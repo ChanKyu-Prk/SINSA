@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -12,11 +13,31 @@ import org.springframework.web.bind.annotation.RequestParam;
 import kr.co.sinsa.biz.product.Page;
 import kr.co.sinsa.biz.product.ProductService;
 import kr.co.sinsa.biz.product.ProductVO;
+import kr.co.sinsa.biz.product.StockService;
+import kr.co.sinsa.biz.product.StockVO;
 
 @Controller
 public class ProductController {
 	@Autowired
 	private ProductService service;
+	
+	@Autowired
+	private StockService stockService;
+	
+	// 상세페이지	
+	@RequestMapping("/product/prdCode={prdCode}")
+    public String getInfo(Model model, @PathVariable("prdCode") String PRD_CODE) {
+    	ProductVO vo = service.info(PRD_CODE);
+    	model.addAttribute("prdInfo", vo);
+    	
+    	StockVO stockVO = stockService.sizeInStock(PRD_CODE);
+    	model.addAttribute("stockInfo", stockVO);
+//    	
+//    	List<ReviewVO> reviewVO = reviewDAO.reviewList(PRD_CODE);
+//    	model.addAttribute("reviewInfo", reviewVO);
+
+    	return "/product/product-details";
+    }
 
 	// 게시물 목록 + 페이징 추가
 	@RequestMapping(value = "/getProductListPage", method = RequestMethod.GET)

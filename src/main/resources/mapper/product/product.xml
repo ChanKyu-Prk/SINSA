@@ -8,6 +8,7 @@
 	]]>
 	</select>
 	
+	<select resultType="kr.co.sinsa.biz.product.ProductVO" id="info">select * from product where PRD_CODE=#{PRD_CODE} </select>
 	
 	<!-- 구분선 -->
 	
