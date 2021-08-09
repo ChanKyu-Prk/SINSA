@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//en" "http://mybaits.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- EmpDAO 인터페이스를 상속받아 사용 -->
+<mapper namespace="StockDAO">
+	<select id="sizeInStock" resultType="kr.co.sinsa.biz.product.StockVO">
+		select * from stock where STOCK_PRDCODE=#{STOCK_PRDCODE}
+	</select>
+</mapper>

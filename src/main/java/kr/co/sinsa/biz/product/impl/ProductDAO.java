@@ -14,6 +14,10 @@ public class ProductDAO {
 	@Autowired
 	private SqlSessionTemplate SST;
 	
+	public ProductVO info(String PRD_CODE) {
+		return SST.selectOne("ProductDAO.info", PRD_CODE);
+	}
+	
 	public List<ProductVO> list(ProductVO vo) throws Exception{
 		return SST.selectList("ProductDAO.list", vo);
 	}

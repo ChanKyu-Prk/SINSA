@@ -16,6 +16,11 @@ public class ProductServiceImpl implements ProductService {
 	private ProductDAO DAO;
 	
 	@Override
+	public ProductVO info(String PRD_CODE) {
+		return DAO.info(PRD_CODE);
+	}
+	
+	@Override
 	public List<ProductVO> list(ProductVO vo) throws Exception {
 		return DAO.list(vo);
 	}

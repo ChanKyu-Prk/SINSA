@@ -3,6 +3,8 @@ package kr.co.sinsa.biz.product;
 import java.util.List;
 
 public interface ProductService {
+	public ProductVO info(String PRD_CODE);
+	
 	public List<ProductVO> list(ProductVO vo) throws Exception;
 	public int countAll() throws Exception;
 	public int countOnlyMen() throws Exception;
