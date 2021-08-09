@@ -34,9 +34,6 @@ public class HomeController {
 		model.addAttribute("serverTime", formattedDate );
 		
 		return "home";
-		
-		//소스 변경 테스트11
-		//2222222
 	}
 	
 }
