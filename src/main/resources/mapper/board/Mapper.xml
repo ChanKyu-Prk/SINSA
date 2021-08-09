@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="LoginService">
+	<select id="login" parameterType="kr.co.sinsa.biz.customer.CustomerVO" resultType="kr.co.sinsa.biz.customer.CustomerVO">
+		select * from CUSTOMER where CUS_ID=#{CUS_ID} and CUS_PWD=#{CUS_PWD}
+	</select>
+	
+	<select id="getUser" parameterType="kr.co.sinsa.biz.user.UserVO" resultType="kr.co.sinsa.biz.user.UserVO">
+		select CUS_ID, CUS_NAME from CUSTOMER where CUS_ID=#{CUS_ID} and CUS_PWD=#{CUS_PWD}
+	</select>
+	
+</mapper>
+
+
