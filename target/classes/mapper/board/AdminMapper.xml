@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//en"
+ "http://mybaits.org/dtd/mybatis-3-mapper.dtd">
+ 
+ <mapper namespace="kr.co.sinsa.admin.dao.AdminDAO">
+ 
+ <select id="Login" parameterType="kr.co.sinsa.admin.vo.AdminVO" resultType="Int">
+ 	select count(*) from admin where ADID=#{ADID} and ADPW=#{ADPW}
+ </select>
+ 
+ 
+ 
+ </mapper>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//en"
+ "http://mybaits.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="PrdDAO">
+
+	<select id="prd_list" resultType="kr.co.sinsa.admin.vo.PrdVO">
+		select * from product where 1=1 order by prd_num desc
+	</select>
+	
+	<select id="prd_search" parameterType="kr.co.sinsa.admin.vo.PrdVO" resultType="kr.co.sinsa.admin.vo.PrdVO">
+		select * from product where
+		 prd_code like '%#{searchWord, jdbcType=VARCHAR}%' or
+		 prd_name like '%#{searchWord, jdbcType=VARCHAR}%' or
+		 prd_brand like '%#{searchWord, jdbcType=VARCHAR}%' order by prd_num desc
+	</select>
+
+	<insert id="prd_insert" parameterType="kr.co.sinsa.admin.vo.PrdVO">
+		insert into product(prd_code, prd_name, prd_category, prd_image, prd_gender, prd_price, prd_brand, prd_color, prd_detail)
+		values (#{prd_code}, #{prd_name}, #{prd_category}, #{prd_image}, #{prd_gender}, #{prd_price}, #{prd_brand}, #{prd_color}, #{prd_detail});
+		
+		insert into stock(stock_prdcode) values (#{prd_code})
+		
+
+	</insert>
+
+	<select id="prd_info" resultType="kr.co.sinsa.admin.vo.PrdVO">
+		select * from product where prd_num=#{prd_num}
+	
+
+	</select>
+
+	<update id="prd_update" parameterType="kr.co.sinsa.admin.vo.PrdVO">
+		update product set prd_code=#{prd_code}, prd_name=#{prd_name}, prd_category=#{prd_category},
+		 prd_image=#{prd_image}, prd_gender=#{prd_gender}, prd_price=#{prd_price}, prd_disrate=#{prd_disrate},
+		 prd_brand=#{prd_brand}, prd_color=#{prd_color}, prd_detail=#{prd_detail} where prd_num=#{prd_num}
+	
+
+	</update>
+
+	<delete id="prd_delete">
+		delete from product where prd_num=#{prd_num}
+
+	</delete>
+
+</mapper>

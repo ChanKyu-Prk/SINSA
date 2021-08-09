@@ -1,11 +1,5 @@
 Manifest-Version: 1.0
-<<<<<<< HEAD
-Built-By: spaky
-=======
-
-Built-By: spaky
-
->>>>>>> 786db709a9ce11bd5f39f3dae9baecb8ca99012e
-Build-Jdk: 1.8.0_291
+Built-By: user
+Build-Jdk: 1.8.0_281
 Created-By: Maven Integration for Eclipse
 
