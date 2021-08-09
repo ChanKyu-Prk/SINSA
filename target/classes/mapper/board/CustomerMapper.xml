@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//en"
+ "http://mybaits.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="kr.co.sinsa.admin.dao.CustomerDAO">
+
+	<select id="CustomerList" resultType="kr.co.sinsa.admin.vo.CustomerVO">
+		select * from customer order by CUS_NUM desc
+	</select>
+
+  <insert id="CustomerInsert" parameterType="kr.co.sinsa.admin.vo.CustomerVO">
+		insert into customer(CUS_ID, CUS_PWD, CUS_NAME, CUS_GENDER, CUS_EMAIL, CUS_ADDR, CUS_TEL, CUS_BIRTH, CUS_DELIV_ADDR)
+		values(#{CUS_ID}, #{CUS_PWD}, #{CUS_NAME}, #{CUS_GENDER}, #{CUS_EMAIL}, #{CUS_ADDR}, #{CUS_TEL}, #{CUS_BIRTH}, #{CUS_DELIV_ADDR});
+	</insert>
+
+	<select id="CustomerInfo" resultType="kr.co.sinsa.admin.vo.CustomerVO">
+		select * from customer where CUS_NUM=#{CUS_NUM}
+	</select>
+
+	<update id="CustomerUpdate" parameterType="kr.co.sinsa.admin.vo.CustomerVO">
+		update customer set CUS_ID=#{CUS_ID}, CUS_PWD=#{CUS_PWD}, CUS_NAME=#{CUS_NAME}, CUS_GENDER=#{CUS_GENDER},
+		 CUS_EMAIL=#{CUS_EMAIL}, CUS_ADDR=#{CUS_ADDR}, CUS_TEL=#{CUS_TEL}, CUS_BIRTH=#{CUS_BIRTH}, CUS_DELIV_ADDR=#{CUS_DELIV_ADDR}, CUS_POINT=#{CUS_POINT} where CUS_NUM=#{CUS_NUM}
+	</update>
+
+	<delete id="CustomerDelete">
+		delete from customer where CUS_NUM=#{CUS_NUM}
+	</delete> 
+	
+	
+	
+
+</mapper>
