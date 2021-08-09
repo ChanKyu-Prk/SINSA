@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+					"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="myInfo"><!-- 클래스명 -->
+
+
+	<select id="myInfo"
+		resultType="kr.co.sinsa.biz.customer.CustomerVO">
+		SELECT CUS_NUM ,CUS_ID ,CUS_PWD ,CUS_NAME ,CUS_GENDER
+		,CUS_EMAIL ,CUS_ADDR
+		,CUS_TEL ,CUS_BIRTH ,CUS_DELIV_ADDR ,CUS_POINT
+		,CUS_REGDATE
+		FROM CUSTOMER WHERE CUS_ID = #{CUS_ID}
+	</select>
+
+
+
+
+	<select id="orders" parameterType="Map"
+		resultType="kr.co.sinsa.biz.customer.OrdersVO">
+		select ORDERS.ORDER_NUM, ORDERS.ORDER_PRDNAME,
+		ORDERS.ORDER_PRDSIZE,
+		ORDERS.ORDER_STATE, ORDERS.ORDER_REGDATE,
+		ORDERS.ORDER_PRICE
+		from ORDERS join CUSTOMER on CUSTOMER.CUS_ID =
+		ORDERS.ORDER_CUSID
+		where CUSTOMER.CUS_ID = #{ID} order by
+		ORDERS.ORDER_REGDATE desc,
+		ORDERS.ORDER_NUM desc limit #{page},20;
+	</select>
+
+	<select id="orderDate" parameterType="Map"
+		resultType="kr.co.sinsa.biz.customer.OrdersVO">
+			<![CDATA[
+		select ORDERS.ORDER_NUM, ORDERS.ORDER_PRDNAME, ORDERS.ORDER_PRDSIZE, 
+		ORDERS.ORDER_STATE, ORDERS.ORDER_REGDATE, ORDERS.ORDER_PRICE 
+		from ORDERS join CUSTOMER on CUSTOMER.CUS_ID = ORDERS.ORDER_CUSID 
+		where CUSTOMER.CUS_ID = #{ID} and ORDERS.ORDER_REGDATE >= #{date1} and ORDERS.ORDER_REGDATE <= DATE_add(#{date2},INTERVAL 1 Day)
+		order by ORDERS.ORDER_REGDATE desc, 
+		ORDERS.ORDER_NUM desc limit #{page},20;
+		]]>
+	</select>
+
+	<select id="countOders" parameterType="Map" resultType="int">
+		select
+		count(*)
+		from ORDERS join CUSTOMER on CUSTOMER.CUS_ID =
+		ORDERS.ORDER_CUSID
+		where CUSTOMER.CUS_ID = #{ID};
+	</select>
+
+	<select id="countOdersDate" parameterType="Map" resultType="int">
+			<![CDATA[
+		select count(*)
+		from ORDERS join CUSTOMER on CUSTOMER.CUS_ID = ORDERS.ORDER_CUSID
+		where CUSTOMER.CUS_ID = #{ID} and ORDERS.ORDER_REGDATE >= #{date1} and ORDERS.ORDER_REGDATE <= DATE_add(#{date2},INTERVAL 1 Day);
+			]]>
+	</select>
+
+
+
+
+
+
+
+
+
+	<select id="jjimList" parameterType="map"
+		resultType="kr.co.sinsa.biz.product.ProductVO">
+		select product.* from product join JJIM on JJIM.JJIM_PRDNUM
+		= product.PRD_NUM
+		where JJIM.JJIM_CUSID = #{ID} limit #{page},20;
+	</select>
+
+	<select id="countJjimList" parameterType="map"
+		resultType="int">
+		select count(*) from product join JJIM on JJIM.JJIM_PRDNUM
+		= product.PRD_NUM
+		where JJIM.JJIM_CUSID = #{ID};
+	</select>
+
+
+
+
+
+
+
+
+	<select id="reviewList" parameterType="Map"
+		resultType="kr.co.sinsa.biz.customer.ReviewVO">
+		select * from REVIEW where REV_CUSID = #{ID}
+		limit
+		#{page},20;
+	</select>
+
+	<select id="reviewListDate" parameterType="Map"
+		resultType="kr.co.sinsa.biz.customer.ReviewVO">
+			<![CDATA[
+		select * from REVIEW where REV_CUSID = #{ID} 
+		and REV_REGDATE >= #{date1} and REV_REGDATE <= DATE_add(#{date2},INTERVAL 1 Day)
+		order by REV_REGDATE desc
+		limit #{page},20;
+		]]>
+	</select>
+	<select id="countReviewList" parameterType="Map"
+		resultType="int">
+		select count(*) from REVIEW where REV_CUSID = #{ID};
+	</select>
+
+	<select id="countReviewListDate" parameterType="Map"
+		resultType="int">
+			<![CDATA[
+		select count(*) from REVIEW where REV_CUSID = #{ID}
+		and REV_REGDATE >= #{date1} and REV_REGDATE <= DATE_add(#{date2},INTERVAL 1 Day) ;
+			]]>
+	</select>
+
+
+
+
+	<select id="QnAList" parameterType="Map"
+		resultType="kr.co.sinsa.biz.customer.QnAVO">
+		select * from QNA where QNA_CUSID = #{ID}
+		limit #{page},20;
+	</select>
+
+	<select id="QnAListDate" parameterType="Map"
+		resultType="kr.co.sinsa.biz.customer.QnAVO">
+			<![CDATA[
+		select * from QNA where QNA_CUSID = #{ID} 
+		and QNA_REGDATE  >= #{date1} and QNA_REGDATE <= DATE_add(#{date2},INTERVAL 1 Day)
+		order by QNA_REGDATE  desc
+		limit #{page},20;
+		]]>
+	</select>
+
+	<select id="countQnAList" parameterType="Map" resultType="int">
+		select count(*) from QNA where QNA_CUSID = #{ID};
+	</select>
+
+	<select id="countQnAListDate" parameterType="Map"
+		resultType="int">
+			<![CDATA[
+		select count(*) from QNA where QNA_CUSID = #{ID}
+		and QNA_REGDATE >= #{date1} and QNA_REGDATE <= DATE_add(#{date2},INTERVAL 1 Day) ;
+			]]>
+	</select>
+
+
+
+
+
+
+
+	<select id="recentView" parameterType="int"
+		resultType="kr.co.sinsa.biz.product.ProductVO">
+		select * from product
+		where PRD_NUM = #{value} ;
+	</select>
+
+	<select id="allProductNum" parameterType="int"
+		resultType="kr.co.sinsa.biz.product.ProductVO">
+		select PRD_NUM from product;
+	</select>
+
+</mapper>
