@@ -163,23 +163,23 @@
 					<nav class="header__menu">
 						<ul>
 							<li><a href="#">brand</a></li>
-							<li><a href="#">ALL</a></li>
-							<li><a href="#">men</a>
+							<li><a href="getProductListPage?num=1&condition=all">ALL</a></li>
+							<li><a href="getProductListPage?num=1&condition=men">men</a>
 								<ul class="header__menu__dropdown">
-									<li><a href="#">스니커즈</a></li>
-									<li><a href="#">캔버스화</a></li>
-									<li><a href="#">슬립온</a></li>
-									<li><a href="#">뮬</a></li>
+									<li><a href="getProductListPage?num=1&condition=onlySneakersForMen">스니커즈</a></li>
+									<li><a href="getProductListPage?num=1&condition=onlyConverseForMen">캔버스화</a></li>
+									<li><a href="getProductListPage?num=1&condition=onlySlip-onForMen">슬립온</a></li>
+									<li><a href="getProductListPage?num=1&condition=onlyMuleForMen">뮬</a></li>
 								</ul></li>
-							<li><a href="#">women</a>
+							<li><a href="getProductListPage?num=1&condition=women">women</a>
 								<ul class="header__menu__dropdown">
-									<li><a href="#">스니커즈</a></li>
-									<li><a href="#">캔버스화</a></li>
-									<li><a href="#">슬립온</a></li>
-									<li><a href="#">뮬</a></li>
+									<li><a href="getProductListPage?num=1&condition=onlySneakersForWomen">스니커즈</a></li>
+									<li><a href="getProductListPage?num=1&condition=onlyConverseForWomen">캔버스화</a></li>
+									<li><a href="getProductListPage?num=1&condition=onlySlip-onForWomen">슬립온</a></li>
+									<li><a href="getProductListPage?num=1&condition=onlyMuleForWomen">뮬</a></li>
 								</ul></li>
-							<li><a href="#">new</a></li>
-							<li><a href="#">best</a></li>
+							<li><a href="getProductListPage?num=1&condition=new">new</a></li>
+							<li><a href="getProductListPage?num=1&condition=best">best</a></li>
 						</ul>
 					</nav>
 				</div>

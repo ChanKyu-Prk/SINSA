@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ProductDAO">
+	<select id="countAll" resultType="int">
+	<![CDATA[
+		select count(*) from PRODUCT
+	]]>
+	</select>
+	
+	
+	<!-- 구분선 -->
+	
+	
+	<select id="countOnlyMen" resultType="int">
+	<![CDATA[
+		select count(*) from PRODUCT where PRD_GENDER='men'
+	]]>
+	</select>
+	
+	<select id="countOnlyWomen" resultType="int">
+	<![CDATA[
+		select count(*) from PRODUCT where PRD_GENDER='women'
+	]]>
+	</select>
+	
+	
+	<!-- 구분선 -->
+	
+	
+	<select id="countOnlySneakersForMen" resultType="int">
+	<![CDATA[
+		select count(*)
+		from PRODUCT
+		where PRD_GENDER='men' AND PRD_CATEGORY = 'sneakers'
+	]]>
+	</select>
+	
+	<select id="countOnlyConverseForMen" resultType="int">
+	<![CDATA[
+		select count(*)
+		from PRODUCT
+		where PRD_GENDER='men' AND PRD_CATEGORY = 'converse'
+	]]>
+	</select>
+	
+	<select id="countOnlySlip_onForMen" resultType="int">
+	<![CDATA[
+		select count(*)
+		from PRODUCT
+		where PRD_GENDER='men' AND PRD_CATEGORY='slip-on'
+	]]>
+	</select>
+	
+	<select id="countOnlyMuleForMen" resultType="int">
+	<![CDATA[
+		select count(*)
+		from PRODUCT
+		where PRD_GENDER='men' AND PRD_CATEGORY='mule'
+	]]>
+	</select>
+	
+	
+	<!-- 구분선 -->
+	
+	
+	<select id="countOnlySneakersForWomen" resultType="int">
+	<![CDATA[
+		select count(*)
+		from PRODUCT
+		where PRD_GENDER='women' AND PRD_CATEGORY = 'sneakers'
+	]]>
+	</select>
+	
+	<select id="countOnlyConverseForWomen" resultType="int">
+	<![CDATA[
+		select count(*)
+		from PRODUCT
+		where PRD_GENDER='women' AND PRD_CATEGORY = 'converse'
+	]]>
+	</select>
+	
+	<select id="countOnlySlip_onForWomen" resultType="int">
+	<![CDATA[
+		select count(*)
+		from PRODUCT
+		where PRD_GENDER='women' AND PRD_CATEGORY='slip-on'
+	]]>
+	</select>
+	
+	<select id="countOnlyMuleForWomen" resultType="int">
+	<![CDATA[
+		select count(*)
+		from PRODUCT
+		where PRD_GENDER='women' AND PRD_CATEGORY='mule'
+	]]>
+	</select>
+
+
+	<!-- 구분선 -->
+
+	
+	
+	<!-- 구분선 -->
+	
+	<select id="listPageOnlySlip_onForMen" parameterType="hashMap" resultType="kr.co.sinsa.biz.product.ProductVO">
+	<![CDATA[
+		select *
+		from PRODUCT
+		where PRD_GENDER='men' AND PRD_CATEGORY = 'slip-on'
+		order by PRD_NUM desc limit #{displayPost}, #{postNum}
+	]]>
+	</select>
+	<select id="listPageOnlyMuleForMen" parameterType="hashMap" resultType="kr.co.sinsa.biz.product.ProductVO">
+	<![CDATA[
+		select *
+		from PRODUCT
+		where PRD_GENDER='men' AND PRD_CATEGORY = 'mule'
+		order by PRD_NUM desc limit #{displayPost}, #{postNum}
+	]]>
+	</select>
+	<select id="listPageOnlyConverseForMen" parameterType="hashMap" resultType="kr.co.sinsa.biz.product.ProductVO">
+	<![CDATA[
+		select *
+		from PRODUCT
+		where PRD_GENDER='men' AND PRD_CATEGORY = 'converse'
+		order by PRD_NUM desc limit #{displayPost}, #{postNum}
+	]]>
+	</select>
+	<select id="listPageOnlySneakersForMen" parameterType="hashMap" resultType="kr.co.sinsa.biz.product.ProductVO">
+	<![CDATA[
+		select *
+		from PRODUCT
+		where PRD_GENDER='men' AND PRD_CATEGORY = 'sneakers'
+		order by PRD_NUM desc limit #{displayPost}, #{postNum}
+	]]>
+	</select>
+	
+	
+	<!-- 구분선 -->
+	
+	
+	<select id="listPageOnlySlip_onForWomen" parameterType="hashMap" resultType="kr.co.sinsa.biz.product.ProductVO">
+	<![CDATA[
+		select *
+		from PRODUCT
+		where PRD_GENDER='women' AND PRD_CATEGORY = 'slip-on'
+		order by PRD_NUM desc limit #{displayPost}, #{postNum}
+	]]>
+	</select>
+	<select id="listPageOnlyMuleForWomen" parameterType="hashMap" resultType="kr.co.sinsa.biz.product.ProductVO">
+	<![CDATA[
+		select *
+		from PRODUCT
+		where PRD_GENDER='women' AND PRD_CATEGORY = 'mule'
+		order by PRD_NUM desc limit #{displayPost}, #{postNum}
+	]]>
+	</select>
+	<select id="listPageOnlyConverseForWomen" parameterType="hashMap" resultType="kr.co.sinsa.biz.product.ProductVO">
+	<![CDATA[
+		select *
+		from PRODUCT
+		where PRD_GENDER='women' AND PRD_CATEGORY = 'converse'
+		order by PRD_NUM desc limit #{displayPost}, #{postNum}
+	]]>
+	</select>
+	<select id="listPageOnlySneakersForWomen" parameterType="hashMap" resultType="kr.co.sinsa.biz.product.ProductVO">
+	<![CDATA[
+		select *
+		from PRODUCT
+		where PRD_GENDER='Women' AND PRD_CATEGORY = 'sneakers'
+		order by PRD_NUM desc limit #{displayPost}, #{postNum}
+	]]>
+	</select>
+	
+
+	<!-- 구분선 -->
+	
+	
+	<select id="listPageBestShoes" parameterType="hashMap" resultType="kr.co.sinsa.biz.product.ProductVO">
+	<![CDATA[
+		SELECT ORDERS.ORDER_PRDNAME, COUNT(*) as count, PRODUCT.PRD_NUM, PRODUCT.PRD_NAME, PRODUCT.PRD_IMAGE, PRODUCT.PRD_PRICE 
+		FROM ORDERS 
+		LEFT JOIN PRODUCT 
+		ON ORDERS.ORDER_PRDNAME = PRODUCT.PRD_NAME
+		GROUP BY ORDER_PRDNAME 
+		HAVING COUNT(ORDER_PRDNAME) > 1 
+		ORDER BY count DESC LIMIT #{displayPost}, #{postNum}
+	]]>
+	</select>
+	
+	<select id="listPageNew" parameterType="hashMap" resultType="kr.co.sinsa.biz.product.ProductVO">
+	<![CDATA[
+		select PRD_NUM, PRD_NAME, PRD_IMAGE, PRD_PRICE from PRODUCT order by PRD_NUM desc limit #{displayPost}, #{postNum}
+	]]>
+	</select>
+	
+	
+	
+	<select id="listPageOnlyWomen" parameterType="hashMap" resultType="kr.co.sinsa.biz.product.ProductVO">
+	<![CDATA[
+		select PRD_NUM, PRD_NAME, PRD_IMAGE, PRD_PRICE 
+		from PRODUCT 
+		where PRD_GENDER='women' 
+		AND PRD_NAME like concat('%', #{keyword}, '%')
+		or PRD_CODE like concat('%', #{keyword}, '%')
+		or PRD_COLOR like concat('%', #{keyword}, '%')
+		order by PRD_NUM desc 
+		limit #{displayPost}, #{postNum}
+	]]>
+	</select>
+
+
+	<select id="listPageOnlyMen" parameterType="hashMap" resultType="kr.co.sinsa.biz.product.ProductVO">
+	<![CDATA[
+		select PRD_NUM, PRD_NAME, PRD_IMAGE, PRD_PRICE 
+		from PRODUCT 
+		where PRD_GENDER='men' 
+		AND PRD_NAME like concat('%', #{keyword}, '%')
+		or PRD_CODE like concat('%', #{keyword}, '%')
+		or PRD_COLOR like concat('%', #{keyword}, '%')
+		order by PRD_NUM desc 
+		limit #{displayPost}, #{postNum}
+	]]>
+	</select>
+	
+	<select id="listPageAll" parameterType="hashMap" resultType="kr.co.sinsa.biz.product.ProductVO">
+	<![CDATA[
+		select PRD_NUM, PRD_NAME, PRD_IMAGE, PRD_PRICE 
+		from PRODUCT 		
+		where PRD_NAME like concat('%', #{keyword}, '%')
+		or PRD_CODE like concat('%', #{keyword}, '%')
+		or PRD_COLOR like concat('%', #{keyword}, '%')
+		order by PRD_NUM desc 
+		limit #{displayPost}, #{postNum}
+	]]>
+	</select>
+	
+	<!-- 
+	<select id="listCount" resultType="int">
+		select count(*) from product
+	</select>
+	<select id="listPage" parameterType="hashMap" resultType="kr.co.sinsa.biz.product.ProductVO">
+		select * from PRODUCT order by PRD_NUM desc
+		limit #{displayPost}, #{postNum}
+	</select>
+	 -->
+	
+	
+	<!-- 
+		select * from PRODUCT order by PRD_NUM desc limit 0, 10
+		select count(*)
+	 -->
+	<!-- 
+	<insert id="insert" parameterType="org.sp.mybatis.Emp">
+		insert into emp2 (empno, ename, deptno, job, sal) values(#{empno}, #{ename}, #{deptno}, #{job}, #{sal})
+	</insert>
+	
+	<select id="info" resultType="org.sp.mybatis.Emp">
+		select * from emp2 where empno=#{empno}
+	</select>
+	
+	<update id="update" parameterType="org.sp.mybatis.Emp">
+		update emp2 set deptno=#{deptno}, sal=#{sal} where empno=#{empno}
+	</update>
+	
+	<delete id="delete">
+		delete from emp2 where empno=#{empno}
+	</delete>
+	 -->
+</mapper>
