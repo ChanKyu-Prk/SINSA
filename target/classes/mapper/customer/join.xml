@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+					"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="JoinDAO"><!-- 클래스명 -->
+
+	<insert id="join"
+		parameterType="kr.co.sinsa.biz.customer.CustomerVO">
+	<![CDATA[
+	INSERT INTO CUSTOMER(CUS_ID, CUS_PWD, CUS_NAME, CUS_GENDER, CUS_EMAIL, CUS_ADDR, CUS_TEL, CUS_BIRTH ) 
+	VALUES(#{CUS_ID}, #{CUS_PWD}, #{CUS_NAME}, #{CUS_GENDER}, #{CUS_EMAIL}, #{CUS_ADDR}, #{CUS_TEL}, #{CUS_BIRTH})
+	]]>
+	</insert>
+
+	<select id="idCheck" resultType="int">
+		select count(*) from customer where CUS_ID = #{CUS_ID}
+	</select>
+
+</mapper>
