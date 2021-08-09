@@ -50,7 +50,7 @@
 		<div class="humberger__menu__cart">
 			<ul>
 				<li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>
-				<li><a href="#"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
+				<li><a href="cart.do"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
 			</ul>
 
 		</div>
@@ -155,7 +155,7 @@
 			<div class="row">
 				<div class="col-lg-3">
 
-					<a href="#"><img class="header_sinsa_logo"
+					<a href="index.do"><img class="header_sinsa_logo"
 						src="${path}/resources/img/sinsa_logo.png" alt="ddd"></a>
 
 				</div>
@@ -187,7 +187,7 @@
 					<div class="header__cart">
 						<ul>
 							<li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>
-							<li><a href="#"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
+							<li><a href="cart.do"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
 						</ul>
 					</div>
 				</div>
@@ -198,8 +198,6 @@
 		</div>
 	</header>
 	<!-- Header Section End -->
-
-
 
 
 </body>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="CartService">
+	
+	<select id="getCartList" parameterType="kr.co.sinsa.biz.user.UserVO" resultType="kr.co.sinsa.biz.product.CartVO">
+		select * from CART where CART_CUSID=#{CUS_ID}
+	</select>
+	
+	<select id="getCartProductList" parameterType="kr.co.sinsa.biz.product.ProductVO" resultType="kr.co.sinsa.biz.product.ProductVO">
+		select * from PRODUCT where PRD_NUM=#{PRD_NUM}
+	</select>
+	
+	<delete id="deleteCartList" parameterType="kr.co.sinsa.biz.product.DeleteCartListVO">
+		delete from CART where CART_CUSID=#{userID} and CART_PRDNUM=#{prdNum}
+	</delete>
+	
+</mapper>
