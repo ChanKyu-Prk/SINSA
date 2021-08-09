@@ -97,7 +97,7 @@
 							<p>
 								<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
 								Copyright &copy; SINSA. All rights reserved | made with by Team
-								SINSA (박찬규, 정인호, 권혁재, 송성진, 이보배, 정혁희, 한다연)
+								SINSA (박찬규, 정인호, 권혁재, 이보배, 정혁희, 한다연)
 							</p>
 						</div>
 						<div class="footer__copyright__payment"></div>

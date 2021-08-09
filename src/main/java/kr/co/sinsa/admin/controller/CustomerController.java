@@ -19,7 +19,12 @@ public class CustomerController {
 	private SqlSessionTemplate sqlSessionTemplate;
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String home(Model model) {
+	public String home1(Model model) {
+		System.out.println("인덱스 화면으로 이동11111");
+		return "index";
+	}
+	@RequestMapping(value = "/index.do", method = RequestMethod.GET)
+	public String home2(Model model) {
 		System.out.println("인덱스 화면으로 이동11111");
 		return "index";
 	}
