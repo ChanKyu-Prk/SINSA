@@ -33,27 +33,18 @@ public class CartController {
 		model.addAttribute("productList", productList);
 		request.setAttribute("cartList", cartList);
 		request.setAttribute("productList", productList);
-		return "cart";
+		return "product/cart";
 	}
 	
 	@RequestMapping(value="/cart.do", method=RequestMethod.POST)
 	public String deleteCartList(Model model, HttpSession session, HttpServletRequest request) {
-		System.out.println("111");
 		UserVO user = (UserVO)session.getAttribute("user");
-		System.out.println("222");
 		int CART_PRDNUM = Integer.parseInt((String) request.getParameter("CART_PRDNUM"));
-		System.out.println("333");
 		DeleteCartListVO vo = new DeleteCartListVO();
-		System.out.println("444");
 		vo.setUserID(user.getCUS_ID());
-		System.out.println("555");
 		vo.setPrdNum(CART_PRDNUM);
-		System.out.println("666");
 		cartService.deleteCartList(vo);
-		System.out.println("777");
 		
 		return "redirect:/cart.do";
 	}
-	
-	
 }
