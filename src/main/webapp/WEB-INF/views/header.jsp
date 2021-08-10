@@ -58,7 +58,7 @@
 			<div class="header__top__right__auth">
 				<ul>
 					<%if(session.getAttribute("user") == null){%>
-					<li><a href="login3.do">로그인</a></li>
+					<li><a href="login.do">로그인</a></li>
 
 					<% }else{%>
 					<li><a href="logout.do">로그아웃</a></li>
@@ -125,12 +125,12 @@
 
 								<%if(session.getAttribute("user") == null){%>
 							<div class="header__top__right__auth">
-								<a href="login.do">로그인</a>
+								<a href="/login.do">로그인</a>
 								</div>
-								<div class="header__top__right__auth"><a href="join.do">회원가입</a></div>
+								<div class="header__top__right__auth"><a href="/join.do">회원가입</a></div>
 								<% }else{%>
 								<div class="header__top__right__auth">
-								<a href="logout.do">로그아웃</a>
+								<a href="/logout.do">로그아웃</a>
 								
 							</div>
 							
@@ -140,7 +140,7 @@
 								<a href="#">주문조회</a>
 							</div>
 							<div class="header__top__right__auth">
-								<a href="myOrderList.do">마이페이지</a>
+								<a href="/myOrderList.do">마이페이지</a>
 							</div>
 							<div class="header__top__right__auth">
 								<a href="#">고객센터</a>
@@ -163,23 +163,23 @@
 					<nav class="header__menu">
 						<ul>
 							<li><a href="#">brand</a></li>
-							<li><a href="getProductListPage?num=1&condition=all">ALL</a></li>
-							<li><a href="getProductListPage?num=1&condition=men">men</a>
+							<li><a href="/getProductListPage?num=1&condition=all">ALL</a></li>
+							<li><a href="/getProductListPage?num=1&condition=men">men</a>
 								<ul class="header__menu__dropdown">
-									<li><a href="getProductListPage?num=1&condition=onlySneakersForMen">스니커즈</a></li>
-									<li><a href="getProductListPage?num=1&condition=onlyConverseForMen">캔버스화</a></li>
-									<li><a href="getProductListPage?num=1&condition=onlySlip-onForMen">슬립온</a></li>
-									<li><a href="getProductListPage?num=1&condition=onlyMuleForMen">뮬</a></li>
+									<li><a href="/getProductListPage?num=1&condition=onlySneakersForMen">스니커즈</a></li>
+									<li><a href="/getProductListPage?num=1&condition=onlyConverseForMen">캔버스화</a></li>
+									<li><a href="/getProductListPage?num=1&condition=onlySlip-onForMen">슬립온</a></li>
+									<li><a href="/getProductListPage?num=1&condition=onlyMuleForMen">뮬</a></li>
 								</ul></li>
-							<li><a href="getProductListPage?num=1&condition=women">women</a>
+							<li><a href="/getProductListPage?num=1&condition=women">women</a>
 								<ul class="header__menu__dropdown">
-									<li><a href="getProductListPage?num=1&condition=onlySneakersForWomen">스니커즈</a></li>
-									<li><a href="getProductListPage?num=1&condition=onlyConverseForWomen">캔버스화</a></li>
-									<li><a href="getProductListPage?num=1&condition=onlySlip-onForWomen">슬립온</a></li>
-									<li><a href="getProductListPage?num=1&condition=onlyMuleForWomen">뮬</a></li>
+									<li><a href="/getProductListPage?num=1&condition=onlySneakersForWomen">스니커즈</a></li>
+									<li><a href="/getProductListPage?num=1&condition=onlyConverseForWomen">캔버스화</a></li>
+									<li><a href="/getProductListPage?num=1&condition=onlySlip-onForWomen">슬립온</a></li>
+									<li><a href="/getProductListPage?num=1&condition=onlyMuleForWomen">뮬</a></li>
 								</ul></li>
-							<li><a href="getProductListPage?num=1&condition=new">new</a></li>
-							<li><a href="getProductListPage?num=1&condition=best">best</a></li>
+							<li><a href="/getProductListPage?num=1&condition=new">new</a></li>
+							<li><a href="/getProductListPage?num=1&condition=best">best</a></li>
 						</ul>
 					</nav>
 				</div>

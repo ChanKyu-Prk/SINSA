@@ -3,8 +3,27 @@
  "http://mybaits.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="StockDAO">
 
-	<select id="stock_list" resultType="kr.co.sinsa.admin.vo.StockVO">
-		select * from stock
+	<select id="stock_list" parameterType="hashmap" resultType="kr.co.sinsa.admin.vo.StockVO">
+		select s.stock_prdcode, p.prd_name, s.stock_220, s.stock_225, s.stock_230, s.stock_235, s.stock_240, s.stock_245, s.stock_250, s.stock_255, s.stock_260, s.stock_265, s.stock_270, s.stock_275, s.stock_280, s.stock_285, s.stock_290
+			from stock as s
+			left join product as p
+			on s.stock_prdcode = p.prd_code
+			where stock_prdcode like '%${searchWord}%' limit ${page}, 10
+	</select>
+			
+		<!-- 	union
+		
+		select s.stock_prdcode, p.prd_name, s.stock_220, s.stock_225, s.stock_230, s.stock_235, s.stock_240, s.stock_245, s.stock_250, s.stock_255, s.stock_260, s.stock_265, s.stock_270, s.stock_275, s.stock_280, s.stock_285, s.stock_290
+			from stock as s
+			right join product as p
+			on s.stock_prdcode = p.prd_code -->
+
+
+	<select id="stock_list_count" parameterType="hashmap" resultType="int">
+		select count(*) from stock as s
+			left join product as p
+			on s.stock_prdcode = p.prd_code
+			where stock_prdcode like '%${searchWord}%'
 	</select>
 
 	<insert id="stock_insert" parameterType="kr.co.sinsa.admin.vo.StockVO">

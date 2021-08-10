@@ -45,30 +45,29 @@
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
 			<ul class="navbar-nav mr-auto">
 			
-				<li class="nav-item"><a class="nav-link" href="prdList" title="캠핑상품으로 이동">상품관리</a></li>
-				<li class="nav-item"><a class="nav-link" href="stockList" title="예약하기로 이동">재고현황</a></li>
-				<li class="nav-item"><a class="nav-link" href="stockAdd" title="고객후기로 이동">상품입고</a></li>
-				<li class="nav-item"><a class="nav-link" href="customerList" title="문의하기로 이동">고객관리</a></li>
+				<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/admin/prdList" title="캠핑상품으로 이동">상품관리</a></li>
+				<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/admin/stockList" title="예약하기로 이동">재고현황</a></li>
+				<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/admin/stockAdd" title="고객후기로 이동">상품입고</a></li>
+				<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/admin/customerList" title="문의하기로 이동">고객관리</a></li>
 				<li class="nav-item"><a class="nav-link" href="#" title="공지사항으로 이동">리뷰관리</a></li>
 				<li class="nav-item"><a class="nav-link" href="#" title="고객후기로 이동">문의관리</a></li>
-				<li class="nav-item"><a class="nav-link" href="noticeList" title="공지사항으로 이동">공지사항</a></li>
+				<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/admin/noticeList" title="공지사항으로 이동">공지사항</a></li>
 				<li class="nav-item"><a class="nav-link" href="#" title="고객후기로 이동">자주하는질문</a></li>
-				<li class="nav-item"><a class="nav-link" href="#" title="고객후기로 이동">${AdminVO}</a></li>
-	           	
+				
 			</ul>
 			
 		<c:if test="${empty AdminVO}">
 			<ul class="nav navbar-nav navbar-right">
-				<li><a class="nav-link" data-toggle="modal" href="adminLogin">로그인</a></li>
+				<li><a class="nav-link" data-toggle="modal" href="${pageContext.request.contextPath}/adminLogin">로그인</a></li>
 			</ul>
 		</c:if>
 			
 		<c:if test="${!empty AdminVO}">
 			<ul class="nav navbar-nav navbar-right">
 				<li class="nav-item dropdown"><a
-					class="nav-link dropdown-toggle" href="adminLogout" id="navbarDropdown"
+					class="nav-link" href="${pageContext.request.contextPath}/admin/adminLogout" id="navbarDropdown"
 					role="button" data-toggle="dropdown" aria-haspopup="true"
-					aria-expanded="false" > ${AdminVO.ADID}님, 로그아웃 </a>
+					aria-expanded="false" > 관리자  로그아웃 </a>
 	      			
 					
 					</div>

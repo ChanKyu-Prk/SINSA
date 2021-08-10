@@ -38,7 +38,12 @@ public class ProductController {
 
     	return "/product/product-details";
     }
-
+	
+		@RequestMapping("/direct/checkout")
+	    public String test1(Model model, String PRD_CODE) {
+	    	return "/orders/checkout";
+	    }
+		
 	// 게시물 목록 + 페이징 추가
 	@RequestMapping(value = "/getProductListPage", method = RequestMethod.GET)
 	public String getProductListPage(Model model, @RequestParam("num") int num,
