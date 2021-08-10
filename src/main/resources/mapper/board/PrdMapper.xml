@@ -4,15 +4,25 @@
 
 <mapper namespace="PrdDAO">
 
-	<select id="prd_list" resultType="kr.co.sinsa.admin.vo.PrdVO">
-		select * from product where 1=1 order by prd_num desc
+	<select id="prd_list" parameterType="hashmap" resultType="kr.co.sinsa.admin.vo.PrdVO">
+		select * from product where ${fieldName} like '%${searchWord}%' order by prd_num desc limit ${page}, 10
 	</select>
 	
-	<select id="prd_search" parameterType="kr.co.sinsa.admin.vo.PrdVO" resultType="kr.co.sinsa.admin.vo.PrdVO">
-		select * from product where
-		 prd_code like '%#{searchWord, jdbcType=VARCHAR}%' or
-		 prd_name like '%#{searchWord, jdbcType=VARCHAR}%' or
-		 prd_brand like '%#{searchWord, jdbcType=VARCHAR}%' order by prd_num desc
+	<select id="prd_list_count" parameterType="hashmap" resultType="int">
+		select count(*) from product where ${fieldName} like '%${searchWord}%'
+	</select>
+	
+	<select id="prd_all_search" parameterType="hashmap" resultType="kr.co.sinsa.admin.vo.PrdVO">
+		select * from product where prd_code like concat('%',#{searchWord},'%') or
+		 prd_name like concat('%',#{searchWord},'%') or
+		 prd_brand like concat('%',#{searchWord},'%') order by prd_num desc limit ${page}, 10
+	</select>
+	
+	<select id="prd_all_search_count" parameterType="hashmap" resultType="int">
+		select count(*) from product where
+		 prd_code like concat('%',#{searchWord},'%') or
+		 prd_name like concat('%',#{searchWord},'%') or
+		 prd_brand like concat('%',#{searchWord},'%')
 	</select>
 
 	<insert id="prd_insert" parameterType="kr.co.sinsa.admin.vo.PrdVO">
