@@ -4,8 +4,24 @@
 
 <mapper namespace="NoticeDAO">
 
-	<select id="notice_list" resultType="kr.co.sinsa.admin.vo.NoticeVO">
-		select * from notice order by notice_num desc
+	<select id="notice_list" parameterType="hashmap" resultType="kr.co.sinsa.admin.vo.NoticeVO">
+		select * from notice where ${fieldName} like '%${searchWord}%' order by notice_num desc limit ${page}, 10
+	</select>
+	
+	<select id="notice_list_count" parameterType="hashmap" resultType="int">
+		select count(*) from notice where ${fieldName} like '%${searchWord}%'
+	</select>
+	
+	<select id="notice_all_search" parameterType="hashmap" resultType="kr.co.sinsa.admin.vo.NoticeVO">
+		select * from notice where
+		 notice_title like concat('%',#{searchWord},'%') or
+		 notice_content like concat('%',#{searchWord},'%') order by notice_num desc limit ${page}, 10
+	</select>
+	
+	<select id="notice_all_search_count" parameterType="hashmap" resultType="int">
+		select count(*) from notice where
+		 notice_title like concat('%',#{searchWord},'%') or
+		 notice_content like concat('%',#{searchWord},'%')
 	</select>
 
 	<insert id="notice_insert" parameterType="kr.co.sinsa.admin.vo.NoticeVO">

@@ -1,6 +1,7 @@
 package kr.co.sinsa.admin.service;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -17,8 +18,13 @@ public class StockServiceImpl implements StockService {
 	
 	
 	@Override
-	public List<StockVO> stock_list() {
-		return dao.stock_list();
+	public List<StockVO> stock_list(Map<String, Object> map) {
+		return dao.stock_list(map);
+	}
+	
+	@Override
+	public int stock_list_count(Map<String, Object> map) {
+		return dao.stock_list_count(map);
 	}
 
 	@Override

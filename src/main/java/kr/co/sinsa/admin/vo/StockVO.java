@@ -3,6 +3,7 @@ package kr.co.sinsa.admin.vo;
 public class StockVO {
 	
 	String stock_prdcode;
+	String prd_name;
 	int stock_220;
 	int stock_225;
 	int stock_230;
@@ -25,6 +26,12 @@ public class StockVO {
 	}
 	public void setStock_prdcode(String stock_prdcode) {
 		this.stock_prdcode = stock_prdcode;
+	}
+	public String getPrd_name() {
+		return prd_name;
+	}
+	public void setPrd_name(String prd_name) {
+		this.prd_name = prd_name;
 	}
 	public int getStock_220() {
 		return stock_220;
