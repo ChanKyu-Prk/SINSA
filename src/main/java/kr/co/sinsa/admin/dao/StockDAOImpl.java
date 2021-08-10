@@ -1,6 +1,7 @@
 package kr.co.sinsa.admin.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -15,8 +16,12 @@ public class StockDAOImpl implements StockDAO {
 	@Inject
 	SqlSession sqlSession;
 	
-	public List<StockVO> prd_list(String fieldName, String searchWord) {
-		return sqlSession.selectList("StockDAO.stock_list");
+	public List<StockVO> stock_list(Map<String, Object> map) {
+		return sqlSession.selectList("StockDAO.stock_list", map);
+	}
+	
+	public int stock_list_count(Map<String, Object> map) {
+		return sqlSession.selectOne("StockDAO.stock_list_count", map);
 	}
 	
 	public StockVO stock_info(String stock_prdcode) {

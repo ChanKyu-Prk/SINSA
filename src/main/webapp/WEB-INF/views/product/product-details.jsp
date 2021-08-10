@@ -16,8 +16,17 @@
 
 <style type="text/css">
 
-.product__details__pic__slider img:hover{
+.product__details__pic__thumb{
+	justify-content: space-between;
+}
+
+.product__details__pic__thumb img:hover{
 	border: 1px solid black;
+}
+
+.product__details__pic__thumb img{
+	max-width: 19%;
+	justify-content: space-between;
 }
 
 .product__details__text .brand_name {
@@ -147,7 +156,7 @@ input[type=number] {
 </style>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-	
+
 <!-- IamPort -->
 <script type="text/javascript" src="https://service.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 	
@@ -156,23 +165,6 @@ input[type=number] {
 	href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap"
 	rel="stylesheet">
 
-<!-- Css Styles -->
-<link rel="stylesheet" href="${path}/resources/css/bootstrap.min.css"
-	type="text/css">
-<link rel="stylesheet" href="${path}/resources/css/font-awesome.min.css"
-	type="text/css">
-<link rel="stylesheet" href="${path}/resources/css/elegant-icons.css"
-	type="text/css">
-<link rel="stylesheet" href="${path}/resources/css/nice-select.css"
-	type="text/css">
-<link rel="stylesheet" href="${path}/resources/css/jquery-ui.min.css"
-	type="text/css">
-<link rel="stylesheet" href="${path}/resources/css/owl.carousel.min.css"
-	type="text/css">
-<link rel="stylesheet" href="${path}/resources/css/slicknav.min.css"
-	type="text/css">
-<link rel="stylesheet" href="${path}/resources/css/style.css"
-	type="text/css">
 </head>
 
 <body>
@@ -191,7 +183,7 @@ input[type=number] {
 							<img class="product__details__pic__item--large"
 								src="${path}/resources/prdImg/${prdInfo.PRD_IMAGE}" alt="">
 						</div>
-						<div class="product__details__pic__slider owl-carousel">
+						<div class="product__details__pic__thumb row mx-auto px-0">
 							<img src="${path}/resources/prdImg/${prdInfo.PRD_IMAGE}" alt="thumbnail1">
 							<img src="${path}/resources/img/product/details/thumb-1.jpg" alt="thumbnail2">
 							<img src="${path}/resources/img/product/details/thumb-2.jpg" alt="thumbnail3">
@@ -338,7 +330,6 @@ input[type=number] {
 		</div>
 	</section>
 	<jsp:include page="../footer.jsp" />
-	<script src="${path}/resources/js/owl.carousel.min.js"></script>
 	<!-- Related Product Section End -->
 	<script type="text/javascript">
 		$(document)
@@ -527,23 +518,29 @@ input[type=number] {
 							    $('.product__details__pic__item--large').height(imgWidth);
 							});
 							
+							// thumb pic width = height
+							var thumbImgWidth = $('.product__details__pic__thumb img').width(); 
+							$(window).resize(function(){
+							    $('.product__details__pic__thumb img').height(thumbImgWidth);
+							});
+							
 							// change main img while hovering on thumbnails
-							$(".product__details__pic__slider img").hover(function(){
+							$(".product__details__pic__thumb img").hover(function(){
 							   var src = $(this).attr("src");
 							    $(".product__details__pic__item--large").attr("src",src);
 							});
 
 							// show thumbnail carousel
-							$(".owl-carousel")
-									.owlCarousel(
-											{
-												items : 5,
-												loop : false,
-												margin : 6,
-												autoplay : false,
-												touchDrag : true,
-										        mouseDrag : false
-							});
+// 							$(".owl-carousel")
+// 									.owlCarousel(
+// 											{
+// 												items : 5,
+// 												loop : false,
+// 												margin : 6,
+// 												autoplay : false,
+// 												touchDrag : true,
+// 										        mouseDrag : false
+// 							});
 							
 							// Iamport 결제
 							$("#btnJjim").click(function () {

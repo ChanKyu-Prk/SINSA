@@ -27,12 +27,12 @@ public class AdminController {
 	@Autowired
 	private AdminDAO Adao;
 
-	@RequestMapping(value = "/admin/adminLogin", method = RequestMethod.GET)
+	@RequestMapping(value = "/adminLogin", method = RequestMethod.GET)
 	public String getAdminLogin(AdminVO vo) {
 		return "admin/adminLogin";
 	}
 
-	@RequestMapping(value = "/admin/adminLoginOk", method = RequestMethod.POST)
+	@RequestMapping(value = "/adminLoginOk", method = RequestMethod.POST)
 	public String AdminLoginOk(Model model, @RequestParam("ADID") String adid, @RequestParam("ADPW") String adpw,
 			HttpServletRequest req) {
 
@@ -62,7 +62,7 @@ public class AdminController {
 	public String Adminlogout(HttpServletRequest req) {
 		req.getSession().invalidate();
 
-		return "admin/adminLogin";
+		return "redirect:/";
 	}
 
 }

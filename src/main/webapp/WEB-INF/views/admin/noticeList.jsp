@@ -52,6 +52,64 @@ table {
 		</tbody>
 	</table>
 	<input type="button" onclick="location.href='noticeInputForm'" value="글쓰기" />
+			<ul class="pagination">
+			<c:choose>
+				<c:when test="${pageInfo.getPage()<=1}">
+					<li class="page-item disabled"><a class="page-link"
+						aria-disabled="true">이전</a></li>
+				</c:when>
+				<c:when test="${pageInfo.getStartPage()==1}">
+					<li class="page-item"><a class="page-link"
+						href="noticeList?page=${pageInfo.getStartPage()}&fielaName=${param.fieldName}&searchWord=${param.searchWord}"
+						tabindex="-1">이전</a></li>
+				</c:when>
+				<c:otherwise>
+					<li class="page-item"><a class="page-link"
+						href="noticeList?page=${pageInfo.getStartPage()-1}&fielaName=${param.fieldName}&searchWord=${param.searchWord}"
+						tabindex="-1">이전</a></li>
+				</c:otherwise>
+			</c:choose>
+
+			<c:forEach begin="${pageInfo.getStartPage()}"
+				end="${pageInfo.getEndPage()}" varStatus="state">
+				<c:choose>
+					<c:when test="${pageInfo.getPage()==state.index}">
+						<li class="page-item active" aria-current="page"><a
+							class="page-link">${state.index}</a></li>
+					</c:when>
+					<c:otherwise>
+						<li class="page-item"><a class="page-link"
+							href="noticeList?page=${state.index}&fielaName=${param.fieldName}&searchWord=${param.searchWord}">${state.index}</a></li>
+					</c:otherwise>
+				</c:choose>
+			</c:forEach>
+
+			<c:choose>
+				<c:when test="${pageInfo.getPage() >= pageInfo.getMaxPage()}">
+					<li class="page-item disabled"><a class="page-link"
+						aria-disabled="true">다음</a></li>
+				</c:when>
+				<c:when test="${pageInfo.getEndPage()==pageInfo.getMaxPage()}">
+					<li class="page-item"><a class="page-link"
+						href="noticeList?page=${pageInfo.getEndPage()}&fielaName=${param.fieldName}&searchWord=${param.searchWord}">다음</a></li>
+				</c:when>
+				<c:otherwise>
+					<li class="page-item"><a class="page-link"
+						href="noticeList?page=${pageInfo.getEndPage()+1}&fielaName=${param.fieldName}&searchWord=${param.searchWord}">다음</a></li>
+				</c:otherwise>
+			</c:choose>
+		</ul>
+		<form>
+			<select name="fieldName" id="fieldName" class="form-control">
+				<option ${(param.fieldName == "all")? "selected" : ""} value="all">전체</option>
+				<option ${(param.fieldName == "notice_title")? "selected" : ""}
+					value="notice_title">제목</option>
+				<option ${(param.fieldName == "notice_content")? "selected" : ""}
+					value="notice_content">내용</option>
+			</select> <input type="text" class="form-control" placeholder="Search"
+				name="searchWord" value="${param.searchWord}" /> <input
+				type="submit" value="검색" />
+		</form>
 	</div>
 </body>
 </html>

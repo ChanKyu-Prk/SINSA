@@ -28,7 +28,6 @@
 </head>
 <body>
 
-	<jsp:include page="../header.jsp" />
     <!-- Page Preloder -->
     <div id="preloder">
         <div class="loader"></div>
@@ -94,7 +93,7 @@
     <!-- Humberger End -->
 
     <!-- Header Section Begin -->
-
+		<jsp:include page="../header.jsp" />
     <!-- Header Section End -->
 
     <!-- Hero Section Begin -->
@@ -105,51 +104,30 @@
                     <div class="hero__categories">
                         <div class="hero__categories__all">
                             <i class="fa fa-bars"></i>
-                            <span>All departments</span>
+                            <span>전체 상품</span>
                         </div>
                         <ul>
-                            <li><a href="#">Fresh Meat</a></li>
-                            <li><a href="#">Vegetables</a></li>
-                            <li><a href="#">Fruit & Nut Gifts</a></li>
-                            <li><a href="#">Fresh Berries</a></li>
-                            <li><a href="#">Ocean Foods</a></li>
-                            <li><a href="#">Butter & Eggs</a></li>
-                            <li><a href="#">Fastfood</a></li>
-                            <li><a href="#">Fresh Onion</a></li>
-                            <li><a href="#">Papayaya & Crisps</a></li>
-                            <li><a href="#">Oatmeal</a></li>
-                            <li><a href="#">Fresh Bananas</a></li>
+                            <li><a href="#">스니커스</a></li>
+                            <li><a href="#">캔버스화</a></li>
+                            <li><a href="#">슬립온</a></li>
+                            <li><a href="#">뮬</a></li>
                         </ul>
                     </div>
                 </div>
                 <div class="col-lg-9">
                     <div class="hero__search">
                         <div class="hero__search__form">
-                            <form action="#">
-      					    <!-- 
-                                <div class="hero__search__categories">
-                                    All Categories        
-                                    <span class="arrow_carrot-down">
-                                    </span>
-                                </div>
- 							-->                                
+                            <form action="#">                   
        
                     
-                                <input type="text" name="keyword" placeholder="What do yo u need?">
-                                <button type="button" id="searchBtn" class="site-btn">SEARCH</button>
+                                <input type="text" name="keyword" placeholder="찾으시는 상품을 검색해주세요">
+                                <button type="button" id="searchBtn" class="site-btn">검색</button>
                                 <script>
                                 	document.getElementById("searchBtn").onclick = function(){
                                 		let keyword = document.getElementsByName("keyword")[0].value;
                                 		console.log("검색중...!");
 
                                 		location.href = "/getProductListPage?num=1&condition="+"${condition}"+"&keyword="+keyword;
-                                		
-                                		<!-- 
-                                		<c:if test="${name eq '홍길동'}">
-                                	   		<c:out value="${str}" />
-                                		</c:if>
-                                		-->
-
                                 	};
                                 </script>
                                 
@@ -178,7 +156,7 @@
             <div class="row">
                 <div class="col-lg-12 text-center">
                     <div class="breadcrumb__text">
-                        <h2>Organi Shop</h2>
+                        <h2>Shoes Shop</h2>
                         <div class="breadcrumb__option">
                             <a href="./index.html">Home</a>
                             <span>Shop</span>
@@ -197,22 +175,16 @@
                 <div class="col-lg-3 col-md-5">
                     <div class="sidebar">
                         <div class="sidebar__item">
-                            <h4>Department</h4>
+                            <h4>품목</h4>
                             <ul>
-                                <li><a href="#">Fresh Meat</a></li>
-                                <li><a href="#">Vegetables</a></li>
-                                <li><a href="#">Fruit & Nut Gifts</a></li>
-                                <li><a href="#">Fresh Berries</a></li>
-                                <li><a href="#">Ocean Foods</a></li>
-                                <li><a href="#">Butter & Eggs</a></li>
-                                <li><a href="#">Fastfood</a></li>
-                                <li><a href="#">Fresh Onion</a></li>
-                                <li><a href="#">Papayaya & Crisps</a></li>
-                                <li><a href="#">Oatmeal</a></li>
+                                <li><a href="#">스니커스</a></li>
+                                <li><a href="#">캔버스화</a></li>
+                                <li><a href="#">슬립온</a></li>
+                                <li><a href="#">뮬</a></li>
                             </ul>
                         </div>
                         <div class="sidebar__item">
-                            <h4>Price</h4>
+                            <h4>가격</h4>
                             <div class="price-range-wrap">
                                 <div class="price-range ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content"
                                     data-min="10" data-max="540">
@@ -229,7 +201,7 @@
                             </div>
                         </div>
                         <div class="sidebar__item sidebar__item__color--option">
-                            <h4>Colors</h4>
+                            <h4>색상</h4>
                             <div class="sidebar__item__color sidebar__item__color--white">
                                 <label for="white">
                                     White
@@ -268,7 +240,7 @@
                             </div>
                         </div>
                         <div class="sidebar__item">
-                            <h4>Popular Size</h4>
+                            <h4>베스트 상품</h4>
                             <div class="sidebar__item__size">
                                 <label for="large">
                                     Large
@@ -296,7 +268,7 @@
                         </div>
                         <div class="sidebar__item">
                             <div class="latest-product__text">
-                                <h4>Latest Products</h4>
+                                <h4>신상</h4>
                                 <div class="latest-product__slider owl-carousel">
                                     <div class="latest-prdouct__slider__item">
                                         <a href="#" class="latest-product__item">
@@ -370,7 +342,7 @@
                 <div class="col-lg-9 col-md-7">
                     <div class="product__discount">
                         <div class="section-title product__discount__title">
-                            <h2>Sale Off</h2>
+                            <h2>특별한 가격으로 만나보세요~</h2>
                         </div>
                         <div class="row">
                             <div class="product__discount__slider owl-carousel">
@@ -498,7 +470,9 @@
                             </div>
                             <div class="col-lg-4 col-md-4">
                                 <div class="filter__found">
-                                    <h6><span>16</span> Products found</h6>
+                         
+                                    <h6><span>${page.count  }</span> Products found</h6>
+                            
                                 </div>
                             </div>
                             <div class="col-lg-4 col-md-3">
@@ -524,7 +498,7 @@
 											<p>
 	 											<h6>${list.PRD_NAME }</h6>												
 	 										</p>
-	                                    <h5>${list.PRD_PRICE } won</h5>
+	                                    <h5>${list.PRD_PRICE }원</h5>
 	                                </div>
 	                            </div>
 	                        </div>
@@ -559,19 +533,9 @@
     <!-- Product Section End -->
 
     <!-- Footer Section Begin -->
-  
+	<jsp:include page="../footer.jsp" />  
     <!-- Footer Section End -->
 
-    <!-- Js Plugins -->
-    <script src="${path}/resources/js/jquery-3.3.1.min.js"></script>
-    <script src="${path}/resources/js/bootstrap.min.js"></script>
-    <script src="${path}/resources/js/jquery.nice-select.min.js"></script>
-    <script src="${path}/resources/js/jquery-ui.min.js"></script>
-    <script src="${path}/resources/js/jquery.slicknav.js"></script>
-    <script src="${path}/resources/js/mixitup.min.js"></script>
-    <script src="${path}/resources/js/owl.carousel.min.js"></script>
-    <script src="${path}/resources/js/main.js"></script>
 
-	<jsp:include page="../footer.jsp" />
 </body>
 </html>

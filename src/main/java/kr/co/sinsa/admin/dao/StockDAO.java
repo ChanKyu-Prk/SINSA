@@ -1,11 +1,13 @@
 package kr.co.sinsa.admin.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import kr.co.sinsa.admin.vo.StockVO;
 
 public interface StockDAO {
-	public List<StockVO> stock_list();
+	public List<StockVO> stock_list(Map<String, Object> map);
+	public int stock_list_count(Map<String, Object> map);
 	public StockVO stock_info(String stock_procode);
 	public void stock_insert(StockVO vo);
 	public void stock_update(StockVO vo);
