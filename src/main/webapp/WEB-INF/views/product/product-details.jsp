@@ -16,8 +16,17 @@
 
 <style type="text/css">
 
-.product__details__pic__slider img:hover{
+.product__details__pic__thumb{
+	justify-content: space-between;
+}
+
+.product__details__pic__thumb img:hover{
 	border: 1px solid black;
+}
+
+.product__details__pic__thumb img{
+	max-width: 19%;
+	justify-content: space-between;
 }
 
 .product__details__text .brand_name {
@@ -174,7 +183,7 @@ input[type=number] {
 							<img class="product__details__pic__item--large"
 								src="${path}/resources/prdImg/${prdInfo.PRD_IMAGE}" alt="">
 						</div>
-						<div class="product__details__pic__slider owl-carousel">
+						<div class="product__details__pic__thumb row mx-auto px-0">
 							<img src="${path}/resources/prdImg/${prdInfo.PRD_IMAGE}" alt="thumbnail1">
 							<img src="${path}/resources/img/product/details/thumb-1.jpg" alt="thumbnail2">
 							<img src="${path}/resources/img/product/details/thumb-2.jpg" alt="thumbnail3">
@@ -509,23 +518,29 @@ input[type=number] {
 							    $('.product__details__pic__item--large').height(imgWidth);
 							});
 							
+							// thumb pic width = height
+							var thumbImgWidth = $('.product__details__pic__thumb img').width(); 
+							$(window).resize(function(){
+							    $('.product__details__pic__thumb img').height(thumbImgWidth);
+							});
+							
 							// change main img while hovering on thumbnails
-							$(".product__details__pic__slider img").hover(function(){
+							$(".product__details__pic__thumb img").hover(function(){
 							   var src = $(this).attr("src");
 							    $(".product__details__pic__item--large").attr("src",src);
 							});
 
 							// show thumbnail carousel
-							$(".owl-carousel")
-									.owlCarousel(
-											{
-												items : 5,
-												loop : false,
-												margin : 6,
-												autoplay : false,
-												touchDrag : true,
-										        mouseDrag : false
-							});
+// 							$(".owl-carousel")
+// 									.owlCarousel(
+// 											{
+// 												items : 5,
+// 												loop : false,
+// 												margin : 6,
+// 												autoplay : false,
+// 												touchDrag : true,
+// 										        mouseDrag : false
+// 							});
 							
 							// Iamport 결제
 							$("#btnJjim").click(function () {
