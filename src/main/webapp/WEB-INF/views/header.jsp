@@ -58,7 +58,7 @@
 			<div class="header__top__right__auth">
 				<ul>
 					<%if(session.getAttribute("user") == null){%>
-					<li><a href="login3.do">로그인</a></li>
+					<li><a href="login.do">로그인</a></li>
 
 					<% }else{%>
 					<li><a href="logout.do">로그아웃</a></li>
@@ -140,7 +140,7 @@
 								<a href="#">주문조회</a>
 							</div>
 							<div class="header__top__right__auth">
-								<a href="myOrderList.do">마이페이지</a>
+								<a href="/myOrderList.do">마이페이지</a>
 							</div>
 							<div class="header__top__right__auth">
 								<a href="#">고객센터</a>
