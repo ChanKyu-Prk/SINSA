@@ -147,7 +147,7 @@ input[type=number] {
 </style>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-	
+
 <!-- IamPort -->
 <script type="text/javascript" src="https://service.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 	
@@ -156,23 +156,6 @@ input[type=number] {
 	href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap"
 	rel="stylesheet">
 
-<!-- Css Styles -->
-<link rel="stylesheet" href="${path}/resources/css/bootstrap.min.css"
-	type="text/css">
-<link rel="stylesheet" href="${path}/resources/css/font-awesome.min.css"
-	type="text/css">
-<link rel="stylesheet" href="${path}/resources/css/elegant-icons.css"
-	type="text/css">
-<link rel="stylesheet" href="${path}/resources/css/nice-select.css"
-	type="text/css">
-<link rel="stylesheet" href="${path}/resources/css/jquery-ui.min.css"
-	type="text/css">
-<link rel="stylesheet" href="${path}/resources/css/owl.carousel.min.css"
-	type="text/css">
-<link rel="stylesheet" href="${path}/resources/css/slicknav.min.css"
-	type="text/css">
-<link rel="stylesheet" href="${path}/resources/css/style.css"
-	type="text/css">
 </head>
 
 <body>
@@ -338,7 +321,6 @@ input[type=number] {
 		</div>
 	</section>
 	<jsp:include page="../footer.jsp" />
-	<script src="${path}/resources/js/owl.carousel.min.js"></script>
 	<!-- Related Product Section End -->
 	<script type="text/javascript">
 		$(document)
