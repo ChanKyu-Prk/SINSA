@@ -92,6 +92,32 @@ input:read-only{
 	background-color: #F7F7F7;
 }
 
+.checkout__order .points {
+	position: relative;
+}
+
+.checkout__order .points input {
+	width: 120px;
+	height: 38px;
+	padding-right: 22px;
+	position: absolute;
+	color: #6f6f6f;
+	right: 0;
+	border: 1px solid #d5d5d5;
+	font-size: 16px;
+	color: #b2b2b2;
+	border-radius:4px;
+}
+
+.checkout__order .points input ~ span {
+	position: absolute;
+	right: 10px;
+}
+
+.avPoint{
+	color: #dd2222;
+}
+
 </style>
 </head>
 
@@ -197,15 +223,19 @@ input:read-only{
 							<div class="row">
 								<label for="ORDER_TEL" class="col-lg-3">주소<span
 									class="inpReq">*</span></label>
-								<div class="checkout__input col-lg-5">
+								<div class="checkout__input col-lg-3">
 									<span><input type="text" id="delivAddrZip"
 										placeholder="우편번호" title="우편번호" required="required" readonly/></span>
 								</div>
 								<button type="button" class="col-lg-2 text-center btn btn-secondary" onclick="findAddr()">우편번호 찾기</button>
+							</div>
+							<div class="row">
 								<div class="checkout__input col-lg-9 offset-lg-3">
 									<span><input type="text" id="delivAddrRoad"
 										placeholder="" title="기본주소" required="required" readonly/></span>
 								</div>
+							</div>
+							<div class="row">
 								<div class="checkout__input col-lg-9 offset-lg-3">
 									<span><input type="text" id="delivAddrJibun" title="상세주소" placeholder="상세주소를 입력해주세요."/></span>
 									<span id="guide" style="color:#999;display:none"></span>
@@ -213,8 +243,7 @@ input:read-only{
 								<input type="hidden" id="delivAddrExtra"/>
 							</div>
 							<div class="row">
-								<label for="ORDER_MEMO" class="col-lg-3">배송시 요청사항 <span
-									class="inpReq">*</span>
+								<label for="ORDER_MEMO" class="col-lg-3">배송시 요청사항
 								</label>
 								<div class="checkout__input col-lg-9">
 									<select id="delivMemo" class="mb-2 wide" title="배송시 요청사항">
@@ -238,7 +267,7 @@ input:read-only{
 								<ul>
 									<li>총 주문 가격 <span>750000원</span></li>
 									<li>할인 <span>5000원</span></li>
-									<li>포인트 사용 <span>300P</span></li>
+									<li class="points">포인트 사용 <input placeholder="0" class="text-right"></input><span>P</span><p><small>사용가능한 포인트: <span class="avPoint">5000 P</span></small></p></li>
 									<li>배송비 <span>무료</span></li>
 								</ul>
 								<div class="checkout__order__total">
