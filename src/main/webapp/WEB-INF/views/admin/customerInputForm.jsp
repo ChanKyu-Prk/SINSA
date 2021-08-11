@@ -11,7 +11,7 @@
 </head>
 <script src="https://kit.fontawesome.com/848d8f1fa9.js"
    crossorigin="anonymous"></script>
-<jsp:include page="../header.jsp" />
+<%-- <jsp:include page="../header.jsp" /> --%>
 <script src="https://code.jquery.com/jquery-3.4.1.js"
    integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
    crossorigin="anonymous"></script>
@@ -19,7 +19,8 @@
 <link rel="stylesheet" href="${path}/resources/css/join.css"
    type="text/css">
 <body >
-
+<jsp:include page="adminHeader.jsp" flush="true" />
+	<br><br>
 
    <div class="container-h">
       <form:form method="post" action="customerInsert" modelAttribute="customerVO">

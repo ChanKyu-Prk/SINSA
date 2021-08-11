@@ -36,9 +36,9 @@ public class AdminController {
 	public String AdminLoginOk(Model model, @RequestParam("ADID") String adid, @RequestParam("ADPW") String adpw,
 			HttpServletRequest req) {
 
-		CustomerDAO dao = sqlSessionTemplate.getMapper(CustomerDAO.class);
-		List<CustomerVO> list = dao.CustomerList();
-		model.addAttribute("customerList", list);
+//		CustomerDAO dao = sqlSessionTemplate.getMapper(CustomerDAO.class);
+//		List<CustomerVO> list = dao.CustomerList();
+//		model.addAttribute("customerList", list);
 
 		AdminVO vo = new AdminVO();
 		vo.setADID(adid);
@@ -51,7 +51,7 @@ public class AdminController {
 			HttpSession session = req.getSession();
 			session.setAttribute("AdminVO", vo);
 			
-			return "admin/customerList";
+			return "redirect:/admin/customerList";
 		} else {
 			model.addAttribute("msg", 1);
 			return "admin/adminLogin";
