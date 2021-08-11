@@ -10,6 +10,42 @@
 	
 	<select resultType="kr.co.sinsa.biz.product.ProductVO" id="info">select * from product where PRD_CODE=#{PRD_CODE} </select>
 	
+	
+	<!-- 구분선 -->
+	
+	
+	<select id="countSneakersForAll" resultType="int">
+	<![CDATA[
+		select count(*)
+		from PRODUCT
+		where PRD_CATEGORY = 'sneakers'
+	]]>
+	</select>
+	
+	<select id="countConverseForAll" resultType="int">
+	<![CDATA[
+		select count(*)
+		from PRODUCT
+		where PRD_CATEGORY = 'converse'
+	]]>
+	</select>
+	
+	<select id="countSlip_onForAll" resultType="int">
+	<![CDATA[
+		select count(*)
+		from PRODUCT
+		where PRD_CATEGORY = 'slip-on'
+	]]>
+	</select>
+	<select id="countMuleForAll" resultType="int">
+	<![CDATA[
+		select count(*)
+		from PRODUCT
+		where PRD_CATEGORY = 'mule'
+	]]>
+	</select>
+	
+	
 	<!-- 구분선 -->
 	
 	
@@ -189,10 +225,105 @@
 		ORDER BY count DESC LIMIT #{displayPost}, #{postNum}
 	]]>
 	</select>
+	<select id="listPageBestSneakers" parameterType="hashMap" resultType="kr.co.sinsa.biz.product.ProductVO">
+	<![CDATA[
+		SELECT ORDERS.ORDER_PRDNAME, COUNT(*) as count, PRODUCT.PRD_NUM, PRODUCT.PRD_NAME, PRODUCT.PRD_IMAGE, PRODUCT.PRD_PRICE, PRODUCT.PRD_CATEGORY 
+		FROM ORDERS 
+		LEFT JOIN PRODUCT 
+		ON ORDERS.ORDER_PRDNAME = PRODUCT.PRD_NAME
+		WHERE PRODUCT.PRD_CATEGORY = 'sneakers'
+		GROUP BY ORDER_PRDNAME 
+		HAVING COUNT(ORDER_PRDNAME) > 1 
+		ORDER BY count DESC LIMIT #{displayPost}, #{postNum}
+	]]>
+	</select>
+	<select id="listPageBestConverse" parameterType="hashMap" resultType="kr.co.sinsa.biz.product.ProductVO">
+	<![CDATA[
+		SELECT ORDERS.ORDER_PRDNAME, COUNT(*) as count, PRODUCT.PRD_NUM, PRODUCT.PRD_NAME, PRODUCT.PRD_IMAGE, PRODUCT.PRD_PRICE, PRODUCT.PRD_CATEGORY 
+		FROM ORDERS 
+		LEFT JOIN PRODUCT 
+		ON ORDERS.ORDER_PRDNAME = PRODUCT.PRD_NAME
+		WHERE PRODUCT.PRD_CATEGORY = 'converse'
+		GROUP BY ORDER_PRDNAME 
+		HAVING COUNT(ORDER_PRDNAME) > 1 
+		ORDER BY count DESC LIMIT #{displayPost}, #{postNum}
+	]]>
+	</select>
+	<select id="listPageSlipOnForBest" parameterType="hashMap" resultType="kr.co.sinsa.biz.product.ProductVO">
+	<![CDATA[
+		SELECT ORDERS.ORDER_PRDNAME, COUNT(*) as count, PRODUCT.PRD_NUM, PRODUCT.PRD_NAME, PRODUCT.PRD_IMAGE, PRODUCT.PRD_PRICE, PRODUCT.PRD_CATEGORY 
+		FROM ORDERS 
+		LEFT JOIN PRODUCT 
+		ON ORDERS.ORDER_PRDNAME = PRODUCT.PRD_NAME
+		WHERE PRODUCT.PRD_CATEGORY = 'slip-on'
+		GROUP BY ORDER_PRDNAME 
+		HAVING COUNT(ORDER_PRDNAME) > 1 
+		ORDER BY count DESC LIMIT #{displayPost}, #{postNum}
+	]]>
+	</select>
+	<select id="listPageMuleForBest" parameterType="hashMap" resultType="kr.co.sinsa.biz.product.ProductVO">
+	<![CDATA[
+		SELECT ORDERS.ORDER_PRDNAME, COUNT(*) as count, PRODUCT.PRD_NUM, PRODUCT.PRD_NAME, PRODUCT.PRD_IMAGE, PRODUCT.PRD_PRICE, PRODUCT.PRD_CATEGORY 
+		FROM ORDERS 
+		LEFT JOIN PRODUCT 
+		ON ORDERS.ORDER_PRDNAME = PRODUCT.PRD_NAME
+		WHERE PRODUCT.PRD_CATEGORY = 'mule'
+		GROUP BY ORDER_PRDNAME 
+		HAVING COUNT(ORDER_PRDNAME) > 1 
+		ORDER BY count DESC LIMIT #{displayPost}, #{postNum}
+	]]>
+	</select>
+
+
+	<!-- 구분선 -->
+
 	
 	<select id="listPageNew" parameterType="hashMap" resultType="kr.co.sinsa.biz.product.ProductVO">
 	<![CDATA[
-		select PRD_NUM, PRD_NAME, PRD_IMAGE, PRD_PRICE from PRODUCT order by PRD_NUM desc limit #{displayPost}, #{postNum}
+		select PRD_NUM, PRD_NAME, PRD_IMAGE, PRD_PRICE 
+		from PRODUCT 
+		order by PRD_NUM desc 
+		limit #{displayPost}, #{postNum}
+	]]>
+	</select>
+	
+	<select id="listPageSneakersForNew" parameterType="hashMap" resultType="kr.co.sinsa.biz.product.ProductVO">
+	<![CDATA[
+		select PRD_NUM, PRD_NAME, PRD_IMAGE, PRD_PRICE 
+		from PRODUCT 
+		where PRD_CATEGORY = 'sneakers'
+		order by PRD_NUM desc 
+		limit #{displayPost}, #{postNum}
+	]]>
+	</select>
+	
+	<select id="listPageConverseForNew" parameterType="hashMap" resultType="kr.co.sinsa.biz.product.ProductVO">
+	<![CDATA[
+		select PRD_NUM, PRD_NAME, PRD_IMAGE, PRD_PRICE 
+		from PRODUCT 
+		where PRD_CATEGORY = 'converse'
+		order by PRD_NUM desc 
+		limit #{displayPost}, #{postNum}
+	]]>
+	</select>
+	
+	<select id="listPageSlipOnForNew" parameterType="hashMap" resultType="kr.co.sinsa.biz.product.ProductVO">
+	<![CDATA[
+		select PRD_NUM, PRD_NAME, PRD_IMAGE, PRD_PRICE 
+		from PRODUCT 
+		where PRD_CATEGORY = 'slip-on'
+		order by PRD_NUM desc 
+		limit #{displayPost}, #{postNum}
+	]]>
+	</select>
+	
+	<select id="listPageMuleForNew" parameterType="hashMap" resultType="kr.co.sinsa.biz.product.ProductVO">
+	<![CDATA[
+		select PRD_NUM, PRD_NAME, PRD_IMAGE, PRD_PRICE 
+		from PRODUCT 
+		where PRD_CATEGORY = 'mule'
+		order by PRD_NUM desc 
+		limit #{displayPost}, #{postNum}
 	]]>
 	</select>
 	
@@ -233,6 +364,56 @@
 		or PRD_CODE like concat('%', #{keyword}, '%')
 		or PRD_COLOR like concat('%', #{keyword}, '%')
 		order by PRD_NUM desc 
+		limit #{displayPost}, #{postNum}
+	]]>
+	</select>
+	
+	<select id="listPageSneakersForAll" parameterType="hashMap" resultType="kr.co.sinsa.biz.product.ProductVO">
+	<![CDATA[
+		select PRD_NUM, PRD_NAME, PRD_IMAGE, PRD_PRICE
+		from PRODUCT
+		where PRD_CATEGORY = 'sneakers'
+		AND PRD_NAME like concat('%', #{keyword}, '%')
+		or PRD_CODE like concat('%', #{keyword}, '%')
+		or PRD_COLOR like concat('%', #{keyword}, '%')
+		order by PRD_NUM desc
+		limit #{displayPost}, #{postNum}
+	]]>
+	</select>
+	<select id="listPageConverseForAll" parameterType="hashMap" resultType="kr.co.sinsa.biz.product.ProductVO">
+	<![CDATA[
+		select PRD_NUM, PRD_NAME, PRD_IMAGE, PRD_PRICE
+		from PRODUCT
+		where PRD_CATEGORY = 'converse'
+		AND PRD_NAME like concat('%', #{keyword}, '%')
+		or PRD_CODE like concat('%', #{keyword}, '%')
+		or PRD_COLOR like concat('%', #{keyword}, '%')
+		order by PRD_NUM desc
+		limit #{displayPost}, #{postNum}
+	]]>
+	</select>
+	<select id="listPageSlip_onForAll" parameterType="hashMap" resultType="kr.co.sinsa.biz.product.ProductVO">
+	<![CDATA[
+		select PRD_NUM, PRD_NAME, PRD_IMAGE, PRD_PRICE
+		from PRODUCT
+		where PRD_CATEGORY = 'slip-on'
+		AND PRD_NAME like concat('%', #{keyword}, '%')
+		or PRD_CODE like concat('%', #{keyword}, '%')
+		or PRD_COLOR like concat('%', #{keyword}, '%')
+		order by PRD_NUM desc
+		limit #{displayPost}, #{postNum}
+	]]>
+	</select>
+	
+	<select id="listPageMuleForAll" parameterType="hashMap" resultType="kr.co.sinsa.biz.product.ProductVO">
+	<![CDATA[
+		select PRD_NUM, PRD_NAME, PRD_IMAGE, PRD_PRICE
+		from PRODUCT
+		where PRD_CATEGORY = 'mule'
+		AND PRD_NAME like concat('%', #{keyword}, '%')
+		or PRD_CODE like concat('%', #{keyword}, '%')
+		or PRD_COLOR like concat('%', #{keyword}, '%')
+		order by PRD_NUM desc
 		limit #{displayPost}, #{postNum}
 	]]>
 	</select>

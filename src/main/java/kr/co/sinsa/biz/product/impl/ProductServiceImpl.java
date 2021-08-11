@@ -31,6 +31,25 @@ public class ProductServiceImpl implements ProductService {
 	}
 	
 	@Override
+	public int countSneakersForAll() throws Exception {
+		return DAO.countSneakersForAll();
+	}
+	@Override
+	public int countConverseForAll() throws Exception {
+		return DAO.countConverseForAll();
+	}
+	
+	@Override
+	public int countSlip_onForAll() throws Exception {
+		return DAO.countSlip_onForAll();
+	}
+	
+	@Override
+	public int countMuleForAll() throws Exception {
+		return DAO.countMuleForAll();
+	}
+	
+	@Override
 	public int countOnlyMen() throws Exception {
 		return DAO.countOnlyMen();
 	}
@@ -117,8 +136,41 @@ public class ProductServiceImpl implements ProductService {
 		return DAO.listPageBestShoes(displayPost, postNum, keyword);
 	}
 	@Override
+	public List<ProductVO> listPageBestSneakers(int displayPost, int postNum, String keyword) throws Exception {
+		return DAO.listPageBestSneakers(displayPost, postNum, keyword);
+	}
+	@Override
+	public List<ProductVO> listPageBestConverse(int displayPost, int postNum, String keyword) throws Exception {
+		return DAO.listPageBestConverse(displayPost, postNum, keyword);
+	}
+	@Override
+	public List<ProductVO> listPageSlipOnForBest(int displayPost, int postNum, String keyword) throws Exception {
+		return DAO.listPageSlipOnForBest(displayPost, postNum, keyword);
+	}
+	@Override
+	public List<ProductVO> listPageMuleForBest(int displayPost, int postNum, String keyword) throws Exception {
+		return DAO.listPageMuleForBest(displayPost, postNum, keyword);
+	}
+	
+	@Override
 	public List<ProductVO> listPageNew(int displayPost, int postNum, String keyword) throws Exception {
 		return DAO.listPageNew(displayPost, postNum, keyword);
+	}
+	@Override
+	public List<ProductVO> listPageSneakersForNew(int displayPost, int postNum, String keyword) throws Exception {
+		return DAO.listPageSneakersForNew(displayPost, postNum, keyword);
+	}
+	@Override
+	public List<ProductVO> listPageConverseForNew(int displayPost, int postNum, String keyword) throws Exception {
+		return DAO.listPageConverseForNew(displayPost, postNum, keyword);
+	}
+	@Override
+	public List<ProductVO> listPageSlipOnForNew(int displayPost, int postNum, String keyword) throws Exception {
+		return DAO.listPageSlipOnForNew(displayPost, postNum, keyword);
+	}
+	@Override
+	public List<ProductVO> listPageMuleForNew(int displayPost, int postNum, String keyword) throws Exception {
+		return DAO.listPageMuleForNew(displayPost, postNum, keyword);
 	}
 	@Override
 	public List<ProductVO> listPageOnlyWomen(int displayPost, int postNum, String keyword) throws Exception {
@@ -131,9 +183,27 @@ public class ProductServiceImpl implements ProductService {
 	public List<ProductVO> listPageOnlyMen(int displayPost, int postNum, String keyword) throws Exception {
 		return DAO.listPageOnlyMen(displayPost, postNum, keyword);
 	}
+	
+	
 	@Override
 	public List<ProductVO> listPageAll(int displayPost, int postNum, String keyword) throws Exception {
 		return DAO.listPageAll(displayPost, postNum, keyword);
+	}
+	@Override
+	public List<ProductVO> listPageSneakersForAll(int displayPost, int postNum, String keyword) throws Exception {
+		return DAO.listPageSneakersForAll(displayPost, postNum, keyword);
+	}
+	@Override
+	public List<ProductVO> listPageConverseForAll(int displayPost, int postNum, String keyword) throws Exception {
+		return DAO.listPageConverseForAll(displayPost, postNum, keyword);
+	}
+	@Override
+	public List<ProductVO> listPageSlip_onForAll(int displayPost, int postNum, String keyword) throws Exception {
+		return DAO.listPageSlip_onForAll(displayPost, postNum, keyword);
+	}
+	@Override
+	public List<ProductVO> listPageMuleForAll(int displayPost, int postNum, String keyword) throws Exception {
+		return DAO.listPageMuleForAll(displayPost, postNum, keyword);
 	}
 	
 

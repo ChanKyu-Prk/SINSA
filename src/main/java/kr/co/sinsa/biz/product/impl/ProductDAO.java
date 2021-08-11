@@ -24,6 +24,25 @@ public class ProductDAO {
 	public int countAll() throws Exception{
 		return SST.selectOne("ProductDAO.countAll");
 	}
+	public int countSneakersForAll() throws Exception{
+		return SST.selectOne("ProductDAO.countSneakersForAll");
+	}
+	public int countConverseForAll() throws Exception{
+		return SST.selectOne("ProductDAO.countConverseForAll");
+	}
+	public int countSlip_onForAll() throws Exception{
+		return SST.selectOne("ProductDAO.countSlip_onForAll");
+	}
+	
+	public int countMuleForAll() throws Exception{
+		return SST.selectOne("ProductDAO.countMuleForAll");
+	}
+
+	
+	/* 구분선---------------------------------------------------------------------------------------------------------------------- */
+	
+
+	
 	public int countOnlyMen() throws Exception{
 		return SST.selectOne("ProductDAO.countOnlyMen");
 	}
@@ -136,6 +155,34 @@ public class ProductDAO {
 		data.put("keyword", keyword);
 		return SST.selectList("ProductDAO.listPageBestShoes", data);
 	}
+	public List<ProductVO> listPageBestSneakers(int displayPost, int postNum, String keyword) throws Exception {
+		HashMap<String, Object> data = new HashMap<String, Object>();
+		data.put("displayPost", displayPost);
+		data.put("postNum", postNum);
+		data.put("keyword", keyword);
+		return SST.selectList("ProductDAO.listPageBestSneakers", data);
+	}
+	public List<ProductVO> listPageBestConverse(int displayPost, int postNum, String keyword) throws Exception {
+		HashMap<String, Object> data = new HashMap<String, Object>();
+		data.put("displayPost", displayPost);
+		data.put("postNum", postNum);
+		data.put("keyword", keyword);
+		return SST.selectList("ProductDAO.listPageBestConverse", data);
+	}
+	public List<ProductVO> listPageSlipOnForBest(int displayPost, int postNum, String keyword) throws Exception {
+		HashMap<String, Object> data = new HashMap<String, Object>();
+		data.put("displayPost", displayPost);
+		data.put("postNum", postNum);
+		data.put("keyword", keyword);
+		return SST.selectList("ProductDAO.listPageSlipOnForBest", data);
+	}
+	public List<ProductVO> listPageMuleForBest(int displayPost, int postNum, String keyword) throws Exception {
+		HashMap<String, Object> data = new HashMap<String, Object>();
+		data.put("displayPost", displayPost);
+		data.put("postNum", postNum);
+		data.put("keyword", keyword);
+		return SST.selectList("ProductDAO.listPageMuleForBest", data);
+	}
 	
 	public List<ProductVO> listPageNew(int displayPost, int postNum, String keyword) throws Exception {
 		HashMap<String, Object> data = new HashMap<String, Object>();
@@ -143,6 +190,34 @@ public class ProductDAO {
 		data.put("postNum", postNum);
 		data.put("keyword", keyword);
 		return SST.selectList("ProductDAO.listPageNew", data);
+	}
+	public List<ProductVO> listPageSneakersForNew(int displayPost, int postNum, String keyword) throws Exception {
+		HashMap<String, Object> data = new HashMap<String, Object>();
+		data.put("displayPost", displayPost);
+		data.put("postNum", postNum);
+		data.put("keyword", keyword);
+		return SST.selectList("ProductDAO.listPageSneakersForNew", data);
+	}
+	public List<ProductVO> listPageConverseForNew(int displayPost, int postNum, String keyword) throws Exception {
+		HashMap<String, Object> data = new HashMap<String, Object>();
+		data.put("displayPost", displayPost);
+		data.put("postNum", postNum);
+		data.put("keyword", keyword);
+		return SST.selectList("ProductDAO.listPageConverseForNew", data);
+	}
+	public List<ProductVO> listPageSlipOnForNew(int displayPost, int postNum, String keyword) throws Exception {
+		HashMap<String, Object> data = new HashMap<String, Object>();
+		data.put("displayPost", displayPost);
+		data.put("postNum", postNum);
+		data.put("keyword", keyword);
+		return SST.selectList("ProductDAO.listPageSlipOnForNew", data);
+	}
+	public List<ProductVO> listPageMuleForNew(int displayPost, int postNum, String keyword) throws Exception {
+		HashMap<String, Object> data = new HashMap<String, Object>();
+		data.put("displayPost", displayPost);
+		data.put("postNum", postNum);
+		data.put("keyword", keyword);
+		return SST.selectList("ProductDAO.listPageMuleForNew", data);
 	}
 	public List<ProductVO> listPageOnlyWomen(int displayPost, int postNum, String keyword) throws Exception {
 		HashMap<String, Object> data = new HashMap<String, Object>();
@@ -171,6 +246,38 @@ public class ProductDAO {
 		data.put("keyword", keyword);
 		
 		return SST.selectList("ProductDAO.listPageAll", data);
+	}
+	public List<ProductVO> listPageSneakersForAll(int displayPost, int postNum, String keyword) throws Exception {
+		HashMap<String, Object> data = new HashMap<String, Object>();
+		data.put("displayPost", displayPost);
+		data.put("postNum", postNum);
+		data.put("keyword", keyword);
+		
+		return SST.selectList("ProductDAO.listPageSneakersForAll", data);
+	}
+	public List<ProductVO> listPageConverseForAll(int displayPost, int postNum, String keyword) throws Exception {
+		HashMap<String, Object> data = new HashMap<String, Object>();
+		data.put("displayPost", displayPost);
+		data.put("postNum", postNum);
+		data.put("keyword", keyword);
+		
+		return SST.selectList("ProductDAO.listPageConverseForAll", data);
+	}
+	public List<ProductVO> listPageSlip_onForAll(int displayPost, int postNum, String keyword) throws Exception {
+		HashMap<String, Object> data = new HashMap<String, Object>();
+		data.put("displayPost", displayPost);
+		data.put("postNum", postNum);
+		data.put("keyword", keyword);
+		
+		return SST.selectList("ProductDAO.listPageSlip_onForAll", data);
+	}
+	public List<ProductVO> listPageMuleForAll(int displayPost, int postNum, String keyword) throws Exception {
+		HashMap<String, Object> data = new HashMap<String, Object>();
+		data.put("displayPost", displayPost);
+		data.put("postNum", postNum);
+		data.put("keyword", keyword);
+		
+		return SST.selectList("ProductDAO.listPageMuleForAll", data);
 	}
 
 }
