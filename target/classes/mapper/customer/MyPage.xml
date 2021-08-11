@@ -5,56 +5,92 @@
 <mapper namespace="myInfo"><!-- 클래스명 -->
 
 
+
+
+
+
 	<select id="myInfo"
 		resultType="kr.co.sinsa.biz.customer.CustomerVO">
-		SELECT CUS_NUM ,CUS_ID ,CUS_PWD ,CUS_NAME ,CUS_GENDER
-		,CUS_EMAIL ,CUS_ADDR
-		,CUS_TEL ,CUS_BIRTH ,CUS_DELIV_ADDR ,CUS_POINT
-		,CUS_REGDATE
-		FROM CUSTOMER WHERE CUS_ID = #{CUS_ID}
+		SELECT
+		CUS_NUM ,
+		CUS_ID ,
+		CUS_PWD ,
+		CUS_NAME ,
+		CUS_GENDER ,
+		CUS_EMAIL ,
+		CUS_ADDR ,
+		CUS_TEL,
+		CUS_BIRTH ,
+		CUS_DELIV_ADDR ,
+		CUS_POINT ,
+		CUS_REGDATE
+		FROM CUSTOMER WHERE
+		CUS_ID = #{CUS_ID}
 	</select>
 
 
 
 
 	<select id="orders" parameterType="Map"
-		resultType="kr.co.sinsa.biz.customer.OrdersVO">
-		select ORDERS.ORDER_NUM, ORDERS.ORDER_PRDNAME,
+		resultType="kr.co.sinsa.biz.customer.MyOrderListVO">
+		select
+		ORDERS.ORDER_NUM,
+		ORDERS.ORDER_PRDNAME,
 		ORDERS.ORDER_PRDSIZE,
-		ORDERS.ORDER_STATE, ORDERS.ORDER_REGDATE,
-		ORDERS.ORDER_PRICE
-		from ORDERS join CUSTOMER on CUSTOMER.CUS_ID =
-		ORDERS.ORDER_CUSID
-		where CUSTOMER.CUS_ID = #{ID} order by
-		ORDERS.ORDER_REGDATE desc,
-		ORDERS.ORDER_NUM desc limit #{page},20;
+		ORDERS.ORDER_PRICE,
+		ORDERS.ORDER_STATE,
+		ORDERS.ORDER_REGDATE,
+		ORDERS.ORDER_PRDCODE,
+		PRODUCT.PRD_BRAND,
+		PRODUCT.PRD_IMAGE
+		from ORDERS
+		join PRODUCT on
+		ORDERS.ORDER_PRDCODE=PRODUCT.PRD_CODE
+		where ORDERS.ORDER_CUSID= #{ID}
+		order by ORDERS.ORDER_REGDATE desc,
+		ORDERS.ORDER_NUM desc
+		limit
+		#{page},20;
 	</select>
 
 	<select id="orderDate" parameterType="Map"
-		resultType="kr.co.sinsa.biz.customer.OrdersVO">
+		resultType="kr.co.sinsa.biz.customer.MyOrderListVO">
 			<![CDATA[
-		select ORDERS.ORDER_NUM, ORDERS.ORDER_PRDNAME, ORDERS.ORDER_PRDSIZE, 
-		ORDERS.ORDER_STATE, ORDERS.ORDER_REGDATE, ORDERS.ORDER_PRICE 
-		from ORDERS join CUSTOMER on CUSTOMER.CUS_ID = ORDERS.ORDER_CUSID 
-		where CUSTOMER.CUS_ID = #{ID} and ORDERS.ORDER_REGDATE >= #{date1} and ORDERS.ORDER_REGDATE <= DATE_add(#{date2},INTERVAL 1 Day)
-		order by ORDERS.ORDER_REGDATE desc, 
-		ORDERS.ORDER_NUM desc limit #{page},20;
+		select 
+		ORDERS.ORDER_NUM, 
+		ORDERS.ORDER_PRDNAME,
+		ORDERS.ORDER_PRDSIZE,
+		ORDERS.ORDER_PRICE,
+		ORDERS.ORDER_STATE, 
+		ORDERS.ORDER_REGDATE,
+		ORDERS.ORDER_PRDCODE,
+		PRODUCT.PRD_BRAND,
+		PRODUCT.PRD_IMAGE
+		from ORDERS 
+		join PRODUCT on 
+		ORDERS.ORDER_PRDCODE=PRODUCT.PRD_CODE
+		where  ORDERS.ORDER_CUSID= #{ID} and 
+		ORDERS.ORDER_REGDATE >= #{date1} and 
+		ORDERS.ORDER_REGDATE <= DATE_add(#{date2},INTERVAL 1 Day)
+		order by ORDERS.ORDER_REGDATE desc,
+		ORDERS.ORDER_NUM desc 
+		limit #{page},20;
 		]]>
 	</select>
 
 	<select id="countOders" parameterType="Map" resultType="int">
 		select
 		count(*)
-		from ORDERS join CUSTOMER on CUSTOMER.CUS_ID =
-		ORDERS.ORDER_CUSID
-		where CUSTOMER.CUS_ID = #{ID};
+		from ORDERS 
+		where ORDER_CUSID = #{ID};
 	</select>
 
 	<select id="countOdersDate" parameterType="Map" resultType="int">
 			<![CDATA[
-		select count(*)
-		from ORDERS join CUSTOMER on CUSTOMER.CUS_ID = ORDERS.ORDER_CUSID
-		where CUSTOMER.CUS_ID = #{ID} and ORDERS.ORDER_REGDATE >= #{date1} and ORDERS.ORDER_REGDATE <= DATE_add(#{date2},INTERVAL 1 Day);
+		select
+		count(*)
+		from ORDERS 
+		where ORDER_CUSID = #{ID} and ORDER_REGDATE >= #{date1} and ORDER_REGDATE <= DATE_add(#{date2},INTERVAL 1 Day);
 			]]>
 	</select>
 
@@ -73,10 +109,10 @@
 		where JJIM.JJIM_CUSID = #{ID} limit #{page},20;
 	</select>
 
-	<select id="countJjimList" parameterType="map"
-		resultType="int">
+	<select id="countJjimList" parameterType="map" resultType="int">
 		select count(*) from product join JJIM on JJIM.JJIM_PRDNUM
-		= product.PRD_NUM
+		=
+		product.PRD_NUM
 		where JJIM.JJIM_CUSID = #{ID};
 	</select>
 
@@ -136,7 +172,8 @@
 	</select>
 
 	<select id="countQnAList" parameterType="Map" resultType="int">
-		select count(*) from QNA where QNA_CUSID = #{ID};
+		select
+		count(*) from QNA where QNA_CUSID = #{ID};
 	</select>
 
 	<select id="countQnAListDate" parameterType="Map"
@@ -164,4 +201,34 @@
 		select PRD_NUM from product;
 	</select>
 
+
+	<select id="passCheck" parameterType="Map" resultType="int">
+		select
+		count(*)
+		from
+		customer where CUS_ID = #{ID} and CUS_PWD = #{PASSWORD};
+	</select>
+
+	<update id="passChange" parameterType="Map">
+		update customer
+		set
+		CUS_PWD
+		= #{PASSWORD}
+		where CUS_ID = #{ID};
+	</update>
+
+	<update id="privateInfoChange"
+		parameterType="kr.co.sinsa.biz.customer.CustomerVO">
+		update customer
+		set
+		CUS_NAME = #{CUS_NAME },
+		CUS_GENDER
+		=#{CUS_GENDER },
+		CUS_EMAIL =#{CUS_EMAIL },
+		CUS_ADDR = #{CUS_ADDR },
+		CUS_TEL = #{CUS_TEL },
+		CUS_BIRTH = #{CUS_BIRTH }
+		where CUS_ID =
+		#{CUS_ID};
+	</update>
 </mapper>
