@@ -10,5 +10,6 @@ public interface CustomerDAO {
 	public int CustomerInsert(CustomerVO vo);
 	public int CustomerUpdate(CustomerVO vo);
 	public int CustomerDelete(int CUS_NUM);
+	
 
 }

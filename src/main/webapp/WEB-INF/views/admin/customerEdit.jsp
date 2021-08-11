@@ -33,7 +33,7 @@ div {
 		<a href="#">로그아웃</a>
 	</nav>
 	<div>
-		<form:form method="post" action="customerUpdate" modelAttribute="customerInfo" enctype="multipart/form-data">
+		<form:form method="post" action="customerUpdate" modelAttribute="customerInfo" >
 			<form:hidden path="CUS_NUM" /> 
 			<table>
 				<tr>
@@ -88,10 +88,13 @@ div {
 					</tr> --%>
 				
 				
-				<tr>
-					<td colspan="2"><input type="submit" value="Save"></td>
-				</tr>
-				<tr>
+				
+				
+				
+				 <tr>
+               <td colspan="2"><input type="submit" value="변경사항저장"></td>
+            </tr>
+            <tr>
 					<td colspan="2"><a href="customerList">회원리스트</a></td>
 				</tr>
 

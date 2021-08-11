@@ -41,10 +41,22 @@ $(document).ready(function() {
 		}
 	}
 </script>
+
 </head>
 <body>
 <jsp:include page="adminHeader.jsp" flush="true" />
    <br><br>
+<form>
+	<fieldset>
+	<label>검색분류</label>
+		<select name="f">
+			<option value="CUS_NAME">이름</option>
+			<option value="CUS_ID">아이디</option>
+			<input type="text" name="q" value=""/>
+			<input type="submit" value="검색"	>	
+			</select>
+	</fieldset>
+</form>
 
 	<div>
 	<h2>신사 관리</h2>
@@ -58,9 +70,8 @@ $(document).ready(function() {
 				<th>이메일</th>
 				<th>주소</th>
 				<th>전화번호</th>
-				<td id="CUS_TEL" />
 				<th>생년월일</th>
-				<th>기본 배송지</th>
+				<!-- <th>기본 배송지</th> -->
 				<th>포인트</th>
 				<th>가입일자</th>
 			</tr>
@@ -75,7 +86,7 @@ $(document).ready(function() {
 			<td>${row.CUS_ADDR }</td>
 			<td>${row.CUS_TEL }</td>
 			<td>${row.CUS_BIRTH }</td>
-			<td>${row.CUS_DELIV_ADDR }</td>
+			<%-- <td>${row.CUS_DELIV_ADDR }</td> --%>
 			<td>${row.CUS_POINT }</td>
 			<td>
 			<fmt:formatDate value="${row.CUS_REGDATE}" pattern="yyyy-MM-dd" />
@@ -86,6 +97,7 @@ $(document).ready(function() {
 				<input type="button" onclick="javascript:customerDelete(${ row.CUS_NUM })" value="삭제" />
 				</td>
 			</tr>
+			
 			</c:forEach> 
 		</tbody>
 	</table>
