@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kr.co.sinsa.biz.customer.CustomerVO;
+import kr.co.sinsa.biz.customer.MyOrderListVO;
 import kr.co.sinsa.biz.customer.MyPageService;
 import kr.co.sinsa.biz.customer.OrdersVO;
 import kr.co.sinsa.biz.customer.QnAVO;
@@ -27,25 +28,37 @@ public class MyPageServiceImpl implements MyPageService {
 	public CustomerVO myInfo(UserVO vo) {
 		return dao.myInfo(vo);
 	}
-	
-	
-	
-	
 
+	
+	
+	
+	
+	
+	
+	
+	
 	@Override
-	public List<OrdersVO> myOrderList(Map<String, Object> map) {
+	public List<MyOrderListVO> myOrderList(Map<String, Object> map) {
 		return dao.myOrderList(map);
 	}
+
 	@Override
-	public List<OrdersVO> myOrderListDate(Map<String, Object> map) {
+	public List<MyOrderListVO> myOrderListDate(Map<String, Object> map) {
+
 		return dao.myOrderListDate(map);
 	}
+
 	@Override
 	public int countmyOrderList(Map<String, Object> map) {
+
 		return dao.countmyOrderList(map);
 	}
+
 	@Override
 	public int countmyOrderListDate(Map<String, Object> map) {
+		
+		
+		
 		return dao.countmyOrderListDate(map);
 	}
 
@@ -56,15 +69,28 @@ public class MyPageServiceImpl implements MyPageService {
 	
 	
 	
+	
+	
+	
+	
 	@Override
-	public List<ProductVO> jjimList(Map<String,Object> map) {
+	public List<ProductVO> jjimList(Map<String, Object> map) {
 		return dao.jjimList(map);
 	}
+
 	@Override
-	public int countJjimList(Map<String,Object> map) {
+	public int countJjimList(Map<String, Object> map) {
 		return dao.countJjimList(map);
 	}
 
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	
@@ -73,39 +99,55 @@ public class MyPageServiceImpl implements MyPageService {
 	public List<ReviewVO> reviewList(Map<String, Object> map) {
 		return dao.reviewList(map);
 	}
+
 	@Override
 	public List<ReviewVO> reviewListDate(Map<String, Object> map) {
 		return dao.reviewListDate(map);
 	}
+
 	@Override
 	public int countReviewList(Map<String, Object> map) {
 		return dao.countReviewList(map);
 	}
+
 	@Override
 	public int countReviewListDate(Map<String, Object> map) {
 		return dao.countReviewListDate(map);
 	}
-	
-	
 
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	@Override
 	public List<QnAVO> QnAList(Map<String, Object> map) {
 		return dao.QnAList(map);
 	}
+
 	@Override
 	public List<QnAVO> QnAListDate(Map<String, Object> map) {
 		return dao.QnAListDate(map);
 	}
+
 	@Override
 	public int countQnAListList(Map<String, Object> map) {
 		return dao.countQnAList(map);
 	}
+
 	@Override
 	public int countQnAListListDate(Map<String, Object> map) {
 		return dao.countQnAListDate(map);
 	}
+
+	
+	
+	
 	
 	
 	
@@ -158,8 +200,33 @@ public class MyPageServiceImpl implements MyPageService {
 		return listcount;
 	}
 
+	
+	
+	
+	
+	
+	
+	@Override
+	public boolean passCheck(Map<String, String> map) {
+		int passCheck = dao.passCheck(map);
+		if (passCheck == 1) {
+			return true;
+		} else {
+			return false;
+		}
+	}
 
+	@Override
+	public void  passChange(Map<String, String> map) {
+		dao.passChange(map);
+	}
 
-
-
+	
+	@Override
+	public void privateInfoChange(CustomerVO vo) {
+		dao.privateInfoChange(vo);
+		
+	}
+	
+	
 }
