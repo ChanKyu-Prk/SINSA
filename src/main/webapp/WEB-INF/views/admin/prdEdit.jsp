@@ -3,7 +3,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
-
+<%
+String getreferer = request.getHeader("Referer");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -27,7 +29,7 @@ div {
 		<div class="row">
 			<form:form method="post" action="prdUpdate" modelAttribute="prdInfo"
 				enctype="multipart/form-data">
-				<input type="hidden" id="referer" name="referer" value="${pageContext.request.requestURI }" />
+				<input type="hidden" id="referer" name="referer" value="<%= getreferer %>" />
 				
 				<form:hidden path="prd_num" />
 				<form:hidden path="prd_image" />

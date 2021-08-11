@@ -118,18 +118,18 @@ public class PrdContorller {
 	@RequestMapping("/admin/prdUpdate")
 	public String prdUpdate(HttpServletRequest request, Model model, PrdVO vo) {
 		model.addAttribute("prd_num", vo.getPrd_num());
-		String referer = request.getParameter("referer").substring(14);
+		String referer = request.getParameter("referer");
 		prdService.prd_update(vo);
-		System.out.println(referer);
-		return referer;
+		return "redirect:"+referer;
 	}
 			
 	@RequestMapping("/admin/prdDelete")
-	public String prdDelete(@RequestParam int prd_num) {
+	public String prdDelete(HttpServletRequest request, @RequestParam int prd_num) {
 //		PrdDAO dao = sqlSessionTemplate.getMapper(PrdDAO.class);
 //		int n = dao.prd_delete(prd_num);
 		prdService.prd_delete(prd_num);
-		return "redirect:/admin/prdList";
+		String referer = request.getHeader("Referer");
+		return "redirect:"+referer;
 	}
 	
 }
