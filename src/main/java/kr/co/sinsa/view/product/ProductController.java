@@ -44,6 +44,11 @@ public class ProductController {
 	    	return "/orders/checkout";
 	    }
 		
+		
+	@RequestMapping(value = "/getProductBrandPage")
+	public String getProductBrandPage(Model model) {
+		return "product/Product-brandPage";
+	}
 	// 게시물 목록 + 페이징 추가
 	@RequestMapping(value = "/getProductListPage", method = RequestMethod.GET)
 	public String getProductListPage(Model model, @RequestParam("num") int num,
@@ -70,7 +75,67 @@ public class ProductController {
 
 			return "product/Product-listPage";
 
-		} else if (condition.equals("men")) {
+		} else if (condition.equals("sneakersForAll")) {
+
+			page = new Page();
+			page.setNum(num);
+			page.setCount(service.countSneakersForAll());
+
+			List<ProductVO> list = null;
+			list = service.listPageSneakersForAll(page.getDisplayPost(), page.getPostNum(), keyword);
+
+			model.addAttribute("list", list);
+			model.addAttribute("page", page);
+			model.addAttribute("select", num);
+			model.addAttribute("condition", condition);
+
+			return "product/Product-listPage";
+		} else if (condition.equals("converseForAll")) {
+
+			page = new Page();
+			page.setNum(num);
+			page.setCount(service.countConverseForAll());
+
+			List<ProductVO> list = null;
+			list = service.listPageConverseForAll(page.getDisplayPost(), page.getPostNum(), keyword);
+
+			model.addAttribute("list", list);
+			model.addAttribute("page", page);
+			model.addAttribute("select", num);
+			model.addAttribute("condition", condition);
+
+			return "product/Product-listPage";
+		}else if (condition.equals("slipOnForAll")) {
+
+			page = new Page();
+			page.setNum(num);
+			page.setCount(service.countSlip_onForAll());
+
+			List<ProductVO> list = null;
+			list = service.listPageSlip_onForAll(page.getDisplayPost(), page.getPostNum(), keyword);
+
+			model.addAttribute("list", list);
+			model.addAttribute("page", page);
+			model.addAttribute("select", num);
+			model.addAttribute("condition", condition);
+
+			return "product/Product-listPage";
+		}else if (condition.equals("muleForAll")) {
+
+			page = new Page();
+			page.setNum(num);
+			page.setCount(service.countMuleForAll());
+
+			List<ProductVO> list = null;
+			list = service.listPageMuleForAll(page.getDisplayPost(), page.getPostNum(), keyword);
+
+			model.addAttribute("list", list);
+			model.addAttribute("page", page);
+			model.addAttribute("select", num);
+			model.addAttribute("condition", condition);
+
+			return "product/Product-listPage";
+		}else if (condition.equals("men")) {
 
 			page = new Page();
 			page.setNum(num);
@@ -105,7 +170,7 @@ public class ProductController {
 
 			page = new Page();
 			page.setNum(num);
-			page.setCount(30);
+			page.setCount(36);
 
 			List<ProductVO> list = null;
 			list = service.listPageNew(page.getDisplayPost(), page.getPostNum(), keyword);
@@ -117,7 +182,71 @@ public class ProductController {
 
 			return "product/Product-listPage";
 
-		} else if (condition.equals("best")) {
+		} else if (condition.equals("sneakersForNew")) {
+
+			page = new Page();
+			page.setNum(num);
+			page.setCount(36);
+
+			List<ProductVO> list = null;
+			list = service.listPageSneakersForNew(page.getDisplayPost(), page.getPostNum(), keyword);
+
+			model.addAttribute("list", list);
+			model.addAttribute("page", page);
+			model.addAttribute("select", num);
+			model.addAttribute("condition", condition);
+
+			return "product/Product-listPage";
+
+		}else if (condition.equals("converseForNew")) {
+
+			page = new Page();
+			page.setNum(num);
+			page.setCount(36);
+
+			List<ProductVO> list = null;
+			list = service.listPageConverseForNew(page.getDisplayPost(), page.getPostNum(), keyword);
+
+			model.addAttribute("list", list);
+			model.addAttribute("page", page);
+			model.addAttribute("select", num);
+			model.addAttribute("condition", condition);
+
+			return "product/Product-listPage";
+
+		}else if (condition.equals("slipOnForNew")) {
+
+			page = new Page();
+			page.setNum(num);
+			page.setCount(36);
+
+			List<ProductVO> list = null;
+			list = service.listPageSlipOnForNew(page.getDisplayPost(), page.getPostNum(), keyword);
+
+			model.addAttribute("list", list);
+			model.addAttribute("page", page);
+			model.addAttribute("select", num);
+			model.addAttribute("condition", condition);
+
+			return "product/Product-listPage";
+
+		}else if (condition.equals("muleForNew")) {
+
+			page = new Page();
+			page.setNum(num);
+			page.setCount(36);
+
+			List<ProductVO> list = null;
+			list = service.listPageMuleForNew(page.getDisplayPost(), page.getPostNum(), keyword);
+
+			model.addAttribute("list", list);
+			model.addAttribute("page", page);
+			model.addAttribute("select", num);
+			model.addAttribute("condition", condition);
+
+			return "product/Product-listPage";
+
+		}else if (condition.equals("best")) {
 
 			page = new Page();
 			page.setNum(num);
@@ -125,6 +254,70 @@ public class ProductController {
 
 			List<ProductVO> list = null;
 			list = service.listPageBestShoes(page.getDisplayPost(), page.getPostNum(), keyword);
+
+			model.addAttribute("list", list);
+			model.addAttribute("page", page);
+			model.addAttribute("select", num);
+			model.addAttribute("condition", condition);
+
+			return "product/Product-listPage";
+
+		}else if (condition.equals("sneakersForBest")) {
+
+			page = new Page();
+			page.setNum(num);
+			page.setCount(12);
+
+			List<ProductVO> list = null;
+			list = service.listPageBestSneakers(page.getDisplayPost(), page.getPostNum(), keyword);
+
+			model.addAttribute("list", list);
+			model.addAttribute("page", page);
+			model.addAttribute("select", num);
+			model.addAttribute("condition", condition);
+
+			return "product/Product-listPage";
+
+		}else if (condition.equals("converseForBest")) {
+
+			page = new Page();
+			page.setNum(num);
+			page.setCount(12);
+
+			List<ProductVO> list = null;
+			list = service.listPageBestConverse(page.getDisplayPost(), page.getPostNum(), keyword);
+
+			model.addAttribute("list", list);
+			model.addAttribute("page", page);
+			model.addAttribute("select", num);
+			model.addAttribute("condition", condition);
+
+			return "product/Product-listPage";
+
+		}else if (condition.equals("slipOnForBest")) {
+
+			page = new Page();
+			page.setNum(num);
+			page.setCount(12);
+
+			List<ProductVO> list = null;
+			list = service.listPageSlipOnForBest(page.getDisplayPost(), page.getPostNum(), keyword);
+
+			model.addAttribute("list", list);
+			model.addAttribute("page", page);
+			model.addAttribute("select", num);
+			model.addAttribute("condition", condition);
+
+			return "product/Product-listPage";
+
+		}else if (condition.equals("muleForBest")) {
+
+			page = new Page();
+			page.setNum(num);
+			page.setCount(12);
+
+			List<ProductVO> list = null;
+			list = service.listPageMuleForBest(page.getDisplayPost(), page.getPostNum(), keyword);
 
 			model.addAttribute("list", list);
 			model.addAttribute("page", page);

@@ -162,7 +162,7 @@
 				<div class="col-lg-6">
 					<nav class="header__menu">
 						<ul>
-							<li><a href="#">brand</a></li>
+							<li><a href="/getProductBrandPage">brand</a></li>
 							<li><a href="/getProductListPage?num=1&condition=all">ALL</a></li>
 							<li><a href="/getProductListPage?num=1&condition=men">men</a>
 								<ul class="header__menu__dropdown">

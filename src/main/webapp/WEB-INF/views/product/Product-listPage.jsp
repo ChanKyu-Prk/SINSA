@@ -16,15 +16,7 @@
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
 
-    <!-- Css Styles -->
-    <link rel="stylesheet" href="${path}/resources/css/bootstrap.min.css" type="text/css">
-    <link rel="stylesheet" href="${path}/resources/css/font-awesome.min.css" type="text/css">
-    <link rel="stylesheet" href="${path}/resources/css/elegant-icons.css" type="text/css">
-    <link rel="stylesheet" href="${path}/resources/css/nice-select.css" type="text/css">
-    <link rel="stylesheet" href="${path}/resources/css/jquery-ui.min.css" type="text/css">
-    <link rel="stylesheet" href="${path}/resources/css/owl.carousel.min.css" type="text/css">
-    <link rel="stylesheet" href="${path}/resources/css/slicknav.min.css" type="text/css">
-    <link rel="stylesheet" href="${path}/resources/css/style.css" type="text/css">
+
 </head>
 <body>
 
@@ -100,20 +92,6 @@
     <section class="hero hero-normal">
         <div class="container">
             <div class="row">
-                <div class="col-lg-3">
-                    <div class="hero__categories">
-                        <div class="hero__categories__all">
-                            <i class="fa fa-bars"></i>
-                            <span>전체 상품</span>
-                        </div>
-                        <ul>
-                            <li><a href="#">스니커스</a></li>
-                            <li><a href="#">캔버스화</a></li>
-                            <li><a href="#">슬립온</a></li>
-                            <li><a href="#">뮬</a></li>
-                        </ul>
-                    </div>
-                </div>
                 <div class="col-lg-9">
                     <div class="hero__search">
                         <div class="hero__search__form">
@@ -177,10 +155,53 @@
                         <div class="sidebar__item">
                             <h4>품목</h4>
                             <ul>
-                                <li><a href="#">스니커스</a></li>
-                                <li><a href="#">캔버스화</a></li>
-                                <li><a href="#">슬립온</a></li>
-                                <li><a href="#">뮬</a></li>
+	                            <c:if test="${condition eq 'all' or condition eq 'sneakersForAll' 
+	                            								 or condition eq 'converseForAll'
+	                            								 or condition eq 'slipOnForAll'
+	                            								 or condition eq 'muleForAll'}">
+	                                <li><a href="/getProductListPage?num=1&condition=sneakersForAll">스니커스</a></li>
+	                                <li><a href="/getProductListPage?num=1&condition=converseForAll">캔버스화</a></li>
+	                                <li><a href="/getProductListPage?num=1&condition=slipOnForAll">슬립온</a></li>
+	                                <li><a href="/getProductListPage?num=1&condition=muleForAll">뮬</a></li>
+	                            </c:if>
+	                            <c:if test="${condition eq 'new' or condition eq 'sneakersForNew' 
+	                            								 or condition eq 'converseForNew'
+	                            								 or condition eq 'slipOnForNew'
+	                            								 or condition eq 'muleForNew'}">
+	                                <li><a href="/getProductListPage?num=1&condition=sneakersForNew">스니커스</a></li>
+	                                <li><a href="/getProductListPage?num=1&condition=converseForNew">캔버스화</a></li>
+	                                <li><a href="/getProductListPage?num=1&condition=slipOnForNew">슬립온</a></li>
+	                                <li><a href="/getProductListPage?num=1&condition=muleForNew">뮬</a></li>
+	                            </c:if>
+	                            <c:if test="${condition eq 'best' or condition eq 'sneakersForBest' 
+	                            								  or condition eq 'converseForBest'
+	                            								  or condition eq 'slipOnForBest'
+	                            								  or condition eq 'muleForBest'}">
+	                                <li><a href="/getProductListPage?num=1&condition=sneakersForBest">스니커스</a></li>
+	                                <li><a href="/getProductListPage?num=1&condition=converseForBest">캔버스화</a></li>
+	                                <li><a href="/getProductListPage?num=1&condition=slipOnForBest">슬립온</a></li>
+	                                <li><a href="/getProductListPage?num=1&condition=muleForBest">뮬</a></li>
+	                            </c:if>
+	                            <c:if test="${condition eq 'men' or condition eq 'onlySneakersForMen'
+	                            								 or condition eq 'onlyConverseForMen'
+	                            								 or condition eq 'onlySlip-onForMen'
+	                            								 or condition eq 'onlyMuleForMen'}">
+	                                <li><a href="/getProductListPage?num=1&condition=onlySneakersForMen">스니커스</a></li>
+	                                <li><a href="/getProductListPage?num=1&condition=onlyConverseForMen">캔버스화</a></li>
+	                                <li><a href="/getProductListPage?num=1&condition=onlySlip-onForMen">슬립온</a></li>
+	                                <li><a href="/getProductListPage?num=1&condition=onlyMuleForMen">뮬</a></li>
+	                            </c:if>
+	                            <c:if test="${condition eq 'women' or condition eq 'onlySneakersForWomen'
+	                            								   or condition eq 'onlyConverseForWomen'
+	                            								   or condition eq 'onlySlip-onForWomen'
+	                            								   or condition eq 'onlyMuleForWomen'}">
+	                                <li><a href="/getProductListPage?num=1&condition=onlySneakersForWomen">스니커스</a></li>
+	                                <li><a href="/getProductListPage?num=1&condition=onlyConverseForWomen">캔버스화</a></li>
+	                                <li><a href="/getProductListPage?num=1&condition=onlySlip-onForWomen">슬립온</a></li>
+	                                <li><a href="/getProductListPage?num=1&condition=onlyMuleForWomen">뮬</a></li>
+	                            </c:if>
+
+
                             </ul>
                         </div>
                         <div class="sidebar__item">
