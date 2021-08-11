@@ -29,7 +29,7 @@
 		insert into product(prd_code, prd_name, prd_category, prd_image, prd_gender, prd_price, prd_brand, prd_color, prd_detail)
 		values (#{prd_code}, #{prd_name}, #{prd_category}, #{prd_image}, #{prd_gender}, #{prd_price}, #{prd_brand}, #{prd_color}, #{prd_detail});
 		
-		insert into stock(stock_prdcode) values (#{prd_code});
+		insert into stock(stock_prdcode) values (#{prd_code})
 		
 
 	</insert>

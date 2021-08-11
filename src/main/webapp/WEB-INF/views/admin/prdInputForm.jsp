@@ -8,7 +8,10 @@
 <head>
 <meta charset="UTF-8">
 <title>empInputform</title>
-
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <style>
 body {
 	font-size: 11pt;
@@ -30,7 +33,8 @@ div {
 			<form:hidden path="prd_image"/>
 			<button id="btn-upload" type="button" style="border: 1px solid #ddd; outline: none;">파일 추가</button>
   			<input id="input_file" multiple="multiple" type="file" style="display:none;">
-
+			<form:hidden path="fieldName" value="${param.fieldName}"/>
+			<form:hidden path="searchWord" value="${param.searchWord}"/>
 			<table>
 				<tr>
 					<td>상품코드 :</td>
