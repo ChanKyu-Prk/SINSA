@@ -13,8 +13,6 @@ public class PrdVO {
 	String prd_color;
 	String prd_detail;
 	int prd_disrate;
-	String fieldName;
-	String searchWord;
 	
 	public int getPrd_num() {
 		return prd_num;
@@ -82,17 +80,6 @@ public class PrdVO {
 	public void setPrd_disrate(int prd_disrate) {
 		this.prd_disrate = prd_disrate;
 	}
-	public String getFieldName() {
-		return fieldName;
-	}
-	public void setFieldName(String fieldName) {
-		this.fieldName = fieldName;
-	}
-	public String getSearchWord() {
-		return searchWord;
-	}
-	public void setSearchWord(String searchWord) {
-		this.searchWord = searchWord;
-	}
+
 	
 }

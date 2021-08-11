@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import kr.co.sinsa.admin.service.PrdService;
 import kr.co.sinsa.admin.vo.PrdVO;
+import kr.co.sinsa.admin.vo.SortVO;
 import kr.co.sinsa.biz.product.PageInfo;
 
 @Controller
@@ -109,20 +110,18 @@ public class PrdContorller {
 			
 	@RequestMapping("/admin/prdEdit")
 	public String prdEdit(Model model, @RequestParam int prd_num) {
-//		PrdDAO dao = sqlSessionTemplate.getMapper(PrdDAO.class);
-//		PrdVO vo = dao.prd_info(prd_num);
-//		model.addAttribute("prdInfo", vo);
+
 		model.addAttribute("prdInfo", prdService.prd_info(prd_num));
 		return "admin/prdEdit";
 	}
 			
 	@RequestMapping("/admin/prdUpdate")
-	public String prdUpdate(Model model, PrdVO vo) {
-//		PrdDAO dao = sqlSessionTemplate.getMapper(PrdDAO.class);
-//		int n = dao.prd_update(vo);
+	public String prdUpdate(HttpServletRequest request, Model model, PrdVO vo) {
 		model.addAttribute("prd_num", vo.getPrd_num());
+		String referer = request.getParameter("referer").substring(14);
 		prdService.prd_update(vo);
-		return "redirect:/admin/prdEdit";
+		System.out.println(referer);
+		return referer;
 	}
 			
 	@RequestMapping("/admin/prdDelete")
