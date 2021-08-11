@@ -114,6 +114,10 @@ input:read-only{
 	right: 10px;
 }
 
+.avPoint{
+	color: #dd2222;
+}
+
 </style>
 </head>
 
@@ -239,8 +243,7 @@ input:read-only{
 								<input type="hidden" id="delivAddrExtra"/>
 							</div>
 							<div class="row">
-								<label for="ORDER_MEMO" class="col-lg-3">배송시 요청사항 <span
-									class="inpReq">*</span>
+								<label for="ORDER_MEMO" class="col-lg-3">배송시 요청사항
 								</label>
 								<div class="checkout__input col-lg-9">
 									<select id="delivMemo" class="mb-2 wide" title="배송시 요청사항">
@@ -264,7 +267,7 @@ input:read-only{
 								<ul>
 									<li>총 주문 가격 <span>750000원</span></li>
 									<li>할인 <span>5000원</span></li>
-									<li class="points">포인트 사용 <input placeholder="0" class="text-right"></input><span>P</span></li>
+									<li class="points">포인트 사용 <input placeholder="0" class="text-right"></input><span>P</span><p><small>사용가능한 포인트: <span class="avPoint">5000 P</span></small></p></li>
 									<li>배송비 <span>무료</span></li>
 								</ul>
 								<div class="checkout__order__total">
