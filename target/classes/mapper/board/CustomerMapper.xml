@@ -2,31 +2,63 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//en"
  "http://mybaits.org/dtd/mybatis-3-mapper.dtd">
  
-<mapper namespace="kr.co.sinsa.admin.dao.CustomerDAO">
+<mapper namespace="CustomerDAO">
 
-	<select id="CustomerList" resultType="kr.co.sinsa.admin.vo.CustomerVO">
-		select * from customer order by CUS_NUM desc
+	<select id="customer_list" parameterType="hashmap" resultType="kr.co.sinsa.admin.vo.CustomerVO">
+		select * from customer where ${fieldName} like '%${searchWord}%' order by CUS_NUM desc limit ${page}, 10
+	</select>
+	
+	<select id="customer_list_count" parameterType="hashmap" resultType="int">
+		select count(*) from customer where ${fieldName} like '%${searchWord}%'
+	</select>
+	
+	<select id="customer_all_search" parameterType="hashmap" resultType="kr.co.sinsa.admin.vo.CustomerVO">
+		select * from customer where
+		 CUS_NAME like concat('%',#{searchWord},'%') or
+		 CUS_ID like concat('%',#{searchWord},'%') order by CUS_NUM desc limit ${page}, 10
+	</select>
+	
+	<select id="customer_all_search_count" parameterType="hashmap" resultType="int">
+		select count(*) from customer where
+		 CUS_NAME like concat('%',#{searchWord},'%') or
+		 CUS_ID like concat('%',#{searchWord},'%')
 	</select>
 
-  <insert id="CustomerInsert" parameterType="kr.co.sinsa.admin.vo.CustomerVO">
+  <insert id="customer_insert" parameterType="kr.co.sinsa.admin.vo.CustomerVO">
 		insert into customer(CUS_ID, CUS_PWD, CUS_NAME, CUS_GENDER, CUS_EMAIL, CUS_ADDR, CUS_TEL, CUS_BIRTH, CUS_DELIV_ADDR)
 		values(#{CUS_ID}, #{CUS_PWD}, #{CUS_NAME}, #{CUS_GENDER}, #{CUS_EMAIL}, #{CUS_ADDR}, #{CUS_TEL}, #{CUS_BIRTH}, #{CUS_DELIV_ADDR});
 	</insert>
 
-	<select id="CustomerInfo" resultType="kr.co.sinsa.admin.vo.CustomerVO">
+	<select id="customer_info" resultType="kr.co.sinsa.admin.vo.CustomerVO">
 		select * from customer where CUS_NUM=#{CUS_NUM}
 	</select>
 
-	<update id="CustomerUpdate" parameterType="kr.co.sinsa.admin.vo.CustomerVO">
+	<update id="customer_update" parameterType="kr.co.sinsa.admin.vo.CustomerVO">
 		update customer set CUS_ID=#{CUS_ID}, CUS_PWD=#{CUS_PWD}, CUS_NAME=#{CUS_NAME}, CUS_GENDER=#{CUS_GENDER},
 		 CUS_EMAIL=#{CUS_EMAIL}, CUS_ADDR=#{CUS_ADDR}, CUS_TEL=#{CUS_TEL}, CUS_BIRTH=#{CUS_BIRTH}, CUS_DELIV_ADDR=#{CUS_DELIV_ADDR}, CUS_POINT=#{CUS_POINT} where CUS_NUM=#{CUS_NUM}
 	</update>
 
-	<delete id="CustomerDelete">
+	<delete id="customer_delete">
 		delete from customer where CUS_NUM=#{CUS_NUM}
 	</delete> 
 	
+	<!-- <insert id="insert" parameterType="kr.co.sinsa.admin.vo.CustomerVO">
 	
+		<![CDATA[
+		insert into customer(CUS_ID, CUS_PWD, CUS_NAME, CUS_GENDER, CUS_EMAIL, CUS_ADDR, CUS_TEL, CUS_BIRTH, CUS_DELIV_ADDR ) 
+	VALUES(#{CUS_ID}, #{CUS_PWD}, #{CUS_NAME}, #{CUS_GENDER}, #{CUS_EMAIL}, #{CUS_ADDR}, #{CUS_TEL}, #{CUS_BIRTH}, #{CUS_DELIV_ADDR})
+		]]>
+	
+	</insert> -->
+	
+	
+	<!-- <select id="idCheck" resultType="int">
+		select count(*) from customer where CUS_ID = #{CUS_ID}
+	</select> -->
+	
+	<!-- <select id="CustomerList" resultType="kr.co.sinsa.admin.vo.CustomerVO">
+		select * from customer order by CUS_NUM desc
+	</select> -->
 	
 
 </mapper>

@@ -18,16 +18,27 @@ div {
 	margin: 0 auto;
 }
 </style>
+
 </head>
 <body>
 <jsp:include page="adminHeader.jsp" flush="true" />
 	<br><br>
 	<div>
+	
 		<form:form method="post" action="prdUpdate" modelAttribute="prdInfo" enctype="multipart/form-data">
 			<form:hidden path="prd_num" />
 			<form:hidden path="prd_image"/>
 			<input type="file" name="uploadfile" placeholder="파일 선택" /><br/>
 			<table>
+			<tr>
+	<td id="tabTitle"><label id="forLabel" for="P_IMG">변경할 메인사진</label></td>
+	<td class="td_right" style="cursor:pointer; text-align: left;"><input name="P_IMG" type="file"
+                  accept="image/*" id="load" /></td>
+	</tr>
+	<tr>
+	  <td id="tabTitle"><label id="forLabel" for="P_IMG">현재 메인사진</label></td>
+     <td><input type="text" name="P_IMG" id="proNum"value="PRD_IMAGE"  disabled/></td>
+	</tr>
 				<tr>
 					<td>상품코드 :</td>
 					<td><form:input path="prd_code" /></td>
@@ -60,7 +71,7 @@ div {
         					<form:option value="여성"/>
 						</form:select>
 					</td>
-				<tr>
+				</tr>
 				<tr>
 					<td>가격 :</td>
 					<td><form:input path="prd_price" /></td>
@@ -79,7 +90,8 @@ div {
         					<form:option value="LACOSTE"/>
 						</form:select>
 					</td>
-				<tr>
+					</tr>
+				
 				<tr>
 					<td>색상 :</td>
 					<td>
