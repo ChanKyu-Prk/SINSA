@@ -38,8 +38,7 @@
 
 .checkout__input input[type="radio"] {
 	width: 20px;
-	height: 20px;
-	vertical-align: middle;
+	height: 20px; vertical-align : middle;
 	margin-top: -3px;
 	border-radius: 10px;
 	background: none;
@@ -51,6 +50,7 @@
 	margin: 0;
 	transition: box-shadow 150ms cubic-bezier(0.95, 0.15, 0.5, 1.25);
 	pointer-events: none;
+	vertical-align: middle;
 }
 
 .checkout__input input[type="radio"]:focus {
@@ -79,9 +79,19 @@
 }
 
 .checkout__input .radioLabel:hover, .checkout__input .radioLabel:focus-within
-	{
+{
 	background: rgba(159, 159, 159, 0.1);
 }
+
+button[onclick="findAddr()"]{
+	height: 38px;
+	font-size:14px;
+}
+
+input:read-only{
+	background-color: #F7F7F7;
+}
+
 </style>
 </head>
 
@@ -169,11 +179,56 @@
 								</div>
 							</div>
 							<div class="row">
-								<label for="ORDER_MEMO" class="col-lg-3">배송시 요청사항<span
+								<label for="ORDER_RECEIVER" class="col-lg-3">이름<span
 									class="inpReq">*</span></label>
 								<div class="checkout__input col-lg-6">
-									<span><input id="ORDER_MEMO" name="ORDER_MEMO"
-										type="text" required="required" maxlength="40" /></span>
+									<span><input id="ORDER_RECEIVER" name="ORDER_RECEIVER"
+										type="text" maxlength="49" required="required" /></span>
+								</div>
+							</div>
+							<div class="row">
+								<label for="ORDER_TEL" class="col-lg-3">휴대폰 번호<span
+									class="inpReq">*</span></label>
+								<div class="checkout__input col-lg-6">
+									<span><input id="ORDER_TEL" name="ORDER_TEL" type="tel"
+										maxlength="11" required="required" /></span>
+								</div>
+							</div>
+							<div class="row">
+								<label for="ORDER_TEL" class="col-lg-3">주소<span
+									class="inpReq">*</span></label>
+								<div class="checkout__input col-lg-5">
+									<span><input type="text" id="delivAddrZip"
+										placeholder="우편번호" title="우편번호" required="required" readonly/></span>
+								</div>
+								<button type="button" class="col-lg-2 text-center btn btn-secondary" onclick="findAddr()">우편번호 찾기</button>
+								<div class="checkout__input col-lg-9 offset-lg-3">
+									<span><input type="text" id="delivAddrRoad"
+										placeholder="" title="기본주소" required="required" readonly/></span>
+								</div>
+								<div class="checkout__input col-lg-9 offset-lg-3">
+									<span><input type="text" id="delivAddrJibun" title="상세주소" placeholder="상세주소를 입력해주세요."/></span>
+									<span id="guide" style="color:#999;display:none"></span>
+								</div>
+								<input type="hidden" id="delivAddrExtra"/>
+							</div>
+							<div class="row">
+								<label for="ORDER_MEMO" class="col-lg-3">배송시 요청사항 <span
+									class="inpReq">*</span>
+								</label>
+								<div class="checkout__input col-lg-9">
+									<select id="delivMemo" class="mb-2 wide" title="배송시 요청사항">
+										<option selected="selected" disabled>배송 시 요청사항을
+											선택해주세요.</option>
+										<option value="opt01">부재시 경비실에 맡겨주세요.</option>
+										<option value="opt02">부재시 문앞에 놓아주세요.</option>
+										<option value="opt03">배송전에 연락주세요.</option>
+										<option value="opt04">직접 수령 하겠습니다.</option>
+										<option value="write">직접입력</option>
+									</select> <span> <input id="ORDER_MEMO" name="ORDER_MEMO"
+										type="text" required="required" maxlength="40"
+										placeholder="요청사항은 40자 이내로 작성해주세요." />
+									</span>
 								</div>
 							</div>
 						</div>
@@ -202,6 +257,65 @@
 	<!-- Footer Section Begin -->
 	<jsp:include page="../footer.jsp" />
 	<!-- Footer Section End -->
+	<script
+		src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+	<script type="text/javascript">
+	function findAddr() {
+		new daum.Postcode(
+				{
+					oncomplete : function(data) {
+						var roadAddr = data.roadAddress; // 도로명 주소 변수
+						var extraRoadAddr = ''; // 참고 항목 변수
+
+						// 법정동명이 있을 경우 추가한다. (법정리는 제외)
+						// 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+						if (data.bname !== '' && /[동|로|가]$/g.test(data.bname)) {
+							extraRoadAddr += data.bname;
+						}
+						// 건물명이 있고, 공동주택일 경우 추가한다.
+						if (data.buildingName !== '' && data.apartment === 'Y') {
+							extraRoadAddr += (extraRoadAddr !== '' ? ', '
+									+ data.buildingName : data.buildingName);
+						}
+						// 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+						if (extraRoadAddr !== '') {
+							extraRoadAddr = ' (' + extraRoadAddr + ')';
+						}
+
+						// 우편번호와 주소 정보를 해당 필드에 넣는다.
+						document.getElementById('delivAddrZip').value = data.zonecode;
+						document.getElementById("delivAddrRoad").value = roadAddr;
+						document.getElementById("delivAddrJibun").value = data.jibunAddress;
+
+						// 참고항목 문자열이 있을 경우 해당 필드에 넣는다.
+						if (roadAddr !== '') {
+							document.getElementById("delivAddrExtra").value = extraRoadAddr;
+						} else {
+							document.getElementById("delivAddrExtra").value = '';
+						}
+
+						var guideTextBox = document.getElementById("guide");
+						// 사용자가 '선택 안함'을 클릭한 경우, 예상 주소라는 표시를 해준다.
+						if (data.autoRoadAddress) {
+							var expRoadAddr = data.autoRoadAddress
+									+ extraRoadAddr;
+							guideTextBox.innerHTML = '(예상 도로명 주소 : '
+									+ expRoadAddr + ')';
+							guideTextBox.style.display = 'none';
+
+						} else if (data.autoJibunAddress) {
+							var expJibunAddr = data.autoJibunAddress;
+							guideTextBox.innerHTML = '(예상 지번 주소 : '
+									+ expJibunAddr + ')';
+							guideTextBox.style.display = 'none';
+						} else {
+							guideTextBox.innerHTML = '';
+							guideTextBox.style.display = 'none';
+						}
+					}
+				}).open();
+	}
+	</script>
 </body>
 
 </html>
