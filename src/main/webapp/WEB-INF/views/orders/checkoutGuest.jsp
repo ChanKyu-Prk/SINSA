@@ -13,6 +13,11 @@
     	.shoping__cart__table tr:first-child{
     		border-top: 1.5px solid #7FAD39;
     	}
+    	
+    	.shoping__cart__table .tableHead h5{
+    		line-height: 36.8px;
+    	}
+
     </style>
 </head>
 
@@ -24,14 +29,17 @@
         	<h4 class="mb-5 font-weight-bold">주문/결제</h4>
             <div class="row">
                 <div class="col-lg-12 shoping__cart__table">
-                    <table>
+                    <table class="mx-auto px-0">
                             <thead>
-                                <h5 class="mb-3">주문리스트</h5>
+                                <span class="tableHead row mx-auto px-0 mb-2">
+                                	<h5>주문리스트</h5>
+                                	<a href="#" class="ml-auto p-2 primary-btn cart-btn cart-btn-right">주문정보 수정</a>
+                                </span>
                             </thead>
                             <tbody>
                                 <tr>
                                     <td class="shoping__cart__item">
-                                        <span class="row">
+                                        <span class="row mx-auto px-0">
 	                                        <span>
 	                                        	<img src="${path}/resources/img/product/details/thumb-1.jpg" alt="thumbnail2">
 		                                    </span>

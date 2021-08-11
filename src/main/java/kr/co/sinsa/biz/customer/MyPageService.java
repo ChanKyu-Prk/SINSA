@@ -12,8 +12,8 @@ public interface MyPageService {
 
 	public CustomerVO myInfo(UserVO vo);
 	
-	public List<OrdersVO> myOrderList(Map<String,Object> map);
-	public List<OrdersVO> myOrderListDate(Map<String,Object> map);
+	public List<MyOrderListVO> myOrderList(Map<String,Object> map);
+	public List<MyOrderListVO> myOrderListDate(Map<String,Object> map);
 	public int countmyOrderList(Map<String,Object> map);
 	public int countmyOrderListDate(Map<String,Object> map);
 	
@@ -33,4 +33,9 @@ public interface MyPageService {
 	
 	public List<ProductVO> recentView(Cookie[] cRecentlyVieweds, int page, int listCount);
 	public int countRecentView(Cookie[] cRecentlyVieweds);
+	
+	public boolean passCheck(Map<String,String> map);
+	public void  passChange(Map<String, String> map);
+	
+	public void privateInfoChange(CustomerVO vo);
 }

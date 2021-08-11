@@ -20,8 +20,8 @@
                             <div class="addmargin"></div>
                              <h4>나의 정보</h4>
                             <ul>
-                                <li><a href="#">개인정보 수정</a></li>
-                                <li><a href="#">비밀번호 변경</a></li>
+                                <li><a href="privateInfoChange.do">개인정보 수정</a></li>
+                                <li><a href="passChange.do">비밀번호 변경</a></li>
                            
                             </ul>
                            

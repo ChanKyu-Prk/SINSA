@@ -14,11 +14,9 @@
 .con_top_margin {
 	margin-top: 40px;
 }
-
 .addmargin {
 	margin-top: 40px;
 }
-
 .subjecet {
 	text-align: center;
 	font-size: 27pt;
@@ -111,53 +109,6 @@
 							</c:choose>
 						</c:when>
 
-						<c:when test="${date != null}">
-							<c:choose>
-								<c:when test="${pageInfo.getPage()<=1}">
-									<li class="page-item disabled"><a class="page-link"
-										aria-disabled="true">이전</a></li>
-								</c:when>
-								<c:when test="${pageInfo.getStartPage()==1}">
-									<li class="page-item"><a class="page-link"
-										href="myReviewList.do?page=${pageInfo.getStartPage()}&date=${date}"
-										tabindex="-1">이전</a></li>
-								</c:when>
-								<c:otherwise>
-									<li class="page-item"><a class="page-link"
-										href="myReviewList.do?page=${pageInfo.getStartPage()-1}&date=${date}"
-										tabindex="-1">이전</a></li>
-								</c:otherwise>
-							</c:choose>
-
-							<c:forEach begin="${pageInfo.getStartPage()}"
-								end="${pageInfo.getEndPage()}" varStatus="state">
-								<c:choose>
-									<c:when test="${pageInfo.getPage()==state.index}">
-										<li class="page-item active" aria-current="page"><a
-											class="page-link">${state.index}</a></li>
-									</c:when>
-									<c:otherwise>
-										<li class="page-item"><a class="page-link"
-											href="myReviewList.do?page=${state.index}&date=${date}">${state.index}</a></li>
-									</c:otherwise>
-								</c:choose>
-							</c:forEach>
-
-							<c:choose>
-								<c:when test="${pageInfo.getPage() >= pageInfo.getMaxPage()}">
-									<li class="page-item disabled"><a class="page-link"
-										aria-disabled="true">다음</a></li>
-								</c:when>
-								<c:when test="${pageInfo.getEndPage()==pageInfo.getMaxPage()}">
-									<li class="page-item"><a class="page-link"
-										href="myReviewList.do?page=${pageInfo.getEndPage()}&date=${date}">다음</a></li>
-								</c:when>
-								<c:otherwise>
-									<li class="page-item"><a class="page-link"
-										href="myReviewList.do?page=${pageInfo.getEndPage()+1}&date=${date}">다음</a></li>
-								</c:otherwise>
-							</c:choose>
-						</c:when>
 
 						<c:otherwise>
 							<c:choose>
@@ -222,9 +173,7 @@
 	$('#wholePeriod').on("click", function() {
 		document.getElementById('date2').value = "";
 		document.getElementById('date1').value = "";
-
 	});
-
 	$('#oneWeek').on("click", function() {
 		var today = new Date();
 		var time = today.getTime();
@@ -232,9 +181,7 @@
 		var date1 = new Date(time - diff);
 		document.getElementById('date2').valueAsDate = today;
 		document.getElementById('date1').valueAsDate = date1;
-
 	});
-
 	$('#oneMonth').on("click", function() {
 		var today = new Date();
 		var year = today.getFullYear() ;
@@ -243,9 +190,7 @@
 		var date1 = new Date(year ,month, date);
 		document.getElementById('date2').valueAsDate = today;
 		document.getElementById('date1').valueAsDate = date1;
-
 	});
-
 	$('#threeMonth').on("click", function() {
 		var today = new Date();
 		var year = today.getFullYear() ;
@@ -254,16 +199,11 @@
 		var date1 = new Date(year ,month, date);
 		document.getElementById('date2').valueAsDate = today;
 		document.getElementById('date1').valueAsDate = date1;
-
 	});
-
 	$('.serchBtn').on("click", function() {
 		var date1 = $('#date1').val();
 		var date2 = $('#date2').val();
-
 		location.href = 'myReviewList.do?date1=' + date1 + '&date2=' + date2;
-
 	});
-
 </script>
 </html>

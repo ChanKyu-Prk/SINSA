@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import kr.co.sinsa.biz.customer.CustomerVO;
+import kr.co.sinsa.biz.customer.MyOrderListVO;
 import kr.co.sinsa.biz.customer.OrdersVO;
 import kr.co.sinsa.biz.customer.QnAVO;
 import kr.co.sinsa.biz.customer.ReviewVO;
@@ -29,10 +30,11 @@ public class MyPageDAO {
 	
 	
 	
-	public List<OrdersVO> myOrderList(Map<String,Object> map) {
+	public List<MyOrderListVO> myOrderList(Map<String,Object> map) {
 		return  SST.selectList("myInfo.orders", map);
 	}
-	public List<OrdersVO> myOrderListDate(Map<String,Object> map) {
+	
+	public List<MyOrderListVO> myOrderListDate(Map<String,Object> map) {
 		return  SST.selectList("myInfo.orderDate", map);
 	}
 	public int countmyOrderList(Map<String,Object> map) {
@@ -48,10 +50,10 @@ public class MyPageDAO {
 	
 	
 	public List<ProductVO> jjimList(Map<String,Object> map){
-		return SST.selectList("jjimList",map);
+		return SST.selectList("myInfo.jjimList",map);
 	}
 	public int countJjimList(Map<String,Object> map){
-		return SST.selectOne("countJjimList",map);
+		return SST.selectOne("myInfo.countJjimList",map);
 	}
 	
 	
@@ -60,31 +62,31 @@ public class MyPageDAO {
 	
 	
 	public List<ReviewVO> reviewList(Map<String,Object> map){
-		return SST.selectList("reviewList",map);
+		return SST.selectList("myInfo.reviewList",map);
 	}
 	public List<ReviewVO> reviewListDate(Map<String,Object> map){
-		return SST.selectList("reviewListDate",map);
+		return SST.selectList("myInfo.reviewListDate",map);
 	}
 	public int countReviewList(Map<String,Object> map){
-		return SST.selectOne("countReviewList",map);
+		return SST.selectOne("myInfo.countReviewList",map);
 	}
 	public int countReviewListDate(Map<String,Object> map){
-		return SST.selectOne("countReviewListDate",map);
+		return SST.selectOne("myInfo.countReviewListDate",map);
 	}
 	
 	
 	
 	public List<QnAVO> QnAList(Map<String,Object> map){
-		return SST.selectList("QnAList",map);
+		return SST.selectList("myInfo.QnAList",map);
 	}
 	public List<QnAVO> QnAListDate(Map<String,Object> map){
-		return SST.selectList("QnAListDate",map);
+		return SST.selectList("myInfo.QnAListDate",map);
 	}
 	public int countQnAList(Map<String,Object> map){
-		return SST.selectOne("countQnAList",map);
+		return SST.selectOne("myInfo.countQnAList",map);
 	}
 	public int countQnAListDate(Map<String,Object> map){
-		return SST.selectOne("countQnAListDate",map);
+		return SST.selectOne("myInfo.countQnAListDate",map);
 	}
 	
 	
@@ -96,10 +98,27 @@ public class MyPageDAO {
 	
 	
 	public List<ProductVO> allProductNum(){
-		return SST.selectList("allProductNum") ;
+		return SST.selectList("myInfo.allProductNum") ;
 	}
 	public ProductVO recentView(int PRD_NUM){
-		return SST.selectOne("recentView",PRD_NUM);
+		return SST.selectOne("myInfo.recentView",PRD_NUM);
 	}
 
+	
+	
+	
+	
+	
+	public int passCheck(Map<String, String> map) {
+	return SST.selectOne("myInfo.passCheck",map);
+	}
+	
+	
+	public void passChange(Map<String , String> map) {
+		SST.update("myInfo.passChange",map);
+	}
+	
+	public void privateInfoChange(CustomerVO vo) {
+		SST.update("myInfo.privateInfoChange",vo);
+	}
 }

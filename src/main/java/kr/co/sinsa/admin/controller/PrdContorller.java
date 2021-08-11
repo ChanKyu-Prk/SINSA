@@ -1,17 +1,24 @@
 package kr.co.sinsa.admin.controller;
 
+import java.io.File;
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletRequestWrapper;
 
+import org.apache.commons.io.FileUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import kr.co.sinsa.admin.service.PrdService;
 import kr.co.sinsa.admin.vo.PrdVO;
@@ -132,5 +139,8 @@ public class PrdContorller {
 		prdService.prd_delete(prd_num);
 		return "redirect:/admin/prdList";
 	}
+	
+	
+	
 	
 }
