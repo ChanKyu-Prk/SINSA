@@ -12,9 +12,9 @@ import org.springframework.stereotype.Service;
 import kr.co.sinsa.biz.customer.CustomerVO;
 import kr.co.sinsa.biz.customer.MyOrderListVO;
 import kr.co.sinsa.biz.customer.MyPageService;
-import kr.co.sinsa.biz.customer.OrdersVO;
 import kr.co.sinsa.biz.customer.QnAVO;
 import kr.co.sinsa.biz.customer.ReviewVO;
+import kr.co.sinsa.biz.orders.OrdersVO;
 import kr.co.sinsa.biz.product.ProductVO;
 import kr.co.sinsa.biz.user.UserVO;
 
