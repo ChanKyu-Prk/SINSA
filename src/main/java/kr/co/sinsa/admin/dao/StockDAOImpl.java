@@ -1,5 +1,6 @@
 package kr.co.sinsa.admin.dao;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -22,6 +23,17 @@ public class StockDAOImpl implements StockDAO {
 	
 	public int stock_list_count(Map<String, Object> map) {
 		return sqlSession.selectOne("StockDAO.stock_list_count", map);
+	}
+	
+	public int stock_all_count() {
+		return sqlSession.selectOne("StockDAO.stock_all_count");
+	}
+	
+	public List<StockVO> stock_pick_list(Map<String, Object> map){
+		return sqlSession.selectList("StockDAO.stock_pick_list", map);
+	}
+	public int stock_pick_count(Map<String, Object> map) {
+		return sqlSession.selectOne("StockDAO.stock_pick_count", map);
 	}
 	
 	public StockVO stock_info(String stock_prdcode) {

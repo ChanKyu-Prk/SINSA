@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>SINSA관리자모드</title>
 
 <!-- Google Font -->
 <link
@@ -30,11 +30,12 @@
 	type="text/css">
 	
 </head>
+
 <body>
 	<nav class="navbar navbar-expand-lg navbar-dark sticky-top order-lg-2"
 		style="background-color: rgba(0, 0, 0, 0.8); position: sticky;">
 		<a class="navbar-brand" href="${pageContext.request.contextPath}"
-			style="font-family: arial; font-weight: 800; color: #ff7200" title="메인페이지로 이동">SINSA 관리자모드</a>
+			style="font-family: arial; font-weight: 800; color: #cbe4ff" title="메인페이지로 이동">SINSA 관리자모드</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
 			data-target="#navbarSupportedContent"
 			aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -45,14 +46,16 @@
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
 			<ul class="navbar-nav mr-auto">
 			
-				<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/admin/prdList" title="캠핑상품으로 이동">상품관리</a></li>
-				<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/admin/stockList" title="예약하기로 이동">재고현황</a></li>
-				<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/admin/stockAdd" title="고객후기로 이동">상품입고</a></li>
-				<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/admin/customerList" title="문의하기로 이동">고객관리</a></li>
+				<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/admin/prdList" title="상품관리페이지로 이동">상품관리</a></li>
+				<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/admin/stockList" title="재고현황페이지로 이동">재고현황</a></li>
+				<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/admin/stockAdd" title="상품입고페이지로 이동">상품입고</a></li>
+				<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/admin/customerList" title="고객관리페이지로 이동">고객관리</a></li>
 				<li class="nav-item"><a class="nav-link" href="#" title="공지사항으로 이동">리뷰관리</a></li>
-				<li class="nav-item"><a class="nav-link" href="#" title="고객후기로 이동">문의관리</a></li>
+				<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/admin/qnaList" title="문의관리로 이동">문의관리</a></li>
 				<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/admin/noticeList" title="공지사항으로 이동">공지사항</a></li>
-				<li class="nav-item"><a class="nav-link" href="#" title="고객후기로 이동">자주하는질문</a></li>
+
+				<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/admin/faqList" title="고객후기로 이동">자주하는질문</a></li>
+
 				
 			</ul>
 			

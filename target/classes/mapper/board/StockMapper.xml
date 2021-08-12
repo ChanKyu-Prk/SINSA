@@ -8,7 +8,8 @@
 			from stock as s
 			left join product as p
 			on s.stock_prdcode = p.prd_code
-			where stock_prdcode like '%${searchWord}%' limit ${page}, 10
+			where stock_prdcode like '%${searchWord}%' limit ${page}, 10;
+			
 	</select>
 			
 		<!-- 	union
@@ -18,12 +19,32 @@
 			right join product as p
 			on s.stock_prdcode = p.prd_code -->
 
-
 	<select id="stock_list_count" parameterType="hashmap" resultType="int">
 		select count(*) from stock as s
 			left join product as p
 			on s.stock_prdcode = p.prd_code
 			where stock_prdcode like '%${searchWord}%'
+	</select>
+
+	<select id="stock_all_count" resultType="int">
+		select sum(stock_220+stock_225+stock_230+stock_235+stock_240+stock_245
+		+stock_250+stock_255+stock_260+stock_265+stock_270+stock_275+stock_280+stock_285+stock_290) from stock;
+	</select>
+	
+	<select id="stock_pick_list" parameterType="hashmap" resultType="kr.co.sinsa.admin.vo.StockVO">
+		select s.stock_prdcode, p.prd_name, s.stock_220, s.stock_225, s.stock_230, s.stock_235, s.stock_240, s.stock_245, s.stock_250, s.stock_255, s.stock_260, s.stock_265, s.stock_270, s.stock_275, s.stock_280, s.stock_285, s.stock_290
+			from stock as s
+			left join product as p
+			on s.stock_prdcode = p.prd_code
+			where stock_prdcode in (${pick})
+			
+	</select>
+	
+	<select id="stock_pick_count" parameterType="hashmap" resultType="int">
+		select count(*) from stock as s
+			left join product as p
+			on s.stock_prdcode = p.prd_code
+			where stock_prdcode in (${pick})
 	</select>
 
 	<insert id="stock_insert" parameterType="kr.co.sinsa.admin.vo.StockVO">

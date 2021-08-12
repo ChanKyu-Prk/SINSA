@@ -6,44 +6,68 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>empInputform</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+	$(document).ready(function() {
+		$('div.a').click(function() {
+			$(this).next().slideToggle();
+		});
+	});
 
+	$(document).ready(function() {
+		$('#click').click(function() {
+			$('#notice').slideToggle('slow', function() {
+			});
+		});
+	});
+</script>
 <style>
-body {
-	font-size: 11pt;
-	color: teal;
+table {
+	width: 100%;
 }
 
-div {
-	margin: 0 auto;
+td.q {
+	width: 10%;
+	height: 38px;
+	background-color: #007bfe;
+	color: #fff;
+	font-size: 1.8em;
+	text-align: center;
+	
 }
+
+td.a {
+	width: 10%;
+	font-size: 1.8em;
+	text-align: center;
+}
+
 </style>
 </head>
 <body>
-<jsp:include page="adminHeader.jsp" flush="true" />
-	<br><br>
+
+	<br>
 	<div>
-		<h2>공지 등록</h2>
+		<h2>공지사항&nbsp;&nbsp;&nbsp;<button id="click" type="button" class="btn btn-outline-primary btn-lg" style="word-break: nowrap; text-align:right";>새 공지 등록</button></h2>
+		<br>
+		<div id="notice" style="display:none;">
 		<form:form method="post" action="noticeInsert" modelAttribute="noticeVO">
 			<table>
 				<tr>
-					<td>제목 </td>
-					<td><form:input path="notice_title" /></td>
+					<td class="q">제목</td>
+					<td><form:input path="notice_title" class="form-control"/></td>
 				</tr>
 				<tr>
-					<td colspan=2>내용</td>
+					<td class="a">내용</td>
+
+					<td><form:textarea class="form-control" path="notice_content" cols="50" rows="5" /></td>
 				</tr>
 				<tr>
-					<td colspan=2>
-						<form:textarea path="notice_content" cols="50" rows="5" />
-					</td>
-				</tr>
-				<tr>
-					<td colspan="2"><input type="submit" value="등록"></td>
+					<td colspan="2" style="text-align:right;"><input type="submit" class="btn btn-primary" value="등록"></td>
 				</tr>
 			</table>
-
 		</form:form>
+		</div>
 	</div>
 </body>
 </html>
