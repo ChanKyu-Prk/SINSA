@@ -10,6 +10,4 @@ import kr.co.sinsa.biz.orders.OrdersService;
 public class OrdersController {
 	@Autowired
 	private OrdersService service;
-	
-
 }
