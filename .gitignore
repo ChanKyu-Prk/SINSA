@@ -10,5 +10,5 @@ local.properties
 .loadpath
 .recommenders
 
-.MF
-.properties
+*.MF
+target/m2e-wtp/web-resources/META-INF/*.properties
