@@ -38,12 +38,6 @@ public class ProductController {
 
     	return "/product/product-details";
     }
-	
-		@RequestMapping("/direct/checkout")
-	    public String test1(Model model, String PRD_CODE) {
-	    	return "/orders/checkout";
-	    }
-		
 		
 	@RequestMapping(value = "/getProductBrandPage")
 	public String getProductBrandPage(Model model) {
