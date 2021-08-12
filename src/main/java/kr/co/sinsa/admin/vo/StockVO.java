@@ -19,7 +19,7 @@ public class StockVO {
 	int stock_280;
 	int stock_285;
 	int stock_290;
-	int row_total = stock_220+ stock_225+ stock_230+ stock_235+ stock_240+ stock_245+ stock_250+ stock_255+ stock_260+ stock_265+ stock_270+ stock_275+ stock_280+ stock_285+ stock_290;
+	int total;
 	
 	public String getStock_prdcode() {
 		return stock_prdcode;
@@ -123,11 +123,11 @@ public class StockVO {
 	public void setStock_290(int stock_290) {
 		this.stock_290 = stock_290;
 	}
-	public int getRow_total() {
-		return row_total;
+	public int getTotal() {
+		return total;
 	}
-	public void setRow_total(int row_total) {
-		this.row_total = row_total;
+	public void setTotal(int total) {
+		this.total = total;
 	}
 	
 	
