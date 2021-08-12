@@ -5,7 +5,6 @@
 <c:set var="path" value="${pageContext.request.contextPath}" />
 
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 
 <%@page import="kr.co.sinsa.biz.product.ProductVO"%>
@@ -46,13 +45,6 @@
 .sumup{
 	color: black !important;
 }
-
-.previousPrice{ 
- 	text-decoration:line-through !important;
- 	color:grey;
-} 
-
-
 </style>
 
 <% 
@@ -99,7 +91,7 @@
                         <table>
                             <thead>
                                 <tr>
-                                    <th class="shoping__product">상품 [<%=productList.size()%>개] </th>
+                                    <th class="shoping__product">상품</th>
                                     <th>가격</th>
                                     <th>수량</th>
                                     <th>합계</th>
@@ -109,69 +101,77 @@
                             
                             
                             <tbody>
+                         
                             
-                            <c:forEach var="list" items="${userCartProductStockList}" varStatus="theCount">
-                           
+                            <%if(productList.size() != 0 || productList != null){
+                               for(int i=0; i<productList.size(); i++){%>
+                               
                                 <tr>
-                                
                                     <td class="shoping__cart__item">
-                                    
                                         <img src="${path}/resources/img/cart/cart-1.jpg" alt="">
-                                        <h5>[${list.PRD_BRAND}] ${list.PRD_NAME}<br><br>사이즈 : ${list.CART_PRDSIZE}<input type="submit" value="옵션변경"/></h5>
-                                      
-                                    </td>
-                                    <td class="shoping__cart__price">
-                                    	<input type="hidden" id="price" value="${list.PRD_PRICE }"/>
-                                        <c:set var="price" value="${list.PRD_PRICE}"/>
-                                        <c:set var="disRate" value="${list.PRD_DISRATE}"/>
-                                        <c:set var="discountedPrice" value="${list.PRD_PRICE-list.PRD_DISRATE*list.PRD_PRICE/100}"/>
-                                        
-                                        <c:if test="${disRate > 0}">
-                                        <div class="previousPrice" ><fmt:formatNumber value="${price}" pattern="#,###" /></div>
-                                        <fmt:formatNumber value="${discountedPrice}" pattern="#,###" />
-                                        </c:if>
-                                        
-                                        <c:if test="${disRate == 0}">
-                                        <fmt:formatNumber value="${price}" pattern="#,###" />
-                                        </c:if>
+                                        <h5>[<%=productList.get(i).getPRD_BRAND()%>] <%=productList.get(i).getPRD_NAME()%><br>
+                                           
+                                        <%   
+                                        for(int j=0; j<cartList.size(); j++){
+                                        if(productList.get(i).getPRD_NUM() == cartList.get(j).getCART_PRDNUM()){%>
+                                           사이즈:<%=cartList.get(j).getCART_PRDSIZE()%>
+                                        <%}
+                                     }
+                                     %>
+                                        </h5><br>
+                                       
                                         
                                     </td>
-                                    <td class="shoping__cart__quantity">
-          
-          							<form action="#">
-          							<input type="hidden" name="CART_PRDNUM" value="${list.CART_PRDNUM}" />
-          							
-          							<input id="count" name="CART_PRDCOUNT" value="${list.CART_PRDCOUNT }" /><br>
-          							<input type="submit" value="변경"/>
-                                    </form>
                                     
-                
+                                    
+                                    <%if(productList.get(i).getPRD_DISRATE() > 0){%>
+                                    	<td class="shoping__cart__price" >
+                                        
+                                        <span class="before discount" style="text-decoration:line-through;"><%=formatter.format(productList.get(i).getPRD_PRICE())%>원</span>
+                                        <br><%=formatter.format(productList.get(i).getPRD_PRICE() * (100-productList.get(i).getPRD_DISRATE())/100)%>원
+                                        <input type="hidden" id="price<%=i %>" value="<%=productList.get(i).getPRD_PRICE()%>">
+                                    </td>
+                                    <%} %>
+                                    <%if(productList.get(i).getPRD_DISRATE() == 0){%>
+                                    	<td class="shoping__cart__price" >
+                                        
+                                        <%=formatter.format(productList.get(i).getPRD_PRICE() * (100-productList.get(i).getPRD_DISRATE())/100)%>원
+                                        <input type="hidden" id="price<%=i %>" value="<%=productList.get(i).getPRD_PRICE()%>">
+                                    </td>
+                                    <%} %>
+                                    
+                                    
+                                    
+                                    <td class="shoping__cart__quantity">
+                                    <span type="text">수량 : <%=cartList.get(i).getCART_PRDCOUNT()%></span>
+                                        
                                     </td>
                                     <td class="shoping__cart__total">
-                                        <c:set var="totalPrice" value="${discountedPrice * list.CART_PRDCOUNT}"/>
-                                        <fmt:formatNumber value="${totalPrice}" pattern="#,###" />
-                                        <div id="totalprice"></div>
+                                        <span>
+                                         <%=formatter.format((productList.get(i).getPRD_PRICE() * (100-productList.get(i).getPRD_DISRATE())/100) * cartList.get(i).getCART_PRDCOUNT())%>
+                                        </span>
                                     </td>
                                     <td class="shoping__cart__item__close">
                                     
-                                    	<input type="submit" value="바로구매"/>
-                                    
-                                    	<form id="form" name="form" action="cart.do" method="post" onsubmit="return confirm('장바구니에서 해당 상품을 삭제 하시겠습니까?');">
-                                    	
-                                    		<input type="hidden" id="CART_PRDNUM" name="CART_PRDNUM" value="${list.CART_PRDNUM }">
-                                    		<input type="submit" value="삭제" onclick="button_event();"/>
-                                    		
-                                        </form>
-                                        <br>
-                                        <input type="submit" value="상품보기"/>
+                                    <%   
+                                        for(int j=0; j<cartList.size(); j++){
+                                        if(productList.get(i).getPRD_NUM() == cartList.get(j).getCART_PRDNUM()){%>
                                         
+                                           <form action="cart.do" method="post">
+                                                <input type="hidden" id="CART_PRDNUM" name="CART_PRDNUM" value="<%=cartList.get(j).getCART_PRDNUM()%>">
+                                                <button class="icon_close" type="submit"></button>
+                                             </form>
+                                           
+                                        <%}
+                                     }
+                                     %>
+                                    
                                     </td>
                                 </tr>
+                                <% }
+                                }%>
                                 
-                       
-                            </c:forEach>
                             </tbody>
-                            
                         </table>
                     </div>
                 </div>
@@ -179,7 +179,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="shoping__cart__btns">
-                        <a href="/" class="primary-btn cart-btn cart-btn-right">쇼핑 계속하기</a>
+                        <a href="/index.do" class="primary-btn cart-btn cart-btn-right">쇼핑 계속하기</a>
                     </div>
                 </div>
                 <div class="col-lg-6">
@@ -250,50 +250,57 @@
       </div>
    </div>
     
+
     
-    
-    
-    
-<script>
+<body onload="init();">
+<script language="JavaScript">
+var sell_price;
+var amount;
 
-var countList=document.querySelectorAll("#count");
-var priceList=document.querySelectorAll("#price");
-var totalpriceList=document.querySelectorAll("#totalprice");
-
-
-for(var i=0; i < countLength; i++){
-    countList[i].addEventListener('input',onIncreaseCountHandler)
-    };
-   
-
-
-function onIncreaseCountHandler(e) {
-
-	for(var i=0; i<countList.length; i++){
-
-		totalpriceList[i].innerText=priceList[i].value*countList[i].value;
-	}
+function init () {
+	sell_price = document.form.sell_price.value;
+	amount = document.form.amount.value;
+	document.form.sum.value = sell_price;
+	change();
 }
 
+function add () {
+	hm = document.form.amount;
+	sum = document.form.sum;
+	hm.value ++ ;
 
-</script>
-
-<script>
-
-function button_event(){
-	
-
-	if (confirm('장바구니에서 해당 상품을 삭제 하시겠습니까?');) {
-		document.getElementById('form').submit();
-	}else{
-		return false;
-	}
+	sum.value = parseInt(hm.value) * sell_price;
 }
 
+function del () {
+	hm = document.form.amount;
+	sum = document.form.sum;
+		if (hm.value > 1) {
+			hm.value -- ;
+			sum.value = parseInt(hm.value) * sell_price;
+		}
+}
+
+function change () {
+	hm = document.form.amount;
+	sum = document.form.sum;
+
+		if (hm.value < 0) {
+			hm.value = 0;
+		}
+	sum.value = parseInt(hm.value) * sell_price;
+}  
 </script>
 
+<%-- <form name="form" method="get"> --%>
+<!-- 수량 : <input type=hidden name="sell_price" value="5500"> -->
+<!-- <input type="text" name="amount" value="1" size="3" onchange="change();"> -->
+<!-- <input type="button" value=" + " onclick="add();"><input type="button" value=" - " onclick="del();"><br> -->
 
-
+<!-- 금액 : <input type="text" name="sum" size="11" readonly>원 -->
+<%-- </form> --%>
+    
+    
     
 
    <jsp:include page="../footer.jsp"/>
