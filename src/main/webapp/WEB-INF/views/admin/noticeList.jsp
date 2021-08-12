@@ -15,9 +15,9 @@ body {
 div {
 	margin: 0 auto;
 }
-table { 
+
+table {
 	width: 100%;
-	border: 1px solid; 
 }
 </style>
 <script type="text/javascript">
@@ -29,30 +29,35 @@ table {
 </script>
 </head>
 <body>
-<jsp:include page="adminHeader.jsp" flush="true" />
-	<br><br>
-	<div>
-	<h2>공지사항</h2>
-	<table>
-		<thead>
-			<tr>
-				<th>번호</th>
-				<th>제목</th>
-				<th>작성일자</th>
-			</tr>
-		</thead>
-		<tbody>
-			<c:forEach var="e" items="${ noticeList }">
-				<tr>
-					<td>${ e.notice_num }</td>
-					<td><a href="noticeEdit?notice_num=${ e.notice_num }">${ e.notice_title }</a></td>
-					<td>${ e.notice_regdate }</td>
-				</tr>
-			</c:forEach>
-		</tbody>
-	</table>
-	<input type="button" onclick="location.href='noticeInputForm'" value="글쓰기" />
-			<ul class="pagination">
+	<jsp:include page="adminHeader.jsp" flush="true" />
+	<br>
+	<br>
+	<div class="container">
+		
+		<div class="row">
+			<jsp:include page="noticeInputForm.jsp" flush="true" />
+			
+			<table class="table table-hover">
+				<thead>
+					<tr>
+						<th>번호</th>
+						<th>제목</th>
+						<th>작성일자</th>
+					</tr>
+				</thead>
+				<tbody>
+					<c:forEach var="e" items="${ noticeList }">
+						<tr>
+							<td>${ e.notice_num }</td>
+							<td><a href="noticeEdit?notice_num=${ e.notice_num }">${ e.notice_title }</a></td>
+							<td>${ e.notice_regdate }</td>
+						</tr>
+					</c:forEach>
+				</tbody>
+			</table>
+		</div>
+		
+		<ul class="pagination">
 			<c:choose>
 				<c:when test="${pageInfo.getPage()<=1}">
 					<li class="page-item disabled"><a class="page-link"
@@ -99,16 +104,28 @@ table {
 				</c:otherwise>
 			</c:choose>
 		</ul>
+		<br> <br>
 		<form>
-			<select name="fieldName" id="fieldName" class="form-control">
-				<option ${(param.fieldName == "all")? "selected" : ""} value="all">전체</option>
-				<option ${(param.fieldName == "notice_title")? "selected" : ""}
-					value="notice_title">제목</option>
-				<option ${(param.fieldName == "notice_content")? "selected" : ""}
-					value="notice_content">내용</option>
-			</select> <input type="text" class="form-control" placeholder="Search"
-				name="searchWord" value="${param.searchWord}" /> <input
-				type="submit" value="검색" />
+			<div class="form-row">
+				<div class="form-group col-md-2"></div>
+				<div class="form-group col-md-2">
+					<select name="fieldName" id="fieldName" class="form-control">
+						<option ${(param.fieldName == "all")? "selected" : ""} value="all">전체</option>
+						<option ${(param.fieldName == "notice_title")? "selected" : ""}
+							value="notice_title">제목</option>
+						<option ${(param.fieldName == "notice_content")? "selected" : ""}
+							value="notice_content">내용</option>
+					</select>
+				</div>
+				<div class="form-group col-md-5">
+					<input type="text" class="form-control" placeholder="Search"
+						name="searchWord" value="${param.searchWord}" />
+				</div>
+				<div class="form-group col-md-1">
+					<input type="submit" class="btn btn-primary" value="검색" />
+				</div>
+				<div class="form-group col-md-2"></div>
+			</div>
 		</form>
 	</div>
 </body>

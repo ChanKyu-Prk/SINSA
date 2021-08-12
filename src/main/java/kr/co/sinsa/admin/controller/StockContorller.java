@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -55,6 +56,9 @@ public class StockContorller {
 		listCount = stockService.stock_list_count(map);
 		List<StockVO> list = stockService.stock_list(map);
 		model.addAttribute("stockList", list);
+		
+		int allcount = stockService.stock_all_count();
+		model.addAttribute("allcount", allcount);
 
 
 		maxPage = (int) ((double) listCount / limit + 0.95);
@@ -83,7 +87,9 @@ public class StockContorller {
 	@RequestMapping(value = "/admin/stockAdd", method = RequestMethod.GET)
 	public String stockInputForm(Model model, @RequestParam(value = "page", required = false) String pages,
 			@RequestParam(value = "fieldName", required = false) String fieldName,
-			@RequestParam(value = "searchWord", required = false) String searchWord, StockVO vo) {
+			@RequestParam(value = "searchWord", required = false) String searchWord, StockVO vo, String pick) {
+		
+		System.out.println(pick);
 		
 		int page = 1;
 		int limit = 10;
@@ -130,6 +136,48 @@ public class StockContorller {
 		
 		return "admin/stockAddForm";
 	}
+	
+	@RequestMapping(value = "/admin/stockAdd", method = RequestMethod.POST)
+	public String stockInputForm(HttpServletRequest request, Model model, StockVO vo) {
+		
+		String pick = request.getParameter("picks");
+		System.out.println(pick);
+		
+		int page = 1;
+		int limit = 10;
+		int listCount;
+		int startPage;
+		int endPage;
+		int maxPage;
+		
+
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("pick", pick);
+		map.put("page", (page - 1) * 10);
+		
+
+		listCount = stockService.stock_pick_count(map);
+		List<StockVO> list = stockService.stock_pick_list(map);
+		model.addAttribute("stockList", list);
+
+		model.addAttribute("stockInfo", vo);
+
+		maxPage = (int) ((double) listCount / limit + 0.95);
+		startPage = (((int) ((double) page / 5 + 0.8)) - 1) * 5 + 1;
+		endPage = startPage + 4;
+		if (endPage > maxPage) {
+			endPage = maxPage;
+		}
+		PageInfo pageInfo = new PageInfo();
+		pageInfo.setListCount(listCount);
+		pageInfo.setEndPage(endPage);
+		pageInfo.setStartPage(startPage);
+		pageInfo.setMaxPage(maxPage);
+		pageInfo.setPage(page);
+		model.addAttribute("pageInfo", pageInfo);
+		
+		return "admin/stockAddForm";
+	}	
 			
 	@RequestMapping(value = "/admin/stockInsert", method = RequestMethod.POST)
 	public String stockInsert(StockVO vo) {

@@ -26,7 +26,22 @@ public class StockServiceImpl implements StockService {
 	public int stock_list_count(Map<String, Object> map) {
 		return dao.stock_list_count(map);
 	}
+	
+	@Override
+	public int stock_all_count() {
+		return dao.stock_all_count();
+	}
 
+	@Override
+	public List<StockVO> stock_pick_list(Map<String, Object> map){
+		return dao.stock_pick_list(map);
+	}
+	
+	@Override
+	public int stock_pick_count(Map<String, Object> map) {
+		return dao.stock_pick_count(map);
+	}
+	
 	@Override
 	public StockVO stock_info(String stock_prdcode) {
 		return dao.stock_info(stock_prdcode);
