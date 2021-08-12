@@ -1,5 +1,5 @@
 package kr.co.sinsa.biz.orders.impl;
 
-public class CheckoutDAO {
+public class OrdersDAO {
 
 }
