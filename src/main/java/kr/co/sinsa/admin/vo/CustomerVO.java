@@ -1,12 +1,25 @@
 package kr.co.sinsa.admin.vo;
 
 import java.util.Date;
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
+//@Entity
 public class CustomerVO {
 	private int CUS_NUM;
+//	@Id
+//	@Size(min=6, max=20, message="아이디는 6~20자리로 입력하세요.")
 	private String CUS_ID;
+//	@NotNull
+//	@Size(min=6, max=20, message="비밀번호는 6~20자리로 입력하세요.")
+//	@Pattern(regexp = "^(?=.*[a-zA-Z])((?=.*\\d)|(?=.*\\W)).{10,}$", message = "비밀번호 형식을 지켜주세요")
 	private String CUS_PWD;
 	private String CUS_NAME;
 	private String CUS_GENDER;
+	//@Pattern(regexp = "^[\\", message="이메일 형식이 아닙니다.")
 	private String CUS_EMAIL;
 	private String CUS_ADDR;
 	private String CUS_TEL;

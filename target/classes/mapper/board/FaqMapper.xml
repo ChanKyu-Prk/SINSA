@@ -4,46 +4,10 @@
 
 <mapper namespace="FAQDAO">
 
-	<select id="faq_list" parameterType="hashmap" resultType="kr.co.sinsa.admin.vo.FAQVO">
-		select * from faq where ${fieldName} like '%${searchWord}%' order by faq_num desc limit ${page}, 5
-	</select>
-	
-	<select id="faq_list_count" parameterType="hashmap" resultType="int">
-		select count(*) from faq where ${fieldName} like '%${searchWord}%'
-	</select>
-	
-	<select id="faq_all_search" parameterType="hashmap" resultType="kr.co.sinsa.admin.vo.FAQVO">
-		select * from faq where
-		 faq_q like concat('%',#{searchWord},'%') or
-		 faq_a like concat('%',#{searchWord},'%') order by faq_num desc limit ${page}, 5
-	</select>
-	
-	<select id="faq_all_search_count" parameterType="hashmap" resultType="int">
-		select count(*) from faq where
-		 faq_q like concat('%',#{searchWord},'%') or
-		 faq_a like concat('%',#{searchWord},'%')
+	<select id="faq_list" resultType="kr.co.sinsa.admin.vo.FAQVO">
+		select * from faq order by faq_num desc
 	</select>
 
 	
-	<insert id="faq_insert" parameterType="kr.co.sinsa.admin.vo.FAQVO">
-		insert into faq(faq_q, faq_a)
-		values (#{faq_q}, #{faq_a})
 
-	</insert>
-
-	<select id="faq_info" resultType="kr.co.sinsa.admin.vo.FAQVO">
-		select * from faq where faq_num=#{faq_num}
-	
-
-	</select>
-
-	<update id="faq_update" parameterType="kr.co.sinsa.admin.vo.FAQVO">
-		update faq set faq_q=#{faq_q}, faq_a=#{faq_a} where faq_num=#{faq_num}
-
-	</update>
-
-	<delete id="faq_delete">
-		delete from faq where faq_num=#{faq_num}
-	</delete>
-	
 </mapper>

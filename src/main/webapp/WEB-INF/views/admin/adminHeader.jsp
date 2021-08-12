@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>SINSA관리자모드</title>
+<title>Insert title here</title>
 
 <!-- Google Font -->
 <link
@@ -50,9 +50,9 @@
 				<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/admin/stockAdd" title="고객후기로 이동">상품입고</a></li>
 				<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/admin/customerList" title="문의하기로 이동">고객관리</a></li>
 				<li class="nav-item"><a class="nav-link" href="#" title="공지사항으로 이동">리뷰관리</a></li>
-				<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/admin/qnaList" title="문의관리로 이동">문의관리</a></li>
+				<li class="nav-item"><a class="nav-link" href="#" title="고객후기로 이동">문의관리</a></li>
 				<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/admin/noticeList" title="공지사항으로 이동">공지사항</a></li>
-				<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/admin/faqList" title="고객후기로 이동">자주하는질문</a></li>
+				<li class="nav-item"><a class="nav-link" href="#" title="고객후기로 이동">자주하는질문</a></li>
 				
 			</ul>
 			
