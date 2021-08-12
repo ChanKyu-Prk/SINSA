@@ -3,26 +3,28 @@ package kr.co.sinsa.admin.vo;
 
 public class FAQVO {
 	
-	private int FAQ_NUM;
-	private String FAQ_Q;
-	private String FAQ_A;
-	public int getFAQ_NUM() {
-		return FAQ_NUM;
+	private int faq_num;
+	private String faq_q;
+	private String faq_a;
+	public int getFaq_num() {
+		return faq_num;
 	}
-	public void setFAQ_NUM(int fAQ_NUM) {
-		FAQ_NUM = fAQ_NUM;
+	public void setFaq_num(int faq_num) {
+		this.faq_num = faq_num;
 	}
-	public String getFAQ_Q() {
-		return FAQ_Q;
+	public String getFaq_q() {
+		return faq_q;
 	}
-	public void setFAQ_Q(String fAQ_Q) {
-		FAQ_Q = fAQ_Q;
+	public void setFaq_q(String faq_q) {
+		this.faq_q = faq_q;
 	}
-	public String getFAQ_A() {
-		return FAQ_A;
+	public String getFaq_a() {
+		return faq_a;
 	}
-	public void setFAQ_A(String fAQ_A) {
-		FAQ_A = fAQ_A;
+	public void setFaq_a(String faq_a) {
+		this.faq_a = faq_a;
 	}
+	
+	
 
 }

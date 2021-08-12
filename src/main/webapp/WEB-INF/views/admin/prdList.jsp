@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,56 +23,53 @@ table {
 	border: 1px solid;
 }
 </style>
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script
+	src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script type="text/javascript">
-
-	
 	var no = "";
-	
+
 	function selectNum(target) {
-	    var tbody = target.parentNode;
-	    var trs = tbody.getElementsByTagName('tr');
-	 
-	    var backColor = "#ffffff";
-	    var textColor = "black";
-	    var orgBColor = "#eeeeee";
-	    var orgTColor = "#000";
-	 
-	  		  	 
-	    for ( var i = 0; i < trs.length; i++ ) {
-	        if ( trs[i] != target ) {
-	            trs[i].style.backgroundColor = backColor;
-	            trs[i].style.color = textColor;
-	        } else {
-	            trs[i].style.backgroundColor = orgBColor;
-	            trs[i].style.color = orgTColor;
-	            var td = trs[i].getElementsByTagName('td');
-	            no = td[0].innerText;
-	        
-	        }
-	    }
+		var tbody = target.parentNode;
+		var trs = tbody.getElementsByTagName('tr');
+
+		var backColor = "#ffffff";
+		var textColor = "black";
+		var orgBColor = "#eeeeee";
+		var orgTColor = "#000";
+
+		for (var i = 0; i < trs.length; i++) {
+			if (trs[i] != target) {
+				trs[i].style.backgroundColor = backColor;
+				trs[i].style.color = textColor;
+			} else {
+				trs[i].style.backgroundColor = orgBColor;
+				trs[i].style.color = orgTColor;
+				var td = trs[i].getElementsByTagName('td');
+				no = td[0].innerText;
+
+			}
+		}
 
 	}
-	
+
 	function prdModify() {
 		if (no != "") {
 			location.href = 'prdEdit?prd_num=' + no;
-			
+
 		} else {
-		  alert('수정할 항목을 선택하십시오.');
+			alert('수정할 항목을 선택하십시오.');
 		}
 	}
-	
+
 	function prdDelete() {
 		if (no != "") {
 			if (confirm('해당 상품을 삭제하시겠습니까?')) {
 				location.href = 'prdDelete?prd_num=' + no;
-			}	
-		} else {
-			  alert('삭제할 항목을 선택하십시오.');
 			}
+		} else {
+			alert('삭제할 항목을 선택하십시오.');
+		}
 	}
-
 </script>
 </head>
 <body>
@@ -78,23 +77,24 @@ table {
 	<br>
 	<br>
 
-	<div class="container-fluid">
+	<div class="container-fluid" style="padding: 0 30px;">
 		<div class="row">
 			<table style="border: 0px">
-			<tr>
-			<td align="left">
-			<button type="button" class="btn btn-outline-primary btn-sm" onclick="location.href='prdInputForm'">신규 상품 등록</button>
-			</td>
-			<td align="right">
-			<input type="button" class="btn btn-primary btn-sm"	onclick="prdModify()" value="선택 상품 수정" />
-			&nbsp;
-			<input type="button" class="btn btn-danger btn-sm" onclick="javascript:prdDelete()" value="선택 상품 삭제" />
-			</td>
-			</tr>
+				<tr>
+					<td align="left">
+						<button type="button" class="btn btn-outline-primary btn-sm"
+							onclick="location.href='prdInputForm'">신규 상품 등록</button>
+					</td>
+					<td align="right"><input type="button"
+						class="btn btn-primary btn-sm" onclick="prdModify()"
+						value="선택 상품 수정" /> &nbsp; <input type="button"
+						class="btn btn-danger btn-sm" onclick="javascript:prdDelete()"
+						value="선택 상품 삭제" /></td>
+				</tr>
 			</table>
-			<br><br>
-			<div class="col-lg-12" id="ex1_Result1" ></div>
-			<div class="col-lg-12" id="ex1_Result2" ></div> 
+			<br>
+			<br>
+
 			<table id="prdlist" class="table table-hover"
 				style="text-align: center; border: 0px solid #dddddd">
 				<thead>
@@ -127,11 +127,11 @@ table {
 									<td><a href="prdInfo?prd_num=${ e.prd_num }">${ e.prd_name }</a></td>
 									<td>${e.prd_category}</td>
 									<td>${e.prd_gender}</td>
-									<td>${e.prd_price}</td>
+									<td><fmt:formatNumber value="${e.prd_price}" pattern="#,###,###"/></td>
 									<td>${e.prd_brand}</td>
 									<td>${e.prd_color}</td>
 									<td>${e.prd_disrate}</td>
-									
+
 								</tr>
 							</c:forEach>
 						</c:when>
@@ -189,7 +189,8 @@ table {
 				</ul>
 			</div>
 		</div>
-		<br><br>
+		<br>
+		<br>
 		<form>
 			<div class="form-row">
 				<div class="form-group col-md-2"></div>

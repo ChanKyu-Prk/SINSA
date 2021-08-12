@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -594,7 +595,7 @@ input::placeholder {
 										<div class="row padding0">
 											<div class="address_input_1_box col-9 padding0">
 												<input class="address_input_1" id="sample4_postcode"
-													placeholder="우편번호" name="CUS_ADDR_1" value="${addr.addr1}">
+													placeholder="우편번호" name="CUS_ADDR_1" value="${fn:substring(addr[0],1,6) }">
 											</div>
 											<div class="address_button col-3 padding0">
 												<span class="vetical_middle"
@@ -608,7 +609,7 @@ input::placeholder {
 								<div class="address_input_2_wrap">
 									<div class="address_input_2_box ">
 										<input class="address_input_2" id="sample4_roadAddress"
-											placeholder="도로명주소" name="CUS_ADDR_2" value="${addr.addr2}">
+											placeholder="도로명주소" name="CUS_ADDR_2" value="${addr[1]}">
 									</div>
 								</div>
 								<div class="address_input_3_wrap">
@@ -621,14 +622,14 @@ input::placeholder {
 								<div class="address_input_4_wrap">
 									<div class="address_input_4_box">
 										<input class="address_input_4" id="sample4_detailAddress"
-											placeholder="상세주소 입력" name="CUS_ADDR_4" value="${addr.addr4}">
+											placeholder="상세주소 입력" name="CUS_ADDR_4" value="${addr[3]}">
 									</div>
 								</div>
 								<div class="address_input_5_wrap">
 									<div class="address_input_5_box">
 										<input type="hidden" class="address_input_5"
 											id="sample4_extraAddress" placeholder="참고항목"
-											name="CUS_ADDR_5" value="${addr.addr5}">
+											name="CUS_ADDR_5" value="${addr[2]}">
 									</div>
 								</div>
 								<div>

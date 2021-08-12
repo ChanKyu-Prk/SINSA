@@ -16,7 +16,7 @@
 
 	$(document).ready(function() {
 		$('#click').click(function() {
-			$('#notice').slideToggle('slow', function() {
+			$('#faq').slideToggle('slow', function() {
 			});
 		});
 	});
@@ -48,19 +48,19 @@ td.a {
 
 	<br>
 	<div>
-		<h2>공지사항&nbsp;&nbsp;&nbsp;<button id="click" type="button" class="btn btn-outline-primary btn-lg" style="word-break: nowrap; text-align:right";>새 공지 등록</button></h2>
+		<h2>자주하는 질문&nbsp;&nbsp;&nbsp;<button id="click" type="button" class="btn btn-outline-primary btn-lg" style="word-break: nowrap; text-align:right";>새 질문 등록</button></h2>
 		<br>
-		<div id="notice" style="display:none;">
-		<form:form method="post" action="noticeInsert" modelAttribute="noticeVO">
+		<div id="faq" style="display:none;">
+		<form:form method="post" action="faqInsert" modelAttribute="FAQVO">
 			<table>
 				<tr>
-					<td class="q">제목</td>
-					<td><form:input path="notice_title" class="form-control"/></td>
+					<td class="q">Q</td>
+					<td><form:input path="faq_q" class="form-control"/></td>
 				</tr>
 				<tr>
-					<td class="a">내용</td>
+					<td class="a">A</td>
 
-					<td><form:textarea class="form-control" path="notice_content" cols="50" rows="5" /></td>
+					<td><form:textarea class="form-control" path="faq_a" cols="50" rows="5" /></td>
 				</tr>
 				<tr>
 					<td colspan="2" style="text-align:right;"><input type="submit" class="btn btn-primary" value="등록"></td>

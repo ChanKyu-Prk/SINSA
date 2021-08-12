@@ -25,7 +25,7 @@ public class NoticeContorller {
 	@RequestMapping(value = "/admin/noticeList", method = RequestMethod.GET)
 	public String getNoticeList(Model model, @RequestParam(value = "page", required = false) String pages,
 			@RequestParam(value = "fieldName", required = false) String fieldName,
-			@RequestParam(value = "searchWord", required = false) String searchWord) {
+			@RequestParam(value = "searchWord", required = false) String searchWord, NoticeVO vo) {
 		
 		int page = 1;
 		int limit = 10;
