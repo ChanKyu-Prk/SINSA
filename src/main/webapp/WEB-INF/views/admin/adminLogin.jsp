@@ -194,22 +194,5 @@ if(message == 1){
    <input type="submit" value="로그인" class="loginButton">
 </form>
 
-
-
-	<!-- <div class="container">
-	<div class="col-lg-4"></div>
-	<div class="col-lg-4">
-	<form name="adminLogin" method="post" action="adminLoginOk">
-	<h3 style="text-align: center;">관리자 로그인</h3>
-	<div class="form-group">
-		<input type="text" class="form-control" id="ADID" placeholder="아이디" name="ADID" maxlength="20">
-	</div>
-	<div class="form-group">
-		<input type="password" class="form-control" id="ADPW" placeholder="비밀번호" name="ADPW" maxlength="20">
-	</div>
-	<input type="submit" class="btn btn-primary form-control" value="로그인">
-	</form>
-	</div>
-	</div> -->
 </body>
 </html>

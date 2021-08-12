@@ -30,15 +30,7 @@ div {
 			<form:hidden path="prd_image"/>
 			<input type="file" name="uploadfile" placeholder="파일 선택" /><br/>
 			<table>
-			<tr>
-	<td id="tabTitle"><label id="forLabel" for="P_IMG">변경할 메인사진</label></td>
-	<td class="td_right" style="cursor:pointer; text-align: left;"><input name="P_IMG" type="file"
-                  accept="image/*" id="load" /></td>
-	</tr>
-	<tr>
-	  <td id="tabTitle"><label id="forLabel" for="P_IMG">현재 메인사진</label></td>
-     <td><input type="text" name="P_IMG" id="proNum"value="PRD_IMAGE"  disabled/></td>
-	</tr>
+			
 				<tr>
 					<td>상품코드 :</td>
 					<td><form:input path="prd_code" /></td>
