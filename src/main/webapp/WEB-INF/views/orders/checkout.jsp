@@ -9,8 +9,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 <title>SINSA</title>
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <style type="text/css">
 .shoping__cart__table tr:first-child, .checkout__form .borderTop {
 	border-top: 1.5px solid #7FAD39;
@@ -169,13 +167,12 @@ input:read-only{
 					<div class="row mx-auto px-0">
 						<div class="col-lg-8 col-md-6">
 							<h5 class="mb-2">구매자정보</h5>
-							<%if(session.getAttribute("user") != null){%>
 							<div class="row borderTop">
 								<label for="CUS_NAME" class="col-lg-3">이름<span
 									class="inpReq">*</span></label>
 								<div class="checkout__input col-lg-6">
 									<span><input id="CUS_NAME" name="CUS_NAME" type="text"
-										maxlength="49" required="required" value="${user.CUS_NAME}" readonly="readonly" /></span>
+										maxlength="49" required="required" /></span>
 								</div>
 							</div>
 							<div class="row">
@@ -183,7 +180,7 @@ input:read-only{
 									class="inpReq">*</span></label>
 								<div class="checkout__input col-lg-6">
 									<span><input id="CUS_TEL" name="CUS_TEL" type="tel"
-										maxlength="11" required="required" readonly="readonly"/></span>
+										maxlength="11" required="required" /></span>
 								</div>
 							</div>
 							<div class="row">
@@ -191,12 +188,9 @@ input:read-only{
 									class="inpReq">*</span></label>
 								<div class="checkout__input col-lg-6">
 									<span><input id="CUS_EMAIL" name="CUS_EMAIL"
-										type="email" maxlength="100" required="required" readonly="readonly"/></span>
+										type="email" maxlength="100" required="required" /></span>
 								</div>
 							</div>
-							<% }else{%>
-							<p>비회원 결제</p>
-							<% }%>
 							<h5 class="my-2">받는사람정보</h5>
 							<div class="row borderTop">
 								<label for="CUS_DELIV_ADDR" class="col-lg-3">배송지 선택<span
@@ -350,12 +344,6 @@ input:read-only{
 					}
 				}).open();
 	}
-	$(document).ready(function(){
-			  if($('#defaultDeliv').is(':checked')) { 
-				  $("#ORDER_RECEIVER").val($(this).val());
-				  $("#ORDER_TEL").val($(this).val());
-			  }	    
-		});
 	</script>
 </body>
 
