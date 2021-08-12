@@ -1,4 +1,4 @@
-package kr.co.sinsa.biz.orders;
+package kr.co.sinsa.biz.customer;
 
 import java.util.Date;
 
