@@ -12,6 +12,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>SinSa</title>
+    
+    <script src="http://code.jquery.com/jquery-3.3.1.min.js">
+	</script>
+    <c:forEach begin="0" end="11" step="1" varStatus="status">
+	<style>
+		#modal {
+			display:none;
+		
+			position:absolute;
+			width:100%;
+			height:100%;
+			z-index:999999;
+		}
+		
+
+		#modal .modal_content {
+			width:300px;
+			margin:100px auto;
+			padding:20px 10px;
+			background:#fff;
+			border: 2px solid #666;
+		}
+	</style>
+	</c:forEach>
+</style>
 
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
@@ -508,25 +533,48 @@
                         <c:forEach var="list" items="${list }">
 	                        <div class="col-lg-4 col-md-6 col-sm-6">
 	                            <div class="product__item">
-	                                <div class="product__item__pic set-bg" data-setbg="${path}/resources/img/product/Sneakers.PNG">
+	                                <div class="product__item__pic set-bg" data-setbg="${path}/resources/img/product/${list.PRD_IMAGE }">
 	                                    <ul class="product__item__pic__hover">
 	                                        <li><a href="#"><i class="fa fa-heart"></i></a></li>
-	                                        <li><a href="#"><i class="fa fa-retweet"></i></a></li>
+	                                        <li><a id="modal_open_btn"><i class="fa fa-retweet"><b>바로구매</b></i></a></li>
 	                                        <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
 	                                    </ul>
 	                                </div>
-		                                <div class="product__item__text">
-											<p>
-	 											<h6>${list.PRD_NAME }</h6>												
-	 										</p>
-	                                    <h5>${list.PRD_PRICE }원</h5>
-	                                </div>
-	                            </div>
+				                    <div id="modal">
+										<div class="modal_content">
+											<h2>모달 창</h2>
+											
+											<p>모달 창 입니다.</p>
+											
+											<button type="button" id="modal_close_btn">
+												모달 창 닫기
+											</button>
+										</div>
+									</div>
+	                                <div class="product__item__text">
+										<p>
+ 											<h6>${list.PRD_NAME }</h6>												
+ 										</p>
+                                   		<h5>${list.PRD_PRICE }원</h5>
+                                	</div>
+                            	</div>
 	                        </div>
-						</c:forEach>
-                        
 
+							<script>
+							    $("#modal_open_btn").click(function(){
+							        $("#modal").attr("style", "display:block");
+							    });
+							   
+							     $("#modal_close_btn").click(function(){
+							        $("#modal").attr("style", "display:none");
+							    });      
+							</script>
+
+						</c:forEach>
                     </div>
+                    
+
+                    
                     <div class="product__pagination">
 	                    <c:if test="${page.prev }">
 	                        <a href="/getProductListPage?num=${page.startPageNum - 1 }&condition=${condition}"><i class="fa fa-long-arrow-left"></i></a>
