@@ -367,25 +367,9 @@ public class MyPageController {
 			if (passMatch) {
 				CustomerVO myInfo = myPageSerive.myInfo(user);
 				String[] email = myInfo.getCUS_EMAIL().split("@");
-
-				String fullAddr = myInfo.getCUS_ADDR();
-				int dot1 = fullAddr.lastIndexOf("|");
-				String subaddr1 = fullAddr.substring(0, dot1);
-				String addr4 = fullAddr.substring(dot1 + 1);
-				int dot2 = subaddr1.lastIndexOf("|");
-				String subaddr2 = subaddr1.substring(0, dot2);
-				String addr5 = subaddr1.substring(dot2 + 1);
-				int dot3 = subaddr2.lastIndexOf("|");
-				String subaddr3 = subaddr2.substring(0, dot3);
-				String addr2 = subaddr2.substring(dot3 + 1);
-				String addr1 = subaddr3.substring(1, 6);
-				Map<String, String> addr = new HashMap<String, String>();
-				addr.put("addr1", addr1);
-				addr.put("addr2", addr2);
-				addr.put("addr4", addr4);
-				addr.put("addr5", addr5);
+				String[] fullAddr = myInfo.getCUS_ADDR().split("\\|"); 
 				model.addAttribute("email", email);
-				model.addAttribute("addr", addr);
+				model.addAttribute("addr", fullAddr);
 				model.addAttribute("myInfo", myInfo);
 				return "customer/privateInfoChange";
 			} else {
