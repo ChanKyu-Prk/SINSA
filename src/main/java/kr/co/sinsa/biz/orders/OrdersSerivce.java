@@ -1,5 +1,7 @@
 package kr.co.sinsa.biz.orders;
 
-public interface OrdersSerivce {
+import kr.co.sinsa.biz.customer.CustomerVO;
 
+public interface OrdersSerivce {
+	public CustomerVO cusInfoView(String CUS_ID);
 }
