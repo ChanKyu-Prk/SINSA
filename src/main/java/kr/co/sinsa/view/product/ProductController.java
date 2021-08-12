@@ -49,6 +49,11 @@ public class ProductController {
 	public String getProductBrandPage(Model model) {
 		return "product/Product-brandPage";
 	}
+	
+	@RequestMapping(value = "/getModal")
+	public String getModal(Model model) {
+		return "modaltest";
+	}
 	// 게시물 목록 + 페이징 추가
 	@RequestMapping(value = "/getProductListPage", method = RequestMethod.GET)
 	public String getProductListPage(Model model, @RequestParam("num") int num,
