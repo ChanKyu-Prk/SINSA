@@ -170,9 +170,10 @@ input:read-only{
 							<div class="row borderTop">
 								<label for="CUS_NAME" class="col-lg-3">이름<span
 									class="inpReq">*</span></label>
+									<input type="text" name="CUS_ID" value="${user.CUS_ID}"/>
 								<div class="checkout__input col-lg-6">
 									<span><input id="CUS_NAME" name="CUS_NAME" type="text"
-										maxlength="49" required="required" /></span>
+										maxlength="49" required="required" value="${cusInfo}" readonly/></span>
 								</div>
 							</div>
 							<div class="row">
@@ -180,7 +181,7 @@ input:read-only{
 									class="inpReq">*</span></label>
 								<div class="checkout__input col-lg-6">
 									<span><input id="CUS_TEL" name="CUS_TEL" type="tel"
-										maxlength="11" required="required" /></span>
+										maxlength="11" required="required" value="${cusInfo.CUS_TEL}" readonly/></span>
 								</div>
 							</div>
 							<div class="row">
@@ -188,7 +189,7 @@ input:read-only{
 									class="inpReq">*</span></label>
 								<div class="checkout__input col-lg-6">
 									<span><input id="CUS_EMAIL" name="CUS_EMAIL"
-										type="email" maxlength="100" required="required" /></span>
+										type="email" maxlength="100" required="required" readonly/></span>
 								</div>
 							</div>
 							<h5 class="my-2">받는사람정보</h5>
