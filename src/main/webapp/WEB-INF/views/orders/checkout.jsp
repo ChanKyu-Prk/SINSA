@@ -163,7 +163,7 @@ input:read-only{
 				</div>
 			</div>
 			<div class="checkout__form">
-				<form action="#">
+				<form action="#" method="POST" >
 					<div class="row mx-auto px-0">
 						<div class="col-lg-8 col-md-6">
 							<h5 class="mb-2">구매자정보</h5>
@@ -173,7 +173,7 @@ input:read-only{
 									<input type="text" name="CUS_ID" value="${user.CUS_ID}"/>
 								<div class="checkout__input col-lg-6">
 									<span><input id="CUS_NAME" name="CUS_NAME" type="text"
-										maxlength="49" required="required" value="${cusInfo}" readonly/></span>
+										maxlength="49" required="required" value="${user.CUS_NAME}" readonly/></span>
 								</div>
 							</div>
 							<div class="row">

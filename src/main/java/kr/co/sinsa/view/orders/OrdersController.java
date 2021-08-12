@@ -17,7 +17,7 @@ public class OrdersController {
 	private OrdersSerivce service;
 	
 	@RequestMapping(value="/direct/checkout", method=RequestMethod.GET)
-	public String cusInfo(Model model, @RequestParam(required=false,value="CUS_ID") String CUS_ID) {
+	public String cusInfo(Model model, @RequestParam(required=false, value="CUS_ID") String CUS_ID) {
 		CustomerVO vo = service.cusInfoView(CUS_ID);
 		System.out.println("VO: "+vo);
 		model.addAttribute("cusInfo", vo);
