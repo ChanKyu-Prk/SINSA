@@ -9,8 +9,6 @@ public interface CartService {
 	public List<CartVO> getCartList(UserVO user);
 	
 	public List<ProductVO> getCartProductList(List<CartVO> cartList);
-	
-	public List<StockVO> getCartStockList(List<ProductVO> cartProductList);
 
 	public void deleteCartList(DeleteCartListVO vo);
 }

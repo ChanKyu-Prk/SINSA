@@ -11,16 +11,8 @@
 		select * from PRODUCT where PRD_NUM=#{PRD_NUM}
 	</select>
 	
-	<select id="getCartStockList" parameterType="kr.co.sinsa.biz.product.StockVO" resultType="kr.co.sinsa.biz.product.StockVO">
-		select * from STOCK where STOCK_PRDCODE=#{STOCK_PRDCODE}
-	</select>
-	
 	<delete id="deleteCartList" parameterType="kr.co.sinsa.biz.product.DeleteCartListVO">
 		delete from CART where CART_CUSID=#{userID} and CART_PRDNUM=#{prdNum}
 	</delete>
-	
-	<update id="privateInfoChange" parameterType="kr.co.sinsa.biz.product.UserCartProductStockVO">
-		update CART set CART_PRDCOUNT=#{CART_PRDCOUNT} where CART_CUSID=#{CART_CUSID} and CART_PRDNUM=#{CART_PRDNUM}
-	</update>
 	
 </mapper>

@@ -155,7 +155,7 @@
 			<div class="row">
 				<div class="col-lg-3">
 
-					<a href="/"><img class="header_sinsa_logo"
+					<a href="index.do"><img class="header_sinsa_logo"
 						src="${path}/resources/img/sinsa_logo.png" alt="ddd"></a>
 
 				</div>

@@ -10,8 +10,6 @@ import org.springframework.stereotype.Repository;
 import kr.co.sinsa.biz.product.CartVO;
 import kr.co.sinsa.biz.product.DeleteCartListVO;
 import kr.co.sinsa.biz.product.ProductVO;
-import kr.co.sinsa.biz.product.StockVO;
-import kr.co.sinsa.biz.product.UserCartProductStockVO;
 import kr.co.sinsa.biz.user.UserVO;
 
 @Repository
@@ -29,8 +27,6 @@ public class CartDAO {
 
 	public List<ProductVO> getCartProductList(List<CartVO> cartList) {
 		List<ProductVO> cartProductList = new ArrayList<ProductVO>();
-//		List<StockVO> cartStockList = new ArrayList<StockVO>();
-//		List<UserCartProductStockVO> userCartProductStockList = new ArrayList<UserCartProductStockVO>();
 		ProductVO productVO = new ProductVO();
 
 
@@ -38,37 +34,14 @@ public class CartDAO {
 			if(cartList.size() != 0) {
 				for(int i=0; i<cartList.size(); i++) {
 					productVO.setPRD_NUM(cartList.get(i).getCART_PRDNUM());
-					cartProductList.add((ProductVO) SST.selectOne("CartService.getCartProductList", productVO));
-					
-//					productVO.setPRD_CODE(cartProductList.get(i).getPRD_CODE());
-//					cartStockList.add((StockVO) SST.selectOne("CartService.getCartStockList", productVO));
-					
-				}
-			}
-		}
-		
-		return cartProductList;
-	}
-	
-	public List<StockVO> getCartStockList(List<ProductVO> cartProductList) {
-		List<StockVO> cartStockList = new ArrayList<StockVO>();
-		StockVO stockVO = new StockVO();
-		
-		
-		if(cartProductList != null) {
-			if(cartProductList.size() != 0) {
-				for(int i=0; i<cartProductList.size(); i++) {
-					
-					
-					stockVO.setSTOCK_PRDCODE(cartProductList.get(i).getPRD_CODE());
-					cartStockList.add((StockVO) SST.selectOne("CartService.getCartStockList", stockVO));
-					
-				}
-			}
-		}
-		
 
-		return cartStockList;
+					cartProductList.add((ProductVO) SST.selectOne("CartService.getCartProductList", productVO));
+
+				}
+			}
+		}
+
+		return cartProductList;
 
 	}
 
