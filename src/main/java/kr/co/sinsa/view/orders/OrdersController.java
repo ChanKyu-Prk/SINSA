@@ -26,6 +26,7 @@ public class OrdersController {
 			//비회원 일시
 			page = "/orders/checkoutGuest";
 		} else {
+			//회원 일시
 			UserVO user = (UserVO) session.getAttribute("user");
 			String CUS_ID = (String)user.getCUS_ID();
 			CustomerVO vo = service.cusInfoView(CUS_ID);

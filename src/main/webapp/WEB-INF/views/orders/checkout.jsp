@@ -119,6 +119,9 @@ input:read-only{
 }
 
 </style>
+
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 
 <body>
@@ -172,11 +175,11 @@ input:read-only{
 									class="inpReq">*</span></label>
 								<div class="checkout__input col-lg-6">
 									<span><input id="CUS_NAME" name="CUS_NAME" type="text"
-										maxlength="49" required="required" value="${user.CUS_NAME}" readonly/></span>
+										maxlength="49" required="required" value="${cusInfo.CUS_NAME}" readonly/></span>
 								</div>
 							</div>
 							<div class="row">
-								<label for="CUS_TEL" class="col-lg-3">휴대폰 번호<span
+								<label for="CUS_TEL" class="col-lg-3 telNum">휴대폰 번호<span
 									class="inpReq">*</span></label>
 								<div class="checkout__input col-lg-6">
 									<span><input id="CUS_TEL" name="CUS_TEL" type="tel"
@@ -208,39 +211,41 @@ input:read-only{
 								<label for="ORDER_RECEIVER" class="col-lg-3">이름<span
 									class="inpReq">*</span></label>
 								<div class="checkout__input col-lg-6">
-									<span><input id="ORDER_RECEIVER" name="ORDER_RECEIVER"
-										type="text" maxlength="49" required="required" /></span>
+									<span><input id="ORDER_RECEIVER" class="newDelivInput" name="ORDER_RECEIVER"
+										type="text" maxlength="49" required="required" value="${cusInfo.CUS_NAME}" readonly/></span>
 								</div>
 							</div>
 							<div class="row">
 								<label for="ORDER_TEL" class="col-lg-3">휴대폰 번호<span
 									class="inpReq">*</span></label>
 								<div class="checkout__input col-lg-6">
-									<span><input id="ORDER_TEL" name="ORDER_TEL" type="tel"
-										maxlength="11" required="required" /></span>
+									<span><input id="ORDER_TEL" class="newDelivInput" name="ORDER_TEL" type="tel"
+										maxlength="11" required="required" value="${cusInfo.CUS_TEL}" readonly/></span>
 								</div>
 							</div>
 							<div class="row">
 								<label for="ORDER_TEL" class="col-lg-3">주소<span
 									class="inpReq">*</span></label>
 								<div class="checkout__input col-lg-3">
-									<span><input type="text" id="delivAddrZip"
+									<span><input type="text" id="delivAddrZip" class="newDelivInput"
 										placeholder="우편번호" title="우편번호" required="required" readonly/></span>
 								</div>
 								<button type="button" class="col-lg-2 text-center btn btn-secondary" onclick="findAddr()">우편번호 찾기</button>
 							</div>
 							<div class="row">
 								<div class="checkout__input col-lg-9 offset-lg-3">
-									<span><input type="text" id="delivAddrRoad"
+									<span><input type="text" id="delivAddrRoad" class="newDelivInput"
 										placeholder="" title="기본주소" required="required" readonly/></span>
 								</div>
 							</div>
 							<div class="row">
 								<div class="checkout__input col-lg-9 offset-lg-3">
-									<span><input type="text" id="delivAddrJibun" title="상세주소" placeholder="상세주소를 입력해주세요."/></span>
+									<span>
+										<input type="hidden" id="delivAddrJibun" class="newDelivInput"/>
+										<input type="text" id="delivAddrExtra" class="newDelivInput" title="상세주소" placeholder="상세주소를 입력해주세요."/>
+									</span>
 									<span id="guide" style="color:#999;display:none"></span>
 								</div>
-								<input type="hidden" id="delivAddrExtra"/>
 							</div>
 							<div class="row">
 								<label for="ORDER_MEMO" class="col-lg-3">배송시 요청사항
@@ -289,6 +294,21 @@ input:read-only{
 	<script
 		src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 	<script type="text/javascript">
+	$(document).ready(function() {
+		$('input[type=radio]').on('change', function() {
+			var chckdRadio = $('input[type=radio]:checked').val();
+			if(chckdRadio == "default"){
+				$('#ORDER_RECEIVER, #ORDER_TEL').prop('readonly', true);
+				$("#ORDER_RECEIVER").val($("#CUS_NAME").val());
+				$("#ORDER_TEL").val($("#CUS_TEL").val());
+			} else if(chckdRadio == "new"){
+				$('input.newDelivInput').val('');
+				$('#ORDER_RECEIVER, #ORDER_TEL').removeAttr('readonly');
+			}
+			
+		});
+	 });
+	
 	function findAddr() {
 		new daum.Postcode(
 				{
