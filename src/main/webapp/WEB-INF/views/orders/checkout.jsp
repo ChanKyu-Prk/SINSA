@@ -1,8 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
 <!DOCTYPE html>
 <html lang="zxx">
+
 
 <head>
 <meta charset="UTF-8">
@@ -223,26 +225,33 @@ input:read-only{
 										maxlength="11" required="required" value="${cusInfo.CUS_TEL}" readonly/></span>
 								</div>
 							</div>
+							<c:set var="getAddr" value="${fn:split(cusInfo.CUS_ADDR, '|')}" />
+							<c:set var="delivAddrExtra" value="${getAddr[fn:length(getAddr)-1]}" />
+							<c:set var="delivAddrJibun" value="${getAddr[fn:length(getAddr)-2]}" />
+							<c:set var="delivAddrRoad" value="${getAddr[fn:length(getAddr)-3]}" />
+							<c:set var="zip" value="${getAddr[fn:length(getAddr)-4]}" />
+							<c:set var="zip" value="${fn:replace(zip, '(', '')}" />
+							<c:set var="delivAddrZip" value="${fn:replace(zip, ')', '')}" />
 							<div class="row">
-								<label for="ORDER_TEL" class="col-lg-3">주소<span
+								<label for="delivAddrZip" class="col-lg-3">주소<span
 									class="inpReq">*</span></label>
 								<div class="checkout__input col-lg-3">
 									<span><input type="text" id="delivAddrZip" class="newDelivInput"
-										placeholder="우편번호" title="우편번호" required="required" readonly/></span>
+										placeholder="우편번호" title="우편번호" required="required" data-zip="${delivAddrZip}" value="${delivAddrZip}" readonly/></span>
 								</div>
 								<button type="button" class="col-lg-2 text-center btn btn-secondary" onclick="findAddr()">우편번호 찾기</button>
 							</div>
 							<div class="row">
 								<div class="checkout__input col-lg-9 offset-lg-3">
 									<span><input type="text" id="delivAddrRoad" class="newDelivInput"
-										placeholder="" title="기본주소" required="required" readonly/></span>
+										placeholder="" title="기본주소" required="required" data-road="${delivAddrRoad}" value="${delivAddrRoad}" readonly/></span>
 								</div>
 							</div>
 							<div class="row">
 								<div class="checkout__input col-lg-9 offset-lg-3">
 									<span>
-										<input type="hidden" id="delivAddrJibun" class="newDelivInput"/>
-										<input type="text" id="delivAddrExtra" class="newDelivInput" title="상세주소" placeholder="상세주소를 입력해주세요."/>
+										<input type="hidden" id="delivAddrJibun" class="newDelivInput" data-jibun="${delivAddrJibun}" value="${delivAddrJibun}"/>
+										<input type="text" id="delivAddrExtra" class="newDelivInput" data-extra="${delivAddrExtra}" value="${delivAddrExtra}" title="상세주소" placeholder="상세주소를 입력해주세요."/>
 									</span>
 									<span id="guide" style="color:#999;display:none"></span>
 								</div>
@@ -301,6 +310,10 @@ input:read-only{
 				$('#ORDER_RECEIVER, #ORDER_TEL').prop('readonly', true);
 				$("#ORDER_RECEIVER").val($("#CUS_NAME").val());
 				$("#ORDER_TEL").val($("#CUS_TEL").val());
+				$("#delivAddrZip").val($("#delivAddrZip").data("zip"));
+				$("#delivAddrRoad").val($("#delivAddrRoad").data("road"));
+				$("#delivAddrJibun").val($("#delivAddrJibun").data("jibun"));
+				$("#delivAddrExtra").val($("#delivAddrExtra").data("extra"));
 			} else if(chckdRadio == "new"){
 				$('input.newDelivInput').val('');
 				$('#ORDER_RECEIVER, #ORDER_TEL').removeAttr('readonly');
