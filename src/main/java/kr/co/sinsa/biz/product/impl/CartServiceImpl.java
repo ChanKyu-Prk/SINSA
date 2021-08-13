@@ -10,6 +10,7 @@ import kr.co.sinsa.biz.product.CartVO;
 import kr.co.sinsa.biz.product.DeleteCartListVO;
 import kr.co.sinsa.biz.product.ProductVO;
 import kr.co.sinsa.biz.product.StockVO;
+import kr.co.sinsa.biz.product.UserCartProductStockVO;
 import kr.co.sinsa.biz.user.UserVO;
 
 @Service("CartService")
@@ -40,5 +41,17 @@ public class CartServiceImpl implements CartService {
 	public void deleteCartList(DeleteCartListVO vo) {
 		
 		dao.deleteCartList(vo);
+	}
+	
+	@Override
+	public void deleteAll(UserCartProductStockVO vo) {
+		
+		dao.deleteAll(vo);
+	}
+	
+	@Override
+	public void updateCartProductCount(UserCartProductStockVO vo) {
+		
+		dao.updateCartProductCount(vo);
 	}
 }

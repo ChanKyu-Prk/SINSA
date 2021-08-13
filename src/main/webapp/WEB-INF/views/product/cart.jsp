@@ -12,6 +12,8 @@
 <%@page import="kr.co.sinsa.biz.product.CartVO"%>
 <%@ page import="java.util.ArrayList" %>
 <%@page import="java.text.DecimalFormat" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+
 
 <!DOCTYPE html>
 <html lang="zxx">
@@ -23,7 +25,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 <title>sinsa</title>
-
+<script src="https://kit.fontawesome.com/848d8f1fa9.js" crossorigin="anonymous"></script>
 
    <jsp:include page="../header.jsp"/>
 <style>
@@ -47,11 +49,43 @@
 	color: black !important;
 }
 
-.previousPrice{ 
+.previousPrice { 
  	text-decoration:line-through !important;
  	color:grey;
 } 
+.previousTotalPrice{
+	text-decoration:line-through !important;
+ 	color:grey;
+}
+.throwout{
+	margin: 0px 5px 0px 0px;
+}
 
+/* .noProduct{ */
+/* 	width:50px !important; */
+/* 	height:50px */
+/* } */
+
+.noProduct{ 
+	text-align: center !important; 
+} 
+
+.noProductIcon{
+	margin: 100px 0px 40px 0px;
+}
+
+.optionModal{
+	height: 600px;
+}
+
+.countselectbox{
+	height:32px;
+    line-height: 30px;
+    box-sizing: border-box !important;
+    z-index: 10 !important;
+    
+    size:3 !important;
+}
 
 </style>
 
@@ -62,14 +96,12 @@
 %>
 
  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+
 </head>
 
 <body>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
-
-
-
 
 
     <!-- Breadcrumb Section Begin -->
@@ -110,16 +142,52 @@
                             
                             <tbody>
                             
+                            
+                            <c:if test="${fn:length(cartList) != 0}">
                             <c:forEach var="list" items="${userCartProductStockList}" varStatus="theCount">
-                           
+                           		
                                 <tr>
                                 
                                     <td class="shoping__cart__item">
                                     
                                         <img src="${path}/resources/img/cart/cart-1.jpg" alt="">
-                                        <h5>[${list.PRD_BRAND}] ${list.PRD_NAME}<br><br>사이즈 : ${list.CART_PRDSIZE}<input type="submit" value="옵션변경"/></h5>
-                                      
-                                    </td>
+                                        <h5>[${list.PRD_BRAND}] ${list.PRD_NAME}<br><br>사이즈 : ${list.CART_PRDSIZE}
+                                        
+                                        
+                                        
+                                        <!-- Button trigger modal -->
+													<div id="locBtnCon" class="container mt-4">
+														<button type="button" class="btn btn-outline-secondary"
+															data-bs-toggle="modal" data-bs-target="#exampleModal">
+															<div>변경</div>
+														</button>
+													</div>
+
+
+													<!-- Modal -->
+													<div class="modal fade " id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+														<div class="modal-dialog modal-dialog-scrollable">
+															<div class="modal-content optionModal">
+																<div class="modal-header">
+																	<h5 class="modal-title" id="exampleModalLabel">옵션변경</h5>
+																	<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+																</div>
+																<div class="modal-body ">
+
+																	
+
+																</div>
+																<div class="modal-footer">
+																	<input type="submit" value="확인" />
+
+																</div>
+															</div>
+														</div>
+													</div>
+												</td>
+												
+												
+												
                                     <td class="shoping__cart__price">
                                     	<input type="hidden" id="price" value="${list.PRD_PRICE }"/>
                                         <c:set var="price" value="${list.PRD_PRICE}"/>
@@ -137,20 +205,32 @@
                                         
                                     </td>
                                     <td class="shoping__cart__quantity">
-          
-          							<form action="#">
-          							<input type="hidden" name="CART_PRDNUM" value="${list.CART_PRDNUM}" />
-          							
-          							<input id="count" name="CART_PRDCOUNT" value="${list.CART_PRDCOUNT }" /><br>
-          							<input type="submit" value="변경"/>
+                                    <form action="updatecart.do" method="POST" onsubmit="return alert('수량이 변경되었습니다');">
+                                    	<div class="quantity">
+                                        	<div class="pro-qty">
+          										<input id="count" name="CART_PRDCOUNT" value="${list.CART_PRDCOUNT}" readonly />
+                                    		</div>
+                                    	</div>
+                                    	<input type="hidden" name="CART_PRDNUM" value="${list.CART_PRDNUM}" />
+                                    	<input type="submit" value="변경" onclick="updateCount_event();"/>
+                                    	
                                     </form>
-                                    
-                
                                     </td>
                                     <td class="shoping__cart__total">
-                                        <c:set var="totalPrice" value="${discountedPrice * list.CART_PRDCOUNT}"/>
-                                        <fmt:formatNumber value="${totalPrice}" pattern="#,###" />
-                                        <div id="totalprice"></div>
+                                    <c:set var="previousTotalPrice" value="${price * list.CART_PRDCOUNT}"/>
+                                    <c:set var="discountedTotalPrice" value="${discountedPrice * list.CART_PRDCOUNT}"/>
+                                    
+                                    <c:if test="${disRate > 0}">
+                                    <div class="previousTotalPrice"><fmt:formatNumber value="${previousTotalPrice}" pattern="#,###" /></div>
+                                    <fmt:formatNumber value="${discountedTotalPrice}" pattern="#,###" />
+                                    </c:if>
+                                    
+                                    <c:if test="${disRate == 0}">
+                                    <fmt:formatNumber value="${discountedTotalPrice}" pattern="#,###" />
+                                    </c:if>
+                                    
+                                        
+                                        <div id="previousTotalPrice"></div>
                                     </td>
                                     <td class="shoping__cart__item__close">
                                     
@@ -159,7 +239,8 @@
                                     	<form id="form" name="form" action="cart.do" method="post" onsubmit="return confirm('장바구니에서 해당 상품을 삭제 하시겠습니까?');">
                                     	
                                     		<input type="hidden" id="CART_PRDNUM" name="CART_PRDNUM" value="${list.CART_PRDNUM }">
-                                    		<input type="submit" value="삭제" onclick="button_event();"/>
+                                    		<input type="submit" value="삭제" onclick="delete_event();"/>
+                                    		
                                     		
                                         </form>
                                         <br>
@@ -168,18 +249,32 @@
                                     </td>
                                 </tr>
                                 
-                       
                             </c:forEach>
+                            </c:if>
                             </tbody>
-                            
                         </table>
                     </div>
+                    
                 </div>
             </div>
+            
+            <c:if test="${fn:length(cartList) == 0}">
+            <div class="noProduct">
+            	<div class="noProductIcon"><i class="fas fa-exclamation-circle fa-9x"></i></div>
+                  	 <div><h3>장바구니에 담긴 상품이 없습니다.</h3></div>
+            </div>               
+            </c:if>
+            
+            <c:if test="${fn:length(cartList) != 0}">
             <div class="row">
                 <div class="col-lg-12">
                     <div class="shoping__cart__btns">
-                        <a href="/" class="primary-btn cart-btn cart-btn-right">쇼핑 계속하기</a>
+                        <a href="/" class="primary-btn cart-btn cart-btn-right keepshopping">쇼핑 계속하기</a>
+                        
+                        <form name="deleteAll" action="deleteAllCart.do" method="post" onsubmit="return confirm('장바구니를 비우시겠습니까?');">
+                        <input type="hidden" name="CUS_ID" value="${list.CUS_ID}"/>
+                        <input type="submit" class="primary-btn cart-btn cart-btn-right throwout" value="장바구니 비우기"/>
+                        </form>
                     </div>
                 </div>
                 <div class="col-lg-6">
@@ -217,79 +312,40 @@
                     </div>
                 </div>
             </div>
-        </div>
+            
+          </c:if>
+
+
+
+			
+
+
+
+		</div>
     </section>
     <!-- Shoping Cart Section End -->
     
-   <!-- Button trigger modal -->
-   <div id="locBtnCon" class="container mt-4">
-      <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal"
-         data-bs-target="#exampleModal">
-         <i class="fas fa-map-marker-alt mr-1"></i>변경
-      </button>
-   </div>
    
-   
-    <!-- Modal -->
-   <div class="modal fade " id="exampleModal" tabindex="-1"
-      aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-scrollable">
-         <div class="modal-content">
-            <div class="modal-header">
-               <h5 class="modal-title" id="exampleModalLabel">옵션변경</h5>
-               <button type="button" class="btn-close" data-bs-dismiss="modal"
-                  aria-label="Close"></button>
-            </div>
-           <div class="modal-body ">
-            </div>
-            <div class="modal-footer">
-               <button type="button" class="btn btn-secondary"
-                  data-bs-dismiss="modal">취소</button>
-            </div>
-         </div>
-      </div>
-   </div>
     
     
     
     
     
-<script>
-
-var countList=document.querySelectorAll("#count");
-var priceList=document.querySelectorAll("#price");
-var totalpriceList=document.querySelectorAll("#totalprice");
-
-
-for(var i=0; i < countLength; i++){
-    countList[i].addEventListener('input',onIncreaseCountHandler)
-    };
-   
-
-
-function onIncreaseCountHandler(e) {
-
-	for(var i=0; i<countList.length; i++){
-
-		totalpriceList[i].innerText=priceList[i].value*countList[i].value;
-	}
-}
-
-
-</script>
 
 <script>
+	// function delete_event(){
 
-function button_event(){
-	
+	// 	if (confirm('장바구니에서 해당 상품을 삭제 하시겠습니까?');) {
+	// 		document.getElementById('form').submit();
+	// 	}else{
+	// 		return false;
+	// 	}
+	// }
 
-	if (confirm('장바구니에서 해당 상품을 삭제 하시겠습니까?');) {
-		document.getElementById('form').submit();
-	}else{
-		return false;
-	}
-}
+	// function updateCount_event(){
 
+	// 	alert('수량이 변경되었습니다');
+	// }
 </script>
 
 

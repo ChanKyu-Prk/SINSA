@@ -19,8 +19,12 @@
 		delete from CART where CART_CUSID=#{userID} and CART_PRDNUM=#{prdNum}
 	</delete>
 	
-	<update id="privateInfoChange" parameterType="kr.co.sinsa.biz.product.UserCartProductStockVO">
-		update CART set CART_PRDCOUNT=#{CART_PRDCOUNT} where CART_CUSID=#{CART_CUSID} and CART_PRDNUM=#{CART_PRDNUM}
+	<delete id="deleteAll" parameterType="kr.co.sinsa.biz.product.UserCartProductStockVO">
+		delete from CART where CART_CUSID=#{CUS_ID}
+	</delete>
+	
+	<update id="updateCartProductCount" parameterType="kr.co.sinsa.biz.product.UserCartProductStockVO">
+		update CART set CART_PRDCOUNT=#{CART_PRDCOUNT} where CART_CUSID=#{CUS_ID} and CART_PRDNUM=#{CART_PRDNUM}
 	</update>
 	
 </mapper>

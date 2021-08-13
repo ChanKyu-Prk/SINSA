@@ -54,7 +54,6 @@ public class CartDAO {
 		List<StockVO> cartStockList = new ArrayList<StockVO>();
 		StockVO stockVO = new StockVO();
 		
-		
 		if(cartProductList != null) {
 			if(cartProductList.size() != 0) {
 				for(int i=0; i<cartProductList.size(); i++) {
@@ -66,16 +65,21 @@ public class CartDAO {
 				}
 			}
 		}
-		
-
 		return cartStockList;
-
 	}
-
 
 	public void deleteCartList(DeleteCartListVO vo) {
 
 		SST.delete("CartService.deleteCartList", vo);
 	}
+	
+	public void deleteAll(UserCartProductStockVO vo) {
 
+		SST.delete("CartService.deleteAll", vo);
+	}
+	
+	public void updateCartProductCount(UserCartProductStockVO vo) {
+
+		SST.update("CartService.updateCartProductCount", vo);
+	}
 }

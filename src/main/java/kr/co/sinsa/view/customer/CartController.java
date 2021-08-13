@@ -32,6 +32,7 @@ public class CartController {
 	public String getCartList(Model model, HttpSession session, HttpServletRequest request) {
 		UserVO user = (UserVO)session.getAttribute("user");
 		List<CartVO> cartList = cartService.getCartList(user);
+		model.addAttribute("user", user);
 		model.addAttribute("cartList", cartList);
 		
 		List<ProductVO> productList = cartService.getCartProductList(cartList);
@@ -93,7 +94,7 @@ public class CartController {
 	}
 	
 	@RequestMapping(value="/cart.do", method=RequestMethod.POST)
-	public String deleteCartList(Model model, HttpSession session, HttpServletRequest request) throws IOException {
+	public String deleteCartList(Model model, HttpSession session, HttpServletRequest request){
 		
 		UserVO user = (UserVO)session.getAttribute("user");
 		int CART_PRDNUM = Integer.parseInt((String) request.getParameter("CART_PRDNUM"));
@@ -105,19 +106,34 @@ public class CartController {
 		return "redirect:/cart.do";
 	}
 	
-//	@RequestMapping(value="/cart.do", method=RequestMethod.POST)
-//	public String updateCartList(Model model, HttpSession session, HttpServletRequest request, UserCartProductStockVO userCartProductStockVO) throws IOException {
-//		
-//		UserVO user = (UserVO)session.getAttribute("user");
-//		
-//		int CART_PRDCOUNT = userCartProductStockVO.getCART_PRDCOUNT();
-//		int CART_PRDNUM = userCartProductStockVO.getCART_PRDNUM();
-//
-////		userCartProductStockVO.setCART_PRDCOUNT(CART_PRDCOUNT);
-////		userCartProductStockVO.setCART_PRDNUM(CART_PRDNUM);
-////		userCartProductStockVO.setCART_CUSID(user.getCUS_ID());
-//		
-//		
-//		return "redirect:/cart.do";
-//	}
+	
+	@RequestMapping(value="/deleteAllCart.do", method=RequestMethod.POST)
+	public String deleteAll(UserCartProductStockVO userCartProductStockVO, Model model, HttpSession session) {
+		UserVO user = (UserVO)session.getAttribute("user");
+		userCartProductStockVO.setCUS_ID(user.getCUS_ID());
+		System.out.println(userCartProductStockVO);
+		
+		cartService.deleteAll(userCartProductStockVO);
+
+		
+		return "redirect:/cart.do";
+	}
+	
+	
+	
+	@RequestMapping(value="/updatecart.do", method=RequestMethod.POST)
+	public String updateSize(UserCartProductStockVO userCartProductStockVO, Model model, HttpSession session) {
+		UserVO user = (UserVO)session.getAttribute("user");
+		userCartProductStockVO.setCUS_ID(user.getCUS_ID());
+		System.out.println(userCartProductStockVO);
+		
+		cartService.updateCartProductCount(userCartProductStockVO);
+
+		return "redirect:/cart.do";
+	}
+	
+	
+	
+	
+	
 }

@@ -27,29 +27,36 @@
     <link rel="stylesheet" href="${path}/resources/login_resources/css/style.css">
 
     <title>Login #5</title>
+    
+    <style>
+    .login{
+    margin:100px 0px !important;
+    }
+    </style>
+    
   </head>
   <body>
-  
+  <jsp:include page="header.jsp"/>
 
-  <div class="d-md-flex half">
-    <div class="bg" style="background-image: url('${path}/resources/login_resources/images/bg_1.jpg');"></div>
+<!--   <div class="d-md-flex half"> -->
+<%--     <div class="bg" style="background-image: url('${path}/resources/login_resources/images/bg_1.jpg');"></div> --%>
     <div class="contents">
 
       <div class="container">
         <div class="row align-items-center justify-content-center">
-          <div class="col-md-12">
+          <div class="col-md-12 login">
             <div class="form-block mx-auto">
               <div class="text-center mb-5">
-                <h3 class="text-uppercase"><strong>LOGIN</strong></h3>
+                <h3 class="text-uppercase"><strong>로그인</strong></h3>
               </div>
               <form action="login.do" method="post">
                 <div class="form-group first">
                   <label for="username">Username</label>
-                  <input type="text" name="CUS_ID" class="form-control" placeholder="아이디" id="username">
+                  <input type="text" name="CUS_ID" class="form-control" placeholder="아이디를 입력해주세요" id="username">
                 </div>
                 <div class="form-group last mb-3">
                   <label for="password">Password</label>
-                  <input type="password" name="CUS_PWD" class="form-control" placeholder="비밀번호" id="password">
+                  <input type="password" name="CUS_PWD" class="form-control" placeholder="비밀번호를 입력해주세요" id="password">
                 </div>
                 
                 <div class="d-sm-flex mb-5 align-items-center">
@@ -79,8 +86,10 @@
     </div>
 
     
-  </div>
+<!--   </div> -->
     
+    
+    <jsp:include page="footer.jsp"/>
     
 
     <script src="${path}/resources/login_resources/js/jquery-3.3.1.min.js"></script>
