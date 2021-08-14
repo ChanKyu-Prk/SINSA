@@ -519,7 +519,7 @@ input[type=number] {
 							
 							function noDigits() {
 								$(".digits").each(function() {
-									$(this).text( $(this).text().replace(',', ''));
+									$(this).text( $(this).text().replaceAll(',', ''));
 								});
 							}
 							
