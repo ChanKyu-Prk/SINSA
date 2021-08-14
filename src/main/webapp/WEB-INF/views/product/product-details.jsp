@@ -2,6 +2,8 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <c:set var="path" value="${pageContext.request.contextPath}" />
 
 <!DOCTYPE html>
@@ -153,6 +155,16 @@ input[type=number] {
 	font-family: sans-serif;
 	font-weight: 400;
 }
+
+.product__details__price{
+	font-family: adihaus;
+}
+
+.product__details__price .discntNum{
+	text-decoration: line-through;
+	color: #999;
+	font-size: 18px;
+}
 </style>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -208,8 +220,18 @@ input[type=number] {
 							</span>
 						</div>
 						
-						<div class="product__details__price digits">
-							${prdInfo.PRD_PRICE}<small>원</small>
+						<div class="product__details__price">
+							<c:if test="${prdInfo.PRD_DISRATE == 0}">
+								<c:set var="finalPrice" value="${prdInfo.PRD_PRICE}"/>
+							</c:if>
+							<c:if test="${prdInfo.PRD_DISRATE != 0}">
+								<c:set var="finalPriceOrg" 
+									value="${prdInfo.PRD_PRICE-(prdInfo.PRD_PRICE*(prdInfo.PRD_DISRATE/100))}"
+		  						/>
+		  						<c:set var="finalPrice" value="${fn:substringBefore(finalPriceOrg, '.')}" />
+		  						<span class="digits discntNum">${prdInfo.PRD_PRICE}원</span>
+							</c:if>
+							<span class="digits">${finalPrice}원</span>
 						</div>
 						<div id="priceContainer">
 							<div id="sizeCon" class="product__details__size">
@@ -352,9 +374,9 @@ input[type=number] {
 														+ clickedSize
 														+ "</span></div><div class='p-2'><div class='qty-countCon'><span class='qty-button qty-minus'>–</span><input type='number' class='amount' value='1' min='1' name='"
 														+ listNum.trim()
-														+ "'><span class='qty-button qty-plus'>+</span></div></div><div class='p-2'><span class='qty-totalPrice mr-1 digits' data-org-price='${prdInfo.PRD_PRICE}' data-stockName='"
+														+ "'><span class='qty-button qty-plus'>+</span></div></div><div class='p-2'><span class='qty-totalPrice mr-1 digits' data-org-price='${finalPrice}' data-stockName='"
 														+ listNum.trim()
-														+ "'>${prdInfo.PRD_PRICE}</span><small>원</small><button class='btn-delete btn btn-outline-secondary'><span>X</span></button></div></div></li>"
+														+ "'>${finalPrice}</span><small>원</small><button class='btn-delete btn btn-outline-secondary'><span>X</span></button></div></div></li>"
 												var selected = $('span[data-stock="'
 														+ listNum.trim() + '"]');
 														noDigits();
@@ -529,18 +551,6 @@ input[type=number] {
 							   var src = $(this).attr("src");
 							    $(".product__details__pic__item--large").attr("src",src);
 							});
-
-							// show thumbnail carousel
-// 							$(".owl-carousel")
-// 									.owlCarousel(
-// 											{
-// 												items : 5,
-// 												loop : false,
-// 												margin : 6,
-// 												autoplay : false,
-// 												touchDrag : true,
-// 										        mouseDrag : false
-// 							});
 							
 							// Iamport 결제
 							$("#btnJjim").click(function () {
