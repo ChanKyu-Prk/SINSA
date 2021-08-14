@@ -36,6 +36,7 @@
 	position: -webkit-sticky;
 	position: sticky;
 	top: 20px;
+	font-family: adihaus;
 }
 
 .checkout__input input[type="radio"] {
@@ -120,6 +121,16 @@ input:read-only{
 	color: #dd2222;
 }
 
+.shoping__cart__price .discntNum{
+	text-decoration: line-through;
+	color: #999;
+	font-family: adihaus;
+}
+
+.numFont{
+	font-family: adihaus;
+}
+
 </style>
 
 <script
@@ -134,7 +145,7 @@ input:read-only{
 			<h4 class="mb-5 font-weight-bold">주문/결제</h4>
 			<div class="row">
 				<div class="col-lg-12 shoping__cart__table">
-					<table class="mx-auto px-0">
+					<table id="itemList" class="mx-auto px-0">
 						<thead>
 							<span class="tableHead row mx-auto px-0 mb-2">
 								<h5>주문리스트</h5> <a href="#"
@@ -155,13 +166,16 @@ input:read-only{
 											</p>
 									</span>
 								</span></td>
-								<td class="shoping__cart__price">55000원</td>
+								<td class="shoping__cart__price">
+									<p class="mb-0 discntNum numFont">55000원</p>
+									<p class="mb-0 font-weight-bold numFont">65000원</p>
+								</td>
 								<td class="shoping__cart__quantity">
 									<p class="mb-1">
 										수량:<span>1</span>
 									</p> <b class="mb-0">무료배송</b>
 								</td>
-								<td class="shoping__cart__total">55000원</td>
+								<td class="shoping__cart__total numFont">55000원</td>
 							</tr>
 						</tbody>
 					</table>
@@ -281,12 +295,15 @@ input:read-only{
 								<ul>
 									<li>총 주문 가격 <span>750000원</span></li>
 									<li>할인 <span>5000원</span></li>
-									<li class="points">포인트 사용 <input placeholder="0" class="text-right"></input><span>P</span><p><small>사용가능한 포인트: <span class="avPoint">5000 P</span></small></p></li>
+									<li class="points">포인트 사용 <input placeholder="0" class="text-right"></input><span>P</span>
+									<p class="mb-1"><small>사용가능한 포인트: <span class="avPoint">5000 P</span></small></p>
+									</li>
 									<li>배송비 <span>무료</span></li>
 								</ul>
-								<div class="checkout__order__total">
+								<div class="checkout__order__total my-2 pb-0 pt-3">
 									총 결제금액 <span>750000원</span>
 								</div>
+								<small class="float-right mb-4">결제 시 <span class="avPoint">3,000P</span> 적립예정</small>
 								<button type="submit" class="site-btn">결제하기</button>
 							</div>
 						</div>
@@ -303,6 +320,7 @@ input:read-only{
 	<script
 		src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 	<script type="text/javascript">
+	
 	$(document).ready(function() {
 		$('input[type=radio]').on('change', function() {
 			var chckdRadio = $('input[type=radio]:checked').val();

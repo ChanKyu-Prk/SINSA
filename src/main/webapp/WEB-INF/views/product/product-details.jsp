@@ -165,6 +165,11 @@ input[type=number] {
 	color: #999;
 	font-size: 18px;
 }
+
+.product__details__price .disRateNum{
+	font-size:18px;
+	font-weight: 400 !important;
+}
 </style>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -232,6 +237,7 @@ input[type=number] {
 		  						<span class="digits discntNum">${prdInfo.PRD_PRICE}원</span>
 							</c:if>
 							<span class="digits">${finalPrice}원</span>
+							<span class="disRateNum">[${prdInfo.PRD_DISRATE}%]</span>
 						</div>
 						<div id="priceContainer">
 							<div id="sizeCon" class="product__details__size">
