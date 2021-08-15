@@ -1,6 +1,5 @@
 package kr.co.sinsa.view.customer;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import kr.co.sinsa.biz.product.CartService;
 import kr.co.sinsa.biz.product.CartVO;
-import kr.co.sinsa.biz.product.DeleteCartListVO;
 import kr.co.sinsa.biz.product.ProductVO;
 import kr.co.sinsa.biz.product.StockVO;
 import kr.co.sinsa.biz.product.UserCartProductStockVO;
@@ -94,14 +92,20 @@ public class CartController {
 	}
 	
 	@RequestMapping(value="/cart.do", method=RequestMethod.POST)
-	public String deleteCartList(Model model, HttpSession session, HttpServletRequest request){
+	public String deleteCartList(UserCartProductStockVO userCartProductStockVO, Model model, HttpSession session, HttpServletRequest request){
 		
 		UserVO user = (UserVO)session.getAttribute("user");
-		int CART_PRDNUM = Integer.parseInt((String) request.getParameter("CART_PRDNUM"));
-		DeleteCartListVO vo = new DeleteCartListVO();
-		vo.setUserID(user.getCUS_ID());
-		vo.setPrdNum(CART_PRDNUM);
-		cartService.deleteCartList(vo);
+//		int CART_PRDNUM = Integer.parseInt((String) request.getParameter("CART_PRDNUM"));
+//		
+//		DeleteCartListVO vo = new DeleteCartListVO();
+//		vo.setUserID(user.getCUS_ID());
+//		vo.setPrdNum(CART_PRDNUM);
+		
+		System.out.println(userCartProductStockVO.getCART_PRDSIZE());
+		System.out.println(userCartProductStockVO.getCART_PRDNUM());
+		System.out.println(userCartProductStockVO.getCUS_ID());
+		
+		cartService.deleteCartList(userCartProductStockVO);
 		
 		return "redirect:/cart.do";
 	}
