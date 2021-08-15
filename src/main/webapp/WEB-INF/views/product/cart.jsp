@@ -144,36 +144,49 @@
                             
                             
                             <c:if test="${fn:length(cartList) != 0}">
-                            <c:forEach var="list" items="${userCartProductStockList}" varStatus="theCount">
+                            <c:forEach var="list" items="${userCartProductStockList}" varStatus="status">
                            		
                                 <tr>
                                 
                                     <td class="shoping__cart__item">
+                                    <div class="row">
                                     
+										<div class="col-lg-3 col-md-9">
                                         <img src="${path}/resources/img/cart/cart-1.jpg" alt="">
-                                        <h5>[${list.PRD_BRAND}] ${list.PRD_NAME}<br><br>사이즈 : ${list.CART_PRDSIZE}
+                                        </div>
+                                        
+                                        <div class="col-lg-9 col-md-3">
+                                        [${list.PRD_BRAND}]<br> ${list.PRD_NAME}<br><br>사이즈 : ${list.CART_PRDSIZE}
                                         
                                         
                                         
                                         <!-- Button trigger modal -->
-													<div id="locBtnCon" class="container mt-4">
-														<button type="button" class="btn btn-outline-secondary"
-															data-bs-toggle="modal" data-bs-target="#exampleModal">
-															<div>변경</div>
-														</button>
-													</div>
+										<button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal${status.index}">변경</button>
 
 
 													<!-- Modal -->
-													<div class="modal fade " id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+													<div class="modal fade " id="exampleModal${status.index}" tabindex="-1" aria-labelledby="exampleModalLabel${status.index}" aria-hidden="true">
 														<div class="modal-dialog modal-dialog-scrollable">
 															<div class="modal-content optionModal">
 																<div class="modal-header">
-																	<h5 class="modal-title" id="exampleModalLabel">옵션변경</h5>
+																	<h5 class="modal-title" id="exampleModalLabel${status.index}">옵션변경</h5>
 																	<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 																</div>
 																<div class="modal-body ">
 
+																	
+																	<div class="row">
+																	<div class="col-lg-3 col-md-9">
+																	<img src="${path}/resources/img/cart/cart-1.jpg" alt="">
+																	
+																	</div>
+																	
+																	<div class="col-lg-9 col-md-3">
+                                        							<h5>[${list.PRD_BRAND}]<br> ${list.PRD_NAME}<br><br>사이즈 : ${list.CART_PRDSIZE}</h5>
+																	
+																	</div>
+																	</div>
+																	
 																	
 
 																</div>
@@ -183,6 +196,8 @@
 																</div>
 															</div>
 														</div>
+													</div>
+													</div>
 													</div>
 												</td>
 												
@@ -211,6 +226,7 @@
           										<input id="count" name="CART_PRDCOUNT" value="${list.CART_PRDCOUNT}" readonly />
                                     		</div>
                                     	</div>
+                                    	<input type="hidden" name="CART_PRDSIZE" value="${list.CART_PRDSIZE}" />
                                     	<input type="hidden" name="CART_PRDNUM" value="${list.CART_PRDNUM}" />
                                     	<input type="submit" value="변경" onclick="updateCount_event();"/>
                                     	
@@ -239,6 +255,8 @@
                                     	<form id="form" name="form" action="cart.do" method="post" onsubmit="return confirm('장바구니에서 해당 상품을 삭제 하시겠습니까?');">
                                     	
                                     		<input type="hidden" id="CART_PRDNUM" name="CART_PRDNUM" value="${list.CART_PRDNUM }">
+                                    		<input type="hidden" id="CART_PRDSIZE" name="CART_PRDSIZE" value="${list.CART_PRDSIZE }">
+                                    		<input type="hidden" id="CUS_ID" name="CUS_ID" value="${list.CUS_ID }">
                                     		<input type="submit" value="삭제" onclick="delete_event();"/>
                                     		
                                     		

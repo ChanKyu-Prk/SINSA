@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import kr.co.sinsa.biz.product.CartService;
 import kr.co.sinsa.biz.product.CartVO;
-import kr.co.sinsa.biz.product.DeleteCartListVO;
 import kr.co.sinsa.biz.product.ProductVO;
 import kr.co.sinsa.biz.product.StockVO;
 import kr.co.sinsa.biz.product.UserCartProductStockVO;
@@ -38,9 +37,9 @@ public class CartServiceImpl implements CartService {
 	}
 	
 	@Override
-	public void deleteCartList(DeleteCartListVO vo) {
+	public void deleteCartList(UserCartProductStockVO userCartProductStockVO) {
 		
-		dao.deleteCartList(vo);
+		dao.deleteCartList(userCartProductStockVO);
 	}
 	
 	@Override

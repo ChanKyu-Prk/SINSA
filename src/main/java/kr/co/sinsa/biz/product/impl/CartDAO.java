@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import kr.co.sinsa.biz.product.CartVO;
-import kr.co.sinsa.biz.product.DeleteCartListVO;
 import kr.co.sinsa.biz.product.ProductVO;
 import kr.co.sinsa.biz.product.StockVO;
 import kr.co.sinsa.biz.product.UserCartProductStockVO;
@@ -68,9 +67,9 @@ public class CartDAO {
 		return cartStockList;
 	}
 
-	public void deleteCartList(DeleteCartListVO vo) {
+	public void deleteCartList(UserCartProductStockVO userCartProductStockVO) {
 
-		SST.delete("CartService.deleteCartList", vo);
+		SST.delete("CartService.deleteCartList", userCartProductStockVO);
 	}
 	
 	public void deleteAll(UserCartProductStockVO vo) {
