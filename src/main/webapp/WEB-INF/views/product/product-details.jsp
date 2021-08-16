@@ -228,6 +228,7 @@ input[type=number] {
 						<div class="product__details__price">
 							<c:if test="${prdInfo.PRD_DISRATE == 0}">
 								<c:set var="finalPrice" value="${prdInfo.PRD_PRICE}"/>
+								<span class="digits">${finalPrice}원</span>
 							</c:if>
 							<c:if test="${prdInfo.PRD_DISRATE != 0}">
 								<c:set var="finalPriceOrg" 
@@ -235,9 +236,9 @@ input[type=number] {
 		  						/>
 		  						<c:set var="finalPrice" value="${fn:substringBefore(finalPriceOrg, '.')}" />
 		  						<span class="digits discntNum">${prdInfo.PRD_PRICE}원</span>
-							</c:if>
 							<span class="digits">${finalPrice}원</span>
 							<span class="disRateNum">[${prdInfo.PRD_DISRATE}%]</span>
+							</c:if>
 						</div>
 						<div id="priceContainer">
 							<div id="sizeCon" class="product__details__size">
@@ -282,7 +283,7 @@ input[type=number] {
 								}).get();
 // 								alert("prdCode : " + prdCode + "/prdSizes : " + prdSizes + "/prdAmounts : " + prdAmounts);
 								for(var i=0; i<prdAmounts.length; i++){
-									alert(prdCode +"/"+prdSizes[i]+"/"+ prdAmounts[i]);
+									alert(prdCode +"|"+prdSizes[i]+"|"+ prdAmounts[i]);
 								}
 							});
 						</script>
