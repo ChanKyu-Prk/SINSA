@@ -126,12 +126,23 @@ public class CartController {
 	
 	
 	@RequestMapping(value="/updatecart.do", method=RequestMethod.POST)
-	public String updateSize(UserCartProductStockVO userCartProductStockVO, Model model, HttpSession session) {
+	public String updateCount(UserCartProductStockVO userCartProductStockVO, Model model, HttpSession session) {
 		UserVO user = (UserVO)session.getAttribute("user");
 		userCartProductStockVO.setCUS_ID(user.getCUS_ID());
 		System.out.println(userCartProductStockVO);
 		
 		cartService.updateCartProductCount(userCartProductStockVO);
+
+		return "redirect:/cart.do";
+	}
+	
+	@RequestMapping(value="/updatesize.do", method=RequestMethod.POST)
+	public String updateSize(UserCartProductStockVO userCartProductStockVO, Model model, HttpSession session) {
+		UserVO user = (UserVO)session.getAttribute("user");
+		userCartProductStockVO.setCUS_ID(user.getCUS_ID());
+		System.out.println(userCartProductStockVO);
+		
+		cartService.updateSize(userCartProductStockVO);
 
 		return "redirect:/cart.do";
 	}
