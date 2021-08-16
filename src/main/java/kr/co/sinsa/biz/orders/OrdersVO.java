@@ -8,6 +8,7 @@ private String ORDER_CUSID;
 private String ORDER_PRDCODE;
 private String ORDER_PRDNAME;
 private String ORDER_PRDSIZE;
+private int ORDER_AMOUNT;
 private String ORDER_RECEIVER;
 private String ORDER_TEL;
 private String ORDER_ADDR;
@@ -45,6 +46,12 @@ public String getORDER_PRDSIZE() {
 }
 public void setORDER_PRDSIZE(String oRDER_PRDSIZE) {
 	ORDER_PRDSIZE = oRDER_PRDSIZE;
+}
+public int getORDER_AMOUNT() {
+	return ORDER_AMOUNT;
+}
+public void setORDER_AMOUNT(int oRDER_AMOUNT) {
+	ORDER_AMOUNT = oRDER_AMOUNT;
 }
 public String getORDER_RECEIVER() {
 	return ORDER_RECEIVER;
