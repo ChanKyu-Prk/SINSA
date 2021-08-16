@@ -214,7 +214,7 @@ input[type=number] {
 						<p class="brand_name">
 							${prdInfo.PRD_BRAND} <span><i class="fa fa-angle-right"></i></span>
 						</p>
-						<h3 class="mb-1">${prdInfo.PRD_NAME}<span class="ml-1 font-weight-normal">${prdInfo.PRD_CODE}</span></h3>
+						<h3 class="mb-1">${prdInfo.PRD_NAME}<span class="ml-1 font-weight-normal prdCode">${prdInfo.PRD_CODE}</span></h3>
 						<div class="product__details__rating">
 							<i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
 								class="fa fa-star"></i> <i class="fa fa-star"></i> <i
@@ -269,7 +269,23 @@ input[type=number] {
 								<span class="totalPriceCon-num digits">0</span><span class="ml-2">원</span>
 							</div>
 						</div>
-						<a href="#" id= "btnBuy" class="primary-btn col-lg-12 text-center">바로구매</a>
+						<button type="button" id= "btnBuy" class="primary-btn col-lg-12 text-center">바로구매</button>
+						<script type="text/javascript">
+							$("#btnBuy").click(function(){
+								var prdCode = $(".prdCode").text();
+// 								var prdSizes = $(".qty-size").text();
+								var prdSizes = $(".qty-size").map(function() {
+								    return $(this).text();
+								}).get();
+								var prdAmounts = $('.amount').map(function() {
+								    return this.value;
+								}).get();
+// 								alert("prdCode : " + prdCode + "/prdSizes : " + prdSizes + "/prdAmounts : " + prdAmounts);
+								for(var i=0; i<prdAmounts.length; i++){
+									alert(prdCode +"/"+prdSizes[i]+"/"+ prdAmounts[i]);
+								}
+							});
+						</script>
 						<div id="jjimNCart" class="row col-lg-12 mx-auto px-0">
 							<a href="#" id="btnJjim"
 								class="primary-btn shopping-icon text-center col-lg-10">장바구니</a>
@@ -365,6 +381,7 @@ input[type=number] {
 						function() {
 							var totalPrice = 0;
 							var singlePrice = 0;
+							var prdListNum = 0;
 							// prepend list on size click
 							numberWithDigits();	
 							$(".product_size")
@@ -378,7 +395,7 @@ input[type=number] {
 														+ listNum.trim()
 														+ "'>"
 														+ clickedSize
-														+ "</span></div><div class='p-2'><div class='qty-countCon'><span class='qty-button qty-minus'>–</span><input type='number' class='amount' value='1' min='1' name='"
+														+ "</span></div><div class='p-2'><div class='qty-countCon'><span class='qty-button qty-minus'>–</span><input type='number' class='amount' value='1' min='1' name='ORDER_AMOUNT' data-opt='"
 														+ listNum.trim()
 														+ "'><span class='qty-button qty-plus'>+</span></div></div><div class='p-2'><span class='qty-totalPrice mr-1 digits' data-org-price='${finalPrice}' data-stockName='"
 														+ listNum.trim()
@@ -392,7 +409,7 @@ input[type=number] {
 															.parents(
 																	"#priceContainer")
 															.find(
-																	".amount[name="
+																	".amount[data-opt="
 																			+ listNum
 																			+ "]");
 													isDup.val(parseInt(isDup
@@ -500,7 +517,7 @@ input[type=number] {
 												".qty-totalPrice").attr(
 												'data-stockname',
 												$(this).siblings(".amount")
-														.attr('name')).text(
+														.data('opt')).text(
 												singlePrice);
 										calc();
 										numberWithDigits();
