@@ -53,4 +53,10 @@ public class CartServiceImpl implements CartService {
 		
 		dao.updateCartProductCount(vo);
 	}
+	
+	@Override
+	public void updateSize(UserCartProductStockVO vo) {
+		
+		dao.updateSize(vo);
+	}
 }

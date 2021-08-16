@@ -24,7 +24,11 @@
 	</delete>
 	
 	<update id="updateCartProductCount" parameterType="kr.co.sinsa.biz.product.UserCartProductStockVO">
-		update CART set CART_PRDCOUNT=#{CART_PRDCOUNT} where CART_CUSID=#{CUS_ID} and CART_PRDNUM=#{CART_PRDNUM} and CART_PRDSIZE=#{CART_PRDSIZE}
+		update CART set CART_PRDCOUNT=#{CART_PRDCOUNT} where CART_CUSID=#{CUS_ID} and CART_NUM=#{CART_NUM}
+	</update>
+	
+	<update id="updateSize" parameterType="kr.co.sinsa.biz.product.UserCartProductStockVO">
+		update CART set CART_PRDSIZE=#{CART_PRDSIZE} where CART_CUSID=#{CUS_ID} and CART_NUM=#{CART_NUM}
 	</update>
 	
 </mapper>

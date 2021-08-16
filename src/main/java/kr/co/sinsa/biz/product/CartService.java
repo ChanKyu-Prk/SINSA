@@ -17,4 +17,6 @@ public interface CartService {
 	public void deleteAll(UserCartProductStockVO vo);
 	
 	public void updateCartProductCount(UserCartProductStockVO vo);
+
+	public void updateSize(UserCartProductStockVO vo);
 }
