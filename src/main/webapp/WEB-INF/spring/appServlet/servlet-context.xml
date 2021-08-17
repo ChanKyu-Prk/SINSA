@@ -58,6 +58,9 @@
        <beans:property name="defaultEncoding" value="UTF-8" />
    </beans:bean>
 
+<!-- NaverLoginBO Class에 대한 Bean설정 추가 --> 
+<beans:bean id="naverLoginBO" class="kr.co.sinsa.view.user.NaverLoginBO" />
+
 
 
 </beans:beans>

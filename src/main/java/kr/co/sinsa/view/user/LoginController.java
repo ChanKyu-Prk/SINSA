@@ -14,12 +14,21 @@ import kr.co.sinsa.biz.user.UserVO;
 
 @Controller
 public class LoginController {
+	/* NaverLoginBO */
+	private NaverLoginBO naverLoginBO;
 
 	@Autowired
+	private void setNaverLoginBO(NaverLoginBO naverLoginBO) {
+		this.naverLoginBO = naverLoginBO;
+	}
+	@Autowired
 	private LoginService loginService;
-
+	
 	@RequestMapping(value="/login.do", method=RequestMethod.GET)
-	public String loginView(CustomerVO customerVO) {
+	public String loginView(CustomerVO customerVO, Model model, HttpSession session) {
+		String naverAuthUrl = naverLoginBO.getAuthorizationUrl(session); 
+		System.out.println("네이버:" + naverAuthUrl); 
+		model.addAttribute("url", naverAuthUrl); 
 		return "login";
 	}
 

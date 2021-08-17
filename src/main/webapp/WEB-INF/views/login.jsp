@@ -64,7 +64,11 @@
 
                 <span class="text-center my-3 d-block">or</span>
                 
-                
+                <div id="naver_id_login" style="text-align: center">
+					<a href="${url}"> <img width="223"
+						src="https://developers.naver.com/doc/review_201802/CK_bEFnWMeEBjXpQ5o8N_20180202_7aot50.png" />
+					</a>
+				</div>
                 <div class="">
                 <a href="#" class="btn btn-block py-2 btn-facebook">
                   <span class="icon-facebook mr-3"></span> Login with facebook
