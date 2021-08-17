@@ -81,4 +81,9 @@ public class CartDAO {
 
 		SST.update("CartService.updateCartProductCount", vo);
 	}
+	
+	public void updateSize(UserCartProductStockVO vo) {
+
+		SST.update("CartService.updateSize", vo);
+	}
 }

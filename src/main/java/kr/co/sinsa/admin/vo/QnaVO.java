@@ -6,7 +6,7 @@ public class QnaVO {
 
 	private int qna_num;
 	private int prd_num;
-	private int qna_rock;
+	private int qna_lock;
 	private String qna_cusid;
 	private String qna_title;
 	private String qna_content;
@@ -26,11 +26,11 @@ public class QnaVO {
 	public void setPrd_num(int prd_num) {
 		this.prd_num = prd_num;
 	}
-	public int getQna_rock() {
-		return qna_rock;
+	public int getQna_lock() {
+		return qna_lock;
 	}
-	public void setQna_rock(int qna_rock) {
-		this.qna_rock = qna_rock;
+	public void setQna_lock(int qna_lock) {
+		this.qna_lock = qna_lock;
 	}
 	public String getQna_cusid() {
 		return qna_cusid;

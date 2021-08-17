@@ -34,5 +34,20 @@ public class QnaServiceImpl implements QnaService{
 	public int qna_all_search_count(Map<String, Object> map) {
 		return dao.qna_all_search_count(map);
 	}
+	
+	@Override
+	public QnaVO qna_info(int qna_num) {
+		return dao.qna_info(qna_num);
+	}
+	
+	@Override
+	public void qna_update(QnaVO vo) {
+		dao.qna_update(vo);
+	}
+	
+	@Override
+	public void qna_delete(int qna_num) {
+		dao.qna_delete(qna_num);
+	}
 
 }

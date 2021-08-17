@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+					"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="SNSLogin"><!-- 클래스명 -->
+
+	<select id="naverIDCheck" resultType="int">
+		select cusnum 
+		from SNS_INFO
+		where naverID = #{value}
+	</select>
+	
+	<select id="emailCheck"
+	resultType="int">
+	select count(*) from CUSTOMER where CUS_EMAIL = #{value}
+	</select>
+
+	<select id="getUser" resultType="kr.co.sinsa.biz.user.UserVO">
+		select CUS_ID, CUS_NAME 
+		from CUSTOMER 
+		where CUS_NUM=#{value}
+	</select>
+	
+	
+	<insert id="snsJoin"
+	parameterType="kr.co.sinsa.biz.customer.CustomerVO">
+	INSERT INTO CUSTOMER(CUS_ID, CUS_PWD, CUS_NAME, CUS_GENDER, CUS_EMAIL, CUS_ADDR, CUS_TEL, CUS_BIRTH ) 
+	VALUES(#{CUS_ID}, #{CUS_PWD}, #{CUS_NAME}, #{CUS_GENDER}, #{CUS_EMAIL}, #{CUS_ADDR}, #{CUS_TEL}, #{CUS_BIRTH})
+	</insert>
+	
+	<select id="getCusNum" resultType="int">
+	select CUS_NUM
+	from customer
+	where CUS_ID = #{value};
+	</select>
+	
+	<insert id="insertSnsInfo"
+	parameterType="Map">
+	INSERT INTO SNS_INFO(CUSNUM, naverID) 
+	VALUES(#{CUSNUM},#{naverID})
+	</insert>
+	
+</mapper>

@@ -8,6 +8,7 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 
 import kr.co.sinsa.admin.dao.StockDAO;
+import kr.co.sinsa.admin.vo.StockLogVO;
 import kr.co.sinsa.admin.vo.StockVO;
 
 @Service
@@ -62,4 +63,13 @@ public class StockServiceImpl implements StockService {
 		dao.stock_delete(stock_prdcode);
 	}
 
+	@Override
+	public List<StockLogVO> stock_log(Map<String, Object> map) {
+		return dao.stock_log(map);
+	}
+	
+	@Override
+	public int stock_log_count(Map<String, Object> map) {
+		return dao.stock_log_count(map);
+	}
 }

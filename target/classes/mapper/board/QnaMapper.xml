@@ -22,6 +22,25 @@
 		 qna_title like concat('%',#{searchWord},'%') or
 		 qna_content like concat('%',#{searchWord},'%')
 	</select>
+	
+	
+	<select id="qna_info" resultType="kr.co.sinsa.admin.vo.QnaVO">
+		select * from qna where qna_num=#{qna_num}
+	
+
+	</select>
+	
+	
+	<update id="qna_update" parameterType="kr.co.sinsa.admin.vo.QnaVO">
+	update qna set prd_num=#{prd_num}, qna_lock=#{qna_lock}, qna_cusid=#{qna_cusid}, qna_title=#{qna_title}, 
+	qna_content=#{qna_content}, qna_answer=#{qna_answer} where qna_num=#{qna_num}
+	</update>
+	
+	
+	<delete id="qna_delete">
+		delete from qna where qna_num=#{qna_num}
+
+	</delete>
 
 	
 

@@ -124,11 +124,39 @@ public class StockVO {
 		this.stock_290 = stock_290;
 	}
 	public int getTotal() {
-		return total;
+		return stock_220+
+				stock_225+
+				stock_230+
+				stock_235+
+				stock_240+
+				stock_245+
+				stock_250+
+				stock_255+
+				stock_260+
+				stock_265+
+				stock_270+
+				stock_275+
+				stock_280+
+				stock_285+
+				stock_290;
 	}
 	public void setTotal(int total) {
-		this.total = total;
+		this.total =
+				stock_220+
+				stock_225+
+				stock_230+
+				stock_235+
+				stock_240+
+				stock_245+
+				stock_250+
+				stock_255+
+				stock_260+
+				stock_265+
+				stock_270+
+				stock_275+
+				stock_280+
+				stock_285+
+				stock_290;
 	}
-	
 	
 }

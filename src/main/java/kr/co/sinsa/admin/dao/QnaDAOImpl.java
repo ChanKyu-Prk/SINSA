@@ -30,5 +30,17 @@ public class QnaDAOImpl implements QnaDAO{
 	public int qna_all_search_count(Map<String, Object> map) {
 		return sqlSession.selectOne("QnaDAO.qna_all_search_count", map);
 	}
+	
+	public QnaVO qna_info(int qna_num) {
+		return sqlSession.selectOne("QnaDAO.qna_info", qna_num);
+	}
+	
+	public void qna_update(QnaVO vo) {
+		sqlSession.update("QnaDAO.qna_update", vo);
+	}
+	
+	public void qna_delete(int qna_num) {
+		sqlSession.delete("QnaDAO.qna_delete", qna_num);
+	}
 
 }

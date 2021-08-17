@@ -86,14 +86,18 @@ table {
    <br><br>
 
 
-	<div class="container-fluid">
+	<div class="container-fluid" style="padding: 0 30px;">
+	<center><h2>고객 관리</h2></center>
 	<div class="row">
+	
 			<table style="border: 0px">
 			<tr>
+			<!-- <td align="right">
+			
+			</td> -->
 			<td align="right">
-			<button type="button" class="btn btn-outline-primary btn-sm" onclick="location.href='customerInputForm'">신1규 회원 등록</button>
-			</td>
-			<td align="right">
+			<button type="button" class="btn btn-outline-primary btn-sm" onclick="location.href='customerInputForm'">신규 회원 등록</button>
+			&nbsp;
 			<input type="button" class="btn btn-primary btn-sm"	onclick="customerModify()" value="회원정보 수정" />
 			&nbsp;
 			<input type="button" class="btn btn-danger btn-sm" onclick="javascript:customerDelete()" value="회원 정보 삭제" />
@@ -103,7 +107,6 @@ table {
 			<br><br>
 			<div class="col-lg-12" id="ex1_Result1" ></div>
 			<div class="col-lg-12" id="ex1_Result2" ></div> 
-	<h2>신사 관리</h2>
 	<table id="customerlist" class="table table-hover"
 				style="text-align: center; border: 0px solid #dddddd">
 		<thead>
@@ -153,6 +156,7 @@ table {
 			</c:choose>
 		</tbody>
 	</table>
+	<div align="center">
 <ul class="pagination">
 			<c:choose>
 				<c:when test="${pageInfo.getPage()<=1}">
@@ -223,11 +227,7 @@ table {
 				</div>
 				<div class="form-group col-md-2"></div>
 			</div>
-			
 		</form>
-	<!-- <p><a href="customerInputForm">신규 회원 등록</a></p></div> -->
-	
-	
-</body>
+		</div>
+	</body>
 </html>
-

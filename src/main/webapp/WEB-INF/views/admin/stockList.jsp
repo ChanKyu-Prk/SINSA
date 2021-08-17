@@ -17,10 +17,7 @@
 <link href="https://cdn.datatables.net/1.10.25/css/dataTables.bootstrap4.min.css" rel="stylesheet"> -->
 
 <style>
-body {
-	font-size: 11pt;
-	color: teal;
-}
+
 
 div {
 	margin: 0 auto;
@@ -188,7 +185,7 @@ function prdDelete() {
 							<td class="size">${ e.stock_280 }</td>
 							<td class="size">${ e.stock_285 }</td>
 							<td class="size">${ e.stock_290 }</td>
-							<td id="row_total">${ e.stock_220+e.stock_225+e.stock_230+e.stock_235+e.stock_240+e.stock_245+e.stock_250+e.stock_255+e.stock_260+e.stock_265+e.stock_270+e.stock_275+e.stock_280+e.stock_285+e.stock_290 }</td>
+							<td id="row_total">${ e.total }</td>
 						</tr>
 					</c:forEach>
 				</tbody>

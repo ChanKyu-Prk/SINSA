@@ -1,6 +1,5 @@
 package kr.co.sinsa.admin.dao;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -9,6 +8,7 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import kr.co.sinsa.admin.vo.StockLogVO;
 import kr.co.sinsa.admin.vo.StockVO;
 
 @Repository
@@ -54,4 +54,13 @@ public class StockDAOImpl implements StockDAO {
 	public List<StockVO> stock_list() {
 		return sqlSession.selectList("StockDAO.stock_list");
 	}
+	
+	public List<StockLogVO> stock_log(Map<String, Object> map) {
+		return sqlSession.selectList("StockDAO.stock_log", map);
+	}
+	
+	public int stock_log_count(Map<String, Object> map) {
+		return sqlSession.selectOne("StockDAO.stock_log_count", map);
+	}
+	
 }
