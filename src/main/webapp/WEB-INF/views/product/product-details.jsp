@@ -286,20 +286,21 @@ input[type=number] {
 // 									alert(prdCode +"|"+prdSizes[i]+"|"+ prdAmounts[i]);
 // 								}
 								
-								//OrdersVO 형태로 데이터 생성
+								//JSON 형태로 데이터 생성
 								var data = {};
+								var itemList = [];
+								console.log("length : " + ORDER_AMOUNT.length);
 								for(var i=0; i<ORDER_AMOUNT.length; i++){
+									data = {};
 									data["ORDER_PRDCODE"] = ORDER_PRDCODE;
 									data["ORDER_PRDSIZE"] = ORDER_PRDSIZE[i];
 									data["ORDER_AMOUNT"] = ORDER_AMOUNT[i];
-
+									itemList.unshift(data);
 								}
-								
-								alert(data);
 									  $.ajax({
 									   url : "/direct/checkout",
 									   type : "POST",
-									   data : JSON.stringify(data),
+									   data : JSON.stringify(itemList),
 									    headers: {
 									      'Accept': 'application/json',
 									      'Content-Type': 'application/json'

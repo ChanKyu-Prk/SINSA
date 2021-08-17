@@ -1,6 +1,7 @@
 package kr.co.sinsa.view.orders;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -48,7 +49,7 @@ public class OrdersController {
 	
 	// 
 	@RequestMapping(value = "/direct/checkout", method=RequestMethod.POST,produces = "application/json;charset=UTF-8")
-    public String details(@RequestBody Map<String, Object> map, Model model) {
+    public String details(@RequestBody List<Object> map, Model model) {
 		
 		System.out.println("ORDERS : " + map);
 //        String prdCode = orders.getORDER_PRDCODE();
