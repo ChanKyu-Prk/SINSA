@@ -3,6 +3,7 @@ package kr.co.sinsa.admin.dao;
 import java.util.List;
 import java.util.Map;
 
+import kr.co.sinsa.admin.vo.StockLogVO;
 import kr.co.sinsa.admin.vo.StockVO;
 
 public interface StockDAO {
@@ -15,5 +16,7 @@ public interface StockDAO {
 	public void stock_insert(StockVO vo);
 	public void stock_update(StockVO vo);
 	public void stock_delete(String stock_procode);
+	public List<StockLogVO> stock_log(Map<String, Object> map);
+	public int stock_log_count(Map<String, Object> map);
 	
 }

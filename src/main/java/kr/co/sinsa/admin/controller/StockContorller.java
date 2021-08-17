@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import kr.co.sinsa.admin.service.StockService;
-import kr.co.sinsa.admin.vo.PrdVO;
+import kr.co.sinsa.admin.vo.StockLogVO;
 import kr.co.sinsa.admin.vo.StockVO;
 import kr.co.sinsa.biz.product.PageInfo;
 
@@ -178,7 +178,68 @@ public class StockContorller {
 		
 		return "admin/stockAddForm";
 	}	
-			
+
+	@RequestMapping("/admin/stockLog")
+	public String getStockLog(Model model, @RequestParam(value = "page", required = false) String pages,
+			@RequestParam(value = "sdate", required = false) String sdate,
+			@RequestParam(value = "edate", required = false) String edate,
+			@RequestParam(value = "searchWord", required = false) String searchWord) {
+		
+
+		int page = 1;
+		int limit = 10;
+		int listCount;
+		int startPage;
+		int endPage;
+		int maxPage;
+		
+		
+		String fieldName = "code";
+		
+		if(searchWord == null || searchWord.equals("")) {
+			searchWord = "";
+		}
+		if(sdate == null || sdate.equals("")) {
+			sdate = "1900-01-01";
+		}
+		if(edate == null || edate.equals("")) {
+			edate = "2099-01-01";
+		}
+		if(pages !=null){
+			page = Integer.parseInt(pages);
+		}
+
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("fieldName", fieldName);
+		map.put("searchWord", searchWord);
+		map.put("sdate", sdate);
+		map.put("edate", edate);
+		map.put("page", (page - 1) * 10);
+		
+
+		listCount = stockService.stock_log_count(map);
+		List<StockLogVO> list = stockService.stock_log(map);
+		model.addAttribute("stockLog", list);
+		
+
+		maxPage = (int) ((double) listCount / limit + 0.95);
+		startPage = (((int) ((double) page / 5 + 0.8)) - 1) * 5 + 1;
+		endPage = startPage + 4;
+		if (endPage > maxPage) {
+			endPage = maxPage;
+		}
+		PageInfo pageInfo = new PageInfo();
+		pageInfo.setListCount(listCount);
+		pageInfo.setEndPage(endPage);
+		pageInfo.setStartPage(startPage);
+		pageInfo.setMaxPage(maxPage);
+		pageInfo.setPage(page);
+		model.addAttribute("pageInfo", pageInfo);
+
+		return "admin/stockUpdateLog";		
+	}
+	
+	
 	@RequestMapping(value = "/admin/stockInsert", method = RequestMethod.POST)
 	public String stockInsert(StockVO vo) {
 		stockService.stock_insert(vo);
