@@ -101,8 +101,8 @@
                         </div>
                         <select class="gender_input col-3" name="CUS_GENDER">
                            <option value="" disabled selected id="Ggrey">성별</option>
-                           <option value="남성">남성</option>
-                           <option value="여성">여성</option>
+                           <option value="남자">남자</option>
+                           <option value="여자">여자</option>
                         </select>
                      </div>
 

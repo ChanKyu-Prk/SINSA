@@ -2,7 +2,10 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>    
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%
+String getreferer = request.getHeader("Referer");
+%>    
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,41 +21,37 @@ div {
 	margin: 0 auto;
 }
 </style>
+
 </head>
 <body>
 <jsp:include page="adminHeader.jsp" flush="true" />
-   <br><br>
-	<nav>
-		SINSA관리자페이지
-		<a href="prdList">상품관리</a>
-		<a href="stockList">재고관리</a>
-		<a href="customerList">고객관리</a>
-		<a href="#">리뷰관리</a>
-		<a href="#">문의관리</a>
-		<a href="#">공지사항</a>
-		<a href="#">로그아웃</a>
-	</nav>
-	<div>
-		<form:form method="post" action="customerUpdate" modelAttribute="customerInfo" >
+   <br>
+   <br>
+   <center><h2>고객정보수정</h2></center>
+	<div class="container">
+			<form:form method="post" action="customerUpdate" modelAttribute="customerInfo" >
+				<input type="hidden" id="referer" name="referer" value="<%= getreferer %>" />
 			<form:hidden path="CUS_NUM" /> 
-			<table>
+			- <table id="qnalist" class="table table-bordered"
+					style="text-align: center; border: 0px solid #dddddd">
 				<tr>
 					<td>아이디 :</td>
-					<td><form:input path="CUS_ID" /></td>
+					<td><form:input path="CUS_ID" class="form-control" /></td>
+					<td rowspan="10"></td>
 				</tr>
 				<tr>
 					<td>비밀번호 :</td>
-					<td><form:input path="CUS_PWD" /></td>
+					<td><form:input type="password" path="CUS_PWD" class="form-control" readonly/></td>
 				</tr>
 				<tr>
 					<td>이름 :</td>
-					<td><form:input path="CUS_NAME" /></td>
+					<td><form:input path="CUS_NAME" class="form-control" /></td>
 					
 				</tr>
 				<tr>
 					<td>성별 :</td>
 					<td>
-						<form:select path="CUS_GENDER">
+						<form:select path="CUS_GENDER" class="form-control">
         					<form:option value="남자"/>
         					<form:option value="여자"/>
 						</form:select>
@@ -60,83 +59,36 @@ div {
 					</tr>
 				<tr>
 					<td>이메일 :</td>
-					<td><form:input path="CUS_EMAIL" /></td>
+					<td><form:input path="CUS_EMAIL" class="form-control" 
+					/></td>
 				</tr>
 				<tr>
 					<td>주소 :</td>
-					<td><form:input path="CUS_ADDR" /></td>
+					<td><form:input path="CUS_ADDR" class="form-control" /></td>
 				</tr>
 				<tr>
 					<td>전화번호 :</td>
-					<td><form:input path="CUS_TEL" /></td>
+					<td><form:input path="CUS_TEL" class="form-control" /></td>
 					</tr>
 				<tr>
 					<td>생년월일 :</td>
-					<td><form:input path="CUS_BIRTH" /></td>
-					</tr>
-				<tr>
-					<td>기본배송지 :</td>
-					<td><form:input path="CUS_DELIV_ADDR" /></td>
-					</tr>
-				<tr>
-					<td>포인트 :</td>
-					<td><form:input path="CUS_POINT" /></td>
+					<td><form:input path="CUS_BIRTH" class="form-control" /></td>
 					</tr>
 				<%-- <tr>
-					<td>가입날짜 :</td>
-					<td><form:input path="CUS_REGDATE" /></td>
+					<td>기본배송지 :</td>
+					<td><form:input path="CUS_DELIV_ADDR" class="form-control" /></td>
 					</tr> --%>
-				
-				
-				
-				
-				
-				 <tr>
-               <td colspan="2"><input type="submit" value="변경사항저장"></td>
-            </tr>
-            <tr>
-					<td colspan="2"><a href="customerList">회원리스트</a></td>
-				</tr>
-
-			</table>
+				<tr>
+					<td>포인트 :</td>
+					<td><form:input path="CUS_POINT" class="form-control" /></td>
+					</tr>
+				</table>
+				<div align="center">
+					<input type="submit" class="btn btn-primary" value="변경사항저장">
+					<button class="btn btn-outline-primary" onclick="history.go(-1);">취소</button>
+					<br><br>
+				</div>
 		</form:form>
-	</div>
+		</div>
 </body>
 </html>
-<%-- <style>
-body {
-	font-size: 11pt;
-	color: teal;
-}
-
-div {
-	margin: 0 auto;
-}
-</style>
-</head>
-<body>
-	<div>
-		<form:form method="post" action="customerUpdate" modelAttribute="customerInfo">
-			<form:hidden path="CUS_NUM" />
-	순번 ${customerInfo.CUS_NUM } <br>
-	아이디 ${customerInfo.CUS_ID } <br>
-	이름${customerInfo.CUS_NAME }<br>
-	성별 ${customerInfo.CUS_GENDER }<br>
-	이메일${customerInfo.CUS_EMAIL } <br>
-	주소${customerInfo.CUS_ADDR }<br>
-	전화번호${customerInfo.CUS_TEL } <br>
-	생년월일${customerInfo.CUS_NUM }<br>
-	기본 배송지${customerInfo.CUS_DELIV_ADDR }<br>
-	포인트${customerInfo.CUS_POINT }<br>
-	가입날짜 ${customerInfo.CUS_REGDATE }
-	
-			<p>
-				<input type="submit" value="변경사항적용">
-			</p>
-			<p>
-				<a href="customerList">회원정보 리스트</a>
-			</p>
-		</form:form>
-	</div>
-</body>
-</html> --%>
