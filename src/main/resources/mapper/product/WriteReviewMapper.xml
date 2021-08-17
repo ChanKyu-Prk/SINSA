@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ReviewService">
+	
+	<select id="getProductVO" parameterType="String" resultType="kr.co.sinsa.biz.product.ProductVO">
+		select * from PRODUCT where PRD_CODE=#{PRD_CODE}
+	</select>
+	
+	<select id="getReviewList" parameterType="String" resultType="kr.co.sinsa.biz.customer.ReviewVO">
+		select * from REVIEW where REV_PRDCODE =#{PRD_CODE}
+	</select>
+	
+</mapper>

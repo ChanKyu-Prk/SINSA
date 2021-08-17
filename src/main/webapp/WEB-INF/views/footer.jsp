@@ -96,7 +96,7 @@
 						<div class="footer__copyright__text">
 							<p>
 								<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-								Copyright &copy; SINSA. All rights reserved | made with by Team
+								Copyright &copy; Team SINSA 2021. All rights reserved
 								SINSA (박찬규, 정인호, 권혁재, 이보배, 정혁희, 한다연)
 							</p>
 						</div>
@@ -105,6 +105,8 @@
 				</div>
 			</div>
 		</div>
+		
+		
 	</footer>
 	<!-- Footer Section End -->
 
