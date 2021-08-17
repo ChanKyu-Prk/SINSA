@@ -1,9 +1,11 @@
 package kr.co.sinsa.admin.vo;
 
-public class StockVO {
+import java.sql.Date;
+
+public class StockLogVO {
 	
-	String stock_prdcode;
-	String prd_name;
+	Date inputdate;
+	String code;
 	int stock_220;
 	int stock_225;
 	int stock_230;
@@ -19,19 +21,19 @@ public class StockVO {
 	int stock_280;
 	int stock_285;
 	int stock_290;
-	int total;
+	int stock_sum;
 	
-	public String getStock_prdcode() {
-		return stock_prdcode;
+	public Date getInputdate() {
+		return inputdate;
 	}
-	public void setStock_prdcode(String stock_prdcode) {
-		this.stock_prdcode = stock_prdcode;
+	public void setInputdate(Date inputdate) {
+		this.inputdate = inputdate;
 	}
-	public String getPrd_name() {
-		return prd_name;
+	public String getCode() {
+		return code;
 	}
-	public void setPrd_name(String prd_name) {
-		this.prd_name = prd_name;
+	public void setCode(String code) {
+		this.code = code;
 	}
 	public int getStock_220() {
 		return stock_220;
@@ -123,40 +125,12 @@ public class StockVO {
 	public void setStock_290(int stock_290) {
 		this.stock_290 = stock_290;
 	}
-	public int getTotal() {
-		return stock_220+
-				stock_225+
-				stock_230+
-				stock_235+
-				stock_240+
-				stock_245+
-				stock_250+
-				stock_255+
-				stock_260+
-				stock_265+
-				stock_270+
-				stock_275+
-				stock_280+
-				stock_285+
-				stock_290;
+	public int getStock_sum() {
+		return stock_sum;
 	}
-	public void setTotal(int total) {
-		this.total =
-				stock_220+
-				stock_225+
-				stock_230+
-				stock_235+
-				stock_240+
-				stock_245+
-				stock_250+
-				stock_255+
-				stock_260+
-				stock_265+
-				stock_270+
-				stock_275+
-				stock_280+
-				stock_285+
-				stock_290;
+	public void setStock_sum(int stock_sum) {
+		this.stock_sum = stock_sum;
 	}
+	
 	
 }

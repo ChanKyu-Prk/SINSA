@@ -9,10 +9,6 @@
 <meta charset="UTF-8">
 <title>prdList</title>
 <style>
-body {
-	font-size: 11pt;
-	color: teal;
-}
 
 div {
 	margin: 0 auto;
@@ -23,88 +19,121 @@ table {
 	border: 1px solid;
 }
 
-input {
-	width: 40px;
+input.form-control {
+	text-align: right;
+}
+
+.code {
+	font-size: 1.3em;
 }
 </style>
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
+<script>
+	function add(total) {
+	    alert("입고 처리되었습니다.");
+	    addform.submit();
+	}
+</script>
 </head>
 <body>
 	<jsp:include page="adminHeader.jsp" flush="true" />
 	<br>
 	<br>
-	<div>
-		<h2>상품 관리</h2>
-		<table>
+	<div class="container-fluid" style="padding: 0 30px;">
+		<div class="row">
+		<h2>상품 입고</h2>
+		<br><br><br>
+		<table id="addstock" class="table table-hover"
+				style="text-align: center; border: 0px solid #dddddd">
 			<thead>
 				<tr>
-					<th>모델</th>
-					<th>220</th>
-					<th>225</th>
-					<th>230</th>
-					<th>235</th>
-					<th>240</th>
-					<th>245</th>
-					<th>250</th>
-					<th>255</th>
-					<th>260</th>
-					<th>265</th>
-					<th>270</th>
-					<th>275</th>
-					<th>280</th>
-					<th>285</th>
-					<th>290</th>
+					<th style="width:150px;">모델</th>
+					<th class="size">220</th>
+					<th class="size">225</th>
+					<th class="size">230</th>
+					<th class="size">235</th>
+					<th class="size">240</th>
+					<th class="size">245</th>
+					<th class="size">250</th>
+					<th class="size">255</th>
+					<th class="size">260</th>
+					<th class="size">265</th>
+					<th class="size">270</th>
+					<th class="size">275</th>
+					<th class="size">280</th>
+					<th class="size">285</th>
+					<th class="size">290</th>
 					<th>합계</th>
-					<th>수량변경</th>
+					<th style="width:120px;">수량변경</th>
 				</tr>
 			</thead>
 			<tbody>
-				<c:forEach var="e" items="${ stockList }">
+				<c:forEach var="e" items="${ stockList }" varStatus="status">
 					<tr>
 						<form:form method="post" action="stockUpdate"
-							modelAttribute="stockInfo">
+							modelAttribute="stockInfo" name="addform">
 							<form:hidden path="stock_prdcode" value="${ e.stock_prdcode }" />
-							<td>${ e.stock_prdcode }</td>
-							<td class="size"><input type=number value="0" min="0"
-								maxlength=3 name="stock_220"></td>
-							<td class="size"><input type=number value="0" min="0"
-								name="stock_225"></td>
-							<td class="size"><input type=number value="0" min="0"
-								name="stock_230"></td>
-							<td class="size"><input type=number value="0" min="0"
-								name="stock_235"></td>
-							<td class="size"><input type=number value="0" min="0"
-								name="stock_240"></td>
-							<td class="size"><input type=number value="0" min="0"
-								name="stock_245"></td>
-							<td class="size"><input type=number value="0" min="0"
-								name="stock_250"></td>
-							<td class="size"><input type=number value="0" min="0"
-								name="stock_255"></td>
-							<td class="size"><input type=number value="0" min="0"
-								name="stock_260"></td>
-							<td class="size"><input type=number value="0" min="0"
-								name="stock_265"></td>
-							<td class="size"><input type=number value="0" min="0"
-								name="stock_270"></td>
-							<td class="size"><input type=number value="0" min="0"
-								name="stock_275"></td>
-							<td class="size"><input type=number value="0" min="0"
-								name="stock_280"></td>
-							<td class="size"><input type=number value="0" min="0"
-								name="stock_285"></td>
-							<td class="size"><input type=number value="0" min="0"
-								name="stock_290"></td>
-							<td id="fn_total"></td>
-							<td><input type="submit" value="입고" /></td>
+							<td class="code">${ e.stock_prdcode }</td>
+							<td><input type=number value="0" min="0" class="form-control"
+								class="stock${status.count} form-control" maxlength=3 name="stock_220" onchange="javascript:sum(${status.count});"></td>
+							<td><input type=number value="0" min="0"
+								class="stock${status.count} form-control" name="stock_225" onchange="javascript:sum(${status.count});"></td>
+							<td><input type=number value="0" min="0"
+								class="stock${status.count} form-control" name="stock_230" onchange="javascript:sum(${status.count});"></td>
+							<td><input type=number value="0" min="0"
+								class="stock${status.count} form-control" name="stock_235" onchange="javascript:sum(${status.count});"></td>
+							<td><input type=number value="0" min="0"
+								class="stock${status.count} form-control" name="stock_240" onchange="javascript:sum(${status.count});"></td>
+							<td><input type=number value="0" min="0"
+								class="stock${status.count} form-control" name="stock_245" onchange="javascript:sum(${status.count});"></td>
+							<td><input type=number value="0" min="0"
+								class="stock${status.count} form-control" name="stock_250" onchange="javascript:sum(${status.count});"></td>
+							<td><input type=number value="0" min="0"
+								class="stock${status.count} form-control" name="stock_255" onchange="javascript:sum(${status.count});"></td>
+							<td><input type=number value="0" min="0"
+								class="stock${status.count} form-control" name="stock_260" onchange="javascript:sum(${status.count});"></td>
+							<td><input type=number value="0" min="0"
+								class="stock${status.count} form-control" name="stock_265" onchange="javascript:sum(${status.count});"></td>
+							<td><input type=number value="0" min="0"
+								class="stock${status.count} form-control" name="stock_270" onchange="javascript:sum(${status.count});"></td>
+							<td><input type=number value="0" min="0"
+								class="stock${status.count} form-control" name="stock_275" onchange="javascript:sum(${status.count});"></td>
+							<td><input type=number value="0" min="0"
+								class="stock${status.count} form-control" name="stock_280" onchange="javascript:sum(${status.count});"></td>
+							<td><input type=number value="0" min="0"
+								class="stock${status.count} form-control" name="stock_285" onchange="javascript:sum(${status.count});"></td>
+							<td><input type=number value="0" min="0"
+								class="stock${status.count} form-control" name="stock_290" onchange="javascript:sum('total'+'${status.count}');"></td>
+							<td><input type=number value="0" min="0" class="form-control"
+								id="total${status.count}" readonly/></td>
+							<td><input type="button" class="btn btn-primary" value="입고" onclick="javascript:add(${e.total});"/></td>
+							
 						</form:form>
 					</tr>
+					
+					<script>
+				    function sum(id) {
+				        
+				        var maxcnt = ${stockList.size()};
+				        for(var i=1; i<maxcnt+1; i++){
+				        	var sum = 0;
+				        	var test = $( '.stock'+i ).get();
+				        	for(var y=0; y<test.length; y++){
+				        		var temp = parseInt(test[y].value);
+				        		sum += temp;
+				        		document.getElementById('total'+i).value = sum;
+				        	}
+				        	
+				        }
+				                                   
+				    }
+					</script>
 				</c:forEach>
 			</tbody>
 		</table>
-		<ul class="pagination">
+<%-- 		<ul class="pagination">
 			<c:choose>
 				<c:when test="${pageInfo.getPage()<=1}">
 					<li class="page-item disabled"><a class="page-link"
@@ -150,11 +179,9 @@ input {
 						href="stockList?page=${pageInfo.getEndPage()+1}&fielaName=${param.fieldName}&searchWord=${param.searchWord}">다음</a></li>
 				</c:otherwise>
 			</c:choose>
-		</ul>
+		</ul> --%>
 
-		<p>
-			<a href="prdInputForm">신규 상품 등록</a>
-		</p>
+	</div>
 	</div>
 </body>
 </html>
