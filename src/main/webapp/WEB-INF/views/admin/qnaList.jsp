@@ -31,6 +31,7 @@ table {
 
 	
 	var no = "";
+	/* var a = ""; */
 	
 	function selectNum(target) {
 	    var tbody = target.parentNode;
@@ -59,7 +60,7 @@ table {
 	
 	function qnaModify() {
 		if (no != "") {
-			location.href = 'qnaEdit?qna_num=' + no;
+			location.href = 'qnaAnswer?qna_num=' + no;
 			
 		} else {
 		  alert('수정할 문의를 선택하십시오.');
@@ -75,18 +76,26 @@ table {
 			  alert('삭제할 문의를 선택하십시오.');
 			}
 	}
+	
+	/* function answerck(){
+		if(a == null){
+			return "답변미완료";
+		}else{
+			return "답변완료";
+		}
+	} */
 
 </script>
 <body>
 <jsp:include page="adminHeader.jsp" flush="true" />
 	<br><br>
-	<div class="container-fluid">
-	<div class="e">
+	<div class="container-fluid" style="padding: 0 30px;">
+	<center><h2>문의사항</h2></center>
+	<div class="row">
 			<table style="border: 0px">
 			<tr>
-			
 			<td align="right">
-			<input type="button" class="btn btn-primary btn-sm"	onclick="qnaModify()" value="답변수정" />
+			<input type="button" class="btn btn-primary btn-sm"	onclick="qnaModify()" value="답변하기" />
 			&nbsp;
 			<input type="button" class="btn btn-danger btn-sm" onclick="javascript:qnaDelete()" value="문의삭제" />
 			&nbsp;
@@ -97,14 +106,16 @@ table {
 			<br><br>
 			<div class="col-lg-12" id="ex1_Result1" ></div>
 			<div class="col-lg-12" id="ex1_Result2" ></div> 
-	<h2>문의사항</h2>
+	
 	
 	<table id="qnalist" class="table table-hover"
 				style="text-align: center; border: 0px solid #dddddd">
 		<thead>
 			<tr>
+			
 				<th>번호</th>
 				<th>상품코드</th>
+				<th>공개여부</th>
 				<th>고객아이디</th>
 				<th>제목</th>
 				<!-- <th>내용</th> -->
@@ -124,12 +135,14 @@ table {
 				<tr onclick="javascript:selectNum(this);">
 					<td>${ e.qna_num }</td>
 					<td>${ e.prd_num }</td>
+					<td>${ e.qna_lock }</td>
 					<td>${ e.qna_cusid }</td>
 					<td>${ e.qna_title }</td>
+					
 					<%-- <td>${ e.qna_content }</td> --%>
 					<td>${ e.qna_answer }</td>
 					<td>
-			<fmt:formatDate value="${e.qna_regdate}" pattern="yyyy-MM-dd" />
+			<fmt:formatDate value="${e.qna_regdate}" pattern="YYYY-MM-dd" />
 			</td>
 					
 					
@@ -139,12 +152,11 @@ table {
 			</c:choose>
 		</tbody>
 	</table>
-	<input type="button" onclick="location.href='qnaInputForm'" value="글쓰기" />
-			<ul class="pagination">
+	<div align="center">
+<ul class="pagination">
 			<c:choose>
 				<c:when test="${pageInfo.getPage()<=1}">
-					<li class="page-item disabled"><a class="page-link"
-						aria-disabled="true">이전</a></li>
+					<li class="page-item disabled"><a class="page-link" aria-disabled="true">이전</a></li>
 				</c:when>
 				<c:when test="${pageInfo.getStartPage()==1}">
 					<li class="page-item"><a class="page-link"
@@ -187,7 +199,36 @@ table {
 				</c:otherwise>
 			</c:choose>
 		</ul>
+	</div>
+		</div>
+		<br>
+		<br>
 		<form>
+			<div class="form-row">
+				<div class="form-group col-md-2"></div>
+				<div class="form-group col-md-2">
+					<select name="fieldName" id="fieldName" class="form-control">
+						<option ${(param.fieldName == "all")? "selected" : ""} value="all">전체</option>
+						<option ${(param.fieldName == "qna_title")? "selected" : ""}
+							value="prd_code">제목</option>
+						<option ${(param.fieldName == "qna_cusid")? "selected" : ""}
+							value="qna_cusid">아이디</option>
+					</select>
+				</div>
+				<div class="form-group col-md-5">
+					<input type="text" class="form-control" placeholder="Search"
+						name="searchWord" value="${param.searchWord}" />
+				</div>
+				<div class="form-group col-md-1">
+					<input type="submit" class="btn btn-primary" value="검색" />
+				</div>
+				<div class="form-group col-md-2"></div>
+			</div>
+		</form>
+	</div>
+</body>
+</html>
+		<%-- <form>
 			<select name="fieldName" id="fieldName" class="form-control">
 				<option ${(param.fieldName == "all")? "selected" : ""} value="all">전체</option>
 				<option ${(param.fieldName == "notice_title")? "selected" : ""}
@@ -197,8 +238,4 @@ table {
 			</select> <input type="text" class="form-control" placeholder="Search"
 				name="searchWord" value="${param.searchWord}" /> <input
 				type="submit" value="검색" />
-		</form>
-	</div>
-	</div>
-</body>
-</html>
+		</form> --%>

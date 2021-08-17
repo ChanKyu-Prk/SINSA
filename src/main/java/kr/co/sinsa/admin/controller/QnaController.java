@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,6 +21,34 @@ public class QnaController {
 
 	@Inject
 	QnaService qnaService;
+	
+	
+	@RequestMapping("/admin/qnaUpdate")
+	public String prdUpdate(HttpServletRequest request, Model model, QnaVO vo) {
+		model.addAttribute("qna_num", vo.getQna_num());
+		String referer = request.getParameter("referer");
+		qnaService.qna_update(vo);
+		return "redirect:"+referer;
+	}
+	
+	
+	@RequestMapping("/admin/qnaAnswer")
+	public String qnaAnswer(Model model, @RequestParam int qna_num) {
+		model.addAttribute("qnaInfo", qnaService.qna_info(qna_num));
+		return "admin/qnaAnswer";
+	}
+	
+	@RequestMapping("/admin/qnaDelete")
+	public String qnaDelete(HttpServletRequest request, @RequestParam int qna_num) {
+		qnaService.qna_delete(qna_num);
+		String referer = request.getHeader("Referer");
+		return "redirect:"+referer;
+	}
+	
+
+	
+	
+	
 	
 	
 	@RequestMapping(value = "/admin/qnaList", method = RequestMethod.GET)

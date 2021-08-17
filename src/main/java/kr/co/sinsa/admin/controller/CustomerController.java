@@ -17,15 +17,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import kr.co.sinsa.admin.dao.CustomerDAO;
 import kr.co.sinsa.admin.service.CustomerService;
 import kr.co.sinsa.admin.vo.CustomerVO;
 import kr.co.sinsa.biz.product.PageInfo;
 
 @Controller 
 public class CustomerController {
-	@Autowired
-	private SqlSessionTemplate sqlSessionTemplate;
 	
 //	@Autowired
 //	private JavaMailSender mailSender;
