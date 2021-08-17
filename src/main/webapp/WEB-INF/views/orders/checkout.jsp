@@ -160,7 +160,7 @@ input:read-only{
 											src="${path}/resources/img/product/details/thumb-1.jpg"
 											alt="thumbnail2">
 									</span> <span class="my-auto"> <b class="mb-1">상품이름</b>
-											<p class="mb-0">GZ5863</p>
+											<p class="mb-0">${prdInfo.prdCode}</p>
 											<p class="mb-0">
 												<span>사이즈: 250</span>
 											</p>
