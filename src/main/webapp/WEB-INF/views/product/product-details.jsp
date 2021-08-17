@@ -273,18 +273,45 @@ input[type=number] {
 						<button type="button" id= "btnBuy" class="primary-btn col-lg-12 text-center">바로구매</button>
 						<script type="text/javascript">
 							$("#btnBuy").click(function(){
-								var prdCode = $(".prdCode").text();
+								var ORDER_PRDCODE = $(".prdCode").text();
 // 								var prdSizes = $(".qty-size").text();
-								var prdSizes = $(".qty-size").map(function() {
+								var ORDER_PRDSIZE = $(".qty-size").map(function() {
 								    return $(this).text();
 								}).get();
-								var prdAmounts = $('.amount').map(function() {
+								var ORDER_AMOUNT = $('.amount').map(function() {
 								    return this.value;
 								}).get();
 // 								alert("prdCode : " + prdCode + "/prdSizes : " + prdSizes + "/prdAmounts : " + prdAmounts);
-								for(var i=0; i<prdAmounts.length; i++){
-									alert(prdCode +"|"+prdSizes[i]+"|"+ prdAmounts[i]);
+// 								for(var i=0; i<prdAmounts.length; i++){
+// 									alert(prdCode +"|"+prdSizes[i]+"|"+ prdAmounts[i]);
+// 								}
+								
+								//JSON 형태로 데이터 생성
+								var data = {};
+								var itemList = [];
+								console.log("length : " + ORDER_AMOUNT.length);
+								for(var i=0; i<ORDER_AMOUNT.length; i++){
+									data = {};
+									data["ORDER_PRDCODE"] = ORDER_PRDCODE;
+									data["ORDER_PRDSIZE"] = ORDER_PRDSIZE[i];
+									data["ORDER_AMOUNT"] = ORDER_AMOUNT[i];
+									itemList.unshift(data);
 								}
+									  $.ajax({
+									   url : "/direct/checkout",
+									   type : "POST",
+									   data : JSON.stringify(itemList),
+									    headers: {
+									      'Accept': 'application/json',
+									      'Content-Type': 'application/json'
+									    },
+									   success : function(data){
+											location.href="/direct/checkout";
+									   },
+									   error : function(){
+									    alert("보내기 실패");
+									   }
+									  });
 							});
 						</script>
 						<div id="jjimNCart" class="row col-lg-12 mx-auto px-0">
