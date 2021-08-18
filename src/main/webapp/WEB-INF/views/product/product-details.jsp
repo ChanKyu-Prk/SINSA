@@ -289,7 +289,6 @@ input[type=number] {
 								//JSON 형태로 데이터 생성
 								var data = {};
 								var itemList = [];
-								console.log("length : " + ORDER_AMOUNT.length);
 								for(var i=0; i<ORDER_AMOUNT.length; i++){
 									data = {};
 									data["ORDER_PRDCODE"] = ORDER_PRDCODE;
