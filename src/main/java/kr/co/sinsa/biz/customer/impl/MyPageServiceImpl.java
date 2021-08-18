@@ -1,6 +1,7 @@
 package kr.co.sinsa.biz.customer.impl;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -14,7 +15,6 @@ import kr.co.sinsa.biz.customer.MyOrderListVO;
 import kr.co.sinsa.biz.customer.MyPageService;
 import kr.co.sinsa.biz.customer.QnAVO;
 import kr.co.sinsa.biz.customer.ReviewVO;
-import kr.co.sinsa.biz.orders.OrdersVO;
 import kr.co.sinsa.biz.product.ProductVO;
 import kr.co.sinsa.biz.user.UserVO;
 
@@ -41,11 +41,51 @@ public class MyPageServiceImpl implements MyPageService {
 	public List<MyOrderListVO> myOrderList(Map<String, Object> map) {
 		return dao.myOrderList(map);
 	}
-
+	
 	@Override
 	public List<MyOrderListVO> myOrderListDate(Map<String, Object> map) {
 
 		return dao.myOrderListDate(map);
+	}
+
+	@Override
+	public Map<String, Integer> countState(Map<String, Object> map) {
+		Map<String, Integer> countState = new HashMap<String, Integer>();
+		map.put("STATE","결제완료");
+		int payEnd = dao.countState(map);
+		map.replace("STATE", "배송중");
+		int delivery = dao.countState(map);
+		map.replace("STATE", "배송완료");
+		int deliveryEnd = dao.countState(map);
+		map.replace("STATE", "취소");
+		int cancel = dao.countState(map);
+		map.replace("STATE", "환불");
+		int refund = dao.countState(map);	
+		countState.put("payEnd",payEnd);
+		countState.put("delivery",delivery);
+		countState.put("deliveryEnd",deliveryEnd);
+		countState.put("cancel",cancel+refund);
+		return countState;
+	}
+	
+	@Override
+	public Map<String, Integer> countStateDate(Map<String, Object> map) {
+		Map<String, Integer> countState = new HashMap<String, Integer>();
+		map.put("STATE","결제완료");
+		int payEnd = dao.countStateDate(map);
+		map.replace("STATE", "배송중");
+		int delivery = dao.countStateDate(map);
+		map.replace("STATE", "배송완료");
+		int deliveryEnd = dao.countStateDate(map);
+		map.replace("STATE", "취소");
+		int cancel = dao.countStateDate(map);
+		map.replace("STATE", "환불");
+		int refund = dao.countStateDate(map);	
+		countState.put("payEnd",payEnd);
+		countState.put("delivery",delivery);
+		countState.put("deliveryEnd",deliveryEnd);
+		countState.put("cancel",cancel+refund);
+		return countState;
 	}
 
 	@Override

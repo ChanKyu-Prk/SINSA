@@ -13,6 +13,29 @@ private Date ORDER_REGDATE;
 private String ORDER_PRDCODE;
 private String PRD_BRAND;
 private String PRD_IMAGE;
+private String ORDER_DELIVCOMP;
+private String ORDER_DELIVNUM;
+private int ORDER_USEPOINT ;
+
+
+public String getORDER_DELIVCOMP() {
+	return ORDER_DELIVCOMP;
+}
+public void setORDER_DELIVCOMP(String oRDER_DELIVCOMP) {
+	ORDER_DELIVCOMP = oRDER_DELIVCOMP;
+}
+public String getORDER_DELIVNUM() {
+	return ORDER_DELIVNUM;
+}
+public void setORDER_DELIVNUM(String oRDER_DELIVNUM) {
+	ORDER_DELIVNUM = oRDER_DELIVNUM;
+}
+public int getORDER_USEPOINT() {
+	return ORDER_USEPOINT;
+}
+public void setORDER_USEPOINT(int oRDER_USEPOINT) {
+	ORDER_USEPOINT = oRDER_USEPOINT;
+}
 public String getORDER_NUM() {
 	return ORDER_NUM;
 }

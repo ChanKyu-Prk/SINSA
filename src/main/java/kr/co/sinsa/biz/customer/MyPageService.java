@@ -14,6 +14,8 @@ public interface MyPageService {
 	
 	public List<MyOrderListVO> myOrderList(Map<String,Object> map);
 	public List<MyOrderListVO> myOrderListDate(Map<String,Object> map);
+	public Map<String, Integer> countState(Map<String,Object> map); 
+	public Map<String, Integer> countStateDate(Map<String,Object> map); 
 	public int countmyOrderList(Map<String,Object> map);
 	public int countmyOrderListDate(Map<String,Object> map);
 	

@@ -70,12 +70,14 @@ public class MyPageController {
 			map.put("date1", date1_sqldate);
 			map.put("date2", date2_sqldate);
 			listCount = myPageSerive.countmyOrderListDate(map);
+			model.addAttribute("countState", myPageSerive.countStateDate(map));
 			model.addAttribute("orderList", myPageSerive.myOrderListDate(map));
 		} else {
 			Map<String, Object> map = new HashMap<String, Object>();
 			map.put("ID", userID);
 			map.put("page", (page - 1) * 20);
 			listCount = myPageSerive.countmyOrderList(map);
+			model.addAttribute("countState", myPageSerive.countState(map));
 			model.addAttribute("orderList", myPageSerive.myOrderList(map));
 		}
 		model.addAttribute("date1", date1);
@@ -95,6 +97,16 @@ public class MyPageController {
 		model.addAttribute("pageInfo", pageInfo);
 
 		return "customer/myOrderList";
+	}
+
+	@RequestMapping(value = "/myOrderStatus.do", method = RequestMethod.GET)
+	public String myOrderStatus(Model model, @RequestParam("ORDER_NUM") String ORDER_NUM, HttpSession session) {
+		UserVO user = (UserVO) session.getAttribute("user");
+		if (user == null) {
+			return "login";
+		}
+
+		return "customer/myOrderStatus";
 	}
 
 	@RequestMapping(value = "/jjimList.do", method = RequestMethod.GET)
@@ -367,7 +379,7 @@ public class MyPageController {
 			if (passMatch) {
 				CustomerVO myInfo = myPageSerive.myInfo(user);
 				String[] email = myInfo.getCUS_EMAIL().split("@");
-				String[] fullAddr = myInfo.getCUS_ADDR().split("\\|"); 
+				String[] fullAddr = myInfo.getCUS_ADDR().split("\\|");
 				model.addAttribute("email", email);
 				model.addAttribute("addr", fullAddr);
 				model.addAttribute("myInfo", myInfo);

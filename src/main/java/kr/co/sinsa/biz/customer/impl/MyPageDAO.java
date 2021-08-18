@@ -33,9 +33,14 @@ public class MyPageDAO {
 	public List<MyOrderListVO> myOrderList(Map<String,Object> map) {
 		return  SST.selectList("myInfo.orders", map);
 	}
-	
 	public List<MyOrderListVO> myOrderListDate(Map<String,Object> map) {
 		return  SST.selectList("myInfo.orderDate", map);
+	}
+	public int countState(Map<String,Object> map) {
+		return SST.selectOne("myInfo.countState",map);
+	}
+	public int countStateDate(Map<String,Object> map) {
+		return SST.selectOne("myInfo.countStateDate",map);
 	}
 	public int countmyOrderList(Map<String,Object> map) {
 		return SST.selectOne("myInfo.countOders", map);

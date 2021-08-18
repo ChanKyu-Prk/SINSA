@@ -78,10 +78,26 @@
 		]]>
 	</select>
 
-	<select id="countOders" parameterType="Map" resultType="int">
+	<select id="countState" parameterType="Map" resultType="int">
+		select
+		count(*)
+		from ORDERS
+		where ORDER_CUSID = #{ID} and ORDER_STATE = #{STATE};
+	</select>
+	
+	<select id="countStateDate" parameterType="Map" resultType="int">
+			<![CDATA[
 		select
 		count(*)
 		from ORDERS 
+		where ORDER_CUSID = #{ID} and ORDER_REGDATE >= #{date1} and ORDER_REGDATE <= DATE_add(#{date2},INTERVAL 1 Day) and ORDER_STATE = #{STATE};
+			]]>
+	</select>
+
+	<select id="countOders" parameterType="Map" resultType="int">
+		select
+		count(*)
+		from ORDERS
 		where ORDER_CUSID = #{ID};
 	</select>
 
