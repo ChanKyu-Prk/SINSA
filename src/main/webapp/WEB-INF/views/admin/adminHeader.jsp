@@ -50,10 +50,9 @@
 				<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/admin/stockList" title="재고현황페이지로 이동">재고현황</a></li>
 				<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/admin/stockLog" title="상품입고내역으로 이동">입고내역</a></li>
 				<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/admin/customerList" title="고객관리페이지로 이동">고객관리</a></li>
-				<li class="nav-item"><a class="nav-link" href="#" title="리뷰관리로 이동">리뷰관리</a></li>
+				<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/admin/reviewList" title="리뷰관리페이지로 이동">리뷰관리</a></li>
 				<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/admin/qnaList" title="문의관리로 이동">문의관리</a></li>
 				<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/admin/noticeList" title="공지사항으로 이동">공지사항</a></li>
-
 				<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/admin/faqList" title="고객후기로 이동">자주하는질문</a></li>
 
 				
@@ -73,7 +72,6 @@
 					aria-expanded="false" > 관리자  로그아웃 </a>
 	      			
 					
-					</div>
 				</li>
 			</ul>
 		</c:if>

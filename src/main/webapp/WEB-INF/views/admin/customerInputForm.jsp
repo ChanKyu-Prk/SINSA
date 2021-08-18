@@ -18,7 +18,28 @@
 
 <link rel="stylesheet" href="${path}/resources/css/join.css"
    type="text/css">
-<body >
+<!--    <script type="text/javascript">
+   
+function fn_emailChk(){
+    $.ajax({
+      url : "/emailChk",
+      type : "post",
+      dataType : "json",
+      data : {"email" : $("#email").val()},
+      success : function(data){
+        if(data == 1){
+          alert("중복된 이메일입니다.");
+        }else if(data == 0){
+          $("#emailChk").attr("value", "Y");
+          alert("사용가능한 이메일입니다.");
+        }else {
+          alert("이메일을 입력해주세요.");
+        }
+      }
+    })
+  }
+</script> -->
+<body>
 <jsp:include page="adminHeader.jsp" flush="true" />
 	<br><br>
 
@@ -133,11 +154,11 @@
                               <input class="mail_input" name="CUS_EMAIL_1"
                                  placeholder=" 이메일 입력">
                            </div>
+                           
                            <div class="col-1 padding0 eamil_">@</div>
                            <div class="col-5 padding0">
                               <input class="mail_input_2" id="mail" name="CUS_EMAIL_2"
                                  placeholder="직접 입력">
-
                            </div>
                         </div>
                      </div>
@@ -145,8 +166,10 @@
                      <div class="col-3 padding0">
                         <select class="mail_input_select col-12">
                            <option value="" selected>직접 입력</option>
-                           <option value="google.com">google.com</option>
+                           <option value="gmail.com">google.com</option>
                            <option value="naver.com">naver.com</option>
+                           <option value="daum.net">daum.net</option>
+                           <option value="nate.com">nate.com</option>
                         </select>
                      </div>
                   </div>
@@ -155,6 +178,7 @@
                   <span class="mail_input_re">필수 입력사항 입니다.</span> <span
                      class="mail_input_re_0">이메일 입력해 주세요.</span>
                </div>
+            </div>   
 
 
              <!--   <div class="mail_check_wrap">
@@ -190,10 +214,6 @@
                      type="hidden" value="0" class="code_is_correct"
                      id="code_is_correct">
                </div> -->
-
-            </div>
-
-
 
             <div class="address_wrap">
                <div class="address_name">주소</div>

@@ -43,58 +43,27 @@ div {
 						<td>아이디</td>
 						<td><form:input path="qna_cusid" class="form-control" /></td>
 					</tr>
-					<tr>
-						
-					</tr>
 					<center><h2>QnA관리</h2></center>
 					<tr>
 						<td>제목</td>
 						<td><form:input path="qna_title" class="form-control" /></td>
-						
-						  
-						  
 						  <td>공개여부</td>
 						<td><form:input path="qna_lock" class="form-control" /></td>
-						<%--  <td>작성일자</td>
-						<td><form:input path="qna_regdate" class="form-control" /></td> --%>
-						
-						
-						
-						
-						
-						
-						<%-- <c:forEach var="e" items="${ qnaList }">
-						<fmt:formatDate value="${e.qna_regdate}" pattern="YYYY-MM-dd" />
-						</c:forEach>  --%>
-						
 					</tr>
-					
-					
 					<tr>
 					<td>내용</td>
 						<td rowspan="10"><form:textarea path="qna_content"
 								style="height: 200px; width: 500px;" /></td>
-								
 						<td>답변</td>
 						<td rowspan="10"><form:textarea path="qna_answer"
 								style="height: 200px; width: 500px;" /></td>		
-						<%-- <td>내용</td>
-						<td colspan="1" width="500" height="400"><form:input path="qna_content" class="form-control" /></td>
-						
-						<td >답변</td>
-						<td colspan="1" width="500" height="400"><form:input path="qna_answer" class="form-control" /></td> --%>
-						
-						
 					</tr>
 				</table>
-				
 				<div align="center">
 					<input type="submit" class="btn btn-primary" value="변경사항저장">
 					<button class="btn btn-outline-primary" onclick="history.go(-1);">취소</button>
 				</div>
-			
 				<br><br>
-
 			</form:form>
 		</div>
 	</div>
