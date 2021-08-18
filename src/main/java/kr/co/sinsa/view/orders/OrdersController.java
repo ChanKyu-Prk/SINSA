@@ -33,18 +33,16 @@ public class OrdersController {
 		
 		if((UserVO) session.getAttribute("user") == null) {
 			//비회원 일시
-			page = "/orders/checkoutGuest";
+			/*로그인 필요 confirm 창 띄우기*/
 		} else {
 			//회원 일시
 			UserVO user = (UserVO) session.getAttribute("user");
 			String CUS_ID = (String)user.getCUS_ID();
 			CustomerVO vo = service.cusInfoView(CUS_ID);
 			model.addAttribute("cusInfo", vo);
-			
-			page = "/orders/checkout";
 		}
 		
-		return page;
+		return "/orders/checkout";
 	}
 	
 	// 
