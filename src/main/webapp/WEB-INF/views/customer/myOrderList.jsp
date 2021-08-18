@@ -152,6 +152,11 @@ td {
 	margin-bottom: 25px;
 	justify-content: center;
 }
+
+.span_margin{
+margin: 0;
+}
+
 </style>
 <title>SINSA : 주문 내역 조회</title>
 </head>
@@ -170,21 +175,17 @@ td {
 
 				<div class="container period_wrap">
 					<div class="row">
-						<div class="col-2 state_C">0</div>
-						<div class="col-2 state_C">0</div>
-						<div class="col-2 state_C">0</div>
-						<div class="col-2 state_C">0</div>
-						<div class="col-2 state_C">0</div>
-						<div class="col-2 state_C">0</div>
+						<div class="col-3 state_C">${countState.payEnd }</div>
+						<div class="col-3 state_C">${countState.delivery }</div>
+						<div class="col-3 state_C">${countState.deliveryEnd }</div>
+						<div class="col-3 state_C">${countState.cancel }</div>
 					</div>
 
 					<div class="row">
-						<div class="col-2 state_box">결제 대기</div>
-						<div class="col-2 state_box">결제 완료</div>
-						<div class="col-2 state_box">배송중</div>
-						<div class="col-2 state_box">배송 완료</div>
-						<div class="col-2 state_box">구매 결정</div>
-						<div class="col-2 state_box">취소/환불/교환</div>
+						<div class="col-3 state_box">결제 완료</div>
+						<div class="col-3 state_box">배송중</div>
+						<div class="col-3 state_box">배송 완료</div>
+						<div class="col-3 state_box">취소/환불</div>
 					</div>
 					<hr>
 
@@ -289,10 +290,10 @@ td {
 												<td>
 													<table>
 														<tr>
-															<td class="prd_brand_td">${list.PRD_BRAND }</td>
+															<td class="prd_brand_td"><span class="prd_brand_span span_margin">${list.PRD_BRAND }</span></td>
 														</tr>
 														<tr>
-															<td class="prd_name_td">${list.ORDER_PRDNAME }</td>
+															<td class="prd_name_td"><span class="prd_name_span span_margin">${list.ORDER_PRDNAME }</span></td>
 														</tr>
 														<tr>
 															<td class="prd_size_td">사이즈 : ${list.ORDER_PRDSIZE }
@@ -303,7 +304,8 @@ td {
 												<td><fmt:formatDate var="date"
 														value="${list.ORDER_REGDATE }" pattern="yyyy-MM-dd" />
 													${date }</td>
-												<td>${list.ORDER_NUM }</td>
+												<td><span class="prd_order_num_span span_margin">
+												<input type="hidden" value="${list.ORDER_NUM }" class="ORDER_NUM">${list.ORDER_NUM }</span></td>
 												<td><fmt:formatNumber value="${list.ORDER_PRICE }"
 														type="number" />원</td>
 												<td>${list.ORDER_STATE }</td>
@@ -437,6 +439,45 @@ td {
 </body>
 
 <script>
+
+
+
+	$('.thumbPic').on("mouseover", function() {
+		$(this).css("cursor", "pointer");
+	});
+
+	$('.prd_brand_span').on("mouseover", function() {
+		$(this).css("cursor", "pointer");
+	});
+
+	$('.prd_name_span').on("mouseover", function() {
+		$(this).css("cursor", "pointer");
+	});
+	
+	$('.prd_order_num_span').on("mouseover", function() {
+		$(this).css("cursor", "pointer");
+	});
+	
+// 	$('.thumbPic').on("click", function() {
+// 		location.href = ;
+// 	});
+	
+// 	$('.prd_brand_span').on("click", function() {
+// 		location.href = ;
+// 	});
+	
+// 	$('.prd_name_span').on("click", function() {
+// 		location.href = ;
+// 	});
+	
+	$('.prd_order_num_span').on("click", function() {
+		var ORDER_NUM = $(this).find('.ORDER_NUM').val();
+	 	location.href = "myOrderStatus.do?ORDER_NUM="+ORDER_NUM;
+	});
+	
+	
+	
+	
 	$('.underline').on("mouseover", function() {
 		$(this).css("background-color", "#EDEFF2");
 	});
