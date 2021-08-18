@@ -2,13 +2,14 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>    
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>qnaList</title>
 
 <style>
 body {
@@ -31,7 +32,6 @@ table {
 
 	
 	var no = "";
-	/* var a = ""; */
 	
 	function selectNum(target) {
 	    var tbody = target.parentNode;
@@ -77,13 +77,7 @@ table {
 			}
 	}
 	
-	/* function answerck(){
-		if(a == null){
-			return "답변미완료";
-		}else{
-			return "답변완료";
-		}
-	} */
+
 
 </script>
 <body>
@@ -115,10 +109,9 @@ table {
 			
 				<th>번호</th>
 				<th>상품코드</th>
-				<th>공개여부</th>
+				<!-- <th>공개여부</th> -->
 				<th>고객아이디</th>
 				<th>제목</th>
-				<!-- <th>내용</th> -->
 				<th>답변</th>
 				<th>작성일자</th>
 			</tr>
@@ -135,12 +128,13 @@ table {
 				<tr onclick="javascript:selectNum(this);">
 					<td>${ e.qna_num }</td>
 					<td>${ e.prd_num }</td>
-					<td>${ e.qna_lock }</td>
+					<%-- <td>${ e.qna_lock }</td> --%>
 					<td>${ e.qna_cusid }</td>
 					<td>${ e.qna_title }</td>
-					
-					<%-- <td>${ e.qna_content }</td> --%>
-					<td>${ e.qna_answer }</td>
+					<td>
+					<c:if test="${!empty fn:trim(e.qna_answer)}">답변완료</c:if>
+             		<c:if test="${empty fn:trim(e.qna_answer)}">답변대기</c:if>
+					</td>
 					<td>
 			<fmt:formatDate value="${e.qna_regdate}" pattern="YYYY-MM-dd" />
 			</td>

@@ -59,12 +59,16 @@ public class CustomerDAOImpl implements CustomerDAO{
 	public int customerInsert(CustomerVO vo) {
 		return SST.insert("CustomertDAO.customerInsert", vo);
 	}
-		public List<CustomerVO> CustomerList() {
-			return sqlSession.selectList("CustomerDAO.customer_list");
-		}
-		public int idCheck(String CUS_ID){
-			return SST.selectOne("CustomerDAO.idCheck",CUS_ID);
-		}
+	public List<CustomerVO> CustomerList() {
+		return sqlSession.selectList("CustomerDAO.customer_list");
+	}
+	public int idCheck(String CUS_ID){
+		return SST.selectOne("CustomerDAO.idCheck",CUS_ID);
+	}
+	
+//	public int emailChk(String CUS_EMAIL) {
+//		return SST.selectOne("CustomerDAO.emailChk", CUS_EMAIL);
+//	}
 	
 	
 

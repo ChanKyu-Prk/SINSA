@@ -42,6 +42,13 @@
 		delete from customer where CUS_NUM=#{CUS_NUM}
 	</delete> 
 	
+	
+	<!-- 
+	<select id="emailChk" resultType="int">
+		select count(*) from customer where CUS_EMAIL=#{CUS_EMAIL}
+	
+	</select> -->
+	
 	<!-- <insert id="insert" parameterType="kr.co.sinsa.admin.vo.CustomerVO">
 	
 		<![CDATA[
@@ -52,9 +59,9 @@
 	</insert> -->
 	
 	
-	<!-- <select id="idCheck" resultType="int">
+	<!--  <select id="idCheck" resultType="int">
 		select count(*) from customer where CUS_ID = #{CUS_ID}
-	</select> -->
+	</select>  -->
 	
 	<!-- <select id="CustomerList" resultType="kr.co.sinsa.admin.vo.CustomerVO">
 		select * from customer order by CUS_NUM desc
