@@ -14,6 +14,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -51,19 +52,29 @@ public class OrdersController {
 	
 	// 
 	@RequestMapping(value = "/direct/checkout", method=RequestMethod.POST,produces = "application/json;charset=UTF-8")
-    public String details(@RequestBody List<Map<String, String>> itemLists, Model model) {
+    public String details(@RequestBody List<Map<String, String>> itemLists, Model model) throws Exception {
 		String ORDER_PRDCODE = null;
 		String ORDER_PRDSIZE = null;
 		String ORDER_AMOUNT = null;
+		OrdersAndProductVO oapVO = null;
+		ArrayList<OrdersAndProductVO> prdList = new ArrayList();
+				
+		int index = 0;
 		for(Object list : itemLists) {
 //			System.out.println(list);
 			LinkedHashMap<String,String> item = (LinkedHashMap<String, String>) list;
-			System.out.println(item.get("ORDER_PRDCODE") + " / index : "+index);
-			System.out.println(item.get("ORDER_PRDSIZE") + " / index : "+index);
-			System.out.println(item.get("ORDER_AMOUNT") + " / index : "+index);
-
+			System.out.println("index : " + index);
+			System.out.println(item.get("ORDER_PRDCODE"));
+//			oapVO = service.selPrdByCode(item.get("ORDER_PRDCODE"));
+//			prdList.add(oapVO);
+			
+			System.out.println(item.get("ORDER_PRDSIZE"));
+			System.out.println(item.get("ORDER_AMOUNT"));
+			index++;
 		}
-//		OrdersAndProductVO oapVO = OrdersSerivce.selPrdByCode(ORDER_PRDCODE);
+		
+//		model.addAttribute("prdInfo", prdList);
+
 		
 //        String prdCode = orders.getORDER_PRDCODE();
 //        System.out.println("orders : " + orders.getORDER_PRDCODE());
