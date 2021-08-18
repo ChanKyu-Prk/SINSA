@@ -1,5 +1,7 @@
 package kr.co.sinsa.biz.user.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,6 +25,24 @@ public class LoginServiceImpl implements LoginService {
 	public UserVO getUser(CustomerVO vo) {
 		
 		return dao.getUser(vo);
+	}
+	
+	@Override
+	public String getCustomerID(CustomerVO customerVO) {
+		
+		return dao.getCustomerID(customerVO);
+	}
+	
+	@Override
+	public String getCustomerPWD(CustomerVO customerVO) {
+		
+		return dao.getCustomerPWD(customerVO);
+	}
+	
+	@Override
+	public List<CustomerVO> getAllCustomerList() {
+		
+		return dao.getAllCustomerList();
 	}
 
 }

@@ -2,17 +2,23 @@ package kr.co.sinsa.view.user;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
+import java.util.Random;
 
+import javax.mail.internet.MimeMessage;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.co.sinsa.biz.user.CustomerVO;
 import kr.co.sinsa.biz.user.LoginService;
@@ -23,6 +29,9 @@ public class LoginController {
 
 	/* NaverLoginBO */
 	private NaverLoginBO naverLoginBO;
+	
+	@Autowired
+	private JavaMailSender mailSender;
 
 	@Autowired
 	private void setNaverLoginBO(NaverLoginBO naverLoginBO) {
@@ -102,4 +111,95 @@ public class LoginController {
 		}
 		
 	}
+	
+	@RequestMapping(value="/find_ID_PWD.do", method=RequestMethod.GET)
+	public String findID(Model model){
+		List<CustomerVO> customerList = loginService.getAllCustomerList();
+		model.addAttribute("customerList", customerList);
+		System.out.println(customerList);
+		
+		
+		return "find_ID_PWD";
+	}
+	
+
+
+	
+	@RequestMapping(value="/find_ID.do", method=RequestMethod.POST)
+	@ResponseBody
+	public String findID(Model model, String CUS_NAME, String CUS_EMAIL) throws Exception{
+		CustomerVO customerVO = new CustomerVO();
+		
+		customerVO.setCUS_NAME(CUS_NAME);
+		customerVO.setCUS_EMAIL(CUS_EMAIL);
+		
+		model.addAttribute("customerVO", customerVO);
+		
+		String CUS_ID = loginService.getCustomerID(customerVO);
+		
+		Random random = new Random();
+		int checkNum = random.nextInt(888888) + 111111;
+		
+		model.addAttribute("checkNum", checkNum);
+		
+		System.out.println(CUS_NAME);
+		System.out.println(CUS_EMAIL);
+		
+		String setFrom = "sjinjin6@naver.com";
+		String toMail = CUS_EMAIL;
+		String title = "[SINSA]요청하신 아이디 찾기 인증번호를 확인해 주세요";
+		String content = "홈페이지를 방문해주셔서 감사합니다." +"<br>" + "아이디 찾기 인증번호는" + checkNum + "입니다.";
+		
+		
+		
+		try {
+			MimeMessage message = mailSender.createMimeMessage();
+			MimeMessageHelper helper = new MimeMessageHelper(message, true, "utf-8");
+			helper.setFrom(setFrom);
+			helper.setTo(toMail);
+			helper.setSubject(title);
+			helper.setText(content, true);
+			mailSender.send(message);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		String num = Integer.toString(checkNum);
+		return num;
+	}
+	
+	@RequestMapping(value="/find_PWD.do", method=RequestMethod.POST)
+//	@ResponseBody
+	public String findPWD(Model model, String CUS_NAME, String CUS_ID, String CUS_EMAIL) throws Exception{
+		CustomerVO customerVO = new CustomerVO();
+		
+		customerVO.setCUS_NAME(CUS_NAME);
+		customerVO.setCUS_ID(CUS_ID);
+		customerVO.setCUS_EMAIL(CUS_EMAIL);
+		
+		String CUS_PWD = loginService.getCustomerPWD(customerVO);
+		
+		String setFrom = "sjinjin6@naver.com";
+		String toMail = CUS_EMAIL;
+		String title = "[SINSA]요청하신 비밀번호를 확인해 주세요";
+		String content = "홈페이지를 방문해주셔서 감사합니다." +"<br>" + "고객님의 비밀번호는 " + CUS_PWD + "입니다.";
+		
+		
+		try {
+			MimeMessage message = mailSender.createMimeMessage();
+			MimeMessageHelper helper = new MimeMessageHelper(message, true, "utf-8");
+			helper.setFrom(setFrom);
+			helper.setTo(toMail);
+			helper.setSubject(title);
+			helper.setText(content, true);
+			mailSender.send(message);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "find_ID_PWD";
+	}
+	
+	
 }
