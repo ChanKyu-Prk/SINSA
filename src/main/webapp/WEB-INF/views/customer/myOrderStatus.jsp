@@ -30,20 +30,8 @@
 	background-color: #EDEFF2;
 }
 
-.period_wrap2 {
-	padding-left: 10px;
-	padding-right: 10px;
-	height: 35px;
-}
-
-.periodBox {
-	display: table;
-	border: solid 1px #EDEFF2;
-	cursor: pointer;
-	text-align: center;
-	height: 35px;
-	background-color: #FFFFFF;
-	border: solid 1px #EDEFF2;
+.period_box {
+	text-align: left;
 }
 
 #exclamation {
@@ -147,16 +135,21 @@ td {
 	text-align: center !important;
 }
 
-.pagination {
-	margin-top: 25px;
-	margin-bottom: 25px;
-	justify-content: center;
+.span_margin {
+	margin: 0;
 }
 
-.span_margin{
-margin: 0;
+.info-wrap {
+	margin-top: 50px;
 }
 
+.blackUnderLine {
+	background-color: black;
+}
+.info_td{
+text-align: left !important;
+margin-top: 5px;
+}
 </style>
 <title>SINSA : 주문 내역 조회</title>
 </head>
@@ -171,6 +164,19 @@ margin: 0;
 				</div>
 				<hr>
 
+				<div class="container period_wrap">
+					<div class="row">
+						<div class="col-6 period_box">
+							주문일자 :
+							<fmt:formatDate var="date" value="${orderList[0].ORDER_REGDATE}"
+								pattern="yyyy-MM-dd" />
+							${date }
+						</div>
+						<div class="col-6 period_box">주문번호 :
+							${orderList[0].ORDER_NUM }</div>
+					</div>
+
+				</div>
 
 
 
@@ -191,55 +197,141 @@ margin: 0;
 									<tr>
 
 										<th colspan="2">상품정보</th>
-										<th>주문일자</th>
-										<th>주문번호</th>
-										<th>결제금액(수량)</th>
+										<th>적립금</th>
+										<th>수량</th>
+										<th>결제금액</th>
 										<th>상태</th>
 									</tr>
 								</thead>
 
-<%-- 										<c:forEach var="list" items="${orderList}" varStatus="status"> --%>
-											<tr class="underline">
+								<c:forEach var="list" items="${orderList}" varStatus="status">
+									<tr class="underline">
 
-												<td class="imgtd">
+										<td class="imgtd">
 
-													<div class="td-row">
-														<img class="thumbPic" alt="상품 대표 사진" title="상품 대표 사진"
-															src="/resources/prdImg/shoe.jpg" />
+											<div class="td-row">
+												<img class="thumbPic" alt="상품 대표 사진" title="상품 대표 사진"
+													src="/resources/prdImg/shoe.jpg" />
 
-													</div>
-												</td>
+											</div>
+										</td>
 
-												<td>
-													<table>
-														<tr>
-															<td class="prd_brand_td"><span class="prd_brand_span span_margin"></span></td>
-														</tr>
-														<tr>
-															<td class="prd_name_td"><span class="prd_name_span span_margin"></span></td>
-														</tr>
-														<tr>
-															<td class="prd_size_td">사이즈 : 
-																mm</td>
-														</tr>
-													</table>
-												</td>
-												<td><fmt:formatDate var="date"
-														value="${list.ORDER_REGDATE }" pattern="yyyy-MM-dd" />
-													${date }</td>
-												<td><span class="prd_order_num_span span_margin"></span></td>
-												<td><fmt:formatNumber value=""
-														type="number" />원</td>
-												<td></td>
-											</tr>
-<%-- 										</c:forEach> --%>
+										<td>
+											<table>
+												<tr>
+													<td class="prd_brand_td"><span
+														class="prd_brand_span span_margin">${list.PRD_BRAND }</span></td>
+												</tr>
+												<tr>
+													<td class="prd_name_td"><span
+														class="prd_name_span span_margin">${list.ORDER_PRDNAME }</span></td>
+												</tr>
+												<tr>
+													<td class="prd_size_td">사이즈 : ${list.ORDER_PRDSIZE }
+														mm</td>
+												</tr>
+											</table>
+										</td>
+										<td><fmt:formatNumber value="${list.ORDER_PRICE*0.05 }"
+												type="number" />원</td>
+										<td>${list.ORDER_AMOUNT}개</td>
+										<td><fmt:formatNumber value="${list.ORDER_PRICE }"
+												type="number" />원</td>
+										<td>${list.ORDER_STATE }<c:if
+												test="${list.ORDER_STATE =='배송중' }">
+												<br>
+												<span>배송조회</span>
+											</c:if> <c:if test="${list.ORDER_STATE =='결제완료' }">
+												<br>
+												<span>구매취소</span>
+											</c:if> <c:if test="${list.ORDER_STATE =='배송완료' }">
+												<br>
+												<span>환불신청</span>
+											</c:if>
+										</td>
+									</tr>
+								</c:forEach>
 							</table>
 						</div>
 					</div>
 				</div>
-				
-				
-				
+
+
+
+				<div class="container info-wrap">
+					<div class="row">
+
+
+
+						<div class="col-6">
+							<h4>배송지 정보</h4>
+							<hr class="blackUnderLine">
+							<table>
+								<colgroup>
+									<col style="width: 30%">
+									<col style="width: 70%">
+								</colgroup>
+								<tr>
+									<td class="info_td">수령인</td>
+									<td class="info_td">${orderList[0].ORDER_RECEIVER}</td>
+								</tr>
+								<tr>
+									<td class="info_td">연락처</td>
+									<td class="info_td">${orderList[0].ORDER_TEL }</td>
+								</tr>
+								<tr>
+									<td class="info_td">배송지</td>
+									<td class="info_td">${orderList[0].ORDER_ADDR }</td>
+								</tr>
+								<tr>
+									<td class="info_td">배송 메모</td>
+									<td class="info_td">${orderList[0].ORDER_MEMO  }</td>
+								</tr>
+							</table>
+						</div>
+
+
+
+						<div class="col-6">
+							<h4>결제 정보</h4>
+							<hr class="blackUnderLine">
+							<table>
+								<colgroup>
+									<col style="width: 30%">
+									<col style="width: 70%">
+								</colgroup>
+								<tr>
+									<td class="info_td">상품 합계</td>
+									<td class="info_td"> 원</td>
+								</tr>
+								<tr>
+									<td class="info_td">할인 합계</td>
+									<td class="info_td"> 원</td>
+								</tr>
+								<tr>
+									<td class="info_td">포인트 사용</td>
+									<td class="info_td"> 원</td>
+								</tr>
+								<tr>
+									<td class="info_td">배송비</td>
+									<td class="info_td">0 원</td>
+								</tr>
+								<tr>
+									<td class="info_td">최종 결제 금액</td>
+									<td class="info_td"> 원</td>
+								</tr>
+							</table>
+						</div>
+
+					</div>
+				</div>
+
+
+
+
+
+
+
 			</div>
 		</div>
 	</div>
@@ -248,85 +340,29 @@ margin: 0;
 
 <script>
 
+$('.thumbPic').on("mouseover", function() {
+	$(this).css("cursor", "pointer");
+});
 
+$('.prd_brand_span').on("mouseover", function() {
+	$(this).css("cursor", "pointer");
+});
 
-	$('.thumbPic').on("mouseover", function() {
-		$(this).css("cursor", "pointer");
-	});
+$('.prd_name_span').on("mouseover", function() {
+	$(this).css("cursor", "pointer");
+});
 
-	$('.prd_brand_span').on("mouseover", function() {
-		$(this).css("cursor", "pointer");
-	});
+//	$('.thumbPic').on("click", function() {
+//	location.href = ;
+//});
 
-	$('.prd_name_span').on("mouseover", function() {
-		$(this).css("cursor", "pointer");
-	});
-	
-	$('.prd_order_num_span').on("mouseover", function() {
-		$(this).css("cursor", "pointer");
-	});
-	
-// 	$('.thumbPic').on("click", function() {
-// 		location.href = ;
-// 	});
-	
-// 	$('.prd_brand_span').on("click", function() {
-// 		location.href = ;
-// 	});
-	
-// 	$('.prd_name_span').on("click", function() {
-// 		location.href = ;
-// 	});
-	
-// 	$('.prd_order_num_span').on("click", function() {
-// 	 	location.href = ;
-// 	});
-	
-	
-	
-	
-	$('.underline').on("mouseover", function() {
-		$(this).css("background-color", "#EDEFF2");
-	});
-	$('.underline').on("mouseout", function() {
-		$(this).css("background-color", "white");
-	});
+//$('.prd_brand_span').on("click", function() {
+//	location.href = ;
+//});
 
-	$('#wholePeriod').on("click", function() {
-		document.getElementById('date2').value = "";
-		document.getElementById('date1').value = "";
-	});
+//$('.prd_name_span').on("click", function() {
+//	location.href = ;
+//});
 
-	$('#oneWeek').on("click", function() {
-		var today = new Date();
-		var time = today.getTime();
-		var diff = 24 * 60 * 60 * 1000 * 7;
-		var date1 = new Date(time - diff);
-		document.getElementById('date2').valueAsDate = today;
-		document.getElementById('date1').valueAsDate = date1;
-	});
-	$('#oneMonth').on("click", function() {
-		var today = new Date();
-		var year = today.getFullYear();
-		var month = today.getMonth() - 1;
-		var date = today.getDate() + 1;
-		var date1 = new Date(year, month, date);
-		document.getElementById('date2').valueAsDate = today;
-		document.getElementById('date1').valueAsDate = date1;
-	});
-	$('#threeMonth').on("click", function() {
-		var today = new Date();
-		var year = today.getFullYear();
-		var month = today.getMonth() - 3;
-		var date = today.getDate() + 1;
-		var date1 = new Date(year, month, date);
-		document.getElementById('date2').valueAsDate = today;
-		document.getElementById('date1').valueAsDate = date1;
-	});
-	$('.serchBtn').on("click", function() {
-		var date1 = $('#date1').val();
-		var date2 = $('#date2').val();
-		location.href = 'myOrderList.do?date1=' + date1 + '&date2=' + date2;
-	});
 </script>
 </html>

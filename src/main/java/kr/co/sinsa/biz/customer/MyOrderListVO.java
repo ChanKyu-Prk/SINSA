@@ -7,6 +7,7 @@ public class MyOrderListVO {
 private String ORDER_NUM;
 private String ORDER_PRDNAME;
 private String ORDER_PRDSIZE;
+private int ORDER_AMOUNT;
 private int ORDER_PRICE;
 private String ORDER_STATE;
 private Date ORDER_REGDATE;
@@ -18,6 +19,12 @@ private String ORDER_DELIVNUM;
 private int ORDER_USEPOINT ;
 
 
+public int getORDER_AMOUNT() {
+	return ORDER_AMOUNT;
+}
+public void setORDER_AMOUNT(int oRDER_AMOUNT) {
+	ORDER_AMOUNT = oRDER_AMOUNT;
+}
 public String getORDER_DELIVCOMP() {
 	return ORDER_DELIVCOMP;
 }

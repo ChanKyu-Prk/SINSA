@@ -307,8 +307,18 @@ margin: 0;
 												<td><span class="prd_order_num_span span_margin">
 												<input type="hidden" value="${list.ORDER_NUM }" class="ORDER_NUM">${list.ORDER_NUM }</span></td>
 												<td><fmt:formatNumber value="${list.ORDER_PRICE }"
-														type="number" />원</td>
-												<td>${list.ORDER_STATE }</td>
+														type="number" />원<br>(${list.ORDER_AMOUNT}개)</td>
+												<td>${list.ORDER_STATE }
+												<c:if test="${list.ORDER_STATE =='배송중' }">
+												<br><span>배송조회</span>
+												</c:if>
+												<c:if test="${list.ORDER_STATE =='결제완료' }">
+												<br><span>구매취소</span>
+												</c:if>
+												<c:if test="${list.ORDER_STATE =='배송완료' }">
+												<br><span>환불신청</span>
+												</c:if>
+												</td>
 											</tr>
 										</c:forEach>
 
@@ -439,8 +449,25 @@ margin: 0;
 </body>
 
 <script>
-
-
+	$('#date1').on("change", function(){
+		var date1 = $('#date1').val();
+		var date2 = $('#date2').val();
+		if(date2 == ""){
+			document.getElementById('date2').value = date1;
+		}else if(date1 > date2){
+			document.getElementById('date2').value = date1;
+		}
+	});
+	$('#date2').on("change", function(){
+		var date1 = $('#date1').val();
+		var date2 = $('#date2').val();
+		if(date1 == ""){
+			document.getElementById('date1').value = date2;
+		}else if(date1 > date2){
+			document.getElementById('date1').value = date2;
+		}
+		
+	});
 
 	$('.thumbPic').on("mouseover", function() {
 		$(this).css("cursor", "pointer");
