@@ -1,5 +1,7 @@
 package kr.co.sinsa.biz.user.impl;
 
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -21,4 +23,15 @@ public class UserDAO {
 		return SST.selectOne("LoginService.getUser", vo);
 	}
 	
+	public String getCustomerID(CustomerVO customerVO) {
+		return SST.selectOne("LoginService.getCustomerID", customerVO);
+	}
+	
+	public String getCustomerPWD(CustomerVO customerVO) {
+		return SST.selectOne("LoginService.getCustomerPWD", customerVO);
+	}
+	
+	public List<CustomerVO> getAllCustomerList() {
+		return SST.selectList("LoginService.getAllCustomerList");
+	}
 }

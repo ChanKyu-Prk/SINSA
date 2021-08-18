@@ -96,7 +96,7 @@
                     <div class="control__indicator"></div>
                     
                   </label>
-                  <span class="ml-auto"><a href="#" class="forgot-pass">Forgot Password</a></span> 
+                  <span class="ml-auto"><a href="find_ID_PWD.do" class="forgot-pass">Forgot Password</a></span> 
                 </div>
 
                 <input onclick="checklogin()" type="button" value="Log In" class="btn btn-block py-2 btn-primary">
