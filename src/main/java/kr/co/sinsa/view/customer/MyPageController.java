@@ -105,7 +105,7 @@ public class MyPageController {
 		if (user == null) {
 			return "login";
 		}
-
+		model.addAttribute("orderList", myPageSerive.orderStatus(ORDER_NUM));
 		return "customer/myOrderStatus";
 	}
 

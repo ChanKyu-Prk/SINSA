@@ -5,6 +5,7 @@ import java.util.Map;
 
 import javax.servlet.http.Cookie;
 
+import kr.co.sinsa.biz.orders.OrdersAndProductVO;
 import kr.co.sinsa.biz.product.ProductVO;
 import kr.co.sinsa.biz.user.UserVO;
 
@@ -18,6 +19,8 @@ public interface MyPageService {
 	public Map<String, Integer> countStateDate(Map<String,Object> map); 
 	public int countmyOrderList(Map<String,Object> map);
 	public int countmyOrderListDate(Map<String,Object> map);
+	
+	public List<OrdersAndProductVO> orderStatus(String ORDER_NUM);
 	
 	public List<ProductVO> jjimList(Map<String,Object> map);
 	public int countJjimList(Map<String,Object> map);

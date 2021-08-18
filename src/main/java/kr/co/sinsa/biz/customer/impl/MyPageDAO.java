@@ -11,7 +11,7 @@ import kr.co.sinsa.biz.customer.CustomerVO;
 import kr.co.sinsa.biz.customer.MyOrderListVO;
 import kr.co.sinsa.biz.customer.QnAVO;
 import kr.co.sinsa.biz.customer.ReviewVO;
-import kr.co.sinsa.biz.orders.OrdersVO;
+import kr.co.sinsa.biz.orders.OrdersAndProductVO;
 import kr.co.sinsa.biz.product.ProductVO;
 import kr.co.sinsa.biz.user.UserVO;
 
@@ -49,6 +49,10 @@ public class MyPageDAO {
 		return SST.selectOne("myInfo.countOdersDate", map);
 	}
 	
+	
+	public List<OrdersAndProductVO> orderStatus(String ORDER_NUM) {
+		return SST.selectList("myInfo.orderStatus",ORDER_NUM);
+	}
 	
 	
 	

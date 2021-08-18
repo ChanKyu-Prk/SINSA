@@ -15,6 +15,7 @@ import kr.co.sinsa.biz.customer.MyOrderListVO;
 import kr.co.sinsa.biz.customer.MyPageService;
 import kr.co.sinsa.biz.customer.QnAVO;
 import kr.co.sinsa.biz.customer.ReviewVO;
+import kr.co.sinsa.biz.orders.OrdersAndProductVO;
 import kr.co.sinsa.biz.product.ProductVO;
 import kr.co.sinsa.biz.user.UserVO;
 
@@ -29,13 +30,7 @@ public class MyPageServiceImpl implements MyPageService {
 		return dao.myInfo(vo);
 	}
 
-	
-	
-	
-	
-	
-	
-	
+
 	
 	@Override
 	public List<MyOrderListVO> myOrderList(Map<String, Object> map) {
@@ -59,12 +54,14 @@ public class MyPageServiceImpl implements MyPageService {
 		int deliveryEnd = dao.countState(map);
 		map.replace("STATE", "취소");
 		int cancel = dao.countState(map);
-		map.replace("STATE", "환불");
+		map.replace("STATE", "환불신청");
 		int refund = dao.countState(map);	
+		map.replace("STATE", "환불");
+		int refundEnd = dao.countState(map);	
 		countState.put("payEnd",payEnd);
 		countState.put("delivery",delivery);
 		countState.put("deliveryEnd",deliveryEnd);
-		countState.put("cancel",cancel+refund);
+		countState.put("cancel",cancel+refund+refundEnd);
 		return countState;
 	}
 	
@@ -79,28 +76,27 @@ public class MyPageServiceImpl implements MyPageService {
 		int deliveryEnd = dao.countStateDate(map);
 		map.replace("STATE", "취소");
 		int cancel = dao.countStateDate(map);
-		map.replace("STATE", "환불");
+		map.replace("STATE", "환불신청");
 		int refund = dao.countStateDate(map);	
+		map.replace("STATE", "환불");
+		int refundEnd = dao.countStateDate(map);	
 		countState.put("payEnd",payEnd);
 		countState.put("delivery",delivery);
 		countState.put("deliveryEnd",deliveryEnd);
-		countState.put("cancel",cancel+refund);
+		countState.put("cancel",cancel+refund+refundEnd);
 		return countState;
 	}
 
 	@Override
 	public int countmyOrderList(Map<String, Object> map) {
-
 		return dao.countmyOrderList(map);
 	}
 
 	@Override
 	public int countmyOrderListDate(Map<String, Object> map) {
-		
-		
-		
 		return dao.countmyOrderListDate(map);
 	}
+
 
 	
 	
@@ -108,6 +104,14 @@ public class MyPageServiceImpl implements MyPageService {
 	
 	
 	
+	
+	@Override
+	public List<OrdersAndProductVO> orderStatus(String ORDER_NUM) {
+		return dao.orderStatus(ORDER_NUM);
+	}
+
+
+
 	
 	
 	
