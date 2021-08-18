@@ -14,8 +14,8 @@ private String ORDER_TEL;
 private String ORDER_ADDR;
 private int ORDER_PRICE;
 private String ORDER_STATE;
+private String ORDER_MEMO;
 private Date ORDER_REGDATE;
-
 
 public String getORDER_PRDCODE() {
 	return ORDER_PRDCODE;
@@ -86,6 +86,13 @@ public void setORDER_STATE(String oRDER_STATE) {
 public Date getORDER_REGDATE() {
 	return ORDER_REGDATE;
 }
+
+public String getORDER_MEMO() {
+	return ORDER_MEMO;
+}
+public void setORDER_MEMO(String oRDER_MEMO) {
+	ORDER_MEMO = oRDER_MEMO;
+}
 public void setORDER_REGDATE(Date oRDER_REGDATE) {
 	ORDER_REGDATE = oRDER_REGDATE;
 }
@@ -94,10 +101,7 @@ public String toString() {
 	return "OrdersVO [ORDER_NUM=" + ORDER_NUM + ", ORDER_CUSID=" + ORDER_CUSID + ", ORDER_PRDCODE=" + ORDER_PRDCODE
 			+ ", ORDER_PRDNAME=" + ORDER_PRDNAME + ", ORDER_PRDSIZE=" + ORDER_PRDSIZE + ", ORDER_AMOUNT=" + ORDER_AMOUNT
 			+ ", ORDER_RECEIVER=" + ORDER_RECEIVER + ", ORDER_TEL=" + ORDER_TEL + ", ORDER_ADDR=" + ORDER_ADDR
-			+ ", ORDER_PRICE=" + ORDER_PRICE + ", ORDER_STATE=" + ORDER_STATE + ", ORDER_REGDATE=" + ORDER_REGDATE
-			+ "]";
+			+ ", ORDER_PRICE=" + ORDER_PRICE + ", ORDER_STATE=" + ORDER_STATE + ", ORDER_MEMO=" + ORDER_MEMO
+			+ ", ORDER_REGDATE=" + ORDER_REGDATE + "]";
 }
-
-
-
 }
