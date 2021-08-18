@@ -159,11 +159,11 @@ input:read-only{
 									class="row mx-auto px-0"> <span> <img
 											src="${path}/resources/img/product/details/thumb-1.jpg"
 											alt="thumbnail2">
-									</span> <span class="my-auto"> <b class="mb-1">상품이름</b>
-											<p class="mb-0">${prdInfo.prdCode}</p>
-											<p class="mb-0">
-												<span>사이즈: 250</span>
-											</p>
+									</span> 
+									<span class="my-auto"> 
+										<b class="mb-1">상품이름</b>
+										<p class="mb-0">브랜드</p>
+										<p class="mb-0">250 / WHITE</p>
 									</span>
 								</span></td>
 								<td class="shoping__cart__price">
@@ -175,7 +175,7 @@ input:read-only{
 										수량:<span>1</span>
 									</p> <b class="mb-0">무료배송</b>
 								</td>
-								<td class="shoping__cart__total numFont">55000원</td>
+								<td class="shoping__cart__total numFont">65000원</td>
 							</tr>
 						</tbody>
 					</table>

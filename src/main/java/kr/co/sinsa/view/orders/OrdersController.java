@@ -57,13 +57,13 @@ public class OrdersController {
 			LinkedHashMap<String,String> item = (LinkedHashMap<String, String>) list;
 			index++;
 			for (Entry<String, String> entry : item.entrySet()) {
-			    String key = entry.getKey();
-			    Object value = entry.getValue();
-			   System.out.println(key+"["+index+"] : "+value);
+			   String key = entry.getKey();
+			   Object value = entry.getValue();
+			   System.out.println(key+"["+index+"] : "+value + " / entry : "+ entry); 
+			   				   // ORDER_PRDSIZE[1] : 230         / entry : ORDER_PRDSIZE=230
+			   
 			}
-			
 		}
-		
 //		
 		
 //        String prdCode = orders.getORDER_PRDCODE();
