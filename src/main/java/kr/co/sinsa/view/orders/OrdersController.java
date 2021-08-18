@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.co.sinsa.biz.customer.CustomerVO;
+import kr.co.sinsa.biz.orders.OrdersAndProductVO;
 import kr.co.sinsa.biz.orders.OrdersSerivce;
 import kr.co.sinsa.biz.orders.OrdersVO;
 import kr.co.sinsa.biz.user.UserVO; 	
@@ -51,20 +52,18 @@ public class OrdersController {
 	// 
 	@RequestMapping(value = "/direct/checkout", method=RequestMethod.POST,produces = "application/json;charset=UTF-8")
     public String details(@RequestBody List<Map<String, String>> itemLists, Model model) {
-		int index = 0;
+		String ORDER_PRDCODE = null;
+		String ORDER_PRDSIZE = null;
+		String ORDER_AMOUNT = null;
 		for(Object list : itemLists) {
 //			System.out.println(list);
 			LinkedHashMap<String,String> item = (LinkedHashMap<String, String>) list;
-			index++;
-			for (Entry<String, String> entry : item.entrySet()) {
-			   String key = entry.getKey();
-			   Object value = entry.getValue();
-			   System.out.println(key+"["+index+"] : "+value + " / entry : "+ entry); 
-			   				   // ORDER_PRDSIZE[1] : 230         / entry : ORDER_PRDSIZE=230
-			   
-			}
+			System.out.println(item.get("ORDER_PRDCODE") + " / index : "+index);
+			System.out.println(item.get("ORDER_PRDSIZE") + " / index : "+index);
+			System.out.println(item.get("ORDER_AMOUNT") + " / index : "+index);
+
 		}
-//		
+//		OrdersAndProductVO oapVO = OrdersSerivce.selPrdByCode(ORDER_PRDCODE);
 		
 //        String prdCode = orders.getORDER_PRDCODE();
 //        System.out.println("orders : " + orders.getORDER_PRDCODE());
