@@ -1,8 +1,11 @@
 package kr.co.sinsa.view.orders;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -33,25 +36,36 @@ public class OrdersController {
 		
 		if((UserVO) session.getAttribute("user") == null) {
 			//비회원 일시
-			page = "/orders/checkoutGuest";
+			/*로그인 필요 confirm 창 띄우기*/
 		} else {
 			//회원 일시
 			UserVO user = (UserVO) session.getAttribute("user");
 			String CUS_ID = (String)user.getCUS_ID();
 			CustomerVO vo = service.cusInfoView(CUS_ID);
 			model.addAttribute("cusInfo", vo);
-			
-			page = "/orders/checkout";
 		}
 		
-		return page;
+		return "/orders/checkout";
 	}
 	
 	// 
 	@RequestMapping(value = "/direct/checkout", method=RequestMethod.POST,produces = "application/json;charset=UTF-8")
-    public String details(@RequestBody List<Object> map, Model model) {
+    public String details(@RequestBody List<Map<String, String>> itemLists, Model model) {
+		int index = 0;
+		for(Object list : itemLists) {
+//			System.out.println(list);
+			LinkedHashMap<String,String> item = (LinkedHashMap<String, String>) list;
+			index++;
+			for (Entry<String, String> entry : item.entrySet()) {
+			    String key = entry.getKey();
+			    Object value = entry.getValue();
+			   System.out.println(key+"["+index+"] : "+value);
+			}
+			
+		}
 		
-		System.out.println("ORDERS : " + map);
+//		
+		
 //        String prdCode = orders.getORDER_PRDCODE();
 //        System.out.println("orders : " + orders.getORDER_PRDCODE());
 //        model.addAttribute("prdInfo", prdCode);
