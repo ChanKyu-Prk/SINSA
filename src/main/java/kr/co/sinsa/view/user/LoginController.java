@@ -120,7 +120,7 @@ public class LoginController {
 		System.out.println(customerList.size());
 
 
-		return "find_ID_PWD";
+		return "find_ID_PW";
 	}
 
 
@@ -263,7 +263,7 @@ public class LoginController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return "find_ID_PWD";
+		return "find_ID_PW";
 	}
 
 
