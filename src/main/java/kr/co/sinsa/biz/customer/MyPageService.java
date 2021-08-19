@@ -25,13 +25,12 @@ public interface MyPageService {
 	public List<ProductVO> jjimList(Map<String,Object> map);
 	public int countJjimList(Map<String,Object> map);
 	
-	public List<ReviewVO> reviewList(Map<String,Object> map);
-	public List<ReviewVO> reviewListDate(Map<String,Object> map);
-	public int countReviewList(Map<String,Object> map);
-	public int countReviewListDate(Map<String,Object> map);
+	public List<Integer> reviewCheck(List<MyOrderListVO> orderList,String ID);
+
 	
 	public List<QnAVO> QnAList(Map<String,Object> map);
 	public List<QnAVO> QnAListDate(Map<String,Object> map);
+	public List<ProductVO> productMatch(List<QnAVO> QnAList);
 	public int countQnAListList(Map<String,Object> map);
 	public int countQnAListListDate(Map<String,Object> map);
 	

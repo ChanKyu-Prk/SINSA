@@ -130,34 +130,24 @@ public class MyPageServiceImpl implements MyPageService {
 	
 	
 	
-	
-	
-	
-	
-	
-	
-	
+
 	
 	
 	@Override
-	public List<ReviewVO> reviewList(Map<String, Object> map) {
-		return dao.reviewList(map);
+	public List<Integer> reviewCheck(List<MyOrderListVO> orderList, String ID) {
+		List<Integer> reviewCheckList = new ArrayList<Integer>();
+		for(int i = 0 ; i < orderList.size(); i ++) {
+			Map<String, String> map = new HashMap<String, String>();
+			map.put("ID", ID);
+			map.put("PRD_CODE", orderList.get(i).getORDER_PRDCODE());
+			map.put("ORDER_NUM", orderList.get(i).getORDER_NUM());
+			map.put("ORDER_PRDSIZE", orderList.get(i).getORDER_PRDSIZE());
+			int reviewCheck = dao.reviewCheck(map);
+			reviewCheckList.add(reviewCheck);
+		}
+		return reviewCheckList;
 	}
 
-	@Override
-	public List<ReviewVO> reviewListDate(Map<String, Object> map) {
-		return dao.reviewListDate(map);
-	}
-
-	@Override
-	public int countReviewList(Map<String, Object> map) {
-		return dao.countReviewList(map);
-	}
-
-	@Override
-	public int countReviewListDate(Map<String, Object> map) {
-		return dao.countReviewListDate(map);
-	}
 
 	
 	
@@ -168,7 +158,7 @@ public class MyPageServiceImpl implements MyPageService {
 	
 	
 	
-	
+
 	@Override
 	public List<QnAVO> QnAList(Map<String, Object> map) {
 		return dao.QnAList(map);
@@ -179,6 +169,16 @@ public class MyPageServiceImpl implements MyPageService {
 		return dao.QnAListDate(map);
 	}
 
+	@Override
+	public List<ProductVO> productMatch(List<QnAVO> QnAList) {
+		List<ProductVO> productList = new ArrayList<ProductVO>();
+		for(int i = 0 ; i < QnAList.size(); i ++) {
+			ProductVO product = dao.productMatch(QnAList.get(i).getPRD_NUM());
+			productList.add(product);
+		}
+		
+		return productList;
+	}
 	@Override
 	public int countQnAListList(Map<String, Object> map) {
 		return dao.countQnAList(map);

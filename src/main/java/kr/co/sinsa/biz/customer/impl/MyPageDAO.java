@@ -70,17 +70,8 @@ public class MyPageDAO {
 	
 	
 	
-	public List<ReviewVO> reviewList(Map<String,Object> map){
-		return SST.selectList("myInfo.reviewList",map);
-	}
-	public List<ReviewVO> reviewListDate(Map<String,Object> map){
-		return SST.selectList("myInfo.reviewListDate",map);
-	}
-	public int countReviewList(Map<String,Object> map){
-		return SST.selectOne("myInfo.countReviewList",map);
-	}
-	public int countReviewListDate(Map<String,Object> map){
-		return SST.selectOne("myInfo.countReviewListDate",map);
+	public int reviewCheck(Map<String,String> map) {
+	return SST.selectOne("myInfo.reviewCheck",map);
 	}
 	
 	
@@ -90,6 +81,9 @@ public class MyPageDAO {
 	}
 	public List<QnAVO> QnAListDate(Map<String,Object> map){
 		return SST.selectList("myInfo.QnAListDate",map);
+	}
+	public ProductVO productMatch(int prd_num){
+		return SST.selectOne("myInfo.productMatch",prd_num);
 	}
 	public int countQnAList(Map<String,Object> map){
 		return SST.selectOne("myInfo.countQnAList",map);

@@ -9,10 +9,10 @@
                             <h4>나의 쇼핑</h4>
                             <ul>
                                 <li><a href="myOrderList.do">주문 내역 조회</a></li>
-                                <li><a href="jjimList.do">찜 목록</a></li>
                                 <li><a href="#">장바구니</a></li>
-                                <li><a href="myReviewList.do">나의 상품 후기</a></li>
+                                <li><a href="myReviewList.do">상품 후기</a></li>
                                 <li><a href="myProductQnA.do">상품 문의</a></li>
+                                <li><a href="jjimList.do">찜 목록</a></li>
                                 <li><a href="recentView.do">최근 본 상품</a></li>
                            
                             </ul>
