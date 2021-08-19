@@ -329,8 +329,8 @@ input[type=number] {
 							<div class="checkout__order">
 								<h4>결제정보</h4>
 								<ul>
-									<li>총 주문 가격<span>원</span><span class="totalOrgPrice">0</span></li>
-									<li>할인<span>원</span><span>5000</span></li>
+									<li>총 주문 가격<span>원</span><span class="totalOrgPrice">-</span></li>
+									<li>할인<span>원</span><span class="totalDiscnt">-</span></li>
 									<li class="points">포인트 사용 <input type="number" placeholder="0" class="text-right usePoint" step="10"></input><span>P</span>
 									<p class="mb-1"><small>사용가능한 포인트: <span class="avPoint digits">${cusInfo.CUS_POINT} P</span></small></p>
 									</li>
@@ -339,11 +339,11 @@ input[type=number] {
 								<div class="checkout__order__total my-2 pb-0 pt-3">
 									총 결제금액
 									<span class="text-right">
-										<span class="totalPriceCon-num float-left">750000</span>
+										<span class="totalPriceCon-num float-left">-</span>
 										<span>원</span>
 									</span>
 								</div>
-								<small class="float-right mb-4">결제 시 <span class="avPoint">3,000P</span> 적립예정</small>
+								<small class="float-right mb-4">결제 시 <span class="avPoint">-P</span> 적립예정</small>
 								<button type="button" id="chckoutBtn" class="site-btn">결제하기</button>
 							</div>
 						</div>
@@ -364,7 +364,7 @@ input[type=number] {
 	$(document).ready(function() {
 		var totalPriceNoDiscnt = 0 // 최초금액
 		$(".discntNum").each(function(n){
-			totalPriceNoDiscnt += parseInt($(this).text());
+			totalPriceNoDiscnt = parseInt($(this).text());
 	    });
 		var totalPrice = 0; //할인 후 금액
 		$(".shoping__cart__total").each(function(n){
@@ -375,9 +375,13 @@ input[type=number] {
 			totalAmount += parseInt($(this).text());
 	    });
 		
+		//총 주문 가격
 		var totalOrgPrice = totalPriceNoDiscnt * totalAmount;
 		$(".totalOrgPrice").text(totalOrgPrice);
 		
+		//할인
+		var totalDiscnt = totalOrgPrice - totalPrice ;
+		$(".totalDiscnt").text(totalDiscnt);
 		
 		
 		$('input[type=radio]').on('change', function() {
