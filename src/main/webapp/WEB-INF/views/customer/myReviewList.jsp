@@ -161,6 +161,7 @@ td {
 background-color: black;
 color : white;
 padding: 6px;
+cursor: pointer;
 }
 </style>
 <title>SINSA : 나의 상품 후기</title>
@@ -302,7 +303,12 @@ padding: 6px;
 											<c:choose>
 											<c:when test="${reviewCheck[status.index] ==0}">
 											
-											<span class="write_btn">후기작성하기</span>
+											<span class="write_btn">
+											<input type="hidden" value="${list.ORDER_PRDCODE }" class="ORDER_PRDCODE">
+											<input type="hidden" value="${list.ORDER_PRDSIZE  }" class="ORDER_PRDSIZE">
+											<input type="hidden" value="${list.ORDER_NUM  }" class="ORDER_NUM ">
+											후기작성하기
+											</span>
 											
 											</c:when>
 											<c:otherwise>
@@ -459,6 +465,14 @@ padding: 6px;
 </body>
 
 <script>
+
+	$('.write_btn').on("click", function(){
+		var ORDERNUM = $(this).find('.ORDER_NUM').val();
+		var ORDERPRDSIZE = $(this).find('.ORDER_PRDSIZE').val();
+		var PRDCODE = $(this).find('.ORDER_PRDCODE').val();
+		
+		location.href = 'reviewWrite.do?ORDERNUM='+ORDERNUM+'&ORDERPRDSIZE='+ORDERPRDSIZE+'&PRDCODE='+PRDCODE;
+	});
 	$('.underline').on("mouseover", function() {
 		$(this).css("background-color", "#EDEFF2");
 	});
@@ -542,7 +556,7 @@ padding: 6px;
 	$('.serchBtn').on("click", function() {
 		var date1 = $('#date1').val();
 		var date2 = $('#date2').val();
-		location.href = 'myProductQnA.do?date1=' + date1 + '&date2=' + date2;
+		location.href = 'myReviewList.do?date1=' + date1 + '&date2=' + date2;
 	});
 </script>
 </html>
