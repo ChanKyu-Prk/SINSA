@@ -41,7 +41,6 @@ public class OrdersController {
 			CustomerVO vo = service.cusInfoView(CUS_ID);
 			model.addAttribute("cusInfo", vo);
 		}
-		System.out.println("GET이다");
 		return "/orders/checkout";
 	}
 	
@@ -57,28 +56,16 @@ public class OrdersController {
 		int index = 0;
 		
 		for(Object list : itemLists) {
-//			System.out.println(list);
 			LinkedHashMap<String,String> item = (LinkedHashMap<String, String>) list;
 			System.out.println("index : " + index);
 			System.out.println(item.get("ORDER_PRDCODE"));
 			oapVO = service.selPrdByCode(item.get("ORDER_PRDCODE"));
+			oapVO.setORDER_AMOUNT(Integer.parseInt(item.get("ORDER_AMOUNT")));
+			oapVO.setORDER_PRDSIZE(item.get("ORDER_PRDSIZE"));
 			prdList.add(oapVO);
-			
-			System.out.println(item.get("ORDER_PRDSIZE"));
-			System.out.println(item.get("ORDER_AMOUNT"));
 			index++;
 		}
-		
-		System.out.println("prdList : " + prdList);
 		model.addAttribute("prdInfo", prdList);
-		System.out.println("POST이다");
-		
-//        String prdCode = orders.getORDER_PRDCODE();
-//        System.out.println("orders : " + orders.getORDER_PRDCODE());
-//        model.addAttribute("prdInfo", prdCode);
-//
-//        if (retrieveService.getdetail(orders) != null) {
-//        }
 
     return "/orders/checkout";
 }
