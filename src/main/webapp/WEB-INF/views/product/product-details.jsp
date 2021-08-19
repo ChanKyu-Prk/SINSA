@@ -274,17 +274,12 @@ input[type=number] {
 						<script type="text/javascript">
 							$("#btnBuy").click(function(){
 								var ORDER_PRDCODE = $(".prdCode").text();
-// 								var prdSizes = $(".qty-size").text();
 								var ORDER_PRDSIZE = $(".qty-size").map(function() {
 								    return $(this).text();
 								}).get();
 								var ORDER_AMOUNT = $('.amount').map(function() {
 								    return this.value;
 								}).get();
-// 								alert("prdCode : " + prdCode + "/prdSizes : " + prdSizes + "/prdAmounts : " + prdAmounts);
-// 								for(var i=0; i<prdAmounts.length; i++){
-// 									alert(prdCode +"|"+prdSizes[i]+"|"+ prdAmounts[i]);
-// 								}
 								
 								//JSON 형태로 데이터 생성
 								var data = {};

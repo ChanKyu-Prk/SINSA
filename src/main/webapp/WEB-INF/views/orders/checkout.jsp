@@ -131,6 +131,11 @@ input:read-only{
 	font-family: adihaus;
 }
 
+.shoping__cart__item img{
+	width: 120px;
+	height: 120px;
+}
+
 </style>
 
 <script
@@ -143,16 +148,7 @@ input:read-only{
 	<section class="checkout spad">
 		<div class="container">
 			<h4 class="mb-5 font-weight-bold">주문/결제</h4>
-			<c:if test="${not empty prdInfo}">
-				<h4>테스트</h4>
-			    <c:forEach items="${prdInfo}" var="lists">
-			       ${lists.PRD_NAME}
-				</c:forEach>
-			</c:if>
-			<c:if test="${empty prdInfo}">
-				<h4>없다</h4>
-				<h4>${prdInfo}</h4>
-			</c:if>
+			
 			<div class="row">
 				<div class="col-lg-12 shoping__cart__table">
 					<table id="itemList" class="mx-auto px-0">
@@ -164,17 +160,18 @@ input:read-only{
 							</span>
 						</thead>
 						<tbody>
-						
-							<tr>
+						<c:if test="${not empty prdInfo}">
+						    <c:forEach items="${prdInfo}" var="lists">
+						    <tr>
 								<td class="shoping__cart__item"><span
 									class="row mx-auto px-0"> <span> <img
-											src="${path}/resources/img/product/details/thumb-1.jpg"
+											src="${path}/resources/prdImg/${lists.PRD_IMAGE}"
 											alt="thumbnail2">
 									</span> 
 									<span class="my-auto"> 
-										<b class="mb-1">상품이름</b>
-										<p class="mb-0">브랜드</p>
-										<p class="mb-0">250 / WHITE</p>
+										<b class="mb-1">${lists.PRD_NAME}</b>
+										<p class="mb-0">${lists.PRD_BRAND}</p>
+										<p class="mb-0">250 / ${lists.PRD_COLOR}</p>
 									</span>
 								</span></td>
 								<td class="shoping__cart__price">
@@ -188,6 +185,9 @@ input:read-only{
 								</td>
 								<td class="shoping__cart__total numFont">65000원</td>
 							</tr>
+							</c:forEach>
+						</c:if>
+							
 						</tbody>
 					</table>
 				</div>
