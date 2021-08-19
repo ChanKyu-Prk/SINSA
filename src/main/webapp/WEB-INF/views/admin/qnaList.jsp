@@ -77,9 +77,11 @@ table {
 			}
 	}
 	
-
-
+	
 </script>
+<style>
+	.hidden-col { display: none; }
+</style>
 <body>
 <jsp:include page="adminHeader.jsp" flush="true" />
 	<br><br>
@@ -107,10 +109,9 @@ table {
 		<thead>
 			<tr>
 			
-				<th>번호</th>
-				<th>상품코드</th>
-				<!-- <th>공개여부</th> -->
+				<!-- <th>번호</th> -->
 				<th>고객아이디</th>
+				<th>상품코드</th>
 				<th>제목</th>
 				<th>답변</th>
 				<th>작성일자</th>
@@ -126,10 +127,9 @@ table {
 					<c:when test="${!empty qnaList}">
 			<c:forEach var="e" items="${ qnaList }">
 				<tr onclick="javascript:selectNum(this);">
-					<td>${ e.qna_num }</td>
-					<td>${ e.prd_num }</td>
-					<%-- <td>${ e.qna_lock }</td> --%>
+					<td class="hidden-col">${ e.qna_num }</td>
 					<td>${ e.qna_cusid }</td>
+					<td>${ e.prd_num }</td>
 					<td>${ e.qna_title }</td>
 					<td>
 					<c:if test="${!empty fn:trim(e.qna_answer)}">답변완료</c:if>

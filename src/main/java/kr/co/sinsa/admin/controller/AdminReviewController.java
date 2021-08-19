@@ -84,5 +84,19 @@ public class AdminReviewController {
 		String referer = request.getHeader("Referer");
 		return "redirect:"+referer;
 	}
+	
+	@RequestMapping("/admin/reviewUpdate")
+	public String reviewUpdate(HttpServletRequest request, Model model, AdminReviewVO vo) {
+		model.addAttribute("rev_num", vo.getRev_num());
+		String referer = request.getParameter("referer");
+		reviewService.review_update(vo);
+		return "redirect:"+referer;
+	}
+	
+	@RequestMapping("/admin/reviewDetail")
+	public String reviewDetail(Model model, @RequestParam int rev_num) {
+		model.addAttribute("reviewInfo", reviewService.review_info(rev_num));
+		return "admin/reviewDetail";
+	}
 
 }

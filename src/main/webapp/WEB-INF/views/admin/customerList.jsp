@@ -6,7 +6,6 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-
 </head>
 <meta charset="UTF-8">
 <title>회원목록</title>
@@ -25,7 +24,9 @@ table {
 }
 </style>
 
-
+<!-- <style>
+	.hidden-col { display: none; }
+</style> -->
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script type="text/javascript">
 
@@ -75,11 +76,13 @@ table {
 			  alert('삭제할 회원을 선택하십시오.');
 			}
 	}
-
+	
 </script>
 
 
-
+<style>
+	.hidden-col { display: none; }
+</style>
 </head>
 <body>
 <jsp:include page="adminHeader.jsp" flush="true" />
@@ -111,7 +114,7 @@ table {
 				style="text-align: center; border: 0px solid #dddddd">
 		<thead>
 			<tr>
-				<th>번호</th>
+				<!-- <th>번호</th> -->
 				<th>아이디</th>
 				<th>이름</th>
 				<th>성별</th>
@@ -133,13 +136,13 @@ table {
 					<c:when test="${!empty customerList}">
 			<c:forEach var="row" items="${customerList }">
 		<tr onclick="javascript:selectNum(this);">
-			<td>${row.CUS_NUM }</td>
+			<td class="hidden-col">${row.CUS_NUM }</td>
 			<td>${row.CUS_ID }</td>
 			<td>${row.CUS_NAME }</td>
 			<td>${row.CUS_GENDER }</td>
 			<td>${row.CUS_EMAIL }</td>
 			<td>${row.CUS_ADDR }</td>
-			<td>${row.CUS_TEL }</td>
+			<td>${row.CUS_TEL }</td> 
 			<td>${row.CUS_BIRTH }</td>
 			<td>${row.CUS_POINT }</td>
 			<td>

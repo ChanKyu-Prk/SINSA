@@ -24,7 +24,7 @@ public class QnaController {
 	
 	
 	@RequestMapping("/admin/qnaUpdate")
-	public String prdUpdate(HttpServletRequest request, Model model, QnaVO vo) {
+	public String qnaUpdate(HttpServletRequest request, Model model, QnaVO vo) {
 		model.addAttribute("qna_num", vo.getQna_num());
 		String referer = request.getParameter("referer");
 		qnaService.qna_update(vo);

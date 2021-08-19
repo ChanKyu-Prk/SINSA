@@ -61,10 +61,10 @@ function selectNum(target) {
 
 function reviewModify() {
 	if (no != "") {
-		location.href = 'reviewdetail?rev_num=' + no;
+		location.href = 'reviewDetail?rev_num=' + no;
 		
 	} else {
-	  alert('수정할 리뷰를 선택하십시오.');
+	  alert('자세히 보실 리뷰를 선택하십시오.');
 	}
 }
 
@@ -77,10 +77,10 @@ function reviewDelete() {
 		  alert('삭제할 리뷰를 선택하십시오.');
 		}
 }
-
-
-
 </script>
+<style>
+	.hidden-col { display: none; }
+</style>
 <body>
 <jsp:include page="adminHeader.jsp" flush="true" />
 	<br><br>
@@ -91,7 +91,7 @@ function reviewDelete() {
 			<table style="border: 0px">
 			<tr>
 			<td align="right">
-			<input type="button" class="btn btn-primary btn-sm"	onclick="reviewModify()" value="답변하기" />
+			<input type="button" class="btn btn-primary btn-sm"	onclick="reviewModify()" value="상세보기" />
 			&nbsp;
 			<input type="button" class="btn btn-danger btn-sm" onclick="javascript:reviewDelete()" value="리뷰삭제" />
 			&nbsp;
@@ -109,13 +109,12 @@ function reviewDelete() {
 		<thead>
 			<tr>
 			
-				<th>번호</th>
+				<!-- <th>번호</th> -->
 				<th>고객아이디</th>
 				<th>상품코드</th>
 				<th>리뷰제목</th>
 				<th>리뷰내용</th>
 				<th>별점</th>
-				<th>이미지</th>
 				<th>작성일자</th>
 			</tr>
 		</thead>
@@ -129,14 +128,14 @@ function reviewDelete() {
 					<c:when test="${!empty reviewList}">
 			<c:forEach var="e" items="${ reviewList }">
 				<tr onclick="javascript:selectNum(this);">
-					<td>${ e.rev_num }</td>
+					<td class="hidden-col">${ e.rev_num }</td>
 					<%-- <td>${ e.rev_regdate }</td> --%>
 					<td>${ e.rev_cusid }</td>
 					<td>${ e.rev_prdcode }</td>
 					<td>${ e.rev_title }</td>
 					<td>${ e.rev_content }</td>
 					<td>${ e.rev_star }</td>
-					<td>${ e.rev_image }</td>
+				
 					<td>
 			<fmt:formatDate value="${e.rev_regdate}" pattern="YYYY-MM-dd" />
 			</td> 
