@@ -154,14 +154,15 @@ input:read-only{
 					<table id="itemList" class="mx-auto px-0">
 						<thead>
 							<span class="tableHead row mx-auto px-0 mb-2">
-								<h5>주문리스트</h5> <a href="#"
+								<h5>주문리스트</h5> 
+								<button id="editOrder"
 								class="ml-auto p-2 primary-btn cart-btn cart-btn-right">주문정보
-									수정</a>
+									수정</button>
 							</span>
 						</thead>
 						<tbody>
 						<c:if test="${not empty prdInfo}">
-						    <c:forEach items="${prdInfo}" var="lists" varstatus="status">
+						    <c:forEach items="${prdInfo}" var="lists">
 						    <tr>
 								<td class="shoping__cart__item"><span
 									class="row mx-auto px-0"> <span> <img
@@ -190,7 +191,6 @@ input:read-only{
 								</td>
 								<td class="shoping__cart__quantity">
 									<p class="mb-1">
-									<c:set var="orgPrice" value="${lists.PRD_PRICE}"/>
 										수량:<span class="amountNum">${lists.ORDER_AMOUNT}</span>
 									</p> <b class="mb-0">무료배송</b>
 								</td>
@@ -315,15 +315,19 @@ input:read-only{
 							<div class="checkout__order">
 								<h4>결제정보</h4>
 								<ul>
-									<li>총 주문 가격 <span class="totalOrgPrice">000원</span></li>
+									<li>총 주문 가격 <span class="totalOrgPrice">0원</span></li>
 									<li>할인 <span>5000원</span></li>
 									<li class="points">포인트 사용 <input placeholder="0" class="text-right"></input><span>P</span>
-									<p class="mb-1"><small>사용가능한 포인트: <span class="avPoint">5000 P</span></small></p>
+									<p class="mb-1"><small>사용가능한 포인트: <span class="avPoint">${cusInfo.CUS_POINT} P</span></small></p>
 									</li>
 									<li>배송비 <span>무료</span></li>
 								</ul>
 								<div class="checkout__order__total my-2 pb-0 pt-3">
-									총 결제금액 <span>750000원</span>
+									총 결제금액
+									<span class="text-right">
+										<span class="totalPriceCon-num float-left">750000</span>
+										<span>원</span>
+									</span>
 								</div>
 								<small class="float-right mb-4">결제 시 <span class="avPoint">3,000P</span> 적립예정</small>
 								<button type="submit" id="chckoutBtn" class="site-btn">결제하기</button>
@@ -357,8 +361,8 @@ input:read-only{
 			} else if(chckdRadio == "new"){
 				$('input.newDelivInput').val('');
 				$('#ORDER_RECEIVER, #ORDER_TEL').removeAttr('readonly');
-			}					
-
+			}		
+			
 			// Iamport 결제
 			$("#chckoutBtn").click(function () {
 
