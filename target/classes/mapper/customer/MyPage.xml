@@ -182,17 +182,25 @@
 
 
 
-	<select id="reviewCheck" parameterType="Map"
-	resultType="int">
-select count(*) from review 
-where 
-REV_PRDCODE = #{PRD_CODE} and 
-REV_ORDERNUM = #{ORDER_NUM} 
-and
- REV_ORDERPRDSIZE = #{ORDER_PRDSIZE};
+	<select id="reviewCheck" parameterType="Map" resultType="int">
+		select count(*) from review
+		where
+		REV_PRDCODE = #{PRD_CODE} and
+		REV_ORDERNUM = #{ORDER_NUM}
+		and
+		REV_ORDERPRDSIZE = #{ORDER_PRDSIZE};
 	</select>
 
-
+	<select id="productSerch"
+	resultType="kr.co.sinsa.biz.product.ProductVO">
+		select
+		PRD_IMAGE,
+		PRD_CODE ,
+		PRD_NAME ,
+		PRD_BRAND
+		from product
+		where PRD_CODE = #{value};
+	</select>
 
 
 	<select id="QnAList" parameterType="Map"
@@ -230,14 +238,14 @@ and
 	</select>
 
 	<select id="productMatch"
-	resultType="kr.co.sinsa.biz.product.ProductVO">
-	select
-	PRD_CODE ,
-	PRD_NAME ,
-	PRD_BRAND ,
-	PRD_IMAGE 
-	from product
-	where PRD_NUM = #{value};
+		resultType="kr.co.sinsa.biz.product.ProductVO">
+		select
+		PRD_CODE ,
+		PRD_NAME ,
+		PRD_BRAND ,
+		PRD_IMAGE
+		from product
+		where PRD_NUM = #{value};
 	</select>
 
 	<select id="countQnAList" parameterType="Map" resultType="int">

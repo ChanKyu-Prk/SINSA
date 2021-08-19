@@ -26,7 +26,7 @@ public interface MyPageService {
 	public int countJjimList(Map<String,Object> map);
 	
 	public List<Integer> reviewCheck(List<MyOrderListVO> orderList,String ID);
-
+	public ProductVO productSerch(String PRDCODE);
 	
 	public List<QnAVO> QnAList(Map<String,Object> map);
 	public List<QnAVO> QnAListDate(Map<String,Object> map);
