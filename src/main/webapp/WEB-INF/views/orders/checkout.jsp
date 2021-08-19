@@ -329,8 +329,8 @@ input[type=number] {
 							<div class="checkout__order">
 								<h4>결제정보</h4>
 								<ul>
-									<li>총 주문 가격 <span class="totalOrgPrice">0원</span></li>
-									<li>할인 <span>5000원</span></li>
+									<li>총 주문 가격<span>원</span><span class="totalOrgPrice">0</span></li>
+									<li>할인<span>원</span><span>5000</span></li>
 									<li class="points">포인트 사용 <input type="number" placeholder="0" class="text-right usePoint" step="10"></input><span>P</span>
 									<p class="mb-1"><small>사용가능한 포인트: <span class="avPoint digits">${cusInfo.CUS_POINT} P</span></small></p>
 									</li>
@@ -362,6 +362,24 @@ input[type=number] {
 	<script type="text/javascript">
 	
 	$(document).ready(function() {
+		var totalPriceNoDiscnt = 0 // 최초금액
+		$(".discntNum").each(function(n){
+			totalPriceNoDiscnt += parseInt($(this).text());
+	    });
+		var totalPrice = 0; //할인 후 금액
+		$(".shoping__cart__total").each(function(n){
+			totalPrice += parseInt($(this).text());
+	    });
+		var totalAmount = 0; //총 주문 수량
+		$(".amountNum").each(function(n){
+			totalAmount += parseInt($(this).text());
+	    });
+		
+		var totalOrgPrice = totalPriceNoDiscnt * totalAmount;
+		$(".totalOrgPrice").text(totalOrgPrice);
+		
+		
+		
 		$('input[type=radio]').on('change', function() {
 			var chckdRadio = $('input[type=radio]:checked').val();
 			if(chckdRadio == "default"){
