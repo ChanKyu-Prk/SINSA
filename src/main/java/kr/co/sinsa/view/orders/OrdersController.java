@@ -58,7 +58,7 @@ public class OrdersController {
 		String ORDER_PRDSIZE = null;
 		String ORDER_AMOUNT = null;
 		OrdersAndProductVO oapVO = null;
-		List<OrdersAndProductVO> prdList = new ArrayList<>();
+		List<OrdersAndProductVO> prdList = new ArrayList();
 				
 		int index = 0;
 		
