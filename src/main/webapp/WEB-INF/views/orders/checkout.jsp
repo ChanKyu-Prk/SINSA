@@ -171,7 +171,7 @@ input:read-only{
 									<span class="my-auto"> 
 										<b class="mb-1">${lists.PRD_NAME}</b>
 										<p class="mb-0">${lists.PRD_BRAND}</p>
-										<p class="mb-0">250 / ${lists.PRD_COLOR}</p>
+										<p class="mb-0">${lists.ORDER_PRDSIZE} / ${lists.PRD_COLOR}</p>
 									</span>
 								</span></td>
 								<td class="shoping__cart__price">
@@ -189,7 +189,7 @@ input:read-only{
 								</td>
 								<td class="shoping__cart__quantity">
 									<p class="mb-1">
-										수량:<span class="amountNum">1</span>
+										수량:<span class="amountNum">${lists.ORDER_AMOUNT}</span>
 									</p> <b class="mb-0">무료배송</b>
 								</td>
 								<td class="shoping__cart__total numFont">65000원</td>
