@@ -136,10 +136,24 @@ input:read-only{
 	height: 120px;
 }
 
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button{
+  -webkit-appearance: none;
+  margin: 0;
+}
+	
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
 </style>
 
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<!-- IamPort -->
+<script type="text/javascript" src="https://service.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 </head>
 
 <body>
@@ -317,8 +331,8 @@ input:read-only{
 								<ul>
 									<li>총 주문 가격 <span class="totalOrgPrice">0원</span></li>
 									<li>할인 <span>5000원</span></li>
-									<li class="points">포인트 사용 <input placeholder="0" class="text-right"></input><span>P</span>
-									<p class="mb-1"><small>사용가능한 포인트: <span class="avPoint">${cusInfo.CUS_POINT} P</span></small></p>
+									<li class="points">포인트 사용 <input type="number" placeholder="0" class="text-right usePoint" step="10"></input><span>P</span>
+									<p class="mb-1"><small>사용가능한 포인트: <span class="avPoint digits">${cusInfo.CUS_POINT} P</span></small></p>
 									</li>
 									<li>배송비 <span>무료</span></li>
 								</ul>
@@ -330,7 +344,7 @@ input:read-only{
 									</span>
 								</div>
 								<small class="float-right mb-4">결제 시 <span class="avPoint">3,000P</span> 적립예정</small>
-								<button type="submit" id="chckoutBtn" class="site-btn">결제하기</button>
+								<button type="button" id="chckoutBtn" class="site-btn">결제하기</button>
 							</div>
 						</div>
 					</div>
@@ -361,74 +375,87 @@ input:read-only{
 			} else if(chckdRadio == "new"){
 				$('input.newDelivInput').val('');
 				$('#ORDER_RECEIVER, #ORDER_TEL').removeAttr('readonly');
-			}		
+			}
 			
-			// Iamport 결제
-			$("#chckoutBtn").click(function () {
-
-			var IMP = window.IMP; // 생략가능
-	        IMP.init('imp39263192'); // 'iamport' 대신 부여받은 "가맹점 식별코드"를 사용
-	        var msg;
-	        var finalPrice = $(".totalPriceCon-num").text().replace(',', ''); 
-	        
-	        IMP.request_pay({
-	            pg : 'kakaopay',
-	            pay_method : 'card',
-	            merchant_uid : 'merchant_' + new Date().getTime(),
-	            name : '[SINSA 상품 결제 ]상품 이름',
-	            amount : finalPrice,
-	            buyer_email : '${cusInfo.CUS_EMAIL}',
-	            buyer_name : '${cusInfo.CUS_NAME}',
-	            buyer_tel : '${cusInfo.CUS_TEL}',
-	            buyer_addr : '${cusInfo.CUS_DELIV_ADDR}',
-	            buyer_postcode : '브랜드', // POSTCODE 받는 법
-	            //m_redirect_url : 'http://www.naver.com'
-	            /*
-				모바일 결제시,
-				결제가 끝나고 랜딩되는 URL을 지정
-				(카카오페이, 페이코, 다날의 경우는 필요없음. PC와 마찬가지로 callback함수로 결과가 떨어짐)
-				*/
-				
-	        }, function(rsp) {
-	            if ( rsp.success ) {
-	                //[1] 서버단에서 결제정보 조회를 위해 jQuery ajax로 imp_uid 전달하기
-	                jQuery.ajax({
-	                    url: "/payments/complete", //cross-domain error가 발생하지 않도록 주의해주세요
-	                    type: 'POST',
-	                    dataType: 'json',
-	                    data: {
-	                        imp_uid : rsp.imp_uid
-	                        //기타 필요한 데이터가 있으면 추가 전달
-	                    }
-	                }).done(function(data) {
-	                    //[2] 서버에서 REST API로 결제정보확인 및 서비스루틴이 정상적인 경우
-	                    if ( everythings_fine ) {
-	                        msg = '결제가 완료되었습니다.';
-	                        msg += '\n고유ID : ' + rsp.imp_uid;
-	                        msg += '\n상점 거래ID : ' + rsp.merchant_uid;
-	                        msg += '\결제 금액 : ' + rsp.paid_amount;
-	                        msg += '카드 승인번호 : ' + rsp.apply_num;
-	                        
-	                        alert(msg);
-	                    } else {
-	                        //[3] 아직 제대로 결제가 되지 않았습니다.
-	                        //[4] 결제된 금액이 요청한 금액과 달라 결제를 자동취소처리하였습니다.
-	                    }
-	                });
-	                //성공시 이동할 페이지
-<%-- 					                location.href='<%=request.getContextPath()%>/order/paySuccess?msg='+msg; --%>
-	            } else {
-	                msg = '결제에 실패하였습니다.';
-	                msg += '에러내용 : ' + rsp.error_msg;
-	                //실패시 이동할 페이지
-<%-- 					                location.href="<%=request.getContextPath()%>/order/payFail"; --%>
-	                alert(msg);
-	            }
-	        });
-			});
-		});
+			function numberWithDigits() {
+				$(".digits").each(function() {
+					$(this).text( $(this).text().replace(/\B(?=(\d{3})+(?!\d))/g, ','));
+				});
+			}
+			
+			function noDigits() {
+				$(".digits").each(function() {
+					$(this).text( $(this).text().replaceAll(',', ''));
+				});
+			}
 	 });
 	
+		// Iamport 결제
+		$("#chckoutBtn").click(function () {
+
+		var IMP = window.IMP; // 생략가능
+        IMP.init('imp39263192');
+        var msg;
+        var finalPrice = $(".totalPriceCon-num").text().replace(',', '');
+        
+        IMP.request_pay({
+            pg : 'inicis',
+            pay_method : 'card',
+            merchant_uid : 'merchant_' + new Date().getTime(),
+            name : '[SINSA 상품 결제 ]상품 이름',
+            amount : finalPrice,
+            buyer_email : '${cusInfo.CUS_EMAIL}',
+            buyer_name : '${cusInfo.CUS_NAME}',
+            buyer_tel : '${cusInfo.CUS_TEL}',
+            buyer_addr : '배달주소',
+            buyer_postcode : '포스트코드', // POSTCODE 받는 법
+            //m_redirect_url : 'http://www.naver.com'
+            /*
+			모바일 결제시,
+			결제가 끝나고 랜딩되는 URL을 지정
+			(카카오페이, 페이코, 다날의 경우는 필요없음. PC와 마찬가지로 callback함수로 결과가 떨어짐)
+			*/
+			
+        }, function(rsp) {
+            if ( rsp.success ) {
+                //[1] 서버단에서 결제정보 조회를 위해 jQuery ajax로 imp_uid 전달하기
+                jQuery.ajax({
+                    url: "/payments/complete", //cross-domain error가 발생하지 않도록 주의해주세요
+                    type: 'POST',
+                    dataType: 'json',
+                    data: {
+                        imp_uid : rsp.imp_uid
+                        //기타 필요한 데이터가 있으면 추가 전달
+                    }
+                }).done(function(data) {
+                    //[2] 서버에서 REST API로 결제정보확인 및 서비스루틴이 정상적인 경우
+                    if ( everythings_fine ) {
+                        msg = '결제가 완료되었습니다.';
+                        msg += '\n고유ID : ' + rsp.imp_uid;
+                        msg += '\n상점 거래ID : ' + rsp.merchant_uid;
+                        msg += '\결제 금액 : ' + rsp.paid_amount;
+                        msg += '카드 승인번호 : ' + rsp.apply_num;
+                        
+                        alert(msg);
+                    } else {
+                        //[3] 아직 제대로 결제가 되지 않았습니다.
+                        //[4] 결제된 금액이 요청한 금액과 달라 결제를 자동취소처리하였습니다.
+                    }
+                });
+                //성공시 이동할 페이지
+<%-- 					                location.href='<%=request.getContextPath()%>/order/paySuccess?msg='+msg; --%>
+            } else {
+                msg = '결제에 실패하였습니다.';
+                msg += '에러내용 : ' + rsp.error_msg;
+                //실패시 이동할 페이지
+<%-- 					                location.href="<%=request.getContextPath()%>/order/payFail"; --%>
+                alert(msg);
+            }
+        });
+		});
+		
+	});
+		
 	function findAddr() {
 		new daum.Postcode(
 				{
