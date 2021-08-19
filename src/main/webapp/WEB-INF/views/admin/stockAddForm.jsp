@@ -70,10 +70,11 @@ input.form-control {
 				</tr>
 			</thead>
 			<tbody>
+				<form:form method="post" action="stockUpdate"
+							modelAttribute="stockInfo" name="addform">
 				<c:forEach var="e" items="${ stockList }" varStatus="status">
 					<tr>
-						<form:form method="post" action="stockUpdate"
-							modelAttribute="stockInfo" name="addform">
+						
 							<form:hidden path="stock_prdcode" value="${ e.stock_prdcode }" />
 							<td class="code">${ e.stock_prdcode }</td>
 							<td><input type=number value="0" min="0" class="form-control"
@@ -108,9 +109,9 @@ input.form-control {
 								class="stock${status.count} form-control" name="stock_290" onchange="javascript:sum('total'+'${status.count}');"></td>
 							<td><input type=number value="0" min="0" class="form-control"
 								id="total${status.count}" readonly/></td>
-							<td><input type="button" class="btn btn-primary" value="입고" onclick="javascript:add(${e.total});"/></td>
+							<td><input type="submit" class="btn btn-primary" value="입고" /></td>
 							
-						</form:form>
+						
 					</tr>
 					
 					<script>
@@ -131,6 +132,7 @@ input.form-control {
 				    }
 					</script>
 				</c:forEach>
+				</form:form>
 			</tbody>
 		</table>
 <%-- 		<ul class="pagination">

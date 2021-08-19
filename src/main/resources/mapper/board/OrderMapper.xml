@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//en"
+ "http://mybaits.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="OrderDAO">
+
+	<select id="order_log" parameterType="hashmap" resultType="kr.co.sinsa.admin.vo.StockLogVO">
+		select inputdate, code, order_220, order_225, order_230, order_235, order_240, order_245, order_250, order_255, order_260, order_265, order_270, order_275, order_280, order_285, order_290, order_sum
+			from stocklog
+			where code like '%${searchWord}%' 
+			and
+			(date(inputdate) between '${sdate}' and '${edate}') order by inputdate desc limit ${page}, 10;
+			
+			
+	</select>
+	
+	<select id="order_log_count" parameterType="hashmap" resultType="int">
+		select count(*) from stocklog
+			where code like '%${searchWord}%'
+			and
+			(date(inputdate) between '${sdate}' and '${edate}');
+			
+	</select>
+
+	<select id="order_list" parameterType="hashmap" resultType="kr.co.sinsa.admin.vo.OrderVO">
+		select order_num, order_cusid, order_prdcode, order_prdname, order_prdsize, order_amount, order_receiver, order_tel, order_addr, 
+			order_price, order_state, order_memo, order_regdate, order_delivcomp, order_delivnum, order_usepoint
+			from orders
+			where ${fieldName} like '%${searchWord}%' 
+			and
+			(date(order_regdate) between '${sdate}' and '${edate}')
+			order by order_regdate desc limit ${page}, 10;
+			
+	</select>
+			
+	<select id="order_list_count" parameterType="hashmap" resultType="int">
+		select count(*) from orders
+			where ${fieldName} like '%${searchWord}%'
+			and
+			(date(order_regdate) between '${sdate}' and '${edate}');
+	</select>
+
+	<select id="sales" parameterType="hashmap" resultType="int">
+		select sum(order_price) from orders
+			where ${fieldName} like '%${searchWord}%'
+			and
+			(date(order_regdate) between '${sdate}' and '${edate}');
+	</select>
+	
+	<select id="shippingreq" resultType="int">
+		select count(*) from orders
+			where order_state='결제완료';
+	</select>
+	
+	<select id="cancelreq" resultType="int">
+		select count(*) from orders
+			where order_state='취소요청';
+	</select>
+	
+	<select id="order_pick_list" parameterType="hashmap" resultType="kr.co.sinsa.admin.vo.OrderVO">
+		select s.order_prdcode, p.prd_name, s.order_220, s.order_225, s.order_230, s.order_235, s.order_240, s.order_245, s.order_250, s.order_255, s.order_260, s.order_265, s.order_270, s.order_275, s.order_280, s.order_285, s.order_290
+			from stock as s
+			left join product as p
+			on s.order_prdcode = p.prd_code
+			where order_prdcode in (${pick})
+			
+	</select>
+	
+	<select id="order_pick_count" parameterType="hashmap" resultType="int">
+		select count(*) from stock as s
+			left join product as p
+			on s.order_prdcode = p.prd_code
+			where order_prdcode in (${pick})
+	</select>
+
+	<insert id="order_insert" parameterType="kr.co.sinsa.admin.vo.OrderVO">
+		insert into stock(order_220, order_225, order_230, order_235, order_240, order_245, order_250, order_255,
+			order_260, order_265, order_270, order_275, order_280, order_285, order_290 )
+			values (#{order_220}, #{order_225},	#{order_230}, #{order_235},	#{order_240}, #{order_245},	#{order_250}, #{order_255},
+			#{order_260}, #{order_265},	#{order_270}, #{order_275},	#{order_280}, #{order_285},	#{order_290})
+
+	</insert>
+
+	<select id="order_info" resultType="kr.co.sinsa.admin.vo.OrderVO">
+		select * from stock where order_prdcode=#{order_prdcode}
+	
+
+	</select>
+
+	<update id="deliv_update" parameterType="kr.co.sinsa.admin.vo.OrderVO">
+		update orders set order_delivcomp='${order_delivcomp}',
+			order_delivnum=${order_delivnum},
+			order_state='배송중'
+ 			where order_num=${order_num};
+	
+
+		update stock set stock_${order_prdsize}=stock_${order_prdsize}-${order_amount}
+			where stock_prdcode='${order_prdcode}';
+			
+	</update>
+
+	<delete id="order_delete">
+		delete from stock where order_prdcode=#{order_prdcode}
+
+	</delete>
+
+
+</mapper>
