@@ -63,11 +63,11 @@ div {
 						<td nowrap>리뷰내용</td>
 						<td rowspan="10"><form:textarea path="rev_content"
 								style="height: 200px; width: 500px;" readonly="true"/></td>		
+								
+								
 					</tr>
 				</table>
 				<div align="center">
-					<!-- <input type="button" class="btn btn-danger btn-sm" onclick="javascript:reviewDelete()" value="리뷰삭제" /> -->
-					<!-- <input type="submit" class="btn btn-primary" value="변경사항저장"> -->
 					<button class="btn btn-outline-primary" onclick="history.go(-1);">뒤로</button>
 				</div>
 				<br><br>
