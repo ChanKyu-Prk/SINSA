@@ -51,8 +51,10 @@
 
 .tabnav {
 	font-size: 0;
-	width: 600px;
+	width: 602px;
 	border: 1px solid #ddd;
+	border-right: 0px solid #ddd;
+/*  	border-bottom: 3px solid black;  */
 }
 
 .tabnav li {
@@ -72,14 +74,19 @@
 }
 
 .tabnav li a.active:before {
-	background: #7ea21e;
+/* 	background: black; */
+	
 }
 
 .tabnav li a.active {
-	border-bottom: 1px solid #fff;
+	border-bottom: 3px solid #fff !important;
+/* 	border-right: 3px solid black; */
+/* 	border-left: 3px solid black; */
+/* 	border-top: 3px solid black; */
 }
 
 .tabnav li a {
+/* 	border-bottom: 3px solid black; */
 	position: relative;
 	display: block;
 	background: #f8f8f8;
@@ -88,17 +95,18 @@
 	line-height: 46px;
 	text-decoration: none;
 	font-size: 16px;
+	width: 299px;
 }
 
 .tabnav li a:hover, .tabnav li a.active {
 	background: #fff;
-	color: #7ea21e;
+/* 	color: black; */
 }
 
 .tabcontent {
 	padding: 20px;
 	height: 400px;
-	border: 1px solid #ddd;
+	border: 0px solid #ddd;
 	border-top: none;
 }
 
@@ -120,9 +128,6 @@
 
 
 	<div class="wrapper">
-		<!-- <div class="container"> -->
-		<!-- <div class="row"> -->
-		<!-- <div class="col-lg-10"> -->
 		<div class="tab">
 			<ul class="tabnav">
 				<li><a href="#tab01">아이디 찾기</a></li>
@@ -136,20 +141,15 @@
 							<label for="username">이름</label> <input type="text"
 								name="input_CUS_NAME_forID" id="CUS_NAME" class="form-control input_CUS_NAME_forID"
 								placeholder="이름을 입력해주세요">
-
+							<div id="fill-out-name"></div>
 						</div>
 						
-						<div id="fill-out-name"></div>
-
-				
-
-
-
+						
 
 
 						<div class="form-group last mb-3">
 							<label for="email">이메일</label> <input type="text"
-								name="input_CUS_EMAIL_forID" id="CUS_EMAIL" class="form-control"
+								name="input_CUS_EMAIL_forID" id="CUS_EMAIL" class="form-control input_CUS_EMAIL_forID"
 								placeholder="이메일을 입력해주세요">
 						</div>
 						<div class="form-group">
@@ -178,8 +178,6 @@
 						</div>
 					</form>
 				</div>
-
-
 
 
 
@@ -232,9 +230,6 @@
 
 			</div>
 		</div>
-		<!-- 	</div> -->
-		<!-- 	</div> -->
-		<!-- 	</div> -->
 	</div>
 	<!--tab-->
 
@@ -244,20 +239,6 @@
 
 
 	<jsp:include page="footer.jsp" />
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -287,8 +268,15 @@
 			
 			
 
-			if(codeData.CUS_NAME.length < 1){
-				document.getElementById('fill-out-name').innerHTML = "이름을 입력해주세요";
+			if($('input[name="input_CUS_NAME_forID"]').val() == ""){
+				$('input[name="input_CUS_NAME_forID"]').focus();
+				alert('이름을 입력해주세요')
+// 				document.getElementById('fill-out-name').innerHTML = "이름을 입력해주세요";
+// 				$('.input_CUS_NAME_forID').css("border-color", "red");
+			}else if($('input[name="input_CUS_EMAIL_forID"]').val() == ""){
+				$('input[name="input_CUS_EMAIL_forID"]').focus();
+				alert('이메일을 입력해주세요')
+// 				$('.input_CUS_EMAIL_forID').css("border-color", "red");
 			}
 			
 			
@@ -316,7 +304,7 @@
 				} else {
 					count++;
 					
-					if (count === arr.length) {
+					if (count === arr.length && codeData.CUS_NAME.length >= 1 && codeData.CUS_EMAIL.length >= 1) {
 						alert("입력정보와 일치하는 회원정보가 존재하지 않습니다.");
 					}
 

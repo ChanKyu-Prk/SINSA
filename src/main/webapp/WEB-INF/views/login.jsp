@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-    
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+	pageEncoding="UTF-8"%>
+
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="path" value="${pageContext.request.contextPath}" />
@@ -11,30 +11,37 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap" rel="stylesheet">
+<!-- Required meta tags -->
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link
+	href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap"
+	rel="stylesheet">
 
-    <link rel="stylesheet" href="${path}/resources/login_resources/fonts/icomoon/style.css">
+<link rel="stylesheet"
+	href="${path}/resources/login_resources/fonts/icomoon/style.css">
 
-    <link rel="stylesheet" href="${path}/resources/login_resources/css/owl.carousel.min.css">
+<link rel="stylesheet"
+	href="${path}/resources/login_resources/css/owl.carousel.min.css">
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="${path}/resources/login_resources/css/bootstrap.min.css">
-    
-    <!-- Style -->
-    <link rel="stylesheet" href="${path}/resources/login_resources/css/style.css">
+<!-- Bootstrap CSS -->
+<link rel="stylesheet"
+	href="${path}/resources/login_resources/css/bootstrap.min.css">
 
-    <title>Login #5</title>
-    
-    <style>
-    .login{
-    margin:100px 0px !important;
-    }
-    </style>
-    
-    <%
+<!-- Style -->
+<link rel="stylesheet"
+	href="${path}/resources/login_resources/css/style.css">
+
+<title>Login #5</title>
+
+<style>
+.login {
+	margin: 100px 0px !important;
+}
+</style>
+
+<%
     	Cookie[] cookie = request.getCookies();
     	String CUS_ID = "";
     	String CUS_PWD = "";
@@ -56,74 +63,84 @@
     		}
     	}
     %>
-    
-    
-  </head>
-  <body>
-  <jsp:include page="header.jsp"/>
 
-<!--   <div class="d-md-flex half"> -->
-<%--     <div class="bg" style="background-image: url('${path}/resources/login_resources/images/bg_1.jpg');"></div> --%>
-    <div class="contents">
+<style>
+.find_id_pw{
+	color: #6c757d !important;
+}
+</style>
 
-      <div class="container">
-        <div class="row align-items-center justify-content-center">
-          <div class="col-md-12 login">
-            <div class="form-block mx-auto">
-              <div class="text-center mb-5">
-                <h3 class="text-uppercase"><strong>로그인</strong></h3>
-              </div>
-              <form action="login.do" method="post" name="loginFrm">
-                <div class="form-group first">
-                  <label for="username">Username</label>
-                  <input type="text" name="CUS_ID" class="form-control" placeholder="아이디를 입력해주세요" id="username" value="<%=CUS_ID%>">
-                  
-                </div>
-                <div class="form-group last mb-3">
-                  <label for="password">Password</label>
-                  <input type="password" name="CUS_PWD" class="form-control" placeholder="비밀번호를 입력해주세요" id="password" value="<%=CUS_PWD%>">
-                </div>
-                
-                <div class="d-sm-flex mb-5 align-items-center">
-                  <label class="control control--checkbox mb-3 mb-sm-0"><span class="caption">아이디 저장</span>
-                    <input type="checkbox" name="id_rem" <%if(CUS_ID.length()>1) out.println("checked"); %>/>
-                    <div class="control__indicator"></div>
-                    
-                  </label>
-                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                  <label class="control control--checkbox mb-3 mb-sm-0"><span class="caption">비밀번호 저장</span>
-                    <input type="checkbox" name="pwd_rem" <%if(CUS_PWD.length()>1) out.println("checked"); %>/>
-                    <div class="control__indicator"></div>
-                    
-                  </label>
-                  <span class="ml-auto"><a href="find_ID_PWD.do" class="forgot-pass">Forgot Password</a></span> 
-                </div>
+</head>
+<body>
+	<jsp:include page="header.jsp" />
 
-                <input onclick="checklogin()" type="button" value="Log In" class="btn btn-block py-2 btn-primary">
+	<!--   <div class="d-md-flex half"> -->
+	<%--     <div class="bg" style="background-image: url('${path}/resources/login_resources/images/bg_1.jpg');"></div> --%>
+	<div class="contents">
 
-                <span class="text-center my-3 d-block">or</span>
-                
-                
-                <div id="naver_id_login" style="text-align: center">
-					<a href="${url}"> <img width="223"
-						src="https://developers.naver.com/doc/review_201802/CK_bEFnWMeEBjXpQ5o8N_20180202_7aot50.png" />
-					</a>
+		<div class="container">
+			<div class="row align-items-center justify-content-center">
+				<div class="col-md-12 login">
+					<div class="form-block mx-auto">
+						<div class="text-center mb-5">
+							<h3 class="text-uppercase">
+								<strong>로그인</strong>
+							</h3>
+						</div>
+						<form action="login.do" method="post" name="loginFrm">
+							<div class="form-group first">
+								<label for="username">Username</label> <input type="text"
+									name="CUS_ID" class="form-control" placeholder="아이디를 입력해주세요"
+									id="username" value="<%=CUS_ID%>">
+
+							</div>
+							<div class="form-group last mb-3">
+								<label for="password">Password</label> <input type="password"
+									name="CUS_PWD" class="form-control" placeholder="비밀번호를 입력해주세요"
+									id="password" value="<%=CUS_PWD%>">
+							</div>
+
+							<div class="d-sm-flex mb-5 align-items-center">
+								<label class="control control--checkbox mb-3 mb-sm-0"><span
+									class="caption">아이디 저장</span> <input type="checkbox"
+									name="id_rem"
+									<%if(CUS_ID.length()>1) out.println("checked"); %> />
+									<div class="control__indicator"></div> </label>
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <label
+									class="control control--checkbox mb-3 mb-sm-0"><span
+									class="caption">비밀번호 저장</span> <input type="checkbox"
+									name="pwd_rem"
+									<%if(CUS_PWD.length()>1) out.println("checked"); %> />
+									<div class="control__indicator"></div> </label> <span
+									class="ml-auto "><a href="find_ID_PWD.do"
+									class="forgot-pass find_id_pw">ID/PW 찾기</a></span>
+							</div>
+
+							<input onclick="checklogin()" type="button" value="Log In"
+								class="btn btn-block py-2 btn-primary"> <span
+								class="text-center my-3 d-block">or</span>
+
+
+							<div id="naver_id_login" style="text-align: center">
+								<a href="${url}"> <img width="223"
+									src="https://developers.naver.com/doc/review_201802/CK_bEFnWMeEBjXpQ5o8N_20180202_7aot50.png" />
+								</a>
+							</div>
+						</form>
+					</div>
 				</div>
-              </form>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+			</div>
+		</div>
+	</div>
 
-    
-<!--   </div> -->
-    
-    
-    <jsp:include page="footer.jsp"/>
-    
-    
-    <script>
+
+	<!--   </div> -->
+
+
+	<jsp:include page="footer.jsp" />
+
+
+	<script>
     
    
     
@@ -148,15 +165,15 @@
    }
     
     </script>
-    
-    
-    
-    
-    
 
-    <script src="${path}/resources/login_resources/js/jquery-3.3.1.min.js"></script>
-    <script src="${path}/resources/login_resources/js/popper.min.js"></script>
-    <script src="${path}/resources/login_resources/js/bootstrap.min.js"></script>
-    <script src="${path}/resources/login_resources/js/main.js"></script>
-  </body>
+
+
+
+
+
+	<script src="${path}/resources/login_resources/js/jquery-3.3.1.min.js"></script>
+	<script src="${path}/resources/login_resources/js/popper.min.js"></script>
+	<script src="${path}/resources/login_resources/js/bootstrap.min.js"></script>
+	<script src="${path}/resources/login_resources/js/main.js"></script>
+</body>
 </html>
