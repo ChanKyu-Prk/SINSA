@@ -192,7 +192,7 @@ input:read-only{
 										수량:<span class="amountNum">${lists.ORDER_AMOUNT}</span>
 									</p> <b class="mb-0">무료배송</b>
 								</td>
-								<td class="shoping__cart__total numFont">65000원</td>
+								<td class="shoping__cart__total numFont">${finalPrice*lists.ORDER_AMOUNT}원</td>
 							</tr>
 							</c:forEach>
 						</c:if>
