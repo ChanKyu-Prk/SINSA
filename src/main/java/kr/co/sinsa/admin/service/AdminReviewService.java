@@ -11,7 +11,9 @@ public interface AdminReviewService {
 	public int review_list_count(Map<String, Object> map);
 	public List<AdminReviewVO> review_all_search(Map<String, Object> map);
 	public int review_all_search_count(Map<String, Object> map);
+	public AdminReviewVO review_info(int rev_num);
 	public void review_delete(int rev_num);
+	public void review_update(AdminReviewVO vo);
 	
 	
 }
