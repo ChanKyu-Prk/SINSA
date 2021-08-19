@@ -414,4 +414,21 @@ public class MyPageController {
 		}
 
 	}
+	@RequestMapping(value = "/reviewWrite.do", method = RequestMethod.GET)
+	public String reviewWrite(Model model,
+			@RequestParam String ORDERNUM,
+			@RequestParam String ORDERPRDSIZE,
+			@RequestParam String PRDCODE,
+			HttpSession session) {
+		UserVO user = (UserVO) session.getAttribute("user");
+
+		if (user == null) {
+			return "login";
+		}
+		model.addAttribute("product",myPageSerive.productSerch(PRDCODE));
+		model.addAttribute("ordernum",ORDERNUM);
+		model.addAttribute("orderprdsize",ORDERPRDSIZE);
+		
+		return "customer/reviewWrite";
+	}
 }
