@@ -146,7 +146,7 @@ input:read-only{
 			<c:if test="${not empty prdInfo}">
 				<h4>테스트</h4>
 			    <c:forEach items="${prdInfo}" var="lists">
-			       ${lists}
+			       ${lists.PRD_NAME}
 				</c:forEach>
 			</c:if>
 			<c:if test="${empty prdInfo}">
