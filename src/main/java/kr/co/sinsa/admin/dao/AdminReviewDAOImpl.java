@@ -32,8 +32,16 @@ public class AdminReviewDAOImpl implements AdminReviewDAO{
 		return sqlSession.selectOne("AdminReviewDAO.review_all_search_count", map);
 	}
 	
+	public AdminReviewVO review_info(int rev_num) {
+		return sqlSession.selectOne("AdminReviewDAO.review_info", rev_num);
+	}
+	
 	public void review_delete(int rev_num) {
 		sqlSession.delete("AdminReviewDAO.review_delete", rev_num);
+	}
+	
+	public void review_update(AdminReviewVO vo) {
+		sqlSession.update("AdminReviewDAO.review_update", vo);
 	}
 
 }

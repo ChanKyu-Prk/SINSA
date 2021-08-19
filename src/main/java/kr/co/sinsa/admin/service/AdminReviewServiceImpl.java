@@ -37,6 +37,16 @@ public class AdminReviewServiceImpl implements AdminReviewService{
 	}
 	
 	@Override
+	public AdminReviewVO review_info(int rev_num) {
+		return dao.review_info(rev_num);
+	}
+	
+	@Override
+	public void review_update(AdminReviewVO vo) {
+		dao.review_update(vo);
+	}
+	
+	@Override
 	public void review_delete(int rev_num) {
 		dao.review_delete(rev_num);
 	}

@@ -23,11 +23,21 @@
 		 rev_title like concat('%',#{searchWord},'%')
 	</select>
 	
+	<select id="review_info" resultType="kr.co.sinsa.admin.vo.AdminReviewVO" >
+		select * from review where rev_num=#{rev_num} 
+	</select>
+
+	<update id="review_update" parameterType="kr.co.sinsa.admin.vo.AdminReviewVO" >
+		update review set rev_cusid=#{rev_cusid}, rev_prdcode=#{rev_prdcode}, rev_title=#{rev_title},
+		rev_content=#{rev_content}, rev_star=#{rev_star}, rev_image=#{rev_image} where rev_num=#{rev_num}
+	</update>
+	
 	<delete id="review_delete">
 		delete from review where rev_num=#{rev_num}
-		
 	</delete>
 	
-	</mapper>
+</mapper>
+	
+	
 	
 	
