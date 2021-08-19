@@ -141,14 +141,17 @@ td {
 
 .info-wrap {
 	margin-top: 50px;
+	margin-bottom: 50px;
 }
 
 .blackUnderLine {
 	background-color: black;
 }
-.info_td{
-text-align: left !important;
-margin-top: 5px;
+
+.info_td {
+	text-align: left !important;
+	margin-top: 5px;
+	vertical-align: top;
 }
 </style>
 <title>SINSA : 주문 내역 조회</title>
@@ -263,7 +266,7 @@ margin-top: 5px;
 
 
 
-						<div class="col-6">
+						<div class="col-7">
 							<h4>배송지 정보</h4>
 							<hr class="blackUnderLine">
 							<table>
@@ -281,36 +284,62 @@ margin-top: 5px;
 								</tr>
 								<tr>
 									<td class="info_td">배송지</td>
-									<td class="info_td">${orderList[0].ORDER_ADDR }</td>
+									<c:set var="addr" 
+										value="${fn:split(orderList[0].ORDER_ADDR,'|')}" />
+									<td class="info_td">
+										<%-- 									${orderList[0].ORDER_ADDR } --%>
+										 <c:forEach var="ad" items="${addr }">
+										 ${ad }
+										 </c:forEach>
+									</td>
 								</tr>
 								<tr>
 									<td class="info_td">배송 메모</td>
 									<td class="info_td">${orderList[0].ORDER_MEMO  }</td>
 								</tr>
 							</table>
+							<hr>
 						</div>
 
 
 
-						<div class="col-6">
+						<div class="col-5">
 							<h4>결제 정보</h4>
 							<hr class="blackUnderLine">
 							<table>
 								<colgroup>
-									<col style="width: 30%">
-									<col style="width: 70%">
+									<col style="width: 40%">
+									<col style="width: 60%">
 								</colgroup>
 								<tr>
 									<td class="info_td">상품 합계</td>
-									<td class="info_td"> 원</td>
+									<td class="info_td">
+									<c:forEach var="list" items="${orderList }">
+									<c:set var="prdTotal" value="${prdTotal + list.PRD_PRICE*list.ORDER_AMOUNT }"/>
+									</c:forEach>
+									<fmt:formatNumber value="${prdTotal }"
+												type="number" />
+									원</td>
 								</tr>
 								<tr>
 									<td class="info_td">할인 합계</td>
-									<td class="info_td"> 원</td>
+									<td class="info_td">
+									<c:forEach var="list" items="${orderList }">
+									<c:set var="prdDiscount" value="${prdDiscount + list.PRD_DISRATE*list.ORDER_AMOUNT }"/>
+									</c:forEach>
+									<fmt:formatNumber value="${prdDiscount }"
+												type="number" />
+									원</td>
 								</tr>
 								<tr>
 									<td class="info_td">포인트 사용</td>
-									<td class="info_td"> 원</td>
+									<td class="info_td">
+									<c:forEach var="list" items="${orderList }">
+									<c:set var="usePoint" value="${usePoint + list.ORDER_USEPOINT }"/>
+									</c:forEach>
+									<fmt:formatNumber value="${usePoint }"
+												type="number" />
+									원</td>
 								</tr>
 								<tr>
 									<td class="info_td">배송비</td>
@@ -318,9 +347,15 @@ margin-top: 5px;
 								</tr>
 								<tr>
 									<td class="info_td">최종 결제 금액</td>
-									<td class="info_td"> 원</td>
+									<td class="info_td">
+									<c:forEach var="list" items="${orderList }">
+									<c:set var="orderTotal" value="${orderTotal + list.ORDER_PRICE }"/>
+									</c:forEach>
+									<fmt:formatNumber value="${orderTotal }"
+												type="number" />원</td>
 								</tr>
 							</table>
+							<hr>
 						</div>
 
 					</div>
@@ -339,30 +374,28 @@ margin-top: 5px;
 </body>
 
 <script>
+	$('.thumbPic').on("mouseover", function() {
+		$(this).css("cursor", "pointer");
+	});
 
-$('.thumbPic').on("mouseover", function() {
-	$(this).css("cursor", "pointer");
-});
+	$('.prd_brand_span').on("mouseover", function() {
+		$(this).css("cursor", "pointer");
+	});
 
-$('.prd_brand_span').on("mouseover", function() {
-	$(this).css("cursor", "pointer");
-});
+	$('.prd_name_span').on("mouseover", function() {
+		$(this).css("cursor", "pointer");
+	});
 
-$('.prd_name_span').on("mouseover", function() {
-	$(this).css("cursor", "pointer");
-});
+	//	$('.thumbPic').on("click", function() {
+	//	location.href = ;
+	//});
 
-//	$('.thumbPic').on("click", function() {
-//	location.href = ;
-//});
+	//$('.prd_brand_span').on("click", function() {
+	//	location.href = ;
+	//});
 
-//$('.prd_brand_span').on("click", function() {
-//	location.href = ;
-//});
-
-//$('.prd_name_span').on("click", function() {
-//	location.href = ;
-//});
-
+	//$('.prd_name_span').on("click", function() {
+	//	location.href = ;
+	//});
 </script>
 </html>

@@ -2,6 +2,7 @@ package kr.co.sinsa.view.customer;
 
 import java.sql.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.Cookie;
@@ -16,8 +17,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import kr.co.sinsa.biz.customer.CustomerVO;
+import kr.co.sinsa.biz.customer.MyOrderListVO;
 import kr.co.sinsa.biz.customer.MyPageService;
+import kr.co.sinsa.biz.customer.QnAVO;
 import kr.co.sinsa.biz.product.PageInfo;
+import kr.co.sinsa.biz.product.ProductVO;
 import kr.co.sinsa.biz.user.UserVO;
 
 @Controller
@@ -181,14 +185,18 @@ public class MyPageController {
 			map.put("page", (page - 1) * 20);
 			map.put("date1", date1_sqldate);
 			map.put("date2", date2_sqldate);
-			listCount = myPageSerive.countReviewListDate(map);
-			model.addAttribute("reviewList", myPageSerive.reviewListDate(map));
+			listCount = myPageSerive.countmyOrderListDate(map);
+			List<MyOrderListVO> orderList= myPageSerive.myOrderListDate(map);
+			model.addAttribute("orderList", orderList);
+			model.addAttribute("reviewCheck", myPageSerive.reviewCheck(orderList,user.getCUS_ID()));
 		} else {
 			Map<String, Object> map = new HashMap<String, Object>();
 			map.put("ID", userID);
 			map.put("page", (page - 1) * 20);
-			listCount = myPageSerive.countReviewList(map);
-			model.addAttribute("reviewList", myPageSerive.reviewList(map));
+			listCount = myPageSerive.countmyOrderList(map);
+			List<MyOrderListVO> orderList= myPageSerive.myOrderList(map);
+			model.addAttribute("orderList", orderList);
+			model.addAttribute("reviewCheck", myPageSerive.reviewCheck(orderList,user.getCUS_ID()));
 		}
 		model.addAttribute("date1", date1);
 		model.addAttribute("date2", date2);
@@ -280,13 +288,19 @@ public class MyPageController {
 			map.put("date1", date1_sqldate);
 			map.put("date2", date2_sqldate);
 			listCount = myPageSerive.countQnAListListDate(map);
-			model.addAttribute("QnAList", myPageSerive.QnAListDate(map));
+			List<QnAVO> QnAList = myPageSerive.QnAListDate(map);
+			List<ProductVO> productList = myPageSerive.productMatch(QnAList);
+			model.addAttribute("QnAList", QnAList);
+			model.addAttribute("productList", productList);
 		} else {
 			Map<String, Object> map = new HashMap<String, Object>();
 			map.put("ID", userID);
 			map.put("page", (page - 1) * 20);
 			listCount = myPageSerive.countQnAListList(map);
-			model.addAttribute("QnAList", myPageSerive.QnAList(map));
+			List<QnAVO> QnAList = myPageSerive.QnAList(map);
+			List<ProductVO> productList =myPageSerive.productMatch(QnAList);
+			model.addAttribute("QnAList", QnAList);
+			model.addAttribute("productList", productList);
 		}
 		model.addAttribute("date1", date1);
 		model.addAttribute("date2", date2);

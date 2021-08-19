@@ -273,6 +273,7 @@ margin: 0;
 
 												</div>
 											</td>
+											</tr>
 									</c:when>
 									<c:otherwise>
 										<c:forEach var="list" items="${orderList}" varStatus="status">
@@ -485,17 +486,17 @@ margin: 0;
 		$(this).css("cursor", "pointer");
 	});
 	
-// 	$('.thumbPic').on("click", function() {
-// 		location.href = ;
-// 	});
-	
-// 	$('.prd_brand_span').on("click", function() {
-// 		location.href = ;
-// 	});
-	
-// 	$('.prd_name_span').on("click", function() {
-// 		location.href = ;
-// 	});
+	$('.thumbPic').on("click", function() {
+		location.href = "#";
+	});
+
+	$('.prd_brand_span').on("click", function() {
+		location.href ="#" ;
+	});
+
+	$('.prd_name_span').on("click", function() {
+		location.href = "#";
+	});
 	
 	$('.prd_order_num_span').on("click", function() {
 		var ORDER_NUM = $(this).find('.ORDER_NUM').val();

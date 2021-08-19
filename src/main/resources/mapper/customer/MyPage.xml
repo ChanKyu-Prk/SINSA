@@ -121,39 +121,39 @@
 
 
 	<select id="orderStatus"
-	resultType="kr.co.sinsa.biz.orders.OrdersAndProductVO">
-	select
-	ORDERS.ORDER_NUM,
-	ORDERS.ORDER_CUSID ,
-	ORDERS.ORDER_PRDCODE ,
-	ORDERS.ORDER_PRDNAME ,
-	ORDERS.ORDER_PRDSIZE ,
-	ORDERS.ORDER_AMOUNT ,
-	ORDERS.ORDER_RECEIVER ,
-	ORDERS.ORDER_TEL ,
-	ORDERS.ORDER_ADDR ,
-	ORDERS.ORDER_PRICE ,
-	ORDERS.ORDER_STATE ,
-	ORDERS.ORDER_MEMO ,
-	ORDERS.ORDER_REGDATE ,
-	ORDERS.ORDER_DELIVCOMP ,
-	ORDERS.ORDER_DELIVNUM ,
-	ORDERS.ORDER_USEPOINT ,
-	PRODUCT.PRD_NUM ,
-	PRODUCT.PRD_CODE ,
-	PRODUCT.PRD_NAME ,
-	PRODUCT.PRD_CATEGORY ,
-	PRODUCT.PRD_IMAGE ,
-	PRODUCT.PRD_PRICE ,
-	PRODUCT.PRD_BRAND ,
-	PRODUCT.PRD_DISRATE 
-	from ORDERS join PRODUCT on
-	ORDERS.ORDER_PRDCODE=PRODUCT.PRD_CODE
-	where ORDER_NUM = #{value}
-	
-	
-	
-	
+		resultType="kr.co.sinsa.biz.orders.OrdersAndProductVO">
+		select
+		ORDERS.ORDER_NUM,
+		ORDERS.ORDER_CUSID ,
+		ORDERS.ORDER_PRDCODE ,
+		ORDERS.ORDER_PRDNAME ,
+		ORDERS.ORDER_PRDSIZE ,
+		ORDERS.ORDER_AMOUNT ,
+		ORDERS.ORDER_RECEIVER ,
+		ORDERS.ORDER_TEL ,
+		ORDERS.ORDER_ADDR ,
+		ORDERS.ORDER_PRICE ,
+		ORDERS.ORDER_STATE ,
+		ORDERS.ORDER_MEMO ,
+		ORDERS.ORDER_REGDATE ,
+		ORDERS.ORDER_DELIVCOMP ,
+		ORDERS.ORDER_DELIVNUM ,
+		ORDERS.ORDER_USEPOINT ,
+		PRODUCT.PRD_NUM ,
+		PRODUCT.PRD_CODE ,
+		PRODUCT.PRD_NAME ,
+		PRODUCT.PRD_CATEGORY ,
+		PRODUCT.PRD_IMAGE ,
+		PRODUCT.PRD_PRICE ,
+		PRODUCT.PRD_BRAND ,
+		PRODUCT.PRD_DISRATE
+		from ORDERS join PRODUCT on
+		ORDERS.ORDER_PRDCODE=PRODUCT.PRD_CODE
+		where ORDER_NUM = #{value}
+
+
+
+
 	</select>
 
 
@@ -161,14 +161,14 @@
 
 
 
-	<select id="jjimList" parameterType="map"
+	<select id="jjimList" parameterType="Map"
 		resultType="kr.co.sinsa.biz.product.ProductVO">
 		select product.* from product join JJIM on JJIM.JJIM_PRDNUM
 		= product.PRD_NUM
 		where JJIM.JJIM_CUSID = #{ID} limit #{page},20;
 	</select>
 
-	<select id="countJjimList" parameterType="map" resultType="int">
+	<select id="countJjimList" parameterType="Map" resultType="int">
 		select count(*) from product join JJIM on JJIM.JJIM_PRDNUM
 		=
 		product.PRD_NUM
@@ -182,33 +182,14 @@
 
 
 
-	<select id="reviewList" parameterType="Map"
-		resultType="kr.co.sinsa.biz.customer.ReviewVO">
-		select * from REVIEW where REV_CUSID = #{ID}
-		limit
-		#{page},20;
-	</select>
-
-	<select id="reviewListDate" parameterType="Map"
-		resultType="kr.co.sinsa.biz.customer.ReviewVO">
-			<![CDATA[
-		select * from REVIEW where REV_CUSID = #{ID} 
-		and REV_REGDATE >= #{date1} and REV_REGDATE <= DATE_add(#{date2},INTERVAL 1 Day)
-		order by REV_REGDATE desc
-		limit #{page},20;
-		]]>
-	</select>
-	<select id="countReviewList" parameterType="Map"
-		resultType="int">
-		select count(*) from REVIEW where REV_CUSID = #{ID};
-	</select>
-
-	<select id="countReviewListDate" parameterType="Map"
-		resultType="int">
-			<![CDATA[
-		select count(*) from REVIEW where REV_CUSID = #{ID}
-		and REV_REGDATE >= #{date1} and REV_REGDATE <= DATE_add(#{date2},INTERVAL 1 Day) ;
-			]]>
+	<select id="reviewCheck" parameterType="Map"
+	resultType="int">
+select count(*) from review 
+where 
+REV_PRDCODE = #{PRD_CODE} and 
+REV_ORDERNUM = #{ORDER_NUM} 
+and
+ REV_ORDERPRDSIZE = #{ORDER_PRDSIZE};
 	</select>
 
 
@@ -216,18 +197,47 @@
 
 	<select id="QnAList" parameterType="Map"
 		resultType="kr.co.sinsa.biz.customer.QnAVO">
-		select * from QNA where QNA_CUSID = #{ID}
+		select
+		QNA_NUM,
+		PRD_NUM ,
+		QNA_LOCK ,
+		QNA_CUSID ,
+		QNA_TITLE ,
+		QNA_CONTENT ,
+		QNA_ANSWER ,
+		QNA_REGDATE
+		from QNA where QNA_CUSID = #{ID}
 		limit #{page},20;
 	</select>
 
 	<select id="QnAListDate" parameterType="Map"
 		resultType="kr.co.sinsa.biz.customer.QnAVO">
 			<![CDATA[
-		select * from QNA where QNA_CUSID = #{ID} 
-		and QNA_REGDATE  >= #{date1} and QNA_REGDATE <= DATE_add(#{date2},INTERVAL 1 Day)
+		select 
+		QNA_NUM,
+		PRD_NUM ,
+		QNA_LOCK ,
+		QNA_CUSID ,
+		QNA_TITLE ,
+		QNA_CONTENT ,
+		QNA_ANSWER ,
+		QNA_REGDATE 
+		 from QNA where QNA_CUSID = #{ID} 
+		and QNA_REGDATE  >= #{date1} and QNA_REGDATE < DATE_add(#{date2},INTERVAL 1 Day)
 		order by QNA_REGDATE  desc
 		limit #{page},20;
 		]]>
+	</select>
+
+	<select id="productMatch"
+	resultType="kr.co.sinsa.biz.product.ProductVO">
+	select
+	PRD_CODE ,
+	PRD_NAME ,
+	PRD_BRAND ,
+	PRD_IMAGE 
+	from product
+	where PRD_NUM = #{value};
 	</select>
 
 	<select id="countQnAList" parameterType="Map" resultType="int">
@@ -239,7 +249,7 @@
 		resultType="int">
 			<![CDATA[
 		select count(*) from QNA where QNA_CUSID = #{ID}
-		and QNA_REGDATE >= #{date1} and QNA_REGDATE <= DATE_add(#{date2},INTERVAL 1 Day) ;
+		and QNA_REGDATE >= #{date1} and QNA_REGDATE < DATE_add(#{date2},INTERVAL 1 Day) ;
 			]]>
 	</select>
 

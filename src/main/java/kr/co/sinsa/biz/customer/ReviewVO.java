@@ -4,6 +4,8 @@ import java.util.Date;
 
 public class ReviewVO {
 	private int REV_NUM;
+	private String REV_ORDERNUM;
+	private String REV_ORDERPRDSIZE ;
 	private Date REV_REGDATE;
 	private String REV_CUSID;
 	private String REV_PRDCODE;
@@ -13,6 +15,19 @@ public class ReviewVO {
 	private String REV_IMAGE;
 
 	
+	
+	public String getREV_ORDERNUM() {
+		return REV_ORDERNUM;
+	}
+	public void setREV_ORDERNUM(String rEV_ORDERNUM) {
+		REV_ORDERNUM = rEV_ORDERNUM;
+	}
+	public String getREV_ORDERPRDSIZE() {
+		return REV_ORDERPRDSIZE;
+	}
+	public void setREV_ORDERPRDSIZE(String rEV_ORDERPRDSIZE) {
+		REV_ORDERPRDSIZE = rEV_ORDERPRDSIZE;
+	}
 	public String getREV_TITLE() {
 		return REV_TITLE;
 	}
