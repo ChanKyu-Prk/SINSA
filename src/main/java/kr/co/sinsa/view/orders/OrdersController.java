@@ -1,6 +1,7 @@
 package kr.co.sinsa.view.orders;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -57,23 +58,25 @@ public class OrdersController {
 		String ORDER_PRDSIZE = null;
 		String ORDER_AMOUNT = null;
 		OrdersAndProductVO oapVO = null;
-		ArrayList<OrdersAndProductVO> prdList = new ArrayList();
+		List<OrdersAndProductVO> prdList = new ArrayList<>();
 				
 		int index = 0;
+		
 		for(Object list : itemLists) {
 //			System.out.println(list);
 			LinkedHashMap<String,String> item = (LinkedHashMap<String, String>) list;
 			System.out.println("index : " + index);
 			System.out.println(item.get("ORDER_PRDCODE"));
-//			oapVO = service.selPrdByCode(item.get("ORDER_PRDCODE"));
-//			prdList.add(oapVO);
+			oapVO = service.selPrdByCode(item.get("ORDER_PRDCODE"));
+			prdList.add(oapVO);
 			
 			System.out.println(item.get("ORDER_PRDSIZE"));
 			System.out.println(item.get("ORDER_AMOUNT"));
 			index++;
 		}
 		
-//		model.addAttribute("prdInfo", prdList);
+		System.out.println("prdList : " + prdList);
+		model.addAttribute("prdInfo", prdList);
 
 		
 //        String prdCode = orders.getORDER_PRDCODE();

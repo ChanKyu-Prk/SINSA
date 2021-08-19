@@ -143,6 +143,16 @@ input:read-only{
 	<section class="checkout spad">
 		<div class="container">
 			<h4 class="mb-5 font-weight-bold">주문/결제</h4>
+			<c:if test="${not empty prdInfo}">
+				<h4>테스트</h4>
+			    <c:forEach items="${prdInfo}" var="lists">
+			       ${lists}
+				</c:forEach>
+			</c:if>
+			<c:if test="${empty prdInfo}">
+				<h4>없다</h4>
+				<h4>${prdInfo}</h4>
+			</c:if>
 			<div class="row">
 				<div class="col-lg-12 shoping__cart__table">
 					<table id="itemList" class="mx-auto px-0">
@@ -154,6 +164,7 @@ input:read-only{
 							</span>
 						</thead>
 						<tbody>
+						
 							<tr>
 								<td class="shoping__cart__item"><span
 									class="row mx-auto px-0"> <span> <img
@@ -348,13 +359,13 @@ input:read-only{
 	            pg : 'kakaopay',
 	            pay_method : 'card',
 	            merchant_uid : 'merchant_' + new Date().getTime(),
-	            name : '[SINSA 상품 결제 ] ${prdInfo.PRD_NAME}',
+	            name : '[SINSA 상품 결제 ]상품 이름',
 	            amount : finalPrice,
 	            buyer_email : '${cusInfo.CUS_EMAIL}',
 	            buyer_name : '${cusInfo.CUS_NAME}',
 	            buyer_tel : '${cusInfo.CUS_TEL}',
 	            buyer_addr : '${cusInfo.CUS_DELIV_ADDR}',
-	            buyer_postcode : '${prdInfo.PRD_BRAND}', // POSTCODE 받는 법
+	            buyer_postcode : '브랜드', // POSTCODE 받는 법
 	            //m_redirect_url : 'http://www.naver.com'
 	            /*
 				모바일 결제시,
