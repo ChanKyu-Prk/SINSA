@@ -175,12 +175,21 @@ input:read-only{
 									</span>
 								</span></td>
 								<td class="shoping__cart__price">
-									<p class="mb-0 discntNum numFont">55000원</p>
-									<p class="mb-0 font-weight-bold numFont">65000원</p>
+									<c:if test="${lists.PRD_DISRATE == 0}">
+										<c:set var="finalPrice" value="${lists.PRD_PRICE}"/>
+										<span class="digits">${finalPrice}원</span>
+									</c:if>
+									<c:if test="${lists.PRD_DISRATE != 0}">
+										<c:set var="finalPriceOrg" 
+										value="${lists.PRD_PRICE-(lists.PRD_PRICE*(lists.PRD_DISRATE/100))}"/>
+			  							<c:set var="finalPrice" value="${fn:substringBefore(finalPriceOrg, '.')}" />
+			  							<span class="mb-0 digits discntNum numFont">${lists.PRD_PRICE}원</span>
+										<span class="mb-0 font-weight-bold digits numFont">${finalPrice}원</span>
+									</c:if>
 								</td>
 								<td class="shoping__cart__quantity">
 									<p class="mb-1">
-										수량:<span>1</span>
+										수량:<span class="amountNum">1</span>
 									</p> <b class="mb-0">무료배송</b>
 								</td>
 								<td class="shoping__cart__total numFont">65000원</td>
