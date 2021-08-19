@@ -161,7 +161,7 @@ input:read-only{
 						</thead>
 						<tbody>
 						<c:if test="${not empty prdInfo}">
-						    <c:forEach items="${prdInfo}" var="lists">
+						    <c:forEach items="${prdInfo}" var="lists" varstatus="status">
 						    <tr>
 								<td class="shoping__cart__item"><span
 									class="row mx-auto px-0"> <span> <img
@@ -175,20 +175,22 @@ input:read-only{
 									</span>
 								</span></td>
 								<td class="shoping__cart__price">
+									<c:set var="orgPrice" value="${lists.PRD_PRICE}"/>
 									<c:if test="${lists.PRD_DISRATE == 0}">
 										<c:set var="finalPrice" value="${lists.PRD_PRICE}"/>
-										<span class="digits">${finalPrice}원</span>
+										<span class="digits" data-orgPrice ="${lists.PRD_PRICE}" >${finalPrice}원</span>
 									</c:if>
 									<c:if test="${lists.PRD_DISRATE != 0}">
 										<c:set var="finalPriceOrg" 
 										value="${lists.PRD_PRICE-(lists.PRD_PRICE*(lists.PRD_DISRATE/100))}"/>
 			  							<c:set var="finalPrice" value="${fn:substringBefore(finalPriceOrg, '.')}" />
-			  							<span class="mb-0 digits discntNum numFont">${lists.PRD_PRICE}원</span>
+			  							<span class="mb-0 digits discntNum numFont" data-orgPrice ="${lists.PRD_PRICE}">${lists.PRD_PRICE}원</span>
 										<span class="mb-0 font-weight-bold digits numFont">${finalPrice}원</span>
 									</c:if>
 								</td>
 								<td class="shoping__cart__quantity">
 									<p class="mb-1">
+									<c:set var="orgPrice" value="${lists.PRD_PRICE}"/>
 										수량:<span class="amountNum">${lists.ORDER_AMOUNT}</span>
 									</p> <b class="mb-0">무료배송</b>
 								</td>
@@ -313,7 +315,7 @@ input:read-only{
 							<div class="checkout__order">
 								<h4>결제정보</h4>
 								<ul>
-									<li>총 주문 가격 <span>750000원</span></li>
+									<li>총 주문 가격 <span class="totalOrgPrice">000원</span></li>
 									<li>할인 <span>5000원</span></li>
 									<li class="points">포인트 사용 <input placeholder="0" class="text-right"></input><span>P</span>
 									<p class="mb-1"><small>사용가능한 포인트: <span class="avPoint">5000 P</span></small></p>
@@ -355,7 +357,8 @@ input:read-only{
 			} else if(chckdRadio == "new"){
 				$('input.newDelivInput').val('');
 				$('#ORDER_RECEIVER, #ORDER_TEL').removeAttr('readonly');
-			}
+			}					
+
 			// Iamport 결제
 			$("#chckoutBtn").click(function () {
 
