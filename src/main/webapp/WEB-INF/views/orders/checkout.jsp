@@ -169,7 +169,7 @@ input[type=number] {
 						<thead>
 							<span class="tableHead row mx-auto px-0 mb-2">
 								<h5>주문리스트</h5> 
-								<button id="editOrder"
+								<button id="editOrder" onclick="location.href='/product/prdCode=${prdInfo[0].PRD_CODE}';"
 								class="ml-auto p-2 primary-btn cart-btn cart-btn-right">주문정보
 									수정</button>
 							</span>
