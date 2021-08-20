@@ -403,11 +403,11 @@ input[type=number] {
 			}
 		});
 		
-		$(".savePoint").text(parseInt(totalPriceCon_num*0.03));
+		$(".savePoint").text(parseInt(((totalPriceCon_num*0.03)/10),10)*10);
 		
 		//적립예정
 		$(".totalPriceCon-num").on('DOMSubtreeModified', function () {
-			$(".savePoint").text(parseInt(totalPriceCon_num*0.03));
+			$(".savePoint").text(parseInt(((totalPriceCon_num*0.03)/10),10)*10);
 		});
 		
 		$('input[type=radio]').on('change', function() {
