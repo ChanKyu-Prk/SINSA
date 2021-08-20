@@ -319,8 +319,8 @@ input[type=number] {
 										<option value="opt04">직접 수령 하겠습니다.</option>
 										<option value="write">직접입력</option>
 									</select> <span> <input id="ORDER_MEMO" name="ORDER_MEMO"
-										type="text" required="required" maxlength="40"
-										placeholder="요청사항은 40자 이내로 작성해주세요." />
+										type="text" required="required" maxlength="40" placeholder="요청사항은 40자 이내로 작성해주세요."
+										 readonly="readonly"/>
 									</span>
 								</div>
 							</div>
@@ -363,10 +363,14 @@ input[type=number] {
 	
 	$(document).ready(function() {
 		$('#delivMemo').niceSelect();
-		
+		var selected = $("#delivMemo").val();
 		$('#delivMemo').on('change', function() {
-			var selected = $("#delivMemo").val();
-			alert(selected);
+			selected = $("#delivMemo").val();
+			$("#ORDER_MEMO").val($("#delivMemo option:selected").text());
+			if(selected == "write"){
+				$("#ORDER_MEMO").val('');
+				$("#ORDER_MEMO").removeAttr('readonly');
+			}	
 		});
 		
 		function numberWithDigits() {
