@@ -23,16 +23,21 @@ table {
 	border: 1px solid; 
 }
 </style>
-
-<!-- <style>
+ <style>
 	.hidden-col { display: none; }
-</style> -->
+</style> 
+
+
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script type="text/javascript">
 
 	
 	var no = "";
 	
+	
+	
+
+
 	function selectNum(target) {
 	    var tbody = target.parentNode;
 	    var trs = tbody.getElementsByTagName('tr');
@@ -76,13 +81,32 @@ table {
 			  alert('삭제할 회원을 선택하십시오.');
 			}
 	}
-	
 </script>
-
-
 <style>
 	.hidden-col { display: none; }
 </style>
+<!-- <script>
+function tel(a)
+{
+	console.log(CUS_TEL);
+	  //var test = a.getCUS_TEL();
+	  var testDate = a.replace(/(^02.{0}|^01.{1}|[0-9]{3})([0-9]+)([0-9]{4})/,"$1-$2-$3");
+	  document.getElementById(CUS_TEL).innerHTML=testData;
+	}
+	//return testDate;
+
+
+
+
+/* $(document).ready(function() {
+                
+  var test = "${CustomerVO.CUS_TEL}";
+  var testDate = test.replace(/(^02.{0}|^01.{1}|[0-9]{3})([0-9]+)([0-9]{4})/,"$1-$2-$3");
+  
+  $("#CUS_TEL").text(testDate);
+ 
+}); */
+</script> -->
 </head>
 <body>
 <jsp:include page="adminHeader.jsp" flush="true" />
@@ -134,24 +158,27 @@ table {
 				</tr>
 				</c:when>
 					<c:when test="${!empty customerList}">
-			<c:forEach var="row" items="${customerList }">
+			<c:forEach var="row" items="${customerList }" varStatus="status">
 		<tr onclick="javascript:selectNum(this);">
 			<td class="hidden-col">${row.CUS_NUM }</td>
 			<td>${row.CUS_ID }</td>
 			<td>${row.CUS_NAME }</td>
 			<td>${row.CUS_GENDER }</td>
 			<td>${row.CUS_EMAIL }</td>
-			<td>${row.CUS_ADDR }</td>
-			<td>${row.CUS_TEL }</td> 
+			<td>${row.CUS_ADDR}</td>
+			<%-- <td>${row.CUS_TEL}</td> --%>  
+			<td><script>
+			function tel(a) {
+				  var testDate = a.replace(/(^02.{0}|^01.{1}|[0-9]{3})([0-9]+)([0-9]{4})/,"$1-$2-$3");
+				  return testDate;
+				}
+			document.write(tel('${row.CUS_TEL}'));
+			</script></td> 
 			<td>${row.CUS_BIRTH }</td>
 			<td>${row.CUS_POINT }</td>
 			<td>
 			<fmt:formatDate value="${row.CUS_REGDATE}" pattern="yyyy-MM-dd" />
 			</td>
-			 <%-- <td>
-				<input type="button" onclick="location.href='customerEdit?CUS_NUM=${ row.CUS_NUM }'" value="수정" />
-				<input type="button" onclick="javascript:customerDelete(${ row.CUS_NUM })" value="삭제" />
-				</td> --%> 
 			</tr>
 			
 			</c:forEach> 
