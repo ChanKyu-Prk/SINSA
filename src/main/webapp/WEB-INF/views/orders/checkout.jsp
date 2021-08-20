@@ -383,6 +383,18 @@ input[type=number] {
 		var totalDiscnt = totalOrgPrice - totalPrice ;
 		$(".totalDiscnt").text(totalDiscnt);
 		
+		var usePoint = 0;
+		//총 결제금액 (포인트사용X)
+		var totalPriceCon_num = totalPrice - usePoint ;
+		$(".totalPriceCon-num").text(totalPriceCon_num);
+		
+		$(".usePoint").on("propertychange change keyup paste input",function() {
+			//포인트사용
+			usePoint = $(".usePoint").val();
+			//총 결제금액
+			var totalPriceCon_num = totalPrice - usePoint ;
+			$(".totalPriceCon-num").text(totalPriceCon_num);
+		});
 		
 		$('input[type=radio]').on('change', function() {
 			var chckdRadio = $('input[type=radio]:checked').val();
