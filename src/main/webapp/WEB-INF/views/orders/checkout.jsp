@@ -309,8 +309,8 @@ input[type=number] {
 							<div class="row">
 								<label for="ORDER_MEMO" class="col-lg-3">배송시 요청사항
 								</label>
-								<div class="checkout__input col-lg-9">
-									<select id="delivMemo" class="mb-2 wide" title="배송시 요청사항">
+								<div class="checkout__input wrapper col-lg-9">
+									<select id="delivMemo" data-display="select" class="mb-2 wide" title="배송시 요청사항">
 										<option selected="selected" disabled>배송 시 요청사항을
 											선택해주세요.</option>
 										<option value="opt01">부재시 경비실에 맡겨주세요.</option>
@@ -362,6 +362,13 @@ input[type=number] {
 	<script type="text/javascript">
 	
 	$(document).ready(function() {
+		$('#delivMemo').niceSelect();
+		
+		$('#delivMemo').on('change', function() {
+			var selected = $("#delivMemo").val();
+			alert(selected);
+		});
+		
 		function numberWithDigits() {
 			$(".digits").each(function() {
 				$(this).text( $(this).text().replace(/\B(?=(\d{3})+(?!\d))/g, ','));
