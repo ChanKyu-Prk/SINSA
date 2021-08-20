@@ -343,7 +343,7 @@ input[type=number] {
 										<span>원</span>
 									</span>
 								</div>
-								<small class="float-right mb-4">결제 시 <span class="avPoint">-P</span> 적립예정</small>
+								<small class="float-right mb-4">결제 시 <span class="avPoint savePoint">-</span>P 적립예정</small>
 								<button type="button" id="chckoutBtn" class="site-btn">결제하기</button>
 							</div>
 						</div>
@@ -392,8 +392,22 @@ input[type=number] {
 			//포인트사용
 			usePoint = $(".usePoint").val();
 			//총 결제금액
-			var totalPriceCon_num = totalPrice - usePoint ;
+			totalPriceCon_num = totalPrice - usePoint ;
 			$(".totalPriceCon-num").text(totalPriceCon_num);
+		});
+		
+		$(".usePoint").on("keydown",function(e) {
+			if (!((e.keyCode > 95 && e.keyCode < 106)
+					|| (e.keyCode > 47 && e.keyCode < 58) || e.keyCode == 8)) {
+				return false;
+			}
+		});
+		
+		$(".savePoint").text(parseInt(totalPriceCon_num*0.03));
+		
+		//적립예정
+		$(".totalPriceCon-num").on('DOMSubtreeModified', function () {
+			$(".savePoint").text(parseInt(totalPriceCon_num*0.03));
 		});
 		
 		$('input[type=radio]').on('change', function() {
