@@ -52,11 +52,17 @@
 .previousPrice {
 	text-decoration: line-through !important;
 	color: grey;
+	font-size: 16px;
+	text-align: right !important;
+	padding: 0px 7px 0px 0px
 }
 
 .previousTotalPrice {
 	text-decoration: line-through !important;
 	color: grey;
+	font-size: 16px;
+	text-align: right !important;
+	padding: 0px 9px 0px 0px
 }
 
 .throwout {
@@ -89,13 +95,11 @@
 	margin: 100px 0px 40px 0px;
 }
 
-
-
 .optionModal {
 	height: 470px;
 }
 
-.size_change_modal_img{
+.size_change_modal_img {
 	padding: 0px 15px 0px 0px !important;
 }
 
@@ -107,8 +111,6 @@
 	size: 3 !important;
 }
 
-
-
 .select_size {
 	width: 310px !important;
 }
@@ -119,41 +121,43 @@
 	width: 305px !important;
 }
 
-.btn-outline-secondary{
-	color:#262525 !important;
-	background-color:#f7f7f7 !important;
-	border-color:#ddd !important;
+.btn-outline-secondary {
+	color: #262525 !important;
+	background-color: #f7f7f7 !important;
+	border-color: #ddd !important;
 	border-radius: 0px !important;
 }
 
-.btn-outline-secondary:hover{
-	color:#262525 !important;
-	background-color:#f7f7f7 !important;
-	border-color:black !important;
+.btn-outline-secondary:hover {
+	color: #262525 !important;
+	background-color: #f7f7f7 !important;
+	border-color: black !important;
 }
 
-.modal_button_size_change{
+.modal_button_size_change {
 	border: 1px solid grey;
-	width: 80px !important;
-	height: 35px;
+	width: 73px !important;
+	height: 30px;
 	background-color: white;
 	font-size: 13px !important;
+	padding: 6px 8px 6px 8px !important;
 }
 
-.button_confirm_change_size{
+.button_confirm_change_size {
 	border: 1px solid #222020;
 	width: 100px !important;
 	height: 40px !important;
-/* 	margin: 0px 0px 7px 0px; */
+	/* 	margin: 0px 0px 7px 0px; */
 	background-color: #222020;
 	color: white;
 	font-weight: bold;
 }
 
-.div_button_change_size{
+.div_button_change_size {
 	text-align: center !important;
 	margin: 47px 0px 0px 0px !important;
 }
+
 .modal-body {
 	height: 500px !important;
 }
@@ -162,7 +166,7 @@
 	border: 1px solid #ddd;
 	text-align: center;
 	width: 100px !important;
-	background-color:#f7f7f7 !important;
+	background-color: #f7f7f7 !important;
 }
 
 #count {
@@ -195,29 +199,84 @@
 	background-color: white;
 }
 
-.size_change_modal{
+.size_change_modal {
 	top: 20%;
 }
 
-.char_size{
+.char_size {
 	text-align: left !important;
 	padding: 9px 0px 0px 0px;
 	margin: 0px 0px 0px 0px !important;
 }
 
-.size_change_row{
+.size_change_row {
 	margin: 40px 0px 40px 0px !important;
 }
 
-.size_change_modal_detail{
+.size_change_modal_detail {
 	margin: 6px 0px 20px 0px !important;
+}
+
+.brand {
+	font-weight: bold;
+}
+
+.product_name {
+	color: grey;
+	font-size: 14px;
+}
+
+.product_name:hover {
+	color: grey;
+}
+
+.product_color {
+	color: grey;
+	font-size: 14px;
+}
+
+.product_color:hover {
+	color: grey;
+}
+
+.product_size {
+	color: grey;
+	font-size: 14px;
+}
+
+.product_size:hover {
+	color: grey;
+}
+
+.pre_won {
+	font-size: 14px;
+}
+
+.won {
+	font-size: 16px;
+}
+
+.shoping__cart__table table tbody tr td.shoping__cart__item {
+	width: 550px !important;
+}
+
+.modal_hr1 {
+	border: 0;
+	height: 2px !important;
+	background: #ccc;
+}
+
+.modal_hr2 {
+	border: 0;
+	height: 2px !important;
+	background: #ccc;
 }
 </style>
 
-<% 
-   ArrayList<ProductVO> productList = (ArrayList<ProductVO>) request.getAttribute("productList");
-   ArrayList<CartVO> cartList = (ArrayList<CartVO>) request.getAttribute("cartList");
-   DecimalFormat formatter = new DecimalFormat("###,###");
+<%
+	ArrayList<ProductVO> productList = (ArrayList<ProductVO>) request.getAttribute("productList");
+	ArrayList<CartVO> cartList = (ArrayList<CartVO>) request.getAttribute("cartList");
+	DecimalFormat formatter = new DecimalFormat("###,###");
 %>
 
 <link
@@ -286,18 +345,29 @@
 												<div class="row">
 
 													<div class="col-lg-3 col-md-9">
-														<img src="${path}/resources/img/cart/cart-1.jpg" alt="">
+														<a href="product/prdCode=${list.PRD_CODE}"><img
+															src="${path}/resources/img/cart/cart-1.jpg" alt=""></a>
 													</div>
 
 													<div class="col-lg-9 col-md-3">
-														[${list.PRD_BRAND}]<br> ${list.PRD_NAME}<br>${list.PRD_CODE}<br>${list.CART_PRDSIZE}
+														<div class="brand">${list.PRD_BRAND}</div>
+														<div>
+															<a class="product_name"
+																href="product/prdCode=${list.PRD_CODE}">${list.PRD_NAME}</a>
+														</div>
+														<div>
+															<a class="product_color"
+																href="product/prdCode=${list.PRD_CODE}">${list.PRD_COLOR}</a>
+														</div>
+														<div class="product_size">
+															${list.CART_PRDSIZE}
 
-
-
-														<!-- Button trigger modal -->
-														<button type="button" class="btn btn-outline-secondary modal_button_size_change"
-															data-bs-toggle="modal"
-															data-bs-target="#exampleModal${status.index}">옵션변경</button>
+															<!-- Button trigger modal -->
+															<button type="button"
+																class="btn btn-outline-secondary modal_button_size_change"
+																data-bs-toggle="modal"
+																data-bs-target="#exampleModal${status.index}">옵션변경</button>
+														</div>
 
 
 														<!-- Modal -->
@@ -328,188 +398,191 @@
 																				</div>
 
 																				<div class="col-lg-9 col-md-3">
-																					<h5>
-																						[${list.PRD_BRAND}]<br> ${list.PRD_NAME}<br>${list.PRD_CODE}<br>사이즈
-																						: ${list.CART_PRDSIZE}
-																					</h5>
+																					<div class="brand">${list.PRD_BRAND}</div>
+																					<div class="product_name">${list.PRD_NAME}</div>
+																					<div class="product_color">${list.PRD_COLOR}
+																					</div>
+																					<div class="product_size">
+																						${list.CART_PRDSIZE}</div>
 
 																				</div>
 
 																			</div>
 
-<!-- 																			<div> -->
-																				<hr>
+																			<!-- 																			<div> -->
+																			<hr class="modal_hr1">
 
-																				<div class="row size_change_row">
-																					<div class="col-lg-3 col-md-9 char_size">사이즈</div>
+																			<div class="row size_change_row">
+																				<div class="col-lg-3 col-md-9 char_size">사이즈</div>
 
 
 
-																					<div class="col-lg-9 col-md-3">
-																						<select id="list" class="select_size"
-																							name="CART_PRDSIZE">
-																							<option value="" disabled selected>선택하세요</option>
-																							<c:choose>
-																								<c:when
-																									test="${list.STOCK_220 > 0 and list.CART_PRDSIZE ne '220'}">
-																									<option value="220">220</option>
-																								</c:when>
-																								<c:when
-																									test="${list.STOCK_220 > 0 and list.CART_PRDSIZE eq '220'}">
-																									<option value="220" selected>220</option>
-																								</c:when>
-																							</c:choose>
-																							<c:choose>
-																								<c:when
-																									test="${list.STOCK_225 > 0 and list.CART_PRDSIZE ne '225'}">
-																									<option value="225">225</option>
-																								</c:when>
-																								<c:when
-																									test="${list.STOCK_225 > 0 and list.CART_PRDSIZE eq '225'}">
-																									<option value="225" selected>225</option>
-																								</c:when>
-																							</c:choose>
-																							<c:choose>
-																								<c:when
-																									test="${list.STOCK_230 > 0 and list.CART_PRDSIZE ne '230'}">
-																									<option value="230">230</option>
-																								</c:when>
-																								<c:when
-																									test="${list.STOCK_230 > 0 and list.CART_PRDSIZE eq '230'}">
-																									<option value="230" selected>230</option>
-																								</c:when>
-																							</c:choose>
-																							<c:choose>
-																								<c:when
-																									test="${list.STOCK_235 > 0 and list.CART_PRDSIZE ne '235'}">
-																									<option value="235">235</option>
-																								</c:when>
-																								<c:when
-																									test="${list.STOCK_235 > 0 and list.CART_PRDSIZE eq '235'}">
-																									<option value="235" selected>235</option>
-																								</c:when>
-																							</c:choose>
-																							<c:choose>
-																								<c:when
-																									test="${list.STOCK_240 > 0 and list.CART_PRDSIZE ne '240'}">
-																									<option value="240">240</option>
-																								</c:when>
-																								<c:when
-																									test="${list.STOCK_240 > 0 and list.CART_PRDSIZE eq '240'}">
-																									<option value="240" selected>240</option>
-																								</c:when>
-																							</c:choose>
-																							<c:choose>
-																								<c:when
-																									test="${list.STOCK_245 > 0 and list.CART_PRDSIZE ne '245'}">
-																									<option value="245">245</option>
-																								</c:when>
-																								<c:when
-																									test="${list.STOCK_245 > 0 and list.CART_PRDSIZE eq '245'}">
-																									<option value="245" selected>245</option>
-																								</c:when>
-																							</c:choose>
-																							<c:choose>
-																								<c:when
-																									test="${list.STOCK_250 > 0 and list.CART_PRDSIZE ne '250'}">
-																									<option value="250">250</option>
-																								</c:when>
-																								<c:when
-																									test="${list.STOCK_250 > 0 and list.CART_PRDSIZE eq '250'}">
-																									<option value="250" selected>250</option>
-																								</c:when>
-																							</c:choose>
-																							<c:choose>
-																								<c:when
-																									test="${list.STOCK_255 > 0 and list.CART_PRDSIZE ne '255'}">
-																									<option value="255">255</option>
-																								</c:when>
-																								<c:when
-																									test="${list.STOCK_255 > 0 and list.CART_PRDSIZE eq '255'}">
-																									<option value="255" selected>255</option>
-																								</c:when>
-																							</c:choose>
-																							<c:choose>
-																								<c:when
-																									test="${list.STOCK_260 > 0 and list.CART_PRDSIZE ne '260'}">
-																									<option value="260">260</option>
-																								</c:when>
-																								<c:when
-																									test="${list.STOCK_260 > 0 and list.CART_PRDSIZE eq '260'}">
-																									<option value="260" selected>260</option>
-																								</c:when>
-																							</c:choose>
-																							<c:choose>
-																								<c:when
-																									test="${list.STOCK_265 > 0 and list.CART_PRDSIZE ne '265'}">
-																									<option value="265">265</option>
-																								</c:when>
-																								<c:when
-																									test="${list.STOCK_265 > 0 and list.CART_PRDSIZE eq '265'}">
-																									<option value="265" selected>265</option>
-																								</c:when>
-																							</c:choose>
-																							<c:choose>
-																								<c:when
-																									test="${list.STOCK_270 > 0 and list.CART_PRDSIZE ne '270'}">
-																									<option value="270">270</option>
-																								</c:when>
-																								<c:when
-																									test="${list.STOCK_270 > 0 and list.CART_PRDSIZE eq '270'}">
-																									<option value="270" selected>270</option>
-																								</c:when>
-																							</c:choose>
-																							<c:choose>
-																								<c:when
-																									test="${list.STOCK_275 > 0 and list.CART_PRDSIZE ne '275'}">
-																									<option value="275">275</option>
-																								</c:when>
-																								<c:when
-																									test="${list.STOCK_275 > 0 and list.CART_PRDSIZE eq '275'}">
-																									<option value="275" selected>275</option>
-																								</c:when>
-																							</c:choose>
-																							<c:choose>
-																								<c:when
-																									test="${list.STOCK_280 > 0 and list.CART_PRDSIZE ne '280'}">
-																									<option value="280">280</option>
-																								</c:when>
-																								<c:when
-																									test="${list.STOCK_280 > 0 and list.CART_PRDSIZE eq '280'}">
-																									<option value="280" selected>280</option>
-																								</c:when>
-																							</c:choose>
-																							<c:choose>
-																								<c:when
-																									test="${list.STOCK_285 > 0 and list.CART_PRDSIZE ne '285'}">
-																									<option value="285">285</option>
-																								</c:when>
-																								<c:when
-																									test="${list.STOCK_285 > 0 and list.CART_PRDSIZE eq '285'}">
-																									<option value="285" selected>285</option>
-																								</c:when>
-																							</c:choose>
-																							<c:choose>
-																								<c:when
-																									test="${list.STOCK_290 > 0 and list.CART_PRDSIZE ne '290'}">
-																									<option value="290">290</option>
-																								</c:when>
-																								<c:when
-																									test="${list.STOCK_290 > 0 and list.CART_PRDSIZE eq '290'}">
-																									<option value="290" selected>290</option>
-																								</c:when>
-																							</c:choose>
+																				<div class="col-lg-9 col-md-3">
+																					<select id="list" class="select_size"
+																						name="CART_PRDSIZE">
+																						<option value="" disabled selected>선택하세요</option>
+																						<c:choose>
+																							<c:when
+																								test="${list.STOCK_220 > 0 and list.CART_PRDSIZE ne '220'}">
+																								<option value="220">220</option>
+																							</c:when>
+																							<c:when
+																								test="${list.STOCK_220 > 0 and list.CART_PRDSIZE eq '220'}">
+																								<option value="220" selected>220</option>
+																							</c:when>
+																						</c:choose>
+																						<c:choose>
+																							<c:when
+																								test="${list.STOCK_225 > 0 and list.CART_PRDSIZE ne '225'}">
+																								<option value="225">225</option>
+																							</c:when>
+																							<c:when
+																								test="${list.STOCK_225 > 0 and list.CART_PRDSIZE eq '225'}">
+																								<option value="225" selected>225</option>
+																							</c:when>
+																						</c:choose>
+																						<c:choose>
+																							<c:when
+																								test="${list.STOCK_230 > 0 and list.CART_PRDSIZE ne '230'}">
+																								<option value="230">230</option>
+																							</c:when>
+																							<c:when
+																								test="${list.STOCK_230 > 0 and list.CART_PRDSIZE eq '230'}">
+																								<option value="230" selected>230</option>
+																							</c:when>
+																						</c:choose>
+																						<c:choose>
+																							<c:when
+																								test="${list.STOCK_235 > 0 and list.CART_PRDSIZE ne '235'}">
+																								<option value="235">235</option>
+																							</c:when>
+																							<c:when
+																								test="${list.STOCK_235 > 0 and list.CART_PRDSIZE eq '235'}">
+																								<option value="235" selected>235</option>
+																							</c:when>
+																						</c:choose>
+																						<c:choose>
+																							<c:when
+																								test="${list.STOCK_240 > 0 and list.CART_PRDSIZE ne '240'}">
+																								<option value="240">240</option>
+																							</c:when>
+																							<c:when
+																								test="${list.STOCK_240 > 0 and list.CART_PRDSIZE eq '240'}">
+																								<option value="240" selected>240</option>
+																							</c:when>
+																						</c:choose>
+																						<c:choose>
+																							<c:when
+																								test="${list.STOCK_245 > 0 and list.CART_PRDSIZE ne '245'}">
+																								<option value="245">245</option>
+																							</c:when>
+																							<c:when
+																								test="${list.STOCK_245 > 0 and list.CART_PRDSIZE eq '245'}">
+																								<option value="245" selected>245</option>
+																							</c:when>
+																						</c:choose>
+																						<c:choose>
+																							<c:when
+																								test="${list.STOCK_250 > 0 and list.CART_PRDSIZE ne '250'}">
+																								<option value="250">250</option>
+																							</c:when>
+																							<c:when
+																								test="${list.STOCK_250 > 0 and list.CART_PRDSIZE eq '250'}">
+																								<option value="250" selected>250</option>
+																							</c:when>
+																						</c:choose>
+																						<c:choose>
+																							<c:when
+																								test="${list.STOCK_255 > 0 and list.CART_PRDSIZE ne '255'}">
+																								<option value="255">255</option>
+																							</c:when>
+																							<c:when
+																								test="${list.STOCK_255 > 0 and list.CART_PRDSIZE eq '255'}">
+																								<option value="255" selected>255</option>
+																							</c:when>
+																						</c:choose>
+																						<c:choose>
+																							<c:when
+																								test="${list.STOCK_260 > 0 and list.CART_PRDSIZE ne '260'}">
+																								<option value="260">260</option>
+																							</c:when>
+																							<c:when
+																								test="${list.STOCK_260 > 0 and list.CART_PRDSIZE eq '260'}">
+																								<option value="260" selected>260</option>
+																							</c:when>
+																						</c:choose>
+																						<c:choose>
+																							<c:when
+																								test="${list.STOCK_265 > 0 and list.CART_PRDSIZE ne '265'}">
+																								<option value="265">265</option>
+																							</c:when>
+																							<c:when
+																								test="${list.STOCK_265 > 0 and list.CART_PRDSIZE eq '265'}">
+																								<option value="265" selected>265</option>
+																							</c:when>
+																						</c:choose>
+																						<c:choose>
+																							<c:when
+																								test="${list.STOCK_270 > 0 and list.CART_PRDSIZE ne '270'}">
+																								<option value="270">270</option>
+																							</c:when>
+																							<c:when
+																								test="${list.STOCK_270 > 0 and list.CART_PRDSIZE eq '270'}">
+																								<option value="270" selected>270</option>
+																							</c:when>
+																						</c:choose>
+																						<c:choose>
+																							<c:when
+																								test="${list.STOCK_275 > 0 and list.CART_PRDSIZE ne '275'}">
+																								<option value="275">275</option>
+																							</c:when>
+																							<c:when
+																								test="${list.STOCK_275 > 0 and list.CART_PRDSIZE eq '275'}">
+																								<option value="275" selected>275</option>
+																							</c:when>
+																						</c:choose>
+																						<c:choose>
+																							<c:when
+																								test="${list.STOCK_280 > 0 and list.CART_PRDSIZE ne '280'}">
+																								<option value="280">280</option>
+																							</c:when>
+																							<c:when
+																								test="${list.STOCK_280 > 0 and list.CART_PRDSIZE eq '280'}">
+																								<option value="280" selected>280</option>
+																							</c:when>
+																						</c:choose>
+																						<c:choose>
+																							<c:when
+																								test="${list.STOCK_285 > 0 and list.CART_PRDSIZE ne '285'}">
+																								<option value="285">285</option>
+																							</c:when>
+																							<c:when
+																								test="${list.STOCK_285 > 0 and list.CART_PRDSIZE eq '285'}">
+																								<option value="285" selected>285</option>
+																							</c:when>
+																						</c:choose>
+																						<c:choose>
+																							<c:when
+																								test="${list.STOCK_290 > 0 and list.CART_PRDSIZE ne '290'}">
+																								<option value="290">290</option>
+																							</c:when>
+																							<c:when
+																								test="${list.STOCK_290 > 0 and list.CART_PRDSIZE eq '290'}">
+																								<option value="290" selected>290</option>
+																							</c:when>
+																						</c:choose>
 
-																						</select>
-																					</div>
+																					</select>
 																				</div>
+																			</div>
 
-<!-- 																			</div> -->
+																			<!-- 																			</div> -->
 
-																			<hr>
+																			<hr class="modal_hr2">
 
 																			<div class="div_button_change_size">
-																				<button class="button_confirm_change_size" type="submit">확인</button>
+																				<button class="button_confirm_change_size"
+																					type="submit">확인</button>
 																			</div>
 																			<div>
 
@@ -532,17 +605,21 @@
 											<td class="shoping__cart__price"><input type="hidden"
 												id="price" value="${list.PRD_PRICE }" /> <c:set var="price"
 													value="${list.PRD_PRICE}" /> <c:set var="disRate"
-													value="${list.PRD_DISRATE}" /> <c:set var="discountedPrice"
+													value="${list.PRD_DISRATE}" /> <c:set var="discountPrice"
 													value="${list.PRD_PRICE-list.PRD_DISRATE*list.PRD_PRICE/100}" />
 
 												<c:if test="${disRate > 0}">
 													<div class="previousPrice">
 														<fmt:formatNumber value="${price}" pattern="#,###" />
+														<span class="pre_won">원</span>
 													</div>
-													<fmt:formatNumber value="${discountedPrice}"
-														pattern="#,###" />
+													<div>
+														<fmt:formatNumber value="${discountPrice}" pattern="#,###" />
+														<span class="won">원</span>
+													</div>
 												</c:if> <c:if test="${disRate == 0}">
 													<fmt:formatNumber value="${price}" pattern="#,###" />
+													<span class="won">원</span>
 												</c:if></td>
 											<td class="shoping__cart__quantity">
 
@@ -567,17 +644,20 @@
 													var="previousTotalPrice"
 													value="${price * list.CART_PRDCOUNT}" /> <c:set
 													var="discountedTotalPrice"
-													value="${discountedPrice * list.CART_PRDCOUNT}" /> <c:if
+													value="${discountPrice * list.CART_PRDCOUNT}" /> <c:if
 													test="${disRate > 0}">
 													<div class="previousTotalPrice">
 														<fmt:formatNumber value="${previousTotalPrice}"
 															pattern="#,###" />
+														<span class="pre_won">원</span>
 													</div>
 													<fmt:formatNumber value="${discountedTotalPrice}"
 														pattern="#,###" />
+													<span class="won">원</span>
 												</c:if> <c:if test="${disRate == 0}">
 													<fmt:formatNumber value="${discountedTotalPrice}"
 														pattern="#,###" />
+													<span class="won">원</span>
 												</c:if>
 
 
@@ -657,15 +737,20 @@
 						<div class="shoping__checkout">
 							<h5>결제예정금액</h5>
 							<ul>
-								<li>주문금액 <span class="sumup"> <%int sum1 = 0;
-                               for(int i=0; i<productList.size(); i++){
-                            		   sum1+=productList.get(i).getPRD_PRICE()*cartList.get(i).getCART_PRDCOUNT();
-                               }%> <%=formatter.format(sum1)%></span></li>
-								<li>할인금액 <span class="sumup"> <%int sum2 = 0;
-                               for(int i=0; i<productList.size(); i++){
-                                  sum2+=(productList.get(i).getPRD_PRICE() * productList.get(i).getPRD_DISRATE()/100)*cartList.get(i).getCART_PRDCOUNT();
-                               }%> <%=formatter.format(sum2)%></span></li>
-								<li>총 금액 <span> <%=formatter.format(sum1-sum2)%></span>
+								<li>주문금액 <span class="sumup"> <%
+ 	int sum1 = 0;
+ 		for (int i = 0; i < productList.size(); i++) {
+ 			sum1 += productList.get(i).getPRD_PRICE() * cartList.get(i).getCART_PRDCOUNT();
+ 		}
+ %> <%=formatter.format(sum1)%></span></li>
+								<li>할인금액 <span class="sumup"> <%
+ 	int sum2 = 0;
+ 		for (int i = 0; i < productList.size(); i++) {
+ 			sum2 += (productList.get(i).getPRD_PRICE() * productList.get(i).getPRD_DISRATE() / 100)
+ 					* cartList.get(i).getCART_PRDCOUNT();
+ 		}
+ %> <%=formatter.format(sum2)%></span></li>
+								<li>총 금액 <span> <%=formatter.format(sum1 - sum2)%></span>
 								</li>
 							</ul>
 							<a href="#" class="primary-btn">결제하기</a>
@@ -693,20 +778,20 @@
 
 
 	<script>
-	// function delete_event(){
+		// function delete_event(){
 
-	// 	if (confirm('장바구니에서 해당 상품을 삭제 하시겠습니까?');) {
-	// 		document.getElementById('form').submit();
-	// 	}else{
-	// 		return false;
-	// 	}
-	// }
+		// 	if (confirm('장바구니에서 해당 상품을 삭제 하시겠습니까?');) {
+		// 		document.getElementById('form').submit();
+		// 	}else{
+		// 		return false;
+		// 	}
+		// }
 
-	// function updateCount_event(){
+		// function updateCount_event(){
 
-	// 	alert('수량이 변경되었습니다');
-	// }
-</script>
+		// 	alert('수량이 변경되었습니다');
+		// }
+	</script>
 
 
 	<script>
@@ -717,47 +802,33 @@
 
 			if (size === '220') {
 				writeSize = "220";
-			}
-			else if (size === '225') {
+			} else if (size === '225') {
 				writeSize = "225";
-			}
-			else if (size === '230') {
+			} else if (size === '230') {
 				writeSize = "230";
-			}
-			else if (size === '235') {
+			} else if (size === '235') {
 				writeSize = "235";
-			}
-			else if (size === '240') {
+			} else if (size === '240') {
 				writeSize = "240";
-			}
-			else if (size === '245') {
+			} else if (size === '245') {
 				writeSize = "245";
-			}
-			else if (size === '250') {
+			} else if (size === '250') {
 				writeSize = "250";
-			}
-			else if (size === '255') {
+			} else if (size === '255') {
 				writeSize = "255";
-			}
-			else if (size === '260') {
+			} else if (size === '260') {
 				writeSize = "260";
-			}
-			else if (size === '265') {
+			} else if (size === '265') {
 				writeSize = "265";
-			}
-			else if (size === '270') {
+			} else if (size === '270') {
 				writeSize = "270";
-			}
-			else if (size === '275') {
+			} else if (size === '275') {
 				writeSize = "275";
-			}
-			else if (size === '280') {
+			} else if (size === '280') {
 				writeSize = "280";
-			}
-			else if (size === '285') {
+			} else if (size === '285') {
 				writeSize = "285";
-			}
-			else if (size === '290') {
+			} else if (size === '290') {
 				writeSize = "290";
 			}
 
