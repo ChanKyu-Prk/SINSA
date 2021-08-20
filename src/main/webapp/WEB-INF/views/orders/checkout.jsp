@@ -309,8 +309,8 @@ input[type=number] {
 							<div class="row">
 								<label for="ORDER_MEMO" class="col-lg-3">배송시 요청사항
 								</label>
-								<div class="checkout__input col-lg-9">
-									<select id="delivMemo" class="mb-2 wide" title="배송시 요청사항">
+								<div class="checkout__input wrapper col-lg-9">
+									<select id="delivMemo" data-display="select" class="mb-2 wide" title="배송시 요청사항">
 										<option selected="selected" disabled>배송 시 요청사항을
 											선택해주세요.</option>
 										<option value="opt01">부재시 경비실에 맡겨주세요.</option>
@@ -319,8 +319,8 @@ input[type=number] {
 										<option value="opt04">직접 수령 하겠습니다.</option>
 										<option value="write">직접입력</option>
 									</select> <span> <input id="ORDER_MEMO" name="ORDER_MEMO"
-										type="text" required="required" maxlength="40"
-										placeholder="요청사항은 40자 이내로 작성해주세요." />
+										type="text" required="required" maxlength="40" placeholder="요청사항은 40자 이내로 작성해주세요."
+										 readonly="readonly"/>
 									</span>
 								</div>
 							</div>
@@ -362,6 +362,17 @@ input[type=number] {
 	<script type="text/javascript">
 	
 	$(document).ready(function() {
+		$('#delivMemo').niceSelect();
+		var selected = $("#delivMemo").val();
+		$('#delivMemo').on('change', function() {
+			selected = $("#delivMemo").val();
+			$("#ORDER_MEMO").val($("#delivMemo option:selected").text());
+			if(selected == "write"){
+				$("#ORDER_MEMO").val('');
+				$("#ORDER_MEMO").removeAttr('readonly');
+			}	
+		});
+		
 		function numberWithDigits() {
 			$(".digits").each(function() {
 				$(this).text( $(this).text().replace(/\B(?=(\d{3})+(?!\d))/g, ','));
@@ -405,16 +416,20 @@ input[type=number] {
 		$(".usePoint").on("propertychange change keyup paste input",function() {
 			//포인트사용
 			usePoint = $(".usePoint").val();
-			
 			//소유 Point보다 더 사용시 alert
-			if($(".hasPoint").attr("data-hasPoint") < usePoint.replaceAll(',', '')){
+			if(parseInt($(".hasPoint").attr("data-hasPoint")) < parseInt(usePoint)){
 				alert("사용가능한 포인트를 초과하였습니다.");
 				$(".usePoint").val('');
 				return false;
 			}
-
 			//총 결제금액
 			totalPriceCon_num = $(".totalOrgPrice").text().replaceAll(',', '') - $(".totalDiscnt").text().replaceAll(',', '') - usePoint ;
+			//사용 포인트가 총 결제금액보다 많을 시 alert
+			if(parseInt(totalPriceCon_num) < parseInt(usePoint)){
+				alert("사용한 포인트가 결제 금액을 초과하였습니다.");
+				$(".usePoint").val('');
+				totalPriceCon_num = $(".totalOrgPrice").text().replaceAll(',', '') - $(".totalDiscnt").text().replaceAll(',', '')
+			}
 			$(".totalPriceCon-num").text(totalPriceCon_num);
 			numberWithDigits();
 		});
