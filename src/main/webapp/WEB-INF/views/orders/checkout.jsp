@@ -362,7 +362,6 @@ input[type=number] {
 	<script type="text/javascript">
 	
 	$(document).ready(function() {
-		
 		function numberWithDigits() {
 			$(".digits").each(function() {
 				$(this).text( $(this).text().replace(/\B(?=(\d{3})+(?!\d))/g, ','));
@@ -400,14 +399,16 @@ input[type=number] {
 			//총 결제금액 (포인트사용X)
 			var totalPriceCon_num = totalPrice - usePoint ;
 			$(".totalPriceCon-num").text(totalPriceCon_num);
-			numberWithDigits();
-		
+
+			$(".savePoint").text(parseInt(((totalPriceCon_num*0.03)/10),10)*10);
+			
 		$(".usePoint").on("propertychange change keyup paste input",function() {
 			//포인트사용
 			usePoint = $(".usePoint").val();
 			//총 결제금액
-			totalPriceCon_num = totalPrice - usePoint ;
+			totalPriceCon_num = $(".totalOrgPrice").text().replaceAll(',', '') - $(".totalDiscnt").text().replaceAll(',', '') - usePoint ;
 			$(".totalPriceCon-num").text(totalPriceCon_num);
+			numberWithDigits();
 		});
 		
 		$(".usePoint").on("keydown",function(e) {
@@ -417,8 +418,6 @@ input[type=number] {
 			}
 		});
 		
-		noDigits();
-		$(".savePoint").text(parseInt(((totalPriceCon_num*0.03)/10),10)*10);
 		numberWithDigits();
 		
 		//적립예정
@@ -440,8 +439,6 @@ input[type=number] {
 				$('input.newDelivInput').val('');
 				$('#ORDER_RECEIVER, #ORDER_TEL').removeAttr('readonly');
 			}
-			
-			
 	 });
 	
 		// Iamport 결제
