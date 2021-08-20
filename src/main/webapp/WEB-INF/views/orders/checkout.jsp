@@ -332,7 +332,7 @@ input[type=number] {
 									<li>총 주문 가격<span>원</span><span class="totalOrgPrice digits">-</span></li>
 									<li>할인<span>원</span><span class="totalDiscnt digits">-</span></li>
 									<li class="points">포인트 사용 <input type="number" placeholder="0" class="text-right usePoint" step="10"></input><span>P</span>
-									<p class="mb-1"><small>사용가능한 포인트: <span>P</span><span class="avPoint digits">${cusInfo.CUS_POINT}</span></small></p>
+									<p class="mb-1"><small>사용가능한 포인트: <span>P</span><span class="avPoint digits hasPoint" data-hasPoint = "${cusInfo.CUS_POINT}">${cusInfo.CUS_POINT}</span></small></p>
 									</li>
 									<li>배송비 <span>무료</span></li>
 								</ul>
@@ -405,6 +405,14 @@ input[type=number] {
 		$(".usePoint").on("propertychange change keyup paste input",function() {
 			//포인트사용
 			usePoint = $(".usePoint").val();
+			
+			//소유 Point보다 더 사용시 alert
+			if($(".hasPoint").attr("data-hasPoint") < usePoint.replaceAll(',', '')){
+				alert("사용가능한 포인트를 초과하였습니다.");
+				$(".usePoint").val('');
+				return false;
+			}
+
 			//총 결제금액
 			totalPriceCon_num = $(".totalOrgPrice").text().replaceAll(',', '') - $(".totalDiscnt").text().replaceAll(',', '') - usePoint ;
 			$(".totalPriceCon-num").text(totalPriceCon_num);
@@ -439,8 +447,8 @@ input[type=number] {
 				$('input.newDelivInput').val('');
 				$('#ORDER_RECEIVER, #ORDER_TEL').removeAttr('readonly');
 			}
-	 });
-	
+	 	});
+
 		// Iamport 결제
 		$("#chckoutBtn").click(function () {
 
