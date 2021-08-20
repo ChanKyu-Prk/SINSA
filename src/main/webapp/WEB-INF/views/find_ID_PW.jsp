@@ -54,7 +54,7 @@
 	width: 602px;
 	border: 1px solid #ddd;
 	border-right: 0px solid #ddd;
-/*  	border-bottom: 3px solid black;  */
+	/*  	border-bottom: 3px solid black;  */
 }
 
 .tabnav li {
@@ -74,19 +74,19 @@
 }
 
 .tabnav li a.active:before {
-/* 	background: black; */
+	/* 	background: black; */
 	
 }
 
 .tabnav li a.active {
 	border-bottom: 3px solid #fff !important;
-/* 	border-right: 3px solid black; */
-/* 	border-left: 3px solid black; */
-/* 	border-top: 3px solid black; */
+	/* 	border-right: 3px solid black; */
+	/* 	border-left: 3px solid black; */
+	/* 	border-top: 3px solid black; */
 }
 
 .tabnav li a {
-/* 	border-bottom: 3px solid black; */
+	/* 	border-bottom: 3px solid black; */
 	position: relative;
 	display: block;
 	background: #f8f8f8;
@@ -100,7 +100,7 @@
 
 .tabnav li a:hover, .tabnav li a.active {
 	background: #fff;
-/* 	color: black; */
+	/* 	color: black; */
 }
 
 .tabcontent {
@@ -135,38 +135,37 @@
 			</ul>
 			<div class="tabcontent">
 				<div id="tab01">
-					<!--탭1 내용 -->
-					<form name="loginFrm">
+					<!--아이디 -->
+					<form name="findIDForm">
 						<div class="form-group first">
 							<label for="username">이름</label> <input type="text"
-								name="input_CUS_NAME_forID" id="CUS_NAME" class="form-control input_CUS_NAME_forID"
+								name="input_CUS_NAME_forID" id="CUS_NAME"
+								class="form-control input_CUS_NAME_forID"
 								placeholder="이름을 입력해주세요">
 							<div id="fill-out-name"></div>
 						</div>
-						
-						
-
 
 						<div class="form-group last mb-3">
 							<label for="email">이메일</label> <input type="text"
-								name="input_CUS_EMAIL_forID" id="CUS_EMAIL" class="form-control input_CUS_EMAIL_forID"
+								name="input_CUS_EMAIL_forID" id="CUS_EMAIL"
+								class="form-control input_CUS_EMAIL_forID"
 								placeholder="이메일을 입력해주세요">
 						</div>
 						<div class="form-group">
-							<span id="button_receive_code"
-								class="btn btn-block py-2 btn-primary" onclick="sendCode();">인증번호
-								요청</span>
+							<span id="button_receive_code_for_ID"
+								class="btn btn-block py-2 btn-primary"
+								onclick="sendCodeForID();">인증번호 요청</span>
 						</div>
 
 					</form>
 
 					<div class="input-group mb-3">
-						<input id="inputCode" name="inputCode" type="text"
+						<input id="inputCodeForID" name="inputCodeForID" type="text"
 							class="form-control input_check_code_forID"
 							placeholder="인증번호 6자리를 입력해 주세요" aria-label="Recipient's username"
 							aria-describedby="button-addon2" disabled="disabled">
 						<button class="btn btn-outline-secondary input_check_code_forID"
-							type="button" id="button-addon2" onclick="checkCode();"
+							type="button" id="button-addon2" onclick="checkCodeForID();"
 							disabled="disabled">인증 확인</button>
 					</div>
 
@@ -186,43 +185,58 @@
 
 
 				<div id="tab02">
-					<!--탭2 내용 -->
+					<!--비밀번호-->
 
 
 
 
-					<form action="find_PWD.do" method="post">
+					<form name="findPWForm">
 						<div class="form-group first">
 							<label for="username">아이디</label> <input type="text"
-								name="CUS_ID" class="form-control" placeholder="아이디를 입력해주세요">
+								name="input_CUS_ID_forPW" id="CUS_ID"
+								class="form-control input_CUS_ID_forPW"
+								placeholder="아이디을 입력해주세요">
+							<div id="fill-out-name"></div>
 						</div>
 
 						<div class="form-group first">
 							<label for="username">이름</label> <input type="text"
-								name="CUS_NAME" class="form-control" placeholder="이름을 입력해주세요">
+								name="input_CUS_NAME_forPW" id="CUS_NAME"
+								class="form-control input_CUS_NAME_forPW" placeholder="이름을 입력해주세요">
+							<div id="fill-out-name"></div>
 						</div>
 
 						<div class="form-group last mb-3">
 							<label for="email">이메일</label> <input type="text"
-								name="CUS_EMAIL" class="form-control" placeholder="이메일을 입력해주세요">
+								name="input_CUS_EMAIL_forPW" id="CUS_EMAIL"
+								class="form-control input_CUS_EMAIL_forPW"
+								placeholder="이메일을 입력해주세요">
 						</div>
 
 						<div class="form-group">
-							<input type="button" value="인증번호 받기" name="checkNum"
-								class="btn btn-block py-2 btn-primary code_check">
+							<span id="button_receive_code_for_PW"
+								class="btn btn-block py-2 btn-primary"
+								onclick="sendCodeForPW();">인증번호 요청</span>
 						</div>
+					</form>
 
 
-						<div class="input-group mb-3">
-							<input type="text" class="form-control"
-								placeholder="Recipient's username"
-								aria-label="Recipient's username"
-								aria-describedby="button-addon2">
-							<button class="btn btn-outline-secondary" type="button"
-								class="code_check" id="button-addon2">인증 확인</button>
+					<div class="input-group mb-3">
+						<input id="inputCodeForPW" name="inputCodeForPW" type="text"
+							class="form-control input_check_code_forPW"
+							placeholder="인증번호 6자리를 입력해 주세요" aria-label="Recipient's username"
+							aria-describedby="button-addon2" disabled="disabled">
+						<button class="btn btn-outline-secondary input_check_code_forPW"
+							type="button" id="button-addon2" onclick="checkCodeForPW();"
+							disabled="disabled">인증 확인</button>
+					</div>
+					
+					<form>
+						<div class="form-group">
+							<button type="button"
+								class="btn btn-block py-2 btn-primary button_require_PW"
+								onclick="showPW();" disabled="disabled">이메일로 비밀번호 요청</button>
 						</div>
-						<input type="submit" value="비밀번호 찾기"
-							class="btn btn-block py-2 btn-primary">
 					</form>
 				</div>
 
@@ -243,68 +257,57 @@
 
 
 
-	<script type="text/javascript">
-		var arr = new Array();
+	<script type="text/javascript"> //아이디찾기
+		var arr1 = new Array();
 		<c:forEach items="${customerList}" var="customerList">
-		arr.push({
+		arr1.push({
 			CUS_NAME : "${customerList.CUS_NAME}",
 			CUS_EMAIL : "${customerList.CUS_EMAIL}"
 		});
 		</c:forEach>
 
 		var customerList = '<c:out value="${customerList}"/>';
-		var codeCheck = $(".input_check_code_forID");
+		var codeCheckForID = $(".input_check_code_forID");
 		var button_require_ID = $(".button_require_ID");
 
-		var code = "";
+		var codeForID = "";
 		var CUS_ID = "";
 
-		function sendCode() {
+		function sendCodeForID() {
 			var count = 0;
 			var codeData = {
 				CUS_NAME : $('input[name="input_CUS_NAME_forID"]').val(),
 				CUS_EMAIL : $('input[name="input_CUS_EMAIL_forID"]').val()
 			}
-			
-			
-
 			if($('input[name="input_CUS_NAME_forID"]').val() == ""){
 				$('input[name="input_CUS_NAME_forID"]').focus();
 				alert('이름을 입력해주세요')
-// 				document.getElementById('fill-out-name').innerHTML = "이름을 입력해주세요";
-// 				$('.input_CUS_NAME_forID').css("border-color", "red");
 			}else if($('input[name="input_CUS_EMAIL_forID"]').val() == ""){
 				$('input[name="input_CUS_EMAIL_forID"]').focus();
 				alert('이메일을 입력해주세요')
-// 				$('.input_CUS_EMAIL_forID').css("border-color", "red");
 			}
 			
-			
-			
-			
-
-			for (var i = 0; i < arr.length; i++) {
+			for (var i = 0; i < arr1.length; i++) {
 				
-				if (arr[i].CUS_NAME === codeData.CUS_NAME && arr[i].CUS_EMAIL === codeData.CUS_EMAIL) {
-// 					alert(arr.length);
+				if (arr1[i].CUS_NAME === codeData.CUS_NAME && arr1[i].CUS_EMAIL === codeData.CUS_EMAIL) {
+// 					alert(arr1.length);
 					$.ajax({
-								url : "sendEmail.do",
+								url : "sendCodeForID.do",
 								type : "POST",
 								data : codeData,
 								success : function(result) {
-									code = result;
+									codeForID = result;
 									document
-											.getElementById('button_receive_code').innerHTML = "인증번호 재요청";
-									codeCheck.attr("disabled", false);
+											.getElementById('button_receive_code_for_ID').innerHTML = "인증번호 재요청";
+									codeCheckForID.attr("disabled", false);
 
 									alert("인증번호가 발송되었습니다.");
-
 								}
 							});
 				} else {
 					count++;
 					
-					if (count === arr.length && codeData.CUS_NAME.length >= 1 && codeData.CUS_EMAIL.length >= 1) {
+					if (count === arr1.length && codeData.CUS_NAME.length >= 1 && codeData.CUS_EMAIL.length >= 1) {
 						alert("입력정보와 일치하는 회원정보가 존재하지 않습니다.");
 					}
 
@@ -313,11 +316,11 @@
 
 		}
 
-		function checkCode() {
+		function checkCodeForID() {
 
-			var inputCode = $('input[name="inputCode"]').val();
+			var inputCodeForID = $('input[name="inputCodeForID"]').val();
 
-			if (code == inputCode) {
+			if (codeForID == inputCodeForID) {
 				button_require_ID.attr("disabled", false);
 				alert('인증되었습니다. 아이디 요청 버튼을 눌러주세요');
 			} else {
@@ -328,6 +331,7 @@
 		function showID() {
 
 			var codeData = {
+				CUS_ID : $('input[name="input_CUS_ID_forID"]').val(),
 				CUS_NAME : $('input[name="input_CUS_NAME_forID"]').val(),
 				CUS_EMAIL : $('input[name="input_CUS_EMAIL_forID"]').val()
 			}
@@ -338,11 +342,138 @@
 				success : function(result) {
 					CUS_ID = result;
 					alert("요청하신 아이디를 회원님의 이메일로 전송했습니다.");
+				}
+			});
+		}
+	</script>
+
+
+
+
+
+
+	<script type="text/javascript"> //비밀번호 찾기
+		var arr2 = new Array();
+		<c:forEach items="${customerList}" var="customerList">
+		arr2.push({
+			CUS_ID : "${customerList.CUS_ID}",
+			CUS_NAME : "${customerList.CUS_NAME}",
+			CUS_EMAIL : "${customerList.CUS_EMAIL}"
+		});
+		</c:forEach>
+
+		var customerList = '<c:out value="${customerList}"/>';
+		var codeCheckForPW = $(".input_check_code_forPW");
+		var button_require_PW = $(".button_require_PW");
+
+		var codeForPW = "";
+		var CUS_PWD = "";
+
+		function sendCodeForPW() {
+			var count = 0;
+			var codeData = {
+				CUS_ID : $('input[name="input_CUS_ID_forPW"]').val(),
+				CUS_NAME : $('input[name="input_CUS_NAME_forPW"]').val(),
+				CUS_EMAIL : $('input[name="input_CUS_EMAIL_forPW"]').val()
+			}
+			if($('input[name="input_CUS_ID_forPW"]').val() == ""){
+				$('input[name="input_CUS_ID_forPW"]').focus();
+				alert('아이디를 입력해주세요')
+			}else if($('input[name="input_CUS_NAME_forPW"]').val() == ""){
+				$('input[name="input_CUS_NAME_forPW"]').focus();
+				alert('이름을 입력해주세요')
+			}else if($('input[name="input_CUS_EMAIL_forPW"]').val() == ""){
+				$('input[name="input_CUS_EMAIL_forPW"]').focus();
+				alert('이메일을 입력해주세요')
+			}
+			
+			for (var i = 0; i < arr2.length; i++) {
+				
+				if (arr2[i].CUS_ID === codeData.CUS_ID && arr2[i].CUS_NAME === codeData.CUS_NAME && arr2[i].CUS_EMAIL === codeData.CUS_EMAIL) {
+// 					alert(arr2.length);
+					$.ajax({
+								url : "sendCodeForPW.do",
+								type : "POST",
+								data : codeData,
+								success : function(result) {
+									codeForPW = result;
+									document
+											.getElementById('button_receive_code_for_PW').innerHTML = "인증번호 재요청";
+									codeCheckForPW.attr("disabled", false);
+
+									alert("인증번호가 발송되었습니다.");
+
+								}
+							});
+				} else {
+					count++;
+					
+					if (count === arr2.length && codeData.CUS_ID.length >= 1 && codeData.CUS_NAME.length >= 1 && codeData.CUS_EMAIL.length >= 1) {
+						alert("입력정보와 일치하는 회원정보가 존재하지 않습니다.");
+					}
+				}
+			}
+		}
+
+		function checkCodeForPW() {
+
+			var inputCodeForPW = $('input[name="inputCodeForPW"]').val();
+
+			if (codeForPW == inputCodeForPW) {
+				button_require_PW.attr("disabled", false);
+				alert('인증되었습니다. 비밀번호 요청 버튼을 눌러주세요');
+			} else {
+				alert('정확한 인증번호 6자리를 입력해주세요.');
+			}
+		}
+
+		function showPW() {
+
+			var codeData = {
+				CUS_ID : $('input[name="input_CUS_ID_forPW"]').val(),
+				CUS_NAME : $('input[name="input_CUS_NAME_forPW"]').val(),
+				CUS_EMAIL : $('input[name="input_CUS_EMAIL_forPW"]').val()
+			}
+			$.ajax({
+				url : "showPW.do",
+				type : "POST",
+				data : codeData,
+				success : function(result) {
+					CUS_PWD = result;
+					alert("요청하신 비밀번호를 회원님의 이메일로 전송했습니다.");
 
 				}
 			});
 		}
 	</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 	<script>
 		$(function() {

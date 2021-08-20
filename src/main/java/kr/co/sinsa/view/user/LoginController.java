@@ -126,9 +126,9 @@ public class LoginController {
 
 
 
-	@RequestMapping(value="/sendEmail.do", method=RequestMethod.POST)
+	@RequestMapping(value="/sendCodeForID.do", method=RequestMethod.POST)
 	@ResponseBody
-	public String findID(Model model, String CUS_NAME, String CUS_EMAIL, HttpServletResponse response) throws Exception{
+	public String sendCodeForID(Model model, String CUS_NAME, String CUS_EMAIL, HttpServletResponse response) throws Exception{
 		CustomerVO customerVO = new CustomerVO();
 
 		customerVO.setCUS_NAME(CUS_NAME);
@@ -168,8 +168,8 @@ public class LoginController {
 			e.printStackTrace();
 		}
 
-		String num = Integer.toString(checkNum);
-		return num;
+		String code = Integer.toString(checkNum);
+		return code;
 	}
 
 
@@ -213,6 +213,60 @@ public class LoginController {
 
 		return CUS_ID;
 	}
+	
+	
+	
+	
+	
+	
+	
+	@RequestMapping(value="/sendCodeForPW.do", method=RequestMethod.POST)
+	@ResponseBody
+	public String sendCodeForPW(Model model, String CUS_ID, String CUS_NAME, String CUS_EMAIL, HttpServletResponse response) throws Exception{
+		CustomerVO customerVO = new CustomerVO();
+
+		customerVO.setCUS_ID(CUS_ID);
+		customerVO.setCUS_NAME(CUS_NAME);
+		customerVO.setCUS_EMAIL(CUS_EMAIL);
+
+		String CUS_PWD = ""; 
+		CUS_PWD = loginService.getCustomerPWD(customerVO);
+
+		Random random = new Random();
+		int checkNum = random.nextInt(888888) + 111111;
+
+		model.addAttribute("CUS_PWD", CUS_PWD);
+//		model.addAttribute("checkNum", checkNum);
+
+
+		System.out.println("PPPPPPPPPPP");
+		System.out.println(CUS_ID);
+		System.out.println(CUS_PWD);
+		System.out.println(CUS_NAME);
+		System.out.println(CUS_EMAIL);
+
+		String setFrom = "sjinjin6@naver.com";
+		String toMail = CUS_EMAIL;
+		String title = "[SINSA]요청하신 비밀번호 찾기 인증번호를 확인해 주세요";
+		String content = "홈페이지를 방문해주셔서 감사합니다." +"<br>" + "비밀번호 찾기 인증번호는" + checkNum + "입니다.";
+
+
+		try {
+			MimeMessage message = mailSender.createMimeMessage();
+			MimeMessageHelper helper = new MimeMessageHelper(message, true, "utf-8");
+			helper.setFrom(setFrom);
+			helper.setTo(toMail);
+			helper.setSubject(title);
+			helper.setText(content, true);
+			mailSender.send(message);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		String code = Integer.toString(checkNum);
+		return code;
+	}
 
 
 
@@ -220,23 +274,9 @@ public class LoginController {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	@RequestMapping(value="/find_PWD.do", method=RequestMethod.POST)
-	//	@ResponseBody
-	public String findPWD(Model model, String CUS_NAME, String CUS_ID, String CUS_EMAIL) throws Exception{
+	@RequestMapping(value="/showPW.do", method=RequestMethod.POST)
+	@ResponseBody
+	public String showPW(Model model, String CUS_NAME, String CUS_ID, String CUS_EMAIL) throws Exception{
 		CustomerVO customerVO = new CustomerVO();
 
 		customerVO.setCUS_NAME(CUS_NAME);
@@ -263,8 +303,13 @@ public class LoginController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return "find_ID_PW";
+		return "CUS_PWD";
 	}
-
-
 }
+
+
+
+
+
+
+
