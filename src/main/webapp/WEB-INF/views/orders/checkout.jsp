@@ -407,7 +407,7 @@ input[type=number] {
 			usePoint = $(".usePoint").val();
 			
 			//소유 Point보다 더 사용시 alert
-			if($(".hasPoint").attr("data-hasPoint") < usePoint.replaceAll(',', '')){
+			if(parseInt($(".hasPoint").attr("data-hasPoint")) < parseInt(usePoint)){
 				alert("사용가능한 포인트를 초과하였습니다.");
 				$(".usePoint").val('');
 				return false;
