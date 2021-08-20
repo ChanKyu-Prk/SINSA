@@ -235,7 +235,7 @@ td {
 												</tr>
 											</table>
 										</td>
-										<td><fmt:formatNumber value="${list.ORDER_PRICE*0.05 }"
+										<td><fmt:formatNumber value="${list.ORDER_PRICE*0.03 }"
 												type="number" />원</td>
 										<td>${list.ORDER_AMOUNT}개</td>
 										<td><fmt:formatNumber value="${list.ORDER_PRICE }"
