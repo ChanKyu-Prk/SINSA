@@ -111,10 +111,38 @@
 }
 
 .wrapper {
-	display: flex;
+	/* 	display: flex; */
 	display: grid;
 	place-items: center;
-	min-height: 100vh;
+	margin: 100px 0px 300px 0px;
+	/* 	min-height: 200vh; */
+}
+
+.button-login-join {
+	display: block;
+	text-align: center;
+}
+
+.button_login {
+	width: 250px !important;
+	margin: 30px 7px 0px 0px;
+}
+
+.button_join {
+	width: 250px !important;
+	margin: 30px 0px 0px 7px;
+}
+
+.description {
+	text-align: center;
+	margin: 0px 0px 50px 0px;
+	font-size: 19px;
+}
+
+.head {
+	text-align: center;
+	margin: 0px 0px 30px 0px;
+	font-size: 30px;
 }
 </style>
 
@@ -129,6 +157,8 @@
 
 	<div class="wrapper">
 		<div class="tab">
+			<div class="head">ID/Password 찾기</div>
+			<div class="description">아이디와 비밀번호는 가입 시 입력하신 정보를 통해 찾을 수 있습니다.</div>
 			<ul class="tabnav">
 				<li><a href="#tab01">아이디 찾기</a></li>
 				<li><a href="#tab02">비밀번호 찾기</a></li>
@@ -176,6 +206,15 @@
 								onclick="showID();" disabled="disabled">이메일로 아이디 요청</button>
 						</div>
 					</form>
+
+					<div class="button-login-join">
+						<span><button type="button"
+								onclick="location.href='login.do'"
+								class="btn py-2 btn-primary button_login">로그인</button></span> <span><button
+								type="button" class="btn py-2 btn-primary button_join"
+								onclick="location.href='join.do'">회원가입</button></span>
+					</div>
+
 				</div>
 
 
@@ -186,9 +225,6 @@
 
 				<div id="tab02">
 					<!--비밀번호-->
-
-
-
 
 					<form name="findPWForm">
 						<div class="form-group first">
@@ -202,7 +238,8 @@
 						<div class="form-group first">
 							<label for="username">이름</label> <input type="text"
 								name="input_CUS_NAME_forPW" id="CUS_NAME"
-								class="form-control input_CUS_NAME_forPW" placeholder="이름을 입력해주세요">
+								class="form-control input_CUS_NAME_forPW"
+								placeholder="이름을 입력해주세요">
 							<div id="fill-out-name"></div>
 						</div>
 
@@ -230,7 +267,7 @@
 							type="button" id="button-addon2" onclick="checkCodeForPW();"
 							disabled="disabled">인증 확인</button>
 					</div>
-					
+
 					<form>
 						<div class="form-group">
 							<button type="button"
@@ -238,6 +275,15 @@
 								onclick="showPW();" disabled="disabled">이메일로 비밀번호 요청</button>
 						</div>
 					</form>
+
+					<div class="button-login-join">
+						<span><button type="button"
+								onclick="location.href='login.do'"
+								class="btn py-2 btn-primary button_login">로그인</button></span> <span><button
+								type="button" class="btn py-2 btn-primary button_join"
+								onclick="location.href='join.do'">회원가입</button></span>
+					</div>
+
 				</div>
 
 
@@ -257,7 +303,8 @@
 
 
 
-	<script type="text/javascript"> //아이디찾기
+	<script type="text/javascript">
+		//아이디찾기
 		var arr1 = new Array();
 		<c:forEach items="${customerList}" var="customerList">
 		arr1.push({
@@ -279,19 +326,21 @@
 				CUS_NAME : $('input[name="input_CUS_NAME_forID"]').val(),
 				CUS_EMAIL : $('input[name="input_CUS_EMAIL_forID"]').val()
 			}
-			if($('input[name="input_CUS_NAME_forID"]').val() == ""){
+			if ($('input[name="input_CUS_NAME_forID"]').val() == "") {
 				$('input[name="input_CUS_NAME_forID"]').focus();
 				alert('이름을 입력해주세요')
-			}else if($('input[name="input_CUS_EMAIL_forID"]').val() == ""){
+			} else if ($('input[name="input_CUS_EMAIL_forID"]').val() == "") {
 				$('input[name="input_CUS_EMAIL_forID"]').focus();
 				alert('이메일을 입력해주세요')
 			}
-			
+
 			for (var i = 0; i < arr1.length; i++) {
-				
-				if (arr1[i].CUS_NAME === codeData.CUS_NAME && arr1[i].CUS_EMAIL === codeData.CUS_EMAIL) {
-// 					alert(arr1.length);
-					$.ajax({
+
+				if (arr1[i].CUS_NAME === codeData.CUS_NAME
+						&& arr1[i].CUS_EMAIL === codeData.CUS_EMAIL) {
+					// 					alert(arr1.length);
+					$
+							.ajax({
 								url : "sendCodeForID.do",
 								type : "POST",
 								data : codeData,
@@ -306,8 +355,9 @@
 							});
 				} else {
 					count++;
-					
-					if (count === arr1.length && codeData.CUS_NAME.length >= 1 && codeData.CUS_EMAIL.length >= 1) {
+
+					if (count === arr1.length && codeData.CUS_NAME.length >= 1
+							&& codeData.CUS_EMAIL.length >= 1) {
 						alert("입력정보와 일치하는 회원정보가 존재하지 않습니다.");
 					}
 
@@ -352,7 +402,8 @@
 
 
 
-	<script type="text/javascript"> //비밀번호 찾기
+	<script type="text/javascript">
+		//비밀번호 찾기
 		var arr2 = new Array();
 		<c:forEach items="${customerList}" var="customerList">
 		arr2.push({
@@ -376,22 +427,25 @@
 				CUS_NAME : $('input[name="input_CUS_NAME_forPW"]').val(),
 				CUS_EMAIL : $('input[name="input_CUS_EMAIL_forPW"]').val()
 			}
-			if($('input[name="input_CUS_ID_forPW"]').val() == ""){
+			if ($('input[name="input_CUS_ID_forPW"]').val() == "") {
 				$('input[name="input_CUS_ID_forPW"]').focus();
 				alert('아이디를 입력해주세요')
-			}else if($('input[name="input_CUS_NAME_forPW"]').val() == ""){
+			} else if ($('input[name="input_CUS_NAME_forPW"]').val() == "") {
 				$('input[name="input_CUS_NAME_forPW"]').focus();
 				alert('이름을 입력해주세요')
-			}else if($('input[name="input_CUS_EMAIL_forPW"]').val() == ""){
+			} else if ($('input[name="input_CUS_EMAIL_forPW"]').val() == "") {
 				$('input[name="input_CUS_EMAIL_forPW"]').focus();
 				alert('이메일을 입력해주세요')
 			}
-			
+
 			for (var i = 0; i < arr2.length; i++) {
-				
-				if (arr2[i].CUS_ID === codeData.CUS_ID && arr2[i].CUS_NAME === codeData.CUS_NAME && arr2[i].CUS_EMAIL === codeData.CUS_EMAIL) {
-// 					alert(arr2.length);
-					$.ajax({
+
+				if (arr2[i].CUS_ID === codeData.CUS_ID
+						&& arr2[i].CUS_NAME === codeData.CUS_NAME
+						&& arr2[i].CUS_EMAIL === codeData.CUS_EMAIL) {
+					// 					alert(arr2.length);
+					$
+							.ajax({
 								url : "sendCodeForPW.do",
 								type : "POST",
 								data : codeData,
@@ -407,8 +461,10 @@
 							});
 				} else {
 					count++;
-					
-					if (count === arr2.length && codeData.CUS_ID.length >= 1 && codeData.CUS_NAME.length >= 1 && codeData.CUS_EMAIL.length >= 1) {
+
+					if (count === arr2.length && codeData.CUS_ID.length >= 1
+							&& codeData.CUS_NAME.length >= 1
+							&& codeData.CUS_EMAIL.length >= 1) {
 						alert("입력정보와 일치하는 회원정보가 존재하지 않습니다.");
 					}
 				}
