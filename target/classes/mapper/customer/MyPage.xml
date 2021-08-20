@@ -201,6 +201,12 @@
 		from product
 		where PRD_CODE = #{value};
 	</select>
+	
+	<insert id="reviewInsert" parameterType="kr.co.sinsa.biz.customer.ReviewVO">
+	insert into review(REV_ORDERNUM, REV_ORDERPRDSIZE , REV_CUSID, REV_PRDCODE , REV_TITLE , REV_CONTENT , REV_IMAGE , REV_STAR )
+	values(#{REV_ORDERNUM}, #{REV_ORDERPRDSIZE} , #{REV_CUSID}, #{REV_PRDCODE} , #{REV_TITLE} , #{REV_CONTENT} , #{REV_IMAGE} , #{REV_STAR});
+	
+	</insert>
 
 
 	<select id="QnAList" parameterType="Map"

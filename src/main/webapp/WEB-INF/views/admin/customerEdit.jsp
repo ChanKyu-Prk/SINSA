@@ -41,7 +41,7 @@ div {
 				</tr>
 				<tr>
 					<td>비밀번호 :</td>
-					<td><form:input type="password" path="CUS_PWD" class="form-control" readonly/></td>
+					<td><form:input type="password" path="CUS_PWD" class="form-control" /></td>
 				</tr>
 				<tr>
 					<td>이름 :</td>

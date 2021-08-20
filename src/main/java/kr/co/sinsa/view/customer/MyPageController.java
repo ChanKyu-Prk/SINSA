@@ -15,11 +15,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import kr.co.sinsa.biz.customer.CustomerVO;
+import kr.co.sinsa.biz.customer.FileUploadService;
 import kr.co.sinsa.biz.customer.MyOrderListVO;
 import kr.co.sinsa.biz.customer.MyPageService;
 import kr.co.sinsa.biz.customer.QnAVO;
+import kr.co.sinsa.biz.customer.ReviewVO;
 import kr.co.sinsa.biz.product.PageInfo;
 import kr.co.sinsa.biz.product.ProductVO;
 import kr.co.sinsa.biz.user.UserVO;
@@ -29,6 +32,8 @@ public class MyPageController {
 
 	@Autowired
 	private MyPageService myPageSerive;
+	@Autowired
+	private FileUploadService upload;
 
 	@RequestMapping(value = "/myPage.do", method = RequestMethod.GET)
 	public String myPage(Model model, CustomerVO vo, HttpSession session) {
@@ -186,17 +191,17 @@ public class MyPageController {
 			map.put("date1", date1_sqldate);
 			map.put("date2", date2_sqldate);
 			listCount = myPageSerive.countmyOrderListDate(map);
-			List<MyOrderListVO> orderList= myPageSerive.myOrderListDate(map);
+			List<MyOrderListVO> orderList = myPageSerive.myOrderListDate(map);
 			model.addAttribute("orderList", orderList);
-			model.addAttribute("reviewCheck", myPageSerive.reviewCheck(orderList,user.getCUS_ID()));
+			model.addAttribute("reviewCheck", myPageSerive.reviewCheck(orderList, user.getCUS_ID()));
 		} else {
 			Map<String, Object> map = new HashMap<String, Object>();
 			map.put("ID", userID);
 			map.put("page", (page - 1) * 20);
 			listCount = myPageSerive.countmyOrderList(map);
-			List<MyOrderListVO> orderList= myPageSerive.myOrderList(map);
+			List<MyOrderListVO> orderList = myPageSerive.myOrderList(map);
 			model.addAttribute("orderList", orderList);
-			model.addAttribute("reviewCheck", myPageSerive.reviewCheck(orderList,user.getCUS_ID()));
+			model.addAttribute("reviewCheck", myPageSerive.reviewCheck(orderList, user.getCUS_ID()));
 		}
 		model.addAttribute("date1", date1);
 		model.addAttribute("date2", date2);
@@ -298,7 +303,7 @@ public class MyPageController {
 			map.put("page", (page - 1) * 20);
 			listCount = myPageSerive.countQnAListList(map);
 			List<QnAVO> QnAList = myPageSerive.QnAList(map);
-			List<ProductVO> productList =myPageSerive.productMatch(QnAList);
+			List<ProductVO> productList = myPageSerive.productMatch(QnAList);
 			model.addAttribute("QnAList", QnAList);
 			model.addAttribute("productList", productList);
 		}
@@ -414,21 +419,41 @@ public class MyPageController {
 		}
 
 	}
+
 	@RequestMapping(value = "/reviewWrite.do", method = RequestMethod.GET)
-	public String reviewWrite(Model model,
-			@RequestParam String ORDERNUM,
-			@RequestParam String ORDERPRDSIZE,
-			@RequestParam String PRDCODE,
-			HttpSession session) {
+	public String reviewWrite(Model model, @RequestParam String ORDERNUM, @RequestParam String ORDERPRDSIZE,
+			@RequestParam String PRDCODE, HttpSession session) {
 		UserVO user = (UserVO) session.getAttribute("user");
 
 		if (user == null) {
 			return "login";
 		}
-		model.addAttribute("product",myPageSerive.productSerch(PRDCODE));
-		model.addAttribute("ordernum",ORDERNUM);
-		model.addAttribute("orderprdsize",ORDERPRDSIZE);
-		
+		model.addAttribute("product", myPageSerive.productSerch(PRDCODE));
+		model.addAttribute("ordernum", ORDERNUM);
+		model.addAttribute("orderprdsize", ORDERPRDSIZE);
+
 		return "customer/reviewWrite";
 	}
+
+	@RequestMapping(value = "/reviewInsert.do", method = RequestMethod.POST)
+	public String reviewInsert(Model model, ReviewVO vo,
+			@RequestParam(required = false) List<MultipartFile> multipartFile, String Tsize, String Tcolor,
+			String Tsense, String Tdelv, HttpSession session) {
+		UserVO user = (UserVO) session.getAttribute("user");
+		if (user == null) {
+			return "login";
+		}
+		String title = Tsize + "/" + Tcolor + "/" + Tsense + "/" + Tdelv;
+		vo.setREV_TITLE(title);
+		vo.setREV_CUSID(user.getCUS_ID());
+		if (multipartFile.get(0).isEmpty()) {
+			myPageSerive.reviewInsert(vo);
+		} else {
+			String fileNames = upload.reviewImgUpload(multipartFile);
+			vo.setREV_IMAGE(fileNames);
+			myPageSerive.reviewInsert(vo);
+		}
+		return "redirect:myReviewList.do";
+	}
+
 }

@@ -11,7 +11,7 @@
 body{
    font: 13px/20px 'Helvetica Neue', Helvetica, Arial, sans-serif;
    color: #333333;
-   background: #596778;
+   background: #387002;
 }
 .signUp {
    position: relative;
@@ -43,32 +43,50 @@ body{
    border-color: #DCDCDC;
 }
 
+.loginLogoTitle{
+	margin: -25px -25px 25px;
+    padding: 15px 25px;
+    color: white;
+    line-height: 35px;
+    text-align: center;
+    font-size: 35px;
+   	font-weight: 300;
+}
+
+.admintext {
+	text-align: center;
+	margin: -25px -25px 25px;
+    padding: 15px 25px;
+    font-size: 15px;
+    color: white;
+}
+
 .signUpTitle {
    margin: -25px -25px 25px;
    padding: 15px 25px;
    line-height: 35px;
-   font-size: 26px;
-   font-weight: 300;
-   color: #777;
+   /*font-size: 26px;
+   font-weight: 300; */
+   color: #777; 
    text-align: center;
    text-shadow: 0 1px rgba(255, 255, 255, 0.75);
    background: #F7F7F7;
 }
 
-.signUpTitle:before {
+/* .signUpTitle:before {
    content: '';
    position: absolute;
    top: 0;
    left: 0;
    right: 0;
    height: 8px;
-   background: #C4E17F;
+   background: #FFFFFF;
    border-radius: 5px 5px 0 0;
    background-image: -webkit-linear-gradient(left, #C4E17F, #C4E17F 12.5%, #F7FDCA 12.5%, #F7FDCA 25%, #FECF71 25%, #FECF71 37.5%, #F0776C 37.5%, #F0776C 50%, #DB9DBE 50%, #db9CBE 62.5%, #C49CDE 62.5%, #C49CDE 75%, #669AE1 75%, #669AE1 87.5%, #62C2E4 87.5%, #62C2E4);
    background-image: -moz-linear-gradient(left, #c4e17f, #C4E17F 12.5%, #F7FDCA 12.5%, #F7FDCA 25%, #FECF71 25%, #FECF71 37.5%, #F0776C 37.5%, #F0776C 50%, #DB9DBE 50%, #DB9CBE 62.5%, #C49CDE 62.5%, #C49CDE 75%, #669AE1 75%, #669AE1 87.5%, #62C2E4 87.5%, #62C2E4);
    background-image: -o-linear-gradient(left, #C4E17F, #C4E17F 12.5%, #F7FDCC 12.5%, #F7FDCA 25%, #FECF71 25%, #FECF71 37.5%, #F0776C 37.5%, #F0776C 50%, #DB9DBE 50%, #DB9DBE 62.5%, #C49CDE 62.5%, #C49CDE 75%, #669AE1 75%, #669AE1 87.5%, #62C2E4 87.5%, #62C2E4);
    background-image: linear-gradient(to right, #C4E17F, #C4E17F 12.5%, #F7FDCA 12.5%, #F7FDCA 25%, #FECF71 25%, #FECF71 37.5%, #F0776C 37.5%, #F0776C 50%, #DB9DBE 50%, #DB9CBE 62.5%, #c49cde 62.5%, #C49CDE 75%, #669AE1 75%, #669AE1 87.5%, #62c2e4 87.5%, #62C2E4);
-}
+} */
 
 input {
    font-family: inherit;
@@ -112,13 +130,13 @@ input {
    color: white;
    text-align: center;
    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
-   background: #CCCCFF;
+   background: #99d066;
    border: 0;
-   border-bottom: 2px solid #D76B60;
+/*    border-bottom: 2px solid #D76B60; */
    border-radius: 5px;
    cursor: pointer;
-   -webkit-box-shadow: inset 0 -2px #D76B60;
-   box-shadow: inset 0 -2px #D76B60;
+   /* -webkit-box-shadow: inset 0 -2px #D76B60; */
+   /* box-shadow: inset 0 -2px #D76B60; */
 }
 
 .loginButton:active {
@@ -187,11 +205,19 @@ if(message == 1){
 }
 
 </script>
+<br><br><br><br>
+<form class="loginLogoTitle" id="LogoTitle" name="SINASLOGO">
+	<h1>SINSA</h1>
+</form>
 <form class="signUp" id="signupForm" name="adminLogin" method="post" action="adminLoginOk">
-   <h1 class="signUpTitle">관리자 로그인</h1>
+   <h1 class="signUpTitle">ADMIN LOGIN</h1>
    <input type="text" name="ADID" id="userId" class="signUpInput" placeholder="ID" autofocus onkeyup="enterKeyCheck()" maxlength="20">
    <input type="password" name="ADPW" id="password" class="signUpInput" placeholder="Password" onkeyup="enterKeyCheck()" maxlength="20">
-   <input type="submit" value="로그인" class="loginButton">
+   <input type="submit" value="LOGIN" class="loginButton">
+</form>
+
+<form class="admintext">
+	<h4>관리자 전용 로그인 페이지입니다.</h4>
 </form>
 </body>
 </html>

@@ -208,7 +208,7 @@ input[type=number] {
 										수량:<span class="amountNum">${lists.ORDER_AMOUNT}</span>
 									</p> <b class="mb-0">무료배송</b>
 								</td>
-								<td class="shoping__cart__total numFont">${finalPrice*lists.ORDER_AMOUNT}원</td>
+								<td class="shoping__cart__total numFont digits">${finalPrice*lists.ORDER_AMOUNT}원</td>
 							</tr>
 							</c:forEach>
 						</c:if>
@@ -329,21 +329,21 @@ input[type=number] {
 							<div class="checkout__order">
 								<h4>결제정보</h4>
 								<ul>
-									<li>총 주문 가격<span>원</span><span class="totalOrgPrice">-</span></li>
-									<li>할인<span>원</span><span class="totalDiscnt">-</span></li>
+									<li>총 주문 가격<span>원</span><span class="totalOrgPrice digits">-</span></li>
+									<li>할인<span>원</span><span class="totalDiscnt digits">-</span></li>
 									<li class="points">포인트 사용 <input type="number" placeholder="0" class="text-right usePoint" step="10"></input><span>P</span>
-									<p class="mb-1"><small>사용가능한 포인트: <span class="avPoint digits">${cusInfo.CUS_POINT} P</span></small></p>
+									<p class="mb-1"><small>사용가능한 포인트: <span>P</span><span class="avPoint digits">${cusInfo.CUS_POINT}</span></small></p>
 									</li>
 									<li>배송비 <span>무료</span></li>
 								</ul>
 								<div class="checkout__order__total my-2 pb-0 pt-3">
 									총 결제금액
 									<span class="text-right">
-										<span class="totalPriceCon-num float-left">-</span>
+										<span class="totalPriceCon-num float-left digits">-</span>
 										<span>원</span>
 									</span>
 								</div>
-								<small class="float-right mb-4">결제 시 <span class="avPoint">-P</span> 적립예정</small>
+								<small class="float-right mb-4">결제 시 <span class="avPoint savePoint">-</span>P 적립예정</small>
 								<button type="button" id="chckoutBtn" class="site-btn">결제하기</button>
 							</div>
 						</div>
@@ -383,6 +383,32 @@ input[type=number] {
 		var totalDiscnt = totalOrgPrice - totalPrice ;
 		$(".totalDiscnt").text(totalDiscnt);
 		
+		var usePoint = 0;
+		//총 결제금액 (포인트사용X)
+		var totalPriceCon_num = totalPrice - usePoint ;
+		$(".totalPriceCon-num").text(totalPriceCon_num);
+		
+		$(".usePoint").on("propertychange change keyup paste input",function() {
+			//포인트사용
+			usePoint = $(".usePoint").val();
+			//총 결제금액
+			totalPriceCon_num = totalPrice - usePoint ;
+			$(".totalPriceCon-num").text(totalPriceCon_num);
+		});
+		
+		$(".usePoint").on("keydown",function(e) {
+			if (!((e.keyCode > 95 && e.keyCode < 106)
+					|| (e.keyCode > 47 && e.keyCode < 58) || e.keyCode == 8)) {
+				return false;
+			}
+		});
+		
+		$(".savePoint").text(parseInt(((totalPriceCon_num*0.03)/10),10)*10);
+		
+		//적립예정
+		$(".totalPriceCon-num").on('DOMSubtreeModified', function () {
+			$(".savePoint").text(parseInt(((totalPriceCon_num*0.03)/10),10)*10);
+		});
 		
 		$('input[type=radio]').on('change', function() {
 			var chckdRadio = $('input[type=radio]:checked').val();

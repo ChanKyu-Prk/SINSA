@@ -157,11 +157,12 @@ td {
 .span_margin {
 	margin: 0;
 }
-.write_btn{
-background-color: black;
-color : white;
-padding: 6px;
-cursor: pointer;
+
+.write_btn {
+	background-color: #0b89fd;
+	color: white;
+	padding: 6px;
+	cursor: pointer;
 }
 </style>
 <title>SINSA : 나의 상품 후기</title>
@@ -300,23 +301,24 @@ cursor: pointer;
 												<td>${list.ORDER_STATE }</td>
 												<td><c:choose>
 														<c:when test="${list.ORDER_STATE =='배송완료' }">
-											<c:choose>
-											<c:when test="${reviewCheck[status.index] ==0}">
-											
-											<span class="write_btn">
-											<input type="hidden" value="${list.ORDER_PRDCODE }" class="ORDER_PRDCODE">
-											<input type="hidden" value="${list.ORDER_PRDSIZE  }" class="ORDER_PRDSIZE">
-											<input type="hidden" value="${list.ORDER_NUM  }" class="ORDER_NUM ">
-											후기작성하기
-											</span>
-											
-											</c:when>
-											<c:otherwise>
+															<c:choose>
+																<c:when test="${reviewCheck[status.index] ==0}">
+
+																	<span class="write_btn"> <input type="hidden"
+																		value="${list.ORDER_PRDCODE }" class="ORDER_PRDCODE">
+																		<input type="hidden" value="${list.ORDER_PRDSIZE  }"
+																		class="ORDER_PRDSIZE"> <input type="hidden"
+																		value="${list.ORDER_NUM  }" class="ORDER_NUM ">
+																		후기작성하기
+																	</span>
+
+																</c:when>
+																<c:otherwise>
 											작성완료
 											</c:otherwise>
-											</c:choose>
-											
-											</c:when>
+															</c:choose>
+
+														</c:when>
 														<c:when test="${list.ORDER_STATE =='취소' }">
 											작성불가 <br>
 											(취소상품)
@@ -465,14 +467,17 @@ cursor: pointer;
 </body>
 
 <script>
+	$('.write_btn').on(
+			"click",
+			function() {
+				var ORDERNUM = $(this).find('.ORDER_NUM').val();
+				var ORDERPRDSIZE = $(this).find('.ORDER_PRDSIZE').val();
+				var PRDCODE = $(this).find('.ORDER_PRDCODE').val();
 
-	$('.write_btn').on("click", function(){
-		var ORDERNUM = $(this).find('.ORDER_NUM').val();
-		var ORDERPRDSIZE = $(this).find('.ORDER_PRDSIZE').val();
-		var PRDCODE = $(this).find('.ORDER_PRDCODE').val();
-		
-		location.href = 'reviewWrite.do?ORDERNUM='+ORDERNUM+'&ORDERPRDSIZE='+ORDERPRDSIZE+'&PRDCODE='+PRDCODE;
-	});
+				location.href = 'reviewWrite.do?ORDERNUM=' + ORDERNUM
+						+ '&ORDERPRDSIZE=' + ORDERPRDSIZE + '&PRDCODE='
+						+ PRDCODE;
+			});
 	$('.underline').on("mouseover", function() {
 		$(this).css("background-color", "#EDEFF2");
 	});
