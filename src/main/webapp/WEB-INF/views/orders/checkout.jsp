@@ -169,7 +169,7 @@ input[type=number] {
 						<thead>
 							<span class="tableHead row mx-auto px-0 mb-2">
 								<h5>주문리스트</h5> 
-								<button id="editOrder"
+								<button id="editOrder" onclick="location.href='/product/prdCode=${prdInfo[0].PRD_CODE}';"
 								class="ml-auto p-2 primary-btn cart-btn cart-btn-right">주문정보
 									수정</button>
 							</span>
@@ -332,7 +332,7 @@ input[type=number] {
 									<li>총 주문 가격<span>원</span><span class="totalOrgPrice digits">-</span></li>
 									<li>할인<span>원</span><span class="totalDiscnt digits">-</span></li>
 									<li class="points">포인트 사용 <input type="number" placeholder="0" class="text-right usePoint" step="10"></input><span>P</span>
-									<p class="mb-1"><small>사용가능한 포인트: <span>P</span><span class="avPoint digits">${cusInfo.CUS_POINT}</span></small></p>
+									<p class="mb-1"><small>사용가능한 포인트: <span>P</span><span class="avPoint digits hasPoint" data-hasPoint = "${cusInfo.CUS_POINT}">${cusInfo.CUS_POINT}</span></small></p>
 									</li>
 									<li>배송비 <span>무료</span></li>
 								</ul>
@@ -343,7 +343,7 @@ input[type=number] {
 										<span>원</span>
 									</span>
 								</div>
-								<small class="float-right mb-4">결제 시 <span class="avPoint savePoint">-</span>P 적립예정</small>
+								<small class="float-right mb-4">결제 시 <span class="avPoint savePoint digits">-</span>P 적립예정</small>
 								<button type="button" id="chckoutBtn" class="site-btn">결제하기</button>
 							</div>
 						</div>
@@ -362,38 +362,61 @@ input[type=number] {
 	<script type="text/javascript">
 	
 	$(document).ready(function() {
-		var totalPriceNoDiscnt = 0 // 최초금액
-		$(".discntNum").each(function(n){
-			totalPriceNoDiscnt = parseInt($(this).text());
-	    });
-		var totalPrice = 0; //할인 후 금액
-		$(".shoping__cart__total").each(function(n){
-			totalPrice += parseInt($(this).text());
-	    });
-		var totalAmount = 0; //총 주문 수량
-		$(".amountNum").each(function(n){
-			totalAmount += parseInt($(this).text());
-	    });
+		function numberWithDigits() {
+			$(".digits").each(function() {
+				$(this).text( $(this).text().replace(/\B(?=(\d{3})+(?!\d))/g, ','));
+			});
+		}
 		
-		//총 주문 가격
-		var totalOrgPrice = totalPriceNoDiscnt * totalAmount;
-		$(".totalOrgPrice").text(totalOrgPrice);
+		function noDigits() {
+			$(".digits").each(function() {
+				$(this).text( $(this).text().replaceAll(',', ''));
+			});
+		}
 		
-		//할인
-		var totalDiscnt = totalOrgPrice - totalPrice ;
-		$(".totalDiscnt").text(totalDiscnt);
-		
-		var usePoint = 0;
-		//총 결제금액 (포인트사용X)
-		var totalPriceCon_num = totalPrice - usePoint ;
-		$(".totalPriceCon-num").text(totalPriceCon_num);
-		
+			var totalPriceNoDiscnt = 0 // 최초금액
+			$(".discntNum").each(function(n){
+				totalPriceNoDiscnt = parseInt($(this).text());
+		    });
+			var totalPrice = 0; //할인 후 금액
+			$(".shoping__cart__total").each(function(n){
+				totalPrice += parseInt($(this).text());
+		    });
+			var totalAmount = 0; //총 주문 수량
+			$(".amountNum").each(function(n){
+				totalAmount += parseInt($(this).text());
+		    });
+			
+			//총 주문 가격
+			var totalOrgPrice = totalPriceNoDiscnt * totalAmount;
+			$(".totalOrgPrice").text(totalOrgPrice);
+			
+			//할인
+			var totalDiscnt = totalOrgPrice - totalPrice ;
+			$(".totalDiscnt").text(totalDiscnt);
+			
+			var usePoint = 0;
+			//총 결제금액 (포인트사용X)
+			var totalPriceCon_num = totalPrice - usePoint ;
+			$(".totalPriceCon-num").text(totalPriceCon_num);
+
+			$(".savePoint").text(parseInt(((totalPriceCon_num*0.03)/10),10)*10);
+			
 		$(".usePoint").on("propertychange change keyup paste input",function() {
 			//포인트사용
 			usePoint = $(".usePoint").val();
+			
+			//소유 Point보다 더 사용시 alert
+			if($(".hasPoint").attr("data-hasPoint") < usePoint.replaceAll(',', '')){
+				alert("사용가능한 포인트를 초과하였습니다.");
+				$(".usePoint").val('');
+				return false;
+			}
+
 			//총 결제금액
-			totalPriceCon_num = totalPrice - usePoint ;
+			totalPriceCon_num = $(".totalOrgPrice").text().replaceAll(',', '') - $(".totalDiscnt").text().replaceAll(',', '') - usePoint ;
 			$(".totalPriceCon-num").text(totalPriceCon_num);
+			numberWithDigits();
 		});
 		
 		$(".usePoint").on("keydown",function(e) {
@@ -403,7 +426,7 @@ input[type=number] {
 			}
 		});
 		
-		$(".savePoint").text(parseInt(((totalPriceCon_num*0.03)/10),10)*10);
+		numberWithDigits();
 		
 		//적립예정
 		$(".totalPriceCon-num").on('DOMSubtreeModified', function () {
@@ -424,20 +447,8 @@ input[type=number] {
 				$('input.newDelivInput').val('');
 				$('#ORDER_RECEIVER, #ORDER_TEL').removeAttr('readonly');
 			}
-			
-			function numberWithDigits() {
-				$(".digits").each(function() {
-					$(this).text( $(this).text().replace(/\B(?=(\d{3})+(?!\d))/g, ','));
-				});
-			}
-			
-			function noDigits() {
-				$(".digits").each(function() {
-					$(this).text( $(this).text().replaceAll(',', ''));
-				});
-			}
-	 });
-	
+	 	});
+
 		// Iamport 결제
 		$("#chckoutBtn").click(function () {
 
