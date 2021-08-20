@@ -405,16 +405,20 @@ input[type=number] {
 		$(".usePoint").on("propertychange change keyup paste input",function() {
 			//포인트사용
 			usePoint = $(".usePoint").val();
-			
 			//소유 Point보다 더 사용시 alert
 			if(parseInt($(".hasPoint").attr("data-hasPoint")) < parseInt(usePoint)){
 				alert("사용가능한 포인트를 초과하였습니다.");
 				$(".usePoint").val('');
 				return false;
 			}
-
 			//총 결제금액
 			totalPriceCon_num = $(".totalOrgPrice").text().replaceAll(',', '') - $(".totalDiscnt").text().replaceAll(',', '') - usePoint ;
+			//사용 포인트가 총 결제금액보다 많을 시 alert
+			if(parseInt(totalPriceCon_num) < parseInt(usePoint)){
+				alert("사용한 포인트가 결제 금액을 초과하였습니다.");
+				$(".usePoint").val('');
+				totalPriceCon_num = $(".totalOrgPrice").text().replaceAll(',', '') - $(".totalDiscnt").text().replaceAll(',', '')
+			}
 			$(".totalPriceCon-num").text(totalPriceCon_num);
 			numberWithDigits();
 		});
