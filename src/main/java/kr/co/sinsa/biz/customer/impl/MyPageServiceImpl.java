@@ -14,6 +14,7 @@ import kr.co.sinsa.biz.customer.CustomerVO;
 import kr.co.sinsa.biz.customer.MyOrderListVO;
 import kr.co.sinsa.biz.customer.MyPageService;
 import kr.co.sinsa.biz.customer.QnAVO;
+import kr.co.sinsa.biz.customer.ReviewVO;
 import kr.co.sinsa.biz.orders.OrdersAndProductVO;
 import kr.co.sinsa.biz.product.ProductVO;
 import kr.co.sinsa.biz.user.UserVO;
@@ -155,11 +156,12 @@ public class MyPageServiceImpl implements MyPageService {
 	}
 
 
-	
-	
-	
-	
-	
+	@Override
+	public void reviewInsert(ReviewVO vo) {
+		dao.reviewInsert(vo);
+	}
+
+
 
 	@Override
 	public List<QnAVO> QnAList(Map<String, Object> map) {
@@ -273,6 +275,15 @@ public class MyPageServiceImpl implements MyPageService {
 		dao.privateInfoChange(vo);
 		
 	}
+
+
+
+
+	
+	
+	
+	
+	
 	
 	
 }
