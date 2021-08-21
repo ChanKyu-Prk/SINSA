@@ -169,12 +169,11 @@ public class MyPageServiceImpl implements MyPageService {
 	@Override
 	public List<ProductVO> recentView(Cookie[] cRecentlyVieweds, int page, int listCount) {
 		List<ProductVO> list = new ArrayList<ProductVO>();
+		List<ProductVO> select = new ArrayList<ProductVO>();
 
 		List<ProductVO> allProduct = dao.allProductNum();
 		int PRD_NUM;
-
-		System.out.println(page + (listCount % 6));
-		for (int i = cRecentlyVieweds.length-1; i >= 0; i--) {
+		for (int i = cRecentlyVieweds.length - 1; i >= 0; i--) {
 			String str = cRecentlyVieweds[i].getName();
 			for (int j = 0; j < allProduct.size(); j++) {
 				String str2 = Integer.toString(allProduct.get(j).getPRD_NUM());
@@ -184,10 +183,14 @@ public class MyPageServiceImpl implements MyPageService {
 				}
 			}
 		}
-		System.out.println("list=" + list);
-
-		return list;
-
+		int end = page + 6;
+		if ((page + 1) * 6 > listCount) {
+			end = page + (listCount % 6);
+		}
+		for (int i = page; i < end; i++) {
+			select.add(list.get(i));
+		}
+		return select;
 	}
 
 	@Override
