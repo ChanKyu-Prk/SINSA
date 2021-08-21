@@ -466,7 +466,14 @@ input[type=number] {
 
 		// Iamport 결제
 		$("#chckoutBtn").click(function () {
-
+			var ORDER_PRDCODE = $(".prdCode").text();
+			var ORDER_PRDSIZE = $(".qty-size").map(function() {
+			    return $(this).text();
+			}).get();
+			var ORDER_AMOUNT = $('.amount').map(function() {
+			    return this.value;
+			}).get();
+			
 		var IMP = window.IMP; // 생략가능
         IMP.init('imp39263192');
         var msg;
@@ -483,8 +490,9 @@ input[type=number] {
             buyer_tel : '${cusInfo.CUS_TEL}',
             buyer_addr : "${fn:substringAfter(cusInfo.CUS_ADDR, '|')}",
             buyer_postcode : "${fn:substringBefore(cusInfo.CUS_ADDR, '|')}",
+            m_redirect_url: "/checkout/complete"
         }, function(rsp) {
-            if ( rsp.success ) {
+            if (rsp.success){
             	//[1] 서버단에서 결제정보 조회를 위해 jQuery ajax로 imp_uid 전달하기
             	$.ajax({
             		url: "/checkout/complete", //cross-domain error가 발생하지 않도록 동일한 도메인으로 전송
@@ -492,7 +500,14 @@ input[type=number] {
             		dataType: 'json',
             		data: {
         	    		imp_uid : rsp.imp_uid,
-        	    		use_point : usePoint,//포인트
+        	    		//포인트
+        	    		use_point : usePoint,
+        	    		//사이즈
+        	    		prd_size : ORDER_PRDSIZE,
+        	    		//수량
+        	    		prd_amount : ORDER_AMOUNT,
+        	    		//상품코드
+        	    		prd_code : ORDER_PRDCODE,
             		},
             		headers: {
 					      'Accept': 'application/json',
@@ -500,7 +515,6 @@ input[type=number] {
 					}
             	}).done(function(data) {
             		//[2] 서버에서 REST API로 결제정보확인 및 서비스루틴이 정상적인 경우
-            		if ( everythings_fine ) {
             			msg = '결제가 완료되었습니다.';
                         msg += '\n고유ID : ' + rsp.imp_uid;
                         msg += '\n상점 거래ID : ' + rsp.merchant_uid;
@@ -510,15 +524,10 @@ input[type=number] {
                         msg += '이름 : ' + rsp.buyer_name;
                         msg += '전화번호 : ' + rsp.buyer_tel;
                         msg += '주소 : ' + rsp.buyer_addr + rsp.buyer_postcode;
-                       //성공시 이동할 페이지
-       					location.href="/checkout/complete";
        					alert(msg);
-            		} else {
-            			//[3] 아직 제대로 결제가 되지 않았습니다.
-            			alert("에러");
-            			//[4] 결제된 금액이 요청한 금액과 달라 결제를 자동취소처리하였습니다.
-            		}
             	});
+            	//성공시 이동할 페이지
+				location.href="/checkout/complete";
             } else {
             	msg = '결제에 실패하였습니다.';
                 msg += '에러내용 : ' + rsp.error_msg;

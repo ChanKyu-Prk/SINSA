@@ -65,9 +65,16 @@ public class OrdersController {
     return "/orders/checkout";
 	}
 	
+	@RequestMapping(value = "/checkout/complete", method=RequestMethod.GET, produces = "application/json;charset=UTF-8")
+    public String getPayComplete(Model model) throws Exception {
+		
+    return "/orders/payComplete";
+	}
+	
 	@RequestMapping(value = "/checkout/complete", method=RequestMethod.POST, produces = "application/json;charset=UTF-8")
     public String payComplete(@RequestBody String json, Model model) throws Exception {
-		System.out.println("json" + json);
+		System.out.println("POSTjson" + json);
+		
     return "/orders/payComplete";
 	}
 }
