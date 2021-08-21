@@ -184,9 +184,9 @@ input[type=number] {
 											alt="thumbnail2">
 									</span> 
 									<span class="my-auto"> 
-										<b class="mb-1">${lists.PRD_NAME}</b>
+										<b class="mb-1">${lists.PRD_NAME}<small class="pl-1 prdCode">${lists.PRD_CODE}</small></b>
 										<p class="mb-0">${lists.PRD_BRAND}</p>
-										<p class="mb-0">${lists.ORDER_PRDSIZE} / ${lists.PRD_COLOR}</p>
+										<p class="mb-0"><span class="qty-size">${lists.ORDER_PRDSIZE}</span> / ${lists.PRD_COLOR}</p>
 									</span>
 								</span></td>
 								<td class="shoping__cart__price">
@@ -205,7 +205,7 @@ input[type=number] {
 								</td>
 								<td class="shoping__cart__quantity">
 									<p class="mb-1">
-										수량:<span class="amountNum">${lists.ORDER_AMOUNT}</span>
+										수량:<span class="amountNum amount">${lists.ORDER_AMOUNT}</span>
 									</p> <b class="mb-0">무료배송</b>
 								</td>
 								<td class="shoping__cart__total numFont digits">${finalPrice*lists.ORDER_AMOUNT}원</td>
@@ -320,7 +320,7 @@ input[type=number] {
 										<option value="write">직접입력</option>
 									</select> <span> <input id="ORDER_MEMO" name="ORDER_MEMO"
 										type="text" required="required" maxlength="40" placeholder="요청사항은 40자 이내로 작성해주세요."
-										 readonly="readonly"/>
+										 readonly="readonly" autocomplete="off"/>
 									</span>
 								</div>
 							</div>
@@ -466,68 +466,78 @@ input[type=number] {
 
 		// Iamport 결제
 		$("#chckoutBtn").click(function () {
-
+			var ORDER_NUM = new Date().getTime();
+			var ORDER_PRDCODE = $(".prdCode").map(function() {
+			    return $(this).text();
+			}).get();
+			var ORDER_PRDSIZE = $(".qty-size").map(function() {
+			    return $(this).text();
+			}).get();
+			var ORDER_AMOUNT = $('.amount').map(function() {
+			    return $(this).text();
+			}).get();
+			
 		var IMP = window.IMP; // 생략가능
         IMP.init('imp39263192');
         var msg;
         var finalPrice = $(".totalPriceCon-num").text().replace(',', '');
-        
+        var data = {};
+		var itemList = [];
+		for(var i=0; i<ORDER_AMOUNT.length; i++){
+			data = {};
+			data["ORDER_PRDCODE"] = ORDER_PRDCODE[i];
+			data["ORDER_PRDSIZE"] = ORDER_PRDSIZE[i];
+			data["ORDER_AMOUNT"] = ORDER_AMOUNT[i];
+			data["ORDER_NUM"] = ORDER_NUM;
+			itemList.unshift(data);
+		}
+		
+		
         IMP.request_pay({
-            pg : 'inicis',
+        	pg : 'inicis',
             pay_method : 'card',
-            merchant_uid : 'merchant_' + new Date().getTime(),
+            merchant_uid : new Date().getTime(),
             name : '[SINSA 상품 결제 ]상품 이름',
             amount : finalPrice,
             buyer_email : '${cusInfo.CUS_EMAIL}',
             buyer_name : '${cusInfo.CUS_NAME}',
             buyer_tel : '${cusInfo.CUS_TEL}',
-            buyer_addr : '배달주소',
-            buyer_postcode : '포스트코드', // POSTCODE 받는 법
-            //m_redirect_url : 'http://www.naver.com'
-            /*
-			모바일 결제시,
-			결제가 끝나고 랜딩되는 URL을 지정
-			(카카오페이, 페이코, 다날의 경우는 필요없음. PC와 마찬가지로 callback함수로 결과가 떨어짐)
-			*/
-			
+            buyer_addr : "${fn:substringAfter(cusInfo.CUS_ADDR, '|')}",
+            buyer_postcode : "${fn:substringBefore(cusInfo.CUS_ADDR, '|')}",
+            m_redirect_url: "/checkout/complete"
         }, function(rsp) {
-            if ( rsp.success ) {
-                //[1] 서버단에서 결제정보 조회를 위해 jQuery ajax로 imp_uid 전달하기
-                jQuery.ajax({
-                    url: "/payments/complete", //cross-domain error가 발생하지 않도록 주의해주세요
-                    type: 'POST',
-                    dataType: 'json',
-                    data: {
-                        imp_uid : rsp.imp_uid
-                        //기타 필요한 데이터가 있으면 추가 전달
-                    }
-                }).done(function(data) {
-                    //[2] 서버에서 REST API로 결제정보확인 및 서비스루틴이 정상적인 경우
-                    if ( everythings_fine ) {
-                        msg = '결제가 완료되었습니다.';
+            if (rsp.success){
+            	//[1] 서버단에서 결제정보 조회를 위해 jQuery ajax로 imp_uid 전달하기
+            	$.ajax({
+            		url: "/checkout/complete", //cross-domain error가 발생하지 않도록 동일한 도메인으로 전송
+            		type: 'POST',
+            		data: JSON.stringify(itemList),
+            		headers: {
+					      'Accept': 'application/json',
+					      'Content-Type': 'application/json'
+					}
+            	}).done(function(data) {
+            		//[2] 서버에서 REST API로 결제정보확인 및 서비스루틴이 정상적인 경우
+            			msg = '결제가 완료되었습니다.';
                         msg += '\n고유ID : ' + rsp.imp_uid;
                         msg += '\n상점 거래ID : ' + rsp.merchant_uid;
                         msg += '\결제 금액 : ' + rsp.paid_amount;
                         msg += '카드 승인번호 : ' + rsp.apply_num;
-                        
-                        alert(msg);
-                    } else {
-                        //[3] 아직 제대로 결제가 되지 않았습니다.
-                        //[4] 결제된 금액이 요청한 금액과 달라 결제를 자동취소처리하였습니다.
-                    }
-                });
-                //성공시 이동할 페이지
-<%-- 					                location.href='<%=request.getContextPath()%>/order/paySuccess?msg='+msg; --%>
+                        msg += '이메일 : ' + rsp.buyer_email;
+                        msg += '이름 : ' + rsp.buyer_name;
+                        msg += '전화번호 : ' + rsp.buyer_tel;
+                        msg += '주소 : ' + rsp.buyer_addr + rsp.buyer_postcode;
+       					//alert(msg);
+            	});
+            	//성공시 이동할 페이지
+				location.href="/checkout/complete";
             } else {
-                msg = '결제에 실패하였습니다.';
+            	msg = '결제에 실패하였습니다.';
                 msg += '에러내용 : ' + rsp.error_msg;
-                //실패시 이동할 페이지
-<%-- 					                location.href="<%=request.getContextPath()%>/order/payFail"; --%>
                 alert(msg);
             }
-        });
+        	});
 		});
-		
 	});
 		
 	function findAddr() {
