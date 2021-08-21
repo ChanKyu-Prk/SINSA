@@ -267,41 +267,207 @@
 	                        <div id="color-box" class="sidebar__item sidebar__item__color--option">
 	                            <h4>색상</h4>
 	                            <div class="sidebar__item__color sidebar__item__color--white">
-	                                <label for="white">
+	                                <label for="white" id="id01" onmouseout="mout1()" onmouseover="mover1()">
 	                                    White
 	                                    <input type="radio" id="white">
 	                                </label>
+
 	                            </div>
 	                            <div class="sidebar__item__color sidebar__item__color--gray">
-	                                <label for="gray">
+	                                <label for="gray" id="id02" onmouseout="mout2()" onmouseover="mover2()">
 	                                    Gray
 	                                    <input type="radio" id="gray">
 	                                </label>
 	                            </div>
 	                            <div class="sidebar__item__color sidebar__item__color--red">
-	                                <label for="red">
+	                                <label for="red" id="id03" onmouseout="mout3()" onmouseover="mover3()">
 	                                    Red
 	                                    <input type="radio" id="red">
 	                                </label>
 	                            </div>
 	                            <div class="sidebar__item__color sidebar__item__color--black">
-	                                <label for="black">
+	                                <label for="black" id="id04" onmouseout="mout4()" onmouseover="mover4()">
 	                                    Black
 	                                    <input type="radio" id="black">
 	                                </label>
 	                            </div>
 	                            <div class="sidebar__item__color sidebar__item__color--blue">
-	                                <label for="blue">
+	                                <label for="blue" id="id05" onmouseout="mout5()" onmouseover="mover5()">
 	                                    Blue
 	                                    <input type="radio" id="blue">
 	                                </label>
 	                            </div>
 	                            <div class="sidebar__item__color sidebar__item__color--green">
-	                                <label for="green">
+	                                <label for="green" id="id06" onmouseout="mout6()" onmouseover="mover6()">
 	                                    Green
 	                                    <input type="radio" id="green">
 	                                </label>
 	                            </div>
+                   	            <script type="text/javascript">
+                   	            
+                   	            
+	                                function mover1() {
+	                                	var m;
+	                                	m = document.getElementById("id01");
+	                                	m.style.color = "red";								
+									}
+	                                var clickCheck1 = "false";
+	                                function mout1() {
+	                                	var m;
+	                                	m = document.getElementById("id01");
+	                                    if(clickCheck1 === "false"){	                                	
+		                                	m.style.color = "black";
+		                                }									
+									}
+	                                $('#id01').on("click", function(e){
+	                                	var m;
+	                                	m = document.getElementById("id01");
+	                                	if(clickCheck1 === "false"){
+		                                	m.style.color = "red";
+		                                	clickCheck1 = "true";
+	                                	}else if(clickCheck1 === "true"){
+	                                		m.style.color = "black";
+		                                	clickCheck1 = "false";
+	                                	}
+	                                	return false;
+	                                });
+	                                
+	                                
+	                                function mover2() {
+	                                	var m;
+	                                	m = document.getElementById("id02");
+	                                	m.style.color = "red";								
+									}
+	                                var clickCheck2 = "false";
+	                                function mout2() {
+	                                	var m;
+	                                	m = document.getElementById("id02");
+	                                    if(clickCheck2 === "false"){	                                	
+		                                	m.style.color = "black";
+		                                }									
+									}
+	                                $('#id02').on("click", function(e){
+	                                	var m;
+	                                	m = document.getElementById("id02");
+	                                	if(clickCheck2 === "false"){
+		                                	m.style.color = "red";
+		                                	clickCheck2 = "true";
+	                                	}else if(clickCheck2 === "true"){
+	                                		m.style.color = "black";
+		                                	clickCheck2 = "false";
+	                                	}
+	                                	return false;
+	                                });
+	                                
+	                                
+	                                function mover3() {
+	                                	var m;
+	                                	m = document.getElementById("id03");
+	                                	m.style.color = "red";								
+									}
+	                                var clickCheck3 = "false";
+	                                function mout3() {
+	                                	var m;
+	                                	m = document.getElementById("id03");
+	                                    if(clickCheck3 === "false"){	                                	
+		                                	m.style.color = "black";
+		                                }									
+									}
+	                                $('#id03').on("click", function(e){
+	                                	var m;
+	                                	m = document.getElementById("id03");
+	                                	if(clickCheck3 === "false"){
+		                                	m.style.color = "red";
+		                                	clickCheck3 = "true";
+	                                	}else if(clickCheck3 === "true"){
+	                                		m.style.color = "black";
+		                                	clickCheck3 = "false";
+	                                	}
+	                                	return false;
+	                                });
+	                                
+	                                
+	                                function mover4() {
+	                                	var m;
+	                                	m = document.getElementById("id04");
+	                                	m.style.color = "red";								
+									}
+	                                var clickCheck4 = "false";
+	                                function mout4() {
+	                                	var m;
+	                                	m = document.getElementById("id04");
+	                                    if(clickCheck4 === "false"){	                                	
+		                                	m.style.color = "black";
+		                                }									
+									}
+	                                $('#id04').on("click", function(e){
+	                                	var m;
+	                                	m = document.getElementById("id04");
+	                                	if(clickCheck4 === "false"){
+		                                	m.style.color = "red";
+		                                	clickCheck4 = "true";
+	                                	}else if(clickCheck4 === "true"){
+	                                		m.style.color = "black";
+		                                	clickCheck4 = "false";
+	                                	}
+	                                	return false;
+	                                });
+	                                
+	                                
+	                                function mover5() {
+	                                	var m;
+	                                	m = document.getElementById("id05");
+	                                	m.style.color = "red";								
+									}
+	                                var clickCheck5 = "false";
+	                                function mout5() {
+	                                	var m;
+	                                	m = document.getElementById("id05");
+		                                if(clickCheck5 === "false"){	                                	
+		                                	m.style.color = "black";
+		                                }								
+									}
+	                                $('#id05').on("click", function(e){
+	                                	var m;
+	                                	m = document.getElementById("id05");
+	                                	if(clickCheck5 === "false"){
+		                                	m.style.color = "red";
+		                                	clickCheck5 = "true";
+	                                	}else if(clickCheck5 === "true"){
+	                                		m.style.color = "black";
+		                                	clickCheck5 = "false";
+	                                	}
+	                                	return false;
+	                                });
+	                                
+	                                
+	                                function mover6() {
+	                                	var m;
+	                                	m = document.getElementById("id06");
+	                                	m.style.color = "red";								
+									}
+                                	var clickCheck6 = "false";
+	                                function mout6() {
+	                                	var m;
+	                                	m = document.getElementById("id06");
+		                                if(clickCheck6 === "false"){	                                	
+		                                	m.style.color = "black";
+		                                }
+									}
+	                                $('#id06').on("click", function(e){
+	                                	var m;
+	                                	m = document.getElementById("id06");
+	                                	if(clickCheck6 === "false"){
+		                                	m.style.color = "red";
+		                                	clickCheck6 = "true";
+	                                	}else if(clickCheck6 === "true"){
+	                                		m.style.color = "black";
+		                                	clickCheck6 = "false";
+	                                	}
+	                                	return false;
+	                                });
+	                                
+                           		</script>
 	                        </div>
 	                        <script type="text/javascript">
 	                		$('#color-box').find('label').on('click', function(){
