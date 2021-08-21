@@ -248,10 +248,10 @@ padding : 20px;
 								<c:choose>
 									<c:when test="${fn:length(QnAList) == 0}">
 										<tr>
-											<td colspan="6 td_center">
+											<td colspan="6 ">
 												<div class="container">
 													<div class="row noQnA_row">
-														<div class="col-12">
+														<div class="col-12 td_center">
 															<svg xmlns="http://www.w3.org/2000/svg" id="exclamation"
 																class="bi bi-exclamation-circle" viewBox="0 0 16 16">
   <path

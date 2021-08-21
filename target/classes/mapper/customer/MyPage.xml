@@ -165,7 +165,7 @@
 		resultType="kr.co.sinsa.biz.product.ProductVO">
 		select product.* from product join JJIM on JJIM.JJIM_PRDNUM
 		= product.PRD_NUM
-		where JJIM.JJIM_CUSID = #{ID} limit #{page},20;
+		where JJIM.JJIM_CUSID = #{ID} limit #{page},6;
 	</select>
 
 	<select id="countJjimList" parameterType="Map" resultType="int">

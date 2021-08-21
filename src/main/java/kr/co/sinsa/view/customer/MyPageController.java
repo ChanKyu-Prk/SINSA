@@ -7,6 +7,7 @@ import java.util.Map;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,6 +46,34 @@ public class MyPageController {
 			return "customer/myPage";
 		}
 	}
+	
+	
+	@RequestMapping(value = "/cookieTest", method = RequestMethod.GET)
+	public String myOrderList(Model model, HttpServletResponse response, String prdnum) {
+		
+		ProductVO vo = new ProductVO();
+		int num = Integer.parseInt(prdnum);
+		vo.setPRD_NUM(num);
+		
+		
+		
+		Cookie recentlyViewed = new Cookie(prdnum,null);
+		recentlyViewed.setMaxAge(0);
+		response.addCookie(recentlyViewed);
+		recentlyViewed = new Cookie(prdnum , prdnum);
+		recentlyViewed.setMaxAge(60*60*24*3);
+		response.addCookie(recentlyViewed);
+		
+		
+		
+		
+		
+		model.addAttribute("product", vo);
+		return "customer/recentViewCookieTest";
+	}
+	
+	
+	
 
 	@RequestMapping(value = "/myOrderList.do", method = RequestMethod.GET)
 	public String myOrderList(Model model, @RequestParam(value = "page", required = false) String pageR,
@@ -123,7 +152,7 @@ public class MyPageController {
 			HttpSession session) {
 		UserVO user = (UserVO) session.getAttribute("user");
 		int page = 1;
-		int limit = 20;
+		int limit = 6;
 		int listCount;
 		int startPage;
 		int endPage;
@@ -138,7 +167,7 @@ public class MyPageController {
 			String userID = user.getCUS_ID();
 			Map<String, Object> map = new HashMap<String, Object>();
 			map.put("ID", userID);
-			map.put("page", (page - 1) * 20);
+			map.put("page", (page - 1) * 6);
 			model.addAttribute("jjimList", myPageSerive.jjimList(map));
 			listCount = myPageSerive.countJjimList(map);
 			maxPage = (int) ((double) listCount / limit + 0.95);
@@ -228,7 +257,7 @@ public class MyPageController {
 		UserVO user = (UserVO) session.getAttribute("user");
 		Cookie[] cRecentlyVieweds = request.getCookies();
 		int page = 1;
-		int limit = 20;
+		int limit = 6;
 		int listCount;
 		int startPage;
 		int endPage;
@@ -242,7 +271,7 @@ public class MyPageController {
 		} else {
 
 			listCount = myPageSerive.countRecentView(cRecentlyVieweds);
-			model.addAttribute("recentView", myPageSerive.recentView(cRecentlyVieweds, (page - 1) * 20, listCount));
+			model.addAttribute("recentView", myPageSerive.recentView(cRecentlyVieweds, (page - 1) * 6, listCount));
 			maxPage = (int) ((double) listCount / limit + 0.95);
 			startPage = (((int) ((double) page / 5 + 0.8)) - 1) * 5 + 1;
 			endPage = startPage + 4;
