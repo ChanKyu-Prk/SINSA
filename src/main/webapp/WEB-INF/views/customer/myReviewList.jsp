@@ -54,9 +54,9 @@
 }
 
 .noOrder_row {
-	min-height: 200px;
+	min-height: 250px;
 	vertical-align: middle;
-	padding-top: 50px;
+	padding-top: 75px;
 }
 
 .tableCel {
@@ -258,7 +258,7 @@ td {
   <path
 																	d="M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995z" />
 </svg>
-															<br>주문 내역이 없습니다.
+															<br>후기 내역이 없습니다.
 														</div>
 													</div>
 

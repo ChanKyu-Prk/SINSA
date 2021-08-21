@@ -23,6 +23,61 @@
 	text-align: center;
 	font-size: 27pt;
 }
+
+#exclamation {
+	width: 100px;
+	height: 100px;
+	fill: grey;
+}
+
+.no_jjim {
+	text-align: center;
+	padding: 120px;
+	vertical-align: middle;
+}
+
+#modal {
+	display: none;
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	z-index: 999999;
+}
+
+#modal .modal_content {
+	width: 300px;
+	margin: 100px auto;
+	padding: 20px 10px;
+	background: #fff;
+	border: 2px solid #666;
+}
+
+#filter {
+	border-top: 1px solid teal;
+	border-bottom: 1px solid teal;
+	padding-top: 18px;
+	padding-bottom: 18px;
+	margin-bottom: 70px;
+}
+
+#filter #search {
+	background-color: gray;
+	color: white;
+	font-size: 25px;
+	width: 100%;
+	height: 60px;
+	text-align: center;
+	border: none;
+}
+
+.clicked {
+	color: black;
+}
+.pagination {
+	margin-top: 25px;
+	margin-bottom: 25px;
+	justify-content: center;
+}
 </style>
 <title>SINSA : 최근 본 상품</title>
 </head>
@@ -34,27 +89,83 @@
 			<jsp:include page="myPageSideBar.jsp"></jsp:include>
 			<div class="col-9">
 				<div class="subjecet">
-				<h3>최근 본 상품</h3>
+					<h3>최근 본 상품</h3>
 				</div>
-				
+
 				<hr>
 
 
 
-		<c:choose>
-					<c:when test="${fn:length(recentViewList) == 0}">
-       			 조회결과가 없습니다.
-   				 </c:when>
-					<c:otherwise>
-						<c:forEach var="list" items="${recentView}" varStatus="status">
-            ${list.PRD_NUM } <br>
-						</c:forEach>
-					</c:otherwise>
-				</c:choose>
-				
-<!-- paging  부분-->
-				<ul class="pagination">
 				<c:choose>
+					<c:when test="${fn:length(recentView) == 0}">
+						<div class="container">
+							<div class="row">
+								<div class="col-12 no_jjim">
+									<svg xmlns="http://www.w3.org/2000/svg" id="exclamation"
+										class="bi bi-exclamation-circle" viewBox="0 0 16 16">
+  <path
+											d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+  <path
+											d="M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995z" />
+</svg>
+									<br>최근 본 내역이 없습니다.
+								</div>
+							</div>
+
+						</div>
+					</c:when>
+					
+					<c:otherwise>
+					<div class="row">
+						<c:forEach var="list" items="${recentView }">
+							<div class="col-lg-4 col-md-6 col-sm-6">
+								<div class="product__item">
+									<div class="product__item__pic set-bg"
+										data-setbg="/resources/img/default.png">
+										<ul class="product__item__pic__hover">
+											<li><a href="#"><i class="fa fa-heart"></i></a></li>
+											<li><a id="modal_open_btn"><i class="fa fa-retweet"><b>바로구매</b></i></a></li>
+											<li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+										</ul>
+									</div>
+									<div id="modal">
+										<div class="modal_content">
+											<h2>모달 창</h2>
+
+											<p>모달 창 입니다.</p>
+
+											<button type="button" id="modal_close_btn">모달 창 닫기</button>
+										</div>
+									</div>
+									<div class="product__item__text">
+										<p>
+										<h6>${list.PRD_NAME }</h6>
+										</p>
+										<h5>${list.PRD_PRICE }원</h5>
+									</div>
+								</div>
+							</div>
+
+							<script>
+								$("#modal_open_btn").click(function() {
+									$("#modal").attr("style", "display:block");
+								});
+
+								$("#modal_close_btn").click(function() {
+									$("#modal").attr("style", "display:none");
+								});
+							</script>
+
+						</c:forEach>
+		
+		</div>
+			</c:otherwise>
+			</c:choose>
+
+			<!-- paging  부분-->
+			<c:if test="${fn:length(recentView) != 0}">
+				<ul class="pagination">
+					<c:choose>
 						<c:when test="${pageInfo.getPage()<=1}">
 							<li class="page-item disabled"><a class="page-link"
 								aria-disabled="true">이전</a></li>
@@ -99,24 +210,22 @@
 								href="recentView.do?page=${pageInfo.getEndPage()+1}">다음</a></li>
 						</c:otherwise>
 					</c:choose>
-			
-				</ul>
-<!-- paging 끝 -->
 
-			</div>
+				</ul>
+			</c:if>
+			<!-- paging 끝 -->
+
 		</div>
-		</div>
-		<jsp:include page="../footer.jsp"></jsp:include>
+	</div>
+	</div>
+	<jsp:include page="../footer.jsp"></jsp:include>
 </body>
 
 <script>
-
-
-	
-// function serach() {
-// 	var date1 = $('#date1').val();
-// 	var date2 = $('#date2').val();
-// 	location.href='myOrderList.do?date1='+date1+'&date2='+date2;
-// }
+	// function serach() {
+	// 	var date1 = $('#date1').val();
+	// 	var date2 = $('#date2').val();
+	// 	location.href='myOrderList.do?date1='+date1+'&date2='+date2;
+	// }
 </script>
 </html>

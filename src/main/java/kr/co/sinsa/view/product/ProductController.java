@@ -3,6 +3,9 @@ package kr.co.sinsa.view.product;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,9 +31,17 @@ public class ProductController {
 	
 	// 상세페이지	
 	@RequestMapping("/product/prdCode={prdCode}")
-    public String getInfo(Model model, @PathVariable("prdCode") String PRD_CODE) {
+    public String getInfo(Model model, @PathVariable("prdCode") String PRD_CODE, HttpServletResponse response) {
+		
     	ProductVO vo = service.info(PRD_CODE);
     	model.addAttribute("prdInfo", vo);
+    	String prdnum = Integer.toString(vo.getPRD_NUM());
+		Cookie recentlyViewed = new Cookie(prdnum,null);
+		recentlyViewed.setMaxAge(0);
+		response.addCookie(recentlyViewed);
+		recentlyViewed = new Cookie(prdnum , prdnum);
+		recentlyViewed.setMaxAge(60*60*24*3);
+		response.addCookie(recentlyViewed);
     	
     	StockVO stockVO = stockService.sizeInStock(PRD_CODE);
     	model.addAttribute("stockInfo", stockVO);
