@@ -113,6 +113,15 @@
 	color: red;
 	display: none;
 }
+
+.changeSub{
+height : 40px;
+border : solid 1px ;
+width : 150px;
+float : right;
+margin-top : 20px;
+margin-bottom : 20px;
+border: 1px solid #c1bfc1;
 }
 </style>
 <title>SINSA : 비밀번호 변경</title>
@@ -154,7 +163,7 @@
 							class="pwck_input_re">비밀번호가 일치하지 않습니다.</span>
 					</div>
 				</div>
-<input type="submit" value="변경" class="changeSub">
+<input type="submit" value="변경하기" class="changeSub">
 
 </form>
 

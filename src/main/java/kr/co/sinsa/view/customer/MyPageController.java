@@ -13,9 +13,11 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import kr.co.sinsa.biz.customer.CustomerVO;
@@ -48,28 +50,20 @@ public class MyPageController {
 	}
 	
 	
-	@RequestMapping(value = "/cookieTest", method = RequestMethod.GET)
-	public String myOrderList(Model model, HttpServletResponse response, String prdnum) {
-		
-		ProductVO vo = new ProductVO();
-		int num = Integer.parseInt(prdnum);
-		vo.setPRD_NUM(num);
-		
-		
-		
-		Cookie recentlyViewed = new Cookie(prdnum,null);
-		recentlyViewed.setMaxAge(0);
-		response.addCookie(recentlyViewed);
-		recentlyViewed = new Cookie(prdnum , prdnum);
-		recentlyViewed.setMaxAge(60*60*24*3);
-		response.addCookie(recentlyViewed);
-		
-		
-		
-		
-		
-		model.addAttribute("product", vo);
-		return "customer/recentViewCookieTest";
+	
+	
+	
+	@RequestMapping(value = "/test1", method = RequestMethod.GET)
+	public String test() {
+
+		return "customer/delevTest";
+	}
+	
+	@RequestMapping(value = "/delev", method = RequestMethod.POST,produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public List<Map<String,String>> delevInquiry(@RequestBody Map<Object, Object> data) {
+		List<Map<String, String>> progresses = (List<Map<String, String>>) data.get("progresses");
+		return progresses;
 	}
 	
 	
