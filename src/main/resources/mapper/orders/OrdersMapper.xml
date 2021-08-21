@@ -10,4 +10,10 @@
 		resultType="kr.co.sinsa.biz.orders.OrdersAndProductVO">
 		select * from PRODUCT where PRD_CODE=#{PRD_CODE}
 	</select>
+	<insert id="addOrders" parameterType="kr.co.sinsa.biz.orders.OrdersVO">
+		insert into Orders (ORDER_NUM, ORDER_CUSID, ORDER_PRDCODE, ORDER_PRDNAME, ORDER_PRDSIZE, ORDER_AMOUNT, ORDER_RECEIVER, 
+		ORDER_TEL, ORDER_ADDR, ORDER_PRICE, ORDER_STATE, ORDER_MEMO, ORDER_REGDATE, ORDER_DELIVCOMP, ORDER_DELIVNUM, ORDER_USEPOINT, 
+		ORDER_PROCESS) VALUES (#{ORDER_NUM}, #{ORDER_CUSID}, #{ORDER_PRDCODE},#{ORDER_PRDNAME},#{ORDER_PRDSIZE},#{ORDER_AMOUNT}, 
+		#{ORDER_RECEIVER}, #{ORDER_TEL}, #{ORDER_ADDR}, #{ORDER_PRICE}, '결제완료', #{ORDER_MEMO}, now(), null, null, 0, null);
+	</insert>
 </mapper>
