@@ -184,9 +184,9 @@ input[type=number] {
 											alt="thumbnail2">
 									</span> 
 									<span class="my-auto"> 
-										<b class="mb-1">${lists.PRD_NAME}</b>
+										<b class="mb-1">${lists.PRD_NAME}<small class="pl-1 prdCode">${lists.PRD_CODE}</small></b>
 										<p class="mb-0">${lists.PRD_BRAND}</p>
-										<p class="mb-0">${lists.ORDER_PRDSIZE} / ${lists.PRD_COLOR}</p>
+										<p class="mb-0"><span class="qty-size">${lists.ORDER_PRDSIZE}</span> / ${lists.PRD_COLOR}</p>
 									</span>
 								</span></td>
 								<td class="shoping__cart__price">
@@ -205,7 +205,7 @@ input[type=number] {
 								</td>
 								<td class="shoping__cart__quantity">
 									<p class="mb-1">
-										수량:<span class="amountNum">${lists.ORDER_AMOUNT}</span>
+										수량:<span class="amountNum amount">${lists.ORDER_AMOUNT}</span>
 									</p> <b class="mb-0">무료배송</b>
 								</td>
 								<td class="shoping__cart__total numFont digits">${finalPrice*lists.ORDER_AMOUNT}원</td>
@@ -466,19 +466,30 @@ input[type=number] {
 
 		// Iamport 결제
 		$("#chckoutBtn").click(function () {
-			var ORDER_PRDCODE = $(".prdCode").text();
+			var ORDER_PRDCODE = $(".prdCode").map(function() {
+			    return $(this).text();
+			}).get();
 			var ORDER_PRDSIZE = $(".qty-size").map(function() {
 			    return $(this).text();
 			}).get();
 			var ORDER_AMOUNT = $('.amount').map(function() {
-			    return this.value;
+			    return $(this).text();
 			}).get();
 			
 		var IMP = window.IMP; // 생략가능
         IMP.init('imp39263192');
         var msg;
         var finalPrice = $(".totalPriceCon-num").text().replace(',', '');
-        
+        var data = {};
+		var itemList = [];
+		for(var i=0; i<ORDER_AMOUNT.length; i++){
+			data = {};
+			data["ORDER_PRDCODE"] = ORDER_PRDCODE[i];
+			data["ORDER_PRDSIZE"] = ORDER_PRDSIZE[i];
+			data["ORDER_AMOUNT"] = ORDER_AMOUNT[i];
+			itemList.unshift(data);
+		}
+		
         IMP.request_pay({
         	pg : 'inicis',
             pay_method : 'card',
@@ -497,18 +508,7 @@ input[type=number] {
             	$.ajax({
             		url: "/checkout/complete", //cross-domain error가 발생하지 않도록 동일한 도메인으로 전송
             		type: 'POST',
-            		dataType: 'json',
-            		data: {
-        	    		imp_uid : rsp.imp_uid,
-        	    		//포인트
-        	    		use_point : usePoint,
-        	    		//사이즈
-        	    		prd_size : ORDER_PRDSIZE,
-        	    		//수량
-        	    		prd_amount : ORDER_AMOUNT,
-        	    		//상품코드
-        	    		prd_code : ORDER_PRDCODE,
-            		},
+            		data: JSON.stringify(itemList),
             		headers: {
 					      'Accept': 'application/json',
 					      'Content-Type': 'application/json'
@@ -524,7 +524,7 @@ input[type=number] {
                         msg += '이름 : ' + rsp.buyer_name;
                         msg += '전화번호 : ' + rsp.buyer_tel;
                         msg += '주소 : ' + rsp.buyer_addr + rsp.buyer_postcode;
-       					alert(msg);
+       					//alert(msg);
             	});
             	//성공시 이동할 페이지
 				location.href="/checkout/complete";

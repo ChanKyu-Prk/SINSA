@@ -72,8 +72,8 @@ public class OrdersController {
 	}
 	
 	@RequestMapping(value = "/checkout/complete", method=RequestMethod.POST, produces = "application/json;charset=UTF-8")
-    public String payComplete(@RequestBody String json, Model model) throws Exception {
-		System.out.println("POSTjson" + json);
+    public String payComplete(@RequestBody List<Map<String, String>> itemLists, Model model) throws Exception {
+		System.out.println("POSTjson" + itemLists);
 		
     return "/orders/payComplete";
 	}
