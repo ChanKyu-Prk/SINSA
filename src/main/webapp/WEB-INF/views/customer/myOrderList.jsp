@@ -156,6 +156,12 @@ td {
 .span_margin{
 margin: 0;
 }
+.modal-header{
+padding-left: 200px;
+}
+.delivBtn{
+outline: none;
+}
 
 </style>
 <title>SINSA : 주문 내역 조회</title>
@@ -224,8 +230,6 @@ margin: 0;
 
 					</div>
 				</div>
-
-
 
 
 
@@ -312,10 +316,13 @@ margin: 0;
 														type="number" />원<br>(${list.ORDER_AMOUNT}개)</td>
 												<td>${list.ORDER_STATE }
 												<c:if test="${list.ORDER_STATE =='배송중' }">
-												<br><span>배송조회</span>
+												<br>
+												<button type="button" class="delivBtn" data-toggle="modal" data-target="#exampleModalCenter" >배송조회</button>
+												<input type="hidden" value="kr.logen" class="delivcomp">
+												<input type="hidden" value="99805163533" class="delivnum">
 												</c:if>
 												<c:if test="${list.ORDER_STATE =='결제완료' }">
-												<br><span>구매취소</span>
+												<br>
 												</c:if>
 												<c:if test="${list.ORDER_STATE =='배송완료' }">
 												<br><span>환불신청</span>
@@ -447,10 +454,104 @@ margin: 0;
 			</div>
 		</div>
 	</div>
+	
+	
+													
+	<!-- Modal -->
+<div class="modal" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">
+ 배송 조회</h5>
+        <button type="button" class="close" data-dismiss="modal"  >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="container-fluid">
+    <div id="testtest">
+        <table class="table">
+        <tr>
+        <td>송장 번호 : </td>
+        <td class="td_deliv_num"></td>
+        <td class="td_deliv_comp"></td>
+        </tr>
+        </table>
+    </div>
+
+    <div class="col-12">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>시간</th>
+                <th>현재 위치</th>
+                <th>배송 상태</th>
+            </tr>
+            </thead>
+            <tbody id="tbodyA">
+           
+            </tbody>
+        </table>
+    </div>
+</div>
+
+    </div>
+  </div>
+</div>
 	<jsp:include page="../footer.jsp"></jsp:include>
 </body>
 
 <script>
+delv = [];
+$('.delivBtn').on("click",function(){
+	var DELIVCOMP = $(this).parent().find('.delivcomp').val();
+	var DELIVNUM = $(this).parent().find('.delivnum').val();
+	var src  = "https://apis.tracker.delivery/carriers/" + DELIVCOMP +"/tracks/"+DELIVNUM ;
+
+	$.ajax({
+		type : "GET",
+		url : src,
+		dataType: "json",
+		success : function(data) {	
+			console.log(data);
+			$.ajax({
+				type : "POST",
+				url : "/delev",
+				data :JSON.stringify(data),
+			    headers: {
+				      'Accept': 'application/json',
+				      'Content-Type': 'application/json'
+				    },
+				success : function(progresses) {
+				$('.td_deliv_num').html(DELIVNUM);	
+				$('.td_deliv_comp').html('('+DELIVCOMP+')');	
+					
+					
+				$("#tbodyA").children().remove(); 
+				var str = '<TR>';
+	            $.each(progresses , function(i){
+	            	
+	            	var time = new Date(progresses[i].time).toLocaleString('ko-KR', {timeZone: 'Asia/Seoul'}); 
+	                str += '<TD>' + time + '</TD><TD>' + progresses[i].location.name + 
+	                '</TD><TD>' + progresses[i].status.text + '</TD>';
+	                str += '</TR>';
+	           });
+	           $("#tbodyA").append(str); 
+					
+					
+				},
+				   error : function(){
+					    alert("보내기 실패2");
+					   }
+			})
+		},
+		   error : function(){
+			    alert("보내기 실패1");
+			   }
+	});
+})
+
+
 	$('#date1').on("change", function(){
 		var date1 = $('#date1').val();
 		var date2 = $('#date2').val();
