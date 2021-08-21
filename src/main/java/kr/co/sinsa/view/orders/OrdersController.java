@@ -79,18 +79,18 @@ public class OrdersController {
 		for(Object list : itemLists) {
 			LinkedHashMap<String,String> item = (LinkedHashMap<String, String>) list;
 			ordersVO.setORDER_NUM(item.get("ORDER_NUM"));
-			ordersVO.setORDER_CUSID();
+			ordersVO.setORDER_CUSID("dhan03");
 			ordersVO.setORDER_PRDCODE(item.get("ORDER_PRDCODE"));
-			ordersVO.setORDER_PRDNAME();
+			ordersVO.setORDER_PRDNAME("dhan03");
 			ordersVO.setORDER_PRDSIZE(item.get("ORDER_PRDSIZE"));
 			ordersVO.setORDER_AMOUNT(Integer.parseInt(item.get("ORDER_AMOUNT")));
-			ordersVO.setORDER_RECEIVER();
-			ordersVO.setORDER_TEL();
-			ordersVO.setORDER_ADDR();
-			ordersVO.setORDER_PRICE();
-			ordersVO.setORDER_STATE();
-			ordersVO.setORDER_MEMO();
-			ordersVO.setORDER_USEPOINT();
+			ordersVO.setORDER_RECEIVER("dhan03");
+			ordersVO.setORDER_TEL("dhan03");
+			ordersVO.setORDER_ADDR("dhan03");
+			ordersVO.setORDER_PRICE(Integer.parseInt("1000"));
+			ordersVO.setORDER_STATE("dhan03");
+			ordersVO.setORDER_MEMO("dhan03");
+			ordersVO.setORDER_USEPOINT(Integer.parseInt("1000"));
 			service.addOrders(ordersVO);
 		}
 
