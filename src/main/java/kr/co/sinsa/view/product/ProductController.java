@@ -37,9 +37,11 @@ public class ProductController {
     	model.addAttribute("prdInfo", vo);
     	String prdnum = Integer.toString(vo.getPRD_NUM());
 		Cookie recentlyViewed = new Cookie(prdnum,null);
+		recentlyViewed.setPath("/");
 		recentlyViewed.setMaxAge(0);
 		response.addCookie(recentlyViewed);
 		recentlyViewed = new Cookie(prdnum , prdnum);
+		recentlyViewed.setPath("/");
 		recentlyViewed.setMaxAge(60*60*24*3);
 		response.addCookie(recentlyViewed);
     	

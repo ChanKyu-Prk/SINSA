@@ -213,6 +213,7 @@ td {
 										<td class="imgtd">
 
 											<div class="td-row">
+											<input type="hidden" value="${list.ORDER_PRDCODE }" class="prdcode">
 												<img class="thumbPic" alt="상품 대표 사진" title="상품 대표 사진"
 													src="/resources/prdImg/shoe.jpg" />
 
@@ -227,7 +228,7 @@ td {
 												</tr>
 												<tr>
 													<td class="prd_name_td"><span
-														class="prd_name_span span_margin">${list.ORDER_PRDNAME }</span></td>
+														class="prd_name_span span_margin"><input type="hidden" value="${list.ORDER_PRDCODE }" class="prdcode">${list.ORDER_PRDNAME }</span></td>
 												</tr>
 												<tr>
 													<td class="prd_size_td">사이즈 : ${list.ORDER_PRDSIZE }
@@ -386,16 +387,18 @@ td {
 		$(this).css("cursor", "pointer");
 	});
 
-	//	$('.thumbPic').on("click", function() {
-	//	location.href = ;
-	//});
+	$('.thumbPic').on("click", function() {
+		var PRD_CODE = $(this).parent().find('.prdcode').val();
+		location.href = "product/prdCode="+PRD_CODE;
+	});
 
-	//$('.prd_brand_span').on("click", function() {
-	//	location.href = ;
-	//});
+	$('.prd_brand_span').on("click", function() {
+		location.href ="#" ;
+	});
 
-	//$('.prd_name_span').on("click", function() {
-	//	location.href = ;
-	//});
+	$('.prd_name_span').on("click", function() {
+		var PRD_CODE = $(this).find('.prdcode').val();
+		location.href = "product/prdCode="+PRD_CODE;
+	});
 </script>
 </html>

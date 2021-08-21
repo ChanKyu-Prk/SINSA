@@ -81,7 +81,7 @@ public class MyPageController {
 			@RequestParam(value = "date2", required = false) String date2, HttpSession session) {
 		UserVO user = (UserVO) session.getAttribute("user");
 		int page = 1;
-		int limit = 20;
+		int limit = 10;
 		int listCount;
 		int startPage;
 		int endPage;
@@ -104,7 +104,7 @@ public class MyPageController {
 			Date date1_sqldate = Date.valueOf(date1);
 			Date date2_sqldate = Date.valueOf(date2);
 			map.put("ID", userID);
-			map.put("page", (page - 1) * 20);
+			map.put("page", (page - 1) * limit);
 			map.put("date1", date1_sqldate);
 			map.put("date2", date2_sqldate);
 			listCount = myPageSerive.countmyOrderListDate(map);
@@ -113,7 +113,7 @@ public class MyPageController {
 		} else {
 			Map<String, Object> map = new HashMap<String, Object>();
 			map.put("ID", userID);
-			map.put("page", (page - 1) * 20);
+			map.put("page", (page - 1) * limit);
 			listCount = myPageSerive.countmyOrderList(map);
 			model.addAttribute("countState", myPageSerive.countState(map));
 			model.addAttribute("orderList", myPageSerive.myOrderList(map));
@@ -167,7 +167,7 @@ public class MyPageController {
 			String userID = user.getCUS_ID();
 			Map<String, Object> map = new HashMap<String, Object>();
 			map.put("ID", userID);
-			map.put("page", (page - 1) * 6);
+			map.put("page", (page - 1) * limit);
 			model.addAttribute("jjimList", myPageSerive.jjimList(map));
 			listCount = myPageSerive.countJjimList(map);
 			maxPage = (int) ((double) listCount / limit + 0.95);
@@ -193,7 +193,7 @@ public class MyPageController {
 			@RequestParam(value = "date2", required = false) String date2, HttpSession session) {
 		UserVO user = (UserVO) session.getAttribute("user");
 		int page = 1;
-		int limit = 20;
+		int limit = 10;
 		int listCount;
 		int startPage;
 		int endPage;
@@ -216,7 +216,7 @@ public class MyPageController {
 			Date date1_sqldate = Date.valueOf(date1);
 			Date date2_sqldate = Date.valueOf(date2);
 			map.put("ID", userID);
-			map.put("page", (page - 1) * 20);
+			map.put("page", (page - 1) * limit);
 			map.put("date1", date1_sqldate);
 			map.put("date2", date2_sqldate);
 			listCount = myPageSerive.countmyOrderListDate(map);
@@ -226,7 +226,7 @@ public class MyPageController {
 		} else {
 			Map<String, Object> map = new HashMap<String, Object>();
 			map.put("ID", userID);
-			map.put("page", (page - 1) * 20);
+			map.put("page", (page - 1) * limit);
 			listCount = myPageSerive.countmyOrderList(map);
 			List<MyOrderListVO> orderList = myPageSerive.myOrderList(map);
 			model.addAttribute("orderList", orderList);
@@ -271,7 +271,7 @@ public class MyPageController {
 		} else {
 
 			listCount = myPageSerive.countRecentView(cRecentlyVieweds);
-			model.addAttribute("recentView", myPageSerive.recentView(cRecentlyVieweds, (page - 1) * 6, listCount));
+			model.addAttribute("recentView", myPageSerive.recentView(cRecentlyVieweds, (page - 1) * limit, listCount));
 			maxPage = (int) ((double) listCount / limit + 0.95);
 			startPage = (((int) ((double) page / 5 + 0.8)) - 1) * 5 + 1;
 			endPage = startPage + 4;
@@ -295,7 +295,7 @@ public class MyPageController {
 			@RequestParam(value = "date2", required = false) String date2, HttpSession session) {
 		UserVO user = (UserVO) session.getAttribute("user");
 		int page = 1;
-		int limit = 20;
+		int limit = 10;
 		int listCount;
 		int startPage;
 		int endPage;
@@ -318,7 +318,7 @@ public class MyPageController {
 			Date date1_sqldate = Date.valueOf(date1);
 			Date date2_sqldate = Date.valueOf(date2);
 			map.put("ID", userID);
-			map.put("page", (page - 1) * 20);
+			map.put("page", (page - 1) * limit);
 			map.put("date1", date1_sqldate);
 			map.put("date2", date2_sqldate);
 			listCount = myPageSerive.countQnAListListDate(map);
@@ -329,7 +329,7 @@ public class MyPageController {
 		} else {
 			Map<String, Object> map = new HashMap<String, Object>();
 			map.put("ID", userID);
-			map.put("page", (page - 1) * 20);
+			map.put("page", (page - 1) * limit);
 			listCount = myPageSerive.countQnAListList(map);
 			List<QnAVO> QnAList = myPageSerive.QnAList(map);
 			List<ProductVO> productList = myPageSerive.productMatch(QnAList);

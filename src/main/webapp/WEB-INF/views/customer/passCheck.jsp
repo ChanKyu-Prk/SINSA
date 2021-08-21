@@ -37,6 +37,7 @@
 <form action="passChange.do" method="post"></c:when>
 <c:otherwise><form action="privateInfoChange.do" method="post"></c:otherwise>
 </c:choose>
+
 비밀번호 <input type="password" name="password">
 <input type="submit" value="확인">
 

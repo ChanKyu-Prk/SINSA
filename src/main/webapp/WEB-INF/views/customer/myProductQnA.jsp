@@ -276,6 +276,7 @@ padding : 20px;
 													value="${status.index }" class="indexN">
 
 													<div class="td-row ">
+													<input type="hidden" value="${productList[status.index].PRD_CODE }" class="prdcode">
 														<img class="thumbPic" alt="상품 대표 사진" title="상품 대표 사진"
 															src="/resources/prdImg/shoe.jpg" />
 
@@ -288,7 +289,8 @@ padding : 20px;
 														</tr>
 														<tr>
 															<td class="prd_name_td td_center"><span
-																class="prd_name_span span_margin">${productList[status.index].PRD_NAME }</span></td>
+																class="prd_name_span span_margin">
+																<input type="hidden" value="${productList[status.index].PRD_CODE }" class="prdcode">${productList[status.index].PRD_NAME }</span></td>
 														</tr>
 
 													</table>
@@ -485,7 +487,8 @@ padding : 20px;
 		$(this).css("cursor", "pointer");
 	});
 	$('.thumbPic').on("click", function() {
-		location.href = "#";
+		var PRD_CODE = $(this).parent().find('.prdcode').val();
+		location.href = "product/prdCode="+PRD_CODE;
 	});
 
 	$('.prd_brand_span').on("click", function() {
@@ -493,7 +496,8 @@ padding : 20px;
 	});
 
 	$('.prd_name_span').on("click", function() {
-		location.href = "#";
+		var PRD_CODE = $(this).find('.prdcode').val();
+		location.href = "product/prdCode="+PRD_CODE;
 	});
 	
 	$('#date1').on("change", function() {
