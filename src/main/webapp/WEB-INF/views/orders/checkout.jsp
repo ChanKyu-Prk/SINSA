@@ -466,6 +466,7 @@ input[type=number] {
 
 		// Iamport 결제
 		$("#chckoutBtn").click(function () {
+			var ORDER_NUM = new Date().getTime();
 			var ORDER_PRDCODE = $(".prdCode").map(function() {
 			    return $(this).text();
 			}).get();
@@ -487,13 +488,15 @@ input[type=number] {
 			data["ORDER_PRDCODE"] = ORDER_PRDCODE[i];
 			data["ORDER_PRDSIZE"] = ORDER_PRDSIZE[i];
 			data["ORDER_AMOUNT"] = ORDER_AMOUNT[i];
+			data["ORDER_NUM"] = ORDER_NUM;
 			itemList.unshift(data);
 		}
+		
 		
         IMP.request_pay({
         	pg : 'inicis',
             pay_method : 'card',
-            merchant_uid : new Date().getTime() + "번호",
+            merchant_uid : new Date().getTime(),
             name : '[SINSA 상품 결제 ]상품 이름',
             amount : finalPrice,
             buyer_email : '${cusInfo.CUS_EMAIL}',
