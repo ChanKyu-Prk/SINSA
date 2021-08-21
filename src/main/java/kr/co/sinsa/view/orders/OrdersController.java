@@ -63,5 +63,11 @@ public class OrdersController {
 		model.addAttribute("prdInfo", prdList);
 
     return "/orders/checkout";
-}
+	}
+	
+	@RequestMapping(value = "/checkout/complete", method=RequestMethod.POST, produces = "application/json;charset=UTF-8")
+    public String payComplete(@RequestBody String json, Model model) throws Exception {
+		System.out.println("json" + json);
+    return "/orders/payComplete";
+	}
 }

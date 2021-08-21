@@ -486,14 +486,18 @@ input[type=number] {
         }, function(rsp) {
             if ( rsp.success ) {
             	//[1] 서버단에서 결제정보 조회를 위해 jQuery ajax로 imp_uid 전달하기
-            	jQuery.ajax({
+            	$.ajax({
             		url: "/checkout/complete", //cross-domain error가 발생하지 않도록 동일한 도메인으로 전송
             		type: 'POST',
             		dataType: 'json',
             		data: {
-        	    		imp_uid : rsp.imp_uid
-        	    		//기타 필요한 데이터가 있으면 추가 전달
-            		}
+        	    		imp_uid : rsp.imp_uid,
+        	    		use_point : usePoint,//포인트
+            		},
+            		headers: {
+					      'Accept': 'application/json',
+					      'Content-Type': 'application/json'
+					}
             	}).done(function(data) {
             		//[2] 서버에서 REST API로 결제정보확인 및 서비스루틴이 정상적인 경우
             		if ( everythings_fine ) {
@@ -506,19 +510,18 @@ input[type=number] {
                         msg += '이름 : ' + rsp.buyer_name;
                         msg += '전화번호 : ' + rsp.buyer_tel;
                         msg += '주소 : ' + rsp.buyer_addr + rsp.buyer_postcode;
-                        alert(msg);
                        //성공시 이동할 페이지
-<%--        			location.href='<%=request.getContextPath()%>/order/paySuccess?msg='+msg; --%>
+       					location.href="/checkout/complete";
+       					alert(msg);
             		} else {
             			//[3] 아직 제대로 결제가 되지 않았습니다.
+            			alert("에러");
             			//[4] 결제된 금액이 요청한 금액과 달라 결제를 자동취소처리하였습니다.
             		}
             	});
             } else {
             	msg = '결제에 실패하였습니다.';
                 msg += '에러내용 : ' + rsp.error_msg;
-                //실패시 이동할 페이지
-			location.href="<%=request.getContextPath()%>/order/payFail";
                 alert(msg);
             }
         	});
