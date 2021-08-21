@@ -320,7 +320,7 @@ input[type=number] {
 										<option value="write">직접입력</option>
 									</select> <span> <input id="ORDER_MEMO" name="ORDER_MEMO"
 										type="text" required="required" maxlength="40" placeholder="요청사항은 40자 이내로 작성해주세요."
-										 readonly="readonly"/>
+										 readonly="readonly" autocomplete="off"/>
 									</span>
 								</div>
 							</div>
