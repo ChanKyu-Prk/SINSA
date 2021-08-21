@@ -26,6 +26,9 @@
 	text-align: center;
 	margin: 50px 0 20px 0;
 }
+.cursor {
+	cursor: pointer;
+}
 
 #brand-name-box {
 	width: 100%;
@@ -296,95 +299,95 @@
 		<hr />
 		<div class="brand-list">
 			<h2><a name="targetA">A</a></h2>
-			<div>AKIII CLASSIC</div><div>ADIDAS</div><div>ASICS</div>
+			<div class="cursor">AKIII CLASSIC</div class="cursor"><div class="cursor">ADIDAS</div><div class="cursor">ASICS</div>
 		</div>
 		<hr />
 		<div class="brand-list">
 			<h2><a name="targetB">B</a></h2>
-			<div>BALENCIAGA</div> <div>BMS FRANCE</div> <div>BURBERRY</div>
+			<div class="cursor">BALENCIAGA</div> <div class="cursor">BMS FRANCE</div> <div class="cursor">BURBERRY</div>
 		</div>
 		<hr />
 		<div class="brand-list">
 			<h2><a name="targetC">C</a></h2>
-			<div>CATCHBALL</div> <div>COCOMODS</div> <div>CONVERSE</div>
+			<div class="cursor">CATCHBALL</div> <div class="cursor">COCOMODS</div> <div class="cursor">CONVERSE</div>
 		</div>
 		<hr />
 
 		<div class="brand-list">
 			<h2><a name="targetD">D</a></h2>
-			<div>DANNER</div> <div>DR.MARTENS</div>
+			<div class="cursor">DANNER</div> <div class="cursor">DR.MARTENS</div>
 		</div>
 		<hr />
 
 		<div class="brand-list">
 			<h2><a name="targetE">E</a></h2>
-			<div>EIDER</div> <div>EARTHUS</div>
+			<div class="cursor">EIDER</div> <div class="cursor">EARTHUS</div>
 		</div>
 		<hr />
 
 		<div class="brand-list">
 			<h2><a name="targetF">F</a></h2>
-			<div>FEIYUE</div> <div>FILA</div> <div>FRED PERRY</div>
+			<div class="cursor">FEIYUE</div> <div class="cursor">FILA</div> <div class="cursor">FRED PERRY</div>
 		</div>
 		<hr />
 
 		<div class="brand-list">
 			<h2><a name="targetG">G</a></h2>
-			<div>GUCCI</div> <div>GOLDEN GOOSE</div>
+			<div class="cursor">GUCCI</div> <div class="cursor">GOLDEN GOOSE</div>
 		</div>
 		<hr />
 
 		<div class="brand-list">
 			<h2><a name="targetH">H</a></h2>
-			<div>HAWKINS</div>
+			<div class="cursor">HAWKINS</div>
 		</div>
 		<hr />
 
 		<div class="brand-list">
 			<h2><a name="targetI">I</a></h2>
-			<div>INTHESTAR</div> <div>IYSO</div>
+			<div class="cursor">INTHESTAR</div> <div class="cursor">IYSO</div>
 		</div>
 		<hr />
 
 		<div class="brand-list">
 			<h2><a name="targetJ">J</a></h2>
-			<div>JOY&MARIO</div> <div>J.DAUL</div>
+			<div class="cursor">JOY&MARIO</div> <div class="cursor">J.DAUL</div>
 		</div>
 		<hr />
 
 		<div class="brand-list">
 			<h2><a name="targetK">K</a></h2>
-			<div>KOLCA</div> <div>KENZO</div>
+			<div class="cursor">KOLCA</div> <div class="cursor">KENZO</div>
 		</div>
 		<hr />
 
 		<div class="brand-list">
 			<h2><a name="targetL">L</a></h2>
-			<div>LACOSTE</div> <div>LAVISIONE</div> <div></div>
+			<div class="cursor">LACOSTE</div> <div class="cursor">LAVISIONE</div> <div></div>
 		</div>
 		<hr />
 
 		<div class="brand-list">
 			<h2><a name="targetM">M</a></h2>
-			<div>MALIBU SANDALS</div> <div>MAISON MARGIELA</div>
+			<div class="cursor">MALIBU SANDALS</div> <div class="cursor">MAISON MARGIELA</div>
 		</div>
 		<hr />
 
 		<div class="brand-list">
 			<h2><a name="targetN">N</a></h2>
-			<div>NIKE</div> <div>NEW BALANCE</div>
+			<div class="cursor">NIKE</div> <div class="cursor">NEW BALANCE</div>
 		</div>
 		<hr />
 		
 		<div class="brand-list">
 			<h2><a name="targetO">O</a></h2>
-			<div>ONISUKA TIGER</div> <div>OTZ</div>
+			<div class="cursor">ONISUKA TIGER</div> <div class="cursor">OTZ</div>
 		</div>
 		<hr />
 
 		<div class="brand-list">
 			<h2><a name="targetP">P</a></h2>
-			<div>POLO</div> <div>POSE GANCH</div> <div>PUMA</div>
+			<div class="cursor">POLO</div> <div class="cursor">POSE GANCH</div> <div class="cursor">PUMA</div>
 		</div>
 		<hr />
 
@@ -396,63 +399,63 @@
 		
 		<div class="brand-list">
 			<h2><a name="targetR">R</a></h2>
-			<div>REEBOK</div> <div></div> <div></div>
+			<div class="cursor">REEBOK</div> <div></div> <div></div>
 		</div>
 		<hr />
 
 		<div class="brand-list">
 			<h2><a name="targetS">S</a></h2>
-			<div>SAUCONY</div> <div>SKECHERS</div> <div>SPERRY</div>
-			<div>STEFANOROSSI</div> <div>STRAYE</div> <div>SUPERGA</div>
+			<div class="cursor">SAUCONY</div> <div class="cursor">SKECHERS</div> <div class="cursor">SPERRY</div>
+			<div class="cursor">STEFANOROSSI</div> <div class="cursor">STRAYE</div> <div class="cursor">SUPERGA</div>
 			
 		</div>
 		<hr />
 
 		<div class="brand-list">
 			<h2><a name="targetT">T</a></h2>
-			<div>TIMBERLAND</div>
+			<div class="cursor">TIMBERLAND</div>
 		</div>
 		<hr />
 
 		<div class="brand-list">
 			<h2><a name="targetU">U</a></h2>
-			<div>UMBRO</div> <div>UNDER ARMOUR</div> <div></div>
+			<div class="cursor">UMBRO</div> <div class="cursor">UNDER ARMOUR</div> <div></div>
 		</div>
 		<hr />
 
 		<div class="brand-list">
 			<h2><a name="targetV">V</a></h2>
-			<div>VANS</div> <div>VERBENAS</div> <div>VLADO</div>
+			<div class="cursor">VANS</div> <div class="cursor">VERBENAS</div> <div class="cursor">VLADO</div>
 		</div>
 		<hr />
 
 		<div class="brand-list">
 			<h2><a name="targetW">W</a></h2>
-			<div>W-STAR</div>
+			<div class="cursor">W-STAR</div>
 		</div>
 		<hr />
 
 		<div class="brand-list">
 			<h2><a name="targetX">X</a></h2>
-			<div>XEXYMIX</div>
+			<div class="cursor">XEXYMIX</div>
 		</div>
 		<hr />
 
 		<div class="brand-list">
 			<h2><a name="targetY">Y</a></h2>
-			<div>YOWE</div>
+			<div class="cursor">YOWE</div>
 		</div>
 		<hr />
 
 		<div class="brand-list">
 			<h2><a name="targetZ">Z</a></h2>
-			<div>ZLEYHADI</div> <div>ZANCA</div>
+			<div class="cursor">ZLEYHADI</div> <div class="cursor">ZANCA</div>
 		</div>
 		<hr />
 
 		<div class="brand-list">
 			<h2><a name="target123">123</a></h2>
-			<div>23.65</div> <div>4T2ND</div>
+			<div class="cursor">23.65</div> <div class="cursor">4T2ND</div>
 		</div>
 		<hr />
 	</div>
