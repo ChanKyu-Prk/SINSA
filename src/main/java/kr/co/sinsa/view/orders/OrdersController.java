@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import kr.co.sinsa.biz.customer.CustomerVO;
 import kr.co.sinsa.biz.orders.OrdersAndProductVO;
 import kr.co.sinsa.biz.orders.OrdersSerivce;
+import kr.co.sinsa.biz.orders.OrdersVO;
 import kr.co.sinsa.biz.user.UserVO; 	
 
 
@@ -67,14 +68,32 @@ public class OrdersController {
 	
 	@RequestMapping(value = "/checkout/complete", method=RequestMethod.GET, produces = "application/json;charset=UTF-8")
     public String getPayComplete(Model model) throws Exception {
-		
+	System.out.println("GET");
     return "/orders/payComplete";
 	}
 	
 	@RequestMapping(value = "/checkout/complete", method=RequestMethod.POST, produces = "application/json;charset=UTF-8")
-    public String payComplete(@RequestBody List<Map<String, String>> itemLists, Model model) throws Exception {
+    public String payComplete(@RequestBody List<Map<String, String>> itemLists, OrdersVO ordersVO, Model model) throws Exception {
 		System.out.println("POSTjson" + itemLists);
-		
+				
+		for(Object list : itemLists) {
+			LinkedHashMap<String,String> item = (LinkedHashMap<String, String>) list;
+			ordersVO.setORDER_NUM(item.get("ORDER_NUM"));
+			ordersVO.setORDER_CUSID();
+			ordersVO.setORDER_PRDCODE(item.get("ORDER_PRDCODE"));
+			ordersVO.setORDER_PRDNAME();
+			ordersVO.setORDER_PRDSIZE(item.get("ORDER_PRDSIZE"));
+			ordersVO.setORDER_AMOUNT(Integer.parseInt(item.get("ORDER_AMOUNT")));
+			ordersVO.setORDER_RECEIVER();
+			ordersVO.setORDER_TEL();
+			ordersVO.setORDER_ADDR();
+			ordersVO.setORDER_PRICE();
+			ordersVO.setORDER_STATE();
+			ordersVO.setORDER_MEMO();
+			ordersVO.setORDER_USEPOINT();
+			service.addOrders(ordersVO);
+		}
+
     return "/orders/payComplete";
 	}
 }

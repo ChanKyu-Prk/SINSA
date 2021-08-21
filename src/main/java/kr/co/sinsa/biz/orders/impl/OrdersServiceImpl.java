@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import kr.co.sinsa.biz.customer.CustomerVO;
 import kr.co.sinsa.biz.orders.OrdersAndProductVO;
 import kr.co.sinsa.biz.orders.OrdersSerivce;
+import kr.co.sinsa.biz.orders.OrdersVO;
 
 @Service("ordersService")
 public class OrdersServiceImpl implements OrdersSerivce{
@@ -21,5 +22,10 @@ public class OrdersServiceImpl implements OrdersSerivce{
 	@Override
 	public OrdersAndProductVO selPrdByCode(String ORDER_PRDCODE) throws Exception {
 		return dao.selPrdByCode(ORDER_PRDCODE);
+	}
+
+	@Override
+	public int addOrders(OrdersVO ordersVO) throws Exception {
+		return dao.addOrders(ordersVO);
 	}
 }
