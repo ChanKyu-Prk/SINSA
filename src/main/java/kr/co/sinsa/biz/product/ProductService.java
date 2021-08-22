@@ -6,6 +6,9 @@ public interface ProductService {
 	public ProductVO info(String PRD_CODE);
 	
 	public List<ProductVO> list(ProductVO vo) throws Exception;
+	
+	public int count(String condition) throws Exception;
+	
 	public int countAll() throws Exception;
 	public int countSneakersForAll() throws Exception;
 	public int countConverseForAll() throws Exception;
@@ -25,6 +28,9 @@ public interface ProductService {
 	public int countOnlyConverseForWomen() throws Exception;
 	public int countOnlySlip_onForWomen() throws Exception;
 	public int countOnlyMuleForWomen() throws Exception;
+	
+	public List<ProductVO> listPage(int displayPost, int PostNum, String keyword, ProductVO vo, String condition) throws Exception;
+
 	
 	public List<ProductVO> listPageOnlySlip_onForWomen(int displayPost, int PostNum, String keyword) throws Exception;
 	public List<ProductVO> listPageOnlyMuleForWomen(int displayPost, int PostNum, String keyword) throws Exception;

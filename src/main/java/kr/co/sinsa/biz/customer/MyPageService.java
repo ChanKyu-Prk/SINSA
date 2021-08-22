@@ -27,6 +27,9 @@ public interface MyPageService {
 	
 	public List<Integer> reviewCheck(List<MyOrderListVO> orderList,String ID);
 	public ProductVO productSerch(String PRDCODE);
+	public void reviewInsert(ReviewVO vo);
+	
+	
 	
 	public List<QnAVO> QnAList(Map<String,Object> map);
 	public List<QnAVO> QnAListDate(Map<String,Object> map);
@@ -42,4 +45,6 @@ public interface MyPageService {
 	public void  passChange(Map<String, String> map);
 	
 	public void privateInfoChange(CustomerVO vo);
+	
+	
 }

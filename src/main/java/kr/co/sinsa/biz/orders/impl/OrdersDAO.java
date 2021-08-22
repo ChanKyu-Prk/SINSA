@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 
 import kr.co.sinsa.biz.customer.CustomerVO;
 import kr.co.sinsa.biz.orders.OrdersAndProductVO;
+import kr.co.sinsa.biz.orders.OrdersVO;
 
 @Repository
 public class OrdersDAO {
@@ -18,5 +19,9 @@ public class OrdersDAO {
 	
 	public OrdersAndProductVO selPrdByCode(String ORDER_PRDCODE) {
 		return SST.selectOne("OrdersDAO.selPrdByCode", ORDER_PRDCODE);
+	}
+	
+	public int addOrders(OrdersVO ordersVO) {
+		return SST.insert("OrdersDAO.addOrders", ordersVO);
 	}
 }

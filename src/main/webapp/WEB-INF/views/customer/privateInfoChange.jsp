@@ -417,6 +417,18 @@ input::placeholder {
 #mail_check_input_box_true {
 	background-color: white;
 }
+
+
+.change_button{
+border : solid 1px ;
+height : 40px;
+width : 150px;
+float : right;
+margin-top : 20px;
+margin-bottom : 20px;
+border: 1px solid #c1bfc1;
+}
+
 </style>
 <title>SINSA : 개인정보 수정</title>
 </head>
@@ -641,7 +653,7 @@ input::placeholder {
 
 
 							<div class="change_button_wrap">
-								<input type="submit" class="change_button" value="변경">
+								<input type="submit" class="change_button" value="변경하기">
 							</div>
 						</div>
 					</form>

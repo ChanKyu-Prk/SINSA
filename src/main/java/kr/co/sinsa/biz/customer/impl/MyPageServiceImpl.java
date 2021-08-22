@@ -14,6 +14,7 @@ import kr.co.sinsa.biz.customer.CustomerVO;
 import kr.co.sinsa.biz.customer.MyOrderListVO;
 import kr.co.sinsa.biz.customer.MyPageService;
 import kr.co.sinsa.biz.customer.QnAVO;
+import kr.co.sinsa.biz.customer.ReviewVO;
 import kr.co.sinsa.biz.orders.OrdersAndProductVO;
 import kr.co.sinsa.biz.product.ProductVO;
 import kr.co.sinsa.biz.user.UserVO;
@@ -29,13 +30,11 @@ public class MyPageServiceImpl implements MyPageService {
 		return dao.myInfo(vo);
 	}
 
-
-	
 	@Override
 	public List<MyOrderListVO> myOrderList(Map<String, Object> map) {
 		return dao.myOrderList(map);
 	}
-	
+
 	@Override
 	public List<MyOrderListVO> myOrderListDate(Map<String, Object> map) {
 
@@ -45,7 +44,7 @@ public class MyPageServiceImpl implements MyPageService {
 	@Override
 	public Map<String, Integer> countState(Map<String, Object> map) {
 		Map<String, Integer> countState = new HashMap<String, Integer>();
-		map.put("STATE","결제완료");
+		map.put("STATE", "결제완료");
 		int payEnd = dao.countState(map);
 		map.replace("STATE", "배송중");
 		int delivery = dao.countState(map);
@@ -54,20 +53,20 @@ public class MyPageServiceImpl implements MyPageService {
 		map.replace("STATE", "취소");
 		int cancel = dao.countState(map);
 		map.replace("STATE", "환불신청");
-		int refund = dao.countState(map);	
+		int refund = dao.countState(map);
 		map.replace("STATE", "환불");
-		int refundEnd = dao.countState(map);	
-		countState.put("payEnd",payEnd);
-		countState.put("delivery",delivery);
-		countState.put("deliveryEnd",deliveryEnd);
-		countState.put("cancel",cancel+refund+refundEnd);
+		int refundEnd = dao.countState(map);
+		countState.put("payEnd", payEnd);
+		countState.put("delivery", delivery);
+		countState.put("deliveryEnd", deliveryEnd);
+		countState.put("cancel", cancel + refund + refundEnd);
 		return countState;
 	}
-	
+
 	@Override
 	public Map<String, Integer> countStateDate(Map<String, Object> map) {
 		Map<String, Integer> countState = new HashMap<String, Integer>();
-		map.put("STATE","결제완료");
+		map.put("STATE", "결제완료");
 		int payEnd = dao.countStateDate(map);
 		map.replace("STATE", "배송중");
 		int delivery = dao.countStateDate(map);
@@ -76,13 +75,13 @@ public class MyPageServiceImpl implements MyPageService {
 		map.replace("STATE", "취소");
 		int cancel = dao.countStateDate(map);
 		map.replace("STATE", "환불신청");
-		int refund = dao.countStateDate(map);	
+		int refund = dao.countStateDate(map);
 		map.replace("STATE", "환불");
-		int refundEnd = dao.countStateDate(map);	
-		countState.put("payEnd",payEnd);
-		countState.put("delivery",delivery);
-		countState.put("deliveryEnd",deliveryEnd);
-		countState.put("cancel",cancel+refund+refundEnd);
+		int refundEnd = dao.countStateDate(map);
+		countState.put("payEnd", payEnd);
+		countState.put("delivery", delivery);
+		countState.put("deliveryEnd", deliveryEnd);
+		countState.put("cancel", cancel + refund + refundEnd);
 		return countState;
 	}
 
@@ -96,26 +95,11 @@ public class MyPageServiceImpl implements MyPageService {
 		return dao.countmyOrderListDate(map);
 	}
 
-
-	
-	
-	
-	
-	
-	
-	
 	@Override
 	public List<OrdersAndProductVO> orderStatus(String ORDER_NUM) {
 		return dao.orderStatus(ORDER_NUM);
 	}
 
-
-
-	
-	
-	
-	
-	
 	@Override
 	public List<ProductVO> jjimList(Map<String, Object> map) {
 		return dao.jjimList(map);
@@ -126,16 +110,10 @@ public class MyPageServiceImpl implements MyPageService {
 		return dao.countJjimList(map);
 	}
 
-	
-	
-	
-
-	
-	
 	@Override
 	public List<Integer> reviewCheck(List<MyOrderListVO> orderList, String ID) {
 		List<Integer> reviewCheckList = new ArrayList<Integer>();
-		for(int i = 0 ; i < orderList.size(); i ++) {
+		for (int i = 0; i < orderList.size(); i++) {
 			Map<String, String> map = new HashMap<String, String>();
 			map.put("ID", ID);
 			map.put("PRD_CODE", orderList.get(i).getORDER_PRDCODE());
@@ -147,19 +125,15 @@ public class MyPageServiceImpl implements MyPageService {
 		return reviewCheckList;
 	}
 
-
-
 	@Override
 	public ProductVO productSerch(String PRDCODE) {
 		return dao.productSerch(PRDCODE);
 	}
 
-
-	
-	
-	
-	
-	
+	@Override
+	public void reviewInsert(ReviewVO vo) {
+		dao.reviewInsert(vo);
+	}
 
 	@Override
 	public List<QnAVO> QnAList(Map<String, Object> map) {
@@ -174,13 +148,14 @@ public class MyPageServiceImpl implements MyPageService {
 	@Override
 	public List<ProductVO> productMatch(List<QnAVO> QnAList) {
 		List<ProductVO> productList = new ArrayList<ProductVO>();
-		for(int i = 0 ; i < QnAList.size(); i ++) {
+		for (int i = 0; i < QnAList.size(); i++) {
 			ProductVO product = dao.productMatch(QnAList.get(i).getPRD_NUM());
 			productList.add(product);
 		}
-		
+
 		return productList;
 	}
+
 	@Override
 	public int countQnAListList(Map<String, Object> map) {
 		return dao.countQnAList(map);
@@ -191,43 +166,31 @@ public class MyPageServiceImpl implements MyPageService {
 		return dao.countQnAListDate(map);
 	}
 
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	@Override
 	public List<ProductVO> recentView(Cookie[] cRecentlyVieweds, int page, int listCount) {
 		List<ProductVO> list = new ArrayList<ProductVO>();
-		int PRD_NUM;
-		List<ProductVO> allProduct = dao.allProductNum();
+		List<ProductVO> select = new ArrayList<ProductVO>();
 
-		for (int i = 0; i < cRecentlyVieweds.length; i++) {
+		List<ProductVO> allProduct = dao.allProductNum();
+		int PRD_NUM;
+		for (int i = cRecentlyVieweds.length - 1; i >= 0; i--) {
 			String str = cRecentlyVieweds[i].getName();
 			for (int j = 0; j < allProduct.size(); j++) {
 				String str2 = Integer.toString(allProduct.get(j).getPRD_NUM());
 				if (str.equals(str2)) {
 					PRD_NUM = Integer.parseInt(cRecentlyVieweds[i].getValue());
-					if (listCount <= 20) {
-						int end = listCount % 20;
-						for (int k = 0; k < end; k++) {
-							list.add(dao.recentView(PRD_NUM));
-						}
-					} else {
-						int end = page + (listCount % 20);
-						for (int k = page; k < end; k++) {
-							list.add(dao.recentView(PRD_NUM));
-						}
-
-					}
+					list.add(dao.recentView(PRD_NUM));
 				}
 			}
 		}
-		return list;
+		int end = page + 6;
+		if ((page + 1) * 6 > listCount) {
+			end = page + (listCount % 6);
+		}
+		for (int i = page; i < end; i++) {
+			select.add(list.get(i));
+		}
+		return select;
 	}
 
 	@Override
@@ -239,6 +202,7 @@ public class MyPageServiceImpl implements MyPageService {
 			for (int j = 0; j < allProduct.size(); j++) {
 				String str2 = Integer.toString(allProduct.get(j).getPRD_NUM());
 				if (str.equals(str2)) {
+
 					listcount++;
 				}
 			}
@@ -246,12 +210,6 @@ public class MyPageServiceImpl implements MyPageService {
 		return listcount;
 	}
 
-	
-	
-	
-	
-	
-	
 	@Override
 	public boolean passCheck(Map<String, String> map) {
 		int passCheck = dao.passCheck(map);
@@ -263,16 +221,14 @@ public class MyPageServiceImpl implements MyPageService {
 	}
 
 	@Override
-	public void  passChange(Map<String, String> map) {
+	public void passChange(Map<String, String> map) {
 		dao.passChange(map);
 	}
 
-	
 	@Override
 	public void privateInfoChange(CustomerVO vo) {
 		dao.privateInfoChange(vo);
-		
+
 	}
-	
-	
+
 }

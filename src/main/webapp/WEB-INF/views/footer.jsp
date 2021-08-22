@@ -7,37 +7,6 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-
-<!-- Google Font -->
-<link
-	href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap"
-	rel="stylesheet">
-
-<!-- Css Styles -->
-<link rel="stylesheet" href="${path}/resources/css/bootstrap.min.css"
-	type="text/css">
-<link rel="stylesheet" href="${path}/resources/css/font-awesome.min.css"
-	type="text/css">
-<link rel="stylesheet" href="${path}/resources/css/elegant-icons.css"
-	type="text/css">
-<link rel="stylesheet" href="${path}/resources/css/nice-select.css"
-	type="text/css">
-<link rel="stylesheet" href="${path}/resources/css/jquery-ui.min.css"
-	type="text/css">
-<link rel="stylesheet" href="${path}/resources/css/owl.carousel.min.css"
-	type="text/css">
-<link rel="stylesheet" href="${path}/resources/css/slicknav.min.css"
-	type="text/css">
-<link rel="stylesheet" href="${path}/resources/css/style.css"
-	type="text/css">
-
-<style>
-.header__top__right__auth {
-	margin: 15px;
-}
-</style>
-
-
 </head>
 <body>
 

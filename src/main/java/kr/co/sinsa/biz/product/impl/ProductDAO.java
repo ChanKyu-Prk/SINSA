@@ -14,6 +14,10 @@ public class ProductDAO {
 	@Autowired
 	private SqlSessionTemplate SST;
 	
+	public int count(String condition) throws Exception{
+		return SST.selectOne("ProductDAO.count", condition);
+	}
+
 	public ProductVO info(String PRD_CODE) {
 		return SST.selectOne("ProductDAO.info", PRD_CODE);
 	}
@@ -83,6 +87,17 @@ public class ProductDAO {
 	/* 구분선---------------------------------------------------------------------------------------------------------------------- */
 	
 	
+	public List<ProductVO> listPage(int displayPost, int postNum, String keyword, int minamount, int maxamount, String condition) throws Exception {
+		HashMap<String, Object> data = new HashMap<String, Object>();
+		data.put("displayPost", displayPost);
+		data.put("postNum", postNum);
+		data.put("keyword", keyword);
+		data.put("minamount", minamount);
+		data.put("maxamount", maxamount);
+		data.put("condition", condition);
+		
+		return SST.selectList("ProductDAO.listPage", data);
+	}
 	public List<ProductVO> listPageOnlySlip_onForMen(int displayPost, int postNum, String keyword) throws Exception {
 		HashMap<String, Object> data = new HashMap<String, Object>();
 		data.put("displayPost", displayPost);

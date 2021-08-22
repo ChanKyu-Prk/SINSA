@@ -26,6 +26,11 @@ public class ProductServiceImpl implements ProductService {
 	}
 	
 	@Override
+	public int count(String condition) throws Exception {
+		return DAO.count(condition);
+	}
+	
+	@Override
 	public int countAll() throws Exception {
 		return DAO.countAll();
 	}
@@ -93,6 +98,32 @@ public class ProductServiceImpl implements ProductService {
 		return DAO.countOnlyMuleForWomen();
 	}
 	
+	
+	@Override
+	public List<ProductVO> listPage(int displayPost, int postNum, String keyword, ProductVO vo,
+			String condition) throws Exception {
+		
+		int minPrice = 0;
+		int maxPrice = 100000000;
+		
+		if(vo.getMinamount() != null) {
+			minPrice = Integer.parseInt(vo.getMinamount().substring(1));
+			maxPrice = Integer.parseInt(vo.getMaxamount().substring(1));			
+		}
+		
+		List<ProductVO> list = null;
+		System.out.println("displayPost : " + displayPost);
+		System.out.println("postNum : " + postNum);
+		System.out.println("keyword : " + keyword);
+		System.out.println("minPrice : " + minPrice);
+		System.out.println("maxPrice : " + maxPrice);
+		System.out.println("condition : " + condition);
+
+		list = DAO.listPage(displayPost, postNum, keyword, minPrice, maxPrice, condition);
+		System.out.println("list data : " + list);
+		
+		return DAO.listPage(displayPost, postNum, keyword, minPrice, maxPrice, condition);
+	}
 	
 	
 	@Override

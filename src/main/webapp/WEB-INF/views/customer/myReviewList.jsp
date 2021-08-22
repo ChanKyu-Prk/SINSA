@@ -54,9 +54,9 @@
 }
 
 .noOrder_row {
-	min-height: 200px;
+	min-height: 250px;
 	vertical-align: middle;
-	padding-top: 50px;
+	padding-top: 75px;
 }
 
 .tableCel {
@@ -157,11 +157,12 @@ td {
 .span_margin {
 	margin: 0;
 }
-.write_btn{
-background-color: black;
-color : white;
-padding: 6px;
-cursor: pointer;
+
+.write_btn {
+	background-color: #0b89fd;
+	color: white;
+	padding: 6px;
+	cursor: pointer;
 }
 </style>
 <title>SINSA : 나의 상품 후기</title>
@@ -257,7 +258,7 @@ cursor: pointer;
   <path
 																	d="M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995z" />
 </svg>
-															<br>주문 내역이 없습니다.
+															<br>후기 내역이 없습니다.
 														</div>
 													</div>
 
@@ -272,6 +273,7 @@ cursor: pointer;
 												<td class="imgtd">
 
 													<div class="td-row">
+													<input type="hidden" value="${list.ORDER_PRDCODE }" class="prdcode">
 														<img class="thumbPic" alt="상품 대표 사진" title="상품 대표 사진"
 															src="/resources/prdImg/shoe.jpg" />
 
@@ -286,7 +288,8 @@ cursor: pointer;
 														</tr>
 														<tr>
 															<td class="prd_name_td"><span
-																class="prd_name_span span_margin">${list.ORDER_PRDNAME }</span></td>
+																class="prd_name_span span_margin"><input type="hidden" value="${list.ORDER_PRDCODE }" class="prdcode">
+																${list.ORDER_PRDNAME }</span></td>
 														</tr>
 														<tr>
 															<td class="prd_size_td">사이즈 : ${list.ORDER_PRDSIZE }
@@ -300,23 +303,24 @@ cursor: pointer;
 												<td>${list.ORDER_STATE }</td>
 												<td><c:choose>
 														<c:when test="${list.ORDER_STATE =='배송완료' }">
-											<c:choose>
-											<c:when test="${reviewCheck[status.index] ==0}">
-											
-											<span class="write_btn">
-											<input type="hidden" value="${list.ORDER_PRDCODE }" class="ORDER_PRDCODE">
-											<input type="hidden" value="${list.ORDER_PRDSIZE  }" class="ORDER_PRDSIZE">
-											<input type="hidden" value="${list.ORDER_NUM  }" class="ORDER_NUM ">
-											후기작성하기
-											</span>
-											
-											</c:when>
-											<c:otherwise>
+															<c:choose>
+																<c:when test="${reviewCheck[status.index] ==0}">
+
+																	<span class="write_btn"> <input type="hidden"
+																		value="${list.ORDER_PRDCODE }" class="ORDER_PRDCODE">
+																		<input type="hidden" value="${list.ORDER_PRDSIZE  }"
+																		class="ORDER_PRDSIZE"> <input type="hidden"
+																		value="${list.ORDER_NUM  }" class="ORDER_NUM ">
+																		후기작성하기
+																	</span>
+
+																</c:when>
+																<c:otherwise>
 											작성완료
 											</c:otherwise>
-											</c:choose>
-											
-											</c:when>
+															</c:choose>
+
+														</c:when>
 														<c:when test="${list.ORDER_STATE =='취소' }">
 											작성불가 <br>
 											(취소상품)
@@ -465,14 +469,17 @@ cursor: pointer;
 </body>
 
 <script>
+	$('.write_btn').on(
+			"click",
+			function() {
+				var ORDERNUM = $(this).find('.ORDER_NUM').val();
+				var ORDERPRDSIZE = $(this).find('.ORDER_PRDSIZE').val();
+				var PRDCODE = $(this).find('.ORDER_PRDCODE').val();
 
-	$('.write_btn').on("click", function(){
-		var ORDERNUM = $(this).find('.ORDER_NUM').val();
-		var ORDERPRDSIZE = $(this).find('.ORDER_PRDSIZE').val();
-		var PRDCODE = $(this).find('.ORDER_PRDCODE').val();
-		
-		location.href = 'reviewWrite.do?ORDERNUM='+ORDERNUM+'&ORDERPRDSIZE='+ORDERPRDSIZE+'&PRDCODE='+PRDCODE;
-	});
+				location.href = 'reviewWrite.do?ORDERNUM=' + ORDERNUM
+						+ '&ORDERPRDSIZE=' + ORDERPRDSIZE + '&PRDCODE='
+						+ PRDCODE;
+			});
 	$('.underline').on("mouseover", function() {
 		$(this).css("background-color", "#EDEFF2");
 	});
@@ -492,15 +499,17 @@ cursor: pointer;
 		$(this).css("cursor", "pointer");
 	});
 	$('.thumbPic').on("click", function() {
-		location.href = "#";
+		var PRD_CODE = $(this).parent().find('.prdcode').val();
+		location.href = "product/prdCode="+PRD_CODE;
 	});
 
 	$('.prd_brand_span').on("click", function() {
-		location.href = "#";
+		location.href ="#" ;
 	});
 
 	$('.prd_name_span').on("click", function() {
-		location.href = "#";
+		var PRD_CODE = $(this).find('.prdcode').val();
+		location.href = "product/prdCode="+PRD_CODE;
 	});
 
 	$('#date1').on("change", function() {

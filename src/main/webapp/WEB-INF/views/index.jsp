@@ -16,13 +16,6 @@
 
 
 
-<style>
-.header__top__right__auth {
-	margin: 15px;
-}
-
-
-</style>
 
 
 </head>

@@ -395,6 +395,7 @@ ol {
 
 .header__top__right__auth {
 	display: inline-block;
+		margin: 15px;
 }
 
 .header__top__right__auth a {
@@ -1126,7 +1127,7 @@ ol {
 
 .price-range-wrap .range-slider .price-input:after {
 	position: absolute;
-	left: 38px;
+	left: 58px;
 	top: 13px;
 	height: 1px;
 	width: 5px;
@@ -1138,7 +1139,7 @@ ol {
 	font-size: 16px;
 	color: #dd2222;
 	font-weight: 700;
-	max-width: 20%;
+	max-width: 33%;
 	border: none;
 	display: inline-block;
 }
