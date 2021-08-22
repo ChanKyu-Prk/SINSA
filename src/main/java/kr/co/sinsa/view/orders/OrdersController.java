@@ -80,6 +80,7 @@ public class OrdersController {
 		OrdersAndProductVO oapVO = null;
 		List<OrdersVO> orderList = new ArrayList();
 		String CUS_ID = null;
+		CustomerVO customerVO = null;
 		
 		if((UserVO) session.getAttribute("user") != null) {
 			UserVO user = (UserVO) session.getAttribute("user");
@@ -105,6 +106,12 @@ public class OrdersController {
 			//리스트로 합치고 model.addAttribute. jsp에서 사용
 			orderList.add(ordersVO);
 		}
+		
+		//usePoint service
+		customerVO = service.cusInfoView(CUS_ID);
+		customerVO.setCUS_ID(CUS_ID);
+		customerVO.setCUS_POINT(customerVO.getCUS_POINT()-ordersVO.getORDER_USEPOINT());
+		service.usePoint(customerVO);
 		
 		//ORDER_CUSID, ORDER_NUM 전송
 		ra.addFlashAttribute("ordersInfo", orderList);

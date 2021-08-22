@@ -28,4 +28,9 @@ public class OrdersServiceImpl implements OrdersSerivce{
 	public int addOrders(OrdersVO ordersVO) throws Exception {
 		return dao.addOrders(ordersVO);
 	}
+
+	@Override
+	public int usePoint(CustomerVO customerVO) throws Exception {
+		return dao.usePoint(customerVO);
+	}
 }
