@@ -43,23 +43,6 @@ table {
 var no = "";
 var picks = new Array();
 
-/* $(document).ready(function() {
-    var events = $('#events');
-    var table = $('#stock').DataTable( {
-        select: true
-    } );
- 
-    table
-        .on( 'select', function ( e, dt, type, indexes ) {
-            var rowData = table.rows( indexes ).data().toArray();
-            events.prepend( '<div><b>'+type+' selection</b> - '+JSON.stringify( rowData )+'</div>' );
-        } )
-        .on( 'deselect', function ( e, dt, type, indexes ) {
-            var rowData = table.rows( indexes ).data().toArray();
-            events.prepend( '<div><b>'+type+' <i>de</i>selection</b> - '+JSON.stringify( rowData )+'</div>' );
-        } );
-} ); */
-
 function selectNum(target) {
     var tbody = target.parentNode;
     var trs = tbody.getElementsByTagName('tr');
@@ -116,8 +99,30 @@ function prdDelete() {
 	<br>
 	<br>
 	<div class="container-fluid" style="padding: 0 30px;">
+		
+		<form>
+			<div class="form-row">
+				<div class="form-group col-md-3">전체 재고 수량 : ${ allcount }</div>
+				<div class="form-group col-md-1">
+					<select name="fieldName" id="fieldName" class="form-control">
+						<option ${(param.fieldName == "stock_prdcode")? "selected" : ""}
+							value="prd_code">코드</option>
+						<option ${(param.fieldName == "prd_name")? "selected" : ""}
+							value="prd_name">품명</option>
+					</select>
+				</div>
+				<div class="form-group col-md-4">
+					<input type="text" class="form-control" placeholder="Search"
+						name="searchWord" value="${param.searchWord}" />
+				</div>
+				<div class="form-group col-md-1">
+					<input type="submit" class="btn btn-primary" value="검색" />
+				</div>
+				<div class="form-group col-md-3"></div>
+			</div>
+		</form>			
+		<br><br>
 		<div class="row">
-			<p>전체 재고 수량 : ${ allcount }</p>
 			<table style="border: 0px">
 				<tr>
 					<td align="left">
@@ -241,27 +246,7 @@ function prdDelete() {
 			</div>
 		</div>
 		<br> <br>
-		<form>
-			<div class="form-row">
-				<div class="form-group col-md-2"></div>
-				<div class="form-group col-md-2">
-					<select name="fieldName" id="fieldName" class="form-control">
-						<option ${(param.fieldName == "stock_prdcode")? "selected" : ""}
-							value="prd_code">코드</option>
-						<option ${(param.fieldName == "prd_name")? "selected" : ""}
-							value="prd_name">품명</option>
-					</select>
-				</div>
-				<div class="form-group col-md-5">
-					<input type="text" class="form-control" placeholder="Search"
-						name="searchWord" value="${param.searchWord}" />
-				</div>
-				<div class="form-group col-md-1">
-					<input type="submit" class="btn btn-primary" value="검색" />
-				</div>
-				<div class="form-group col-md-2"></div>
-			</div>
-		</form>
+
 	</div>
 </body>
 </html>

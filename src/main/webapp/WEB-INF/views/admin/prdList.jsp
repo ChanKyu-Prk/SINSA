@@ -9,10 +9,6 @@
 <meta charset="UTF-8">
 
 <style>
-body {
-	font-size: 11pt;
-	color: teal;
-}
 
 div {
 	margin: 0 auto;
@@ -20,8 +16,10 @@ div {
 
 table {
 	width: 100%;
-	border: 1px solid;
+	font-size: 0.8em;
+		
 }
+
 </style>
 <script
 	src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -78,14 +76,42 @@ table {
 	<br>
 
 	<div class="container-fluid" style="padding: 0 30px;">
-		<div class="row">
-			<table style="border: 0px">
+	
+	<table style="border: 0px">
 				<tr>
 					<td align="left">
 						<button type="button" class="btn btn-outline-primary btn-sm"
 							onclick="location.href='prdInputForm'">신규 상품 등록</button>
 					</td>
-					<td align="right"><input type="button"
+					<td>
+					
+					<form>
+			<div class="form-row">
+				<div class="form-group col-md-2"></div>
+				<div class="form-group col-md-2" style="margin: 0;">
+					<select name="fieldName" id="fieldName" class="form-control">
+						<option ${(param.fieldName == "all")? "selected" : ""} value="all">전체</option>
+						<option ${(param.fieldName == "prd_code")? "selected" : ""}
+							value="prd_code">코드</option>
+						<option ${(param.fieldName == "prd_name")? "selected" : ""}
+							value="prd_name">품명</option>
+						<option ${(param.fieldName == "prd_brand")? "selected" : ""}
+							value="prd_brand">브랜드</option>
+					</select>
+				</div>
+				<div class="form-group col-md-5" style="margin: 0;">
+					<input type="text" class="form-control" placeholder="Search"
+						name="searchWord" value="${param.searchWord}" />
+				</div>
+				<div class="form-group col-md-1" style="margin: 0;">
+					<input type="submit" class="btn btn-primary" value="검색" />
+				</div>
+				<div class="form-group col-md-2"></div>
+			</div>
+		</form>
+		
+					</td>
+					<td align="right" style="width: 250px;"><input type="button"
 						class="btn btn-primary btn-sm" onclick="prdModify()"
 						value="선택 상품 수정" /> &nbsp; <input type="button"
 						class="btn btn-danger btn-sm" onclick="javascript:prdDelete()"
@@ -94,6 +120,10 @@ table {
 			</table>
 			<br>
 			<br>
+			
+			
+		<div class="row">
+			
 
 			<table id="prdlist" class="table table-hover"
 				style="text-align: center; border: 0px solid #dddddd">
@@ -191,30 +221,6 @@ table {
 		</div>
 		<br>
 		<br>
-		<form>
-			<div class="form-row">
-				<div class="form-group col-md-2"></div>
-				<div class="form-group col-md-2">
-					<select name="fieldName" id="fieldName" class="form-control">
-						<option ${(param.fieldName == "all")? "selected" : ""} value="all">전체</option>
-						<option ${(param.fieldName == "prd_code")? "selected" : ""}
-							value="prd_code">코드</option>
-						<option ${(param.fieldName == "prd_name")? "selected" : ""}
-							value="prd_name">품명</option>
-						<option ${(param.fieldName == "prd_brand")? "selected" : ""}
-							value="prd_brand">브랜드</option>
-					</select>
-				</div>
-				<div class="form-group col-md-5">
-					<input type="text" class="form-control" placeholder="Search"
-						name="searchWord" value="${param.searchWord}" />
-				</div>
-				<div class="form-group col-md-1">
-					<input type="submit" class="btn btn-primary" value="검색" />
-				</div>
-				<div class="form-group col-md-2"></div>
-			</div>
-		</form>
 	</div>
 </body>
 </html>
