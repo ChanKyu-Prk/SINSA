@@ -192,13 +192,13 @@ input[type=number] {
 									<c:set var="orgPrice" value="${lists.PRD_PRICE}"/>
 									<c:if test="${lists.PRD_DISRATE == 0}">
 										<c:set var="finalPrice" value="${lists.PRD_PRICE}"/>
-										<span class="digits" data-orgPrice ="${lists.PRD_PRICE}" >${finalPrice}원</span>
+										<span class="digits orgPrice" data-orgPrice ="${lists.PRD_PRICE}" >${finalPrice}원</span>
 									</c:if>
 									<c:if test="${lists.PRD_DISRATE != 0}">
 										<c:set var="finalPriceOrg" 
 										value="${lists.PRD_PRICE-(lists.PRD_PRICE*(lists.PRD_DISRATE/100))}"/>
 			  							<c:set var="finalPrice" value="${fn:substringBefore(finalPriceOrg, '.')}" />
-			  							<span class="mb-0 digits discntNum numFont" data-orgPrice ="${lists.PRD_PRICE}">${lists.PRD_PRICE}원</span>
+			  							<span class="mb-0 digits orgPrice discntNum numFont" data-orgPrice ="${lists.PRD_PRICE}">${lists.PRD_PRICE}원</span>
 										<span class="mb-0 font-weight-bold digits numFont">${finalPrice}원</span>
 									</c:if>
 								</td>
@@ -387,7 +387,7 @@ input[type=number] {
 		}
 		
 			var totalPriceNoDiscnt = 0 // 최초금액
-			$(".discntNum").each(function(n){
+			$(".orgPrice").each(function(n){
 				totalPriceNoDiscnt = parseInt($(this).text());
 		    });
 			var totalPrice = 0; //할인 후 금액
@@ -398,9 +398,9 @@ input[type=number] {
 			$(".amountNum").each(function(n){
 				totalAmount += parseInt($(this).text());
 		    });
-			
-			//총 주문 가격
-			var totalOrgPrice = totalPriceNoDiscnt * totalAmount;
+
+			//총 주문 가격			
+			var	totalOrgPrice = totalPriceNoDiscnt * totalAmount;
 			$(".totalOrgPrice").text(totalOrgPrice);
 			
 			//할인
