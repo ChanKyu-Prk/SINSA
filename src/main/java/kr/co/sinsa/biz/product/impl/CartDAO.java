@@ -86,7 +86,6 @@ public class CartDAO {
 		
 		List<UserCartProductStockVO> checkSizeList = SST.selectList("CartService.getCheckSizeList", vo);
 		int checkNum = checkSizeList.size();
-		System.out.println(checkNum + "asdfasdfasdfasdfasdfadfdffefef");
 		if(checkNum == 0) {
 			SST.update("CartService.updateSize", vo);
 		}
