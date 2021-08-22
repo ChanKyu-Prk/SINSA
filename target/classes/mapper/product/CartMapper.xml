@@ -31,4 +31,8 @@
 		update CART set CART_PRDSIZE=#{CART_PRDSIZE} where CART_CUSID=#{CUS_ID} and CART_NUM=#{CART_NUM}
 	</update>
 	
+	<select id="getCheckSizeList" parameterType="kr.co.sinsa.biz.product.UserCartProductStockVO" resultType="kr.co.sinsa.biz.product.UserCartProductStockVO">
+		select * from CART where CART_PRDNUM=#{CART_PRDNUM} and CART_PRDSIZE=#{CART_PRDSIZE} and CART_CUSID=#{CUS_ID}
+	</select>
+	
 </mapper>
