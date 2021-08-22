@@ -45,7 +45,7 @@
 
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
 			<ul class="navbar-nav mr-auto">
-				<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/admin/prdList" title="주문관리페이지로 이동">주문관리</a></li>
+				<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/admin/orderList" title="주문관리페이지로 이동">주문관리</a></li>
 				<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/admin/prdList" title="상품관리페이지로 이동">상품관리</a></li>
 				<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/admin/stockList" title="재고현황페이지로 이동">재고현황</a></li>
 				<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/admin/stockLog" title="상품입고내역으로 이동">입고내역</a></li>
