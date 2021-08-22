@@ -1,11 +1,13 @@
 package kr.co.sinsa.view.orders;
 
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,18 +38,12 @@ public class OrdersController {
 	@RequestMapping(value="/direct/checkout", method=RequestMethod.GET)
 	public String cusInfo(Model model, HttpSession session) throws Exception {
 		
-		if((UserVO) session.getAttribute("user") == null) {
-			//비회원 일시
-			CustomerVO vo = service.cusInfoView("dhan03");
-			model.addAttribute("cusInfo", vo);
-			/*로그인 필요 confirm 창 띄우기*/
-		} else {
-			//회원 일시
+		if((UserVO) session.getAttribute("user") != null) {
 			UserVO user = (UserVO) session.getAttribute("user");
 			String CUS_ID = (String)user.getCUS_ID();
 			CustomerVO vo = service.cusInfoView(CUS_ID);
 			model.addAttribute("cusInfo", vo);
-		}
+		} 
 		return "/orders/checkout";
 	}
 	 
@@ -79,16 +75,22 @@ public class OrdersController {
 	
 	@RequestMapping(value = "/checkout/complete", method=RequestMethod.POST, produces = "application/json;charset=UTF-8")
     @ResponseBody
-	public String payComplete(@RequestBody List<Map<String, String>> itemLists, OrdersVO ordersVO, RedirectAttributes ra, HttpSession session, HttpServletRequest request) throws Exception {
+	public String payComplete(@RequestBody List<Map<String, String>> itemLists, OrdersVO ordersVO, RedirectAttributes ra, HttpSession session, HttpServletResponse response) throws Exception {
 		System.out.println("POST");
 		OrdersAndProductVO oapVO = null;
 		List<OrdersVO> orderList = new ArrayList();
+		String CUS_ID = null;
+		
+		if((UserVO) session.getAttribute("user") != null) {
+			UserVO user = (UserVO) session.getAttribute("user");
+			CUS_ID = (String)user.getCUS_ID();
+		}
 		
 		for(Object list : itemLists) {
 			LinkedHashMap<String,String> item = (LinkedHashMap<String, String>) list;
 			oapVO = service.selPrdByCode(item.get("ORDER_PRDCODE"));
 			ordersVO.setORDER_NUM(item.get("ORDER_NUM"));
-			ordersVO.setORDER_CUSID("test2"); // 아이디
+			ordersVO.setORDER_CUSID(CUS_ID);
 			ordersVO.setORDER_PRDCODE(item.get("ORDER_PRDCODE"));
 			ordersVO.setORDER_PRDNAME(oapVO.getPRD_NAME());
 			ordersVO.setORDER_PRDSIZE(item.get("ORDER_PRDSIZE"));
@@ -104,6 +106,7 @@ public class OrdersController {
 			orderList.add(ordersVO);
 		}
 		
+		//ORDER_CUSID, ORDER_NUM 전송
 		ra.addFlashAttribute("ordersInfo", orderList);
 
 		return "/orders/payComplete";

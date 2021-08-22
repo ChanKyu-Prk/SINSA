@@ -467,6 +467,10 @@ input[type=number] {
 
 		// Iamport 결제
 		$("#chckoutBtn").click(function () {
+			<%if(session.getAttribute("user") == null){%>
+				var result = confirm("로그인이 필요한 서비스입니다. 로그인하시겠습니까?");
+				if(result)location.href="/login.do";
+			<%}%>
 			var ORDER_NUM = new Date().getTime();
 			var ORDER_PRDCODE = $(".prdCode").map(function() {
 			    return $(this).text();
