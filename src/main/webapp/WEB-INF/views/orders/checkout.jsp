@@ -184,7 +184,7 @@ input[type=number] {
 											alt="thumbnail2">
 									</span> 
 									<span class="my-auto"> 
-										<b class="mb-1">${lists.PRD_NAME}<small class="pl-1 prdCode">${lists.PRD_CODE}</small></b>
+										<b class="mb-1 ORDER_PRDNAME">${lists.PRD_NAME}<small class="pl-1 prdCode">${lists.PRD_CODE}</small></b>
 										<p class="mb-0">${lists.PRD_BRAND}</p>
 										<p class="mb-0"><span class="qty-size">${lists.ORDER_PRDSIZE}</span> / ${lists.PRD_COLOR}</p>
 									</span>
@@ -208,7 +208,7 @@ input[type=number] {
 										수량:<span class="amountNum amount">${lists.ORDER_AMOUNT}</span>
 									</p> <b class="mb-0">무료배송</b>
 								</td>
-								<td class="shoping__cart__total numFont digits">${finalPrice*lists.ORDER_AMOUNT}원</td>
+								<td class="shoping__cart__total numFont digits" data-value="ORDER_PRICE">${finalPrice*lists.ORDER_AMOUNT}원</td>
 							</tr>
 							</c:forEach>
 						</c:if>
@@ -331,7 +331,7 @@ input[type=number] {
 								<ul>
 									<li>총 주문 가격<span>원</span><span class="totalOrgPrice digits">-</span></li>
 									<li>할인<span>원</span><span class="totalDiscnt digits">-</span></li>
-									<li class="points">포인트 사용 <input type="number" placeholder="0" class="text-right usePoint" step="10"></input><span>P</span>
+									<li class="points">포인트 사용 <input type="number" placeholder="0" class="text-right usePoint" name="ORDER_USEPOINT"></input><span>P</span>
 									<p class="mb-1"><small>사용가능한 포인트: <span>P</span><span class="avPoint digits hasPoint" data-hasPoint = "${cusInfo.CUS_POINT}">${cusInfo.CUS_POINT}</span></small></p>
 									</li>
 									<li>배송비 <span>무료</span></li>
@@ -476,7 +476,7 @@ input[type=number] {
 			var ORDER_AMOUNT = $('.amount').map(function() {
 			    return $(this).text();
 			}).get();
-			
+
 		var IMP = window.IMP; // 생략가능
         IMP.init('imp39263192');
         var msg;

@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -75,23 +76,25 @@ public class OrdersController {
 	@RequestMapping(value = "/checkout/complete", method=RequestMethod.POST, produces = "application/json;charset=UTF-8")
     public String payComplete(@RequestBody List<Map<String, String>> itemLists, OrdersVO ordersVO, Model model) throws Exception {
 		System.out.println("POSTjson" + itemLists);
-				
+		System.out.println(ordersVO.getORDER_MEMO());
+		OrdersAndProductVO oapVO = null;
 		for(Object list : itemLists) {
 			LinkedHashMap<String,String> item = (LinkedHashMap<String, String>) list;
+			oapVO = service.selPrdByCode(item.get("ORDER_PRDCODE"));
 			ordersVO.setORDER_NUM(item.get("ORDER_NUM"));
-			ordersVO.setORDER_CUSID("dhan03");
+			ordersVO.setORDER_CUSID("manbal1"); //
 			ordersVO.setORDER_PRDCODE(item.get("ORDER_PRDCODE"));
-			ordersVO.setORDER_PRDNAME("dhan03");
+			ordersVO.setORDER_PRDNAME(oapVO.getPRD_NAME());
 			ordersVO.setORDER_PRDSIZE(item.get("ORDER_PRDSIZE"));
 			ordersVO.setORDER_AMOUNT(Integer.parseInt(item.get("ORDER_AMOUNT")));
-			ordersVO.setORDER_RECEIVER("dhan03");
-			ordersVO.setORDER_TEL("dhan03");
-			ordersVO.setORDER_ADDR("dhan03");
-			ordersVO.setORDER_PRICE(Integer.parseInt("1000"));
-			ordersVO.setORDER_STATE("dhan03");
-			ordersVO.setORDER_MEMO("dhan03");
-			ordersVO.setORDER_USEPOINT(Integer.parseInt("1000"));
+			ordersVO.setORDER_RECEIVER("dhan03"); //
+			ordersVO.setORDER_TEL("dhan03"); //
+			ordersVO.setORDER_ADDR("dhan03"); //주소 합체
+			ordersVO.setORDER_PRICE(oapVO.getPRD_PRICE()*Integer.parseInt(item.get("ORDER_AMOUNT")));
+			ordersVO.setORDER_MEMO("dhan03"); //
+			ordersVO.setORDER_USEPOINT(Integer.parseInt("1000")); //
 			service.addOrders(ordersVO);
+			//리스트로 합치고 model.addAttribute. jsp에서 사용
 		}
 
     return "/orders/payComplete";
