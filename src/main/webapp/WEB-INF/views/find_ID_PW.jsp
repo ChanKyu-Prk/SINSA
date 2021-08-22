@@ -144,6 +144,33 @@
 	margin: 0px 0px 30px 0px;
 	font-size: 30px;
 }
+
+.input_code{
+	width: 420px !important;
+	border-radius: 0px !important;
+	
+}
+
+.button_code{
+	margin: 0px 0px 0px 10px;
+	width: 130px !important;
+	
+	border-radius: 0px !important;
+	
+}
+
+.input_email{
+	width: 420px !important;
+	margin: 0px 0px 0px 0px !important;
+	border-radius: 0px !important;
+}
+
+.button_email{
+	margin: 0px 0px 0px 10px;
+	width: 130px !important;
+	
+	border-radius: 0px !important;
+}
 </style>
 
 
@@ -175,28 +202,29 @@
 							<div id="fill-out-name"></div>
 						</div>
 
-						<div class="form-group last mb-3">
-							<label for="email">이메일</label> <input type="text"
+						
+							<div><label for="email">이메일</label></div>
+							<div class="input-group mb-3">
+							 <input type="text"
 								name="input_CUS_EMAIL_forID" id="CUS_EMAIL"
-								class="form-control input_CUS_EMAIL_forID"
+								class="form-control input_CUS_EMAIL_forID input_email"
 								placeholder="이메일을 입력해주세요">
-						</div>
-						<div class="form-group">
+						
 							<span id="button_receive_code_for_ID"
-								class="btn btn-block py-2 btn-primary"
+								class="btn btn-outline-secondary button_email"
 								onclick="sendCodeForID();">인증번호 요청</span>
 						</div>
 
 					</form>
 
 					<div class="input-group mb-3">
-						<input id="inputCodeForID" name="inputCodeForID" type="text"
-							class="form-control input_check_code_forID"
+						<span><input id="inputCodeForID" name="inputCodeForID" type="text"
+							class="form-control input_check_code_forID input_code"
 							placeholder="인증번호 6자리를 입력해 주세요" aria-label="Recipient's username"
-							aria-describedby="button-addon2" disabled="disabled">
-						<button class="btn btn-outline-secondary input_check_code_forID"
+							aria-describedby="button-addon2" disabled="disabled"></span>
+						<span><button class="btn btn-outline-secondary input_check_code_forID button_code" 
 							type="button" id="button-addon2" onclick="checkCodeForID();"
-							disabled="disabled">인증 확인</button>
+							disabled="disabled">인증 확인</button></span>
 					</div>
 
 					<form>
@@ -343,7 +371,7 @@
 								success : function(result) {
 									codeForID = result;
 									document
-											.getElementById('button_receive_code_for_ID').innerHTML = "인증번호 재요청";
+											.getElementById('button_receive_code_for_ID').innerHTML = "재요청";
 									codeCheckForID.attr("disabled", false);
 
 									alert("인증번호가 발송되었습니다.");

@@ -58,7 +58,6 @@ public class CartServiceImpl implements CartService {
 	public int updateSize(UserCartProductStockVO vo) {
 		
 		int checkNum = dao.updateSize(vo);
-		System.out.println(checkNum + "어디서 문제인거야....");
 		return checkNum;
 	}
 }

@@ -146,7 +146,6 @@ public class CartController {
 		
 		int checkNum = cartService.updateSize(userCartProductStockVO);
 
-		System.out.println(checkNum+"여기여기여기여");
 		return checkNum;
 	}
 }

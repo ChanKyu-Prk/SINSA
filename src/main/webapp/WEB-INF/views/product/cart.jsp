@@ -891,13 +891,11 @@
 				success : function(result) {
 					var num = result;
 					if(num > 0){
-						alert("동일한 옵션입니다.");
+						alert("동일한 옵션이 존재합니다.");
 					}else{
 						alert("상품이 수정되었습니다.");
 						location.href="/cart.do";
 					}
-					
-
 				}
 			});
 		}
