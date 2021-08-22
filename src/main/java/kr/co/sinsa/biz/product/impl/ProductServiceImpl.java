@@ -26,8 +26,8 @@ public class ProductServiceImpl implements ProductService {
 	}
 	
 	@Override
-	public int count(String condition) throws Exception {
-		return DAO.count(condition);
+	public int count(String condition, ProductVO vo) throws Exception {
+		return DAO.count(condition, vo);
 	}
 	
 	@Override
@@ -106,12 +106,12 @@ public class ProductServiceImpl implements ProductService {
 		int minPrice = 0;
 		int maxPrice = 100000000;
 		
-		if(vo.getMinamount() != null) {
-			minPrice = Integer.parseInt(vo.getMinamount().substring(1));
-			maxPrice = Integer.parseInt(vo.getMaxamount().substring(1));			
+		if(!vo.getMinamount().equals("")) {
+			minPrice = Integer.parseInt(vo.getMinamount());
+			maxPrice = Integer.parseInt(vo.getMaxamount());			
 		}
 		
-		List<ProductVO> list = null;
+
 		System.out.println("displayPost : " + displayPost);
 		System.out.println("postNum : " + postNum);
 		System.out.println("keyword : " + keyword);
@@ -119,10 +119,8 @@ public class ProductServiceImpl implements ProductService {
 		System.out.println("maxPrice : " + maxPrice);
 		System.out.println("condition : " + condition);
 
-		list = DAO.listPage(displayPost, postNum, keyword, minPrice, maxPrice, condition);
-		System.out.println("list data : " + list);
 		
-		return DAO.listPage(displayPost, postNum, keyword, minPrice, maxPrice, condition);
+		return DAO.listPage(displayPost, postNum, keyword, minPrice, maxPrice, condition, vo);
 	}
 	
 	

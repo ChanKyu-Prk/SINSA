@@ -7,7 +7,7 @@ public interface ProductService {
 	
 	public List<ProductVO> list(ProductVO vo) throws Exception;
 	
-	public int count(String condition) throws Exception;
+	public int count(String condition, ProductVO vo) throws Exception;
 	
 	public int countAll() throws Exception;
 	public int countSneakersForAll() throws Exception;
