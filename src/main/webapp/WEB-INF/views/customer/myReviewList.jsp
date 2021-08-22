@@ -331,7 +331,7 @@ td {
 											</c:when>
 														<c:when test="${list.ORDER_STATE =='환불신청' }">
 											작성불가 <br>
-											환불상품
+											(환불상품)
 											</c:when>
 														<c:otherwise>
 											배송전

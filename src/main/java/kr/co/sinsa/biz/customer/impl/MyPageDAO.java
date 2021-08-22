@@ -130,4 +130,15 @@ public class MyPageDAO {
 	public void privateInfoChange(CustomerVO vo) {
 		SST.update("myInfo.privateInfoChange",vo);
 	}
+	
+	public void refund(Map<String, String> map) {
+		SST.update("myInfo.refund",map);
+	}
+	
+	public void cancel(Map<String, String> map) {
+		SST.update("myInfo.cancel",map);
+	}
+	
+	
+	
 }

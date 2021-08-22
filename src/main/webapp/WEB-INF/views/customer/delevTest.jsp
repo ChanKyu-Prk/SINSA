@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<a href="https://apis.tracker.delivery/carriers/kr.logen/tracks/99805163533" target="_blank">배송조회</a><br>
+<a href="https://apis.tracker.delivery/carriers/kr.cjlogistics/tracks/388949657312" target="_blank">배송조회</a><br>
 
 <input type="text" id="a" value="kr.logen"><br>
 <input type="text" id="b" value="99805163533"><br>

@@ -318,14 +318,23 @@ outline: none;
 												<c:if test="${list.ORDER_STATE =='배송중' }">
 												<br>
 												<button type="button" class="delivBtn" data-toggle="modal" data-target="#exampleModalCenter" >배송조회</button>
-												<input type="hidden" value="kr.logen" class="delivcomp">
-												<input type="hidden" value="99805163533" class="delivnum">
+												
+												<input type="hidden" value="${list.ORDER_DELIVCOMP }" class="delivcomp">
+												<input type="hidden" value="${list.ORDER_DELIVNUM }" class="delivnum">
 												</c:if>
 												<c:if test="${list.ORDER_STATE =='결제완료' }">
+												<input type="hidden" value="${list.ORDER_PRDCODE }" class="prdcode">
+												<input type="hidden" value="${list.ORDER_NUM }" class="orderum">
+												<input type="hidden" value="${list.ORDER_PRDSIZE }" class="prdsize">
+												<button type="button" class="cancelBtn">주문취소</button>
 												<br>
 												</c:if>
 												<c:if test="${list.ORDER_STATE =='배송완료' }">
-												<br><span>환불신청</span>
+												<br>
+												<input type="hidden" value="${list.ORDER_PRDCODE }" class="prdcode">
+												<input type="hidden" value="${list.ORDER_NUM }" class="orderum">
+												<input type="hidden" value="${list.ORDER_PRDSIZE }" class="prdsize">
+												<button type="button" class="refundBtn">환불신청</button>
 												</c:if>
 												</td>
 											</tr>
@@ -506,7 +515,68 @@ delv = [];
 $('.delivBtn').on("click",function(){
 	var DELIVCOMP = $(this).parent().find('.delivcomp').val();
 	var DELIVNUM = $(this).parent().find('.delivnum').val();
-	var src  = "https://apis.tracker.delivery/carriers/" + DELIVCOMP +"/tracks/"+DELIVNUM ;
+	var DEILVCODE = "";
+	
+	
+	if (DELIVCOMP=='DHL'){
+		DEILVCODE = 'de.dhl';
+	}else if(DELIVCOMP=='Sagawa'){
+		DEILVCODE = 'jp.sagawa';
+	}else if(DELIVCOMP=='Kuroneko Yamato'){
+		DEILVCODE = 'jp.yamato';
+	}else if(DELIVCOMP=='Japan Post'){
+		DEILVCODE = 'jp.yuubin';
+	}else if(DELIVCOMP=='천일택배'){
+		DEILVCODE = 'kr.chunilps';
+	}else if(DELIVCOMP=='CJ대한통운'){
+		DEILVCODE = 'kr.cjlogistics';
+	}else if(DELIVCOMP=='GS Postbox 택배'){
+		DEILVCODE = 'kr.cvsnet';
+	}else if(DELIVCOMP=='CWAY (Woori Express)'){
+		DEILVCODE = 'kr.cway';
+	}else if(DELIVCOMP=='대신택배'){
+		DEILVCODE = 'kr.daesin';
+	}else if(DELIVCOMP=='우체국 택배'){
+		DEILVCODE = 'kr.epost';
+	}else if(DELIVCOMP=='한의사랑택배'){
+		DEILVCODE = 'kr.hanips';
+	}else if(DELIVCOMP=='한진택배'){
+		DEILVCODE = 'kr.hanjin';
+	}else if(DELIVCOMP=='합동택배'){
+		DEILVCODE = 'kr.hdexp';
+	}else if(DELIVCOMP=='홈픽'){
+		DEILVCODE = 'kr.homepick';
+	}else if(DELIVCOMP=='한서호남택배'){
+		DEILVCODE = 'kr.honamlogis';
+	}else if(DELIVCOMP=='일양로지스'){
+		DEILVCODE = 'kr.ilyanglogis';
+	}else if(DELIVCOMP=='경동택배'){
+		DEILVCODE = 'kr.kdexp';
+	}else if(DELIVCOMP=='건영택배'){
+		DEILVCODE = 'kr.kunyoung';
+	}else if(DELIVCOMP=='로젠택배'){
+		DEILVCODE = 'kr.logen';
+	}else if(DELIVCOMP=='롯데택배'){
+		DEILVCODE = 'kr.lotte';
+	}else if(DELIVCOMP=='SLX'){
+		DEILVCODE = 'kr.slx';
+	}else if(DELIVCOMP=='성원글로벌카고'){
+		DEILVCODE = 'kr.swgexp';
+	}else if(DELIVCOMP=='TNT'){
+		DEILVCODE = 'nl.tnt';
+	}else if(DELIVCOMP=='EMS'){
+		DEILVCODE = 'un.upu.ems';
+	}else if(DELIVCOMP=='Fedex'){
+		DEILVCODE = 'us.fedex';
+	}else if(DELIVCOMP=='UPS'){
+		DEILVCODE = 'us.ups';
+	}else if(DELIVCOMP=='USPS'){
+		DEILVCODE = 'us.usps';
+	}
+
+	
+	
+	var src  = "https://apis.tracker.delivery/carriers/" + DEILVCODE +"/tracks/"+DELIVNUM ;
 
 	$.ajax({
 		type : "GET",
@@ -550,6 +620,22 @@ $('.delivBtn').on("click",function(){
 			   }
 	});
 })
+
+
+	$('.refundBtn').on("click", function() {
+		var prdcode = $(this).parent().find('.prdcode').val();
+		var orderum = $(this).parent().find('.orderum').val();
+		var prdsize = $(this).parent().find('.prdsize').val();
+		location.href = 'refund?prdcode='+prdcode+'&orderum='+orderum+'&prdsize='+prdsize;
+	});
+	
+	$('.cancelBtn').on("click", function() {
+		var prdcode = $(this).parent().find('.prdcode').val();
+		var orderum = $(this).parent().find('.orderum').val();
+		var prdsize = $(this).parent().find('.prdsize').val();
+		location.href = 'cancel?prdcode='+prdcode+'&orderum='+orderum+'&prdsize='+prdsize;
+	});
+
 
 
 	$('#date1').on("change", function(){
