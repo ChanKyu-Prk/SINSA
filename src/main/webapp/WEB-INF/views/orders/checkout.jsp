@@ -468,8 +468,8 @@ input[type=number] {
 		// Iamport 결제
 		$("#chckoutBtn").click(function () {
 			<%if(session.getAttribute("user") == null){%>
-				var result = confirm("로그인이 필요한 서비스입니다. 로그인하시겠습니까?");
-				if(result)location.href="/login.do";
+				var result = alert("결제 오류가 발생하였습니다. 다시 시도해주세요.");
+				window.history.back();
 			<%}%>
 			var ORDER_NUM = new Date().getTime();
 			var ORDER_PRDCODE = $(".prdCode").map(function() {
@@ -488,6 +488,7 @@ input[type=number] {
 			}
 			var ORDER_RECEIVER = $("input[name=ORDER_RECEIVER]").val();
 			var ORDER_USEPOINT = $("input[name=ORDER_USEPOINT]").val();
+			if(ORDER_USEPOINT == "") ORDER_USEPOINT = 0;
 			var ORDER_ADDR = $("#delivAddrZip").val() + "|" +$("#delivAddrRoad").val() + "|" + $("#delivAddrJibun").val() +"|"+$("#delivAddrExtra").val();
 			var IMP = window.IMP; // 생략가능
 	        IMP.init('imp39263192');

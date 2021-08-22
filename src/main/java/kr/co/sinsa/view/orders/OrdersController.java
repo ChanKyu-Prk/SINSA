@@ -78,7 +78,7 @@ public class OrdersController {
 	public String payComplete(@RequestBody List<Map<String, String>> itemLists, OrdersVO ordersVO, RedirectAttributes ra, HttpSession session, HttpServletResponse response) throws Exception {
 		System.out.println("POST");
 		OrdersAndProductVO oapVO = null;
-		List<OrdersVO> orderList = new ArrayList();
+		List<String> orderList = new ArrayList();
 		String CUS_ID = null;
 		CustomerVO customerVO = null;
 		
@@ -103,8 +103,6 @@ public class OrdersController {
 			ordersVO.setORDER_MEMO(item.get("ORDER_MEMO"));
 			ordersVO.setORDER_USEPOINT(Integer.parseInt(item.get("ORDER_USEPOINT")));
 			service.addOrders(ordersVO);
-			//리스트로 합치고 model.addAttribute. jsp에서 사용
-			orderList.add(ordersVO);
 		}
 		
 		//usePoint service
@@ -114,8 +112,10 @@ public class OrdersController {
 		service.chkUsePoint(customerVO);
 		
 		//ORDER_CUSID, ORDER_NUM 전송
+		orderList.add(ordersVO.getORDER_CUSID());
+		orderList.add(ordersVO.getORDER_NUM());
 		ra.addFlashAttribute("ordersInfo", orderList);
 
-		return "/orders/payComplete";
+		return "redirect:/orders/payComplete";
 	}
 }
