@@ -16,6 +16,63 @@ public class ProductVO {
 	
 	private String minamount;
 	private String maxamount;
+	
+	private String white;
+	private String gray;
+	private String red;
+	private String black;
+	private String blue;
+	private String green;
+	
+	public String getWhite() {
+		return white;
+	}
+
+	public void setWhite(String white) {
+		this.white = white;
+	}
+
+	public String getGray() {
+		return gray;
+	}
+
+	public void setGray(String gray) {
+		this.gray = gray;
+	}
+
+	public String getRed() {
+		return red;
+	}
+
+	public void setRed(String red) {
+		this.red = red;
+	}
+
+	public String getBlack() {
+		return black;
+	}
+
+	public void setBlack(String black) {
+		this.black = black;
+	}
+
+	public String getBlue() {
+		return blue;
+	}
+
+	public void setBlue(String blue) {
+		this.blue = blue;
+	}
+
+	public String getGreen() {
+		return green;
+	}
+
+	public void setGreen(String green) {
+		this.green = green;
+	}
+
+
 
 	public String getMinamount() {
 		return minamount;
