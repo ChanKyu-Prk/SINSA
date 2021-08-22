@@ -265,6 +265,11 @@ input[type=number] {
 						<button type="button" id= "btnBuy" class="primary-btn col-lg-12 text-center">바로구매</button>
 						<script type="text/javascript">
 							$("#btnBuy").click(function(){
+								<%if(session.getAttribute("user") == null){%>
+									var result = confirm("로그인이 필요한 서비스입니다. 로그인하시겠습니까?");
+									if(result)location.href="/login.do";
+									else return false;
+								<%}%>
 								var ORDER_PRDCODE = $(".prdCode").text();
 								var ORDER_PRDSIZE = $(".qty-size").map(function() {
 								    return $(this).text();
