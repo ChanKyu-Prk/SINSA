@@ -111,7 +111,7 @@ public class OrdersController {
 		customerVO = service.cusInfoView(CUS_ID);
 		customerVO.setCUS_ID(CUS_ID);
 		customerVO.setCUS_POINT(customerVO.getCUS_POINT()-ordersVO.getORDER_USEPOINT());
-		service.usePoint(customerVO);
+		service.chkUsePoint(customerVO);
 		
 		//ORDER_CUSID, ORDER_NUM 전송
 		ra.addFlashAttribute("ordersInfo", orderList);

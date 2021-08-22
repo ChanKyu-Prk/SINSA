@@ -16,7 +16,7 @@
 		ORDER_PROCESS) VALUES (#{ORDER_NUM}, #{ORDER_CUSID}, #{ORDER_PRDCODE},#{ORDER_PRDNAME},#{ORDER_PRDSIZE},#{ORDER_AMOUNT}, 
 		#{ORDER_RECEIVER}, #{ORDER_TEL}, #{ORDER_ADDR}, #{ORDER_PRICE}, '결제완료', #{ORDER_MEMO}, now(), null, null, #{ORDER_USEPOINT}, null)
 	</insert>
-	<update id="usePoint" parameterType="kr.co.sinsa.biz.customer.CustomerVO">
+	<update id="chkUsePoint" parameterType="kr.co.sinsa.biz.customer.CustomerVO">
 		update CUSTOMER set CUS_POINT=#{CUS_POINT} where CUS_ID=#{CUS_ID}
 	</update>
 </mapper>

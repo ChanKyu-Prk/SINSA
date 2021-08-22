@@ -30,7 +30,7 @@ public class OrdersServiceImpl implements OrdersSerivce{
 	}
 
 	@Override
-	public int usePoint(CustomerVO customerVO) throws Exception {
-		return dao.usePoint(customerVO);
+	public int chkUsePoint(CustomerVO customerVO) throws Exception {
+		return dao.chkUsePoint(customerVO);
 	}
 }
