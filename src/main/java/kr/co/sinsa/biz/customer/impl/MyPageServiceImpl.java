@@ -231,4 +231,16 @@ public class MyPageServiceImpl implements MyPageService {
 
 	}
 
+	@Override
+	public void refund(Map<String, String> map) {
+		dao.refund(map);
+		
+	}
+	
+	@Override
+	public void cancel(Map<String, String> map) {
+		dao.cancel(map);
+		
+	}
+
 }
