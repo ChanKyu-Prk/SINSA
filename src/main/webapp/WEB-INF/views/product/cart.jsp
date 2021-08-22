@@ -19,6 +19,14 @@
 <html lang="zxx">
 
 <head>
+
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We"
+	crossorigin="anonymous">
+
+
 <meta charset="UTF-8">
 <meta name="description" content="Ogani Template">
 <meta name="keywords" content="Ogani, unica, creative, html">
@@ -279,11 +287,7 @@
 	DecimalFormat formatter = new DecimalFormat("###,###");
 %>
 
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css"
-	rel="stylesheet"
-	integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We"
-	crossorigin="anonymous">
+
 
 </head>
 
@@ -385,8 +389,7 @@
 																	</div>
 
 
-																	<form action="updatesize.do" method="POST"
-																		onsubmit="return alert('사이즈가 변경되었습니다');">
+																	<form>
 																		<div class="modal-body ">
 
 
@@ -582,12 +585,17 @@
 
 																			<div class="div_button_change_size">
 																				<button class="button_confirm_change_size"
-																					type="submit">확인</button>
+																					type="button" onclick="checkSize();">확인</button>
 																			</div>
 																			<div>
 
 																				<input type="hidden" name="CART_NUM"
-																					value="${list.CART_NUM}" />
+																					value="${list.CART_NUM}" /> <input type="hidden"
+																					name="CART_PRDNUM" value="${list.CART_PRDNUM}" />
+																				<input type="hidden" name="CUS_ID"
+																					value="${list.CUS_ID}" />
+
+
 																			</div>
 																		</div>
 
@@ -599,6 +607,30 @@
 													</div>
 												</div>
 											</td>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -834,6 +866,40 @@
 
 			resultElement.innerText = writeSize;
 
+		}
+	</script>
+
+
+
+
+
+
+
+	<script>
+		function checkSize() {
+
+			var codeData = {
+				CART_PRDSIZE : $('select[name="CART_PRDSIZE"]').val(),
+				CUS_ID : $('input[name="CUS_ID"]').val(),
+				CART_NUM : $('input[name="CART_NUM"]').val(),
+				CART_PRDNUM : $('input[name="CART_PRDNUM"]').val()
+			}
+			$.ajax({
+				url : "updatesize.do",
+				type : "POST",
+				data : codeData,
+				success : function(result) {
+					var num = result;
+					if(num > 0){
+						alert("동일한 옵션입니다.");
+					}else{
+						alert("상품이 수정되었습니다.");
+						location.href="/cart.do";
+					}
+					
+
+				}
+			});
 		}
 	</script>
 

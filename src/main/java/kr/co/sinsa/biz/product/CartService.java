@@ -18,5 +18,7 @@ public interface CartService {
 	
 	public void updateCartProductCount(UserCartProductStockVO vo);
 
-	public void updateSize(UserCartProductStockVO vo);
+	public int updateSize(UserCartProductStockVO vo);
+
+//	public void getCheckSizeList(UserCartProductStockVO vo);
 }

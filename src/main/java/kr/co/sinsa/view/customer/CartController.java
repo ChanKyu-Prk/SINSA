@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.co.sinsa.biz.product.CartService;
 import kr.co.sinsa.biz.product.CartVO;
@@ -137,13 +138,15 @@ public class CartController {
 	}
 	
 	@RequestMapping(value="/updatesize.do", method=RequestMethod.POST)
-	public String updateSize(UserCartProductStockVO userCartProductStockVO, Model model, HttpSession session) {
+	@ResponseBody
+	public int updateSize(UserCartProductStockVO userCartProductStockVO, Model model, HttpSession session) {
 		UserVO user = (UserVO)session.getAttribute("user");
 		userCartProductStockVO.setCUS_ID(user.getCUS_ID());
 		System.out.println(userCartProductStockVO);
 		
-		cartService.updateSize(userCartProductStockVO);
+		int checkNum = cartService.updateSize(userCartProductStockVO);
 
-		return "redirect:/cart.do";
+		System.out.println(checkNum+"여기여기여기여");
+		return checkNum;
 	}
 }
