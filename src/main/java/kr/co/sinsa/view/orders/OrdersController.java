@@ -75,9 +75,29 @@ public class OrdersController {
 	}
 	
 	@RequestMapping(value = "/checkout/complete/orderNo={ORDER_NUM}", method=RequestMethod.GET, produces = "application/json;charset=UTF-8")
-    public String getPayComplete(Model model,@PathVariable("ORDER_NUM") String ORDER_NUM) throws Exception {
-	System.out.println(ORDER_NUM);
-    return "/orders/payComplete";
+    public String getPayComplete(Model model,@PathVariable("ORDER_NUM") String ORDER_NUM, OrdersVO ordersVO, HttpSession session) throws Exception {
+		String CUS_ID = null;
+		int totalPrice = 0;
+		int usePoint = 0;
+		if((UserVO) session.getAttribute("user") != null) {
+			UserVO user = (UserVO) session.getAttribute("user");
+			CUS_ID = (String)user.getCUS_ID();
+		}
+		CUS_ID = "dhan03";
+		ordersVO.setORDER_CUSID(CUS_ID);
+		ordersVO.setORDER_NUM(ORDER_NUM);
+		
+		List<OrdersVO> orderInfo = service.selOrdersById(ordersVO);
+		for(OrdersVO order : orderInfo) {
+			System.out.println(order);
+			totalPrice += order.getORDER_PRICE();
+			usePoint = order.getORDER_USEPOINT();
+		}
+		
+		model.addAttribute("ORDER_NUM", ORDER_NUM);
+		model.addAttribute("totalPrice", totalPrice);
+		model.addAttribute("usePoint",usePoint);
+		return "/orders/payComplete";
 	}
 	
 	@RequestMapping(value = "/checkout/process", method=RequestMethod.POST, produces = "application/json;charset=UTF-8")

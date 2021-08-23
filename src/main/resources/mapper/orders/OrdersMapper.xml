@@ -19,4 +19,7 @@
 	<update id="chkUsePoint" parameterType="kr.co.sinsa.biz.customer.CustomerVO">
 		update CUSTOMER set CUS_POINT=#{CUS_POINT} where CUS_ID=#{CUS_ID}
 	</update>
+	<select id="selOrdersById" resultType="kr.co.sinsa.biz.orders.OrdersVO">
+		select * from ORDERS where ORDER_NUM=#{ORDER_NUM} AND ORDER_CUSID=#{ORDER_CUSID}
+	</select>
 </mapper>
