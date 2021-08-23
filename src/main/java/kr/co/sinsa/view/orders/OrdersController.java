@@ -128,29 +128,22 @@ public class OrdersController {
 	@RequestMapping(value = "/jjim", method=RequestMethod.POST,produces = "application/json;charset=UTF-8")
     public String manageJjim(@RequestBody LinkedHashMap<String,String> map, JjimVO jjimVO, Model model, HttpSession session) throws Exception {
 		String CUS_ID = null;
-		//코드랑 회원 아이디 받고
 		if((UserVO) session.getAttribute("user") != null) {
 			UserVO user = (UserVO) session.getAttribute("user");
 			CUS_ID = (String)user.getCUS_ID();
 		}
-		CUS_ID = "dhan03"; //테스트 후 삭제
 		
 		String ORDER_PRDCODE = map.get("ORDER_PRDCODE");
 		ProductVO productVO = proService.info(ORDER_PRDCODE);		
 		int PRD_NUM = productVO.getPRD_NUM();
 		
-		//로그인 한 회원의 찜 조회
 		jjimVO.setJJIM_CUSID(CUS_ID);
 		jjimVO.setJJIM_PRDNUM(PRD_NUM);
-		System.out.println("ID : " + CUS_ID);
-		System.out.println("NUM : " + PRD_NUM);
 		
 		if(myService.selJjimById(jjimVO) == null) {
 			myService.addJjim(jjimVO);
-    		System.out.println(jjimVO + " 1");
 		} else {
 			myService.removeJjim(jjimVO);
-    		System.out.println(jjimVO + " 2");
 		}
    
     return "redirect:/product/prdCode="+ORDER_PRDCODE;

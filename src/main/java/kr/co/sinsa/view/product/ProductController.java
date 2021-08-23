@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,11 +16,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import kr.co.sinsa.biz.customer.JjimVO;
+import kr.co.sinsa.biz.customer.MyPageService;
 import kr.co.sinsa.biz.product.Page;
 import kr.co.sinsa.biz.product.ProductService;
 import kr.co.sinsa.biz.product.ProductVO;
 import kr.co.sinsa.biz.product.StockService;
 import kr.co.sinsa.biz.product.StockVO;
+import kr.co.sinsa.biz.user.UserVO;
 
 @Controller
 public class ProductController {
@@ -29,9 +33,27 @@ public class ProductController {
 	@Autowired
 	private StockService stockService;
 	
+	@Autowired
+	private MyPageService myService;
+	
 	// 상세페이지	
 	@RequestMapping("/product/prdCode={prdCode}")
-    public String getInfo(Model model, @PathVariable("prdCode") String PRD_CODE, HttpServletResponse response) {
+    public String getInfo(Model model, @PathVariable("prdCode") String PRD_CODE, JjimVO jjimVO, HttpServletResponse response, HttpSession session) {
+		String CUS_ID = null;
+		if((UserVO) session.getAttribute("user") != null) {
+			UserVO user = (UserVO) session.getAttribute("user");
+			CUS_ID = (String)user.getCUS_ID();
+			
+			ProductVO productVO = service.info(PRD_CODE);		
+			int PRD_NUM = productVO.getPRD_NUM();
+	    	//조회 내역 모델에 저장 후 jsp에서 모델이 null이면 fa-heart-o
+	    	jjimVO.setJJIM_CUSID(CUS_ID);
+			jjimVO.setJJIM_PRDNUM(PRD_NUM);
+			JjimVO chckJjim = myService.selJjimById(jjimVO);
+			if(chckJjim != null) {
+				model.addAttribute("jjimInfo", chckJjim);
+			} 
+		}
 		
     	ProductVO vo = service.info(PRD_CODE);
     	model.addAttribute("prdInfo", vo);
@@ -48,7 +70,7 @@ public class ProductController {
     	StockVO stockVO = stockService.sizeInStock(PRD_CODE);
     	model.addAttribute("stockInfo", stockVO);
     	
-    	//조회 내역 모델에 저장 후 jsp에서 모델이 null이면 fa-heart-o
+    	
 
 //    	List<ReviewVO> reviewVO = reviewDAO.reviewList(PRD_CODE);
 //    	model.addAttribute("reviewInfo", reviewVO);

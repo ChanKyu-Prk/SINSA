@@ -317,7 +317,12 @@ input[type=number] {
 							<a href="#" id="btnJjim"
 								class="primary-btn shopping-icon text-center col-lg-10">장바구니</a>
 							<button id="jjimBtn" class="heart-icon col-lg-2 text-center">
-								<i class="fa fa-heart-o"></i>
+								<c:if test="${empty jjimInfo}">
+									<i class="fa fa-heart-o"></i>
+								</c:if>
+								<c:if test="${not empty jjimInfo}">
+									<i class="fa fa-heart"></i>
+								</c:if>
 							</button>
 							<script type="text/javascript">
 							$("#jjimBtn").click(function(){
