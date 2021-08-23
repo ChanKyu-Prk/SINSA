@@ -357,7 +357,7 @@ input[type=number] {
 									      'Content-Type': 'application/json'
 									    },
 									   success : function(data){
-										   //css 하트 빨간색으로 class에
+										   //
 									   },
 									   error : function(){
 									    alert("보내기 실패");

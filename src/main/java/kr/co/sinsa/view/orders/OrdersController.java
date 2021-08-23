@@ -11,6 +11,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -73,13 +74,13 @@ public class OrdersController {
     return "/orders/checkout";
 	}
 	
-	@RequestMapping(value = "/checkout/complete", method=RequestMethod.GET, produces = "application/json;charset=UTF-8")
-    public String getPayComplete(Model model) throws Exception {
-	System.out.println("GET");
+	@RequestMapping(value = "/checkout/complete/orderNo={ORDER_NUM}", method=RequestMethod.GET, produces = "application/json;charset=UTF-8")
+    public String getPayComplete(Model model,@PathVariable("ORDER_NUM") String ORDER_NUM) throws Exception {
+	System.out.println(ORDER_NUM);
     return "/orders/payComplete";
 	}
 	
-	@RequestMapping(value = "/checkout/complete", method=RequestMethod.POST, produces = "application/json;charset=UTF-8")
+	@RequestMapping(value = "/checkout/process", method=RequestMethod.POST, produces = "application/json;charset=UTF-8")
     @ResponseBody
 	public String payComplete(@RequestBody List<Map<String, String>> itemLists, OrdersVO ordersVO, RedirectAttributes ra, HttpSession session, HttpServletResponse response) throws Exception {
 		System.out.println("POST");
@@ -87,6 +88,7 @@ public class OrdersController {
 		List<String> orderList = new ArrayList();
 		String CUS_ID = null;
 		CustomerVO customerVO = null;
+		String ORDER_NUM = null;
 		
 		if((UserVO) session.getAttribute("user") != null) {
 			UserVO user = (UserVO) session.getAttribute("user");
@@ -96,6 +98,7 @@ public class OrdersController {
 		for(Object list : itemLists) {
 			LinkedHashMap<String,String> item = (LinkedHashMap<String, String>) list;
 			oapVO = service.selPrdByCode(item.get("ORDER_PRDCODE"));
+			ORDER_NUM = item.get("ORDER_NUM");
 			ordersVO.setORDER_NUM(item.get("ORDER_NUM"));
 			ordersVO.setORDER_CUSID(CUS_ID);
 			ordersVO.setORDER_PRDCODE(item.get("ORDER_PRDCODE"));
@@ -122,7 +125,7 @@ public class OrdersController {
 		orderList.add(ordersVO.getORDER_NUM());
 		ra.addFlashAttribute("ordersInfo", orderList);
 
-		return "redirect:/orders/payComplete";
+		return "redirect:/checkout/complete/orderNo="+ORDER_NUM;
 	}
 	
 	@RequestMapping(value = "/jjim", method=RequestMethod.POST,produces = "application/json;charset=UTF-8")
