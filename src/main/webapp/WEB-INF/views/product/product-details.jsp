@@ -317,11 +317,19 @@ input[type=number] {
 							<a href="#" id="btnJjim"
 								class="primary-btn shopping-icon text-center col-lg-10">장바구니</a>
 							<button id="jjimBtn" class="heart-icon col-lg-2 text-center">
-								<span class="icon_heart_alt"></span>
+								<i class="fa fa-heart-o"></i>
 							</button>
 							<script type="text/javascript">
 							$("#jjimBtn").click(function(){
 								//로그인 체크
+								
+								if($(this).find("i").hasClass("fa-heart-o")){
+									$(this).find("i").removeClass("fa-heart-o");
+									$(this).find("i").addClass("fa-heart");
+								} else {
+									$(this).find("i").removeClass("fa-heart");
+									$(this).find("i").addClass("fa-heart-o");
+								}
 								var ORDER_PRDCODE = $(".prdCode").text();
 								
 								//JSON 형태로 데이터 생성

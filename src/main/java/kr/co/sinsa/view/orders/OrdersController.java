@@ -133,14 +133,18 @@ public class OrdersController {
 			UserVO user = (UserVO) session.getAttribute("user");
 			CUS_ID = (String)user.getCUS_ID();
 		}
-		CUS_ID = "dhan03";
+		CUS_ID = "dhan03"; //테스트 후 삭제
 		
 		String ORDER_PRDCODE = map.get("ORDER_PRDCODE");
 		ProductVO productVO = proService.info(ORDER_PRDCODE);		
 		int PRD_NUM = productVO.getPRD_NUM();
-		System.out.println("NUM : " + PRD_NUM);
 		
-		System.out.println("CUS_ID : " + CUS_ID);
+		//해당 데이터로 찜 조회
+		
+		//조회 내역 모델에 저장 후 jsp에서 모델이 null이면 fa-heart-o
+		
+		//이미 해당 데이터가 찜에 있다면 찜에서 삭제
+		
 		//해당 데이터를 찜에 추가
 		jjimVO.setJJIM_CUSID(CUS_ID);
 		jjimVO.setJJIM_PRDNUM(PRD_NUM);
