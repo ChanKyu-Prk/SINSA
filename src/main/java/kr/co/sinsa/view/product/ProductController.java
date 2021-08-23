@@ -47,7 +47,9 @@ public class ProductController {
     	
     	StockVO stockVO = stockService.sizeInStock(PRD_CODE);
     	model.addAttribute("stockInfo", stockVO);
-//    	
+    	
+    	//조회 내역 모델에 저장 후 jsp에서 모델이 null이면 fa-heart-o
+
 //    	List<ReviewVO> reviewVO = reviewDAO.reviewList(PRD_CODE);
 //    	model.addAttribute("reviewInfo", reviewVO);
 

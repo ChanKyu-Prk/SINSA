@@ -348,5 +348,17 @@
 
 	</update>
 
+	<select id="selJjimById" parameterType="kr.co.sinsa.biz.customer.JjimVO" resultType="kr.co.sinsa.biz.customer.JjimVO">
+		select * from jjim where JJIM_CUSID = #{JJIM_CUSID} AND JJIM_PRDNUM = #{JJIM_PRDNUM};
+	</select>
+	
+	<insert id="addJjim"
+		parameterType="kr.co.sinsa.biz.customer.JjimVO">
+		insert into jjim (JJIM_CUSID, JJIM_PRDNUM) values(#{JJIM_CUSID},#{JJIM_PRDNUM});
+	</insert>
+	
+	<delete id="removeJjim" parameterType="kr.co.sinsa.biz.customer.JjimVO">
+		DELETE FROM jjim WHERE JJIM_CUSID = #{JJIM_CUSID} AND JJIM_PRDNUM = #{JJIM_PRDNUM};
+	</delete>
 
 </mapper>

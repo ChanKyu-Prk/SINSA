@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kr.co.sinsa.biz.customer.CustomerVO;
+import kr.co.sinsa.biz.customer.JjimVO;
 import kr.co.sinsa.biz.customer.MyOrderListVO;
 import kr.co.sinsa.biz.customer.MyPageService;
 import kr.co.sinsa.biz.customer.QnAVO;
@@ -241,6 +242,21 @@ public class MyPageServiceImpl implements MyPageService {
 	public void cancel(Map<String, String> map) {
 		dao.cancel(map);
 		
+	}
+
+	@Override
+	public int addJjim(JjimVO vo) {
+		return dao.addJjim(vo);
+	}
+
+	@Override
+	public JjimVO selJjimById(JjimVO jjimVO) {
+		return dao.selJjimById(jjimVO);
+	}
+
+	@Override
+	public int removeJjim(JjimVO jjimVO) {
+		return dao.removeJjim(jjimVO);
 	}
 
 }

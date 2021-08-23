@@ -49,5 +49,7 @@ public interface MyPageService {
 	public void refund(Map<String,String> map);
 	public void cancel(Map<String,String> map);
 	
-	
+	public JjimVO selJjimById(JjimVO jjimVO);
+	public int addJjim(JjimVO vo);
+	public int removeJjim(JjimVO jjimVO);
 }

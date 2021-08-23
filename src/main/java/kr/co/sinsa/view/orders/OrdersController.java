@@ -1,20 +1,16 @@
 package kr.co.sinsa.view.orders;
 
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -23,9 +19,13 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import kr.co.sinsa.biz.customer.CustomerVO;
+import kr.co.sinsa.biz.customer.JjimVO;
+import kr.co.sinsa.biz.customer.MyPageService;
 import kr.co.sinsa.biz.orders.OrdersAndProductVO;
 import kr.co.sinsa.biz.orders.OrdersSerivce;
 import kr.co.sinsa.biz.orders.OrdersVO;
+import kr.co.sinsa.biz.product.ProductService;
+import kr.co.sinsa.biz.product.ProductVO;
 import kr.co.sinsa.biz.user.UserVO; 	
 
 
@@ -34,6 +34,12 @@ import kr.co.sinsa.biz.user.UserVO;
 public class OrdersController {
 	@Autowired
 	private OrdersSerivce service;
+	
+	@Autowired
+	private ProductService proService;
+	
+	@Autowired
+	private MyPageService myService;
 	
 	@RequestMapping(value="/direct/checkout", method=RequestMethod.GET)
 	public String cusInfo(Model model, HttpSession session) throws Exception {
@@ -117,5 +123,36 @@ public class OrdersController {
 		ra.addFlashAttribute("ordersInfo", orderList);
 
 		return "redirect:/orders/payComplete";
+	}
+	
+	@RequestMapping(value = "/jjim", method=RequestMethod.POST,produces = "application/json;charset=UTF-8")
+    public String manageJjim(@RequestBody LinkedHashMap<String,String> map, JjimVO jjimVO, Model model, HttpSession session) throws Exception {
+		String CUS_ID = null;
+		//코드랑 회원 아이디 받고
+		if((UserVO) session.getAttribute("user") != null) {
+			UserVO user = (UserVO) session.getAttribute("user");
+			CUS_ID = (String)user.getCUS_ID();
+		}
+		CUS_ID = "dhan03"; //테스트 후 삭제
+		
+		String ORDER_PRDCODE = map.get("ORDER_PRDCODE");
+		ProductVO productVO = proService.info(ORDER_PRDCODE);		
+		int PRD_NUM = productVO.getPRD_NUM();
+		
+		//로그인 한 회원의 찜 조회
+		jjimVO.setJJIM_CUSID(CUS_ID);
+		jjimVO.setJJIM_PRDNUM(PRD_NUM);
+		System.out.println("ID : " + CUS_ID);
+		System.out.println("NUM : " + PRD_NUM);
+		
+		if(myService.selJjimById(jjimVO) == null) {
+			myService.addJjim(jjimVO);
+    		System.out.println(jjimVO + " 1");
+		} else {
+			myService.removeJjim(jjimVO);
+    		System.out.println(jjimVO + " 2");
+		}
+   
+    return "redirect:/product/prdCode="+ORDER_PRDCODE;
 	}
 }
