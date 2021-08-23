@@ -126,7 +126,7 @@ public class OrdersController {
 	}
 	
 	@RequestMapping(value = "/jjim", method=RequestMethod.POST,produces = "application/json;charset=UTF-8")
-    public String addJjim(@RequestBody LinkedHashMap<String,String> map, JjimVO jjimVO, Model model, HttpSession session) throws Exception {
+    public String manageJjim(@RequestBody LinkedHashMap<String,String> map, JjimVO jjimVO, Model model, HttpSession session) throws Exception {
 		String CUS_ID = null;
 		//코드랑 회원 아이디 받고
 		if((UserVO) session.getAttribute("user") != null) {
@@ -139,17 +139,20 @@ public class OrdersController {
 		ProductVO productVO = proService.info(ORDER_PRDCODE);		
 		int PRD_NUM = productVO.getPRD_NUM();
 		
-		//해당 데이터로 찜 조회
-		
-		//조회 내역 모델에 저장 후 jsp에서 모델이 null이면 fa-heart-o
-		
-		//이미 해당 데이터가 찜에 있다면 찜에서 삭제
-		
-		//해당 데이터를 찜에 추가
+		//로그인 한 회원의 찜 조회
 		jjimVO.setJJIM_CUSID(CUS_ID);
 		jjimVO.setJJIM_PRDNUM(PRD_NUM);
-		myService.addJjim(jjimVO);
+		System.out.println("ID : " + CUS_ID);
+		System.out.println("NUM : " + PRD_NUM);
 		
+		if(myService.selJjimById(jjimVO) == null) {
+			myService.addJjim(jjimVO);
+    		System.out.println(jjimVO + " 1");
+		} else {
+			myService.removeJjim(jjimVO);
+    		System.out.println(jjimVO + " 2");
+		}
+   
     return "redirect:/product/prdCode="+ORDER_PRDCODE;
 	}
 }

@@ -249,4 +249,14 @@ public class MyPageServiceImpl implements MyPageService {
 		return dao.addJjim(vo);
 	}
 
+	@Override
+	public JjimVO selJjimById(JjimVO jjimVO) {
+		return dao.selJjimById(jjimVO);
+	}
+
+	@Override
+	public int removeJjim(JjimVO jjimVO) {
+		return dao.removeJjim(jjimVO);
+	}
+
 }

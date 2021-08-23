@@ -144,4 +144,12 @@ public class MyPageDAO {
 		return SST.insert("myInfo.addJjim", vo);
 	}
 	
+	public JjimVO selJjimById(JjimVO jjimVO) {
+		return SST.selectOne("myInfo.selJjimById", jjimVO);
+	}
+	
+	public int removeJjim(JjimVO jjimVO) {
+		return SST.delete("myInfo.removeJjim", jjimVO);
+	}
+	
 }
