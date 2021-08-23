@@ -26,6 +26,8 @@ import kr.co.sinsa.biz.customer.CustomerVO;
 import kr.co.sinsa.biz.orders.OrdersAndProductVO;
 import kr.co.sinsa.biz.orders.OrdersSerivce;
 import kr.co.sinsa.biz.orders.OrdersVO;
+import kr.co.sinsa.biz.product.ProductService;
+import kr.co.sinsa.biz.product.ProductVO;
 import kr.co.sinsa.biz.user.UserVO; 	
 
 
@@ -34,6 +36,9 @@ import kr.co.sinsa.biz.user.UserVO;
 public class OrdersController {
 	@Autowired
 	private OrdersSerivce service;
+	
+	@Autowired
+	private ProductService proService;
 	
 	@RequestMapping(value="/direct/checkout", method=RequestMethod.GET)
 	public String cusInfo(Model model, HttpSession session) throws Exception {
@@ -117,5 +122,25 @@ public class OrdersController {
 		ra.addFlashAttribute("ordersInfo", orderList);
 
 		return "redirect:/orders/payComplete";
+	}
+	
+	@RequestMapping(value = "/jjim", method=RequestMethod.POST,produces = "application/json;charset=UTF-8")
+    public String addJjim(@RequestBody LinkedHashMap<String,String> map, Model model, HttpSession session) throws Exception {
+		String CUS_ID = null;
+		//코드랑 회원 아이디 받고
+		if((UserVO) session.getAttribute("user") != null) {
+			UserVO user = (UserVO) session.getAttribute("user");
+			CUS_ID = (String)user.getCUS_ID();
+		}
+		CUS_ID ="dhan03";//테스트 후 삭제
+		
+		String ORDER_PRDCODE = map.get("ORDER_PRDCODE");
+		ProductVO productVO = proService.info(ORDER_PRDCODE);		
+		int PRD_NUM = productVO.getPRD_NUM();
+		//해당 데이터를 찜에 추가
+		System.out.println("ID : " + CUS_ID);
+		System.out.println("NUM : " + PRD_NUM);
+
+    return "redirect:/product/prdCode="+ORDER_PRDCODE;
 	}
 }

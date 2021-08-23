@@ -316,8 +316,34 @@ input[type=number] {
 						<div id="jjimNCart" class="row col-lg-12 mx-auto px-0">
 							<a href="#" id="btnJjim"
 								class="primary-btn shopping-icon text-center col-lg-10">장바구니</a>
-							<a href="#" class="heart-icon col-lg-2 text-center"><span
-								class="icon_heart_alt"></span></a>
+							<button id="jjimBtn" class="heart-icon col-lg-2 text-center">
+								<span class="icon_heart_alt"></span>
+							</button>
+							<script type="text/javascript">
+							$("#jjimBtn").click(function(){
+								//로그인 체크
+								var ORDER_PRDCODE = $(".prdCode").text();
+								
+								//JSON 형태로 데이터 생성
+								var data = {};
+									data["ORDER_PRDCODE"] = ORDER_PRDCODE;
+									  $.ajax({
+									   url : "/jjim",
+									   type : "POST",
+									   data : JSON.stringify(data),
+									    headers: {
+									      'Accept': 'application/json',
+									      'Content-Type': 'application/json'
+									    },
+									   success : function(data){
+										   //css 하트 빨간색으로 class에
+									   },
+									   error : function(){
+									    alert("보내기 실패");
+									   }
+									  });
+							});
+							</script>
 						</div>
 						<ul>
 							<li><b>재고</b> <span>In Stock</span></li>
