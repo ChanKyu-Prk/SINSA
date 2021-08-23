@@ -82,8 +82,14 @@ public class CartDAO {
 		SST.update("CartService.updateCartProductCount", vo);
 	}
 	
-	public void updateSize(UserCartProductStockVO vo) {
+	public int updateSize(UserCartProductStockVO vo) {
+		
+		List<UserCartProductStockVO> checkSizeList = SST.selectList("CartService.getCheckSizeList", vo);
+		int checkNum = checkSizeList.size();
+		if(checkNum == 0) {
+			SST.update("CartService.updateSize", vo);
+		}
 
-		SST.update("CartService.updateSize", vo);
+		return checkNum;
 	}
 }

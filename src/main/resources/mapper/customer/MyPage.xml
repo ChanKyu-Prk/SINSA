@@ -165,8 +165,8 @@
 		resultType="kr.co.sinsa.biz.product.ProductVO">
 		select product.* from product join JJIM on JJIM.JJIM_PRDNUM
 		= product.PRD_NUM
-		where JJIM.JJIM_CUSID = #{ID} 
-		
+		where JJIM.JJIM_CUSID = #{ID}
+
 		limit #{page},6;
 	</select>
 
@@ -185,16 +185,18 @@
 
 
 	<select id="reviewCheck" parameterType="Map" resultType="int">
-		select count(*) from review
+		select
+		count(*) from review
 		where
 		REV_PRDCODE = #{PRD_CODE} and
-		REV_ORDERNUM = #{ORDER_NUM}
+		REV_ORDERNUM =
+		#{ORDER_NUM}
 		and
 		REV_ORDERPRDSIZE = #{ORDER_PRDSIZE};
 	</select>
 
 	<select id="productSerch"
-	resultType="kr.co.sinsa.biz.product.ProductVO">
+		resultType="kr.co.sinsa.biz.product.ProductVO">
 		select
 		PRD_IMAGE,
 		PRD_CODE ,
@@ -203,11 +205,15 @@
 		from product
 		where PRD_CODE = #{value};
 	</select>
-	
-	<insert id="reviewInsert" parameterType="kr.co.sinsa.biz.customer.ReviewVO">
-	insert into review(REV_ORDERNUM, REV_ORDERPRDSIZE , REV_CUSID, REV_PRDCODE , REV_TITLE , REV_CONTENT , REV_IMAGE , REV_STAR )
-	values(#{REV_ORDERNUM}, #{REV_ORDERPRDSIZE} , #{REV_CUSID}, #{REV_PRDCODE} , #{REV_TITLE} , #{REV_CONTENT} , #{REV_IMAGE} , #{REV_STAR});
-	
+
+	<insert id="reviewInsert"
+		parameterType="kr.co.sinsa.biz.customer.ReviewVO">
+		insert into review(REV_ORDERNUM, REV_ORDERPRDSIZE , REV_CUSID, REV_PRDCODE ,
+		REV_TITLE , REV_CONTENT , REV_IMAGE , REV_STAR )
+		values(#{REV_ORDERNUM}, #{REV_ORDERPRDSIZE} , #{REV_CUSID},
+		#{REV_PRDCODE} , #{REV_TITLE} , #{REV_CONTENT} , #{REV_IMAGE} ,
+		#{REV_STAR});
+
 	</insert>
 
 
@@ -223,7 +229,7 @@
 		QNA_ANSWER ,
 		QNA_REGDATE
 		from QNA where QNA_CUSID = #{ID}
-		order by QNA_REGDATE  desc
+		order by QNA_REGDATE desc
 		limit #{page},10;
 	</select>
 
@@ -317,4 +323,30 @@
 		where CUS_ID =
 		#{CUS_ID};
 	</update>
+
+
+
+	<update id="refund" parameterType="Map">
+		update orders
+		set
+		ORDER_STATE = '환불신청'
+		where
+		ORDER_NUM = #{orderum} and
+		ORDER_PRDCODE = #{prdcode} and
+		ORDER_PRDSIZE = #{prdsize};
+
+	</update>
+	
+		<update id="cancel" parameterType="Map">
+		update orders
+		set
+		ORDER_STATE = '취소'
+		where
+		ORDER_NUM = #{orderum} and
+		ORDER_PRDCODE = #{prdcode} and
+		ORDER_PRDSIZE = #{prdsize};
+
+	</update>
+
+
 </mapper>

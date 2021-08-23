@@ -14,8 +14,27 @@ public class ProductDAO {
 	@Autowired
 	private SqlSessionTemplate SST;
 	
-	public int count(String condition) throws Exception{
-		return SST.selectOne("ProductDAO.count", condition);
+	public int count(String condition, ProductVO vo) throws Exception{
+		HashMap<String, Object> data = new HashMap<String, Object>();
+		String white = vo.getWhite();
+		String black = vo.getBlack();
+		String blue = vo.getBlue();
+		String gray = vo.getGray();
+		String green = vo.getGreen();
+		String red = vo.getRed();
+		String maxamount = vo.getMaxamount();
+		String minamount = vo.getMinamount();
+
+		data.put("White", white);
+		data.put("Black", black);
+		data.put("Blue", blue);
+		data.put("Gray", gray);
+		data.put("Green", green);
+		data.put("Red", red);
+		data.put("Maxamount", maxamount);
+		data.put("Minamount", minamount);
+		
+		return SST.selectOne("ProductDAO.count", data);
 	}
 
 	public ProductVO info(String PRD_CODE) {
@@ -87,14 +106,31 @@ public class ProductDAO {
 	/* 구분선---------------------------------------------------------------------------------------------------------------------- */
 	
 	
-	public List<ProductVO> listPage(int displayPost, int postNum, String keyword, int minamount, int maxamount, String condition) throws Exception {
+	public List<ProductVO> listPage(int displayPost, int postNum, String keyword, int minamount, int maxamount, String condition, ProductVO vo) throws Exception {
 		HashMap<String, Object> data = new HashMap<String, Object>();
+		String white = vo.getWhite();
+		String black = vo.getBlack();
+		String blue = vo.getBlue();
+		String gray = vo.getGray();
+		String green = vo.getGreen();
+		String red = vo.getRed();
+		
+		
 		data.put("displayPost", displayPost);
 		data.put("postNum", postNum);
 		data.put("keyword", keyword);
 		data.put("minamount", minamount);
 		data.put("maxamount", maxamount);
 		data.put("condition", condition);
+		
+		data.put("White", white);
+		data.put("Black", black);
+		data.put("Blue", blue);
+		data.put("Gray", gray);
+		data.put("Green", green);
+		data.put("Red", red);
+		
+		
 		
 		return SST.selectList("ProductDAO.listPage", data);
 	}

@@ -71,49 +71,35 @@ public class ProductController {
 	}
 	
 
-//	@RequestMapping(value="/priceFilter", method = RequestMethod.POST)
-//	@ResponseBody
-//	public Object serialize(ProductVO vo, Model model,
-//			@RequestParam("num") int num,
-//			@RequestParam("condition") String condition,
-//			@RequestParam(value = "keyword", required = false, defaultValue = "") String keyword) throws Exception {
-//		
-//		
-//		System.out.println("condition ? " + condition);
-//		
-//		System.out.println("vo.getMinamount() : " + vo.getMinamount());
-//		System.out.println("vo.getMaxamount() : " + vo.getMaxamount());
-//		
-//		Page page = new Page();
-//		page.setNum(num);
-//		page.setCount(service.count());
-//		
-//		List<ProductVO> list = null;
-//		list = service.listPage(page.getDisplayPost(), page.getPostNum(), keyword, vo,
-//								condition);
-//		
-//		System.out.println("list : "+ list );
-//
-//		model.addAttribute("list", list);
-//		model.addAttribute("page", page);
-//		model.addAttribute("select", num);
-//		model.addAttribute("condition", condition);
-//		
-//		return "product/Product-listPage";
-//	}
 	
 	// 게시물 목록 + 페이징 추가
 	@RequestMapping(value = "/getProductListPage", method = RequestMethod.GET)
 	public String getProductListPage(Model model, ProductVO vo,
 			@RequestParam("num") int num,
 			@RequestParam("condition") String condition,
-			@RequestParam(value = "keyword", required = false, defaultValue = "") String keyword) throws Exception {
+			@RequestParam(value = "keyword", required = false, defaultValue = "") String keyword,
+			@RequestParam(value = "ShoeType", required = false, defaultValue = "") String ShoeType,
+			@RequestParam(value = "white", required = false, defaultValue = "") String white,
+			@RequestParam(value = "gray", required = false, defaultValue = "") String gray,
+			@RequestParam(value = "red", required = false, defaultValue = "") String red,
+			@RequestParam(value = "black", required = false, defaultValue = "") String black,
+			@RequestParam(value = "blue", required = false, defaultValue = "") String blue,
+			@RequestParam(value = "green", required = false, defaultValue = "") String green,
+			@RequestParam(value = "minPrice", required = false, defaultValue = "") String minPrice,
+			@RequestParam(value = "maxPrice", required = false, defaultValue = "") String maxPrice) throws Exception {
 
-		System.out.println("condition ? " + condition);
+		vo.setMinamount(minPrice);
+		vo.setMaxamount(maxPrice);
+		vo.setWhite(white);
+		vo.setGray(gray);
+		vo.setRed(red);
+		vo.setBlack(black);
+		vo.setBlue(blue);
+		vo.setGreen(green);
 
 		Page page = new Page();
 		page.setNum(num);
-		page.setCount(service.count(condition));
+		page.setCount(service.count(condition, vo));
 
 		List<ProductVO> list = null;
 		list = service.listPage(page.getDisplayPost(), page.getPostNum(), keyword, vo,

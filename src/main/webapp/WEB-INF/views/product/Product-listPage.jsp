@@ -15,24 +15,10 @@
     
     <script src="http://code.jquery.com/jquery-3.3.1.min.js">
 	</script>
-    <c:forEach begin="0" end="11" step="1" varStatus="status">
-	<style>
-		#modal {
-			display:none;
-			position:absolute;
-			width:100%;
-			height:100%;
-			z-index:999999;
-		}
-		
 
-		#modal .modal_content {
-			width:300px;
-			margin:100px auto;
-			padding:20px 10px;
-			background:#fff;
-			border: 2px solid #666;
-		}
+	<style>
+
+		
 		#filter{
 			border-top : 1px solid teal;
 			border-bottom : 1px solid teal;
@@ -53,9 +39,19 @@
 		.clicked{
 			color: black;
 		}
+		
+		ul.mySize > li {
+			display:inline-block; width: 120px; padding: 5px 10px;
+			background: #eee; border:1px solid #eee; text-align: center; position: relative;
+		}
+		ul.mySize > li:hover { background: #fff; }
+		ul.mySize > li ul.li-size { display: none; position: absolute; top: 30px; left: 0; }
+		ul.mySize > li:hover ul.li-size { z-index: 9999; display: inline-block; float: left; }
+		ul.mySize > li ul.li-size > li { display: inline-block; float: left;   width: 120px; padding: 5px 10px; background: #eee; border:1px solid #eee; text-align: center;}
+		ul.mySize > li ul.li-size > li:hover { background: #fff; }
+	
 	</style>
-	</c:forEach>
-</style>
+
 
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
@@ -193,62 +189,83 @@
                         <div class="sidebar__item">
                             <h4>품목</h4>
                             <ul>
-	                            <c:if test="${condition eq 'all' or condition eq 'sneakersForAll' 
+                           
+
+                            <c:choose>
+	                            <c:when test="${condition eq 'all' or condition eq 'sneakersForAll' 
 	                            								 or condition eq 'converseForAll'
 	                            								 or condition eq 'slipOnForAll'
 	                            								 or condition eq 'muleForAll'}">
-	                                <li><a href="/getProductListPage?num=1&condition=sneakersForAll">스니커스</a></li>
-	                                <li><a href="/getProductListPage?num=1&condition=converseForAll">캔버스화</a></li>
-	                                <li><a href="/getProductListPage?num=1&condition=slipOnForAll">슬립온</a></li>
-	                                <li><a href="/getProductListPage?num=1&condition=muleForAll">뮬</a></li>
-	                            </c:if>
-	                            <c:if test="${condition eq 'new' or condition eq 'sneakersForNew' 
+	                                <li><a href="/getProductListPage?num=1&condition=sneakersForAll">Sneakers</a></li>
+	                                <li><a href="/getProductListPage?num=1&condition=converseForAll">Converse</a></li>
+	                                <li><a href="/getProductListPage?num=1&condition=slipOnForAll">Slip-on</a></li>
+	                                <li><a href="/getProductListPage?num=1&condition=muleForAll">Mule</a></li>
+	                            </c:when>
+	                            <c:when test="${condition eq 'new' or condition eq 'sneakersForNew' 
 	                            								 or condition eq 'converseForNew'
 	                            								 or condition eq 'slipOnForNew'
 	                            								 or condition eq 'muleForNew'}">
-	                                <li><a href="/getProductListPage?num=1&condition=sneakersForNew">스니커스</a></li>
-	                                <li><a href="/getProductListPage?num=1&condition=converseForNew">캔버스화</a></li>
-	                                <li><a href="/getProductListPage?num=1&condition=slipOnForNew">슬립온</a></li>
-	                                <li><a href="/getProductListPage?num=1&condition=muleForNew">뮬</a></li>
-	                            </c:if>
-	                            <c:if test="${condition eq 'best' or condition eq 'sneakersForBest' 
+	                                <li><a href="/getProductListPage?num=1&condition=sneakersForNew">Sneakers</a></li>
+	                                <li><a href="/getProductListPage?num=1&condition=converseForNew">Converse</a></li>
+	                                <li><a href="/getProductListPage?num=1&condition=slipOnForNew">Slip-on</a></li>
+	                                <li><a href="/getProductListPage?num=1&condition=muleForNew">Mule</a></li>
+	                            </c:when>
+	                            <c:when test="${condition eq 'best' or condition eq 'sneakersForBest' 
 	                            								  or condition eq 'converseForBest'
 	                            								  or condition eq 'slipOnForBest'
 	                            								  or condition eq 'muleForBest'}">
-	                                <li><a href="/getProductListPage?num=1&condition=sneakersForBest">스니커스</a></li>
-	                                <li><a href="/getProductListPage?num=1&condition=converseForBest">캔버스화</a></li>
-	                                <li><a href="/getProductListPage?num=1&condition=slipOnForBest">슬립온</a></li>
-	                                <li><a href="/getProductListPage?num=1&condition=muleForBest">뮬</a></li>
-	                            </c:if>
-	                            <c:if test="${condition eq 'men' or condition eq 'onlySneakersForMen'
+	                                <li><a href="/getProductListPage?num=1&condition=sneakersForBest">Sneakers</a></li>
+	                                <li><a href="/getProductListPage?num=1&condition=converseForBest">Converse</a></li>
+	                                <li><a href="/getProductListPage?num=1&condition=slipOnForBest">Slip-on</a></li>
+	                                <li><a href="/getProductListPage?num=1&condition=muleForBest">Mule</a></li>
+	                            </c:when>
+	                            <c:when test="${condition eq 'men' or condition eq 'onlySneakersForMen'
 	                            								 or condition eq 'onlyConverseForMen'
 	                            								 or condition eq 'onlySlip-onForMen'
 	                            								 or condition eq 'onlyMuleForMen'}">
-	                                <li><a href="/getProductListPage?num=1&condition=onlySneakersForMen">스니커스</a></li>
-	                                <li><a href="/getProductListPage?num=1&condition=onlyConverseForMen">캔버스화</a></li>
-	                                <li><a href="/getProductListPage?num=1&condition=onlySlip-onForMen">슬립온</a></li>
-	                                <li><a href="/getProductListPage?num=1&condition=onlyMuleForMen">뮬</a></li>
-	                            </c:if>
-	                            <c:if test="${condition eq 'women' or condition eq 'onlySneakersForWomen'
+	                                <li><a href="/getProductListPage?num=1&condition=onlySneakersForMen">Sneakers</a></li>
+	                                <li><a href="/getProductListPage?num=1&condition=onlyConverseForMen">Converse</a></li>
+	                                <li><a href="/getProductListPage?num=1&condition=onlySlip-onForMen">Slip-on</a></li>
+	                                <li><a href="/getProductListPage?num=1&condition=onlyMuleForMen">Mule</a></li>
+	                            </c:when>
+	                            <c:when test="${condition eq 'women' or condition eq 'onlySneakersForWomen'
 	                            								   or condition eq 'onlyConverseForWomen'
 	                            								   or condition eq 'onlySlip-onForWomen'
 	                            								   or condition eq 'onlyMuleForWomen'}">
-	                                <li><a href="/getProductListPage?num=1&condition=onlySneakersForWomen">스니커스</a></li>
-	                                <li><a href="/getProductListPage?num=1&condition=onlyConverseForWomen">캔버스화</a></li>
-	                                <li><a href="/getProductListPage?num=1&condition=onlySlip-onForWomen">슬립온</a></li>
-	                                <li><a href="/getProductListPage?num=1&condition=onlyMuleForWomen">뮬</a></li>
-	                            </c:if>
+	                                <li><a href="/getProductListPage?num=1&condition=onlySneakersForWomen">Sneakers</a></li>
+	                                <li><a href="/getProductListPage?num=1&condition=onlyConverseForWomen">Converse</a></li>
+	                                <li><a href="/getProductListPage?num=1&condition=onlySlip-onForWomen">Slip-on</a></li>
+	                                <li><a href="/getProductListPage?num=1&condition=onlyMuleForWomen">Mule</a></li>
+	                            </c:when>
+	                            <c:otherwise>
+                         	        <li class="side-PList"><a>Sneakers</a></li>
+	                                <li class="side-PList"><a>Converse</a></li>
+	                                <li class="side-PList"><a>Slip-on</a></li>
+	                                <li class="side-PList"><a>Mule</a></li>
+	                        
+	                               	<script type="text/javascript">
+										$('.side-PList').find('a').on('click', function(){
+											var ShoeType = $(this).html();
+											var condition = "${condition}";
+											location.href = "/getProductListPage?num=1&condition="+"${condition}&"+"ShoeType="+ShoeType;
+										})
+									</script>
+	                            </c:otherwise>
+                                
+                            </c:choose>
 
 
                             </ul>
                         </div>
                         
-                        
+                    
                         <div id="filter">
                        
 	                        <div class="sidebar__item">
 	                            <h4>가격</h4>
+	                            <!-- 
 	                            <div class="price-range-wrap">
+
 	                                <div class="price-range ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content"
 	                                    data-min="10" data-max="5000000">
 	                                    <div class="ui-slider-range ui-corner-all ui-widget-header"></div>
@@ -262,44 +279,51 @@
 	                                    </div>
 	                                </div>
 	                            </div>
+	                             -->
+	                             <div style="width: 248px">
+	                             	<input class="price_input" id="minPrice" name="minPrice" type="text" placeholder="최소 금액 입력" maxlength="9" >
+	                             	<span>원 ~</span><br /><br />
+	                             	<input class="price_input" id="maxPrice" name="maxPrice" type="text" placeholder="최대 금액 입력" maxlength="9" >
+	                             	<span>원</span>
+	                             </div>
 	                        </div>
 	                        <div id="color-box" class="sidebar__item sidebar__item__color--option">
 	                            <h4>색상</h4>
 	                            <div class="sidebar__item__color sidebar__item__color--white">
 	                                <label for="white" id="id01" onmouseout="mout1()" onmouseover="mover1()">
 	                                    White
-	                                    <input type="radio" id="white">
+	                                    <input type="radio" id="white" name="white" value="">
 	                                </label>
 
 	                            </div>
 	                            <div class="sidebar__item__color sidebar__item__color--gray">
 	                                <label for="gray" id="id02" onmouseout="mout2()" onmouseover="mover2()">
 	                                    Gray
-	                                    <input type="radio" id="gray">
+	                                    <input type="radio" id="gray" name="gray" value="">
 	                                </label>
 	                            </div>
 	                            <div class="sidebar__item__color sidebar__item__color--red">
 	                                <label for="red" id="id03" onmouseout="mout3()" onmouseover="mover3()">
 	                                    Red
-	                                    <input type="radio" id="red">
+	                                    <input type="radio" id="red" name="red" value="">
 	                                </label>
 	                            </div>
 	                            <div class="sidebar__item__color sidebar__item__color--black">
 	                                <label for="black" id="id04" onmouseout="mout4()" onmouseover="mover4()">
 	                                    Black
-	                                    <input type="radio" id="black">
+	                                    <input type="radio" id="black" name="black" value="">
 	                                </label>
 	                            </div>
 	                            <div class="sidebar__item__color sidebar__item__color--blue">
 	                                <label for="blue" id="id05" onmouseout="mout5()" onmouseover="mover5()">
 	                                    Blue
-	                                    <input type="radio" id="blue">
+	                                    <input type="radio" id="blue" name="blue" value="">
 	                                </label>
 	                            </div>
 	                            <div class="sidebar__item__color sidebar__item__color--green">
 	                                <label for="green" id="id06" onmouseout="mout6()" onmouseover="mover6()">
 	                                    Green
-	                                    <input type="radio" id="green">
+	                                    <input type="radio" id="green" name="green" value="">
 	                                </label>
 	                            </div>
                    	            <script type="text/javascript">
@@ -322,9 +346,11 @@
 	                                	var m;
 	                                	m = document.getElementById("id01");
 	                                	if(clickCheck1 === "false"){
+	                                		$('#white').val('white');
 		                                	m.style.color = "red";
 		                                	clickCheck1 = "true";
 	                                	}else if(clickCheck1 === "true"){
+	                                		$('#white').val('');
 	                                		m.style.color = "black";
 		                                	clickCheck1 = "false";
 	                                	}
@@ -349,9 +375,11 @@
 	                                	var m;
 	                                	m = document.getElementById("id02");
 	                                	if(clickCheck2 === "false"){
+	                                		$('#gray').val('gray');
 		                                	m.style.color = "red";
 		                                	clickCheck2 = "true";
 	                                	}else if(clickCheck2 === "true"){
+	                                		$('#gray').val('');
 	                                		m.style.color = "black";
 		                                	clickCheck2 = "false";
 	                                	}
@@ -376,9 +404,11 @@
 	                                	var m;
 	                                	m = document.getElementById("id03");
 	                                	if(clickCheck3 === "false"){
+	                                		$('#red').val('red');
 		                                	m.style.color = "red";
 		                                	clickCheck3 = "true";
 	                                	}else if(clickCheck3 === "true"){
+	                                		$('#red').val('');
 	                                		m.style.color = "black";
 		                                	clickCheck3 = "false";
 	                                	}
@@ -403,9 +433,11 @@
 	                                	var m;
 	                                	m = document.getElementById("id04");
 	                                	if(clickCheck4 === "false"){
+	                                		$('#black').val('black');
 		                                	m.style.color = "red";
 		                                	clickCheck4 = "true";
 	                                	}else if(clickCheck4 === "true"){
+	                                		$('#black').val('');
 	                                		m.style.color = "black";
 		                                	clickCheck4 = "false";
 	                                	}
@@ -430,9 +462,11 @@
 	                                	var m;
 	                                	m = document.getElementById("id05");
 	                                	if(clickCheck5 === "false"){
+	                                		$('#blue').val('blue');
 		                                	m.style.color = "red";
 		                                	clickCheck5 = "true";
 	                                	}else if(clickCheck5 === "true"){
+	                                		$('#blue').val('');
 	                                		m.style.color = "black";
 		                                	clickCheck5 = "false";
 	                                	}
@@ -457,9 +491,11 @@
 	                                	var m;
 	                                	m = document.getElementById("id06");
 	                                	if(clickCheck6 === "false"){
+	                                		$('#green').val('green');
 		                                	m.style.color = "red";
 		                                	clickCheck6 = "true";
 	                                	}else if(clickCheck6 === "true"){
+	                                		$('#green').val('');
 	                                		m.style.color = "black";
 		                                	clickCheck6 = "false";
 	                                	}
@@ -468,49 +504,92 @@
 	                                
                            		</script>
 	                        </div>
-	                        <script type="text/javascript">
-	                		$('#color-box').find('label').on('click', function(){
-	                			
-	                		})
-	                        	
-	                        </script>
-	                        <div class="sidebar__item">
+	                  		<!-- 
+	                  		
+	                        <div class="sidebar__item" id="sidebar__item__id">
 	                            <h4>사이즈</h4>
-	                            <div class="sidebar__item__size">
-	                                <label for="large">
-	                                    Large
-	                                    <input type="radio" id="large">
-	                                </label>
-	                            </div>
-	                            <div class="sidebar__item__size">
-	                                <label for="medium">
-	                                    Medium
-	                                    <input type="radio" id="medium">
-	                                </label>
-	                            </div>
-	                            <div class="sidebar__item__size">
-	                                <label for="small">
-	                                    Small
-	                                    <input type="radio" id="small">
-	                                </label>
-	                            </div>
-	                            <div class="sidebar__item__size">
-	                                <label for="tiny">
-	                                    Tiny
-	                                    <input type="radio" id="tiny">
-	                                </label>
+
+	                            <div id="container" class="sidebar__item__size">
+									<ul class="mySize">
+										<li class="meun2">
+											사이즈 목록
+											<ul class="menu2_s li-size">
+												<li>220</li>
+												<li>225</li>
+												<li>230</li>
+												<li>235</li>
+												<li>240</li>
+												<li>245</li>
+												<li>250</li>
+												<li>255</li>
+												<li>260</li>
+												<li>265</li>
+												<li>270</li>
+												<li>275</li>
+												<li>280</li>
+												<li>285</li>
+												<li>290</li>
+											</ul>
+										</li>
+									</ul>
 	                            </div>
 	                        </div>
+	                         -->
+	                        
+	                        <input id="search" type="button" value="조건 검색">
+	                        
+							<script type="text/javascript">
+								
+								$('.li-size').find('li').on('click', function(){
+									var newDiv = document.createElement("div");
+									var size = $(this).html();
+									newDiv.setAttribute( 'name', size );
+									newDiv.setAttribute( 'value', size );
+									newDiv.setAttribute( 'id', size );
+									newDiv.innerHTML = size;
+									var sidebar__item__id = document.getElementById("sidebar__item__id");
+									sidebar__item__id.appendChild(newDiv);
+								});
+								
+								$('#search').on('click', function(){
+									var white = $('#white').val();
+									var gray = $('#gray').val();
+									var red = $('#red').val();
+									var black = $('#black').val();
+									var blue = $('#blue').val();
+									var green = $('#green').val();
+									var minPrice = $('#minPrice').val();
+									var maxPrice = $('#maxPrice').val();
+									
+										
+									
+									location.href = "/getProductListPage?num=1&condition="+"${condition}&"
+											+"ShoeType="+"${ShoeType}"
+											+"&white="+white
+											+"&gray="+gray
+											+"&red="+red
+											+"&black="+black
+											+"&blue="+blue
+											+"&green="+green
+											+"&minPrice="+minPrice
+											+"&maxPrice="+maxPrice;
+								});
+						
+							</script>
 	                        
                      
-                        	<input id="search" type="button" value="조건 검색">
+                        	
                  
 	                     
                         </div>
                         
                         
+                        
                         <div class="sidebar__item">
                             <div class="latest-product__text">
+                                
+                                <!-- 
+                                
                                 <h4>신상</h4>
                                 <div class="latest-product__slider owl-carousel">
                                     <div class="latest-prdouct__slider__item">
@@ -526,7 +605,7 @@
 													</p>
 												</c:forEach>
                                              
-                                                <span>$30.00</span>
+                                                <span>30.00원</span>
                                             </div>
                                         </a>
                                         <a href="#" class="latest-product__item">
@@ -535,7 +614,7 @@
                                             </div>
                                             <div class="latest-product__item__text">
                                                 <h6>Crab Pool Security</h6>
-                                                <span>$30.00</span>
+                                                <span>30.00원</span>
                                             </div>
                                         </a>
                                         <a href="#" class="latest-product__item">
@@ -544,7 +623,7 @@
                                             </div>
                                             <div class="latest-product__item__text">
                                                 <h6>Crab Pool Security</h6>
-                                                <span>$30.00</span>
+                                                <span>30.00원</span>
                                             </div>
                                         </a>
                                     </div>
@@ -555,7 +634,7 @@
                                             </div>
                                             <div class="latest-product__item__text">
                                                 <h6>Crab Pool Security</h6>
-                                                <span>$30.00</span>
+                                                <span>30.00원</span>
                                             </div>
                                         </a>
                                         <a href="#" class="latest-product__item">
@@ -564,7 +643,7 @@
                                             </div>
                                             <div class="latest-product__item__text">
                                                 <h6>Crab Pool Security</h6>
-                                                <span>$30.00</span>
+                                                <span>30.00원</span>
                                             </div>
                                         </a>
                                         <a href="#" class="latest-product__item">
@@ -573,20 +652,25 @@
                                             </div>
                                             <div class="latest-product__item__text">
                                                 <h6>Crab Pool Security</h6>
-                                                <span>$30.00</span>
+                                                <span>30.00원</span>
                                             </div>
                                         </a>
                                     </div>
                                 </div>
+                                 -->
+                                
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-9 col-md-7">
+                    <!-- 
                     <div class="product__discount">
+                    
                         <div class="section-title product__discount__title">
                             <h2>특별한 가격으로 만나보세요~</h2>
                         </div>
+                        
                         <div class="row">
                             <div class="product__discount__slider owl-carousel">
                                 <div class="col-lg-4">
@@ -594,115 +678,29 @@
                                         <div class="product__discount__item__pic set-bg"
                                             data-setbg="${path}/resources/img/product/discount/pd-1.jpg">
                                             <div class="product__discount__percent">-20%</div>
-                                            <ul class="product__item__pic__hover">
-                                                <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                                <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                                <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                                            </ul>
                                         </div>
                                         <div class="product__discount__item__text">
                                             <span>Dried Fruit</span>
                                             <h5><a href="#">Raisin’n’nuts</a></h5>
-                                            <div class="product__item__price">$30.00 <span>$36.00</span></div>
+                                            <div class="product__item__price">30.00원 <span>36.00원</span></div>
                                         </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4">
-                                    <div class="product__discount__item">
-                                        <div class="product__discount__item__pic set-bg"
-                                            data-setbg="${path}/resources/img/product/discount/pd-2.jpg">
-                                            <div class="product__discount__percent">-20%</div>
-                                            <ul class="product__item__pic__hover">
-                                                <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                                <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                                <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                                            </ul>
-                                        </div>
-                                        <div class="product__discount__item__text">
-                                            <span>Vegetables</span>
-                                            <h5><a href="#">Vegetables’package</a></h5>
-                                            <div class="product__item__price">$30.00 <span>$36.00</span></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4">
-                                    <div class="product__discount__item">
-                                        <div class="product__discount__item__pic set-bg"
-                                            data-setbg="${path}/resources/img/product/discount/pd-3.jpg">
-                                            <div class="product__discount__percent">-20%</div>
-                                            <ul class="product__item__pic__hover">
-                                                <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                                <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                                <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                                            </ul>
-                                        </div>
-                                        <div class="product__discount__item__text">
-                                            <span>Dried Fruit</span>
-                                            <h5><a href="#">Mixed Fruitss</a></h5>
-                                            <div class="product__item__price">$30.00 <span>$36.00</span></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4">
-                                    <div class="product__discount__item">
-                                        <div class="product__discount__item__pic set-bg"
-                                            data-setbg="${path}/resources/img/product/discount/pd-4.jpg">
-                                            <div class="product__discount__percent">-20%</div>
-                                            <ul class="product__item__pic__hover">
-                                                <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                                <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                                <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                                            </ul>
-                                        </div>
-                                        <div class="product__discount__item__text">
-                                            <span>Dried Fruit</span>
-                                            <h5><a href="#">Raisin’n’nuts</a></h5>
-                                            <div class="product__item__price">$30.00 <span>$36.00</span></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4">
-                                    <div class="product__discount__item">
-                                        <div class="product__discount__item__pic set-bg"
-                                            data-setbg="${path}/resources/img/product/discount/pd-5.jpg">
-                                            <div class="product__discount__percent">-20%</div>
-                                            <ul class="product__item__pic__hover">
-                                                <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                                <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                                <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                                            </ul>
-                                        </div>
-                                        <div class="product__discount__item__text">
-                                            <span>Dried Fruit</span>
-                                            <h5><a href="#">Raisin’n’nuts</a></h5>
-                                            <div class="product__item__price">$30.00 <span>$36.00</span></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4">
-                                    <div class="product__discount__item">
-                                        <div class="product__discount__item__pic set-bg"
-                                            data-setbg="${path}/resources/img/product/discount/pd-6.jpg">
-                                            <div class="product__discount__percent">-20%</div>
-                                            <ul class="product__item__pic__hover">
-                                                <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                                <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                                <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                                            </ul>
-                                        </div>
-                                        <div class="product__discount__item__text">
-                                            <span>Dried Fruit</span>
-                                            <h5><a href="#">Raisin’n’nuts</a></h5>
-                                            <div class="product__item__price">$30.00 <span>$36.00</span></div>
-                                        </div>
+                                        <ul class="product__item__pic__hover" style="bottom: 110px;">
+                                            <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                                            <li><a href="#"><i class="fa fa-retweet"><b>바로구매</b></i></a></li>
+                                            <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                                        </ul>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                        
                     </div>
+                         -->
                     <div class="filter__item">
                         <div class="row">
                             <div class="col-lg-4 col-md-5">
+                            <!-- 
+                            
                                 <div class="filter__sort">
                                     <span>Sort By</span>
                                     <select>
@@ -710,6 +708,9 @@
                                         <option value="0">Default</option>
                                     </select>
                                 </div>
+                             -->
+                                
+                                
                             </div>
                             <div class="col-lg-4 col-md-4">
                                 <div class="filter__found">
@@ -720,31 +721,54 @@
                             </div>
                             <div class="col-lg-4 col-md-3">
                                 <div class="filter__option">
+                                <!-- 
                                     <span class="icon_grid-2x2"></span>
                                     <span class="icon_ul"></span>
+                                 -->
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <c:forEach var="list" items="${list }">
+	                        <style>
+                       			#modal${list.PRD_CODE } {
+									display:none;
+									position:absolute;
+									width:100%;
+									height:100%;
+									z-index:999999;
+								}
+								
+						
+								#modal${list.PRD_CODE } .modal_content {
+									width:300px;
+									margin:100px auto;
+									padding:20px 10px;
+									background:#fff;
+									border: 2px solid #666;
+								}
+	                        </style>
 	                        <div class="col-lg-4 col-md-6 col-sm-6">
 	                            <div class="product__item">
 	                                <div class="product__item__pic set-bg" data-setbg="${path}/resources/img/product/${list.PRD_IMAGE }">
-	                                    <ul class="product__item__pic__hover">
-	                                        <li><a href="#"><i class="fa fa-heart"></i></a></li>
-	                                        <li><a id="modal_open_btn"><i class="fa fa-retweet"><b>바로구매</b></i></a></li>
-	                                        <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-	                                    </ul>
 	                                </div>
-				                    <div id="modal">
+                                    <ul class="product__item__pic__hover">
+                                        <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                                        <li><a id="modal_open_btn${list.PRD_CODE }"><i class="fa fa-retweet"><b>바로구매</b></i></a></li>
+                                        <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                                    </ul>
+                                    
+				                    <div id="modal${list.PRD_CODE }">
 										<div class="modal_content">
-											<h2>모달 창</h2>
+											<h2>바로구매</h2>
+											<hr />
 											
-											<p>모달 창 입니다.</p>
-											
-											<button type="button" id="modal_close_btn">
-												모달 창 닫기
+											<button type="button" id="">
+												구매하기
+											</button>
+											<button type="button" id="modal_close_btn${list.PRD_CODE }">
+												창 닫기
 											</button>
 										</div>
 									</div>
@@ -755,17 +779,22 @@
                                    		<h5>${list.PRD_PRICE }원</h5>
                                 	</div>
                             	</div>
+                            	<script type="text/javascript">
+                            		$('.product__item__pic').on('click', function(){
+                            			var PRD_CODE = "${list.PRD_CODE}";
+                            			location.href = "/product/prdCode="+PRD_CODE;
+                            		})
+                            
+								    $("#modal_open_btn${list.PRD_CODE }").click(function(){
+								        $("#modal${list.PRD_CODE }").attr("style", "display:block");
+								    });
+								   
+								     $("#modal_close_btn${list.PRD_CODE }").click(function(){
+								        $("#modal${list.PRD_CODE }").attr("style", "display:none");
+								    });      
+								</script>
 	                        </div>
 
-							<script>
-							    $("#modal_open_btn").click(function(){
-							        $("#modal").attr("style", "display:block");
-							    });
-							   
-							     $("#modal_close_btn").click(function(){
-							        $("#modal").attr("style", "display:none");
-							    });      
-							</script>
 
 						</c:forEach>
                     </div>

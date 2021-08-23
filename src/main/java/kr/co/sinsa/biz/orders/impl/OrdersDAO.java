@@ -24,4 +24,8 @@ public class OrdersDAO {
 	public int addOrders(OrdersVO ordersVO) {
 		return SST.insert("OrdersDAO.addOrders", ordersVO);
 	}
+	
+	public int chkUsePoint(CustomerVO customerVO) {
+		return SST.update("OrdersDAO.chkUsePoint", customerVO);
+	}
 }

@@ -46,5 +46,8 @@ public interface MyPageService {
 	
 	public void privateInfoChange(CustomerVO vo);
 	
+	public void refund(Map<String,String> map);
+	public void cancel(Map<String,String> map);
+	
 	
 }

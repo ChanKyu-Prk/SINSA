@@ -40,6 +40,15 @@ public class LoginController {
 	@Autowired
 	private LoginService loginService;
 
+//	@RequestMapping(value="login.do", method=RequestMethod.GET)
+//	public String loginGET(HttpServletRequest request) {
+//		String referer = request.getHeader("Referer");
+//		request.getSession().setAttribute("redirectURI", referer);
+//		
+//		return "/user/login";
+//	}
+	
+	
 	@RequestMapping(value="/login.do", method=RequestMethod.GET)
 	public String loginView(CustomerVO customerVO, Model model, HttpSession session) {
 		String naverAuthUrl = naverLoginBO.getAuthorizationUrl(session); 
@@ -54,7 +63,7 @@ public class LoginController {
 		String CUS_ID = (String)request.getParameter("CUS_ID");
 		String CUS_NAME = (String)request.getParameter("CUS_NAME");
 
-
+		
 		if(customerVO.getCUS_ID() == null || customerVO.getCUS_ID().equals("")) {
 			return null;
 		}else if(customerVO.getCUS_PWD() == null || customerVO.getCUS_PWD().equals("")) {
