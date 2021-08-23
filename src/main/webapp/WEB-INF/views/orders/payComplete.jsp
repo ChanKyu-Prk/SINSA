@@ -34,7 +34,7 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 
-<body>
+<body onload="noBack();" onpageshow="if(event.persisted) noBack();" onunload="">
 	<jsp:include page="../header.jsp" />
 	<section class="product spad payCompleteCon">
 		<div class="container">
@@ -65,4 +65,7 @@
 	<jsp:include page="../footer.jsp" />
 	<!-- Footer Section End -->
 </body>
+<script type="text/javascript">
+window.history.forward(); function noBack(){ window.history.forward(); }
+</script>
 </html>

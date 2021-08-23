@@ -97,6 +97,8 @@ public class OrdersController {
 		model.addAttribute("ORDER_NUM", ORDER_NUM);
 		model.addAttribute("totalPrice", totalPrice);
 		model.addAttribute("usePoint",usePoint);
+		
+		model.addAttribute("prdInfo", "");
 		return "/orders/payComplete";
 	}
 	
