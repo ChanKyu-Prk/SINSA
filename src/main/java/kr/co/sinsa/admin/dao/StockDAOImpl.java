@@ -48,8 +48,9 @@ public class StockDAOImpl implements StockDAO {
 		sqlSession.update("StockDAO.stock_update", vo);
 	}
 	
-	public void stock_delete(String stock_prdcode) {
-		sqlSession.delete("StockDAO.stock_delete", stock_prdcode);
+	public void stock_delete(Map<String, Object> map) {
+		sqlSession.delete("StockDAO.stock_delete", map);
+		System.out.println(map);
 	}
 	public List<StockVO> stock_list() {
 		return sqlSession.selectList("StockDAO.stock_list");

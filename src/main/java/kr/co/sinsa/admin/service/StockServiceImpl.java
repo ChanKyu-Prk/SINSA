@@ -1,5 +1,6 @@
 package kr.co.sinsa.admin.service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -59,8 +60,10 @@ public class StockServiceImpl implements StockService {
 	}
 
 	@Override
-	public void stock_delete(String stock_prdcode) {
-		dao.stock_delete(stock_prdcode);
+	public void stock_delete(String picks) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("picks", picks);
+		dao.stock_delete(map);
 	}
 
 	@Override

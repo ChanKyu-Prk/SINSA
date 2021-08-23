@@ -16,7 +16,7 @@ public interface StockService {
 	public StockVO stock_info(String stock_prdcode);
 	public void stock_insert(StockVO vo);
 	public void stock_update(StockVO vo);
-	public void stock_delete(String stock_prdcode);
+	public void stock_delete(String picks);
 	public List<StockLogVO> stock_log(Map<String, Object> map);
 	public int stock_log_count(Map<String, Object> map);
 	

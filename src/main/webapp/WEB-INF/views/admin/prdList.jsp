@@ -43,7 +43,7 @@ table {
 				trs[i].style.backgroundColor = orgBColor;
 				trs[i].style.color = orgTColor;
 				var td = trs[i].getElementsByTagName('td');
-				no = td[0].innerText;
+				no = td[2].innerText;
 
 			}
 		}
@@ -52,7 +52,7 @@ table {
 
 	function prdModify() {
 		if (no != "") {
-			location.href = 'prdEdit?prd_num=' + no;
+			location.href = 'prdEdit?prd_code=' + no;
 
 		} else {
 			alert('수정할 항목을 선택하십시오.');
@@ -61,9 +61,7 @@ table {
 
 	function prdDelete() {
 		if (no != "") {
-			if (confirm('해당 상품을 삭제하시겠습니까?')) {
-				location.href = 'prdDelete?prd_num=' + no;
-			}
+			location.href = 'prdDelete?prd_code=' + no;
 		} else {
 			alert('삭제할 항목을 선택하십시오.');
 		}

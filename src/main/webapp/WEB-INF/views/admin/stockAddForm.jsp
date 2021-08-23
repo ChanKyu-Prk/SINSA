@@ -3,6 +3,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%
+	String getreferer = request.getHeader("Referer");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -31,10 +34,20 @@ input.form-control {
 	src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
 <script>
-	function add(total) {
-	    alert("입고 처리되었습니다.");
-	    addform.submit();
+
+	function add() {
+		var maxcnt = ${stockList.size()};
+		var sum = 0;
+		for(var i=1; i<maxcnt+1; i++){
+				temp = parseInt(document.getElementById('total'+i).value);
+				sum += temp;
+			}
+		if (confirm("총수량 " + sum + "족 입고 처리하시겠습니까?")) {
+			document.forms["addform"].submit();
+		}
+		
 	}
+	
 </script>
 </head>
 <body>
@@ -66,51 +79,49 @@ input.form-control {
 					<th class="size">285</th>
 					<th class="size">290</th>
 					<th>합계</th>
-					<th style="width:120px;">수량변경</th>
 				</tr>
 			</thead>
 			<tbody>
+									<form:form method="post" action="stockUpdate"
+							modelAttribute="stockInfo" name="addform">
 				<c:forEach var="e" items="${ stockList }" varStatus="status">
 					<tr>
-						<form:form method="post" action="stockUpdate"
-							modelAttribute="stockInfo" name="addform">
+							<input type="hidden" id="referer" name="referer" value="<%=getreferer%>" />
 							<form:hidden path="stock_prdcode" value="${ e.stock_prdcode }" />
 							<td class="code">${ e.stock_prdcode }</td>
-							<td><input type=number value="0" min="0" class="form-control"
-								class="stock${status.count} form-control" maxlength=3 name="stock_220" onchange="javascript:sum(${status.count});"></td>
-							<td><input type=number value="0" min="0"
+							<td><input type=number min="0" value="0"
+								class="stock${status.count} form-control" name="stock_220" onchange="javascript:sum(${status.count});"></td>
+							<td><input type=number min="0" value="0"
 								class="stock${status.count} form-control" name="stock_225" onchange="javascript:sum(${status.count});"></td>
-							<td><input type=number value="0" min="0"
+							<td><input type=number min="0" value="0"
 								class="stock${status.count} form-control" name="stock_230" onchange="javascript:sum(${status.count});"></td>
-							<td><input type=number value="0" min="0"
+							<td><input type=number min="0" value="0"
 								class="stock${status.count} form-control" name="stock_235" onchange="javascript:sum(${status.count});"></td>
-							<td><input type=number value="0" min="0"
+							<td><input type=number min="0" value="0"
 								class="stock${status.count} form-control" name="stock_240" onchange="javascript:sum(${status.count});"></td>
-							<td><input type=number value="0" min="0"
+							<td><input type=number min="0" value="0"
 								class="stock${status.count} form-control" name="stock_245" onchange="javascript:sum(${status.count});"></td>
-							<td><input type=number value="0" min="0"
+							<td><input type=number min="0" value="0"
 								class="stock${status.count} form-control" name="stock_250" onchange="javascript:sum(${status.count});"></td>
-							<td><input type=number value="0" min="0"
+							<td><input type=number min="0" value="0"
 								class="stock${status.count} form-control" name="stock_255" onchange="javascript:sum(${status.count});"></td>
-							<td><input type=number value="0" min="0"
+							<td><input type=number min="0" value="0"
 								class="stock${status.count} form-control" name="stock_260" onchange="javascript:sum(${status.count});"></td>
-							<td><input type=number value="0" min="0"
+							<td><input type=number min="0" value="0"
 								class="stock${status.count} form-control" name="stock_265" onchange="javascript:sum(${status.count});"></td>
-							<td><input type=number value="0" min="0"
+							<td><input type=number min="0" value="0"
 								class="stock${status.count} form-control" name="stock_270" onchange="javascript:sum(${status.count});"></td>
-							<td><input type=number value="0" min="0"
+							<td><input type=number min="0" value="0"
 								class="stock${status.count} form-control" name="stock_275" onchange="javascript:sum(${status.count});"></td>
-							<td><input type=number value="0" min="0"
+							<td><input type=number min="0" value="0"
 								class="stock${status.count} form-control" name="stock_280" onchange="javascript:sum(${status.count});"></td>
-							<td><input type=number value="0" min="0"
+							<td><input type=number min="0" value="0"
 								class="stock${status.count} form-control" name="stock_285" onchange="javascript:sum(${status.count});"></td>
-							<td><input type=number value="0" min="0"
-								class="stock${status.count} form-control" name="stock_290" onchange="javascript:sum('total'+'${status.count}');"></td>
-							<td><input type=number value="0" min="0" class="form-control"
+							<td><input type=number min="0" value="0"
+								class="stock${status.count} form-control" name="stock_290" onchange="javascript:sum(${status.count});"></td>
+							<td><input type=number min="0" value="0" class="form-control" name="total"
 								id="total${status.count}" readonly/></td>
-							<td><input type="button" class="btn btn-primary" value="입고" onclick="javascript:add(${e.total});"/></td>
-							
-						</form:form>
+						
 					</tr>
 					
 					<script>
@@ -131,8 +142,11 @@ input.form-control {
 				    }
 					</script>
 				</c:forEach>
+				</form:form>
 			</tbody>
 		</table>
+		<br><br>
+		<input type="button" class="btn btn-primary btn-lg btn-block" value="전체 입고 처리" onclick="add();"/>
 <%-- 		<ul class="pagination">
 			<c:choose>
 				<c:when test="${pageInfo.getPage()<=1}">

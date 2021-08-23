@@ -28,8 +28,18 @@ public class OrderServiceImpl implements OrderService {
 	}
 	
 	@Override
+	public int order_cancel_count(Map<String, Object> map) {
+		return dao.order_cancel_count(map);
+	}
+	
+	@Override
 	public int sales(Map<String, Object> map) {
 		return dao.sales(map);
+	}
+	
+	@Override
+	public int minus(Map<String, Object> map) {
+		return dao.minus(map);
 	}
 
 	@Override
@@ -50,16 +60,6 @@ public class OrderServiceImpl implements OrderService {
 	@Override
 	public void order_cancel(OrderVO vo) {
 		dao.order_cancel(vo);
-	}
-	
-	@Override
-	public List<OrderVO> order_pick_list(Map<String, Object> map){
-		return dao.order_pick_list(map);
-	}
-	
-	@Override
-	public int order_pick_count(Map<String, Object> map) {
-		return dao.order_pick_count(map);
 	}
 	
 	@Override

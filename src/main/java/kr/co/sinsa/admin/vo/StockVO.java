@@ -1,5 +1,8 @@
 package kr.co.sinsa.admin.vo;
 
+import java.util.HashMap;
+import java.util.List;
+
 public class StockVO {
 	
 	String stock_prdcode;
@@ -20,6 +23,7 @@ public class StockVO {
 	int stock_285;
 	int stock_290;
 	int total;
+	List<HashMap<String, Object>> listMap;
 	
 	public String getStock_prdcode() {
 		return stock_prdcode;
@@ -157,6 +161,12 @@ public class StockVO {
 				stock_280+
 				stock_285+
 				stock_290;
+	}
+	public List<HashMap<String, Object>> getListMap() {
+		return listMap;
+	}
+	public void setListMap(List<HashMap<String, Object>> listMap) {
+		this.listMap = listMap;
 	}
 	
 }

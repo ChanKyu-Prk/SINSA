@@ -1,5 +1,9 @@
 package kr.co.sinsa.admin.controller;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -178,7 +182,82 @@ public class StockContorller {
 		
 		return "admin/stockAddForm";
 	}	
+	
+	@RequestMapping("/admin/stockUpdate")
+	public String stockUpdate(Model model, StockVO vo, HttpServletRequest request) {
+		//model.addAttribute("stock_prdcode", vo.getStock_prdcode());
+		String[] stock_220 = request.getParameterValues("stock_220");
+		String[] stock_225 = request.getParameterValues("stock_225");
+		String[] stock_230 = request.getParameterValues("stock_230");
+		String[] stock_235 = request.getParameterValues("stock_235");
+		String[] stock_240 = request.getParameterValues("stock_240");
+		String[] stock_245 = request.getParameterValues("stock_245");
+		String[] stock_250 = request.getParameterValues("stock_250");
+		String[] stock_255 = request.getParameterValues("stock_255");
+		String[] stock_260 = request.getParameterValues("stock_260");
+		String[] stock_265 = request.getParameterValues("stock_265");
+		String[] stock_270 = request.getParameterValues("stock_270");
+		String[] stock_275 = request.getParameterValues("stock_275");
+		String[] stock_280 = request.getParameterValues("stock_280");
+		String[] stock_285 = request.getParameterValues("stock_285");
+		String[] stock_290 = request.getParameterValues("stock_290");
+		String[] total = request.getParameterValues("total");
+		String[] stock_prdcode = request.getParameterValues("stock_prdcode");
+		 
+		ArrayList list = new ArrayList();
+		
+		int cnt = 0;
+		for(String arr : stock_prdcode) {
+			HashMap<String, Object> map = new HashMap<String, Object>();
+			map.put("stock_prdcode", stock_prdcode[cnt]);
+			map.put("stock_220", stock_220[cnt]);
+			map.put("stock_225", stock_225[cnt]);
+			map.put("stock_230", stock_230[cnt]);
+			map.put("stock_235", stock_235[cnt]);
+			map.put("stock_240", stock_240[cnt]);
+			map.put("stock_245", stock_245[cnt]);
+			map.put("stock_250", stock_250[cnt]);
+			map.put("stock_255", stock_255[cnt]);
+			map.put("stock_260", stock_260[cnt]);
+			map.put("stock_265", stock_265[cnt]);
+			map.put("stock_270", stock_270[cnt]);
+			map.put("stock_275", stock_275[cnt]);
+			map.put("stock_280", stock_280[cnt]);
+			map.put("stock_285", stock_285[cnt]);
+			map.put("stock_290", stock_290[cnt]);
+			map.put("total", total[cnt]);
+			list.add(map);
+			cnt++;
+		}
+		vo.setListMap(list);
+		
+		stockService.stock_update(vo);
+		String referer = request.getParameter("referer");
+		return "redirect:"+referer;
+	}
+	
+	public String today() {
 
+		SimpleDateFormat Format = new SimpleDateFormat("yyyy-MM-dd");
+		Date time = new Date();
+
+		String today = Format.format(time).toString();
+
+		return today;
+
+	}
+
+	public String lastmonth() {
+
+		SimpleDateFormat Format = new SimpleDateFormat("yyyy-MM-dd");
+		Calendar cal = Calendar.getInstance();
+
+		cal.add(Calendar.MONTH, -1);
+		String lastmonth = Format.format(cal.getTime());
+
+		return lastmonth;
+	}
+	
 	@RequestMapping("/admin/stockLog")
 	public String getStockLog(Model model, @RequestParam(value = "page", required = false) String pages,
 			@RequestParam(value = "sdate", required = false) String sdate,
@@ -200,10 +279,10 @@ public class StockContorller {
 			searchWord = "";
 		}
 		if(sdate == null || sdate.equals("")) {
-			sdate = "1900-01-01";
+			sdate = lastmonth();
 		}
 		if(edate == null || edate.equals("")) {
-			edate = "2099-01-01";
+			edate = today();
 		}
 		if(pages !=null){
 			page = Integer.parseInt(pages);
@@ -220,7 +299,8 @@ public class StockContorller {
 		listCount = stockService.stock_log_count(map);
 		List<StockLogVO> list = stockService.stock_log(map);
 		model.addAttribute("stockLog", list);
-		
+		model.addAttribute("sdate", sdate);
+		model.addAttribute("edate", edate);
 
 		maxPage = (int) ((double) listCount / limit + 0.95);
 		startPage = (((int) ((double) page / 5 + 0.8)) - 1) * 5 + 1;
@@ -246,23 +326,18 @@ public class StockContorller {
 		return "redirect:/admin/stockList";
 	}
 			
-	@RequestMapping("/admin/stockEdit")
+/*	@RequestMapping("/admin/stockEdit")
 	public String stockEdit(Model model, @RequestParam String stock_prdcode) {
 		model.addAttribute("stockInfo", stockService.stock_info(stock_prdcode));
 		return "admin/stockEdit";
 	}
-			
-	@RequestMapping("/admin/stockUpdate")
-	public String stockUpdate(Model model, StockVO vo) {
-		//model.addAttribute("stock_prdcode", vo.getStock_prdcode());
-		stockService.stock_update(vo);
-		return "redirect:/admin/stockAdd";
-	}
+*/ 			
 			
 	@RequestMapping("/admin/stockDelete")
-	public String stockDelete(@RequestParam String stock_prdcode) {
-		stockService.stock_delete(stock_prdcode);
-		return "redirect:/admin/stockList";
+	public String stockDelete(@RequestParam String picks, HttpServletRequest request) {
+		stockService.stock_delete(picks);
+		String referer = request.getHeader("Referer");
+		return "redirect:"+referer;
 	}
 	
 }
