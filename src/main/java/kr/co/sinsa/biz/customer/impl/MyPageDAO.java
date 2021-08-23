@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import kr.co.sinsa.biz.customer.CustomerVO;
+import kr.co.sinsa.biz.customer.JjimVO;
 import kr.co.sinsa.biz.customer.MyOrderListVO;
 import kr.co.sinsa.biz.customer.QnAVO;
 import kr.co.sinsa.biz.customer.ReviewVO;
@@ -139,6 +140,8 @@ public class MyPageDAO {
 		SST.update("myInfo.cancel",map);
 	}
 	
-	
+	public int addJjim(JjimVO vo) {
+		return SST.insert("myInfo.addJjim", vo);
+	}
 	
 }

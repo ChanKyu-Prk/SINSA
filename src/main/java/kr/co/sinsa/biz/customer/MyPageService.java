@@ -12,6 +12,7 @@ import kr.co.sinsa.biz.user.UserVO;
 public interface MyPageService {
 
 	public CustomerVO myInfo(UserVO vo);
+	public int addJjim(JjimVO vo);
 	
 	public List<MyOrderListVO> myOrderList(Map<String,Object> map);
 	public List<MyOrderListVO> myOrderListDate(Map<String,Object> map);

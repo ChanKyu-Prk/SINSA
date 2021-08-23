@@ -348,5 +348,9 @@
 
 	</update>
 
+	<insert id="addJjim"
+		parameterType="kr.co.sinsa.biz.customer.JjimVO">
+		insert into jjim (JJIM_CUSID, JJIM_PRDNUM) values(#{JJIM_CUSID},#{JJIM_PRDNUM});
+	</insert>
 
 </mapper>
