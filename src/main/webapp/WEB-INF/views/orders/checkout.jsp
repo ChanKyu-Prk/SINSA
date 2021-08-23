@@ -346,6 +346,97 @@ input[type=number] {
 								</div>
 								<small class="float-right mb-4">결제 시 <span class="avPoint savePoint digits">-</span>P 적립예정</small>
 								<button type="button" id="chckoutBtn" class="site-btn">결제하기</button>
+								<script type="text/javascript">
+								$("#chckoutBtn").click(function () {
+									<%if(session.getAttribute("user") == null){%>
+										var result = alert("결제 오류가 발생하였습니다. 다시 시도해주세요.");
+										window.history.back();
+									<%}%>
+									var ORDER_NUM = new Date().getTime();
+									var ORDER_PRDCODE = $(".prdCode").map(function() {
+									    return $(this).text();
+									}).get();
+									var ORDER_PRDSIZE = $(".qty-size").map(function() {
+									    return $(this).text();
+									}).get();
+									var ORDER_AMOUNT = $('.amount').map(function() {
+									    return $(this).text();
+									}).get();
+									var ORDER_TEL = $("input[name=ORDER_TEL]").val();
+									var ORDER_MEMO = $("input[name=ORDER_MEMO]").val();
+									if(ORDER_MEMO == ""){
+										ORDER_MEMO = null;
+									}
+									var ORDER_RECEIVER = $("input[name=ORDER_RECEIVER]").val();
+									var ORDER_USEPOINT = $("input[name=ORDER_USEPOINT]").val();
+									if(ORDER_USEPOINT == "") ORDER_USEPOINT = 0;
+									var ORDER_ADDR = $("#delivAddrZip").val() + "|" +$("#delivAddrRoad").val() + "|" + $("#delivAddrJibun").val() +"|"+$("#delivAddrExtra").val();
+									var IMP = window.IMP; // 생략가능
+							        IMP.init('imp39263192');
+							        var msg;
+							        var finalPrice = $(".totalPriceCon-num").text().replace(',', '');
+							        var data = {};
+									var itemList = [];
+									for(var i=0; i<ORDER_AMOUNT.length; i++){
+										data = {};
+										data["ORDER_PRDCODE"] = ORDER_PRDCODE[i];
+										data["ORDER_PRDSIZE"] = ORDER_PRDSIZE[i];
+										data["ORDER_AMOUNT"] = ORDER_AMOUNT[i];
+										
+										data["ORDER_NUM"] = ORDER_NUM;
+										data["ORDER_MEMO"] = ORDER_MEMO;
+										data["ORDER_TEL"] = ORDER_TEL;
+										data["ORDER_RECEIVER"] = ORDER_RECEIVER;
+										data["ORDER_USEPOINT"] = ORDER_USEPOINT;
+										data["ORDER_ADDR"] = ORDER_ADDR;
+										itemList.unshift(data);
+									}
+							        IMP.request_pay({
+							        	pg : 'inicis',
+							            pay_method : 'card',
+							            merchant_uid : new Date().getTime(),
+							            name : '[SINSA 상품 결제 ]',
+							            amount : finalPrice,
+							            buyer_email : '${cusInfo.CUS_EMAIL}',
+							            buyer_name : '${cusInfo.CUS_NAME}',
+							            buyer_tel : '${cusInfo.CUS_TEL}',
+							            buyer_addr : "${fn:substringAfter(cusInfo.CUS_ADDR, '|')}",
+							            buyer_postcode : "${fn:substringBefore(cusInfo.CUS_ADDR, '|')}",
+							            m_redirect_url: "/checkout/complete"
+							        }, function(rsp) {
+							            if (rsp.success){
+							            	//[1] 서버단에서 결제정보 조회를 위해 jQuery ajax로 imp_uid 전달하기
+							            	$.ajax({
+							            		url: "/checkout/process", //cross-domain error가 발생하지 않도록 동일한 도메인으로 전송
+							            		type: 'POST',
+							            		data: JSON.stringify(itemList),
+							            		headers: {
+												      'Accept': 'application/json',
+												      'Content-Type': 'application/json'
+												}
+							            	}).done(function(data) {
+							            		//[2] 서버에서 REST API로 결제정보확인 및 서비스루틴이 정상적인 경우
+							            			msg = '결제가 완료되었습니다.';
+							                        msg += '\n고유ID : ' + rsp.imp_uid;
+							                        msg += '\n상점 거래ID : ' + rsp.merchant_uid;
+							                        msg += '\결제 금액 : ' + rsp.paid_amount;
+							                        msg += '카드 승인번호 : ' + rsp.apply_num;
+							                        msg += '이메일 : ' + rsp.buyer_email;
+							                        msg += '이름 : ' + rsp.buyer_name;
+							                        msg += '전화번호 : ' + rsp.buyer_tel;
+							                        msg += '주소 : ' + rsp.buyer_addr + rsp.buyer_postcode;
+							       					//alert(msg);
+							            	});
+							            	//성공시 이동할 페이지
+											location.href="/checkout/complete/orderNo="+ORDER_NUM;
+							            } else {
+							            	msg = '결제에 실패하였습니다.';
+							                msg += '에러내용 : ' + rsp.error_msg;
+							                alert(msg);
+							            }
+						        	});
+								});
+								</script>
 							</div>
 						</div>
 					</div>
@@ -464,97 +555,6 @@ input[type=number] {
 				$('#ORDER_RECEIVER, #ORDER_TEL').removeAttr('readonly');
 			}
 	 	});
-
-		// Iamport 결제
-		$("#chckoutBtn").click(function () {
-			<%if(session.getAttribute("user") == null){%>
-				var result = alert("결제 오류가 발생하였습니다. 다시 시도해주세요.");
-				window.history.back();
-			<%}%>
-			var ORDER_NUM = new Date().getTime();
-			var ORDER_PRDCODE = $(".prdCode").map(function() {
-			    return $(this).text();
-			}).get();
-			var ORDER_PRDSIZE = $(".qty-size").map(function() {
-			    return $(this).text();
-			}).get();
-			var ORDER_AMOUNT = $('.amount').map(function() {
-			    return $(this).text();
-			}).get();
-			var ORDER_TEL = $("input[name=ORDER_TEL]").val();
-			var ORDER_MEMO = $("input[name=ORDER_MEMO]").val();
-			if(ORDER_MEMO == ""){
-				ORDER_MEMO = null;
-			}
-			var ORDER_RECEIVER = $("input[name=ORDER_RECEIVER]").val();
-			var ORDER_USEPOINT = $("input[name=ORDER_USEPOINT]").val();
-			if(ORDER_USEPOINT == "") ORDER_USEPOINT = 0;
-			var ORDER_ADDR = $("#delivAddrZip").val() + "|" +$("#delivAddrRoad").val() + "|" + $("#delivAddrJibun").val() +"|"+$("#delivAddrExtra").val();
-			var IMP = window.IMP; // 생략가능
-	        IMP.init('imp39263192');
-	        var msg;
-	        var finalPrice = $(".totalPriceCon-num").text().replace(',', '');
-	        var data = {};
-			var itemList = [];
-			for(var i=0; i<ORDER_AMOUNT.length; i++){
-				data = {};
-				data["ORDER_PRDCODE"] = ORDER_PRDCODE[i];
-				data["ORDER_PRDSIZE"] = ORDER_PRDSIZE[i];
-				data["ORDER_AMOUNT"] = ORDER_AMOUNT[i];
-				
-				data["ORDER_NUM"] = ORDER_NUM;
-				data["ORDER_MEMO"] = ORDER_MEMO;
-				data["ORDER_TEL"] = ORDER_TEL;
-				data["ORDER_RECEIVER"] = ORDER_RECEIVER;
-				data["ORDER_USEPOINT"] = ORDER_USEPOINT;
-				data["ORDER_ADDR"] = ORDER_ADDR;
-				itemList.unshift(data);
-			}
-	        IMP.request_pay({
-	        	pg : 'inicis',
-	            pay_method : 'card',
-	            merchant_uid : new Date().getTime(),
-	            name : '[SINSA 상품 결제 ]상품 이름',
-	            amount : finalPrice,
-	            buyer_email : '${cusInfo.CUS_EMAIL}',
-	            buyer_name : '${cusInfo.CUS_NAME}',
-	            buyer_tel : '${cusInfo.CUS_TEL}',
-	            buyer_addr : "${fn:substringAfter(cusInfo.CUS_ADDR, '|')}",
-	            buyer_postcode : "${fn:substringBefore(cusInfo.CUS_ADDR, '|')}",
-	            m_redirect_url: "/checkout/complete"
-	        }, function(rsp) {
-	            if (rsp.success){
-	            	//[1] 서버단에서 결제정보 조회를 위해 jQuery ajax로 imp_uid 전달하기
-	            	$.ajax({
-	            		url: "/checkout/complete", //cross-domain error가 발생하지 않도록 동일한 도메인으로 전송
-	            		type: 'POST',
-	            		data: JSON.stringify(itemList),
-	            		headers: {
-						      'Accept': 'application/json',
-						      'Content-Type': 'application/json'
-						}
-	            	}).done(function(data) {
-	            		//[2] 서버에서 REST API로 결제정보확인 및 서비스루틴이 정상적인 경우
-	            			msg = '결제가 완료되었습니다.';
-	                        msg += '\n고유ID : ' + rsp.imp_uid;
-	                        msg += '\n상점 거래ID : ' + rsp.merchant_uid;
-	                        msg += '\결제 금액 : ' + rsp.paid_amount;
-	                        msg += '카드 승인번호 : ' + rsp.apply_num;
-	                        msg += '이메일 : ' + rsp.buyer_email;
-	                        msg += '이름 : ' + rsp.buyer_name;
-	                        msg += '전화번호 : ' + rsp.buyer_tel;
-	                        msg += '주소 : ' + rsp.buyer_addr + rsp.buyer_postcode;
-	       					//alert(msg);
-	            	});
-	            	//성공시 이동할 페이지
-					location.href="/checkout/complete";
-	            } else {
-	            	msg = '결제에 실패하였습니다.';
-	                msg += '에러내용 : ' + rsp.error_msg;
-	                alert(msg);
-	            }
-        	});
-		});
 	});
 		
 	function findAddr() {

@@ -1,5 +1,7 @@
 package kr.co.sinsa.biz.orders.impl;
 
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -27,5 +29,9 @@ public class OrdersDAO {
 	
 	public int chkUsePoint(CustomerVO customerVO) {
 		return SST.update("OrdersDAO.chkUsePoint", customerVO);
+	}
+	
+	public List<OrdersVO> selOrdersById(OrdersVO ordersVO){
+		return SST.selectList("OrdersDAO.selOrdersById", ordersVO);
 	}
 }

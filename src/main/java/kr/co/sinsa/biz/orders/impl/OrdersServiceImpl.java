@@ -1,5 +1,7 @@
 package kr.co.sinsa.biz.orders.impl;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
@@ -32,5 +34,10 @@ public class OrdersServiceImpl implements OrdersSerivce{
 	@Override
 	public int chkUsePoint(CustomerVO customerVO) throws Exception {
 		return dao.chkUsePoint(customerVO);
+	}
+
+	@Override
+	public List<OrdersVO> selOrdersById(OrdersVO ordersVO) throws Exception {
+		return dao.selOrdersById(ordersVO);
 	}
 }
