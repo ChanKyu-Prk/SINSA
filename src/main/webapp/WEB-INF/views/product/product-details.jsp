@@ -317,12 +317,25 @@ input[type=number] {
 							<a href="#" id="btnJjim"
 								class="primary-btn shopping-icon text-center col-lg-10">장바구니</a>
 							<button id="jjimBtn" class="heart-icon col-lg-2 text-center">
-								<i class="fa fa-heart-o"></i>
+								<c:if test="${empty jjimInfo}">
+									<i class="fa fa-heart-o"></i>
+								</c:if>
+								<c:if test="${not empty jjimInfo}">
+									<i class="fa fa-heart"></i>
+								</c:if>
 							</button>
 							<script type="text/javascript">
 							$("#jjimBtn").click(function(){
-								//로그인 체크
-								
+								<%if(session.getAttribute("user") == null){%>
+								var result = confirm("로그인이 필요한 서비스입니다. 로그인하시겠습니까?");
+								if(result){
+									location.href="/login.do";
+								}
+								else {
+									return false;
+								}
+								<%}%>
+							
 								if($(this).find("i").hasClass("fa-heart-o")){
 									$(this).find("i").removeClass("fa-heart-o");
 									$(this).find("i").addClass("fa-heart");
