@@ -33,8 +33,8 @@ public class PrdDAOImpl implements PrdDAO {
 		return sqlSession.selectOne("PrdDAO.prd_all_search_count", map);
 	}
 	
-	public PrdVO prd_info(int prd_num) {
-		return sqlSession.selectOne("PrdDAO.prd_info", prd_num);
+	public PrdVO prd_info(String prd_code) {
+		return sqlSession.selectOne("PrdDAO.prd_info", prd_code);
 	}
 	
 	public void prd_insert(PrdVO vo) {
@@ -45,8 +45,12 @@ public class PrdDAOImpl implements PrdDAO {
 		sqlSession.update("PrdDAO.prd_update", vo);
 	}
 	
-	public void prd_delete(int prd_num) {
-		sqlSession.delete("PrdDAO.prd_delete", prd_num);
+	public void prd_delete(String prd_code) {
+		sqlSession.delete("PrdDAO.prd_delete", prd_code);
+	}
+	
+	public String prd_delete_stock(String prd_code) {
+		return sqlSession.selectOne("PrdDAO.prd_delete_stock", prd_code);
 	}
 	
 }

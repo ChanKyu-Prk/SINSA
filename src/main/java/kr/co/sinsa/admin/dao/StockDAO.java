@@ -15,7 +15,7 @@ public interface StockDAO {
 	public StockVO stock_info(String stock_procode);
 	public void stock_insert(StockVO vo);
 	public void stock_update(StockVO vo);
-	public void stock_delete(String stock_procode);
+	public void stock_delete(Map<String, Object> map);
 	public List<StockLogVO> stock_log(Map<String, Object> map);
 	public int stock_log_count(Map<String, Object> map);
 	

@@ -9,10 +9,6 @@
 <meta charset="UTF-8">
 
 <style>
-body {
-	font-size: 11pt;
-	color: teal;
-}
 
 div {
 	margin: 0 auto;
@@ -74,10 +70,18 @@ table {
 				            $("#sdate").datepicker();                    
 				            $("#edate").datepicker();
 				            
-				            //From의 초기값을 오늘 날짜로 설정
-				            $('#sdate').datepicker('setDate', '-1M'); //(-1D:하루전, -1M:한달전, -1Y:일년전), (+1D:하루후, -1M:한달후, -1Y:일년후)
-				            //To의 초기값을 내일로 설정
-				            $('#edate').datepicker('setDate', 'today'); //(-1D:하루전, -1M:한달전, -1Y:일년전), (+1D:하루후, -1M:한달후, -1Y:일년후)
+ 				            if ('${param.sdate}' != null || '${param.sdate}' != "") {
+				            	
+				            	$("#sdate").datepicker("setDate", '${param.sdate}');
+				            	$("#edate").datepicker("setDate", '${param.edate}');
+				            }
+				            
+				            if ('${param.sdate}' == null || '${param.sdate}' == "") {
+				            	//From의 초기값을 오늘 날짜로 설정
+				            	$('#sdate').datepicker('setDate', '-1M'); //(-1D:하루전, -1M:한달전, -1Y:일년전), (+1D:하루후, -1M:한달후, -1Y:일년후)
+				            	//To의 초기값을 내일로 설정
+				            	$('#edate').datepicker('setDate', 'today'); //(-1D:하루전, -1M:한달전, -1Y:일년전), (+1D:하루후, -1M:한달후, -1Y:일년후)
+				            }  
 				        });
     					</script>
 				</div>

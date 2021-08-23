@@ -26,7 +26,7 @@
 			from stock as s
 			left join product as p
 			on s.stock_prdcode = p.prd_code
-			where stock_prdcode like '%${searchWord}%' limit ${page}, 10;
+			where ${fieldName} like '%${searchWord}%' limit ${page}, 10;
 			
 	</select>
 			
@@ -78,8 +78,52 @@
 	
 
 	</select>
-
+	
 	<update id="stock_update" parameterType="kr.co.sinsa.admin.vo.StockVO">
+		<foreach item="e" index="index" collection="listMap" open="" close="" separator=";">
+		update stock set stock_220=stock_220+${e.stock_220}, 
+			stock_225=stock_225+${e.stock_225}, 
+			stock_230=stock_230+${e.stock_230},
+			stock_235=stock_235+${e.stock_235},
+			stock_240=stock_240+${e.stock_240},
+			stock_245=stock_245+${e.stock_245},
+			stock_250=stock_250+${e.stock_250},
+			stock_255=stock_255+${e.stock_255},
+			stock_260=stock_260+${e.stock_260},
+			stock_265=stock_265+${e.stock_265},
+			stock_270=stock_270+${e.stock_270},
+			stock_275=stock_275+${e.stock_275},
+			stock_280=stock_280+${e.stock_280},
+			stock_285=stock_285+${e.stock_285},
+			stock_290=stock_290+${e.stock_290}
+ 			where stock_prdcode='${e.stock_prdcode}'
+ 		</foreach>
+		;
+		<foreach item="e" index="index" collection="listMap" open="" close="" separator=";">
+		insert into stocklog(code, stock_220, stock_225, stock_230, stock_235, stock_240, stock_245, stock_250, stock_255,
+			stock_260, stock_265, stock_270, stock_275, stock_280, stock_285, stock_290, stock_sum)
+			values ('${e.stock_prdcode}',
+				${e.stock_220},
+				${e.stock_225},
+				${e.stock_230},
+				${e.stock_235},
+				${e.stock_240},
+				${e.stock_245},
+				${e.stock_250},
+				${e.stock_255},
+				${e.stock_260},
+				${e.stock_265},				
+				${e.stock_270},
+				${e.stock_275},
+				${e.stock_280},
+				${e.stock_285},
+				${e.stock_290},
+				${e.total}
+			 )
+		</foreach>
+		
+	</update>
+	<update id="stock_update222" parameterType="hashmap">
 		update stock set stock_220=stock_220+#{stock_220}, 
 			stock_225=stock_225+#{stock_225}, 
 			stock_230=stock_230+#{stock_230},
@@ -120,8 +164,9 @@
 			 )
 	</update>
 
-	<delete id="stock_delete">
-		delete from stock where stock_prdcode=#{stock_prdcode}
+	<delete id="stock_delete" parameterType="map">
+		delete from stock where stock_prdcode in (${picks})
+
 
 	</delete>
 

@@ -28,15 +28,6 @@ table {
 	border: 1px solid;
 }
 
-#events {
-	margin-bottom: 1em;
-	padding: 1em;
-	background-color: #f6f6f6;
-	border: 1px solid #999;
-	border-radius: 3px;
-	height: 100px;
-	overflow: auto;
-}
 </style>
 <script type="text/javascript">
 
@@ -71,26 +62,29 @@ function selectNum(target) {
 
 }
 
-function prdModify(picks) {
+function stockAdd() {
 	if (no != "") {
-		location.href = 'stockAdd?' + picks;
+		document.forms["picks"].submit();
 		
 	} else {
 	  alert('수정할 항목을 선택하십시오.');
 	}
 }
 
-function prdDelete() {
-	if (no != "") {
-		if (confirm('해당 상품을 삭제하시겠습니까?')) {
-			location.href = 'stockDelete?stock_prdcode=' + no;
+function stockDelete() {
+	if (picks != "") {
+		if (confirm(picks + '상품을 삭제하시겠습니까?')) {
+			location.href = 'stockDelete?picks=' + picks;
 		}	
 	} else {
 		  alert('삭제할 항목을 선택하십시오.');
 		}
 }
 
-	
+function boxclear() {
+	document.getElementById("pick").value = "";
+	picks = new Array();
+}	
 
 </script>
 </head>
@@ -102,11 +96,11 @@ function prdDelete() {
 		
 		<form>
 			<div class="form-row">
-				<div class="form-group col-md-3">전체 재고 수량 : ${ allcount }</div>
+				<div class="form-group col-md-3"></div>
 				<div class="form-group col-md-1">
 					<select name="fieldName" id="fieldName" class="form-control">
 						<option ${(param.fieldName == "stock_prdcode")? "selected" : ""}
-							value="prd_code">코드</option>
+							value="stock_prdcode">코드</option>
 						<option ${(param.fieldName == "prd_name")? "selected" : ""}
 							value="prd_name">품명</option>
 					</select>
@@ -125,27 +119,24 @@ function prdDelete() {
 		<div class="row">
 			<table style="border: 0px">
 				<tr>
-					<td align="left">
-						<button type="button" class="btn btn-outline-primary btn-sm"
-							onclick="location.href='stockInputForm'">신규 상품 등록</button>
+					<td align="left" colspan="2">
+						전체 재고 수량 : ${ allcount }
 					</td>
-					
-					<td width=50%><form:form id="picks" method="post" action="stockAdd">
+					<td style="width: 55%"><form:form id="picks" method="post" action="stockAdd">
 					<input type="text" id="pick" name="picks" class="form-control" placeholder="현재 페이지에서 수정 또는 삭제할 아이템을 선택하세요." readonly/>
 					</form:form></td>
-					
-					<td align="right"><input type="submit" 
-						class="btn btn-primary btn-sm" form="picks"
-						value="선택 상품 입고" /> &nbsp; <input type="button"
+					<td><a href="#;" onClick="boxclear()">&nbsp;&nbsp;&nbsp;&#10006;</a></td>
+					<td align="right" style="width: 400px"><button type="button" 
+						class="btn btn-primary btn-sm" onclick="javascript:stockAdd()">선택 상품 입고</button> &nbsp; 
+						
+						<input type="button"
 						class="btn btn-danger btn-sm" onclick="javascript:stockDelete()"
 						value="선택 상품 삭제" /></td>
 				</tr>
 			</table>
 			<br>
 			<br>
-			<!-- 			<div id="events">
-        	Event summary - new events added at the top
-    		</div> -->
+			
 			<table id="stock" class="table table-hover"
 				style="text-align: center; border: 0px solid #dddddd">
 				<thead>

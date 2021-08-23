@@ -24,8 +24,16 @@ public class OrderDAOImpl implements OrderDAO {
 		return sqlSession.selectOne("OrderDAO.order_list_count", map);
 	}
 	
+	public int order_cancel_count(Map<String, Object> map) {
+		return sqlSession.selectOne("OrderDAO.order_cancel_count", map);
+	}
+	
 	public int sales(Map<String, Object> map) {
 		return sqlSession.selectOne("OrderDAO.sales", map);
+	}
+	
+	public int minus(Map<String, Object> map) {
+		return sqlSession.selectOne("OrderDAO.minus", map);
 	}
 	
 	public int shippingreq() {
@@ -44,13 +52,6 @@ public class OrderDAOImpl implements OrderDAO {
 		sqlSession.update("OrderDAO.order_cancel", vo);
 	}
 		
-	public List<OrderVO> order_pick_list(Map<String, Object> map){
-		return sqlSession.selectList("OrderDAO.order_pick_list", map);
-	}
-	public int order_pick_count(Map<String, Object> map) {
-		return sqlSession.selectOne("OrderDAO.order_pick_count", map);
-	}
-	
 	public OrderVO order_info(String order_num) {
 		return sqlSession.selectOne("OrderDAO.order_info", order_num);
 	}
@@ -62,9 +63,5 @@ public class OrderDAOImpl implements OrderDAO {
 	public void order_delete(String order_num) {
 		sqlSession.delete("OrderDAO.order_delete", order_num);
 	}
-	public List<OrderVO> order_list() {
-		return sqlSession.selectList("OrderDAO.order_list");
-	}
-
 	
 }

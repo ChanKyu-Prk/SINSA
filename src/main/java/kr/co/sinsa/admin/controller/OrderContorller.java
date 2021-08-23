@@ -85,10 +85,12 @@ public class OrderContorller {
 		map.put("page", (page - 1) * 10);
 
 		listCount = orderService.order_list_count(map);
+		int cancelCount = orderService.order_cancel_count(map);
 		List<OrderVO> list = orderService.order_list(map);
 		model.addAttribute("orderList", list);
 		
 		int sales;
+		int minus;
 		int shippingreq = orderService.shippingreq();
 		int cancelreq = orderService.cancelreq();
 		
@@ -98,10 +100,18 @@ public class OrderContorller {
 			sales = 0;
 		}
 		
+		if (cancelCount > 0) {
+			minus = orderService.minus(map);
+		} else {
+			minus = 0;
+		}
+		
 		model.addAttribute("sales", sales);
+		model.addAttribute("minus", minus);
 		model.addAttribute("shippingreq", shippingreq);
 		model.addAttribute("cancelreq", cancelreq);
 		model.addAttribute("allcount", listCount);
+		model.addAttribute("cancelcount", cancelCount);
 		model.addAttribute("sdate", sdate);
 		model.addAttribute("edate", edate);
 		

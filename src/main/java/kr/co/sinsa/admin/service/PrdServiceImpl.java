@@ -38,8 +38,8 @@ public class PrdServiceImpl implements PrdService {
 	
 
 	@Override
-	public PrdVO prd_info(int prd_num) {
-		return dao.prd_info(prd_num);
+	public PrdVO prd_info(String prd_code) {
+		return dao.prd_info(prd_code);
 	}
 
 	@Override
@@ -53,8 +53,12 @@ public class PrdServiceImpl implements PrdService {
 	}
 
 	@Override
-	public void prd_delete(int prd_num) {
-		dao.prd_delete(prd_num);
+	public void prd_delete(String prd_code) {
+		dao.prd_delete(prd_code);
 	}
 
+	@Override
+	public String prd_delete_stock(String prd_code) {
+		return dao.prd_delete_stock(prd_code);
+	}
 }

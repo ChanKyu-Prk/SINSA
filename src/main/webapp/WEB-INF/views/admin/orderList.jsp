@@ -40,7 +40,8 @@ table {
 	<br>
 
 	<div class="container-fluid" style="padding: 0 30px;">
-	<p>${ sdate } ~ ${ edate } 기간 내  주문 건수 ${ allcount }건( 금액 <fmt:formatNumber value="${ sales }" pattern="#,###,###"/>원 )</p>
+	<p>${ sdate } ~ ${ edate } 기간 내  검색된 주문 건수 ${ allcount - cancelcount }건, 환불 요청 및 처리 건수 ${ cancelcount }건</p>
+	<p>( 매출금액 <fmt:formatNumber value="${ sales - minus }" pattern="#,###,###"/>원, 환불금액 <fmt:formatNumber value="${ minus }" pattern="#,###,###"/>원 )</p><br>
 	<button type="button" class="btn btn-outline-primary btn-lg"
 	onclick="location.href='orderList?fieldName=order_state&searchWord=결제완료'">출고요청 : ${ shippingreq }건</button>
 	<button type="button" class="btn btn-outline-primary btn-lg"
@@ -100,6 +101,8 @@ table {
 					<select name="fieldName" id="fieldName" class="form-control">
 						<option ${(param.fieldName == "order_cusid")? "selected" : ""} value="order_cusid">아이디</option>
 						<option ${(param.fieldName == "order_num")? "selected" : ""} value="order_num">주문번호</option>
+						<option ${(param.fieldName == "order_prdcode")? "selected" : ""} value="order_prdcode">상품코드</option>
+						<option ${(param.fieldName == "order_prdname")? "selected" : ""} value="order_prdname">상품명</option>
 						<option ${(param.fieldName == "order_addr")? "selected" : ""} value="order_addr">배송지</option>
 					</select>
 				</div>
@@ -203,7 +206,7 @@ table {
 											<td style="padding:6px 3px;">${ e.order_delivcomp }</td>
 											<td style="padding:6px 3px;">${ e.order_delivnum }</td>
 											<td style="padding:6px 3px;">
-												<button type="submit" class="btn btn-danger btn-sm">취소처리</button>
+												<button type="submit" class="btn btn-danger btn-sm" onclick="javascript:alert('취소처리되었습니다');">취소처리</button>
 											</td>
 							</form:form>
 										</c:when>

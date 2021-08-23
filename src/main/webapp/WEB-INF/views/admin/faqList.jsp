@@ -8,10 +8,6 @@
 <meta charset="UTF-8">
 
 <style>
-body {
-	font-size: 11pt;
-	color: teal;
-}
 
 div {
 	margin: 0 auto;

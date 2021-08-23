@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import kr.co.sinsa.admin.service.PrdService;
 import kr.co.sinsa.admin.vo.PrdVO;
+import kr.co.sinsa.admin.vo.StockVO;
 import kr.co.sinsa.biz.product.PageInfo;
 
 @Controller
@@ -22,12 +23,6 @@ public class PrdContorller {
 
 	@Inject
 	PrdService prdService;
-
-//	@RequestMapping(value = "/", method = RequestMethod.GET)
-//	public String home(Model model) {
-//		System.out.println("인덱스 화면으로 이동11111");
-//		return "index";
-//	}
 
 	
 	@RequestMapping(value = "/admin/prdList", method = RequestMethod.GET)
@@ -86,11 +81,11 @@ public class PrdContorller {
 	}
 		
 	@RequestMapping("/admin/prdInfo")
-	public String getPrd(Model model, @RequestParam int prd_num) {
+	public String getPrd(Model model, @RequestParam String prd_code) {
 //		PrdDAO dao = sqlSessionTemplate.getMapper(PrdDAO.class);
 //		PrdVO vo = dao.prd_info(prd_num);
 //		model.addAttribute("prdInfo", vo);
-		model.addAttribute("prdInfo", prdService.prd_info(prd_num));
+		model.addAttribute("prdInfo", prdService.prd_info(prd_code));
 		return "admin/xprdInfo";
 	}
 			
@@ -108,26 +103,35 @@ public class PrdContorller {
 	}
 			
 	@RequestMapping("/admin/prdEdit")
-	public String prdEdit(Model model, @RequestParam int prd_num) {
+	public String prdEdit(Model model, @RequestParam String prd_code) {
 
-		model.addAttribute("prdInfo", prdService.prd_info(prd_num));
+		model.addAttribute("prdInfo", prdService.prd_info(prd_code));
 		return "admin/prdEdit";
 	}
 			
 	@RequestMapping("/admin/prdUpdate")
 	public String prdUpdate(HttpServletRequest request, Model model, PrdVO vo) {
-		model.addAttribute("prd_num", vo.getPrd_num());
+		model.addAttribute("prd_code", vo.getPrd_code());
 		String referer = request.getParameter("referer");
 		prdService.prd_update(vo);
 		return "redirect:"+referer;
 	}
 			
 	@RequestMapping("/admin/prdDelete")
-	public String prdDelete(HttpServletRequest request, @RequestParam int prd_num) {
-//		PrdDAO dao = sqlSessionTemplate.getMapper(PrdDAO.class);
-//		int n = dao.prd_delete(prd_num);
-		prdService.prd_delete(prd_num);
-		String referer = request.getHeader("Referer");
+	public String prdDelete(HttpServletRequest request, @RequestParam String prd_code, Model model) {
+		String stock = prdService.prd_delete_stock(prd_code);
+		model.addAttribute("prdInfo", prdService.prd_info(prd_code));
+		request.setAttribute("stock", stock);
+		
+		//prdService.prd_delete(prd_code);
+		
+		return "admin/prdDelete";
+	}
+
+	@RequestMapping("/admin/prdDeleteSuccess")
+	public String prdDeleteSuccess(HttpServletRequest request, @RequestParam String prd_code) {
+		prdService.prd_delete(prd_code);
+		String referer = request.getParameter("referer");
 		return "redirect:"+referer;
 	}
 	

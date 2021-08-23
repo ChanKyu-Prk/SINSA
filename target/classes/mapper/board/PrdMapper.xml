@@ -35,7 +35,7 @@
 	</insert>
 
 	<select id="prd_info" resultType="kr.co.sinsa.admin.vo.PrdVO">
-		select * from product where prd_num=#{prd_num}
+		select * from product where prd_code=#{prd_code}
 	
 
 	</select>
@@ -43,14 +43,21 @@
 	<update id="prd_update" parameterType="kr.co.sinsa.admin.vo.PrdVO">
 		update product set prd_code=#{prd_code}, prd_name=#{prd_name}, prd_category=#{prd_category},
 		 prd_image=#{prd_image}, prd_gender=#{prd_gender}, prd_price=#{prd_price}, prd_disrate=#{prd_disrate},
-		 prd_brand=#{prd_brand}, prd_color=#{prd_color}, prd_detail=#{prd_detail} where prd_num=#{prd_num}
+		 prd_brand=#{prd_brand}, prd_color=#{prd_color}, prd_detail=#{prd_detail} where prd_code=#{prd_code}
 	
 
 	</update>
 
 	<delete id="prd_delete">
-		delete from product where prd_num=#{prd_num}
+		delete from product where prd_code=#{prd_code};
+		
+		delete from stock where stock_prdcode=#{prd_code};
 
 	</delete>
+	
+	<select id="prd_delete_stock" resultType="String">
+		select sum(stock_220+stock_225+stock_230+stock_235+stock_240+stock_245+stock_250+
+			stock_255+stock_260+stock_265+stock_270+stock_275+stock_280+stock_285+stock_290) from stock where stock_prdcode=#{prd_code}
+	</select>
 
 </mapper>
