@@ -66,9 +66,9 @@ public class CustomerDAOImpl implements CustomerDAO{
 		return SST.selectOne("CustomerDAO.idCheck",CUS_ID);
 	}
 	
-//	public int emailChk(String CUS_EMAIL) {
-//		return SST.selectOne("CustomerDAO.emailChk", CUS_EMAIL);
-//	}
+	public int mailChk(String CUS_EMAIL) {
+		return SST.selectOne("CustomerDAO.mailChk", CUS_EMAIL);
+	}
 	
 	
 

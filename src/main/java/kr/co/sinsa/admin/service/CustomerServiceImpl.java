@@ -67,10 +67,10 @@ public class CustomerServiceImpl implements CustomerService{
 		return dao.idCheck(CUS_ID);
 	}
 	
-//	@Override
-//	public int emailChk(String CUS_EMAIL) throws Exception{
-//		return dao.emailChk(CUS_EMAIL);
-//	}
+	@Override
+	public int mailChk(String CUS_EMAIL){
+		return dao.mailChk(CUS_EMAIL);
+	}
 	
 	
 	
