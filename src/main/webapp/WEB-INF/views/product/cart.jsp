@@ -795,7 +795,7 @@
 													var ORDER_AMOUNT = $(this).parents("tr").find(".amount").val();
 													var lastVal = $(this).parents("tr").find(".amount").attr("data-lastval");
 													if(lastVal != ORDER_AMOUNT){
-														var result = confirm("변경된 수량을 저장하시겠습니까?\n변경전 : " + lastVal + "\n변경후 : " + ORDER_AMOUNT);
+														var result = confirm("변경된 수량을 저장하시겠습니까?\n변경전 : " + lastVal + " => 변경후 : " + ORDER_AMOUNT);
 														if(!result){
 															$(this).parents("tr").find(".amount").val(lastVal);
 															alert("변경을 취소하였습니다.");															return false;
@@ -916,7 +916,50 @@
 								<li>총 금액 <span> <%=formatter.format(sum1 - sum2)%></span>
 								</li>
 							</ul>
-							<a href="#" class="primary-btn">결제하기</a>
+							<button id="cartBuyBtn" class="primary-btn col-lg-12">결제하기</button>
+							<script type="text/javascript">
+							$("#cartBuyBtn").click(function(){
+								var ORDER_PRDCODE = $(".prdCode").map(function() {
+								    return $(this).text();
+								}).get();
+								var ORDER_PRDSIZE = $(".qty-size").map(function() {
+								    return $(this).text();
+								}).get();
+								var ORDER_AMOUNT = $('.amount').map(function() {
+								    return this.value;
+								}).get();
+								
+								//JSON 형태로 데이터 생성
+								var data = {};
+								var itemList = [];
+								if(ORDER_AMOUNT.length == 0){
+									alert("옵션을 선택해주세요.");
+									return false;
+								}
+								for(var i=0; i<ORDER_AMOUNT.length; i++){
+									data = {};
+									data["ORDER_PRDCODE"] = ORDER_PRDCODE[i];
+									data["ORDER_PRDSIZE"] = ORDER_PRDSIZE[i];
+									data["ORDER_AMOUNT"] = ORDER_AMOUNT[i];
+									itemList.unshift(data);
+								}
+									  $.ajax({
+									   url : "/direct/checkout",
+									   type : "POST",
+									   data : JSON.stringify(itemList),
+									    headers: {
+									      'Accept': 'application/json',
+									      'Content-Type': 'application/json'
+									    },
+									   success : function(data){
+											location.href="/direct/checkout";
+									   },
+									   error : function(){
+									    alert("보내기 실패");
+									   }
+									  });
+							});
+						</script>
 						</div>
 					</div>
 				</div>
