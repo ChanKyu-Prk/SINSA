@@ -4,7 +4,7 @@
 <mapper namespace="IndexService">
 	
 		<select id="getProductList" resultType="kr.co.sinsa.biz.product.ProductVO"> 
- 			select * from PRODUCT 
+ 			select * from PRODUCT order by PRD_NUM desc limit 10
 		</select> 
 	
 	
