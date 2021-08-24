@@ -53,8 +53,12 @@ function selectNum(target) {
             var td = trs[i].getElementsByTagName('td');
             no = td[0].innerText;
         	
-        	picks[picks.length] = "'"+no+"'";
-        	document.getElementById("pick").value = picks;
+            if(picks.indexOf("'"+no+"'") == -1) {
+        		picks[picks.length] = "'"+no+"'";
+        		document.getElementById("pick").value = picks;
+            } else {
+            	alert("이미 선택된 제품입니다.");
+            }
         	
         }
     }

@@ -508,7 +508,7 @@ outline: none;
   </div>
 </div>
 	<jsp:include page="../footer.jsp"></jsp:include>
-</body>
+
 
 <script>
 delv = [];
@@ -740,4 +740,5 @@ $('.delivBtn').on("click",function(){
 		location.href = 'myOrderList.do?date1=' + date1 + '&date2=' + date2;
 	});
 </script>
+</body>
 </html>

@@ -1,5 +1,6 @@
 package kr.co.sinsa.admin.service;
 
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Calendar;
@@ -8,15 +9,29 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import kr.co.sinsa.biz.customer.FileUploadService;
-
 @Service("prdFileUploadService")
-public class PrdFileUploadServiceImpl implements PrdFileUploadService{
-	private static final String SAVE_PATH = "/prdImg";
+public class PrdFileUploadServiceImpl implements PrdFileUploadService {
+	
+	private static final String SAVE_PATH = "/upload/prdImg";
+	private static final String PREFIX_URL = "/upload/prdImg/";
+	
+	
+	
 	@Override
 	public String prdImgUpload(List<MultipartFile> multipartFile) {
-		String fileNames= "";
-
+		
+		File uploadPath = new File("C:\\upload\\prdImg");
+		
+		if (!uploadPath.exists()) {
+			try{
+			    uploadPath.mkdirs(); 
+		    } catch(Exception e) {
+			    e.getStackTrace();
+			} 
+		}
+		
+		String url = null;
+		
 		try {
 			for(int i = 0; i <multipartFile.size();i ++) {
 				
@@ -26,16 +41,18 @@ public class PrdFileUploadServiceImpl implements PrdFileUploadService{
 			String extName
 				= originFilename.substring(originFilename.lastIndexOf("."), originFilename.length());
 			// 서버에서 저장 할 파일 이름
-			String saveFileName = genSaveFileName(extName);			
+			/*String saveFileName = genSaveFileName(extName);	*/	
+			String saveFileName = extName;
 			writeFile(multipartFile.get(i), saveFileName);		
-			fileNames += saveFileName+"/";
+			
+			url = PREFIX_URL + saveFileName;
 			
 			}
 		}
 		catch (IOException e) {
 			throw new RuntimeException(e);
 		}
-			return fileNames;
+			return url;
 		
 		
 	}
@@ -65,6 +82,7 @@ public class PrdFileUploadServiceImpl implements PrdFileUploadService{
 
 		byte[] data = multipartFile.getBytes();
 		FileOutputStream fos = new FileOutputStream(SAVE_PATH + "/" + saveFileName);
+
 		fos.write(data);
 		fos.close();
 		

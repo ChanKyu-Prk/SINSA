@@ -20,6 +20,10 @@
 		up static resources in the ${webappRoot}/resources directory -->
 	<resources mapping="/resources/**" location="/resources/" />
 
+	<!-- resource mapping -->
+	<!-- location : 물리적 주소 / mapping : 가상 주소 -->
+	<resources location="file:///upload/prdImg/" mapping="upload/prdImg/*"/>
+
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources 
 		in the /WEB-INF/views directory -->
 	<beans:bean

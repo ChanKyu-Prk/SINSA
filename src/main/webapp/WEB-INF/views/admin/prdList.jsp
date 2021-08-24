@@ -15,8 +15,9 @@ div {
 
 table {
 	width: 100%;
-	font-size: 0.8em;
 }
+
+
 </style>
 <script
 	src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -120,7 +121,7 @@ table {
 				<thead>
 					<tr>
 						<th>번호</th>
-						<th>이미지</th>
+						<th>대표이미지</th>
 						<th>코드</th>
 						<th>품명</th>
 						<th>분류</th>
@@ -141,17 +142,22 @@ table {
 						<c:when test="${!empty prdList}">
 							<c:forEach var="e" items="${ prdList }">
 								<tr onclick="javascript:selectNum(this);">
-									<td>${ e.prd_num }</td>
-									<td>${e.prd_image}</td>
-									<td>${ e.prd_code }</td>
-									<td><a href="prdInfo?prd_num=${ e.prd_num }">${ e.prd_name }</a></td>
-									<td>${e.prd_category}</td>
-									<td>${e.prd_gender}</td>
-									<td><fmt:formatNumber value="${e.prd_price}"
+									<td style="vertical-align:middle;">${ e.prd_num }</td>
+									<%-- <td>${e.prd_image}</td> --%>
+									<c:set var="img" value="${ e.prd_code }" ></c:set>
+									<%
+									String img = (String)pageContext.getAttribute("img");
+									%>
+									<td style="vertical-align:middle;"><img src="${pageContext.request.contextPath}\upload\prdImg\<%= img %>.png" width="100px"></td>
+									<td style="vertical-align:middle;">${ e.prd_code }</td>
+									<td style="vertical-align:middle;"><a href="prdInfo?prd_num=${ e.prd_num }">${ e.prd_name }</a></td>
+									<td style="vertical-align:middle;">${e.prd_category}</td>
+									<td style="vertical-align:middle;">${e.prd_gender}</td>
+									<td style="vertical-align:middle;"><fmt:formatNumber value="${e.prd_price}"
 											pattern="#,###,###" /></td>
-									<td>${e.prd_brand}</td>
-									<td>${e.prd_color}</td>
-									<td>${e.prd_disrate}</td>
+									<td style="vertical-align:middle;">${e.prd_brand}</td>
+									<td style="vertical-align:middle;">${e.prd_color}</td>
+									<td style="vertical-align:middle;">${e.prd_disrate}</td>
 
 								</tr>
 							</c:forEach>
