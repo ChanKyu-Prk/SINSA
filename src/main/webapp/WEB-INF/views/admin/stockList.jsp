@@ -25,7 +25,6 @@ div {
 
 table {
 	width: 100%;
-	border: 1px solid;
 }
 
 </style>
@@ -93,7 +92,8 @@ function boxclear() {
 	<br>
 	<br>
 	<div class="container-fluid" style="padding: 0 30px;">
-		
+	<center><h2>재고 현황</h2></center>
+		<br>
 		<form>
 			<div class="form-row">
 				<div class="form-group col-md-3"></div>
@@ -115,7 +115,7 @@ function boxclear() {
 				<div class="form-group col-md-3"></div>
 			</div>
 		</form>			
-		<br><br>
+		<br>
 		<div class="row">
 			<table style="border: 0px">
 				<tr>
@@ -137,8 +137,7 @@ function boxclear() {
 			<br>
 			<br>
 			
-			<table id="stock" class="table table-hover"
-				style="text-align: center; border: 0px solid #dddddd">
+			<table id="stock" class="table table-hover"	style="text-align: center;">
 				<thead>
 					<tr>
 						<th>모델</th>
@@ -239,5 +238,7 @@ function boxclear() {
 		<br> <br>
 
 	</div>
+		<br><br>
+	<jsp:include page="../footer.jsp"/>
 </body>
 </html>

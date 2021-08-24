@@ -5,19 +5,16 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>prdList</title>
-<style>
-body {
-	font-size: 11pt;
-	color: teal;
-}
 
+<style>
 div {
 	margin: 0 auto;
 }
 
 table {
 	width: 100%;
+	text-align: center;
+	
 }
 </style>
 <script type="text/javascript">
@@ -33,77 +30,80 @@ table {
 	<br>
 	<br>
 	<div class="container">
-		
+
 		<div class="row">
-			<jsp:include page="noticeInputForm.jsp" flush="true" />
-			
+			<div align="center"><h2>공지사항&nbsp;&nbsp;&nbsp;
+			<button id="click" type="button" class="btn btn-outline-primary btn-lg" onclick="location.href='noticeInput'">새 공지 등록</button></h2></div>
+			<br><br><br>
 			<table class="table table-hover">
 				<thead>
 					<tr>
-						<th>번호</th>
-						<th>제목</th>
-						<th>작성일자</th>
+						<th style="width:10%;">번호</th>
+						<th style="width:60%;">제목</th>
+						<th style="width:20%;">작성일자</th>
 					</tr>
 				</thead>
 				<tbody>
 					<c:forEach var="e" items="${ noticeList }">
 						<tr>
 							<td>${ e.notice_num }</td>
-							<td><a href="noticeEdit?notice_num=${ e.notice_num }">${ e.notice_title }</a></td>
+							<td style="text-align:left;"><a href="noticeEdit?notice_num=${ e.notice_num }">${ e.notice_title }</a></td>
 							<td>${ e.notice_regdate }</td>
 						</tr>
 					</c:forEach>
 				</tbody>
 			</table>
+
+			<div align="center">
+				<ul class="pagination">
+					<c:choose>
+						<c:when test="${pageInfo.getPage()<=1}">
+							<li class="page-item disabled"><a class="page-link"
+								aria-disabled="true">이전</a></li>
+						</c:when>
+						<c:when test="${pageInfo.getStartPage()==1}">
+							<li class="page-item"><a class="page-link"
+								href="noticeList?page=${pageInfo.getStartPage()}&fielaName=${param.fieldName}&searchWord=${param.searchWord}"
+								tabindex="-1">이전</a></li>
+						</c:when>
+						<c:otherwise>
+							<li class="page-item"><a class="page-link"
+								href="noticeList?page=${pageInfo.getStartPage()-1}&fielaName=${param.fieldName}&searchWord=${param.searchWord}"
+								tabindex="-1">이전</a></li>
+						</c:otherwise>
+					</c:choose>
+
+					<c:forEach begin="${pageInfo.getStartPage()}"
+						end="${pageInfo.getEndPage()}" varStatus="state">
+						<c:choose>
+							<c:when test="${pageInfo.getPage()==state.index}">
+								<li class="page-item active" aria-current="page"><a
+									class="page-link">${state.index}</a></li>
+							</c:when>
+							<c:otherwise>
+								<li class="page-item"><a class="page-link"
+									href="noticeList?page=${state.index}&fielaName=${param.fieldName}&searchWord=${param.searchWord}">${state.index}</a></li>
+							</c:otherwise>
+						</c:choose>
+					</c:forEach>
+
+					<c:choose>
+						<c:when test="${pageInfo.getPage() >= pageInfo.getMaxPage()}">
+							<li class="page-item disabled"><a class="page-link"
+								aria-disabled="true">다음</a></li>
+						</c:when>
+						<c:when test="${pageInfo.getEndPage()==pageInfo.getMaxPage()}">
+							<li class="page-item"><a class="page-link"
+								href="noticeList?page=${pageInfo.getEndPage()}&fielaName=${param.fieldName}&searchWord=${param.searchWord}">다음</a></li>
+						</c:when>
+						<c:otherwise>
+							<li class="page-item"><a class="page-link"
+								href="noticeList?page=${pageInfo.getEndPage()+1}&fielaName=${param.fieldName}&searchWord=${param.searchWord}">다음</a></li>
+						</c:otherwise>
+					</c:choose>
+				</ul>
+			</div>
 		</div>
-		
-		<ul class="pagination">
-			<c:choose>
-				<c:when test="${pageInfo.getPage()<=1}">
-					<li class="page-item disabled"><a class="page-link"
-						aria-disabled="true">이전</a></li>
-				</c:when>
-				<c:when test="${pageInfo.getStartPage()==1}">
-					<li class="page-item"><a class="page-link"
-						href="noticeList?page=${pageInfo.getStartPage()}&fielaName=${param.fieldName}&searchWord=${param.searchWord}"
-						tabindex="-1">이전</a></li>
-				</c:when>
-				<c:otherwise>
-					<li class="page-item"><a class="page-link"
-						href="noticeList?page=${pageInfo.getStartPage()-1}&fielaName=${param.fieldName}&searchWord=${param.searchWord}"
-						tabindex="-1">이전</a></li>
-				</c:otherwise>
-			</c:choose>
-
-			<c:forEach begin="${pageInfo.getStartPage()}"
-				end="${pageInfo.getEndPage()}" varStatus="state">
-				<c:choose>
-					<c:when test="${pageInfo.getPage()==state.index}">
-						<li class="page-item active" aria-current="page"><a
-							class="page-link">${state.index}</a></li>
-					</c:when>
-					<c:otherwise>
-						<li class="page-item"><a class="page-link"
-							href="noticeList?page=${state.index}&fielaName=${param.fieldName}&searchWord=${param.searchWord}">${state.index}</a></li>
-					</c:otherwise>
-				</c:choose>
-			</c:forEach>
-
-			<c:choose>
-				<c:when test="${pageInfo.getPage() >= pageInfo.getMaxPage()}">
-					<li class="page-item disabled"><a class="page-link"
-						aria-disabled="true">다음</a></li>
-				</c:when>
-				<c:when test="${pageInfo.getEndPage()==pageInfo.getMaxPage()}">
-					<li class="page-item"><a class="page-link"
-						href="noticeList?page=${pageInfo.getEndPage()}&fielaName=${param.fieldName}&searchWord=${param.searchWord}">다음</a></li>
-				</c:when>
-				<c:otherwise>
-					<li class="page-item"><a class="page-link"
-						href="noticeList?page=${pageInfo.getEndPage()+1}&fielaName=${param.fieldName}&searchWord=${param.searchWord}">다음</a></li>
-				</c:otherwise>
-			</c:choose>
-		</ul>
 		<br> <br>
 		<form>
 			<div class="form-row">
@@ -128,5 +128,7 @@ table {
 			</div>
 		</form>
 	</div>
+	<br><br>
+	<jsp:include page="footer.jsp"/>
 </body>
 </html>

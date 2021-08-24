@@ -7,21 +7,55 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>empInputform</title>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
 <style>
-body {
-	font-size: 11pt;
-	color: teal;
-}
 
 div {
 	margin: 0 auto;
 }
 </style>
+<script>
+$('.reviewPicAdd').on("click", function() {
+	$('#input_file').trigger('click');
+});
+
+$(window).resize(function() {
+	var imgWidth = $('.reviewPic').width();
+	$('.reviewPic').height(imgWidth);
+});
+
+$('#input_file').on("change", handlerIngsFilesSelect);
+
+function handlerIngsFilesSelect(e) {
+	$('#reviewPic0').removeAttr("src").attr("src",
+			"/resources/img/default.png");
+	$('#reviewPic1').removeAttr("src").attr("src",
+			"/resources/img/default.png");
+	$('#reviewPic2').removeAttr("src").attr("src",
+			"/resources/img/default.png");
+
+	var sel_files = [];
+	var files = e.target.files;
+	var filesArr = Array.prototype.slice.call(files);
+	
+	if(filesArr.length>3){
+		$('#input_file').val(null);
+		return
+	}
+	
+	var index = 0;
+	filesArr.forEach(function(f) {
+		sel_files.push(f);
+
+		var reader = new FileReader();
+		reader.onload = function(e) {
+			$('#reviewPic' + index).attr("src", e.target.result);
+			index++;
+		}
+		reader.readAsDataURL(f);
+	});
+}
+</script>
 </head>
 <body>
 <jsp:include page="adminHeader.jsp" flush="true" />
@@ -31,8 +65,50 @@ div {
 		<h2>신규 상품 등록</h2>
 		<form:form method="post" action="prdInsert" modelAttribute="prdVO" enctype="multipart/form-data">
 			<form:hidden path="prd_image"/>
-			<button id="btn-upload" type="button" style="border: 1px solid #ddd; outline: none;">파일 추가</button>
-  			<input id="input_file" multiple="multiple" type="file" style="display:none;">
+
+  			
+						<div class="row">
+							<input id="input_file" multiple="multiple" name="multipartFile"
+								type="file" accept="image/jpeg, image/jpg, image/png"
+								class="inputFile">
+
+
+
+							<table class="imgTable">
+								<colgroup>
+									<col width="250px">
+									<col width="250px">
+									<col width="250px">
+									<col width="250px">
+								</colgroup>
+								<tr>
+									<td class="imgtd"><div class="img_td_row">
+											<img class="reviewPic" alt="리뷰 사진" title="리뷰 사진"
+												id="reviewPic0" src="/resources/img/default.png" />
+
+										</div></td>
+									<td class="imgtd"><div class="img_td_row">
+											<img class="reviewPic" alt="리뷰 사진" title="리뷰 사진"
+												id="reviewPic1" src="/resources/img/default.png" />
+
+										</div></td>
+									<td class="imgtd"><div class="img_td_row">
+											<img class="reviewPic" alt="리뷰 사진" title="리뷰 사진"
+												id="reviewPic2" src="/resources/img/default.png" />
+
+										</div></td>
+									<td class="imgtd"><div class="img_td_row">
+											<img class="reviewPicAdd" alt="리뷰 사진 추가" title="리뷰 사진 추가"
+												src="/resources/img/camera.png" />
+
+										</div></td>
+								</tr>
+
+							</table>
+
+						</div>
+
+  			
 			<form:hidden path="fieldName" value="${param.fieldName}"/>
 			<form:hidden path="searchWord" value="${param.searchWord}"/>
 			<table>

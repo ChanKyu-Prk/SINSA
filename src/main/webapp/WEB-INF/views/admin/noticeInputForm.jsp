@@ -6,68 +6,57 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script>
-	$(document).ready(function() {
-		$('div.a').click(function() {
-			$(this).next().slideToggle();
-		});
-	});
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
-	$(document).ready(function() {
-		$('#click').click(function() {
-			$('#notice').slideToggle('slow', function() {
-			});
-		});
-	});
-</script>
 <style>
 table {
 	width: 100%;
 }
-
-td.q {
-	width: 10%;
-	height: 38px;
-	background-color: #007bfe;
-	color: #fff;
-	font-size: 1.8em;
-	text-align: center;
-	
-}
-
-td.a {
-	width: 10%;
-	font-size: 1.8em;
-	text-align: center;
-}
-
 </style>
 </head>
 <body>
-
+	<jsp:include page="adminHeader.jsp" flush="true" />
+	<br>
+	<br>
 	<br>
 	<div>
-		<h2>공지사항&nbsp;&nbsp;&nbsp;<button id="click" type="button" class="btn btn-outline-primary btn-lg" style="word-break: nowrap; text-align:right";>새 공지 등록</button></h2>
-		<br>
-		<div id="notice" style="display:none;">
-		<form:form method="post" action="noticeInsert" modelAttribute="noticeVO">
-			<table>
-				<tr>
-					<td class="q">제목</td>
-					<td><form:input path="notice_title" class="form-control"/></td>
-				</tr>
-				<tr>
-					<td class="a">내용</td>
 
-					<td><form:textarea class="form-control" path="notice_content" cols="50" rows="5" /></td>
-				</tr>
-				<tr>
-					<td colspan="2" style="text-align:right;"><input type="submit" class="btn btn-primary" value="등록"></td>
-				</tr>
-			</table>
-		</form:form>
+		<br>
+		<div class="container">
+			<h2>공지사항 등록</h2>
+			
+
+				<br>
+				<br>
+				<form:form method="post" action="noticeInsert"
+					modelAttribute="noticeVO">
+
+					<div class="input-group mb-3">
+						<div class="input-group-prepend">
+							<span class="input-group-text" id="basic-addon1">제목</span>
+						</div>
+						<input type="text" class="form-control" aria-label="Username"
+							aria-describedby="basic-addon1" name="notice_title">
+					</div>
+
+					<div class="input-group">
+						<div class="input-group-prepend">
+							<span class="input-group-text">내용</span>
+						</div>
+						<textarea class="form-control" aria-label="With textarea"
+							name="notice_content" rows="20"></textarea>
+					</div>
+
+					<br><br>
+					<div align="center">
+						<input type="submit" class="btn btn-primary" value="등록">
+						<button class="btn btn-outline-primary" type="button" onclick="history.go(-1);">취소</button>
+					</div>
+				</form:form>
+			</div>
 		</div>
-	</div>
+	<br><br>
+	<jsp:include page="../footer.jsp"/>
 </body>
 </html>

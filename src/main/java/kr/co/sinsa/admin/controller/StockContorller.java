@@ -93,8 +93,6 @@ public class StockContorller {
 			@RequestParam(value = "fieldName", required = false) String fieldName,
 			@RequestParam(value = "searchWord", required = false) String searchWord, StockVO vo, String pick) {
 		
-		System.out.println(pick);
-		
 		int page = 1;
 		int limit = 10;
 		int listCount;

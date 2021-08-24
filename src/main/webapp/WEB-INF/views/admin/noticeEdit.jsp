@@ -7,13 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>empEdit</title>
 <style>
-body {
-	font-size: 11pt;
-	color: teal;
-}
-
 div {
 	margin: 0 auto;
 }
@@ -27,31 +21,53 @@ div {
 </script>
 </head>
 <body>
-<jsp:include page="adminHeader.jsp" flush="true" />
-	<br><br>
+	<jsp:include page="adminHeader.jsp" flush="true" />
+	<br>
+	<br>
+	<br>
 	<div>
-		<form:form method="post" action="noticeUpdate" modelAttribute="noticeInfo">
-			<form:hidden path="notice_num" />
-			<table>
-				<tr>
-					<td>제목</td>
-					<td><form:input path="notice_title" /></td>
-				</tr>
-				<tr>
-					<td>내용</td>
-					<td>
-						<form:textarea path="notice_content" cols="50" rows="5" />
-					</td>
-				</tr>
-				<tr>
-					<td colspan="2"><input type="submit" value="변경사항저장"></td>
-				</tr>
-				<tr>
-					<td colspan="2"><input type="button" onclick="javascript:noticeDelete(${ param.notice_num })" value="삭제" /></td>
-				</tr>
 
-			</table>
-		</form:form>
+		<br>
+		<div class="container">
+			<h2>공지사항 수정/삭제</h2>
+
+
+			<br> <br>
+			<form:form method="post" action="noticeUpdate"
+				modelAttribute="noticeInfo">
+				<form:hidden path="notice_num" />
+
+				<div class="input-group mb-3">
+					<div class="input-group-prepend">
+						<span class="input-group-text" id="basic-addon1">제목</span>
+					</div>
+					<input type="text" class="form-control" aria-label="Username"
+						aria-describedby="basic-addon1" name="notice_title"
+						value="${noticeInfo.notice_title }">
+				</div>
+
+				<div class="input-group">
+					<div class="input-group-prepend">
+						<span class="input-group-text">내용</span>
+					</div>
+					<textarea class="form-control" aria-label="With textarea"
+						name="notice_content" rows="20">${noticeInfo.notice_content }</textarea>
+				</div>
+
+				<br>
+				<br>
+				<div align="center">
+					<input type="submit" class="btn btn-primary" value="변경사항저장">
+					<button type="button" class="btn btn-danger"
+						onclick="javascript:noticeDelete(${ param.notice_num })">게시물삭제</button>
+					&nbsp;&nbsp;&nbsp;&nbsp;<button class="btn btn-outline-primary" type="button"
+						onclick="history.go(-1);">취소</button>
+				</div>
+
+			</form:form>
+		</div>
 	</div>
+	<br><br>
+	<jsp:include page="../footer.jsp"/>
 </body>
 </html>

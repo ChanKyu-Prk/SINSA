@@ -38,21 +38,24 @@ table {
 	<jsp:include page="adminHeader.jsp" flush="true" />
 	<br>
 	<br>
-
 	<div class="container-fluid" style="padding: 0 30px;">
+	<center><h2>주문 관리</h2></center>
+	<br>
 	<p>${ sdate } ~ ${ edate } 기간 내  검색된 주문 건수 ${ allcount - cancelcount }건, 환불 요청 및 처리 건수 ${ cancelcount }건</p>
 	<p>( 매출금액 <fmt:formatNumber value="${ sales - minus }" pattern="#,###,###"/>원, 환불금액 <fmt:formatNumber value="${ minus }" pattern="#,###,###"/>원 )</p><br>
-	<button type="button" class="btn btn-outline-primary btn-lg"
+	
+	<br>
+			<form>
+			<div class="form-row">
+				<div class="form-group col-md-3">
+				<button type="button" class="btn btn-outline-primary btn-lg"
 	onclick="location.href='orderList?fieldName=order_state&searchWord=결제완료'">출고요청 : ${ shippingreq }건</button>
 	<button type="button" class="btn btn-outline-primary btn-lg"
 	onclick="location.href='orderList?fieldName=order_state&searchWord=취소요청'">취소요청 : ${ cancelreq }건</button>
-	<br><br>
-			<form>
-			<div class="form-row">
-				<div class="form-group col-md-2"></div>
+				</div>
 				<div class="form-group col-md-1">
 					<input type="text" id="sdate" name="sdate" class="form-control">
-				</div>
+				</div>&#126;
 				<div class="form-group col-md-1">
 					<input type="text" id="edate" name="edate" class="form-control">
 					    <script>
@@ -113,7 +116,7 @@ table {
 				<div class="form-group col-md-1">
 					<input type="submit" class="btn btn-primary" value="검색" />
 				</div>
-				<div class="form-group col-md-2"></div>
+				<div class="form-group col-md-1"></div>
 			</div>
 		</form>
 		<div class="row">
@@ -243,12 +246,12 @@ table {
 						</c:when>
 						<c:when test="${pageInfo.getStartPage()==1}">
 							<li class="page-item"><a class="page-link"
-								href="orderList?page=${pageInfo.getStartPage()}&fielaName=${param.fieldName}&searchWord=${param.searchWord}"
+								href="orderList?page=${pageInfo.getStartPage()}&sdate=${param.sdate}&edate=${param.edate}&fieldName=${param.fieldName}&searchWord=${param.searchWord}"
 								tabindex="-1">이전</a></li>
 						</c:when>
 						<c:otherwise>
 							<li class="page-item"><a class="page-link"
-								href="orderList?page=${pageInfo.getStartPage()-1}&fielaName=${param.fieldName}&searchWord=${param.searchWord}"
+								href="orderList?page=${pageInfo.getStartPage()-1}&sdate=${param.sdate}&edate=${param.edate}&fieldName=${param.fieldName}&searchWord=${param.searchWord}"
 								tabindex="-1">이전</a></li>
 						</c:otherwise>
 					</c:choose>
@@ -262,7 +265,7 @@ table {
 							</c:when>
 							<c:otherwise>
 								<li class="page-item"><a class="page-link"
-									href="orderList?page=${state.index}&fielaName=${param.fieldName}&searchWord=${param.searchWord}">${state.index}</a></li>
+									href="orderList?page=${state.index}&sdate=${param.sdate}&edate=${param.edate}&fieldName=${param.fieldName}&searchWord=${param.searchWord}">${state.index}</a></li>
 							</c:otherwise>
 						</c:choose>
 					</c:forEach>
@@ -274,11 +277,11 @@ table {
 						</c:when>
 						<c:when test="${pageInfo.getEndPage()==pageInfo.getMaxPage()}">
 							<li class="page-item"><a class="page-link"
-								href="orderList?page=${pageInfo.getEndPage()}&fielaName=${param.fieldName}&searchWord=${param.searchWord}">다음</a></li>
+								href="orderList?page=${pageInfo.getEndPage()}&sdate=${param.sdate}&edate=${param.edate}&fieldName=${param.fieldName}&searchWord=${param.searchWord}">다음</a></li>
 						</c:when>
 						<c:otherwise>
 							<li class="page-item"><a class="page-link"
-								href="orderList?page=${pageInfo.getEndPage()+1}&fielaName=${param.fieldName}&searchWord=${param.searchWord}">다음</a></li>
+								href="orderList?page=${pageInfo.getEndPage()+1}&sdate=${param.sdate}&edate=${param.edate}&fieldName=${param.fieldName}&searchWord=${param.searchWord}">다음</a></li>
 						</c:otherwise>
 					</c:choose>
 				</ul>
@@ -288,5 +291,7 @@ table {
 		<br>
 
 	</div>
+	<br><br>
+	<jsp:include page="footer.jsp"/>
 </body>
 </html>
