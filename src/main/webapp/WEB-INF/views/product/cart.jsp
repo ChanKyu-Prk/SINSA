@@ -423,8 +423,15 @@
 																				<div class="col-lg-9 col-md-3">
 																					<select id="list" class="select_size"
 																						name="CART_PRDSIZE">
-																						<option value="" disabled selected>선택하세요</option>
+																						<option value="" disabled selected hidden>선택하세요</option>
 																						<c:choose>
+																							<c:when
+																								test="${list.STOCK_220 <= 0 and list.CART_PRDSIZE eq '220'}">
+																								<option value="220" disabled selected>[품절]220</option>
+																							</c:when>
+																							<c:when test="${list.STOCK_220 <= 0}">
+																								<option value="220" disabled>[품절]220</option>
+																							</c:when>
 																							<c:when
 																								test="${list.STOCK_220 > 0 and list.CART_PRDSIZE ne '220'}">
 																								<option value="220">220</option>
@@ -433,8 +440,16 @@
 																								test="${list.STOCK_220 > 0 and list.CART_PRDSIZE eq '220'}">
 																								<option value="220" selected>220</option>
 																							</c:when>
+
 																						</c:choose>
 																						<c:choose>
+																							<c:when
+																								test="${list.STOCK_225 <= 0 and list.CART_PRDSIZE eq '225'}">
+																								<option value="225" disabled selected>[품절]225</option>
+																							</c:when>
+																							<c:when test="${list.STOCK_225 <= 0}">
+																								<option value="225" disabled>[품절]225</option>
+																							</c:when>
 																							<c:when
 																								test="${list.STOCK_225 > 0 and list.CART_PRDSIZE ne '225'}">
 																								<option value="225">225</option>
@@ -443,8 +458,16 @@
 																								test="${list.STOCK_225 > 0 and list.CART_PRDSIZE eq '225'}">
 																								<option value="225" selected>225</option>
 																							</c:when>
+
 																						</c:choose>
 																						<c:choose>
+																							<c:when
+																								test="${list.STOCK_230 <= 0 and list.CART_PRDSIZE eq '230'}">
+																								<option value="230" disabled selected>[품절]230</option>
+																							</c:when>
+																							<c:when test="${list.STOCK_230 <= 0}">
+																								<option value="230" disabled>[품절]230</option>
+																							</c:when>
 																							<c:when
 																								test="${list.STOCK_230 > 0 and list.CART_PRDSIZE ne '230'}">
 																								<option value="230">230</option>
@@ -453,8 +476,16 @@
 																								test="${list.STOCK_230 > 0 and list.CART_PRDSIZE eq '230'}">
 																								<option value="230" selected>230</option>
 																							</c:when>
+
 																						</c:choose>
 																						<c:choose>
+																							<c:when
+																								test="${list.STOCK_235 <= 0 and list.CART_PRDSIZE eq '235'}">
+																								<option value="235" disabled selected>[품절]235</option>
+																							</c:when>
+																							<c:when test="${list.STOCK_235 <= 0}">
+																								<option value="235" disabled>[품절]235</option>
+																							</c:when>
 																							<c:when
 																								test="${list.STOCK_235 > 0 and list.CART_PRDSIZE ne '235'}">
 																								<option value="235">235</option>
@@ -463,8 +494,16 @@
 																								test="${list.STOCK_235 > 0 and list.CART_PRDSIZE eq '235'}">
 																								<option value="235" selected>235</option>
 																							</c:when>
+
 																						</c:choose>
 																						<c:choose>
+																							<c:when
+																								test="${list.STOCK_240 <= 0 and list.CART_PRDSIZE eq '240'}">
+																								<option value="240" disabled selected>[품절]240</option>
+																							</c:when>
+																							<c:when test="${list.STOCK_240 <= 0}">
+																								<option value="240" disabled>[품절]240</option>
+																							</c:when>
 																							<c:when
 																								test="${list.STOCK_240 > 0 and list.CART_PRDSIZE ne '240'}">
 																								<option value="240">240</option>
@@ -476,6 +515,13 @@
 																						</c:choose>
 																						<c:choose>
 																							<c:when
+																								test="${list.STOCK_245 <= 0 and list.CART_PRDSIZE eq '245'}">
+																								<option value="245" disabled selected>[품절]245</option>
+																							</c:when>
+																							<c:when test="${list.STOCK_245 <= 0}">
+																								<option value="245" disabled>[품절]245</option>
+																							</c:when>
+																							<c:when
 																								test="${list.STOCK_245 > 0 and list.CART_PRDSIZE ne '245'}">
 																								<option value="245">245</option>
 																							</c:when>
@@ -483,8 +529,16 @@
 																								test="${list.STOCK_245 > 0 and list.CART_PRDSIZE eq '245'}">
 																								<option value="245" selected>245</option>
 																							</c:when>
+
 																						</c:choose>
 																						<c:choose>
+																							<c:when
+																								test="${list.STOCK_250 <= 0 and list.CART_PRDSIZE eq '250'}">
+																								<option value="250" disabled selected>[품절]250</option>
+																							</c:when>
+																							<c:when test="${list.STOCK_250 <= 0}">
+																								<option value="250" disabled>[품절]250</option>
+																							</c:when>
 																							<c:when
 																								test="${list.STOCK_250 > 0 and list.CART_PRDSIZE ne '250'}">
 																								<option value="250">250</option>
@@ -496,6 +550,13 @@
 																						</c:choose>
 																						<c:choose>
 																							<c:when
+																								test="${list.STOCK_255 <= 0 and list.CART_PRDSIZE eq '255'}">
+																								<option value="255" disabled selected>[품절]255</option>
+																							</c:when>
+																							<c:when test="${list.STOCK_255 <= 0}">
+																								<option value="255" disabled>[품절]255</option>
+																							</c:when>
+																							<c:when
 																								test="${list.STOCK_255 > 0 and list.CART_PRDSIZE ne '255'}">
 																								<option value="255">255</option>
 																							</c:when>
@@ -503,8 +564,16 @@
 																								test="${list.STOCK_255 > 0 and list.CART_PRDSIZE eq '255'}">
 																								<option value="255" selected>255</option>
 																							</c:when>
+
 																						</c:choose>
 																						<c:choose>
+																							<c:when
+																								test="${list.STOCK_260 <= 0 and list.CART_PRDSIZE eq '260'}">
+																								<option value="260" disabled selected>[품절]260</option>
+																							</c:when>
+																							<c:when test="${list.STOCK_260 <= 0}">
+																								<option value="260" disabled>[품절]260</option>
+																							</c:when>
 																							<c:when
 																								test="${list.STOCK_260 > 0 and list.CART_PRDSIZE ne '260'}">
 																								<option value="260">260</option>
@@ -513,8 +582,16 @@
 																								test="${list.STOCK_260 > 0 and list.CART_PRDSIZE eq '260'}">
 																								<option value="260" selected>260</option>
 																							</c:when>
+
 																						</c:choose>
 																						<c:choose>
+																							<c:when
+																								test="${list.STOCK_265 <= 0 and list.CART_PRDSIZE eq '265'}">
+																								<option value="265" disabled selected>[품절]265</option>
+																							</c:when>
+																							<c:when test="${list.STOCK_265 <= 0}">
+																								<option value="265" disabled>[품절]265</option>
+																							</c:when>
 																							<c:when
 																								test="${list.STOCK_265 > 0 and list.CART_PRDSIZE ne '265'}">
 																								<option value="265">265</option>
@@ -523,8 +600,16 @@
 																								test="${list.STOCK_265 > 0 and list.CART_PRDSIZE eq '265'}">
 																								<option value="265" selected>265</option>
 																							</c:when>
+
 																						</c:choose>
 																						<c:choose>
+																							<c:when
+																								test="${list.STOCK_270 <= 0 and list.CART_PRDSIZE eq '270'}">
+																								<option value="270" disabled selected>[품절]270</option>
+																							</c:when>
+																							<c:when test="${list.STOCK_270 <= 0}">
+																								<option value="270" disabled>[품절]270</option>
+																							</c:when>
 																							<c:when
 																								test="${list.STOCK_270 > 0 and list.CART_PRDSIZE ne '270'}">
 																								<option value="270">270</option>
@@ -533,8 +618,16 @@
 																								test="${list.STOCK_270 > 0 and list.CART_PRDSIZE eq '270'}">
 																								<option value="270" selected>270</option>
 																							</c:when>
+
 																						</c:choose>
 																						<c:choose>
+																							<c:when
+																								test="${list.STOCK_275 <= 0 and list.CART_PRDSIZE eq '275'}">
+																								<option value="275" disabled selected>[품절]275</option>
+																							</c:when>
+																							<c:when test="${list.STOCK_275 <= 0}">
+																								<option value="275" disabled>[품절]275</option>
+																							</c:when>
 																							<c:when
 																								test="${list.STOCK_275 > 0 and list.CART_PRDSIZE ne '275'}">
 																								<option value="275">275</option>
@@ -543,8 +636,16 @@
 																								test="${list.STOCK_275 > 0 and list.CART_PRDSIZE eq '275'}">
 																								<option value="275" selected>275</option>
 																							</c:when>
+
 																						</c:choose>
 																						<c:choose>
+																							<c:when
+																								test="${list.STOCK_280 <= 0 and list.CART_PRDSIZE eq '280'}">
+																								<option value="280" disabled selected>[품절]280</option>
+																							</c:when>
+																							<c:when test="${list.STOCK_280 <= 0}">
+																								<option value="280" disabled>[품절]280</option>
+																							</c:when>
 																							<c:when
 																								test="${list.STOCK_280 > 0 and list.CART_PRDSIZE ne '280'}">
 																								<option value="280">280</option>
@@ -553,8 +654,16 @@
 																								test="${list.STOCK_280 > 0 and list.CART_PRDSIZE eq '280'}">
 																								<option value="280" selected>280</option>
 																							</c:when>
+
 																						</c:choose>
 																						<c:choose>
+																							<c:when
+																								test="${list.STOCK_285 <= 0 and list.CART_PRDSIZE eq '285'}">
+																								<option value="285" disabled selected>[품절]285</option>
+																							</c:when>
+																							<c:when test="${list.STOCK_285 <= 0}">
+																								<option value="285" disabled>[품절]285</option>
+																							</c:when>
 																							<c:when
 																								test="${list.STOCK_285 > 0 and list.CART_PRDSIZE ne '285'}">
 																								<option value="285">285</option>
@@ -563,8 +672,16 @@
 																								test="${list.STOCK_285 > 0 and list.CART_PRDSIZE eq '285'}">
 																								<option value="285" selected>285</option>
 																							</c:when>
+
 																						</c:choose>
 																						<c:choose>
+																							<c:when
+																								test="${list.STOCK_290 <= 0 and list.CART_PRDSIZE eq '290'}">
+																								<option value="290" disabled selected>[품절]290</option>
+																							</c:when>
+																							<c:when test="${list.STOCK_290 <= 0}">
+																								<option value="290" disabled>[품절]290</option>
+																							</c:when>
 																							<c:when
 																								test="${list.STOCK_290 > 0 and list.CART_PRDSIZE ne '290'}">
 																								<option value="290">290</option>
@@ -573,6 +690,7 @@
 																								test="${list.STOCK_290 > 0 and list.CART_PRDSIZE eq '290'}">
 																								<option value="290" selected>290</option>
 																							</c:when>
+
 																						</c:choose>
 
 																					</select>
@@ -611,29 +729,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 											<td class="shoping__cart__price"><input type="hidden"
 												id="price" value="${list.PRD_PRICE }" /> <c:set var="price"
 													value="${list.PRD_PRICE}" /> <c:set var="disRate"
@@ -654,24 +749,34 @@
 													<span class="won">원</span>
 												</c:if></td>
 											<td class="shoping__cart__quantity">
+											
+											
+											
+											
+											
+											
+									
 
-
-
-												<form action="updatecart.do" method="POST"
-													onsubmit="return alert('수량이 변경되었습니다');">
-													<div class="quantity">
-														<div class="pro-qty">
-															<input id="count" name="CART_PRDCOUNT"
-																value="${list.CART_PRDCOUNT}" readonly />
+													<form action="updatecart.do" method="POST"
+														onsubmit="return alert('수량이 변경되었습니다');">
+														<div class="quantity">
+															<div class="pro-qty">
+																<input id="count" name="CART_PRDCOUNT"
+																	value="${list.CART_PRDCOUNT}" readonly />
+															</div>
 														</div>
-													</div>
-													<input type="hidden" name="CART_NUM"
-														value="${list.CART_NUM}" /> <input
-														class="button_qty_change" type="submit" value="변경" />
+														<input type="hidden" name="CART_NUM"
+															value="${list.CART_NUM}" /> <input
+															class="button_qty_change" type="submit" value="변경" />
+													</form>
 
-												</form>
-
-											</td>
+												
+												
+												
+												
+												
+												
+												</td>
 											<td class="shoping__cart__total"><c:set
 													var="previousTotalPrice"
 													value="${price * list.CART_PRDCOUNT}" /> <c:set
@@ -890,11 +995,11 @@
 				data : codeData,
 				success : function(result) {
 					var num = result;
-					if(num > 0){
+					if (num > 0) {
 						alert("동일한 옵션이 존재합니다.");
-					}else{
+					} else {
 						alert("상품이 수정되었습니다.");
-						location.href="/cart.do";
+						location.href = "/cart.do";
 					}
 				}
 			});
