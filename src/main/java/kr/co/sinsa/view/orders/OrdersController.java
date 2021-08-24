@@ -77,8 +77,8 @@ public class OrdersController {
 		return "redirect:/product/prdCode="+ORDER_PRDCODE;
 	}
 	
-	@RequestMapping(value="/direct/checkout", method=RequestMethod.GET)
-	public String cusInfo(Model model, HttpSession session) throws Exception {
+	@RequestMapping(value="/{access}/checkout", method=RequestMethod.GET)
+	public String cusInfo(Model model, @PathVariable("access") String access, HttpSession session) throws Exception {
 		
 		if((UserVO) session.getAttribute("user") != null) {
 			UserVO user = (UserVO) session.getAttribute("user");
@@ -89,13 +89,9 @@ public class OrdersController {
 		return "/orders/checkout";
 	}
 	 
-	@RequestMapping(value = "/direct/checkout", method=RequestMethod.POST,produces = "application/json;charset=UTF-8")
-    public String details(@RequestBody List<Map<String, String>> itemLists, Model model) throws Exception {
-		String ORDER_PRDCODE = null;
-		String ORDER_PRDSIZE = null;
-		String ORDER_AMOUNT = null;
+	@RequestMapping(value = "/{access}/checkout", method=RequestMethod.POST,produces = "application/json;charset=UTF-8")
+    public String details(@RequestBody List<Map<String, String>> itemLists, @PathVariable("access") String access, Model model) throws Exception {
 		OrdersAndProductVO oapVO = null;
-		System.out.println("itemLists : " + itemLists);
 		List<OrdersAndProductVO> prdList = new ArrayList();
 				
 		for(Object list : itemLists) {
@@ -106,7 +102,6 @@ public class OrdersController {
 			prdList.add(oapVO);
 		}
 		model.addAttribute("prdInfo", prdList);
-
     return "/orders/checkout";
 	}
 	

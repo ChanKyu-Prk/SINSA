@@ -812,7 +812,7 @@
 														data["ORDER_AMOUNT"] = ORDER_AMOUNT;
 														itemList.unshift(data);
 														  $.ajax({
-														   url : "/direct/checkout",
+														   url : "/cart/checkout",
 														   type : "POST",
 														   data : JSON.stringify(itemList),
 														    headers: {
@@ -820,7 +820,7 @@
 														      'Content-Type': 'application/json'
 														    },
 														   success : function(data){
-																location.href="/direct/checkout";
+																location.href="/cart/checkout";
 														   },
 														   error : function(){
 														    alert("보내기 실패");
@@ -930,7 +930,8 @@
 									}
 								});
 								if(changedVal > 0){
-									alert("저장되지 않은 수량변경이 있습니다. 수량을 초기화 합니다.");
+									alert("저장되지 않은 수량변경이 있습니다.");
+									alert("수량을 초기화 합니다.");
 									return false;
 								}
 								var ORDER_PRDCODE = $(".prdCode").map(function() {
@@ -958,7 +959,7 @@
 									itemList.push(data);
 								}
 									  $.ajax({
-									   url : "/direct/checkout",
+									   url : "/cart/checkout",
 									   type : "POST",
 									   data : JSON.stringify(itemList),
 									    headers: {
@@ -966,7 +967,7 @@
 									      'Content-Type': 'application/json'
 									    },
 									   success : function(data){
-											location.href="/direct/checkout";
+											location.href="/cart/checkout";
 									   },
 									   error : function(){
 									    alert("보내기 실패");
