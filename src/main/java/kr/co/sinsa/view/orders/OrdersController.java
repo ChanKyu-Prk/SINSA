@@ -95,6 +95,7 @@ public class OrdersController {
 		String ORDER_PRDSIZE = null;
 		String ORDER_AMOUNT = null;
 		OrdersAndProductVO oapVO = null;
+		System.out.println("itemLists : " + itemLists);
 		List<OrdersAndProductVO> prdList = new ArrayList();
 				
 		for(Object list : itemLists) {

@@ -280,6 +280,8 @@
 	background: #ccc;
 }
 </style>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 <%
 	ArrayList<ProductVO> productList = (ArrayList<ProductVO>) request.getAttribute("productList");
@@ -357,14 +359,14 @@
 														<div class="brand">${list.PRD_BRAND}</div>
 														<div>
 															<a class="product_name"
-																href="product/prdCode=${list.PRD_CODE}">${list.PRD_NAME}</a>
+																href="product/prdCode=${list.PRD_CODE}">${list.PRD_NAME}<span class="pl-1 prdCode">${list.PRD_CODE}</span></a>
 														</div>
 														<div>
 															<a class="product_color"
 																href="product/prdCode=${list.PRD_CODE}">${list.PRD_COLOR}</a>
 														</div>
 														<div class="product_size">
-															${list.CART_PRDSIZE}
+															<span class="qty-size">${list.CART_PRDSIZE}</span>
 
 															<!-- Button trigger modal -->
 															<button type="button"
@@ -761,7 +763,7 @@
 														onsubmit="return alert('수량이 변경되었습니다');">
 														<div class="quantity">
 															<div class="pro-qty">
-																<input id="count" name="CART_PRDCOUNT"
+																<input id="count" class="amount" name="CART_PRDCOUNT"
 																	value="${list.CART_PRDCOUNT}" readonly />
 															</div>
 														</div>
@@ -799,8 +801,39 @@
 
 
 												<div id="previousTotalPrice"></div></td>
-											<td class="shoping__cart__item__close"><input
-												class="buy_rightnow" type="submit" value="바로구매" />
+											<td class="shoping__cart__item__close">
+												<button id="directBtn${status.index}" class="buy_rightnow" type="submit">바로구매</button>
+												<script type="text/javascript">
+												$("#directBtn${status.index}").click(function(){						
+													var ORDER_PRDCODE = $(this).parents("tr").find(".prdCode").text();
+													var ORDER_PRDSIZE = $(this).parents("tr").find(".qty-size").text();
+													var ORDER_AMOUNT = $(this).parents("tr").find(".amount").val();
+													
+													//JSON 형태로 데이터 생성
+													var data = {};
+													var itemList = [];
+														data["ORDER_PRDCODE"] = ORDER_PRDCODE;
+														data["ORDER_PRDSIZE"] = ORDER_PRDSIZE;
+														data["ORDER_AMOUNT"] = ORDER_AMOUNT;
+														itemList.unshift(data);
+												
+														  $.ajax({
+														   url : "/direct/checkout",
+														   type : "POST",
+														   data : JSON.stringify(itemList),
+														    headers: {
+														      'Accept': 'application/json',
+														      'Content-Type': 'application/json'
+														    },
+														   success : function(data){
+																location.href="/direct/checkout";
+														   },
+														   error : function(){
+														    alert("보내기 실패");
+														   }
+														  });
+												});
+											</script>
 
 												<form id="form" name="form" action="cart.do" method="post"
 													onsubmit="return confirm('장바구니에서 해당 상품을 삭제 하시겠습니까?');">
