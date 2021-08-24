@@ -369,5 +369,9 @@
 		parameterType="kr.co.sinsa.biz.customer.CartVO">
 		insert into CART (CART_CUSID, CART_PRDNUM, CART_PRDSIZE, CART_PRDCOUNT) values(#{CART_CUSID},#{CART_PRDNUM},#{CART_PRDSIZE}, 1);
 	</insert>
+	
+	<delete id="chckDeleteCart">
+		delete from CART where CART_CUSID=#{CART_CUSID}
+	</delete>
 
 </mapper>

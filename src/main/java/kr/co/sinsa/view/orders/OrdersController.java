@@ -77,25 +77,25 @@ public class OrdersController {
 		return "redirect:/product/prdCode="+ORDER_PRDCODE;
 	}
 	
-	@RequestMapping(value="/direct/checkout", method=RequestMethod.GET)
-	public String cusInfo(Model model, HttpSession session) throws Exception {
-		
+	@RequestMapping(value="/{access}/checkout", method=RequestMethod.GET)
+	public String cusInfo(Model model, @PathVariable("access") String access, HttpSession session) throws Exception {
 		if((UserVO) session.getAttribute("user") != null) {
 			UserVO user = (UserVO) session.getAttribute("user");
 			String CUS_ID = (String)user.getCUS_ID();
 			CustomerVO vo = service.cusInfoView(CUS_ID);
 			model.addAttribute("cusInfo", vo);
 		} 
+		if(access.equals("cart")) {
+			model.addAttribute("isCart", "true");
+		}else {
+			model.addAttribute("isCart", "false");
+		}
 		return "/orders/checkout";
 	}
 	 
-	@RequestMapping(value = "/direct/checkout", method=RequestMethod.POST,produces = "application/json;charset=UTF-8")
-    public String details(@RequestBody List<Map<String, String>> itemLists, Model model) throws Exception {
-		String ORDER_PRDCODE = null;
-		String ORDER_PRDSIZE = null;
-		String ORDER_AMOUNT = null;
+	@RequestMapping(value = "/{access}/checkout", method=RequestMethod.POST,produces = "application/json;charset=UTF-8")
+    public String details(@RequestBody List<Map<String, String>> itemLists, @PathVariable("access") String access, Model model) throws Exception {
 		OrdersAndProductVO oapVO = null;
-		System.out.println("itemLists : " + itemLists);
 		List<OrdersAndProductVO> prdList = new ArrayList();
 				
 		for(Object list : itemLists) {
@@ -106,7 +106,6 @@ public class OrdersController {
 			prdList.add(oapVO);
 		}
 		model.addAttribute("prdInfo", prdList);
-
     return "/orders/checkout";
 	}
 	
@@ -123,12 +122,13 @@ public class OrdersController {
 		ordersVO.setORDER_NUM(ORDER_NUM);
 		
 		List<OrdersVO> orderInfo = service.selOrdersById(ordersVO);
+		ProductVO prdVO = null;
 		for(OrdersVO order : orderInfo) {
-			System.out.println(order);
-			totalPrice += order.getORDER_PRICE();
+			prdVO = proService.info(order.getORDER_PRDCODE());
+			totalPrice += order.getORDER_PRICE()*(1-(prdVO.getPRD_DISRATE()*0.01));
 			usePoint = order.getORDER_USEPOINT();
 		}
-		
+		totalPrice -= usePoint;
 		model.addAttribute("ORDER_NUM", ORDER_NUM);
 		model.addAttribute("totalPrice", totalPrice);
 		model.addAttribute("usePoint",usePoint);
@@ -146,6 +146,7 @@ public class OrdersController {
 		String CUS_ID = null;
 		CustomerVO customerVO = null;
 		String ORDER_NUM = null;
+		String isCart = null;
 		
 		if((UserVO) session.getAttribute("user") != null) {
 			UserVO user = (UserVO) session.getAttribute("user");
@@ -154,6 +155,7 @@ public class OrdersController {
 		
 		for(Object list : itemLists) {
 			LinkedHashMap<String,String> item = (LinkedHashMap<String, String>) list;
+			isCart = item.get("isCart");
 			oapVO = service.selPrdByCode(item.get("ORDER_PRDCODE"));
 			ORDER_NUM = item.get("ORDER_NUM");
 			ordersVO.setORDER_NUM(item.get("ORDER_NUM"));
@@ -180,8 +182,10 @@ public class OrdersController {
 		//ORDER_CUSID, ORDER_NUM 전송
 		orderList.add(ordersVO.getORDER_CUSID());
 		orderList.add(ordersVO.getORDER_NUM());
-		ra.addFlashAttribute("ordersInfo", orderList);
-
+		ra.addFlashAttribute("ordersInfo", orderList);	
+		if(isCart.equals("true")) {
+			myService.chckDeleteCart(CUS_ID);
+		}
 		return "redirect:/checkout/complete/orderNo="+ORDER_NUM;
 	}
 	

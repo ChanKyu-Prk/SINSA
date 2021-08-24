@@ -55,4 +55,6 @@ public interface MyPageService {
 	
 	public CartVO selCartById(CartVO cartVO);
 	public int addCart(CartVO cartVO);
+	
+	public int chckDeleteCart(String CUS_ID);
 }

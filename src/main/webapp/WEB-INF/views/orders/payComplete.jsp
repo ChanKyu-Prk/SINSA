@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="zxx">
 <head>
@@ -46,11 +47,17 @@
 					<tr>
 						<th rowspan="2" class="text-center align-middle">주문번호<p class="mb-0">${ORDER_NUM}</p></th>
 						<th class="pl-4">총 결제 금액</th>
-						<th class="text-right pr-4">${totalPrice}<span>원</span></th>
+						<th class="text-right pr-4">
+							<fmt:formatNumber type="number" maxFractionDigits="3" value="${totalPrice}" />
+							<span>원</span>
+						</th>
 					</tr>
 					<tr>
 						<td class="pl-4">포인트 사용</td>
-						<td class="text-right pr-4">${usePoint}<span>P</span></td>
+						<td class="text-right pr-4">
+							<fmt:formatNumber type="number" maxFractionDigits="3" value="${usePoint}" />
+							<span>P</span>
+						</td>
 					</tr>
 				</table>
 				<p class="mb-5">자세한 구매내역 확인 및 환불, 취소 등의 서비스는 사이트 우측 상단의 <a href="/myOrderList.do">마이페이지>주문 내역 조회</a>에서 이용 가능합니다.</p>
