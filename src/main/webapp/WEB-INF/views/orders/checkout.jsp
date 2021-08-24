@@ -149,7 +149,7 @@ input[type=number] {
 						
 						<c:if test="${not empty prdInfo}">
 						    <c:forEach items="${prdInfo}" var="lists">
-						    <tr>
+						    <tr class="prdItem">
 								<td class="shoping__cart__item"><span
 									class="row mx-auto px-0"> <span> <img
 											src="${path}/resources/prdImg/${lists.PRD_IMAGE}"
@@ -173,7 +173,7 @@ input[type=number] {
 										value="${lists.PRD_PRICE-(lists.PRD_PRICE*(lists.PRD_DISRATE/100))}"/>
 			  							<c:set var="finalPrice" value="${fn:substringBefore(finalPriceOrg, '.')}" />
 			  							<span class="mb-0 digits orgPrice discntNum numFont" data-orgPrice ="${lists.PRD_PRICE}">${lists.PRD_PRICE}원</span>
-										<span class="mb-0 font-weight-bold digits numFont">${finalPrice}원</span>
+										<span class="mb-0 font-weight-bold digits numFont discntNumCk">${finalPrice}원</span>
 									</c:if>
 								</td>
 								<td class="shoping__cart__quantity">
@@ -437,67 +437,63 @@ input[type=number] {
 				$("#ORDER_MEMO").removeAttr('readonly');
 			}	
 		});
-		
 		function numberWithDigits() {
 			$(".digits").each(function() {
 				$(this).text( $(this).text().replace(/\B(?=(\d{3})+(?!\d))/g, ','));
 			});
 		}
-		
 		function noDigits() {
 			$(".digits").each(function() {
 				$(this).text( $(this).text().replaceAll(',', ''));
 			});
 		}
-		
-			var totalPriceNoDiscnt = 0 // 최초금액
-			$(".orgPrice").each(function(n){
-				totalPriceNoDiscnt = parseInt($(this).text());
-		    });
-			var totalPrice = 0; //할인 후 금액
-			$(".shoping__cart__total").each(function(n){
-				totalPrice += parseInt($(this).text());
-		    });
-			var totalAmount = 0; //총 주문 수량
-			$(".amountNum").each(function(n){
-				totalAmount += parseInt($(this).text());
-		    });
-
-			//총 주문 가격			
-			var	totalOrgPrice = totalPriceNoDiscnt * totalAmount;
-			$(".totalOrgPrice").text(totalOrgPrice);
+			// 총 주문 가격
+			var totalPriceNoDiscnt = 0 
+			$('.orgPrice').each(function (index, item) {
+				totalPriceNoDiscnt += parseInt($(this).text())*parseInt($(this).parents("tr").find(".amountNum").text());
+			});
+			$(".totalOrgPrice").text(totalPriceNoDiscnt);
+			
+			//총 결제 금액
+			var totalPriceCon_num = 0;
+			$('.orgPrice').each(function (index, item) {
+				if($(this).siblings("span").hasClass("discntNumCk")){
+					totalPriceCon_num += parseInt($(this).siblings($("span.discntNumCk")).text())*parseInt($(this).parents("tr").find(".amountNum").text());
+				}
+				else{
+					totalPriceCon_num += parseInt($(this).text())*parseInt($(this).parents("tr").find(".amountNum").text());
+				}
+			});
+			$(".totalPriceCon-num").text(totalPriceCon_num);
 			
 			//할인
-			var totalDiscnt = totalOrgPrice - totalPrice ;
+			var totalDiscnt = 0;
+			totalDiscnt = totalPriceNoDiscnt - totalPriceCon_num;
 			$(".totalDiscnt").text(totalDiscnt);
 			
-			var usePoint = 0;
-			//총 결제금액 (포인트사용X)
-			var totalPriceCon_num = totalPrice - usePoint ;
-			$(".totalPriceCon-num").text(totalPriceCon_num);
-
-			$(".savePoint").text(parseInt(((totalPriceCon_num*0.03)/10),10)*10);
+			//적립예정 init
+ 			$(".savePoint").text(parseInt(((totalPriceCon_num*0.03)/10),10)*10);
 			
-		$(".usePoint").on("propertychange change keyup paste input",function() {
-			//포인트사용
-			usePoint = $(".usePoint").val();
-			//소유 Point보다 더 사용시 alert
-			if(parseInt($(".hasPoint").attr("data-hasPoint")) < parseInt(usePoint)){
-				alert("사용가능한 포인트를 초과하였습니다.");
-				$(".usePoint").val('');
-				return false;
-			}
-			//총 결제금액
-			totalPriceCon_num = $(".totalOrgPrice").text().replaceAll(',', '') - $(".totalDiscnt").text().replaceAll(',', '') - usePoint ;
-			//사용 포인트가 총 결제금액보다 많을 시 alert
-			if(parseInt(totalPriceCon_num) < parseInt(usePoint)){
-				alert("사용한 포인트가 결제 금액을 초과하였습니다.");
-				$(".usePoint").val('');
-				totalPriceCon_num = $(".totalOrgPrice").text().replaceAll(',', '') - $(".totalDiscnt").text().replaceAll(',', '')
-			}
-			$(".totalPriceCon-num").text(totalPriceCon_num);
-			numberWithDigits();
-		});
+			$(".usePoint").on("propertychange change keyup paste input",function() {
+				//포인트사용
+				usePoint = $(".usePoint").val();
+				//소유 Point보다 더 사용시 alert
+				if(parseInt($(".hasPoint").attr("data-hasPoint")) < parseInt(usePoint)){
+					alert("사용가능한 포인트를 초과하였습니다.");
+					$(".usePoint").val('');
+					return false;
+				}
+				//총 결제금액
+				totalPriceCon_num = $(".totalOrgPrice").text().replaceAll(',', '') - $(".totalDiscnt").text().replaceAll(',', '') - usePoint ;
+				//사용 포인트가 총 결제금액보다 많을 시 alert
+				if(parseInt(totalPriceCon_num) < parseInt(usePoint)){
+					alert("사용한 포인트가 결제 금액을 초과하였습니다.");
+					$(".usePoint").val('');
+					totalPriceCon_num = $(".totalOrgPrice").text().replaceAll(',', '') - $(".totalDiscnt").text().replaceAll(',', '')
+				}
+				$(".totalPriceCon-num").text(totalPriceCon_num);
+				numberWithDigits();
+			});
 		
 		$(".usePoint").on("keydown",function(e) {
 			if (!((e.keyCode > 95 && e.keyCode < 106)

@@ -181,13 +181,10 @@ public class OrdersController {
 		//ORDER_CUSID, ORDER_NUM 전송
 		orderList.add(ordersVO.getORDER_CUSID());
 		orderList.add(ordersVO.getORDER_NUM());
-		ra.addFlashAttribute("ordersInfo", orderList);
-		
+		ra.addFlashAttribute("ordersInfo", orderList);	
 		if(isCart.equals("true")) {
-			//사용자의 카트내역 삭제
 			myService.chckDeleteCart(CUS_ID);
 		}
-
 		return "redirect:/checkout/complete/orderNo="+ORDER_NUM;
 	}
 	
