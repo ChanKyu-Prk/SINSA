@@ -161,4 +161,8 @@ public class MyPageDAO {
 		return SST.selectOne("myInfo.selCartById", vo);
 	}
 	
+	public int chckDeleteCart(String CUS_ID) {
+		return SST.delete("myInfo.chckDeleteCart",CUS_ID);
+	}
+	
 }

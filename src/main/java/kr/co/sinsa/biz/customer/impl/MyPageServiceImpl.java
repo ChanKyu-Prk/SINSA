@@ -270,4 +270,9 @@ public class MyPageServiceImpl implements MyPageService {
 		return dao.selCartById(vo);
 	}
 
+	@Override
+	public int chckDeleteCart(String CUS_ID) {
+		return dao.chckDeleteCart(CUS_ID);
+	}
+
 }

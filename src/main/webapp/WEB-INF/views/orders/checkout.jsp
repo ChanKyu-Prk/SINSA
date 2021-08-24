@@ -139,13 +139,14 @@ input[type=number] {
 					<table id="itemList" class="mx-auto px-0">
 						<thead>
 							<span class="tableHead row mx-auto px-0 mb-2">
-								<h5>주문리스트</h5> 
+								<h5>주문리스트</h5> 							
 								<button id="editOrder" onclick="location.href='/product/prdCode=${prdInfo[0].PRD_CODE}';"
 								class="ml-auto p-2 primary-btn cart-btn cart-btn-right">주문정보
 									수정</button>
 							</span>
 						</thead>
 						<tbody>
+						
 						<c:if test="${not empty prdInfo}">
 						    <c:forEach items="${prdInfo}" var="lists">
 						    <tr>
@@ -166,6 +167,7 @@ input[type=number] {
 										<c:set var="finalPrice" value="${lists.PRD_PRICE}"/>
 										<span class="digits orgPrice" data-orgPrice ="${lists.PRD_PRICE}" >${finalPrice}원</span>
 									</c:if>
+									
 									<c:if test="${lists.PRD_DISRATE != 0}">
 										<c:set var="finalPriceOrg" 
 										value="${lists.PRD_PRICE-(lists.PRD_PRICE*(lists.PRD_DISRATE/100))}"/>
@@ -245,6 +247,7 @@ input[type=number] {
 										maxlength="11" required="required" value="${cusInfo.CUS_TEL}" readonly/></span>
 								</div>
 							</div>
+							<input type="hidden" id="isCart" value="${isCart}"/>
 							<c:set var="getAddr" value="${fn:split(cusInfo.CUS_ADDR, '|')}" />
 							<c:set var="delivAddrExtra" value="${getAddr[fn:length(getAddr)-1]}" />
 							<c:set var="delivAddrJibun" value="${getAddr[fn:length(getAddr)-2]}" />
@@ -323,6 +326,7 @@ input[type=number] {
 										var result = alert("결제 오류가 발생하였습니다. 다시 시도해주세요.");
 										window.history.back();
 									<%}%>
+									var isCart = $("#isCart").val();
 									var ORDER_NUM = new Date().getTime();
 									var ORDER_PRDCODE = $(".prdCode").map(function() {
 									    return $(this).text();
@@ -360,6 +364,7 @@ input[type=number] {
 										data["ORDER_RECEIVER"] = ORDER_RECEIVER;
 										data["ORDER_USEPOINT"] = ORDER_USEPOINT;
 										data["ORDER_ADDR"] = ORDER_ADDR;
+										data["isCart"] = isCart;
 										itemList.unshift(data);
 									}
 							        IMP.request_pay({

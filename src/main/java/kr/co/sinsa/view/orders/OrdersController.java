@@ -79,13 +79,17 @@ public class OrdersController {
 	
 	@RequestMapping(value="/{access}/checkout", method=RequestMethod.GET)
 	public String cusInfo(Model model, @PathVariable("access") String access, HttpSession session) throws Exception {
-		
 		if((UserVO) session.getAttribute("user") != null) {
 			UserVO user = (UserVO) session.getAttribute("user");
 			String CUS_ID = (String)user.getCUS_ID();
 			CustomerVO vo = service.cusInfoView(CUS_ID);
 			model.addAttribute("cusInfo", vo);
 		} 
+		if(access.equals("cart")) {
+			model.addAttribute("isCart", "true");
+		}else {
+			model.addAttribute("isCart", "false");
+		}
 		return "/orders/checkout";
 	}
 	 
@@ -141,6 +145,7 @@ public class OrdersController {
 		String CUS_ID = null;
 		CustomerVO customerVO = null;
 		String ORDER_NUM = null;
+		String isCart = null;
 		
 		if((UserVO) session.getAttribute("user") != null) {
 			UserVO user = (UserVO) session.getAttribute("user");
@@ -149,6 +154,7 @@ public class OrdersController {
 		
 		for(Object list : itemLists) {
 			LinkedHashMap<String,String> item = (LinkedHashMap<String, String>) list;
+			isCart = item.get("isCart");
 			oapVO = service.selPrdByCode(item.get("ORDER_PRDCODE"));
 			ORDER_NUM = item.get("ORDER_NUM");
 			ordersVO.setORDER_NUM(item.get("ORDER_NUM"));
@@ -176,6 +182,11 @@ public class OrdersController {
 		orderList.add(ordersVO.getORDER_CUSID());
 		orderList.add(ordersVO.getORDER_NUM());
 		ra.addFlashAttribute("ordersInfo", orderList);
+		
+		if(isCart.equals("true")) {
+			//사용자의 카트내역 삭제
+			myService.chckDeleteCart(CUS_ID);
+		}
 
 		return "redirect:/checkout/complete/orderNo="+ORDER_NUM;
 	}
