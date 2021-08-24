@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="IndexService">
+	
+		<select id="getProductList" resultType="kr.co.sinsa.biz.product.ProductVO"> 
+ 			select * from PRODUCT 
+		</select> 
+	
+	
+	
+<!-- 	<select id="getCartList" parameterType="kr.co.sinsa.biz.user.UserVO" resultType="kr.co.sinsa.biz.product.CartVO"> -->
+<!-- 		select * from CART where CART_CUSID=#{CUS_ID} -->
+<!-- 	</select> -->
+	
+<!-- 	<select id="getCartProductList" parameterType="kr.co.sinsa.biz.product.ProductVO" resultType="kr.co.sinsa.biz.product.ProductVO"> -->
+<!-- 		select * from PRODUCT where PRD_NUM=#{PRD_NUM} -->
+<!-- 	</select> -->
+	
+<!-- 	<select id="getCartStockList" parameterType="kr.co.sinsa.biz.product.StockVO" resultType="kr.co.sinsa.biz.product.StockVO"> -->
+<!-- 		select * from STOCK where STOCK_PRDCODE=#{STOCK_PRDCODE} -->
+<!-- 	</select> -->
+	
+<!-- 	<delete id="deleteCartList" parameterType="kr.co.sinsa.biz.product.UserCartProductStockVO"> -->
+<!-- 		delete from CART where CART_CUSID=#{CUS_ID} and CART_PRDNUM=#{CART_PRDNUM} and CART_PRDSIZE=#{CART_PRDSIZE} -->
+<!-- 	</delete> -->
+	
+<!-- 	<delete id="deleteAll" parameterType="kr.co.sinsa.biz.product.UserCartProductStockVO"> -->
+<!-- 		delete from CART where CART_CUSID=#{CUS_ID} -->
+<!-- 	</delete> -->
+	
+<!-- 	<update id="updateCartProductCount" parameterType="kr.co.sinsa.biz.product.UserCartProductStockVO"> -->
+<!-- 		update CART set CART_PRDCOUNT=#{CART_PRDCOUNT} where CART_CUSID=#{CUS_ID} and CART_NUM=#{CART_NUM} -->
+<!-- 	</update> -->
+	
+<!-- 	<update id="updateSize" parameterType="kr.co.sinsa.biz.product.UserCartProductStockVO"> -->
+<!-- 		update CART set CART_PRDSIZE=#{CART_PRDSIZE} where CART_CUSID=#{CUS_ID} and CART_NUM=#{CART_NUM} -->
+<!-- 	</update> -->
+	
+<!-- 	<select id="getCheckSizeList" parameterType="kr.co.sinsa.biz.product.UserCartProductStockVO" resultType="kr.co.sinsa.biz.product.UserCartProductStockVO"> -->
+<!-- 		select * from CART where CART_PRDNUM=#{CART_PRDNUM} and CART_PRDSIZE=#{CART_PRDSIZE} and CART_CUSID=#{CUS_ID} -->
+<!-- 	</select> -->
+	
+</mapper>
