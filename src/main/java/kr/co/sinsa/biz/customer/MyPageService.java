@@ -52,4 +52,7 @@ public interface MyPageService {
 	public JjimVO selJjimById(JjimVO jjimVO);
 	public int addJjim(JjimVO vo);
 	public int removeJjim(JjimVO jjimVO);
+	
+	public CartVO selCartById(CartVO cartVO);
+	public int addCart(CartVO cartVO);
 }

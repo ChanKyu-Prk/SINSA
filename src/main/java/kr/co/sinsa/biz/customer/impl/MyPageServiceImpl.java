@@ -10,6 +10,7 @@ import javax.servlet.http.Cookie;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import kr.co.sinsa.biz.customer.CartVO;
 import kr.co.sinsa.biz.customer.CustomerVO;
 import kr.co.sinsa.biz.customer.JjimVO;
 import kr.co.sinsa.biz.customer.MyOrderListVO;
@@ -257,6 +258,16 @@ public class MyPageServiceImpl implements MyPageService {
 	@Override
 	public int removeJjim(JjimVO jjimVO) {
 		return dao.removeJjim(jjimVO);
+	}
+	
+	@Override
+	public int addCart(CartVO vo) {
+		return dao.addCart(vo);
+	}
+
+	@Override
+	public CartVO selCartById(CartVO vo) {
+		return dao.selCartById(vo);
 	}
 
 }

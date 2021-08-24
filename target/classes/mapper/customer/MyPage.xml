@@ -360,5 +360,14 @@
 	<delete id="removeJjim" parameterType="kr.co.sinsa.biz.customer.JjimVO">
 		DELETE FROM jjim WHERE JJIM_CUSID = #{JJIM_CUSID} AND JJIM_PRDNUM = #{JJIM_PRDNUM};
 	</delete>
+	
+	<select id="selCartById" parameterType="kr.co.sinsa.biz.customer.CartVO" resultType="kr.co.sinsa.biz.customer.CartVO">
+		select * from CART where CART_CUSID = #{CART_CUSID} AND CART_PRDNUM = #{CART_PRDNUM} AND CART_PRDSIZE = #{CART_PRDSIZE};
+	</select>
+	
+	<insert id="addCart"
+		parameterType="kr.co.sinsa.biz.customer.CartVO">
+		insert into CART (CART_CUSID, CART_PRDNUM, CART_PRDSIZE, CART_PRDCOUNT) values(#{CART_CUSID},#{CART_PRDNUM},#{CART_PRDSIZE}, 1);
+	</insert>
 
 </mapper>
