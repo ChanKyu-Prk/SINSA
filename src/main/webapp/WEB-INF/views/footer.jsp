@@ -83,7 +83,14 @@
 
 
 <!-- Js Plugins -->
-
+	   <script src="${path}/resources/js/jquery-3.3.1.min.js"></script>
+ 	   <script src="${path}/resources/js/bootstrap.min.js"></script>
+	   <script src="${path}/resources/js/jquery.nice-select.min.js"></script>
+	   <script src="${path}/resources/js/jquery-ui.min.js"></script>
+	   <script src="${path}/resources/js/jquery.slicknav.js"></script>
+	   <script src="${path}/resources/js/mixitup.min.js"></script>
+	   <script src="${path}/resources/js/owl.carousel.min.js"></script>
+ 	   <script src="${path}/resources/js/main.js"></script>
 
 </body>
 </html>
