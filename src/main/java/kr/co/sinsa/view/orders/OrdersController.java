@@ -1,5 +1,6 @@
 package kr.co.sinsa.view.orders;
 
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -19,12 +20,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import kr.co.sinsa.biz.customer.CartVO;
 import kr.co.sinsa.biz.customer.CustomerVO;
 import kr.co.sinsa.biz.customer.JjimVO;
 import kr.co.sinsa.biz.customer.MyPageService;
 import kr.co.sinsa.biz.orders.OrdersAndProductVO;
 import kr.co.sinsa.biz.orders.OrdersSerivce;
 import kr.co.sinsa.biz.orders.OrdersVO;
+
 import kr.co.sinsa.biz.product.ProductService;
 import kr.co.sinsa.biz.product.ProductVO;
 import kr.co.sinsa.biz.user.UserVO; 	
@@ -41,6 +44,38 @@ public class OrdersController {
 	
 	@Autowired
 	private MyPageService myService;
+	
+	@RequestMapping(value = "/addCart", method=RequestMethod.POST,produces = "application/json;charset=UTF-8")
+    public String manageCart(@RequestBody List<Map<String, String>> itemLists, HttpServletResponse response, CartVO cartVO, Model model, HttpSession session) throws Exception {
+		String CUS_ID = null;
+		if((UserVO) session.getAttribute("user") != null) {
+			UserVO user = (UserVO) session.getAttribute("user");
+			CUS_ID = (String)user.getCUS_ID();
+		}
+		String ORDER_PRDCODE = null;;
+				
+		for(Object list : itemLists) {
+			LinkedHashMap<String,String> item = (LinkedHashMap<String, String>) list;
+			cartVO.setCART_CUSID(CUS_ID);
+			ORDER_PRDCODE = item.get("ORDER_PRDCODE");
+			OrdersAndProductVO oapVO = service.selPrdByCode(ORDER_PRDCODE);
+			int CART_PRDNUM = oapVO.getPRD_NUM();
+			cartVO.setCART_PRDNUM(CART_PRDNUM);
+			cartVO.setCART_PRDSIZE(item.get("ORDER_PRDSIZE"));
+
+			if(myService.selCartById(cartVO) == null) {
+				myService.addCart(cartVO);
+			} else {
+				PrintWriter out = response.getWriter();
+		        out.println("<script>alert('이미 담겨있는 상품입니다 ');</script> ");
+		        out.flush();
+		        continue;
+			}
+			
+		}
+   
+		return "redirect:/product/prdCode="+ORDER_PRDCODE;
+	}
 	
 	@RequestMapping(value="/direct/checkout", method=RequestMethod.GET)
 	public String cusInfo(Model model, HttpSession session) throws Exception {

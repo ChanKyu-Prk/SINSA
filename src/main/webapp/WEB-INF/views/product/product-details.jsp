@@ -63,12 +63,18 @@ div#sizeCon.product__details__size button:hover, div#sizeCon.product__details__s
 	display: inline;
 	margin-bottom: 5px;
 	border-left: 5px solid white;
+	border: none;
 }
 
-.product__details__text #jjimNCart a:first-child {
+#cartBtn{
 	background-color: #6f6f6f;
 	color: white;
 	margin-right: 0;
+}
+
+.borderNone {
+	border: none;
+	border-radius : 2px;
 }
 
 /** pro-qty 카운트 */
@@ -170,6 +176,10 @@ input[type=number] {
 	font-size:18px;
 	font-weight: 400 !important;
 }
+
+#btnJjim{
+	pointer:cursor;
+}
 </style>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -262,7 +272,7 @@ input[type=number] {
 								<span class="totalPriceCon-num digits">0</span><span class="ml-2">원</span>
 							</div>
 						</div>
-						<button type="button" id= "btnBuy" class="primary-btn col-lg-12 text-center">바로구매</button>
+						<button type="button" id= "btnBuy" class="primary-btn col-lg-12 borderNone text-center">바로구매</button>
 						<script type="text/javascript">
 							$("#btnBuy").click(function(){
 								<%if(session.getAttribute("user") == null){%>
@@ -314,9 +324,63 @@ input[type=number] {
 							});
 						</script>
 						<div id="jjimNCart" class="row col-lg-12 mx-auto px-0">
-							<a href="#" id="btnJjim"
-								class="primary-btn shopping-icon text-center col-lg-10">장바구니</a>
-							<button id="jjimBtn" class="heart-icon col-lg-2 text-center">
+							<button id="cartBtn" class="primary-btn text-center col-lg-10 borderNone">장바구니</button>
+							<script type="text/javascript">
+							$("#cartBtn").click(function(){
+								<%if(session.getAttribute("user") == null){%>
+								var result = confirm("로그인이 필요한 서비스입니다. 로그인하시겠습니까?");
+								if(result){
+									location.href="/login.do";
+								}
+								else {
+									return false;
+								}
+								<%}%>
+								var ORDER_PRDCODE = $(".prdCode").text();
+								var ORDER_PRDSIZE = $(".qty-size").map(function() {
+								    return $(this).text();
+								}).get();
+								var ORDER_AMOUNT = $('.amount').map(function() {
+								    return this.value;
+								}).get();
+								
+								//JSON 형태로 데이터 생성
+								var data = {};
+								var itemList = [];
+								if(ORDER_AMOUNT.length == 0){
+									alert("옵션을 선택해주세요.");
+									return false;
+								}
+								for(var i=0; i<ORDER_AMOUNT.length; i++){
+									data = {};
+									data["ORDER_PRDCODE"] = ORDER_PRDCODE;
+									data["ORDER_PRDSIZE"] = ORDER_PRDSIZE[i];
+									data["ORDER_AMOUNT"] = ORDER_AMOUNT[i];
+									itemList.unshift(data);
+								}
+									  $.ajax({
+									   url : "/addCart",
+									   type : "POST",
+									   data : JSON.stringify(itemList),
+									    headers: {
+									      'Accept': 'application/json',
+									      'Content-Type': 'application/json'
+									    },
+									   success : function(data){
+										   	var result = confirm("상품이 장바구니에 담겼습니다. 장바구니로 이동하시겠습니까?");
+									   		if(result){
+									   			location.href="/cart.do";
+									   		} else {
+									   			return false;
+									   		}
+									   },
+									   error : function(){
+									    alert("이미 담겨있는 상품입니다.");
+									   }
+									  });
+							});
+						</script>
+							<button id="jjimBtn" class="heart-icon col-lg-2 text-center borderNone">
 								<c:if test="${empty jjimInfo}">
 									<i class="fa fa-heart-o"></i>
 								</c:if>

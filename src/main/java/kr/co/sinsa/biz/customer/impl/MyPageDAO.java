@@ -7,6 +7,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import kr.co.sinsa.biz.customer.CartVO;
 import kr.co.sinsa.biz.customer.CustomerVO;
 import kr.co.sinsa.biz.customer.JjimVO;
 import kr.co.sinsa.biz.customer.MyOrderListVO;
@@ -150,6 +151,14 @@ public class MyPageDAO {
 	
 	public int removeJjim(JjimVO jjimVO) {
 		return SST.delete("myInfo.removeJjim", jjimVO);
+	}
+	
+	public int addCart(CartVO vo) {
+		return SST.insert("myInfo.addCart", vo);
+	}
+	
+	public CartVO selCartById(CartVO vo) {
+		return SST.selectOne("myInfo.selCartById", vo);
 	}
 	
 }
