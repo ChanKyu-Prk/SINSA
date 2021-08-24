@@ -798,7 +798,8 @@
 														var result = confirm("변경된 수량을 저장하시겠습니까?\n변경전 : " + lastVal + " => 변경후 : " + ORDER_AMOUNT);
 														if(!result){
 															$(this).parents("tr").find(".amount").val(lastVal);
-															alert("변경을 취소하였습니다.");															return false;
+															alert("변경을 취소하였습니다.");
+															return false;
 														} else {
 															$(this).parents("tr").find(".button_qty_change").trigger('click');
 														}
@@ -919,6 +920,19 @@
 							<button id="cartBuyBtn" class="primary-btn col-lg-12">결제하기</button>
 							<script type="text/javascript">
 							$("#cartBuyBtn").click(function(){
+								var changedVal = 0;
+								$('.buy_rightnow').each(function (index, item) {
+									var curVal = $(this).parents("tr").find(".amount").val();
+									var lastVal = $(this).parents("tr").find(".amount").attr("data-lastval");
+									if(lastVal != curVal){
+										$(this).parents("tr").find(".amount").val(lastVal);
+										changedVal+=1;
+									}
+								});
+								if(changedVal > 0){
+									alert("저장되지 않은 수량변경이 있습니다. 수량을 초기화 합니다.");
+									return false;
+								}
 								var ORDER_PRDCODE = $(".prdCode").map(function() {
 								    return $(this).text();
 								}).get();
@@ -941,7 +955,7 @@
 									data["ORDER_PRDCODE"] = ORDER_PRDCODE[i];
 									data["ORDER_PRDSIZE"] = ORDER_PRDSIZE[i];
 									data["ORDER_AMOUNT"] = ORDER_AMOUNT[i];
-									itemList.unshift(data);
+									itemList.push(data);
 								}
 									  $.ajax({
 									   url : "/direct/checkout",
