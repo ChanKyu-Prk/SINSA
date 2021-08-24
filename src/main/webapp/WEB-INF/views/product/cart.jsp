@@ -280,6 +280,8 @@
 	background: #ccc;
 }
 </style>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 <%
 	ArrayList<ProductVO> productList = (ArrayList<ProductVO>) request.getAttribute("productList");
@@ -357,14 +359,14 @@
 														<div class="brand">${list.PRD_BRAND}</div>
 														<div>
 															<a class="product_name"
-																href="product/prdCode=${list.PRD_CODE}">${list.PRD_NAME}</a>
+																href="product/prdCode=${list.PRD_CODE}">${list.PRD_NAME}<span class="pl-1 prdCode">${list.PRD_CODE}</span></a>
 														</div>
 														<div>
 															<a class="product_color"
 																href="product/prdCode=${list.PRD_CODE}">${list.PRD_COLOR}</a>
 														</div>
 														<div class="product_size">
-															${list.CART_PRDSIZE}
+															<span class="qty-size">${list.CART_PRDSIZE}</span>
 
 															<!-- Button trigger modal -->
 															<button type="button"
@@ -749,19 +751,11 @@
 													<span class="won">원</span>
 												</c:if></td>
 											<td class="shoping__cart__quantity">
-											
-											
-											
-											
-											
-											
-									
-
 													<form action="updatecart.do" method="POST"
 														onsubmit="return alert('수량이 변경되었습니다');">
 														<div class="quantity">
-															<div class="pro-qty">
-																<input id="count" name="CART_PRDCOUNT"
+															<div id="count${status.index}" class="pro-qty">
+																<input  class="amount" name="CART_PRDCOUNT" data-lastVal = "${list.CART_PRDCOUNT}"
 																	value="${list.CART_PRDCOUNT}" readonly />
 															</div>
 														</div>
@@ -769,13 +763,6 @@
 															value="${list.CART_NUM}" /> <input
 															class="button_qty_change" type="submit" value="변경" />
 													</form>
-
-												
-												
-												
-												
-												
-												
 												</td>
 											<td class="shoping__cart__total"><c:set
 													var="previousTotalPrice"
@@ -799,8 +786,48 @@
 
 
 												<div id="previousTotalPrice"></div></td>
-											<td class="shoping__cart__item__close"><input
-												class="buy_rightnow" type="submit" value="바로구매" />
+											<td class="shoping__cart__item__close">
+												<button id="directBtn${status.index}" class="buy_rightnow" type="submit">바로구매</button>
+												<script type="text/javascript">
+												$("#directBtn${status.index}").click(function(){
+													var ORDER_PRDCODE = $(this).parents("tr").find(".prdCode").text();
+													var ORDER_PRDSIZE = $(this).parents("tr").find(".qty-size").text();
+													var ORDER_AMOUNT = $(this).parents("tr").find(".amount").val();
+													var lastVal = $(this).parents("tr").find(".amount").attr("data-lastval");
+													if(lastVal != ORDER_AMOUNT){
+														var result = confirm("변경된 수량을 저장하시겠습니까?\n변경전 : " + lastVal + " => 변경후 : " + ORDER_AMOUNT);
+														if(!result){
+															$(this).parents("tr").find(".amount").val(lastVal);
+															alert("변경을 취소하였습니다.");
+															return false;
+														} else {
+															$(this).parents("tr").find(".button_qty_change").trigger('click');
+														}
+													}
+													//JSON 형태로 데이터 생성
+													var data = {};
+													var itemList = [];
+														data["ORDER_PRDCODE"] = ORDER_PRDCODE;
+														data["ORDER_PRDSIZE"] = ORDER_PRDSIZE;
+														data["ORDER_AMOUNT"] = ORDER_AMOUNT;
+														itemList.unshift(data);
+														  $.ajax({
+														   url : "/direct/checkout",
+														   type : "POST",
+														   data : JSON.stringify(itemList),
+														    headers: {
+														      'Accept': 'application/json',
+														      'Content-Type': 'application/json'
+														    },
+														   success : function(data){
+																location.href="/direct/checkout";
+														   },
+														   error : function(){
+														    alert("보내기 실패");
+														   }
+														  });
+												});
+											</script>
 
 												<form id="form" name="form" action="cart.do" method="post"
 													onsubmit="return confirm('장바구니에서 해당 상품을 삭제 하시겠습니까?');">
@@ -890,7 +917,63 @@
 								<li>총 금액 <span> <%=formatter.format(sum1 - sum2)%></span>
 								</li>
 							</ul>
-							<a href="#" class="primary-btn">결제하기</a>
+							<button id="cartBuyBtn" class="primary-btn col-lg-12">결제하기</button>
+							<script type="text/javascript">
+							$("#cartBuyBtn").click(function(){
+								var changedVal = 0;
+								$('.buy_rightnow').each(function (index, item) {
+									var curVal = $(this).parents("tr").find(".amount").val();
+									var lastVal = $(this).parents("tr").find(".amount").attr("data-lastval");
+									if(lastVal != curVal){
+										$(this).parents("tr").find(".amount").val(lastVal);
+										changedVal+=1;
+									}
+								});
+								if(changedVal > 0){
+									alert("저장되지 않은 수량변경이 있습니다. 수량을 초기화 합니다.");
+									return false;
+								}
+								var ORDER_PRDCODE = $(".prdCode").map(function() {
+								    return $(this).text();
+								}).get();
+								var ORDER_PRDSIZE = $(".qty-size").map(function() {
+								    return $(this).text();
+								}).get();
+								var ORDER_AMOUNT = $('.amount').map(function() {
+								    return this.value;
+								}).get();
+								
+								//JSON 형태로 데이터 생성
+								var data = {};
+								var itemList = [];
+								if(ORDER_AMOUNT.length == 0){
+									alert("옵션을 선택해주세요.");
+									return false;
+								}
+								for(var i=0; i<ORDER_AMOUNT.length; i++){
+									data = {};
+									data["ORDER_PRDCODE"] = ORDER_PRDCODE[i];
+									data["ORDER_PRDSIZE"] = ORDER_PRDSIZE[i];
+									data["ORDER_AMOUNT"] = ORDER_AMOUNT[i];
+									itemList.push(data);
+								}
+									  $.ajax({
+									   url : "/direct/checkout",
+									   type : "POST",
+									   data : JSON.stringify(itemList),
+									    headers: {
+									      'Accept': 'application/json',
+									      'Content-Type': 'application/json'
+									    },
+									   success : function(data){
+											location.href="/direct/checkout";
+									   },
+									   error : function(){
+									    alert("보내기 실패");
+									   }
+									  });
+							});
+						</script>
 						</div>
 					</div>
 				</div>
