@@ -24,12 +24,12 @@
 
 
 	<!-- Page Preloder -->
-<!-- 	<div id="preloder"> -->
-<!-- 		<div class="loader"></div> -->
-<!-- 	</div> -->
+	<!-- 	<div id="preloder"> -->
+	<!-- 		<div class="loader"></div> -->
+	<!-- 	</div> -->
 
-	
-	<jsp:include page="header.jsp"/>
+
+	<jsp:include page="header.jsp" />
 
 
 
@@ -52,7 +52,9 @@
 						data-setbg="${path}/resources/img/hero/banner.jpg">
 						<div class="hero__text">
 							<span>SINSA</span>
-							<h2>이달의 특가 <br/>최대 40% 할인!</h2>
+							<h2>
+								이달의 특가 <br />최대 40% 할인!
+							</h2>
 							<p>지금 특별한 가격을 만나보세요~</p>
 							<a href="#" class="primary-btn">SHOP NOW</a>
 						</div>
@@ -71,37 +73,33 @@
 			</div>
 			<div class="row">
 				<div class="categories__slider owl-carousel">
-				
-				
-				
-				
-				<c:forEach var="list" items="${productList}" varStatus="status">
-					<div class="col-lg-3">
-					<a href="#">
-						<div class="featured__item">
-							<div class="featured__item__pic set-bg"
-								data-setbg="${path}/resources/img/featured/feature-1.jpg">
-							</div>
-							<div class="featured__item__text">
-								<h6>
-									${list.PRD_BRAND}
-								</h6>
-								<h6>
-									${list.PRD_NAME}
-								</h6>
-								<h5>${list.PRD_PRICE}원</h5>
-							</div>
+
+
+
+
+					<c:forEach var="list" items="${productList}" varStatus="status">
+						<div class="col-lg-3">
+							<a href="#">
+								<div class="featured__item">
+									<div class="featured__item__pic set-bg"
+										data-setbg="${path}/resources/img/featured/feature-1.jpg">
+									</div>
+									<div class="featured__item__text">
+										<h6>${list.PRD_BRAND}</h6>
+										<h6>${list.PRD_NAME}</h6>
+										<h5>${list.PRD_PRICE}원</h5>
+									</div>
+								</div>
+							</a>
 						</div>
-						</a>
-					</div>
-				</c:forEach>
-					
-					
-					
-					
-					
-					
-					
+					</c:forEach>
+
+
+
+
+
+
+
 				</div>
 			</div>
 		</div>
@@ -127,10 +125,10 @@
 					</div>
 				</div>
 			</div>
-			
-			
-			
-			
+
+
+
+
 			<div class="row featured__filter">
 				<div class="col-lg-3 col-md-4 col-sm-6 mix oranges fresh-meat">
 
@@ -143,12 +141,8 @@
 							</ul>
 						</div>
 						<div class="featured__item__text">
-							<h6>
-								BRAND
-							</h6>
-							<h6>
-								NAME
-							</h6>
+							<h6>BRAND</h6>
+							<h6>NAME</h6>
 							<h5>45,000원</h5>
 						</div>
 					</div>
@@ -163,12 +157,8 @@
 							</ul>
 						</div>
 						<div class="featured__item__text">
-							<h6>
-								BRAND
-							</h6>
-							<h6>
-								NAME
-							</h6>
+							<h6>BRAND</h6>
+							<h6>NAME</h6>
 							<h5>45,000원</h5>
 						</div>
 					</div>
@@ -183,12 +173,8 @@
 							</ul>
 						</div>
 						<div class="featured__item__text">
-							<h6>
-								BRAND
-							</h6>
-							<h6>
-								NAME
-							</h6>
+							<h6>BRAND</h6>
+							<h6>NAME</h6>
 							<h5>45,000원</h5>
 						</div>
 					</div>
@@ -203,12 +189,8 @@
 							</ul>
 						</div>
 						<div class="featured__item__text">
-							<h6>
-								BRAND
-							</h6>
-							<h6>
-								NAME
-							</h6>
+							<h6>BRAND</h6>
+							<h6>NAME</h6>
 							<h5>45,000원</h5>
 						</div>
 					</div>
@@ -223,12 +205,8 @@
 							</ul>
 						</div>
 						<div class="featured__item__text">
-							<h6>
-								BRAND
-							</h6>
-							<h6>
-								NAME
-							</h6>
+							<h6>BRAND</h6>
+							<h6>NAME</h6>
 							<h5>45,000원</h5>
 						</div>
 					</div>
@@ -243,12 +221,8 @@
 							</ul>
 						</div>
 						<div class="featured__item__text">
-							<h6>
-								BRAND
-							</h6>
-							<h6>
-								NAME
-							</h6>
+							<h6>BRAND</h6>
+							<h6>NAME</h6>
 							<h5>45,000원</h5>
 						</div>
 					</div>
@@ -263,12 +237,8 @@
 							</ul>
 						</div>
 						<div class="featured__item__text">
-							<h6>
-								BRAND
-							</h6>
-							<h6>
-								NAME
-							</h6>
+							<h6>BRAND</h6>
+							<h6>NAME</h6>
 							<h5>45,000원</h5>
 						</div>
 					</div>
@@ -283,12 +253,8 @@
 							</ul>
 						</div>
 						<div class="featured__item__text">
-							<h6>
-								BRAND
-							</h6>
-							<h6>
-								NAME
-							</h6>
+							<h6>BRAND</h6>
+							<h6>NAME</h6>
 							<h5>45,000원</h5>
 						</div>
 					</div>
@@ -394,8 +360,8 @@
 
 
 
-	<jsp:include page="footer.jsp"/>
-	
+	<jsp:include page="footer.jsp" />
+
 
 </body>
 
