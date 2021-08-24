@@ -21,9 +21,6 @@ import kr.co.sinsa.biz.product.PageInfo;
 @Controller 
 public class CustomerController {
 	
-//	@Autowired
-//	private JavaMailSender mailSender;
-	
 	@Autowired
 	private CustomerService customerService;
 	
@@ -99,7 +96,6 @@ public class CustomerController {
 		return "admin/customerInputForm";
 	}
 	
-	//여기부터
 		@RequestMapping(value = "/admin/customerInsert", method = RequestMethod.POST)
 		public String customerInsert(CustomerVO vo, HttpServletRequest req) {
 			System.out.println("인덱스 화면으로 이동5555");
@@ -111,9 +107,6 @@ public class CustomerController {
 					+ req.getParameter("CUS_ADDR_5") + "|" + req.getParameter("CUS_ADDR_4");
 			vo.setCUS_ADDR(address);
 			customerService.customer_insert(vo);
-			
-//			CusInsertDAO dao = sqlSessionTemplate.getMapper(CusInsertDAO.class);
-//			int n = dao.customerInsert(vo);
 			return "redirect:/admin/customerList";
 		}
 		
@@ -129,6 +122,17 @@ public class CustomerController {
 			}
 
 		}
+		
+		@RequestMapping(value = "/admin/mailChk", method = RequestMethod.POST)
+		@ResponseBody
+		public int mailChkPOST(Model model, String CUS_EMAIL_1, String CUS_EMAIL_2) throws Exception {
+			System.out.println(CUS_EMAIL_1 + "aaaa" + CUS_EMAIL_2);
+			String CUS_EMAIL = CUS_EMAIL_1+"@"+CUS_EMAIL_2;
+			System.out.println(CUS_EMAIL + " 12123123123");
+			int result = customerService.mailChk(CUS_EMAIL);
+			return result;
+		}
+		
 		@RequestMapping("/admin/customerEdit")
 		public String customerEdit(Model model, @RequestParam int CUS_NUM) {
 			model.addAttribute("customerInfo", customerService.customer_info(CUS_NUM));
@@ -137,21 +141,13 @@ public class CustomerController {
 
 		@RequestMapping("/admin/customerUpdate")
 		public String customerUpdate(Model model, CustomerVO vo) {
-//			model.addAttribute("notice_num", vo.getNotice_num());
 			customerService.customer_update(vo);
 			return "redirect:/admin/customerList";
 		}
-	
 	
 		@RequestMapping("/admin/customerDelete")
 		public String customerDelete(@RequestParam int CUS_NUM) {
 			customerService.customer_delete(CUS_NUM);
 			return "redirect:/admin/customerList";
 		}
-	
-	
-	
-	
-
-	
 }

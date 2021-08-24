@@ -36,7 +36,7 @@ div {
 					style="text-align: center; border: 0px solid #dddddd">
 				<tr>
 					<td>아이디 :</td>
-					<td><form:input path="CUS_ID" class="form-control" /></td>
+					<td><form:input path="CUS_ID" class="form-control" readonly="true"/></td>
 					<td rowspan="10"></td>
 				</tr>
 				<tr>
@@ -51,10 +51,10 @@ div {
 				<tr>
 					<td>성별 :</td>
 					<td>
-						<form:select path="CUS_GENDER" class="form-control">
-        					<form:option value="남자"/>
+						<form:input path="CUS_GENDER" class="form-control" readonly="true" />
+        				<%-- 	<form:option value="남자"/>
         					<form:option value="여자"/>
-						</form:select>
+						</form:select>--%>
 					</td>
 					</tr>
 				<tr>
@@ -72,12 +72,8 @@ div {
 					</tr>
 				<tr>
 					<td>생년월일 :</td>
-					<td><form:input path="CUS_BIRTH" class="form-control" /></td>
+					<td><form:input path="CUS_BIRTH" class="form-control" readonly="true"/></td>
 					</tr>
-				<%-- <tr>
-					<td>기본배송지 :</td>
-					<td><form:input path="CUS_DELIV_ADDR" class="form-control" /></td>
-					</tr> --%>
 				<tr>
 					<td>포인트 :</td>
 					<td><form:input path="CUS_POINT" class="form-control" /></td>

@@ -17,7 +17,7 @@ public interface CustomerDAO {
 	public List<CustomerVO> CustomerList();
 	
 	public int idCheck(String CUS_ID);
-	//public int emailChk(String CUS_EMAIL) throws Exception;
+	public int mailChk(String CUS_EMAIL);
 	
 	
 	

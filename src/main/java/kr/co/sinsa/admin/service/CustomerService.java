@@ -18,6 +18,6 @@ public interface CustomerService {
 //	public void insert(CustomerVO vo);
 	public int idCheck(String CUS_ID) throws Exception;
 	
-	//public int emailChk(String CUS_EMAIL) throws Exception;
+	public int mailChk(String CUS_EMAIL);
 
 }

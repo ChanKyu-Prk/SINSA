@@ -44,7 +44,7 @@ body{
 }
 
 .loginLogoTitle{
-	margin: -25px -25px 25px;
+	margin: -25px 0px 25px;
     padding: 15px 25px;
     color: white;
     line-height: 35px;
@@ -55,7 +55,7 @@ body{
 
 .admintext {
 	text-align: center;
-	margin: -25px -25px 25px;
+	margin: -25px 0px 25px ;
     padding: 15px 25px;
     font-size: 15px;
     color: white;
