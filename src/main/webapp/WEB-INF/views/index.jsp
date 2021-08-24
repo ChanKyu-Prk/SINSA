@@ -118,11 +118,11 @@
 					</div>
 					<div class="featured__controls">
 						<ul>
-							<li class="active" data-filter="*">전체</li>
-							<li data-filter=".oranges">스니커즈</li>
-							<li data-filter=".fresh-meat">캔버스화</li>
-							<li data-filter=".vegetables">슬립온</li>
-							<li data-filter=".fastfood">뮬</li>
+							<li class="active" data-filter=".all">전체</li>
+							<li data-filter=".sneakers">스니커즈</li>
+							<li data-filter=".canvas">캔버스화</li>
+							<li data-filter=".slip-on">슬립온</li>
+							<li data-filter=".mule">뮬</li>
 						</ul>
 					</div>
 				</div>
@@ -132,7 +132,7 @@
 			
 			
 			<div class="row featured__filter">
-				<div class="col-lg-3 col-md-4 col-sm-6 mix oranges fresh-meat">
+				<div class="col-lg-3 col-md-4 col-sm-6 mix all">
 
 					<div class="featured__item">
 						<div class="featured__item__pic set-bg"
@@ -153,7 +153,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="col-lg-3 col-md-4 col-sm-6 mix vegetables fastfood">
+				<div class="col-lg-3 col-md-4 col-sm-6 mix canvas">
 					<div class="featured__item">
 						<div class="featured__item__pic set-bg"
 							data-setbg="${path}/resources/img/featured/feature-2.jpg">
@@ -173,7 +173,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="col-lg-3 col-md-4 col-sm-6 mix vegetables fresh-meat">
+				<div class="col-lg-3 col-md-4 col-sm-6 mix slip-on">
 					<div class="featured__item">
 						<div class="featured__item__pic set-bg"
 							data-setbg="${path}/resources/img/featured/feature-3.jpg">
@@ -193,7 +193,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="col-lg-3 col-md-4 col-sm-6 mix fastfood oranges">
+				<div class="col-lg-3 col-md-4 col-sm-6 mix slip-on">
 					<div class="featured__item">
 						<div class="featured__item__pic set-bg"
 							data-setbg="${path}/resources/img/featured/feature-4.jpg">
@@ -213,7 +213,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="col-lg-3 col-md-4 col-sm-6 mix fresh-meat vegetables">
+				<div class="col-lg-3 col-md-4 col-sm-6 mix mule">
 					<div class="featured__item">
 						<div class="featured__item__pic set-bg"
 							data-setbg="${path}/resources/img/featured/feature-5.jpg">
@@ -233,27 +233,27 @@
 						</div>
 					</div>
 				</div>
-				<div class="col-lg-3 col-md-4 col-sm-6 mix oranges fastfood">
-					<div class="featured__item">
-						<div class="featured__item__pic set-bg"
-							data-setbg="${path}/resources/img/featured/feature-6.jpg">
-							<ul class="featured__item__pic__hover">
-								<li><a href="#"><i class="fa fa-heart"></i></a></li>
-								<li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-							</ul>
-						</div>
-						<div class="featured__item__text">
-							<h6>
-								BRAND
-							</h6>
-							<h6>
-								NAME
-							</h6>
-							<h5>45,000원</h5>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-3 col-md-4 col-sm-6 mix fresh-meat vegetables">
+<!-- 				<div class="col-lg-3 col-md-4 col-sm-6 mix mule"> -->
+<!-- 					<div class="featured__item"> -->
+<!-- 						<div class="featured__item__pic set-bg" -->
+<%-- 							data-setbg="${path}/resources/img/featured/feature-6.jpg"> --%>
+<!-- 							<ul class="featured__item__pic__hover"> -->
+<!-- 								<li><a href="#"><i class="fa fa-heart"></i></a></li> -->
+<!-- 								<li><a href="#"><i class="fa fa-shopping-cart"></i></a></li> -->
+<!-- 							</ul> -->
+<!-- 						</div> -->
+<!-- 						<div class="featured__item__text"> -->
+<!-- 							<h6> -->
+<!-- 								BRAND -->
+<!-- 							</h6> -->
+<!-- 							<h6> -->
+<!-- 								NAME -->
+<!-- 							</h6> -->
+<!-- 							<h5>45,000원</h5> -->
+<!-- 						</div> -->
+<!-- 					</div> -->
+<!-- 				</div> -->
+				<div class="col-lg-3 col-md-4 col-sm-6 mix mule">
 					<div class="featured__item">
 						<div class="featured__item__pic set-bg"
 							data-setbg="${path}/resources/img/featured/feature-7.jpg">
@@ -273,7 +273,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="col-lg-3 col-md-4 col-sm-6 mix fastfood vegetables">
+				<div class="col-lg-3 col-md-4 col-sm-6 mix mule">
 					<div class="featured__item">
 						<div class="featured__item__pic set-bg"
 							data-setbg="${path}/resources/img/featured/feature-8.jpg">
