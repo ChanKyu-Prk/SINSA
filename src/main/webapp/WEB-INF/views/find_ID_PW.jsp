@@ -129,7 +129,8 @@
 }
 
 .button_login {
-	width: 250px !important;
+	width: 200px !important;
+	height: 50px !important;
 	margin: 30px 7px 0px 0px;
 	background-color: white !important;
 	color: #222020 !important;
@@ -139,7 +140,8 @@
 }
 
 .button_join {
-	width: 250px !important;
+	width: 200px !important;
+	height: 50px !important;
 	margin: 30px 0px 0px 7px;
 	background-color: #222020 !important;
 	color: white !important;
