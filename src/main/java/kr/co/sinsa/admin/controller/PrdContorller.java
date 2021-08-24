@@ -1,5 +1,6 @@
 package kr.co.sinsa.admin.controller;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -97,10 +98,13 @@ public class PrdContorller {
 	}
 			
 	@RequestMapping(value = "/admin/prdInsert", method = RequestMethod.POST)
-	public String prdInsert(PrdVO vo, @RequestParam(required = false) List<MultipartFile> multipartFile) {
+	public String prdInsert(PrdVO vo, @RequestParam(required = false) List<MultipartFile> multipartFile, Model model) {
+		
 		String fileNames = upload.prdImgUpload(multipartFile);
 		vo.setPrd_image(fileNames);
 		prdService.prd_insert(vo);
+		System.out.println(fileNames);
+		model.addAttribute("url", fileNames);
 		return "redirect:/admin/prdList";
 	}
 			
