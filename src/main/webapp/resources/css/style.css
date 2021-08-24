@@ -1536,6 +1536,7 @@ ol {
 }
 
 .product__item__pic {
+	width: 100%;
 	height: 270px;
 	position: relative;
 	overflow: hidden;
