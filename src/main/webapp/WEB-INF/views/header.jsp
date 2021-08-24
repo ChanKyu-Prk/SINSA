@@ -178,7 +178,7 @@
 									<li><a href="/product/List/women/newest/slipon/1">슬립온</a></li>
 									<li><a href="/product/List/women/newest/mule/1">뮬</a></li>
 								</ul></li>
-							<li><a href="/product/List/new/newest/all/1">new</a></li>
+							<!-- <li><a href="/product/List/new/newest/all/1">new</a></li> -->
 							<li><a href="/product/List/best/newest/all/1">best</a></li>
 						</ul>
 					</nav>

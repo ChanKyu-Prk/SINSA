@@ -12,9 +12,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>SinSa</title>
-    
+    <link rel="stylesheet" href="${path}/resources/css/productList.css" type="text/css">
+    <script type="text/javascript"></script>
     <script src="http://code.jquery.com/jquery-3.3.1.min.js">
 	</script>
+
 
 	<style>
 
@@ -58,6 +60,7 @@
 
 
 </head>
+
 <body>
 
     <!-- Page Preloder -->
@@ -730,20 +733,58 @@
                         </div>
                     </div>
                     <div class="row">
+                    <script type="text/javascript">
+				    	var cartCheck = "false";
+                    </script>
                         <c:forEach var="list" items="${list }">
 	                        <style>
                        			#modal${list.PRD_CODE } {
 									display:none;
 									position:absolute;
 									width:100%;
-									height:100%;
+									height:60%;
+									z-index:999999;
+								}
+								
+								#cartModal${list.PRD_CODE } {
+									display:none;
+									position:absolute;
+									width:100%;
+									height:60%;
+									z-index:999999;
+								}
+								
+								#jjimModal${list.PRD_CODE } {
+									display:none;
+									position:absolute;
+									width:100%;
+									height:60%;
 									z-index:999999;
 								}
 								
 						
 								#modal${list.PRD_CODE } .modal_content {
-									width:300px;
-									margin:100px auto;
+									width:500px;
+									height:500px;
+									margin:50px auto;
+									padding:20px 10px;
+									background:#fff;
+									border: 2px solid #666;
+								}
+								
+								#cartModal${list.PRD_CODE } .modal_content {
+									width:500px;
+									height:500px;
+									margin:50px auto;
+									padding:20px 10px;
+									background:#fff;
+									border: 2px solid #666;
+								}
+								
+								#jjimModal${list.PRD_CODE } .modal_content {
+									width:500px;
+									height:500px;
+									margin:50px auto;
 									padding:20px 10px;
 									background:#fff;
 									border: 2px solid #666;
@@ -754,16 +795,21 @@
 	                                <div class="product__item__pic set-bg" data-setbg="${path}/resources/img/product/${list.PRD_IMAGE }">
 	                                </div>
                                     <ul class="product__item__pic__hover">
-                                        <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                                        <li><a id="jjimModal_open_btn${list.PRD_CODE }"><i class="fa fa-heart"></i></a></li>
                                         <li><a id="modal_open_btn${list.PRD_CODE }"><i class="fa fa-retweet"><b>바로구매</b></i></a></li>
-                                        <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                                        <li><a id="cartModal_open_btn${list.PRD_CODE }"><i class="fa fa-shopping-cart"></i></a></li>
                                     </ul>
                                     
 				                    <div id="modal${list.PRD_CODE }">
 										<div class="modal_content">
-											<h2>바로구매</h2>
+											<h4>옵션선택</h4>
 											<hr />
-											
+											<img alt="${list.PRD_IMAGE }" width="250px" src="${path}/resources/img/product/${list.PRD_IMAGE }">
+											<br>
+											<span>${list.PRD_BRAND }</span> <br />
+											<span>${list.PRD_NAME }</span>
+											<span>컬러</span>
+											<hr />
 											<button type="button" id="">
 												구매하기
 											</button>
@@ -772,6 +818,47 @@
 											</button>
 										</div>
 									</div>
+									
+									
+				                    <div id="cartModal${list.PRD_CODE }">
+										<div class="modal_content">
+											<h4>옵션선택</h4>
+											<hr />
+											<div id="p-Box">
+												<div id="p-Img">
+												<img alt="${list.PRD_IMAGE }" width="250px" src="${path}/resources/img/product/${list.PRD_IMAGE }">
+												</div>
+												<br>
+												<div id="p-Text">
+													<span>${list.PRD_BRAND }</span> <br />
+													<span>${list.PRD_NAME }</span> <br />
+													<span>컬러</span>
+												</div>
+											</div>
+											<hr />
+											<button type="button" id="">
+												구매하기
+											</button>
+											<button type="button" id="cartModal_close_btn${list.PRD_CODE }">
+												창 닫기
+											</button>
+										</div>
+									</div>
+									
+				                    <div id="jjimModal${list.PRD_CODE }">
+										<div class="modal_content">
+											<h2>바로구매</h2>
+											<hr />
+											
+											<button type="button" id="">
+												구매하기
+											</button>
+											<button type="button" id="jjimModal_close_btn${list.PRD_CODE }">
+												창 닫기
+											</button>
+										</div>
+									</div>
+									
 	                                <div class="product__item__text">
 										<p>
  											<h6>${list.PRD_NAME }</h6>												
@@ -779,6 +866,7 @@
                                    		<h5>${list.PRD_PRICE }원</h5>
                                 	</div>
                             	</div>
+                            	
                             	<script type="text/javascript">
                             		$('.product__item__pic').on('click', function(){
                             			var PRD_CODE = "${list.PRD_CODE}";
@@ -786,12 +874,46 @@
                             		})
                             
 								    $("#modal_open_btn${list.PRD_CODE }").click(function(){
-								        $("#modal${list.PRD_CODE }").attr("style", "display:block");
+								    	if(cartCheck === "false"){							    		
+									        $("#modal${list.PRD_CODE }").attr("style", "display:block");
+								        	cartCheck = "true";
+								    	}
 								    });
-								   
+                            		
 								     $("#modal_close_btn${list.PRD_CODE }").click(function(){
-								        $("#modal${list.PRD_CODE }").attr("style", "display:none");
+								        if(cartCheck === "true"){								        	
+									    	 $("#modal${list.PRD_CODE }").attr("style", "display:none");
+									    	 cartCheck = "false";
+								        }
+								    });
+								     
+								     
+								    $("#cartModal_open_btn${list.PRD_CODE }").click(function(){
+									    if(cartCheck === "false"){								    	
+									        $("#cartModal${list.PRD_CODE }").attr("style", "display:block");
+									        cartCheck = "true";
+									    }
+								    });
+								     $("#cartModal_close_btn${list.PRD_CODE }").click(function(){
+								        if(cartCheck === "true"){									        	
+								    	 	$("#cartModal${list.PRD_CODE }").attr("style", "display:none");
+								    	 	cartCheck = "false";
+								        }
 								    });      
+								     
+								    $("#jjimModal_open_btn${list.PRD_CODE }").click(function(){
+									    if(cartCheck === "false"){								    	
+									        $("#jjimModal${list.PRD_CODE }").attr("style", "display:block");
+									        cartCheck = "true";
+									    }
+								    });
+								     $("#jjimModal_close_btn${list.PRD_CODE }").click(function(){
+								        if(cartCheck === "true"){									        	
+								    	 	$("#jjimModal${list.PRD_CODE }").attr("style", "display:none");
+								    	 	cartCheck = "false";
+								        }
+								    });
+								    
 								</script>
 	                        </div>
 

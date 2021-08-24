@@ -1,0 +1,22 @@
+@charset "UTF-8";
+
+#p-Img{
+	width: 40%;
+	display: inline-block;
+	float: left;
+}
+#p-Text{
+	margin-left: 30px;
+	width: 225px;
+	display: inline-block;
+	float: left;
+}
+#p-Box{
+	margin-bottom: 170px;
+    height: 5px;
+	
+}
+#cartSize{
+	display: inline-block;
+	margin-right: 60px;
+}
