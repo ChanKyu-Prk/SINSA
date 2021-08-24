@@ -327,6 +327,15 @@ input[type=number] {
 							<button id="cartBtn" class="primary-btn text-center col-lg-10 borderNone">장바구니</button>
 							<script type="text/javascript">
 							$("#cartBtn").click(function(){
+								<%if(session.getAttribute("user") == null){%>
+								var result = confirm("로그인이 필요한 서비스입니다. 로그인하시겠습니까?");
+								if(result){
+									location.href="/login.do";
+								}
+								else {
+									return false;
+								}
+								<%}%>
 								var ORDER_PRDCODE = $(".prdCode").text();
 								var ORDER_PRDSIZE = $(".qty-size").map(function() {
 								    return $(this).text();
@@ -358,9 +367,15 @@ input[type=number] {
 									      'Content-Type': 'application/json'
 									    },
 									   success : function(data){
+										   	var result = confirm("상품이 장바구니에 담겼습니다. 장바구니로 이동하시겠습니까?");
+									   		if(result){
+									   			location.href="/cart.do";
+									   		} else {
+									   			return false;
+									   		}
 									   },
 									   error : function(){
-									    alert("장바구니에 담기 실패");
+									    alert("이미 담겨있는 상품입니다.");
 									   }
 									  });
 							});

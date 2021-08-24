@@ -1,5 +1,6 @@
 package kr.co.sinsa.view.orders;
 
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -45,36 +46,30 @@ public class OrdersController {
 	private MyPageService myService;
 	
 	@RequestMapping(value = "/addCart", method=RequestMethod.POST,produces = "application/json;charset=UTF-8")
-    public String manageCart(@RequestBody List<Map<String, String>> itemLists, CartVO cartVO, Model model, HttpSession session) throws Exception {
+    public String manageCart(@RequestBody List<Map<String, String>> itemLists, HttpServletResponse response, CartVO cartVO, Model model, HttpSession session) throws Exception {
 		String CUS_ID = null;
 		if((UserVO) session.getAttribute("user") != null) {
 			UserVO user = (UserVO) session.getAttribute("user");
 			CUS_ID = (String)user.getCUS_ID();
 		}
-		CUS_ID="dhan03";
 		String ORDER_PRDCODE = null;;
-
-		List<OrdersAndProductVO> prdList = new ArrayList();
 				
 		for(Object list : itemLists) {
 			LinkedHashMap<String,String> item = (LinkedHashMap<String, String>) list;
-			//CART_CUSID
 			cartVO.setCART_CUSID(CUS_ID);
 			ORDER_PRDCODE = item.get("ORDER_PRDCODE");
-			//CART_PRDNUM
 			OrdersAndProductVO oapVO = service.selPrdByCode(ORDER_PRDCODE);
 			int CART_PRDNUM = oapVO.getPRD_NUM();
 			cartVO.setCART_PRDNUM(CART_PRDNUM);
-			//CART_PRDSIZE
 			cartVO.setCART_PRDSIZE(item.get("ORDER_PRDSIZE"));
 
-			//PRDNUM과 CART_PRDSIZE와 CUS_ID를 통해 이미 담겨있는 상품인지 확인
 			if(myService.selCartById(cartVO) == null) {
-				//없다면 cartVO를 통해 cart에 INSERT (COUNT는 무조건 1개)
 				myService.addCart(cartVO);
 			} else {
-				//이미 담겨있다면 alert("이미 담겨있는 상품입니다.")
-				System.out.println(":::이미 담겨있는 상품입니다:::");
+				PrintWriter out = response.getWriter();
+		        out.println("<script>alert('이미 담겨있는 상품입니다 ');</script> ");
+		        out.flush();
+		        continue;
 			}
 			
 		}
