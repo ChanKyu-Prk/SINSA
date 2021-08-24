@@ -4,8 +4,6 @@
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
 <!DOCTYPE html>
 <html lang="zxx">
-
-
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,30 +13,24 @@
 .shoping__cart__table tr:first-child, .checkout__form .borderTop {
 	border-top: 1.5px solid #7FAD39;
 }
-
 .checkout__form .borderTop {
 	padding-top: 30px;
 }
-
 .shoping__cart__table .tableHead h5, .checkout__form h5 {
 	line-height: 36.8px;
 }
-
 .checkout__form .row label span {
 	color: #dd2222;
 }
-
 .checkout__form .row label {
 	line-height: 46px;
 }
-
 .checkout__form .checkout__order {
 	position: -webkit-sticky;
 	position: sticky;
 	top: 20px;
 	font-family: adihaus;
 }
-
 .checkout__input input[type="radio"] {
 	width: 20px;
 	height: 20px; vertical-align : middle;
@@ -55,22 +47,18 @@
 	pointer-events: none;
 	vertical-align: middle;
 }
-
 .checkout__input input[type="radio"]:focus {
 	outline: none;
 }
-
 .checkout__input input[type="radio"]:checked {
 	box-shadow: inset 0 0 0 6px #7fad39;
 }
-
 .checkout__input input[type="radio"] ~ span {
 	color: #111111;
 	display: inline-block;
 	line-height: 20px;
 	padding: 0 8px;
 }
-
 .checkout__input .radioLabel {
 	padding: 6px;
 	border-radius: 50px;
@@ -80,25 +68,20 @@
 	margin: 8px 0;
 	-webkit-tap-highlight-color: transparent;
 }
-
 .checkout__input .radioLabel:hover, .checkout__input .radioLabel:focus-within
 {
 	background: rgba(159, 159, 159, 0.1);
 }
-
 button[onclick="findAddr()"]{
 	height: 38px;
 	font-size:14px;
 }
-
 input:read-only{
 	background-color: #F7F7F7;
 }
-
 .checkout__order .points {
 	position: relative;
 }
-
 .checkout__order .points input {
 	width: 120px;
 	height: 38px;
@@ -111,51 +94,40 @@ input:read-only{
 	color: #b2b2b2;
 	border-radius:4px;
 }
-
 .checkout__order .points input ~ span {
 	position: absolute;
 	right: 10px;
 }
-
 .avPoint{
 	color: #dd2222;
 }
-
 .shoping__cart__price .discntNum{
 	text-decoration: line-through;
 	color: #999;
 	font-family: adihaus;
 }
-
 .numFont{
 	font-family: adihaus;
 }
-
 .shoping__cart__item img{
 	width: 120px;
 	height: 120px;
 }
-
 /* Chrome, Safari, Edge, Opera */
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button{
   -webkit-appearance: none;
   margin: 0;
 }
-	
 /* Firefox */
 input[type=number] {
   -moz-appearance: textfield;
 }
 </style>
-
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <!-- IamPort -->
 <script type="text/javascript" src="https://service.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 </head>
-
 <body>
 	<jsp:include page="../header.jsp" />
 	<!-- Checkout Section Begin -->
@@ -211,7 +183,6 @@ input[type=number] {
 							</tr>
 							</c:forEach>
 						</c:if>
-							
 						</tbody>
 					</table>
 				</div>
@@ -405,9 +376,8 @@ input[type=number] {
 							            m_redirect_url: "/checkout/complete"
 							        }, function(rsp) {
 							            if (rsp.success){
-							            	//[1] 서버단에서 결제정보 조회를 위해 jQuery ajax로 imp_uid 전달하기
 							            	$.ajax({
-							            		url: "/checkout/process", //cross-domain error가 발생하지 않도록 동일한 도메인으로 전송
+							            		url: "/checkout/process",
 							            		type: 'POST',
 							            		data: JSON.stringify(itemList),
 							            		headers: {
@@ -415,7 +385,6 @@ input[type=number] {
 												      'Content-Type': 'application/json'
 												}
 							            	}).done(function(data) {
-							            		//[2] 서버에서 REST API로 결제정보확인 및 서비스루틴이 정상적인 경우
 							            			msg = '결제가 완료되었습니다.';
 							                        msg += '\n고유ID : ' + rsp.imp_uid;
 							                        msg += '\n상점 거래ID : ' + rsp.merchant_uid;
@@ -427,7 +396,6 @@ input[type=number] {
 							                        msg += '주소 : ' + rsp.buyer_addr + rsp.buyer_postcode;
 							       					//alert(msg);
 							            	});
-							            	//성공시 이동할 페이지
 											location.href="/checkout/complete/orderNo="+ORDER_NUM;
 							            } else {
 							            	msg = '결제에 실패하였습니다.';

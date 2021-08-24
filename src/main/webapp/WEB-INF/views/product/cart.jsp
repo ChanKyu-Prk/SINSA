@@ -757,14 +757,6 @@
 															<div id="count${status.index}" class="pro-qty">
 																<input  class="amount" name="CART_PRDCOUNT" data-lastVal = "${list.CART_PRDCOUNT}"
 																	value="${list.CART_PRDCOUNT}" readonly />
-																	<script type="text/javascript">
-																	$("#count${status.index}").click(function(){
-																		alert("focusout");
-																		alert($(this).find(".amount").val());
-																		alert($(this).find(".amount").attr("data-lastVal"));
-																	});
-																	
-																	</script>
 															</div>
 														</div>
 														<input type="hidden" name="CART_NUM"
@@ -797,11 +789,20 @@
 											<td class="shoping__cart__item__close">
 												<button id="directBtn${status.index}" class="buy_rightnow" type="submit">바로구매</button>
 												<script type="text/javascript">
-												$("#directBtn${status.index}").click(function(){						
+												$("#directBtn${status.index}").click(function(){
 													var ORDER_PRDCODE = $(this).parents("tr").find(".prdCode").text();
 													var ORDER_PRDSIZE = $(this).parents("tr").find(".qty-size").text();
 													var ORDER_AMOUNT = $(this).parents("tr").find(".amount").val();
-													
+													var lastVal = $(this).parents("tr").find(".amount").attr("data-lastval");
+													if(lastVal != ORDER_AMOUNT){
+														var result = confirm("변경된 수량을 저장하시겠습니까?\n변경전 : " + lastVal + "\n변경후 : " + ORDER_AMOUNT);
+														if(!result){
+															$(this).parents("tr").find(".amount").val(lastVal);
+															alert("변경을 취소하였습니다.");															return false;
+														} else {
+															$(this).parents("tr").find(".button_qty_change").trigger('click');
+														}
+													}
 													//JSON 형태로 데이터 생성
 													var data = {};
 													var itemList = [];
@@ -809,7 +810,6 @@
 														data["ORDER_PRDSIZE"] = ORDER_PRDSIZE;
 														data["ORDER_AMOUNT"] = ORDER_AMOUNT;
 														itemList.unshift(data);
-												
 														  $.ajax({
 														   url : "/direct/checkout",
 														   type : "POST",
