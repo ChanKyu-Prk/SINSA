@@ -30,7 +30,6 @@ public class CartController {
 	@RequestMapping(value="/cart.do", method=RequestMethod.GET)
 	public String getCartList(Model model, HttpSession session, HttpServletRequest request, HttpServletRequest response) {
 
-		
 		UserVO user = (UserVO)session.getAttribute("user");
 		List<CartVO> cartList = cartService.getCartList(user);
 		model.addAttribute("user", user);

@@ -71,98 +71,37 @@
 			</div>
 			<div class="row">
 				<div class="categories__slider owl-carousel">
+				
+				
+				
+				
+				<c:forEach var="list" items="${productList}" varStatus="status">
+					<div class="col-lg-3">
+					<a href="#">
+						<div class="featured__item">
+							<div class="featured__item__pic set-bg"
+								data-setbg="${path}/resources/img/featured/feature-1.jpg">
+							</div>
+							<div class="featured__item__text">
+								<h6>
+									${list.PRD_BRAND}
+								</h6>
+								<h6>
+									${list.PRD_NAME}
+								</h6>
+								<h5>${list.PRD_PRICE}원</h5>
+							</div>
+						</div>
+						</a>
+					</div>
+				</c:forEach>
 					
-					<div class="col-lg-3">
-					<a href="#">
-						<div class="featured__item">
-							<div class="featured__item__pic set-bg"
-								data-setbg="${path}/resources/img/featured/feature-1.jpg">
-								
-							</div>
-							<div class="featured__item__text">
-								<h6>
-									BRAND
-								</h6>
-								<h6>
-									NAME
-								</h6>
-								<h5>45,000원</h5>
-							</div>
-						</div>
-						</a>
-					</div>
-					<div class="col-lg-3">
-					<a href="#">
-						<div class="featured__item">
-							<div class="featured__item__pic set-bg"
-								data-setbg="${path}/resources/img/featured/feature-1.jpg">
-							</div>
-							<div class="featured__item__text">
-								<h6>
-									BRAND
-								</h6>
-								<h6>
-									NAME
-								</h6>
-								<h5>45,000원</h5>
-							</div>
-						</div>
-						</a>
-					</div>
-					<div class="col-lg-3">
-					<a href="#">
-						<div class="featured__item">
-							<div class="featured__item__pic set-bg"
-								data-setbg="${path}/resources/img/featured/feature-1.jpg">
-							</div>
-							<div class="featured__item__text">
-								<h6>
-									BRAND
-								</h6>
-								<h6>
-									NAME
-								</h6>
-								<h5>45,000원</h5>
-							</div>
-						</div>
-						</a>
-					</div>
-					<div class="col-lg-3">
-					<a href="#">
-						<div class="featured__item">
-							<div class="featured__item__pic set-bg"
-								data-setbg="${path}/resources/img/featured/feature-1.jpg">
-							</div>
-							<div class="featured__item__text">
-								<h6>
-									BRAND
-								</h6>
-								<h6>
-									NAME
-								</h6>
-								<h5>45,000원</h5>
-							</div>
-						</div>
-						</a>
-					</div>
-					<div class="col-lg-3">
-					<a href="#">
-						<div class="featured__item">
-							<div class="featured__item__pic set-bg"
-								data-setbg="${path}/resources/img/featured/feature-1.jpg">
-							</div>
-							<div class="featured__item__text">
-								<h6>
-									BRAND
-								</h6>
-								<h6>
-									NAME
-								</h6>
-								<h5>45,000원</h5>
-							</div>
-						</div>
-						</a>
-					</div>
+					
+					
+					
+					
+					
+					
 				</div>
 			</div>
 		</div>
@@ -188,6 +127,10 @@
 					</div>
 				</div>
 			</div>
+			
+			
+			
+			
 			<div class="row featured__filter">
 				<div class="col-lg-3 col-md-4 col-sm-6 mix oranges fresh-meat">
 

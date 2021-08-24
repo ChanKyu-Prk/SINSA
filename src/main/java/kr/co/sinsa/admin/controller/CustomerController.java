@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import kr.co.sinsa.admin.service.CustomerService;
 import kr.co.sinsa.admin.vo.CustomerVO;
 import kr.co.sinsa.biz.product.PageInfo;
+import kr.co.sinsa.biz.product.ProductVO;
 
 @Controller 
 public class CustomerController {
@@ -27,11 +28,7 @@ public class CustomerController {
 	@Autowired
 	private CustomerService customerService;
 	
-	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String home1(Model model) {
-		System.out.println("인덱스 화면으로 이동11111");
-		return "index";
-	}
+	
 	
 	@RequestMapping(value = "/admin/customerList", method = RequestMethod.GET)
 	public String getCustomerList(Model model, @RequestParam(value = "page", required = false) String pages,
