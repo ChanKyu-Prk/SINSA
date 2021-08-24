@@ -83,7 +83,6 @@ public class OrdersController {
 			UserVO user = (UserVO) session.getAttribute("user");
 			CUS_ID = (String)user.getCUS_ID();
 		}
-		CUS_ID = "dhan03";
 		ordersVO.setORDER_CUSID(CUS_ID);
 		ordersVO.setORDER_NUM(ORDER_NUM);
 		
