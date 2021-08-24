@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ProductList">
+
+<select id="getList" parameterType="Map" resultType="kr.co.sinsa.biz.product.ProductVO">
+<![CDATA[
+select * from product 
+where 
+PRD_BRAND like concat ('%',#{brand},'%') and
+PRD_CATEGORY like concat('%',#{category},'%') and
+PRD_GENDER like concat('%',#{gender},'%') and
+PRD_NAME in (SELECT PRD_NAME from product where PRD_BRAND like concat('%',#{name},'%')  or PRD_BRAND like concat('%',#{name},'%'))  and
+PRD_PRICE > #{minPrice} and 
+PRD_PRICE < #{maxPrice} and
+PRD_COLOR in (${color})
+order by ${orderby} ${ascdesc}
+limit #{page},12;
+ ]]> 
+</select>
+
+
+<select id="countProductList" parameterType="Map" resultType="int">
+<![CDATA[
+select count(*) from product 
+where 
+PRD_BRAND like concat ('%',#{brand},'%') and
+PRD_CATEGORY like concat('%',#{category},'%') and
+PRD_GENDER like concat('%',#{gender},'%') and
+PRD_NAME in (SELECT PRD_NAME from product where PRD_BRAND like concat('%',#{name},'%')  or PRD_BRAND like concat('%',#{name},'%'))  and
+PRD_PRICE > #{minPrice} and 
+PRD_PRICE < #{maxPrice} and
+PRD_COLOR in (${color})
+;
+ ]]> 
+</select>
+
+</mapper>
