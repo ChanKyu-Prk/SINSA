@@ -163,23 +163,23 @@
 					<nav class="header__menu">
 						<ul>
 							<li><a href="/getProductBrandPage">brand</a></li>
-							<li><a href="/getProductListPage?num=1&condition=all">ALL</a></li>
-							<li><a href="/getProductListPage?num=1&condition=men">men</a>
+							<li><a href="/product/List/all/newest/all/1">ALL</a></li>
+							<li><a href="/product/List/men/newest/all/1">men</a>
 								<ul class="header__menu__dropdown">
-									<li><a href="/getProductListPage?num=1&condition=onlySneakersForMen">스니커즈</a></li>
-									<li><a href="/getProductListPage?num=1&condition=onlyConverseForMen">캔버스화</a></li>
-									<li><a href="/getProductListPage?num=1&condition=onlySlip-onForMen">슬립온</a></li>
-									<li><a href="/getProductListPage?num=1&condition=onlyMuleForMen">뮬</a></li>
+									<li><a href="/product/List/men/newest/sneakers/1">스니커즈</a></li>
+									<li><a href="/product/List/men/newest/converse/1">캔버스화</a></li>
+									<li><a href="/product/List/men/newest/slipon/1">슬립온</a></li>
+									<li><a href="/product/List/men/newest/mule/1">뮬</a></li>
 								</ul></li>
-							<li><a href="/getProductListPage?num=1&condition=women">women</a>
+							<li><a href="/product/List/women/newest/all/1/">women</a>
 								<ul class="header__menu__dropdown">
-									<li><a href="/getProductListPage?num=1&condition=onlySneakersForWomen">스니커즈</a></li>
-									<li><a href="/getProductListPage?num=1&condition=onlyConverseForWomen">캔버스화</a></li>
-									<li><a href="/getProductListPage?num=1&condition=onlySlip-onForWomen">슬립온</a></li>
-									<li><a href="/getProductListPage?num=1&condition=onlyMuleForWomen">뮬</a></li>
+									<li><a href="/product/List/women/newest/sneakers/1">스니커즈</a></li>
+									<li><a href="/product/List/women/newest/converse/1">캔버스화</a></li>
+									<li><a href="/product/List/women/newest/slipon/1">슬립온</a></li>
+									<li><a href="/product/List/women/newest/mule/1">뮬</a></li>
 								</ul></li>
-							<li><a href="/getProductListPage?num=1&condition=new">new</a></li>
-							<li><a href="/getProductListPage?num=1&condition=best">best</a></li>
+							<li><a href="/product/List/new/newest/all/1">new</a></li>
+							<li><a href="/product/List/best/newest/all/1">best</a></li>
 						</ul>
 					</nav>
 				</div>
