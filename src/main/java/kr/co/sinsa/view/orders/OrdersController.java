@@ -122,12 +122,13 @@ public class OrdersController {
 		ordersVO.setORDER_NUM(ORDER_NUM);
 		
 		List<OrdersVO> orderInfo = service.selOrdersById(ordersVO);
+		ProductVO prdVO = null;
 		for(OrdersVO order : orderInfo) {
-			System.out.println(order);
-			totalPrice += order.getORDER_PRICE();
+			prdVO = proService.info(order.getORDER_PRDCODE());
+			totalPrice += order.getORDER_PRICE()*(1-(prdVO.getPRD_DISRATE()*0.01));
 			usePoint = order.getORDER_USEPOINT();
 		}
-		
+		totalPrice -= usePoint;
 		model.addAttribute("ORDER_NUM", ORDER_NUM);
 		model.addAttribute("totalPrice", totalPrice);
 		model.addAttribute("usePoint",usePoint);
