@@ -39,6 +39,23 @@
 .login {
 	margin: 100px 0px !important;
 }
+
+.input_username{
+	border-radius: 0px !important;
+}
+
+.input_password{
+	border-radius: 0px !important;
+}
+
+.button_login{
+	border-radius: 0px !important;
+	height: 53px;
+	border: 1px solid black !important;
+	background-color: #222020 !important;
+	font-weight: bold !important;
+	font-size: 18px !important;
+}
 </style>
 
 <%
@@ -89,14 +106,14 @@
 						</div>
 						<form action="login.do" method="post" name="loginFrm">
 							<div class="form-group first">
-								<label for="username">Username</label> <input type="text"
-									name="CUS_ID" class="form-control" placeholder="아이디를 입력해주세요"
+								<label for="username">아이디</label> <input type="text"
+									name="CUS_ID" class="form-control input_username" placeholder="아이디를 입력해주세요"
 									id="username" value="<%=CUS_ID%>">
 
 							</div>
 							<div class="form-group last mb-3">
-								<label for="password">Password</label> <input type="password"
-									name="CUS_PWD" class="form-control" placeholder="비밀번호를 입력해주세요"
+								<label for="password">비밀번호</label> <input type="password"
+									name="CUS_PWD" class="form-control input_password" placeholder="비밀번호를 입력해주세요"
 									id="password" value="<%=CUS_PWD%>">
 							</div>
 
@@ -116,8 +133,8 @@
 									class="forgot-pass find_id_pw">ID/PW 찾기</a></span>
 							</div>
 
-							<input onclick="checklogin()" type="button" value="Log In"
-								class="btn btn-block py-2 btn-primary"> <span
+							<input onclick="checklogin()" type="button" value="로그인"
+								class="btn btn-block py-2 btn-primary button_login"> <span
 								class="text-center my-3 d-block">or</span>
 
 
