@@ -12,10 +12,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
+import kr.co.sinsa.admin.service.PrdFileUploadService;
 import kr.co.sinsa.admin.service.PrdService;
 import kr.co.sinsa.admin.vo.PrdVO;
-import kr.co.sinsa.admin.vo.StockVO;
 import kr.co.sinsa.biz.product.PageInfo;
 
 @Controller
@@ -23,7 +24,8 @@ public class PrdContorller {
 
 	@Inject
 	PrdService prdService;
-
+	@Inject
+	private PrdFileUploadService upload;
 	
 	@RequestMapping(value = "/admin/prdList", method = RequestMethod.GET)
 	public String getPrdList(Model model, @RequestParam(value = "page", required = false) String pages,
@@ -95,9 +97,9 @@ public class PrdContorller {
 	}
 			
 	@RequestMapping(value = "/admin/prdInsert", method = RequestMethod.POST)
-	public String prdInsert(PrdVO vo) {
-//		PrdDAO dao = sqlSessionTemplate.getMapper(PrdDAO.class);
-//		int n = dao.prd_insert(vo);
+	public String prdInsert(PrdVO vo, @RequestParam(required = false) List<MultipartFile> multipartFile) {
+		String fileNames = upload.prdImgUpload(multipartFile);
+		vo.setPrd_image(fileNames);
 		prdService.prd_insert(vo);
 		return "redirect:/admin/prdList";
 	}

@@ -9,7 +9,6 @@
 <meta charset="UTF-8">
 
 <style>
-
 div {
 	margin: 0 auto;
 }
@@ -17,9 +16,7 @@ div {
 table {
 	width: 100%;
 	font-size: 0.8em;
-		
 }
-
 </style>
 <script
 	src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -72,57 +69,52 @@ table {
 	<jsp:include page="adminHeader.jsp" flush="true" />
 	<br>
 	<br>
-
 	<div class="container-fluid" style="padding: 0 30px;">
-	
-	<table style="border: 0px">
-				<tr>
-					<td align="left">
-						<button type="button" class="btn btn-outline-primary btn-sm"
-							onclick="location.href='prdInputForm'">신규 상품 등록</button>
-					</td>
-					<td>
-					
-					<form>
-			<div class="form-row">
-				<div class="form-group col-md-2"></div>
-				<div class="form-group col-md-2" style="margin: 0;">
-					<select name="fieldName" id="fieldName" class="form-control">
-						<option ${(param.fieldName == "all")? "selected" : ""} value="all">전체</option>
-						<option ${(param.fieldName == "prd_code")? "selected" : ""}
-							value="prd_code">코드</option>
-						<option ${(param.fieldName == "prd_name")? "selected" : ""}
-							value="prd_name">품명</option>
-						<option ${(param.fieldName == "prd_brand")? "selected" : ""}
-							value="prd_brand">브랜드</option>
-					</select>
-				</div>
-				<div class="form-group col-md-5" style="margin: 0;">
-					<input type="text" class="form-control" placeholder="Search"
-						name="searchWord" value="${param.searchWord}" />
-				</div>
-				<div class="form-group col-md-1" style="margin: 0;">
-					<input type="submit" class="btn btn-primary" value="검색" />
-				</div>
-				<div class="form-group col-md-2"></div>
+	<center><h2>상품 관리</h2></center>
+	<br><br><br>
+	<form>
+		<div class="form-row">
+		<div class="form-group col-md-3"></div>
+			<div class="form-group col-md-1" style="margin: 0;">
+				<select class="form-control" name="fieldName" id="fieldName">
+					<option ${(param.fieldName == "all")? "selected" : ""} value="all">전체</option>
+					<option ${(param.fieldName == "prd_code")? "selected" : ""}
+						value="prd_code">코드</option>
+					<option ${(param.fieldName == "prd_name")? "selected" : ""}
+						value="prd_name">품명</option>
+					<option ${(param.fieldName == "prd_brand")? "selected" : ""}
+						value="prd_brand">브랜드</option>
+				</select>
 			</div>
-		</form>
-		
-					</td>
-					<td align="right" style="width: 250px;"><input type="button"
-						class="btn btn-primary btn-sm" onclick="prdModify()"
-						value="선택 상품 수정" /> &nbsp; <input type="button"
-						class="btn btn-danger btn-sm" onclick="javascript:prdDelete()"
-						value="선택 상품 삭제" /></td>
-				</tr>
-			</table>
-			<br>
-			<br>
-			
-			
-		<div class="row">
-			
+			<div class="form-group col-md-5" style="margin: 0;">
+				<input type="text" class="form-control" placeholder="Search"
+					name="searchWord" value="${param.searchWord}" />
+			</div>
+			<div class="form-group col-md-1" style="margin: 0;">
+				<input type="submit" class="btn btn-primary" value="검색" />
+			</div>
+			<div class="form-group col-md-2"></div>
+		</div>
+	</form>
+		<br> <br>
 
+	
+		<table style="border: 0px">
+			<tr>
+				<td align="left">
+					<button type="button" class="btn btn-outline-primary btn-sm"
+						onclick="location.href='prdInputForm'">신규 상품 등록</button>
+				</td>
+				<td></td>
+				<td align="right" style="width: 250px;"><input type="button"
+					class="btn btn-primary btn-sm" onclick="prdModify()"
+					value="선택 상품 수정" /> &nbsp; <input type="button"
+					class="btn btn-danger btn-sm" onclick="javascript:prdDelete()"
+					value="선택 상품 삭제" /></td>
+			</tr>
+		</table>
+		<br>
+		<div class="row">
 			<table id="prdlist" class="table table-hover"
 				style="text-align: center; border: 0px solid #dddddd">
 				<thead>
@@ -155,7 +147,8 @@ table {
 									<td><a href="prdInfo?prd_num=${ e.prd_num }">${ e.prd_name }</a></td>
 									<td>${e.prd_category}</td>
 									<td>${e.prd_gender}</td>
-									<td><fmt:formatNumber value="${e.prd_price}" pattern="#,###,###"/></td>
+									<td><fmt:formatNumber value="${e.prd_price}"
+											pattern="#,###,###" /></td>
 									<td>${e.prd_brand}</td>
 									<td>${e.prd_color}</td>
 									<td>${e.prd_disrate}</td>
@@ -217,8 +210,9 @@ table {
 				</ul>
 			</div>
 		</div>
-		<br>
-		<br>
+		<br> <br>
 	</div>
+	<br><br>
+	<jsp:include page="footer.jsp"/>
 </body>
 </html>

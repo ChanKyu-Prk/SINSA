@@ -83,7 +83,7 @@ public class NoticeContorller {
 		return "admin/noticeInfo";
 	}
 			
-	@RequestMapping(value = "/admin/noticeInputForm", method = RequestMethod.GET)
+	@RequestMapping(value = "/admin/noticeInput", method = RequestMethod.GET)
 	public String noticeInputForm(NoticeVO vo) {
 		return "admin/noticeInputForm";
 	}

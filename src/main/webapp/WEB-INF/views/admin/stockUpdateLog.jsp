@@ -16,7 +16,6 @@ div {
 
 table {
 	width: 100%;
-	border: 1px solid;
 }
 
 /*datepicer 버튼 롤오버 시 손가락 모양 표시*/
@@ -36,12 +35,14 @@ table {
 	<br>
 
 	<div class="container-fluid" style="padding: 0 30px;">
+	<center><h2>입고 내역</h2></center>
+		<br><br><br>
 			<form>
 			<div class="form-row">
 				<div class="form-group col-md-2"></div>
 				<div class="form-group col-md-1">
 					<input type="text" id="sdate" name="sdate" class="form-control">
-				</div>
+				</div>&#126;
 				<div class="form-group col-md-1">
 					<input type="text" id="edate" name="edate" class="form-control">
 					    <script>
@@ -95,13 +96,13 @@ table {
 				<div class="form-group col-md-2"></div>
 			</div>
 		</form>
+		<br><br>
 		<div class="row">
 			
 			<br>
 			<br>
 
-			<table id="stockLog" class="table table-hover"
-				style="text-align: center; border: 0px solid #dddddd">
+			<table id="stockLog" class="table table-hover" style="text-align: center;">
 				<thead>
 					<tr>
 						<th>입고일시</th>
@@ -168,12 +169,12 @@ table {
 						</c:when>
 						<c:when test="${pageInfo.getStartPage()==1}">
 							<li class="page-item"><a class="page-link"
-								href="stockLog?page=${pageInfo.getStartPage()}&fielaName=${param.fieldName}&searchWord=${param.searchWord}"
+								href="stockLog?page=${pageInfo.getStartPage()}&sdate=${param.sdate}&edate=${param.edate}&fielaName=${param.fieldName}&searchWord=${param.searchWord}"
 								tabindex="-1">이전</a></li>
 						</c:when>
 						<c:otherwise>
 							<li class="page-item"><a class="page-link"
-								href="stockLog?page=${pageInfo.getStartPage()-1}&fielaName=${param.fieldName}&searchWord=${param.searchWord}"
+								href="stockLog?page=${pageInfo.getStartPage()-1}&sdate=${param.sdate}&edate=${param.edate}&fielaName=${param.fieldName}&searchWord=${param.searchWord}"
 								tabindex="-1">이전</a></li>
 						</c:otherwise>
 					</c:choose>
@@ -187,7 +188,7 @@ table {
 							</c:when>
 							<c:otherwise>
 								<li class="page-item"><a class="page-link"
-									href="stockLog?page=${state.index}&fielaName=${param.fieldName}&searchWord=${param.searchWord}">${state.index}</a></li>
+									href="stockLog?page=${state.index}&sdate=${param.sdate}&edate=${param.edate}&fielaName=${param.fieldName}&searchWord=${param.searchWord}">${state.index}</a></li>
 							</c:otherwise>
 						</c:choose>
 					</c:forEach>
@@ -199,11 +200,11 @@ table {
 						</c:when>
 						<c:when test="${pageInfo.getEndPage()==pageInfo.getMaxPage()}">
 							<li class="page-item"><a class="page-link"
-								href="stockLog?page=${pageInfo.getEndPage()}&fielaName=${param.fieldName}&searchWord=${param.searchWord}">다음</a></li>
+								href="stockLog?page=${pageInfo.getEndPage()}&sdate=${param.sdate}&edate=${param.edate}&fielaName=${param.fieldName}&searchWord=${param.searchWord}">다음</a></li>
 						</c:when>
 						<c:otherwise>
 							<li class="page-item"><a class="page-link"
-								href="stockLog?page=${pageInfo.getEndPage()+1}&fielaName=${param.fieldName}&searchWord=${param.searchWord}">다음</a></li>
+								href="stockLog?page=${pageInfo.getEndPage()+1}&sdate=${param.sdate}&edate=${param.edate}&fielaName=${param.fieldName}&searchWord=${param.searchWord}">다음</a></li>
 						</c:otherwise>
 					</c:choose>
 				</ul>
@@ -213,5 +214,7 @@ table {
 		<br>
 
 	</div>
+	<br><br>
+	<jsp:include page="footer.jsp"/>
 </body>
 </html>

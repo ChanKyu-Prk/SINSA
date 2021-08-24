@@ -13,19 +13,21 @@ div {
 	margin: 0 auto;
 }
 
-table.list {
+table{
 	width: 100%;
 	margin: 0 15px;
 }
 
+table.list{
+	width: 100%;
+	margin: 0 0 0 30px;
+}
+
 td.q {
-	width: 10%;
-	height: 38px;
-	background-color: #007bfe;
-	color: #fff;
+	color: #007bfe;
 	font-size: 1.8em;
 	text-align: center;
-	
+	background-color: #fff;
 }
 
 td.a {
@@ -168,5 +170,7 @@ td.a {
 			</div>
 		</form>
 	</div>
+	<br><br>
+	<jsp:include page="footer.jsp"/>
 </body>
 </html>

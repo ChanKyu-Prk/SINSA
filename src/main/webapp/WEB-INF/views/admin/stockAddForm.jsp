@@ -10,7 +10,6 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>prdList</title>
 <style>
 
 div {
@@ -56,7 +55,7 @@ input.form-control {
 	<br>
 	<div class="container-fluid" style="padding: 0 30px;">
 		<div class="row">
-		<h2>상품 입고</h2>
+		<div align="center"><h2>상품 입고</h2></div>
 		<br><br><br>
 		<table id="addstock" class="table table-hover"
 				style="text-align: center; border: 0px solid #dddddd">
@@ -197,5 +196,7 @@ input.form-control {
 
 	</div>
 	</div>
+	<br><br>
+	<jsp:include page="footer.jsp"/>
 </body>
 </html>
