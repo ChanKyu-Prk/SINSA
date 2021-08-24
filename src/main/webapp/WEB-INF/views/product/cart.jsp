@@ -751,33 +751,26 @@
 													<span class="won">원</span>
 												</c:if></td>
 											<td class="shoping__cart__quantity">
-											
-											
-											
-											
-											
-											
-									
-
 													<form action="updatecart.do" method="POST"
 														onsubmit="return alert('수량이 변경되었습니다');">
 														<div class="quantity">
-															<div class="pro-qty">
-																<input id="count" class="amount" name="CART_PRDCOUNT"
+															<div id="count${status.index}" class="pro-qty">
+																<input  class="amount" name="CART_PRDCOUNT" data-lastVal = "${list.CART_PRDCOUNT}"
 																	value="${list.CART_PRDCOUNT}" readonly />
+																	<script type="text/javascript">
+																	$("#count${status.index}").click(function(){
+																		alert("focusout");
+																		alert($(this).find(".amount").val());
+																		alert($(this).find(".amount").attr("data-lastVal"));
+																	});
+																	
+																	</script>
 															</div>
 														</div>
 														<input type="hidden" name="CART_NUM"
 															value="${list.CART_NUM}" /> <input
 															class="button_qty_change" type="submit" value="변경" />
 													</form>
-
-												
-												
-												
-												
-												
-												
 												</td>
 											<td class="shoping__cart__total"><c:set
 													var="previousTotalPrice"
