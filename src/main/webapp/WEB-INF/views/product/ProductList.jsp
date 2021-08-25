@@ -280,6 +280,12 @@
 	                                    <input type="checkbox" id="green" name="color" value="green">
 	                                </label>
 	                            </div>
+	                            <div class="sidebar__item__color sidebar__item__color--white">
+	                                <label for="multi" id="id07" onmouseout="mout7()" onmouseover="mover7()">
+	                                    Multi
+	                                    <input type="checkbox" id="multi" name="color" value="multi">
+	                                </label>
+	                            </div>
             
 	                        </div>
 	                
@@ -408,6 +414,7 @@
 									background:#fff;
 									border: 2px solid #666;
 								}
+						
 							
 	                        </style>
 	                        <div class="col-lg-4 col-md-6 col-sm-6">
@@ -420,6 +427,7 @@
                                         <li><a id="cartModal_open_btn${list.PRD_CODE }"><i class="fa fa-shopping-cart"></i></a></li>
                                     </ul>
                                     
+                              
 				                    <div id="modal${list.PRD_CODE }">
 										<div class="modal_content">
 											<h4>옵션선택</h4>
@@ -438,15 +446,12 @@
 											</button>
 										</div>
 									</div>
+                               
 									
-									
+							
 				                    <div id="cartModal${list.PRD_CODE }">
 										<div class="modal_content">
-										
 												<h4>옵션선택</h4>
-								
-												<button type="button">X</button>
-											
 											<hr />
 											<div id="p-Box">
 												<div id="p-Img">
@@ -457,7 +462,7 @@
 													<span><b>${list.PRD_BRAND }</b></span> <br />
 													<span>${list.PRD_NAME }</span> <br />
 													<br />
-													<span>${list.PRD_COLOR }</span>
+													<span>COLOR : ${list.PRD_COLOR }</span>
 													<br />												
 													<span>금액 : ${list.PRD_PRICE }원</span>
 													<br />
@@ -477,7 +482,9 @@
 											</button>
 										</div>
 									</div>
+							
 									
+								
 				                    <div id="jjimModal${list.PRD_CODE }">
 										<div class="modal_content">
 											<h2>바로구매</h2>
@@ -491,6 +498,7 @@
 											</button>
 										</div>
 									</div>
+									</div>
 									
 	                                <div class="product__item__text">
 										<p>
@@ -498,9 +506,10 @@
  										</p>
                                    		<h5>${list.PRD_PRICE }원</h5>
                                 	</div>
-                            	</div>
+                           
                             	
                             	<script type="text/javascript">
+                            	
                             		$('.product__item__pic').on('click', function(){
                             			var PRD_CODE = "${list.PRD_CODE}";
                             			location.href = "/product/prdCode="+PRD_CODE;
@@ -822,6 +831,38 @@ $('#id06').on("click", function(e){
 });
 
 
+function mover7() {
+	var m;
+	m = document.getElementById("id07");
+	m.style.color = "red";								
+}
+var clickCheck7 = "false";
+function mout7() {
+	var m;
+	m = document.getElementById("id07");
+    if(clickCheck7 === "false"){	                                	
+    	m.style.color = "black";
+    }
+}
+$('#id07').on("click", function(e){
+	var m;
+	m = document.getElementById("id07");
+	if(clickCheck7 === "false"){
+// 		$('#green').val('green');
+    	m.style.color = "red";
+    	clickCheck7 = "true";
+    	$('#multi').attr('checked',true);
+	}else if(clickCheck7 === "true"){
+// 		$('#green').val('');
+		m.style.color = "black";
+    	clickCheck7 = "false";
+    	$('#multi').attr('checked',false);
+	}
+	return false;
+});
+
+
+
 $(document).ready( function() { 
 	var colors= $('#colorHidden').val();
 	var colorsArray = colors.split('_');
@@ -831,6 +872,7 @@ $(document).ready( function() {
 	var m4 = document.getElementById("id04");
 	var m5 = document.getElementById("id05");
 	var m6 = document.getElementById("id06");
+	var m7 = document.getElementById("id07");
 	for ( var i in colorsArray ) {
         if(colorsArray[i]=='white'){
         	m1.style.color = "red";
@@ -861,6 +903,11 @@ $(document).ready( function() {
         	m6.style.color = "red";
         	clickCheck6 = "true";
         	$('#green').attr('checked',true);
+        }
+        if(colorsArray[i]=='multi'){
+        	m7.style.color = "red";
+        	clickCheck7 = "true";
+        	$('#multi').attr('checked',true);
         }
       }
 });
