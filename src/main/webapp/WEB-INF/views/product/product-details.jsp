@@ -279,6 +279,7 @@ input[type=number] {
 									var result = confirm("로그인이 필요한 서비스입니다. 로그인하시겠습니까?");
 									if(result){
 										location.href="/login.do";
+										return false;
 									}
 									else {
 										return false;
@@ -331,6 +332,7 @@ input[type=number] {
 								var result = confirm("로그인이 필요한 서비스입니다. 로그인하시겠습니까?");
 								if(result){
 									location.href="/login.do";
+									return false;
 								}
 								else {
 									return false;
@@ -394,6 +396,7 @@ input[type=number] {
 								var result = confirm("로그인이 필요한 서비스입니다. 로그인하시겠습니까?");
 								if(result){
 									location.href="/login.do";
+									return false;
 								}
 								else {
 									return false;

@@ -318,13 +318,14 @@ input[type=number] {
 										<span>원</span>
 									</span>
 								</div>
-								<small class="float-right mb-4">결제 시 <span class="avPoint savePoint digits">-</span>P 적립예정</small>
+								<small class="float-right mb-4">구매 확정시 <span class="avPoint savePoint digits">-</span>P 적립예정</small>
 								<button type="button" id="chckoutBtn" class="site-btn">결제하기</button>
 								<script type="text/javascript">
 								$("#chckoutBtn").click(function () {
 									<%if(session.getAttribute("user") == null){%>
 										var result = alert("결제 오류가 발생하였습니다. 다시 시도해주세요.");
 										window.history.back();
+										return false;
 									<%}%>
 									var isCart = $("#isCart").val();
 									var ORDER_NUM = new Date().getTime();

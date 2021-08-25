@@ -47,11 +47,10 @@ public class ProductController {
 		if((UserVO) session.getAttribute("user") != null) {
 			UserVO user = (UserVO) session.getAttribute("user");
 			CUS_ID = (String)user.getCUS_ID();
-
 			
 			ProductVO productVO = service.info(PRD_CODE);		
 			int PRD_NUM = productVO.getPRD_NUM();
-	    	//조회 내역 모델에 저장 후 jsp에서 모델이 null이면 fa-heart-o
+
 	    	jjimVO.setJJIM_CUSID(CUS_ID);
 			jjimVO.setJJIM_PRDNUM(PRD_NUM);
 			JjimVO chckJjim = myService.selJjimById(jjimVO);
