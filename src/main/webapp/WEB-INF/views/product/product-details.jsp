@@ -48,13 +48,17 @@ div#sizeCon.product__details__size button {
 	cursor: pointer;
 	display: inline-block;
 	font-size: 13px;
-	line-height: 26px;
-	width: 52px;
+	line-height: 29px;
+	width: 80px;
 	text-align: center;
 	border: 1px solid black;
 	border-radius: 2px;
 	margin: 0 3px 3px 0;
 	background-color: white;
+}
+
+div#sizeCon.product__details__size button small{
+	color: #858585;
 }
 
 div#sizeCon.product__details__size button:hover, div#sizeCon.product__details__size button:focus
@@ -261,7 +265,7 @@ input[type=number] {
 									<c:if test="${stock ne 0}">
 										<!-- 여기에 속한게 하나도 없으면 품절value c:set -->
 										<% inStock++; %>
-										<button type="button" class="product_size" value="${column}">${size}</button>
+										<button type="button" class="product_size" value="${column}">${size}<small class="pl-1">(${stock}개)</small></button>
 									</c:if>
 								</c:forEach>
 							</div>
@@ -539,7 +543,7 @@ input[type=number] {
 											function() {
 												var listNum = $(this).val(); //STOCK_260
 												var clickedSize = $(this)
-														.text(); //260
+														.text().substring(0,3); //260
 												
 												var element = "<li><div class='pro-qty d-flex col-lg-12'><div class='mr-auto p-2'><span class='qty-size ml-2' data-stock='"
 														+ listNum.trim()
