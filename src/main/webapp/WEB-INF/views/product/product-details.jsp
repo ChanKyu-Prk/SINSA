@@ -249,6 +249,7 @@ input[type=number] {
 						<div id="priceContainer">
 							<div id="sizeCon" class="product__details__size">
 								<c:set var="items" value="${fn:split(stockInfo, ',')}" />
+								<% int inStock = 0; %>
 								<c:forEach var="item" items="${items}" begin="1">
 									<c:set var="stockTrim" value="${fn:replace(item, ']', '')}" />
 									<c:set var="stock" value="${fn:substringAfter(stockTrim, '=')}" />
@@ -258,6 +259,8 @@ input[type=number] {
 									<c:set var="size" value="${fn:substringBefore(item, '=')}" />
 									<c:set var="size" value="${fn:substringAfter(size, '_')}" />
 									<c:if test="${stock ne 0}">
+										<!-- 여기에 속한게 하나도 없으면 품절value c:set -->
+										<% inStock++; %>
 										<button type="button" class="product_size" value="${column}">${size}</button>
 									</c:if>
 								</c:forEach>
@@ -440,8 +443,8 @@ input[type=number] {
 							</script>
 						</div>
 						<ul>
-							<li><b>재고</b> <span>In Stock</span></li>
-							<li><b>배송</b> <span>무료 배송</span></li>
+							<li><b>재고</b><span><%if(inStock > 0){%>IN STOCK<%}else{%>SOLD OUT<%}%></span></li>
+							<li><b>배송</b><span>무료 배송</span></li>
 						</ul>
 					</div>
 				</div>
