@@ -106,7 +106,7 @@
 							<a href="#">
 								<div class="featured__item">
 									<div class="featured__item__pic set-bg"
-										data-setbg="${path}/resources/img/featured/feature-1.jpg">
+										data-setbg="${path}/resources/img/product/나이키디파이올데이.png">
 									</div>
 									<div class="featured__item__text">
 										<h6>${list.PRD_BRAND}</h6>
@@ -321,7 +321,7 @@
 					<div class="col-lg-4 col-md-4 col-sm-6">
 						<div class="blog__item">
 							<div class="blog__item__pic">
-								<img src="${path}/resources/img/blog/blog-1.jpg" alt="">
+								<img src="${path}/resources/img/review/상품후기.jpeg" alt="">
 							</div>
 							<div class="blog__item__text">
 								<ul>
