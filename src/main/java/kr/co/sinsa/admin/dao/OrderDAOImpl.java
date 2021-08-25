@@ -51,7 +51,12 @@ public class OrderDAOImpl implements OrderDAO {
 	public void order_cancel(OrderVO vo) {
 		sqlSession.update("OrderDAO.order_cancel", vo);
 	}
-		
+
+	public void auto_complete() {
+		sqlSession.delete("OrderDAO.auto_complete");
+	}
+	
+	
 	public OrderVO order_info(String order_num) {
 		return sqlSession.selectOne("OrderDAO.order_info", order_num);
 	}
@@ -63,5 +68,5 @@ public class OrderDAOImpl implements OrderDAO {
 	public void order_delete(String order_num) {
 		sqlSession.delete("OrderDAO.order_delete", order_num);
 	}
-	
+
 }

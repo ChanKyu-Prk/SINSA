@@ -77,4 +77,8 @@ public class OrderServiceImpl implements OrderService {
 		dao.order_delete(order_num);
 	}
 
+	@Override
+	public void auto_complete() {
+		dao.auto_complete();
+	}
 }

@@ -25,6 +25,7 @@ div {
 	<jsp:include page="adminHeader.jsp" flush="true" />
 	<br>
 	<br>
+	<br>
 	<div class="container">
 		<div class="row">
 			<form:form method="post" action="prdUpdate" modelAttribute="prdInfo"
@@ -32,17 +33,68 @@ div {
 				<input type="hidden" id="referer" name="referer" value="<%= getreferer %>" />
 				
 				<form:hidden path="prd_num" />
-				<form:hidden path="prd_image" />
-				<input type="file" name="uploadfile" placeholder="파일 선택" />
+				<div class="row">
+				
+				<input id="input_file" multiple="multiple" name="multipartFile"
+					type="file" accept="image/jpeg, image/jpg, image/png"
+					class="inputFile" style="display: none;">
+
+
+
+				<table class="imgTable">
+					<colgroup>
+						<col width="250px">
+						<col width="250px">
+						<col width="250px">
+						<col width="250px">
+						<col width="250px">
+						<col width="250px">
+					</colgroup>
+					<tr>
+						<td class="imgtd"><div class="img_td_row">
+								<img class="reviewPicAdd" alt="상품 사진 추가" title="상품 사진 추가"
+									src="/resources/img/camera.png" />
+
+							</div></td>
+						<td class="imgtd"><div class="img_td_row">
+								<img class="reviewPic" alt="상품 사진" title="상품 사진" id="reviewPic0"
+									src="${pageContext.request.contextPath}\upload\prdImg\ ${param.prd_code}.png" />
+
+							</div></td>
+						<td class="imgtd"><div class="img_td_row">
+								<img class="reviewPic" alt="상품 사진" title="상품 사진" id="reviewPic1"
+									src="${pageContext.request.contextPath}\upload\prdImg\ ${param.prd_code}1.png" />
+
+							</div></td>
+						<td class="imgtd"><div class="img_td_row">
+								<img class="reviewPic" alt="상품 사진" title="상품 사진" id="reviewPic2"
+									src="${pageContext.request.contextPath}\upload\prdImg\ ${param.prd_code}2.png" />
+
+							</div></td>
+						<td class="imgtd"><div class="img_td_row">
+								<img class="reviewPic" alt="상품 사진" title="상품 사진" id="reviewPic3"
+									src="${pageContext.request.contextPath}\upload\prdImg\ ${param.prd_code}3.png" />
+
+							</div></td>
+						<td class="imgtd"><div class="img_td_row">
+								<img class="reviewPic" alt="상품 사진" title="상품 사진" id="reviewPic4"
+									src="${pageContext.request.contextPath}\upload\prdImg\ ${param.prd_code}4.png" />
+
+							</div></td>
+					</tr>
+
+				</table>
+
+			</div>
 				<br />
 				<table class="table table-bordered"
 					style="text-align: center; border: 0px solid #dddddd">
 					<tr>
 						<td>상품코드</td>
-						<td><form:input path="prd_code" class="form-control" /></td>
+						<td style="text-align:left;"><form:hidden path="prd_code"/>&nbsp; ${ prdInfo.prd_code }</td>
 						<td rowspan="10"></td>
-						<td rowspan="10"><form:textarea path="prd_detail"
-								style="height: 300px; width: 700px;" /></td>
+						<td rowspan="10" width="50%"><form:textarea path="prd_detail" class="form-control"
+								style="height: 500px; border: 0px;" /></td>
 					</tr>
 					<tr>
 						<td>상품명</td>
@@ -108,7 +160,7 @@ div {
 				</table>
 				<div align="center">
 					<input type="submit" class="btn btn-primary" value="변경사항저장">
-					<button class="btn btn-outline-primary" onclick="history.go(-1);">취소</button>
+					<button type="button" class="btn btn-outline-primary" onclick="history.go(-1);">취소</button>
 				</div>
 				<!-- 				<tr>
 					<td colspan="4"><a href="prdList">상품리스트</a></td>
@@ -118,5 +170,51 @@ div {
 			</form:form>
 		</div>
 	</div>
+	
+	<script src="${path}/resources/js/jquery-3.3.1.min.js"></script>
+	<script src="${path}/resources/js/bootstrap.min.js"></script>
+	<script src="${path}/resources/js/jquery-ui.min.js"></script>
+	<script src="${path}/resources/js/jquery.slicknav.js"></script>
+	<script src="${path}/resources/js/mixitup.min.js"></script>
+	<script src="${path}/resources/js/owl.carousel.min.js"></script>
+	<script src="${path}/resources/js/main.js"></script>
 </body>
+<script>
+$('.reviewPicAdd').on("click", function() {
+	$('#input_file').trigger('click');
+});
+
+$(window).resize(function() {
+	var imgWidth = $('.reviewPic').width();
+	$('.reviewPic').height(imgWidth);
+});
+
+$('#input_file').on("change", handlerIngsFilesSelect);
+
+function handlerIngsFilesSelect(e) {
+	$('#reviewPic0').removeAttr("src").attr("src",
+			"/resources/img/default.png");
+
+	var sel_files = [];
+	var files = e.target.files;
+	var filesArr = Array.prototype.slice.call(files);
+	
+	if(filesArr.length>5){
+		$('#input_file').val(null);
+		return
+	}
+	
+	var index = 0;
+	filesArr.forEach(function(f) {
+		sel_files.push(f);
+
+		var reader = new FileReader();
+		reader.onload = function(e) {
+			$('#reviewPic' + index).attr("src", e.target.result);
+			index++;
+		}
+		reader.readAsDataURL(f);
+	});
+}
+</script>
 </html>

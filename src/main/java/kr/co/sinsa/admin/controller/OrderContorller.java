@@ -83,7 +83,8 @@ public class OrderContorller {
 		map.put("sdate", sdate);
 		map.put("edate", edate);
 		map.put("page", (page - 1) * 10);
-
+		
+		orderService.auto_complete();
 		listCount = orderService.order_list_count(map);
 		int cancelCount = orderService.order_cancel_count(map);
 		List<OrderVO> list = orderService.order_list(map);

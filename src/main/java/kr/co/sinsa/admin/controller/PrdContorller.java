@@ -98,13 +98,15 @@ public class PrdContorller {
 	}
 			
 	@RequestMapping(value = "/admin/prdInsert", method = RequestMethod.POST)
-	public String prdInsert(PrdVO vo, @RequestParam(required = false) List<MultipartFile> multipartFile, Model model) {
+	public String prdInsert(PrdVO vo, @RequestParam(required = false) List<MultipartFile> multipartFile) {
 		
-		String fileNames = upload.prdImgUpload(multipartFile);
-		vo.setPrd_image(fileNames);
-		prdService.prd_insert(vo);
-		System.out.println(fileNames);
-		model.addAttribute("url", fileNames);
+		if (multipartFile.get(0).isEmpty()) {
+			prdService.prd_insert(vo);
+		} else {
+			String fileNames = upload.prdImgUpload(multipartFile);
+			vo.setPrd_image(fileNames);
+			prdService.prd_insert(vo);
+		}
 		return "redirect:/admin/prdList";
 	}
 			
@@ -116,10 +118,17 @@ public class PrdContorller {
 	}
 			
 	@RequestMapping("/admin/prdUpdate")
-	public String prdUpdate(HttpServletRequest request, Model model, PrdVO vo) {
+	public String prdUpdate(HttpServletRequest request, Model model, PrdVO vo,
+			@RequestParam(required = false) List<MultipartFile> multipartFile) {
+		if (multipartFile.get(0).isEmpty()) {
+			prdService.prd_update(vo);
+		} else {
+			String fileNames = upload.prdImgUpload(multipartFile);
+			vo.setPrd_image(fileNames);
+			prdService.prd_update(vo);
+		}
 		model.addAttribute("prd_code", vo.getPrd_code());
 		String referer = request.getParameter("referer");
-		prdService.prd_update(vo);
 		return "redirect:"+referer;
 	}
 			

@@ -33,19 +33,14 @@ public class PrdFileUploadServiceImpl implements PrdFileUploadService {
 		String url = null;
 		
 		try {
-			for(int i = 0; i <multipartFile.size();i ++) {
+			for(int i=0; i<multipartFile.size(); i++) {
 				
 				
 			// 파일 정보
-			String originFilename = multipartFile.get(i).getOriginalFilename();
-			String extName
-				= originFilename.substring(originFilename.lastIndexOf("."), originFilename.length());
-			// 서버에서 저장 할 파일 이름
-			/*String saveFileName = genSaveFileName(extName);	*/	
-			String saveFileName = extName;
-			writeFile(multipartFile.get(i), saveFileName);		
+			String originFileName = multipartFile.get(i).getOriginalFilename();
+			writeFile(multipartFile.get(i), originFileName);		
 			
-			url = PREFIX_URL + saveFileName;
+			url = PREFIX_URL + originFileName;
 			
 			}
 		}
