@@ -6,6 +6,10 @@
 		<select id="getProductList" resultType="kr.co.sinsa.biz.product.ProductVO"> 
  			select * from PRODUCT order by PRD_NUM desc limit 10
 		</select> 
+		
+		<select id="getReviewList" resultType="kr.co.sinsa.biz.customer.ReviewVO"> 
+ 			select * from REVIEW order by REV_STAR desc limit 3
+		</select> 
 	
 	
 	

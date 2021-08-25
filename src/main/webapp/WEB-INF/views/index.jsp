@@ -16,6 +16,33 @@
 
 
 
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
+
+
+
+<style>
+.review_date {
+	margin: 0px 90px 0px 0px !important;
+	padding: 0px 0px 0px 0px;
+}
+
+.star {
+	width: 25px;
+	height: 25px;
+	margin: 0px 4px 0px 0px !important;
+/* 	padding: 0px 0px 0px 0px; */
+}
+
+.empty_star {
+	width: 25px;
+	height: 25px;
+	margin: 0px 4px 0px 0px !important;
+}
+</style>
+
+
+
 
 
 </head>
@@ -74,9 +101,6 @@
 			<div class="row">
 				<div class="categories__slider owl-carousel">
 
-
-
-
 					<c:forEach var="list" items="${productList}" varStatus="status">
 						<div class="col-lg-3">
 							<a href="#">
@@ -93,12 +117,6 @@
 							</a>
 						</div>
 					</c:forEach>
-
-
-
-
-
-
 
 				</div>
 			</div>
@@ -296,68 +314,110 @@
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-lg-4 col-md-4 col-sm-6">
-					<div class="blog__item">
-						<div class="blog__item__pic">
-							<img src="${path}/resources/img/blog/blog-1.jpg" alt="">
-						</div>
-						<div class="blog__item__text">
-							<ul>
-								<li><i class="fa fa-calendar-o"></i> May 4,2019</li>
-								<li><i class="fa fa-comment-o"></i> 5</li>
-							</ul>
-							<h5>
-								<a href="#">Cooking tips make cooking simple</a>
-							</h5>
-							<p>Sed quia non numquam modi tempora indunt ut labore et
-								dolore magnam aliquam quaerat</p>
+
+
+
+				<c:forEach var="list" items="${reviewList}" varStatus="status">
+					<div class="col-lg-4 col-md-4 col-sm-6">
+						<div class="blog__item">
+							<div class="blog__item__pic">
+								<img src="${path}/resources/img/blog/blog-1.jpg" alt="">
+							</div>
+							<div class="blog__item__text">
+								<ul>
+									<li class="review_date"><i class="fa fa-calendar-o "></i>
+										<fmt:formatDate value="${list.REV_REGDATE}"
+											pattern="yyyy-MM-dd" /></li>
+
+
+									<c:if test="${list.REV_STAR eq 0}">
+										<li class="star"><div style="display: flex;">
+												<img src="${path}/resources/img/empty_star.png"
+													class="empty_star"> <img
+													src="${path}/resources/img/empty_star.png"
+													class="empty_star"> <img
+													src="${path}/resources/img/empty_star.png"
+													class="empty_star"> <img
+													src="${path}/resources/img/empty_star.png"
+													class="empty_star"> <img
+													src="${path}/resources/img/empty_star.png"
+													class="empty_star">
+											</div></li>
+									</c:if>
+									<c:if test="${list.REV_STAR eq 1}">
+										<li class="star"><div style="display: flex;">
+												<img src="${path}/resources/img/star.png" class="star">
+												<img src="${path}/resources/img/empty_star.png"
+													class="empty_star"> <img
+													src="${path}/resources/img/empty_star.png"
+													class="empty_star"> <img
+													src="${path}/resources/img/empty_star.png"
+													class="empty_star"> <img
+													src="${path}/resources/img/empty_star.png"
+													class="empty_star">
+											</div></li>
+									</c:if>
+									<c:if test="${list.REV_STAR eq 2}">
+										<li class="star"><div style="display: flex;">
+												<img src="${path}/resources/img/star.png" class="star">
+												<img src="${path}/resources/img/star.png" class="star">
+												<img src="${path}/resources/img/empty_star.png"
+													class="empty_star"> <img
+													src="${path}/resources/img/empty_star.png"
+													class="empty_star"> <img
+													src="${path}/resources/img/empty_star.png"
+													class="empty_star">
+											</div></li>
+									</c:if>
+									<c:if test="${list.REV_STAR eq 3}">
+										<li class="star"><div style="display: flex;">
+												<img src="${path}/resources/img/star.png" class="star">
+												<img src="${path}/resources/img/star.png" class="star">
+												<img src="${path}/resources/img/star.png" class="star">
+												<img src="${path}/resources/img/empty_star.png"
+													class="empty_star"> <img
+													src="${path}/resources/img/empty_star.png"
+													class="empty_star">
+											</div></li>
+									</c:if>
+									<c:if test="${list.REV_STAR eq 4}">
+										<li class="star"><div style="display: flex;">
+												<img src="${path}/resources/img/star.png" class="star">
+												<img src="${path}/resources/img/star.png" class="star">
+												<img src="${path}/resources/img/star.png" class="star">
+												<img src="${path}/resources/img/star.png" class="star">
+												<img src="${path}/resources/img/empty_star.png"
+													class="empty_star">
+											</div></li>
+									</c:if>
+									<c:if test="${list.REV_STAR eq 5}">
+										<li class="star"><div style="display: flex;">
+												<img src="${path}/resources/img/star.png" class="star">
+												<img src="${path}/resources/img/star.png" class="star">
+												<img src="${path}/resources/img/star.png" class="star">
+												<img src="${path}/resources/img/star.png" class="star">
+												<img src="${path}/resources/img/star.png" class="star">
+											</div></li>
+									</c:if>
+
+
+								</ul>
+
+								<h5>
+									<a href="#">${list.REV_TITLE}</a>
+								</h5>
+								<p>${list.REV_CONTENT}</p>
+							</div>
 						</div>
 					</div>
-				</div>
-				<div class="col-lg-4 col-md-4 col-sm-6">
-					<div class="blog__item">
-						<div class="blog__item__pic">
-							<img src="${path}/resources/img/blog/blog-2.jpg" alt="">
-						</div>
-						<div class="blog__item__text">
-							<ul>
-								<li><i class="fa fa-calendar-o"></i> May 4,2019</li>
-								<li><i class="fa fa-comment-o"></i> 5</li>
-							</ul>
-							<h5>
-								<a href="#">6 ways to prepare breakfast for 30</a>
-							</h5>
-							<p>Sed quia non numquam modi tempora indunt ut labore et
-								dolore magnam aliquam quaerat</p>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-4 col-md-4 col-sm-6">
-					<div class="blog__item">
-						<div class="blog__item__pic">
-							<img src="${path}/resources/img/blog/blog-3.jpg" alt="">
-						</div>
-						<div class="blog__item__text">
-							<ul>
-								<li><i class="fa fa-calendar-o"></i> May 4,2019</li>
-								<li><i class="fa fa-comment-o"></i> 5</li>
-							</ul>
-							<h5>
-								<a href="#">Visit the clean farm in the US</a>
-							</h5>
-							<p>Sed quia non numquam modi tempora indunt ut labore et
-								dolore magnam aliquam quaerat</p>
-						</div>
-					</div>
-				</div>
+				</c:forEach>
+
+
+
 			</div>
 		</div>
 	</section>
 	<!-- Blog Section End -->
-
-
-
-
 
 
 	<jsp:include page="footer.jsp" />

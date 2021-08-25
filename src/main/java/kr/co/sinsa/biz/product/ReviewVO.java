@@ -4,11 +4,42 @@ import java.util.Date;
 
 public class ReviewVO {
 	private int REV_NUM;
+	private String REV_ORDERNUM;
+	private String REV_ORDERPRDSIZE ;
 	private Date REV_REGDATE;
 	private String REV_CUSID;
-	private String PRDCODE;
+	private String REV_PRDCODE;
+	private String REV_TITLE; 
+	private String REV_CONTENT; 
 	private int REV_STAR;
 	private String REV_IMAGE;
+
+	
+	
+	public String getREV_ORDERNUM() {
+		return REV_ORDERNUM;
+	}
+	public void setREV_ORDERNUM(String rEV_ORDERNUM) {
+		REV_ORDERNUM = rEV_ORDERNUM;
+	}
+	public String getREV_ORDERPRDSIZE() {
+		return REV_ORDERPRDSIZE;
+	}
+	public void setREV_ORDERPRDSIZE(String rEV_ORDERPRDSIZE) {
+		REV_ORDERPRDSIZE = rEV_ORDERPRDSIZE;
+	}
+	public String getREV_TITLE() {
+		return REV_TITLE;
+	}
+	public void setREV_TITLE(String rEV_TITLE) {
+		REV_TITLE = rEV_TITLE;
+	}
+	public String getREV_CONTENT() {
+		return REV_CONTENT;
+	}
+	public void setREV_CONTENT(String rEV_CONTENT) {
+		REV_CONTENT = rEV_CONTENT;
+	}
 	public int getREV_NUM() {
 		return REV_NUM;
 	}
@@ -27,11 +58,11 @@ public class ReviewVO {
 	public void setREV_CUSID(String rEV_CUSID) {
 		REV_CUSID = rEV_CUSID;
 	}
-	public String getPRDCODE() {
-		return PRDCODE;
+	public String getREV_PRDCODE() {
+		return REV_PRDCODE;
 	}
-	public void setPRDCODE(String pRDCODE) {
-		PRDCODE = pRDCODE;
+	public void setREV_PRDCODE(String rEV_PRDCODE) {
+		REV_PRDCODE = rEV_PRDCODE;
 	}
 	public int getREV_STAR() {
 		return REV_STAR;
@@ -45,11 +76,6 @@ public class ReviewVO {
 	public void setREV_IMAGE(String rEV_IMAGE) {
 		REV_IMAGE = rEV_IMAGE;
 	}
-	@Override
-	public String toString() {
-		return "ReviewVO [REV_NUM=" + REV_NUM + ", REV_REGDATE=" + REV_REGDATE + ", REV_CUSID=" + REV_CUSID
-				+ ", PRDCODE=" + PRDCODE + ", REV_STAR=" + REV_STAR + ", REV_IMAGE=" + REV_IMAGE + "]";
-	}
 
-	
+
 }
