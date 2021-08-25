@@ -31,6 +31,9 @@ public class ProductDAO {
 		return SST.selectList("ProductList.getList",map);
 	}
 	
+	public List<Integer> getJjimList(String user) {
+		return SST.selectList("ProductList.getJjimList",user);
+	}
 	
 	
 	public List<ProductVO> listPageBestShoes(Map<String, Object> map){

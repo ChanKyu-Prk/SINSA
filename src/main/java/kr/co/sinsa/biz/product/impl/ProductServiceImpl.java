@@ -32,7 +32,10 @@ public class ProductServiceImpl implements ProductService {
 		return DAO.getList(map);
 	}
 	
-
+	@Override
+	public List<Integer> getJjimList(String user) {
+		return DAO.getJjimList(user);
+	}
 
 	@Override
 	public int countProductList(Map<String, Object> map) {

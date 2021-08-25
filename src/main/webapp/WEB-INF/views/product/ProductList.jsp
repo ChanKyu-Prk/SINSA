@@ -361,7 +361,7 @@
                         </div>
                     </div>
                     <div class="row">
-                          <c:forEach var="list" items="${list }">
+                          <c:forEach var="list" items="${list }" varStatus="status">
 	                        <style>
 	                        	
                        			#modal${list.PRD_CODE } {
@@ -380,13 +380,7 @@
 									z-index:999999;
 								}
 								
-								#jjimModal${list.PRD_CODE } {
-									display:none;
-									position:absolute;
-									width:100%;
-									height:60%;
-									z-index:999999;
-								}
+								
 								
 								#modal${list.PRD_CODE } .modal_content {
 									width:450px;
@@ -406,14 +400,7 @@
 									border: 2px solid #666;
 								}
 								
-								#jjimModal${list.PRD_CODE } .modal_content {
-									width:450px;
-									height:295px;
-									margin:50px auto;
-									padding:20px 10px;
-									background:#fff;
-									border: 2px solid #666;
-								}
+							
 						
 							
 	                        </style>
@@ -422,7 +409,15 @@
 	                                <div class="product__item__pic set-bg product__item__detail${list.PRD_CODE }" data-setbg="${path}/resources/img/product/${list.PRD_IMAGE }">
 	                                </div>
                                     <ul class="product__item__pic__hover">
-                                        <li><a id="jjimModal_open_btn${list.PRD_CODE }"><i class="fa fa-heart"></i></a></li>
+                                        <li>
+                                        <a class="jjimBtn"><input type="hidden" value= "${list.PRD_NUM}" class="prdnumj">
+								<c:if test="${jjimcheck[status.index]==0}">
+									<i class="fa fa-heart-o"></i>
+								</c:if>
+								<c:if test="${jjimcheck[status.index]==1}">
+									<i class="fa fa-heart"></i>
+								</c:if>
+					</a></li>
                                         <li><a id="modal_open_btn${list.PRD_CODE }"><i class="fa fa-retweet"><b>바로구매</b></i></a></li>
                                         <li><a id="cartModal_open_btn${list.PRD_CODE }" class="listToCart${list.PRD_CODE }"><i class="fa fa-shopping-cart"></i></a></li>
                                     </ul>
@@ -485,19 +480,7 @@
 							
 									
 								
-				                    <div id="jjimModal${list.PRD_CODE }">
-										<div class="modal_content">
-											<h2>바로구매</h2>
-											<hr />
-											
-											<button type="button" id="">
-												구매하기
-											</button>
-											<button type="button" id="jjimModal_close_btn${list.PRD_CODE }">
-												창 닫기
-											</button>
-										</div>
-									</div>
+				                 
 									</div>
 									
 	                                <div class="product__item__text">
@@ -563,18 +546,7 @@
 								        }
 								    });      
 								     
-								    $("#jjimModal_open_btn${list.PRD_CODE }").click(function(){
-									    if(cartCheck === "false"){								    	
-									        $("#jjimModal${list.PRD_CODE }").attr("style", "display:block");
-									        cartCheck = "true";
-									    }
-								    });
-								     $("#jjimModal_close_btn${list.PRD_CODE }").click(function(){
-								        if(cartCheck === "true"){									        	
-								    	 	$("#jjimModal${list.PRD_CODE }").attr("style", "display:none");
-								    	 	cartCheck = "false";
-								        }
-								    });
+								   
 						
 								    
 								</script>
@@ -987,6 +959,41 @@ $('.orderbySelect').on("change", function(){
 	+"&keyWord="+keyWord;
 });
 
-
+$('.jjimBtn').on("click",function(){
+	var prdnum = $(this).find('.prdnumj').val();
+	var data = {
+			prdnum : prdnum
+		}
+	var btn = $(this).find("i");
+		  $.ajax({
+		   type : "POST",
+		   url : "/dojjim",
+		   data : data,
+		   success : function(result){
+			   
+			   if(result == 'login'){
+				   var con = confirm("로그인이 필요한 서비스입니다. 로그인하시겠습니까?");
+					if(con){
+						location.href="/login.do";
+						return false;
+					}
+					else {
+						return false;
+					}
+			   }else{
+				if(btn.hasClass("fa-heart-o")){
+					btn.removeClass("fa-heart-o");
+					btn.addClass("fa-heart");
+				} else {
+					btn.removeClass("fa-heart");
+					btn.addClass("fa-heart-o");
+				}}
+				
+		   },
+		   error : function(){
+			    alert("보내기 실패");
+			   }
+		  }); 
+});
 </script>
 </html>
