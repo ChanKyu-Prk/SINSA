@@ -419,12 +419,12 @@
 	                        </style>
 	                        <div class="col-lg-4 col-md-6 col-sm-6">
 	                            <div class="product__item">
-	                                <div class="product__item__pic set-bg" data-setbg="${path}/resources/img/product/${list.PRD_IMAGE }">
+	                                <div class="product__item__pic set-bg product__item__detail${list.PRD_CODE }" data-setbg="${path}/resources/img/product/${list.PRD_IMAGE }">
 	                                </div>
                                     <ul class="product__item__pic__hover">
                                         <li><a id="jjimModal_open_btn${list.PRD_CODE }"><i class="fa fa-heart"></i></a></li>
                                         <li><a id="modal_open_btn${list.PRD_CODE }"><i class="fa fa-retweet"><b>바로구매</b></i></a></li>
-                                        <li><a id="cartModal_open_btn${list.PRD_CODE }"><i class="fa fa-shopping-cart"></i></a></li>
+                                        <li><a id="cartModal_open_btn${list.PRD_CODE }" class="listToCart${list.PRD_CODE }"><i class="fa fa-shopping-cart"></i></a></li>
                                     </ul>
                                     
                               
@@ -472,11 +472,11 @@
 											<div id="cartSize" class="filter__sort">
 												<c:if test=""></c:if>
                                   					<select class="orderbySelect">
-                                       				<option value="newest">사이즈 선택</option>
+                                       					<option value="newest">사이즈 선택</option>
                                       					<option value="size">220</option>
                                       					<option value="size">230</option>
-                                   				</select>
-                          						</div>
+                                   					</select>
+                        						</div>
 											<button type="button" id="cartModal_close_btn${list.PRD_CODE }">
 												장바구니에 담기
 											</button>
@@ -506,19 +506,38 @@
  										</p>
                                    		<h5>${list.PRD_PRICE }원</h5>
                                 	</div>
-                           
-                            	
+                                	
+								
                             	<script type="text/javascript">
+	                            	$('.listToCart${list.PRD_CODE }').on('click', function(){
+	                            		
+		                            	var code = '${list.PRD_CODE }';
+										var sendData = {"code":code};
+	                            		console.log(code);
+	                          	          	
+		                            	$.ajax({
+		                            	    url:'/listToCart',
+		                            	    method:'POST',
+		                            	    data:sendData,
+		                            	    success:function(data){
+		                            	    	var respData = data
+		    									console.log(respData);
+		                            	    }
+		                            	});
+	                            	});
                             	
-                            		$('.product__item__pic').on('click', function(){
-                            			var PRD_CODE = "${list.PRD_CODE}";
-                            			location.href = "/product/prdCode="+PRD_CODE;
+                            		$('.product__item__detail${list.PRD_CODE }').on('click', function(){
+                            			var prdCode = "${list.PRD_CODE}";
+                            			location.href = "/product/prdCode="+prdCode;
+                            			
                             		})
+                            		
                             
 								    $("#modal_open_btn${list.PRD_CODE }").click(function(){
 								    	if(cartCheck === "false"){							    		
 									        $("#modal${list.PRD_CODE }").attr("style", "display:block");
 								        	cartCheck = "true";
+
 								    	}
 								    });
                             		
@@ -556,6 +575,7 @@
 								    	 	cartCheck = "false";
 								        }
 								    });
+						
 								    
 								</script>
 	                        </div>
@@ -966,5 +986,7 @@ $('.orderbySelect').on("change", function(){
 	+"&maxPrice="+maxPrice
 	+"&keyWord="+keyWord;
 });
+
+
 </script>
 </html>

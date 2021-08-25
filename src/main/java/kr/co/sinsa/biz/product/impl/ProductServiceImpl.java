@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import kr.co.sinsa.biz.product.ProductService;
 import kr.co.sinsa.biz.product.ProductVO;
+import kr.co.sinsa.biz.product.StockVO;
 
 @Service("productService")
 public class ProductServiceImpl implements ProductService {
@@ -19,6 +20,11 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public ProductVO info(String PRD_CODE) {
 		return DAO.info(PRD_CODE);
+	}
+	
+	@Override
+	public List<StockVO> getStock(Map<String, String> map) {	
+		return DAO.getStock(map);
 	}
 	
 	@Override
