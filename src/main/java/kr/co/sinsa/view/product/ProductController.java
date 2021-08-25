@@ -46,6 +46,7 @@ public class ProductController {
 			
 			ProductVO productVO = service.info(PRD_CODE);		
 			int PRD_NUM = productVO.getPRD_NUM();
+	    	//조회 내역 모델에 저장 후 jsp에서 모델이 null이면 fa-heart-o
 	    	jjimVO.setJJIM_CUSID(CUS_ID);
 			jjimVO.setJJIM_PRDNUM(PRD_NUM);
 			JjimVO chckJjim = myService.selJjimById(jjimVO);
@@ -68,6 +69,8 @@ public class ProductController {
     	
     	StockVO stockVO = stockService.sizeInStock(PRD_CODE);
     	model.addAttribute("stockInfo", stockVO);
+    	
+    	
 
 //    	List<ReviewVO> reviewVO = reviewDAO.reviewList(PRD_CODE);
 //    	model.addAttribute("reviewInfo", reviewVO);
@@ -90,6 +93,7 @@ public class ProductController {
 			@PathVariable("category") String category, @PathVariable("orderby") String orderby,
 			@PathVariable("page") String pageR,
 			@RequestParam(value = "keyword", required = false, defaultValue = "") String keyword,
+			@RequestParam(value = "brand", required = false, defaultValue = "") String brand,
 			@RequestParam(value = "color", required = false, defaultValue = "") String color,
 			@RequestParam(value = "minPrice", required = false, defaultValue = "0") String minPriceR,
 			@RequestParam(value = "maxPrice", required = false, defaultValue = "150000") String maxPriceR) throws Exception {
@@ -98,6 +102,7 @@ public class ProductController {
 		info.put("orderby", orderby);
 		info.put("category", category);
 		info.put("keyWord", keyword);
+		info.put("brand", brand);
 		info.put("color", color);
 		info.put("minPrice", minPriceR);
 		info.put("maxPrice", maxPriceR);
@@ -111,8 +116,8 @@ public class ProductController {
 		int minPrice = Integer.parseInt(minPriceR);
 		int maxPrice = Integer.parseInt(maxPriceR);
 		
-
 		String[] colors=color.split("_");
+		System.out.println(colors +"colors");
 		for(int i = 0 ; i < colors.length ; i++) {
 			if(colors[i].equals("white") || colors[i] == "white" ) {
 				colors[i] = "WH";
@@ -126,6 +131,8 @@ public class ProductController {
 				colors[i] = "BLUE";
 			}else if(colors[i].equals("green") || colors[i] == "green") {
 				colors[i] = "GREEN";
+			}else if(colors[i].equals("multi") || colors[i] == "multi") {
+				colors[i] = "MULTI";
 			}
 		}
 		String colorQuerry = "select PRD_COLOR from product ";
@@ -134,7 +141,7 @@ public class ProductController {
 		for(int i = 0 ; colors.length>i;i++) {
 			colorQuerry += "PRD_COLOR='"+colors[i] +"' or ";	
 		}
-		colorQuerry = colorQuerry.substring(0, (colorQuerry.length()-3));
+			colorQuerry = colorQuerry.substring(0, (colorQuerry.length()-3));
 		}
 		
 		String gender = "";
@@ -172,7 +179,7 @@ public class ProductController {
 			ascdesc = "desc";
 		}
 
-		
+		System.out.println(prdCategory);
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("name", keyword);
@@ -183,10 +190,26 @@ public class ProductController {
 		map.put("orderby", orderby);
 		map.put("ascdesc", ascdesc);
 		map.put("color", colorQuerry);
-		map.put("brand", "");
+		System.out.println(colorQuerry);
+		map.put("brand", brand);
 		map.put("page", (page - 1) * limit);
 		listCount = service.countProductList(map);
-		List<ProductVO> list = service.getList(map);
+		
+		List<ProductVO> list = null;
+		if(condition.equals("best")) {
+			list = service.listPageBestShoes(map);
+			if(prdCategory.equals("스니커즈")) {
+				list = service.listPageBestSneakers(map);
+			}else if(prdCategory.equals("캔버스화")) {
+				list = service.listPageBestConverse(map);
+			}else if(prdCategory.equals("슬립온")) {
+				list = service.listPageSlipOnForBest(map);
+			}else if(prdCategory.equals("뮬")) {
+				list = service.listPageMuleForBest(map);
+			}
+		}else {
+			list = service.getList(map);	
+		}
 		model.addAttribute("list", list);
 
 		maxPage = (int) ((double) listCount / limit + 0.95);
