@@ -137,7 +137,7 @@ border: 1px solid #c1bfc1;
 					<span>비밀번호 변경</span>
 				</div>
 				<hr>
-<form action="passChange.do" method="post">
+<form action="passChange" method="post">
 <div class="pw_wrap">
 					<div class="pw_name">비밀번호</div>
 					<div class="pw_input_box">

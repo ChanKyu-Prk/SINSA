@@ -389,7 +389,7 @@ td {
 
 	$('.thumbPic').on("click", function() {
 		var PRD_CODE = $(this).parent().find('.prdcode').val();
-		location.href = "product/prdCode="+PRD_CODE;
+		location.href = "/product/prdCode="+PRD_CODE;
 	});
 
 	$('.prd_brand_span').on("click", function() {
@@ -398,7 +398,7 @@ td {
 
 	$('.prd_name_span').on("click", function() {
 		var PRD_CODE = $(this).find('.prdcode').val();
-		location.href = "product/prdCode="+PRD_CODE;
+		location.href = "/product/prdCode="+PRD_CODE;
 	});
 </script>
 </html>

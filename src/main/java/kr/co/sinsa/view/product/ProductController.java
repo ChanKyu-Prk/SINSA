@@ -283,7 +283,6 @@ public class ProductController {
 			}
 		}
 		model.addAttribute("jjimcheck", jjimcheck);
-		System.out.println(jjimcheck);
 		
 //		service.getStock(list);
 		model.addAttribute("list", list);

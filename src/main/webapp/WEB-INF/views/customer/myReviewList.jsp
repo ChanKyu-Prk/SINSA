@@ -367,12 +367,12 @@ td {
 									</c:when>
 									<c:when test="${pageInfo.getStartPage()==1}">
 										<li class="page-item"><a class="page-link"
-											href="myReviewList.do?page=${pageInfo.getStartPage()}&date1=${date1}&date2=${date2}"
+											href="${pageInfo.getStartPage()}?fromDate=${date1}&toDate=${date2}"
 											tabindex="-1">이전</a></li>
 									</c:when>
 									<c:otherwise>
 										<li class="page-item"><a class="page-link"
-											href="myReviewList.do?page=${pageInfo.getStartPage()-1}&date1=${date1}&date2=${date2}"
+											href="${pageInfo.getStartPage()-1}?fromDate=${date1}&toDate=${date2}"
 											tabindex="-1">이전</a></li>
 									</c:otherwise>
 								</c:choose>
@@ -386,7 +386,7 @@ td {
 										</c:when>
 										<c:otherwise>
 											<li class="page-item"><a class="page-link"
-												href="myReviewList.do?page=${state.index}&date1=${date1}&date2=${date2}">${state.index}</a></li>
+												href="${state.index}?fromDate=${date1}& qtoDate=${date2}">${state.index}</a></li>
 										</c:otherwise>
 									</c:choose>
 								</c:forEach>
@@ -398,11 +398,11 @@ td {
 									</c:when>
 									<c:when test="${pageInfo.getEndPage()==pageInfo.getMaxPage()}">
 										<li class="page-item"><a class="page-link"
-											href="myReviewList.do?page=${pageInfo.getEndPage()}&date1=${date1}&date2=${date2}">다음</a></li>
+											href="${pageInfo.getEndPage()}?fromDate=${date1}&toDate=${date2}">다음</a></li>
 									</c:when>
 									<c:otherwise>
 										<li class="page-item"><a class="page-link"
-											href="myReviewList.do?page=${pageInfo.getEndPage()+1}&date1=${date1}&date2=${date2}">다음</a></li>
+											href="${pageInfo.getEndPage()+1}?fromDate=${date1}&toDate=${date2}">다음</a></li>
 									</c:otherwise>
 								</c:choose>
 							</c:when>
@@ -416,12 +416,12 @@ td {
 									</c:when>
 									<c:when test="${pageInfo.getStartPage()==1}">
 										<li class="page-item"><a class="page-link"
-											href="myReviewList.do?page=${pageInfo.getStartPage()}"
+											href="${pageInfo.getStartPage()}"
 											tabindex="-1">이전</a></li>
 									</c:when>
 									<c:otherwise>
 										<li class="page-item"><a class="page-link"
-											href="myReviewList.do?page=${pageInfo.getStartPage()-1}"
+											href="${pageInfo.getStartPage()-1}"
 											tabindex="-1">이전</a></li>
 									</c:otherwise>
 								</c:choose>
@@ -435,7 +435,7 @@ td {
 										</c:when>
 										<c:otherwise>
 											<li class="page-item"><a class="page-link"
-												href="myReviewList.do?page=${state.index}">${state.index}</a></li>
+												href="${state.index}">${state.index}</a></li>
 										</c:otherwise>
 									</c:choose>
 								</c:forEach>
@@ -447,11 +447,11 @@ td {
 									</c:when>
 									<c:when test="${pageInfo.getEndPage()==pageInfo.getMaxPage()}">
 										<li class="page-item"><a class="page-link"
-											href="myReviewList.do?page=${pageInfo.getEndPage()}">다음</a></li>
+											href="${pageInfo.getEndPage()}">다음</a></li>
 									</c:when>
 									<c:otherwise>
 										<li class="page-item"><a class="page-link"
-											href="myReviewList.do?page=${pageInfo.getEndPage()+1}">다음</a></li>
+											href="${pageInfo.getEndPage()+1}">다음</a></li>
 									</c:otherwise>
 								</c:choose>
 							</c:otherwise>
@@ -476,8 +476,8 @@ td {
 				var ORDERPRDSIZE = $(this).find('.ORDER_PRDSIZE').val();
 				var PRDCODE = $(this).find('.ORDER_PRDCODE').val();
 
-				location.href = 'reviewWrite.do?ORDERNUM=' + ORDERNUM
-						+ '&ORDERPRDSIZE=' + ORDERPRDSIZE + '&PRDCODE='
+				location.href = '/reviewWrite/'+ORDERNUM
+						+ '/' + ORDERPRDSIZE + '/'
 						+ PRDCODE;
 			});
 	$('.underline').on("mouseover", function() {
@@ -500,7 +500,7 @@ td {
 	});
 	$('.thumbPic').on("click", function() {
 		var PRD_CODE = $(this).parent().find('.prdcode').val();
-		location.href = "product/prdCode="+PRD_CODE;
+		location.href = "/product/prdCode="+PRD_CODE;
 	});
 
 	$('.prd_brand_span').on("click", function() {
@@ -509,7 +509,7 @@ td {
 
 	$('.prd_name_span').on("click", function() {
 		var PRD_CODE = $(this).find('.prdcode').val();
-		location.href = "product/prdCode="+PRD_CODE;
+		location.href = "/product/prdCode="+PRD_CODE;
 	});
 
 	$('#date1').on("change", function() {
@@ -565,7 +565,7 @@ td {
 	$('.serchBtn').on("click", function() {
 		var date1 = $('#date1').val();
 		var date2 = $('#date2').val();
-		location.href = 'myReviewList.do?date1=' + date1 + '&date2=' + date2;
+		location.href = '1?fromDate=' + date1 + '&toDate=' + date2;
 	});
 </script>
 </html>

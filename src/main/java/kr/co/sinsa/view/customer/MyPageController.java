@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -48,33 +49,26 @@ public class MyPageController {
 			return "customer/myPage";
 		}
 	}
-	
-	
-	
-	
-	
+
 	@RequestMapping(value = "/test1", method = RequestMethod.GET)
 	public String test() {
 
 		return "customer/delevTest";
 	}
-	
-	@RequestMapping(value = "/delev", method = RequestMethod.POST,produces = "application/json;charset=UTF-8")
+
+	@RequestMapping(value = "/delev", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
 	@ResponseBody
-	public List<Map<String,String>> delevInquiry(@RequestBody Map<Object, Object> data) {
+	public List<Map<String, String>> delevInquiry(@RequestBody Map<Object, Object> data) {
 		List<Map<String, String>> progresses = (List<Map<String, String>>) data.get("progresses");
 		return progresses;
 	}
-	
-	
-	
 
-	@RequestMapping(value = "/myOrderList.do", method = RequestMethod.GET)
-	public String myOrderList(Model model, @RequestParam(value = "page", required = false) String pageR,
-			@RequestParam(value = "date1", required = false) String date1,
-			@RequestParam(value = "date2", required = false) String date2, HttpSession session) {
+	@RequestMapping(value = "/myOrderList/{page}", method = RequestMethod.GET)
+	public String myOrderList(Model model, @PathVariable("page") String pageR,
+			@RequestParam(value = "fromDate", required = false) String date1,
+			@RequestParam(value = "toDate", required = false) String date2, HttpSession session) {
 		UserVO user = (UserVO) session.getAttribute("user");
-		int page = 1;
+		int page = Integer.parseInt(pageR);
 		int limit = 10;
 		int listCount;
 		int startPage;
@@ -82,12 +76,9 @@ public class MyPageController {
 		int maxPage;
 
 		if (user == null) {
-			return "redirect:login.do";
+			return "redirect:/login.do";
 		}
 
-		if (pageR != null) {
-			page = Integer.parseInt(pageR);
-		}
 		if (date1 == "")
 			date1 = null;
 		if (date2 == "")
@@ -131,32 +122,29 @@ public class MyPageController {
 		return "customer/myOrderList";
 	}
 
-	@RequestMapping(value = "/myOrderStatus.do", method = RequestMethod.GET)
-	public String myOrderStatus(Model model, @RequestParam("ORDER_NUM") String ORDER_NUM, HttpSession session) {
+	@RequestMapping(value = "/myOrderStatus/{ORDER_NUM}", method = RequestMethod.GET)
+	public String myOrderStatus(Model model, @PathVariable("ORDER_NUM") String ORDER_NUM, HttpSession session) {
 		UserVO user = (UserVO) session.getAttribute("user");
 		if (user == null) {
-			return "redirect:login.do";
+			return "redirect:/login.do";
 		}
 		model.addAttribute("orderList", myPageSerive.orderStatus(ORDER_NUM));
 		return "customer/myOrderStatus";
 	}
 
-	@RequestMapping(value = "/jjimList.do", method = RequestMethod.GET)
-	public String jjimList(Model model, @RequestParam(value = "page", required = false) String pageR,
-			HttpSession session) {
+	@RequestMapping(value = "/jjimList/{page}", method = RequestMethod.GET)
+	public String jjimList(Model model, @PathVariable("page") String pageR, HttpSession session) {
 		UserVO user = (UserVO) session.getAttribute("user");
-		int page = 1;
+		int page = Integer.parseInt(pageR);
+		;
 		int limit = 6;
 		int listCount;
 		int startPage;
 		int endPage;
 		int maxPage;
-		if (pageR != null) {
-			page = Integer.parseInt(pageR);
-		}
 
 		if (user == null) {
-			return "redirect:login.do";
+			return "redirect:/login.do";
 		} else {
 			String userID = user.getCUS_ID();
 			Map<String, Object> map = new HashMap<String, Object>();
@@ -181,12 +169,12 @@ public class MyPageController {
 		}
 	}
 
-	@RequestMapping(value = "/myReviewList.do", method = RequestMethod.GET)
-	public String myReviewList(Model model, @RequestParam(value = "page", required = false) String pageR,
-			@RequestParam(value = "date1", required = false) String date1,
-			@RequestParam(value = "date2", required = false) String date2, HttpSession session) {
+	@RequestMapping(value = "/myReviewList/{page}", method = RequestMethod.GET)
+	public String myReviewList(Model model, @PathVariable("page") String pageR,
+			@RequestParam(value = "fromDate", required = false) String date1,
+			@RequestParam(value = "toDate", required = false) String date2, HttpSession session) {
 		UserVO user = (UserVO) session.getAttribute("user");
-		int page = 1;
+		int page = Integer.parseInt(pageR);
 		int limit = 10;
 		int listCount;
 		int startPage;
@@ -194,12 +182,9 @@ public class MyPageController {
 		int maxPage;
 
 		if (user == null) {
-			return "redirect:login.do";
+			return "redirect:/login.do";
 		}
 
-		if (pageR != null) {
-			page = Integer.parseInt(pageR);
-		}
 		if (date1 == "")
 			date1 = null;
 		if (date2 == "")
@@ -245,23 +230,22 @@ public class MyPageController {
 		return "customer/myReviewList";
 	}
 
-	@RequestMapping(value = "/recentView.do", method = RequestMethod.GET)
-	public String recentView(Model model, @RequestParam(value = "page", required = false) String pageR,
+	@RequestMapping(value = "/recentView/{page}", method = RequestMethod.GET)
+	public String recentView(Model model, 
+			@PathVariable("page") String pageR,
 			HttpSession session, HttpServletRequest request) {
 		UserVO user = (UserVO) session.getAttribute("user");
 		Cookie[] cRecentlyVieweds = request.getCookies();
-		int page = 1;
+		int page = Integer.parseInt(pageR);
 		int limit = 6;
 		int listCount;
 		int startPage;
 		int endPage;
 		int maxPage;
-		if (pageR != null) {
-			page = Integer.parseInt(pageR);
-		}
+	
 
 		if (user == null) {
-			return "redirect:login.do";
+			return "redirect:/login.do";
 		} else {
 
 			listCount = myPageSerive.countRecentView(cRecentlyVieweds);
@@ -283,12 +267,13 @@ public class MyPageController {
 		}
 	}
 
-	@RequestMapping(value = "/myProductQnA.do", method = RequestMethod.GET)
-	public String myProductQnA(Model model, @RequestParam(value = "page", required = false) String pageR,
-			@RequestParam(value = "date1", required = false) String date1,
-			@RequestParam(value = "date2", required = false) String date2, HttpSession session) {
+	@RequestMapping(value = "/myProductQnA/{page}", method = RequestMethod.GET)
+	public String myProductQnA(Model model,
+			@PathVariable("page") String pageR,
+			@RequestParam(value = "fromDate", required = false) String date1,
+			@RequestParam(value = "toDate", required = false) String date2, HttpSession session) {
 		UserVO user = (UserVO) session.getAttribute("user");
-		int page = 1;
+		int page = Integer.parseInt(pageR);
 		int limit = 10;
 		int listCount;
 		int startPage;
@@ -296,12 +281,9 @@ public class MyPageController {
 		int maxPage;
 
 		if (user == null) {
-			return "redirect:login.do";
+			return "redirect:/login.do";
 		}
 
-		if (pageR != null) {
-			page = Integer.parseInt(pageR);
-		}
 		if (date1 == "")
 			date1 = null;
 		if (date2 == "")
@@ -349,22 +331,22 @@ public class MyPageController {
 		return "customer/myProductQnA";
 	}
 
-	@RequestMapping(value = "/passChange.do", method = RequestMethod.GET)
+	@RequestMapping(value = "/passChange", method = RequestMethod.GET)
 	public String passChangePassCheck(Model model, HttpSession session) {
 		UserVO user = (UserVO) session.getAttribute("user");
 		if (user == null) {
-			return "redirect:login.do";
+			return "redirect:/login.do";
 		}
 		model.addAttribute("page", "비밀번호 변경");
 		return "customer/passCheck";
 	}
 
-	@RequestMapping(value = "/passChange.do", method = RequestMethod.POST)
+	@RequestMapping(value = "/passChange", method = RequestMethod.POST)
 	public String passChangeForm(Model model, @RequestParam(value = "password", required = false) String password,
 			@RequestParam(value = "CUS_PWD", required = false) String newPassword, HttpSession session) {
 		UserVO user = (UserVO) session.getAttribute("user");
 		if (user == null) {
-			return "redirect:login.do";
+			return "redirect:/login.do";
 		}
 		if (password != null) {
 			Map<String, String> map = new HashMap<String, String>();
@@ -374,31 +356,31 @@ public class MyPageController {
 			if (passMatch) {
 				return "customer/passChange";
 			} else {
-				return "redirect:passChange.do";
+				return "redirect:/passChange";
 			}
 		} else if (newPassword != null) {
 			Map<String, String> map = new HashMap<String, String>();
 			map.put("ID", user.getCUS_ID());
 			map.put("PASSWORD", newPassword);
 			myPageSerive.passChange(map);
-			return "redirect:myOrderList.do";
+			return "redirect:/myOrderList/1";
 		} else {
 			return "";
 		}
 
 	}
 
-	@RequestMapping(value = "/privateInfoChange.do", method = RequestMethod.GET)
+	@RequestMapping(value = "/privateInfoChange", method = RequestMethod.GET)
 	public String privateInfoChangePassCheck(Model model, HttpSession session) {
 		UserVO user = (UserVO) session.getAttribute("user");
 		if (user == null) {
-			return "redirect:login.do";
+			return "redirect:/login.do";
 		}
 		model.addAttribute("page", "개인정보 수정");
 		return "customer/passCheck";
 	}
 
-	@RequestMapping(value = "/privateInfoChange.do", method = RequestMethod.POST)
+	@RequestMapping(value = "/privateInfoChange", method = RequestMethod.POST)
 	public String privateInfoChangeForm(Model model,
 			@RequestParam(value = "password", required = false) String password, CustomerVO vo,
 			@RequestParam(value = "CUS_BIRTH_Date", required = false) String CUS_BIRTH_Date,
@@ -411,7 +393,7 @@ public class MyPageController {
 		UserVO user = (UserVO) session.getAttribute("user");
 
 		if (user == null) {
-			return "redirect:login.do";
+			return "redirect:/login.do";
 		}
 		if (password != null) {
 			Map<String, String> map = new HashMap<String, String>();
@@ -427,7 +409,7 @@ public class MyPageController {
 				model.addAttribute("myInfo", myInfo);
 				return "customer/privateInfoChange";
 			} else {
-				return "redirect:privateInfoChange.do";
+				return "redirect:/privateInfoChange";
 			}
 
 		} else {
@@ -438,18 +420,19 @@ public class MyPageController {
 			String address = "(" + CUS_ADDR_1 + ")|" + CUS_ADDR_2 + "|" + CUS_ADDR_5 + "|" + CUS_ADDR_4;
 			vo.setCUS_ADDR(address);
 			myPageSerive.privateInfoChange(vo);
-			return "redirect:myOrderList.do";
+			return "redirect:/myOrderList/1";
 		}
 
 	}
 
-	@RequestMapping(value = "/reviewWrite.do", method = RequestMethod.GET)
-	public String reviewWrite(Model model, @RequestParam String ORDERNUM, @RequestParam String ORDERPRDSIZE,
-			@RequestParam String PRDCODE, HttpSession session) {
+	@RequestMapping(value = "/reviewWrite/{ORDERNUM}/{ORDERPRDSIZE}/{PRDCODE}", method = RequestMethod.GET)
+	public String reviewWrite(Model model, @PathVariable("ORDERNUM") String ORDERNUM,
+			@PathVariable("ORDERPRDSIZE") String ORDERPRDSIZE, @PathVariable("PRDCODE") String PRDCODE,
+			HttpSession session) {
 		UserVO user = (UserVO) session.getAttribute("user");
 
 		if (user == null) {
-			return "redirect:login.do";
+			return "redirect:/login.do";
 		}
 		model.addAttribute("product", myPageSerive.productSerch(PRDCODE));
 		model.addAttribute("ordernum", ORDERNUM);
@@ -458,13 +441,13 @@ public class MyPageController {
 		return "customer/reviewWrite";
 	}
 
-	@RequestMapping(value = "/reviewInsert.do", method = RequestMethod.POST)
+	@RequestMapping(value = "/reviewInsert", method = RequestMethod.POST)
 	public String reviewInsert(Model model, ReviewVO vo,
 			@RequestParam(required = false) List<MultipartFile> multipartFile, String Tsize, String Tcolor,
-			String Tsense, String Tdelv, HttpSession session) {
+			String Tsense, String Tdelv, HttpSession session, HttpServletRequest req) {
 		UserVO user = (UserVO) session.getAttribute("user");
 		if (user == null) {
-			return "redirect:login.do";
+			return "redirect:/login.do";
 		}
 		String title = Tsize + "/" + Tcolor + "/" + Tsense + "/" + Tdelv;
 		vo.setREV_TITLE(title);
@@ -472,14 +455,13 @@ public class MyPageController {
 		if (multipartFile.get(0).isEmpty()) {
 			myPageSerive.reviewInsert(vo);
 		} else {
-			String fileNames = upload.reviewImgUpload(multipartFile);
+			String fileNames = upload.reviewImgUpload(multipartFile, req);
 			vo.setREV_IMAGE(fileNames);
 			myPageSerive.reviewInsert(vo);
 		}
-		return "redirect:myReviewList.do";
+		return "redirect:/myReviewList/1";
 	}
 
-	
 	@RequestMapping(value = "/refund", method = RequestMethod.GET)
 	public String refund(String prdcode, String orderum, String prdsize) {
 		Map<String, String> map = new HashMap<String, String>();
@@ -487,9 +469,9 @@ public class MyPageController {
 		map.put("orderum", orderum);
 		map.put("prdsize", prdsize);
 		myPageSerive.refund(map);
-		return "redirect:myOrderList.do";
+		return "redirect:/myOrderList/1";
 	}
-	
+
 	@RequestMapping(value = "/cancel", method = RequestMethod.GET)
 	public String cancel(String prdcode, String orderum, String prdsize) {
 		Map<String, String> map = new HashMap<String, String>();
@@ -497,8 +479,7 @@ public class MyPageController {
 		map.put("orderum", orderum);
 		map.put("prdsize", prdsize);
 		myPageSerive.cancel(map);
-		return "redirect:myOrderList.do";
+		return "redirect:/myOrderList/1";
 	}
-	
-	
+
 }
