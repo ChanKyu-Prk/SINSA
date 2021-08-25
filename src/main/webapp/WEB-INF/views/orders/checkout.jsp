@@ -152,8 +152,8 @@ input[type=number] {
 						    <tr class="prdItem">
 								<td class="shoping__cart__item"><span
 									class="row mx-auto px-0"> <span> <img
-											src="${path}/resources/prdImg/${lists.PRD_IMAGE}"
-											alt="thumbnail2">
+											src="${pageContext.request.contextPath}/upload\prdImg/${lists.PRD_CODE}.png"
+											alt="${lists.PRD_NAME}_image">
 									</span> 
 									<span class="my-auto"> 
 										<b class="mb-1 ORDER_PRDNAME">${lists.PRD_NAME}<small class="pl-1 prdCode">${lists.PRD_CODE}</small></b>

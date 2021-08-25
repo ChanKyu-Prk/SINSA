@@ -36,6 +36,10 @@
 	margin-bottom: 0px;
 }
 
+.product__details__text .brand_name:hover {
+	color:#0e4a8b; 
+}
+
 ul#quantity {
 	padding-top: 0px;
 }
@@ -44,13 +48,17 @@ div#sizeCon.product__details__size button {
 	cursor: pointer;
 	display: inline-block;
 	font-size: 13px;
-	line-height: 26px;
-	width: 52px;
+	line-height: 29px;
+	width: 80px;
 	text-align: center;
 	border: 1px solid black;
 	border-radius: 2px;
 	margin: 0 3px 3px 0;
 	background-color: white;
+}
+
+div#sizeCon.product__details__size button small{
+	color: #858585;
 }
 
 div#sizeCon.product__details__size button:hover, div#sizeCon.product__details__size button:focus
@@ -200,23 +208,23 @@ input[type=number] {
 					<div class="product__details__pic">
 						<div class="product__details__pic__item">
 							<img class="product__details__pic__item--large"
-								src="${path}/resources/prdImg/${prdInfo.PRD_IMAGE}" alt="">
+								src="${pageContext.request.contextPath}/upload\prdImg/${prdInfo.PRD_CODE}.png" alt="mainPic">
 						</div>
 						<div class="product__details__pic__thumb row mx-auto px-0">
-							<img src="${path}/resources/prdImg/${prdInfo.PRD_IMAGE}" alt="thumbnail1">
-							<img src="${path}/resources/img/product/details/thumb-1.jpg" alt="thumbnail2">
-							<img src="${path}/resources/img/product/details/thumb-2.jpg" alt="thumbnail3">
-							<img src="${path}/resources/img/product/details/thumb-3.jpg" alt="thumbnail4">
-							<img src="${path}/resources/img/product/details/thumb-4.jpg" alt="thumbnail5">
+							<img src="${pageContext.request.contextPath}/upload\prdImg/${prdInfo.PRD_CODE}.png" alt="mainPicThumbnail">
+							<img src="${pageContext.request.contextPath}/upload\prdImg/${prdInfo.PRD_CODE}1.png" alt="thumbnail1">
+							<img src="${pageContext.request.contextPath}/upload\prdImg/${prdInfo.PRD_CODE}2.png" alt="thumbnail2">
+							<img src="${pageContext.request.contextPath}/upload\prdImg/${prdInfo.PRD_CODE}3.png" alt="thumbnail3">
+							<img src="${pageContext.request.contextPath}/upload\prdImg/${prdInfo.PRD_CODE}4.png" alt="thumbnail4">
 						</div>
 					</div>
 				</div>
 				<div class="col-lg-6 col-md-6">
 					<div class="product__details__text">
-						<p class="brand_name">
+						<a href="/product/List/all/newest/all/1?brand=${prdInfo.PRD_BRAND}" class="brand_name">
 							${prdInfo.PRD_BRAND} <span><i class="fa fa-angle-right"></i></span>
-						</p>
-						<h3 class="mb-1">${prdInfo.PRD_NAME}<span class="ml-1 font-weight-normal prdCode">${prdInfo.PRD_CODE}</span></h3>
+						</a>
+						<h3 class="mb-1">${prdInfo.PRD_NAME}<span class="ml-2 font-weight-normal prdCode">${prdInfo.PRD_CODE}</span></h3>
 						<div class="product__details__rating">
 							<i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
 								class="fa fa-star"></i> <i class="fa fa-star"></i> <i
@@ -245,6 +253,7 @@ input[type=number] {
 						<div id="priceContainer">
 							<div id="sizeCon" class="product__details__size">
 								<c:set var="items" value="${fn:split(stockInfo, ',')}" />
+								<% int inStock = 0; %>
 								<c:forEach var="item" items="${items}" begin="1">
 									<c:set var="stockTrim" value="${fn:replace(item, ']', '')}" />
 									<c:set var="stock" value="${fn:substringAfter(stockTrim, '=')}" />
@@ -254,7 +263,9 @@ input[type=number] {
 									<c:set var="size" value="${fn:substringBefore(item, '=')}" />
 									<c:set var="size" value="${fn:substringAfter(size, '_')}" />
 									<c:if test="${stock ne 0}">
-										<button type="button" class="product_size" value="${column}">${size}</button>
+										<!-- 여기에 속한게 하나도 없으면 품절value c:set -->
+										<% inStock++; %>
+										<button type="button" class="product_size" value="${column}">${size}<small class="pl-1">(${stock}개)</small></button>
 									</c:if>
 								</c:forEach>
 							</div>
@@ -349,10 +360,12 @@ input[type=number] {
 								//JSON 형태로 데이터 생성
 								var data = {};
 								var itemList = [];
+								<%if(session.getAttribute("user") != null){%>
 								if(ORDER_AMOUNT.length == 0){
 									alert("옵션을 선택해주세요.");
 									return false;
 								}
+								<%}%>
 								for(var i=0; i<ORDER_AMOUNT.length; i++){
 									data = {};
 									data["ORDER_PRDCODE"] = ORDER_PRDCODE;
@@ -434,8 +447,8 @@ input[type=number] {
 							</script>
 						</div>
 						<ul>
-							<li><b>재고</b> <span>In Stock</span></li>
-							<li><b>배송</b> <span>무료 배송</span></li>
+							<li><b>재고</b><span><%if(inStock > 0){%>IN STOCK<%}else{%>SOLD OUT<%}%></span></li>
+							<li><b>배송</b><span>무료 배송</span></li>
 						</ul>
 					</div>
 				</div>
@@ -530,7 +543,7 @@ input[type=number] {
 											function() {
 												var listNum = $(this).val(); //STOCK_260
 												var clickedSize = $(this)
-														.text(); //260
+														.text().substring(0,3); //260
 												
 												var element = "<li><div class='pro-qty d-flex col-lg-12'><div class='mr-auto p-2'><span class='qty-size ml-2' data-stock='"
 														+ listNum.trim()
@@ -700,9 +713,10 @@ input[type=number] {
 							
 							// large pic width = height
 							var imgWidth = $('.product__details__pic__item--large').width(); 
-							$(window).resize(function(){
-							    $('.product__details__pic__item--large').height(imgWidth);
-							});
+							
+							$(".product__details__pic__item--large").get(0).onload = function() {
+								$('.product__details__pic__item--large').height(imgWidth);
+							}
 							
 							// thumb pic width = height
 							var thumbImgWidth = $('.product__details__pic__thumb img').width(); 
