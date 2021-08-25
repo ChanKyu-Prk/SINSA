@@ -170,10 +170,7 @@
 												.getElementsByName("keyword")[0].value;
 										console.log("검색중...!");
 
-										location.href = "/getProductListPage?num=1&condition="
-												+ "${condition}"
-												+ "&keyword="
-												+ keyword;
+										location.href = "/product/List/all/newest/all/1?keyWord="+keyword;
 									};
 								</script>
 							</form>
@@ -209,53 +206,53 @@
 		<table id="brand-name-box">
 			<tr>
 				<td class="col1"> 
-					<a href="/getProductListPage?num=1&condition=nike">
+					<a href="/product/List/all/newest/all/1?brand=nike">
 						<img src="${path}/resources/img/나이키로고.png" alt="나이키로고">
 					</a>
 				</td>
 				<td class="col2"> 
-					<a href="/getProductListPage?num=1&condition=adidas">
+					<a href="/product/List/all/newest/all/1?brand=adidas">
 						<img src="${path}/resources/img/아디다스로고.png" alt=" 아디다스로고">
 					</a>
 				</td>
 				<td class="col3">
-					<a href="/getProductListPage?num=1&condition=vans">
+					<a href="/product/List/all/newest/all/1?brand=vans">
 						<img src="${path}/resources/img/반스로고.png" alt="반스로고">
 					</a> 
 				</td>
 				<td class="col4">
-					<a href="/getProductListPage?num=1&condition=converse">
+					<a href="/product/List/all/newest/all/1?brand=converse">
 						<img src="${path}/resources/img/컨버스로고.png" alt="컨버스로고">
 					</a> 
 				</td>
 				<td class="col5">
-					<a href="/getProductListPage?num=1&condition=puma">
+					<a href="/product/List/all/newest/all/1?brand=puma">
 						<img src="${path}/resources/img/퓨마로고.png" alt="푸마로고">
 					</a> 
 				</td>
 			</tr>
 			<tr>
 				<td> 
-					<a href="/getProductListPage?num=1&condition=fila">
+					<a href="/product/List/all/newest/all/1?brand=fila">
 						<img src="${path}/resources/img/휠라로고.png" alt="휠라로고" >
 					</a>
 				</td>
 				<td> 
-					<a href="/getProductListPage?num=1&condition=newbalance">
+					<a href="/product/List/all/newest/all/1?brand=newbalance">
 						<img src="${path}/resources/img/뉴발란스 로고.png" alt="뉴발란스로고" >
 					</a>
 				</td>
 				<td>
-					<a href="/getProductListPage?num=1&condition=reebok">
+					<a href="/product/List/all/newest/all/1?brand=reebok">
 						<img src="${path}/resources/img/리복로고.png" alt="리복로고" ></td>
 					</a> 
 				<td> 
-					<a href="/getProductListPage?num=1&condition=lacoste">
+					<a href="/product/List/all/newest/all/1?brand=lacoste">
 						<img src="${path}/resources/img/라코스테로고.png" width="120px;"  alt="라코스테로고" >
 					</a>
 				</td>
 				<td> 
-					<a href="/getProductListPage?num=1&condition=asics">
+					<a href="/product/List/all/newest/all/1?brand=asics">
 						<img src="${path}/resources/img/아식스로고.png" width="150px;" alt="아식스로고" >
 					</a>
 				</td>
@@ -463,7 +460,7 @@
 	<script type="text/javascript">
 		$('.brand-list').find('div').on('click', function(){
 			var brand = $(this).html();
-			location.href = "/getProductListPage?num=1&condition="+brand;
+			location.href = "/product/List/all/newest/all/1?brand="+brand;
 		})
 	</script>
 
