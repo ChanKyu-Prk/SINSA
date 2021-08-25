@@ -6,6 +6,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import kr.co.sinsa.biz.customer.ReviewVO;
 import kr.co.sinsa.biz.product.ProductVO;
 
 @Repository
@@ -18,6 +19,10 @@ public class IndexDAO {
 	
 	public List<ProductVO> getProductList() {
 		return SST.selectList("IndexService.getProductList");
+	}
+	
+	public List<ReviewVO> getReviewList() {
+		return SST.selectList("IndexService.getReviewList");
 	}
 
 

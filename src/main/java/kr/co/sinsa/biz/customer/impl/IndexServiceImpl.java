@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kr.co.sinsa.biz.customer.IndexService;
+import kr.co.sinsa.biz.customer.ReviewVO;
 import kr.co.sinsa.biz.product.ProductVO;
 
 @Service("IndexService")
@@ -18,6 +19,11 @@ public class IndexServiceImpl implements IndexService {
 	@Override
 	public List<ProductVO> getProductList() {
 		return dao.getProductList();
+	}
+	
+	@Override
+	public List<ReviewVO> getReviewList() {
+		return dao.getReviewList();
 	}
 	
 	

@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import kr.co.sinsa.biz.customer.IndexService;
+import kr.co.sinsa.biz.customer.ReviewVO;
 import kr.co.sinsa.biz.product.ProductVO;
 
 @Controller
@@ -21,11 +22,13 @@ public class IndexController {
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home1(Model model) {
-		System.out.println("asdf");
 		
 		List<ProductVO> productList = IndexService.getProductList();
 		model.addAttribute("productList", productList);
 		
+		List<ReviewVO> reviewList = IndexService.getReviewList();
+		model.addAttribute("reviewList", reviewList);
+		System.out.println(reviewList.size());
 		
 		return "index";
 	}
