@@ -15,6 +15,7 @@ public interface OrderDAO {
 	public int cancelreq();
 	public void deliv_update(OrderVO vo);
 	public void order_cancel(OrderVO vo);
+	public void auto_complete();
 	
 	public OrderVO order_info(String order_num);
 	public void order_insert(OrderVO vo);

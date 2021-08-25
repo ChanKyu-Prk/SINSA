@@ -124,7 +124,7 @@ table {
 			<br>
 			<br>
 			
-			<table class="table table-hover"
+			<table class="table table-hover" id="thetable"
 				style="text-align: center; border: 0px solid #dddddd">
 				<thead>
 					<tr>
@@ -158,7 +158,7 @@ table {
 						<c:when test="${!empty orderList}">
 
 							<c:forEach var="e" items="${ orderList }">
-								<tr onclick="javascript:selectNum(this);">
+								<tr>
 									<td style="padding:6px 3px;">${ e.order_num }</td>
 									<td style="padding:6px 3px;"><fmt:formatDate pattern="yy-MM-dd HH:mm:ss" value="${ e.order_regdate }" /></td>
 									<td style="padding:6px 3px;">${ e.order_cusid }</td>
@@ -180,13 +180,16 @@ table {
 								<form:hidden path="order_prdcode" value="${ e.order_prdcode }" />
 								<form:hidden path="order_prdsize" value="${ e.order_prdsize }" />
 								<form:hidden path="order_amount" value="${ e.order_amount }" />
+								<form:hidden path="order_price" value="${ e.order_price }" />
+								<form:hidden path="order_cusid" value="${ e.order_cusid }" />
 
 											<td style="padding:6px 3px;">
 											
 											<select	name="order_delivcomp" class="form-control form-control-sm">
-												<option value="우체국">우체국</option>
-												<option value="대한통운">대한통운</option>
+												<option value="우체국 택배">우체국 택배</option>
+												<option value="CJ대한통운">CJ대한통운</option>
 												<option value="로젠택배">로젠택배</option>
+												<option value="한진택배">한진택배</option>
 											</select>
 
 											
@@ -206,7 +209,7 @@ table {
 								<form:hidden path="order_cusid" value="${ e.order_cusid }" />
 								<form:hidden path="order_price" value="${ e.order_price }" />
 								<form:hidden path="order_usepoint" value="${ e.order_usepoint }" />
-											<td style="padding:6px 3px;">${ e.order_delivcomp }</td>
+											<td style="padding:6px 3px;" >${ e.order_delivcomp }</td>
 											<td style="padding:6px 3px;">${ e.order_delivnum }</td>
 											<td style="padding:6px 3px;">
 												<button type="submit" class="btn btn-danger btn-sm" onclick="javascript:alert('취소처리되었습니다');">취소처리</button>
@@ -214,7 +217,7 @@ table {
 							</form:form>
 										</c:when>
 										<c:when test="${ e.order_state == '취소완료' }">
-											<td style="padding:6px 3px;">${ e.order_delivcomp }</td>
+											<td style="padding:6px 3px;">테스트테스트${ e.order_delivcomp }</td>
 											<td style="padding:6px 3px;">${ e.order_delivnum }</td>
 											<td style="padding:6px 3px;">
 												<input type="button" class="btn btn-danger btn-sm" aria-pressed="true" value="취소완료" disabled/>
@@ -222,7 +225,9 @@ table {
 										</c:when>
 										<c:otherwise>
 											<td style="padding:6px 3px;">${ e.order_delivcomp }</td>
-											<td style="padding:6px 3px;">${ e.order_delivnum }</td>
+											<td style="padding:6px 3px;">
+												<a data-toggle="modal" href="#exampleModalCenter" class="delivBtn">${ e.order_delivnum }</a>
+											</td>
 											<td style="padding:6px 3px;">
 												<input type="button" class="btn btn-secondary btn-sm" onclick="" value="발송완료" disabled/>
 											</td>
@@ -291,7 +296,172 @@ table {
 		<br>
 
 	</div>
+	
+		<!-- Modal -->
+<div class="modal" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">
+ 배송 조회</h5>
+        <button type="button" class="close" data-dismiss="modal"  >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="container-fluid">
+    <div id="testtest">
+        <table class="table">
+        <tr>
+        <td>송장 번호 : </td>
+        <td class="td_deliv_num"></td>
+        <td class="td_deliv_comp"></td>
+        </tr>
+        </table>
+    </div>
+
+    <div class="col-12">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>시간</th>
+                <th>현재 위치</th>
+                <th>배송 상태</th>
+            </tr>
+            </thead>
+            <tbody id="tbodyA">
+           
+            </tbody>
+        </table>
+    </div>
+</div>
+</div>
+</div>
+</div>
+
 	<br><br>
 	<jsp:include page="footer.jsp"/>
+	
+	<script src="${path}/resources/js/jquery-3.3.1.min.js"></script>
+	<script src="${path}/resources/js/bootstrap.min.js"></script>
+	<script src="${path}/resources/js/jquery-ui.min.js"></script>
+	<script src="${path}/resources/js/jquery.slicknav.js"></script>
+	<script src="${path}/resources/js/mixitup.min.js"></script>
+	<script src="${path}/resources/js/owl.carousel.min.js"></script>
+	<script src="${path}/resources/js/main.js"></script>
+	
+
+<script>
+
+
+$('.delivBtn').on("click",function(){
+	
+	var DELIVCOMP = $(this).parent().parent().find('td:eq(14)').text();
+	var DELIVNUM = $(this).parent().parent().find('td:eq(15)').text();
+	var DEILVCODE = "";
+	
+	
+	if (DELIVCOMP=='DHL'){
+		DEILVCODE = 'de.dhl';
+	}else if(DELIVCOMP=='Sagawa'){
+		DEILVCODE = 'jp.sagawa';
+	}else if(DELIVCOMP=='Kuroneko Yamato'){
+		DEILVCODE = 'jp.yamato';
+	}else if(DELIVCOMP=='Japan Post'){
+		DEILVCODE = 'jp.yuubin';
+	}else if(DELIVCOMP=='천일택배'){
+		DEILVCODE = 'kr.chunilps';
+	}else if(DELIVCOMP=='CJ대한통운'){
+		DEILVCODE = 'kr.cjlogistics';
+	}else if(DELIVCOMP=='GS Postbox 택배'){
+		DEILVCODE = 'kr.cvsnet';
+	}else if(DELIVCOMP=='CWAY (Woori Express)'){
+		DEILVCODE = 'kr.cway';
+	}else if(DELIVCOMP=='대신택배'){
+		DEILVCODE = 'kr.daesin';
+	}else if(DELIVCOMP=='우체국 택배'){
+		DEILVCODE = 'kr.epost';
+	}else if(DELIVCOMP=='한의사랑택배'){
+		DEILVCODE = 'kr.hanips';
+	}else if(DELIVCOMP=='한진택배'){
+		DEILVCODE = 'kr.hanjin';
+	}else if(DELIVCOMP=='합동택배'){
+		DEILVCODE = 'kr.hdexp';
+	}else if(DELIVCOMP=='홈픽'){
+		DEILVCODE = 'kr.homepick';
+	}else if(DELIVCOMP=='한서호남택배'){
+		DEILVCODE = 'kr.honamlogis';
+	}else if(DELIVCOMP=='일양로지스'){
+		DEILVCODE = 'kr.ilyanglogis';
+	}else if(DELIVCOMP=='경동택배'){
+		DEILVCODE = 'kr.kdexp';
+	}else if(DELIVCOMP=='건영택배'){
+		DEILVCODE = 'kr.kunyoung';
+	}else if(DELIVCOMP=='로젠택배'){
+		DEILVCODE = 'kr.logen';
+	}else if(DELIVCOMP=='롯데택배'){
+		DEILVCODE = 'kr.lotte';
+	}else if(DELIVCOMP=='SLX'){
+		DEILVCODE = 'kr.slx';
+	}else if(DELIVCOMP=='성원글로벌카고'){
+		DEILVCODE = 'kr.swgexp';
+	}else if(DELIVCOMP=='TNT'){
+		DEILVCODE = 'nl.tnt';
+	}else if(DELIVCOMP=='EMS'){
+		DEILVCODE = 'un.upu.ems';
+	}else if(DELIVCOMP=='Fedex'){
+		DEILVCODE = 'us.fedex';
+	}else if(DELIVCOMP=='UPS'){
+		DEILVCODE = 'us.ups';
+	}else if(DELIVCOMP=='USPS'){
+		DEILVCODE = 'us.usps';
+	}
+
+	
+	
+	var src  = "https://apis.tracker.delivery/carriers/" + DEILVCODE +"/tracks/"+DELIVNUM ;
+
+	$.ajax({
+		type : "GET",
+		url : src,
+		dataType: "json",
+		success : function(data) {	
+			console.log(data);
+			$.ajax({
+				type : "POST",
+				url : "/delev",
+				data :JSON.stringify(data),
+			    headers: {
+				      'Accept': 'application/json',
+				      'Content-Type': 'application/json'
+				    },
+				success : function(progresses) {
+				$('.td_deliv_num').html(DELIVNUM);	
+				$('.td_deliv_comp').html('('+DELIVCOMP+')');	
+					
+					
+				$("#tbodyA").children().remove(); 
+				var str = '<TR>';
+	            $.each(progresses , function(i){
+	            	
+	            	var time = new Date(progresses[i].time).toLocaleString('ko-KR', {timeZone: 'Asia/Seoul'}); 
+	                str += '<TD>' + time + '</TD><TD>' + progresses[i].location.name + 
+	                '</TD><TD>' + progresses[i].status.text + '</TD>';
+	                str += '</TR>';
+	           });
+	           $("#tbodyA").append(str); 
+					
+					
+				},
+				   error : function(){
+					    alert("보내기 실패2");
+					   }
+			})
+		},
+		   error : function(){
+			    alert("보내기 실패1");
+			   }
+	});
+})
+</script>
 </body>
 </html>
