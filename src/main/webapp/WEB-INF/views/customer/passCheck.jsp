@@ -98,10 +98,10 @@ padding : 0px !important;
 
 				<c:choose>
 					<c:when test="${page == '비밀번호 변경' }">
-						<form action="passChange.do" method="post">
+						<form action="/passChange" method="post">
 					</c:when>
 					<c:otherwise>
-						<form action="privateInfoChange.do" method="post">
+						<form action="/privateInfoChange" method="post">
 					</c:otherwise>
 				</c:choose>
 				<div class="passwWrap">

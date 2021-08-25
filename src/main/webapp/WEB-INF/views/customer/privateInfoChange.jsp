@@ -444,7 +444,7 @@ border: 1px solid #c1bfc1;
 				</div>
 				<hr>
 				<div class="container-h">
-					<form action="privateInfoChange.do" method="post">
+					<form action="privateInfoChange" method="post">
 						<div class="wrap">
 							<div class="user_wrap">
 								<div class="user_name">이름</div>

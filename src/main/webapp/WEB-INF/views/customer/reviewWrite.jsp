@@ -224,7 +224,7 @@ table {
 
 					</div>
 					<hr>
-					<form action="reviewInsert.do" method="post"
+					<form action="/reviewInsert" method="post"
 						enctype="multipart/form-data">
 						<input type="hidden" value="${ordernum }" name="REV_ORDERNUM">
 						<input type="hidden" value="${product.PRD_CODE }"

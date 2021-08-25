@@ -140,7 +140,7 @@
 								<a href="#">주문조회</a>
 							</div>
 							<div class="header__top__right__auth">
-								<a href="/myOrderList.do">마이페이지</a>
+								<a href="/myOrderList/1">마이페이지</a>
 							</div>
 							<div class="header__top__right__auth">
 								<a href="#">고객센터</a>

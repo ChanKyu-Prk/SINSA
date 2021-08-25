@@ -172,12 +172,12 @@
 						</c:when>
 						<c:when test="${pageInfo.getStartPage()==1}">
 							<li class="page-item"><a class="page-link"
-								href="recentView.do?page=${pageInfo.getStartPage()}"
+								href="${pageInfo.getStartPage()}"
 								tabindex="-1">이전</a></li>
 						</c:when>
 						<c:otherwise>
 							<li class="page-item"><a class="page-link"
-								href="recentView.do?page=${pageInfo.getStartPage()-1}"
+								href="${pageInfo.getStartPage()-1}"
 								tabindex="-1">이전</a></li>
 						</c:otherwise>
 					</c:choose>
@@ -191,7 +191,7 @@
 							</c:when>
 							<c:otherwise>
 								<li class="page-item"><a class="page-link"
-									href="recentView.do?page=${state.index}">${state.index}</a></li>
+									href="${state.index}">${state.index}</a></li>
 							</c:otherwise>
 						</c:choose>
 					</c:forEach>
@@ -203,11 +203,11 @@
 						</c:when>
 						<c:when test="${pageInfo.getEndPage()==pageInfo.getMaxPage()}">
 							<li class="page-item"><a class="page-link"
-								href="recentView.do?page=${pageInfo.getEndPage()}">다음</a></li>
+								href="${pageInfo.getEndPage()}">다음</a></li>
 						</c:when>
 						<c:otherwise>
 							<li class="page-item"><a class="page-link"
-								href="recentView.do?page=${pageInfo.getEndPage()+1}">다음</a></li>
+								href="${pageInfo.getEndPage()+1}">다음</a></li>
 						</c:otherwise>
 					</c:choose>
 
