@@ -265,7 +265,7 @@ input[type=number] {
 									<c:if test="${stock ne 0}">
 										<!-- 여기에 속한게 하나도 없으면 품절value c:set -->
 										<% inStock++; %>
-										<button type="button" class="product_size" value="${column}">${size}<small class="pl-1">(${stock}개)</small></button>
+										<button id="${column}" type="button" class="product_size" value="${column}">${size}<small class="pl-1" data-stockNum="${stock}">(${stock}개)</small></button>
 									</c:if>
 								</c:forEach>
 							</div>
@@ -296,6 +296,20 @@ input[type=number] {
 										return false;
 									}
 								<%}%>
+								var stopFunc = 0;
+								$(".amount").each(function(event) {
+									var liNum = $(this).val(); //선택된 수량
+									var liOpt = $(this).attr("data-opt"); // STOCK_260
+									var btnNum = $(this).parents("#priceContainer").find("button[value="+liOpt+"] > small").attr("data-stocknum");
+									if(liNum > btnNum){
+										alert("준비된 수량을 초과했습니다.");
+										stopFunc += 1;
+										return false;
+									}
+								});
+								if(stopFunc > 0){
+									return false;
+								}
 								var ORDER_PRDCODE = $(".prdCode").text();
 								var ORDER_PRDSIZE = $(".qty-size").map(function() {
 								    return $(this).text();
