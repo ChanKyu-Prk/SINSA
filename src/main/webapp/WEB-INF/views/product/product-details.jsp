@@ -36,6 +36,10 @@
 	margin-bottom: 0px;
 }
 
+.product__details__text .brand_name:hover {
+	color:#0e4a8b; 
+}
+
 ul#quantity {
 	padding-top: 0px;
 }
@@ -213,10 +217,10 @@ input[type=number] {
 				</div>
 				<div class="col-lg-6 col-md-6">
 					<div class="product__details__text">
-						<p class="brand_name">
+						<a href="/product/List/all/newest/all/1?brand=${prdInfo.PRD_BRAND}" class="brand_name">
 							${prdInfo.PRD_BRAND} <span><i class="fa fa-angle-right"></i></span>
-						</p>
-						<h3 class="mb-1">${prdInfo.PRD_NAME}<span class="ml-1 font-weight-normal prdCode">${prdInfo.PRD_CODE}</span></h3>
+						</a>
+						<h3 class="mb-1">${prdInfo.PRD_NAME}<span class="ml-2 font-weight-normal prdCode">${prdInfo.PRD_CODE}</span></h3>
 						<div class="product__details__rating">
 							<i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
 								class="fa fa-star"></i> <i class="fa fa-star"></i> <i
