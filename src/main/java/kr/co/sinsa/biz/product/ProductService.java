@@ -7,6 +7,7 @@ public interface ProductService {
 	public ProductVO info(String PRD_CODE);
 	
 	public List<ProductVO> getList(Map<String, Object> map);
+	public List<StockVO> getStock(Map<String, String> map);
 	public List<ProductVO> listPageBestShoes(Map<String, Object> map);
 	public int countProductList(Map<String, Object> map);
 	

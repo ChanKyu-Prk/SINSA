@@ -19,6 +19,12 @@ limit #{page},12;
  ]]> 
 </select>
 
+<select id="getStock" parameterType="Map" resultType="kr.co.sinsa.biz.product.StockVO">
+<![CDATA[
+	SELECT * FROM STOCK WHERE STOCK_PRDCODE=#{code}
+ ]]> 
+</select>
+
 
 <select id="countProductList" parameterType="Map" resultType="int">
 <![CDATA[

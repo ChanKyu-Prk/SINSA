@@ -1,5 +1,6 @@
 package kr.co.sinsa.view.product;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -15,6 +16,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.sun.xml.internal.bind.v2.runtime.unmarshaller.XsiNilLoader.Array;
 
 import kr.co.sinsa.biz.customer.JjimVO;
 import kr.co.sinsa.biz.customer.MyPageService;
@@ -43,6 +47,7 @@ public class ProductController {
 		if((UserVO) session.getAttribute("user") != null) {
 			UserVO user = (UserVO) session.getAttribute("user");
 			CUS_ID = (String)user.getCUS_ID();
+
 			
 			ProductVO productVO = service.info(PRD_CODE);		
 			int PRD_NUM = productVO.getPRD_NUM();
@@ -88,6 +93,55 @@ public class ProductController {
 		return "modaltest";
 	}
 	
+	
+	@ResponseBody
+	@RequestMapping(value = "/listToCart", method = RequestMethod.POST)
+	public Map<String,String> reqAjax2(Model model, String code, StockVO vo) {
+		System.out.println("ajax 요청 도착!  " + code);
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("code", code);
+		List<StockVO> stock = service.getStock(map);
+		String stockStr = stock.get(0).toString();
+		String cutStr = "StockVO [STOCK_PRDCODE=" + code + ", ";
+		stockStr = stockStr.replace(cutStr, "");
+		String[] STOCK_size = stockStr.split(", "); 
+		STOCK_size[14] = STOCK_size[14].replace("]", "");
+		String STOCK_220 = STOCK_size[0].replace("STOCK_220=", "");
+		String STOCK_225 = STOCK_size[1].replace("STOCK_225=", "");
+		String STOCK_230 = STOCK_size[2].replace("STOCK_230=", "");
+		String STOCK_235 = STOCK_size[3].replace("STOCK_235=", "");
+		String STOCK_240 = STOCK_size[4].replace("STOCK_240=", "");
+		String STOCK_245 = STOCK_size[5].replace("STOCK_245=", "");
+		String STOCK_250 = STOCK_size[6].replace("STOCK_250=", "");
+		String STOCK_255 = STOCK_size[7].replace("STOCK_255=", "");
+		String STOCK_260 = STOCK_size[8].replace("STOCK_260=", "");
+		String STOCK_265 = STOCK_size[9].replace("STOCK_265=", "");
+		String STOCK_270 = STOCK_size[10].replace("STOCK_270=", "");
+		String STOCK_275 = STOCK_size[11].replace("STOCK_275=", "");
+		String STOCK_280 = STOCK_size[12].replace("STOCK_280=", "");
+		String STOCK_285 = STOCK_size[13].replace("STOCK_285=", "");
+		String STOCK_290 = STOCK_size[14].replace("STOCK_290=", "");
+		System.out.println(STOCK_220);
+		System.out.println(STOCK_225);
+		System.out.println(STOCK_230);
+		System.out.println(STOCK_235);
+		System.out.println(STOCK_240);
+		System.out.println(STOCK_245);
+		System.out.println(STOCK_250);
+		System.out.println(STOCK_255);
+		System.out.println(STOCK_260);
+		System.out.println(STOCK_265);
+		System.out.println(STOCK_270);
+		System.out.println(STOCK_275);
+		System.out.println(STOCK_280);
+		System.out.println(STOCK_285);
+		System.out.println(STOCK_290);
+	
+		map.put("code", code);
+		
+	    return map;
+	}
+	
 	@RequestMapping(value = "/product/List/{condition}/{orderby}/{category}/{page}", method = RequestMethod.GET)
 	public String getProductList(Model model, @PathVariable("condition") String condition,
 			@PathVariable("category") String category, @PathVariable("orderby") String orderby,
@@ -115,6 +169,8 @@ public class ProductController {
 		int maxPage;
 		int minPrice = Integer.parseInt(minPriceR);
 		int maxPrice = Integer.parseInt(maxPriceR);
+		
+		
 		
 		String[] colors=color.split("_");
 		System.out.println(colors +"colors");
@@ -179,7 +235,6 @@ public class ProductController {
 			ascdesc = "desc";
 		}
 
-		System.out.println(prdCategory);
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("name", keyword);
@@ -190,7 +245,6 @@ public class ProductController {
 		map.put("orderby", orderby);
 		map.put("ascdesc", ascdesc);
 		map.put("color", colorQuerry);
-		System.out.println(colorQuerry);
 		map.put("brand", brand);
 		map.put("page", (page - 1) * limit);
 		listCount = service.countProductList(map);
@@ -210,7 +264,9 @@ public class ProductController {
 		}else {
 			list = service.getList(map);	
 		}
+//		service.getStock(list);
 		model.addAttribute("list", list);
+
 
 		maxPage = (int) ((double) listCount / limit + 0.95);
 		startPage = (((int) ((double) page / 5 + 0.8)) - 1) * 5 + 1;
@@ -232,7 +288,4 @@ public class ProductController {
 		
 		return "product/ProductList";
 	}
-	
-
-
 }

@@ -8,13 +8,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import kr.co.sinsa.biz.product.ProductVO;
+import kr.co.sinsa.biz.product.StockVO;
 
 @Repository
 public class ProductDAO {
 	@Autowired
 	private SqlSessionTemplate SST;
 	
-
+	
+	
+	public List<StockVO> getStock(Map<String, String> map){
+		return SST.selectList("ProductList.getStock",map);
+	}
+	
+	
 
 	public ProductVO info(String PRD_CODE) {
 		return SST.selectOne("ProductDAO.info", PRD_CODE);
@@ -23,6 +30,9 @@ public class ProductDAO {
 	public List<ProductVO> getList(Map<String, Object> map){
 		return SST.selectList("ProductList.getList",map);
 	}
+	
+	
+	
 	public List<ProductVO> listPageBestShoes(Map<String, Object> map){
 		return SST.selectList("ProductList.listPageBestShoes",map);
 	}
