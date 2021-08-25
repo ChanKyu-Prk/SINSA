@@ -1,6 +1,6 @@
 package kr.co.sinsa.view.product;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,8 +17,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-
-import com.sun.xml.internal.bind.v2.runtime.unmarshaller.XsiNilLoader.Array;
 
 import kr.co.sinsa.biz.customer.JjimVO;
 import kr.co.sinsa.biz.customer.MyPageService;
@@ -149,7 +147,8 @@ public class ProductController {
 			@RequestParam(value = "brand", required = false, defaultValue = "") String brand,
 			@RequestParam(value = "color", required = false, defaultValue = "") String color,
 			@RequestParam(value = "minPrice", required = false, defaultValue = "0") String minPriceR,
-			@RequestParam(value = "maxPrice", required = false, defaultValue = "150000") String maxPriceR) throws Exception {
+			@RequestParam(value = "maxPrice", required = false, defaultValue = "150000") String maxPriceR,
+			HttpSession session) throws Exception {
 		Map<String, String> info = new HashMap<String, String>();
 		info.put("condition", condition);
 		info.put("orderby", orderby);
@@ -172,7 +171,6 @@ public class ProductController {
 		
 		
 		String[] colors=color.split("_");
-		System.out.println(colors +"colors");
 		for(int i = 0 ; i < colors.length ; i++) {
 			if(colors[i].equals("white") || colors[i] == "white" ) {
 				colors[i] = "WH";
@@ -263,6 +261,30 @@ public class ProductController {
 		}else {
 			list = service.getList(map);	
 		}
+		List<Integer> jjimcheck = new ArrayList<Integer>();
+		UserVO user = (UserVO) session.getAttribute("user");
+		if(user !=null) {
+			List<Integer> jjimList = service.getJjimList(user.getCUS_ID());
+			for(int i = 0 ; i < list.size() ; i ++) {
+				int jjim = 0;
+				int prdnum = list.get(i).getPRD_NUM();
+				for (int j = 0 ; j < jjimList.size(); j ++) {
+					int jjjim = jjimList.get(j);
+					
+					if(jjjim == prdnum) {
+						jjim =1 ;
+					}
+				}
+				jjimcheck.add(jjim);
+			}
+		}else {
+			for(int i = 0 ; i < list.size() ; i ++) {
+					jjimcheck.add(0);
+			}
+		}
+		model.addAttribute("jjimcheck", jjimcheck);
+		System.out.println(jjimcheck);
+		
 //		service.getStock(list);
 		model.addAttribute("list", list);
 
@@ -287,4 +309,28 @@ public class ProductController {
 		
 		return "product/ProductList";
 	}
+	
+	@RequestMapping(value = "/dojjim", method = RequestMethod.POST)
+	@ResponseBody
+	public String doJjim(HttpSession session,String prdnum) throws Exception{
+		UserVO user = (UserVO) session.getAttribute("user");
+
+		if(user ==  null) {
+			return "login";
+		}else {
+		
+		JjimVO jjimVO = new JjimVO();
+		jjimVO.setJJIM_CUSID(user.getCUS_ID());
+		jjimVO.setJJIM_PRDNUM(Integer.parseInt(prdnum));
+		if(myService.selJjimById(jjimVO) == null) {
+			myService.addJjim(jjimVO);
+		} else {
+			myService.removeJjim(jjimVO);
+		}
+		
+		
+		return "success";}
+	}
+	
+	
 }

@@ -10,6 +10,7 @@ public interface ProductService {
 	public List<StockVO> getStock(Map<String, String> map);
 	public List<ProductVO> listPageBestShoes(Map<String, Object> map);
 	public int countProductList(Map<String, Object> map);
+	public List<Integer> getJjimList(String user);
 	
 	public List<ProductVO> listPageBestSneakers(Map<String, Object> map) throws Exception;
 	public List<ProductVO> listPageBestConverse(Map<String, Object> map) throws Exception;

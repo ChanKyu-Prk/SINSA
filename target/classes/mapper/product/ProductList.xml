@@ -41,6 +41,10 @@ PRD_COLOR in (${color})
  ]]> 
 </select>
 
+<select id="getJjimList" resultType="int">
+select JJIM_PRDNUM from jjim where JJIM_CUSID =#{value};
+</select>
+
 	<select id="listPageBestShoes" parameterType="Map" resultType="kr.co.sinsa.biz.product.ProductVO">
 	<![CDATA[
 		SELECT ORDERS.ORDER_PRDNAME, COUNT(*) as count, PRODUCT.PRD_NUM, PRODUCT.PRD_CODE, PRODUCT.PRD_NAME, 
