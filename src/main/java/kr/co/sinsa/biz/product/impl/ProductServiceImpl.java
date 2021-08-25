@@ -25,6 +25,7 @@ public class ProductServiceImpl implements ProductService {
 	public List<ProductVO> getList(Map<String, Object> map) {	
 		return DAO.getList(map);
 	}
+	
 
 
 	@Override
@@ -32,6 +33,26 @@ public class ProductServiceImpl implements ProductService {
 		return DAO.countProductList(map);
 	}
 
+	@Override
+	public List<ProductVO> listPageBestShoes(Map<String, Object> map) {	
+		return DAO.listPageBestShoes(map);
+	}
+	@Override
+	public List<ProductVO> listPageBestSneakers(Map<String, Object> map) throws Exception {
+		return DAO.listPageBestSneakers(map);
+	}
+	@Override
+	public List<ProductVO> listPageBestConverse(Map<String, Object> map) throws Exception {
+		return DAO.listPageBestConverse(map);
+	}
+	@Override
+	public List<ProductVO> listPageSlipOnForBest(Map<String, Object> map) throws Exception {
+		return DAO.listPageSlipOnForBest(map);
+	}
+	@Override
+	public List<ProductVO> listPageMuleForBest(Map<String, Object> map) throws Exception {
+		return DAO.listPageMuleForBest(map);
+	}
 	
 
 }
