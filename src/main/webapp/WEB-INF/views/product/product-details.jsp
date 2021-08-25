@@ -200,14 +200,14 @@ input[type=number] {
 					<div class="product__details__pic">
 						<div class="product__details__pic__item">
 							<img class="product__details__pic__item--large"
-								src="${path}/resources/prdImg/${prdInfo.PRD_IMAGE}" alt="">
+								src="${pageContext.request.contextPath}/upload\prdImg/${prdInfo.PRD_CODE}.png" alt="mainPic">
 						</div>
 						<div class="product__details__pic__thumb row mx-auto px-0">
-							<img src="${path}/resources/prdImg/${prdInfo.PRD_IMAGE}" alt="thumbnail1">
-							<img src="${path}/resources/img/product/details/thumb-1.jpg" alt="thumbnail2">
-							<img src="${path}/resources/img/product/details/thumb-2.jpg" alt="thumbnail3">
-							<img src="${path}/resources/img/product/details/thumb-3.jpg" alt="thumbnail4">
-							<img src="${path}/resources/img/product/details/thumb-4.jpg" alt="thumbnail5">
+							<img src="${pageContext.request.contextPath}/upload\prdImg/${prdInfo.PRD_CODE}.png" alt="mainPicThumbnail">
+							<img src="${pageContext.request.contextPath}/upload\prdImg/${prdInfo.PRD_CODE}1.png" alt="thumbnail1">
+							<img src="${pageContext.request.contextPath}/upload\prdImg/${prdInfo.PRD_CODE}2.png" alt="thumbnail2">
+							<img src="${pageContext.request.contextPath}/upload\prdImg/${prdInfo.PRD_CODE}3.png" alt="thumbnail3">
+							<img src="${pageContext.request.contextPath}/upload\prdImg/${prdInfo.PRD_CODE}4.png" alt="thumbnail4">
 						</div>
 					</div>
 				</div>
@@ -702,9 +702,10 @@ input[type=number] {
 							
 							// large pic width = height
 							var imgWidth = $('.product__details__pic__item--large').width(); 
-							$(window).resize(function(){
-							    $('.product__details__pic__item--large').height(imgWidth);
-							});
+							
+							$(".product__details__pic__item--large").get(0).onload = function() {
+								$('.product__details__pic__item--large').height(imgWidth);
+							}
 							
 							// thumb pic width = height
 							var thumbImgWidth = $('.product__details__pic__thumb img').width(); 
