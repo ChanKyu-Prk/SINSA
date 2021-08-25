@@ -23,6 +23,21 @@ public class ProductDAO {
 	public List<ProductVO> getList(Map<String, Object> map){
 		return SST.selectList("ProductList.getList",map);
 	}
+	public List<ProductVO> listPageBestShoes(Map<String, Object> map){
+		return SST.selectList("ProductList.listPageBestShoes",map);
+	}
+	public List<ProductVO> listPageBestConverse(Map<String, Object> map){
+		return SST.selectList("ProductList.listPageBestConverse",map);
+	}
+	public List<ProductVO> listPageSlipOnForBest(Map<String, Object> map){
+		return SST.selectList("ProductList.listPageSlipOnForBest",map);
+	}
+	public List<ProductVO> listPageBestSneakers(Map<String, Object> map){
+		return SST.selectList("ProductList.listPageBestSneakers",map);
+	}
+	public List<ProductVO> listPageMuleForBest(Map<String, Object> map){
+		return SST.selectList("ProductList.listPageMuleForBest",map);
+	}
 	
 	public int countProductList(Map<String, Object> map){
 		return SST.selectOne("ProductList.countProductList",map);
