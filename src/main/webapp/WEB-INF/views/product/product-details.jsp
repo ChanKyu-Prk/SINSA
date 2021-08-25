@@ -349,10 +349,12 @@ input[type=number] {
 								//JSON 형태로 데이터 생성
 								var data = {};
 								var itemList = [];
+								<%if(session.getAttribute("user") != null){%>
 								if(ORDER_AMOUNT.length == 0){
 									alert("옵션을 선택해주세요.");
 									return false;
 								}
+								<%}%>
 								for(var i=0; i<ORDER_AMOUNT.length; i++){
 									data = {};
 									data["ORDER_PRDCODE"] = ORDER_PRDCODE;
