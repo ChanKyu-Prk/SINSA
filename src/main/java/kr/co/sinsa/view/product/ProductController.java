@@ -80,10 +80,11 @@ public class ProductController {
     	
 		List<ReviewVO> reviewList = ReviewService.getReviewList(PRD_CODE);
 		
-		int reviewNum = reviewList.size(); //리뷰 갯수
-		int avgReview = (int)Math.round(ReviewService.getAvgReview(PRD_CODE));//REV_STAR 더하고 평균
+		int reviewNum = reviewList.size();
+		int avgReview = (int)Math.round(ReviewService.getAvgReview(PRD_CODE));
 		model.addAttribute("reviewNum", reviewNum);
 		model.addAttribute("avgReview", avgReview);
+		System.out.println("HI");
 
     	return "/product/product-details";
     }
