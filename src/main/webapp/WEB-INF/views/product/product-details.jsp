@@ -188,6 +188,10 @@ input[type=number] {
 #btnJjim{
 	pointer:cursor;
 }
+
+button:disabled {
+	background-color : #B2B2B2;
+}
 </style>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -211,7 +215,7 @@ input[type=number] {
 								src="${pageContext.request.contextPath}/upload\prdImg/${prdInfo.PRD_CODE}.png" alt="mainPic">
 						</div>
 						<div class="product__details__pic__thumb row mx-auto px-0">
-							<img src="${pageContext.request.contextPath}/upload\prdImg/${prdInfo.PRD_CODE}.png" alt="mainPicThumbnail">
+							<img src="${pageContext.request.contextPath}/upload\prdImg/${prdInfo.PRD_CODE}.png" alt="thumbnailMain">
 							<img src="${pageContext.request.contextPath}/upload\prdImg/${prdInfo.PRD_CODE}1.png" alt="thumbnail1">
 							<img src="${pageContext.request.contextPath}/upload\prdImg/${prdInfo.PRD_CODE}2.png" alt="thumbnail2">
 							<img src="${pageContext.request.contextPath}/upload\prdImg/${prdInfo.PRD_CODE}3.png" alt="thumbnail3">
@@ -283,7 +287,7 @@ input[type=number] {
 								<span class="totalPriceCon-num digits">0</span><span class="ml-2">원</span>
 							</div>
 						</div>
-						<button type="button" id= "btnBuy" class="primary-btn col-lg-12 borderNone text-center">바로구매</button>
+						<button type="button" id= "btnBuy" class="primary-btn col-lg-12 borderNone text-center" <%if(inStock == 0){%>disabled<%}%>>바로구매</button>
 						<script type="text/javascript">
 							$("#btnBuy").click(function(){
 								<%if(session.getAttribute("user") == null){%>
@@ -742,6 +746,11 @@ input[type=number] {
 							$(".product__details__pic__thumb img").hover(function(){
 							   var src = $(this).attr("src");
 							    $(".product__details__pic__item--large").attr("src",src);
+							});
+							
+							// 썸네일 없으면 표시 안함
+							$(".product__details__pic__thumb img").on('error', function(e){
+							    $(this).hide();
 							});
 						});
 	</script>

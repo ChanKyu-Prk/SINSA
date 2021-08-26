@@ -139,10 +139,9 @@ input[type=number] {
 					<table id="itemList" class="mx-auto px-0">
 						<thead>
 							<span class="tableHead row mx-auto px-0 mb-2">
-								<h5>주문리스트</h5> 							
+								<h5>주문리스트</h5>						
 								<button id="editOrder" onclick="location.href='/product/prdCode=${prdInfo[0].PRD_CODE}';"
-								class="ml-auto p-2 primary-btn cart-btn cart-btn-right">주문정보
-									수정</button>
+								class="ml-auto p-2 primary-btn cart-btn cart-btn-right">주문정보 수정</button>
 							</span>
 						</thead>
 						<tbody>
@@ -428,6 +427,12 @@ input[type=number] {
 	<script type="text/javascript">
 	
 	$(document).ready(function() {
+		var isCart = $("#isCart").val();
+		if(isCart === "true"){
+			$("#editOrder").click(function(){
+			  document.location.href = "/cart.do";
+			});
+		}
 		$('#delivMemo').niceSelect();
 		var selected = $("#delivMemo").val();
 		$('#delivMemo').on('change', function() {
