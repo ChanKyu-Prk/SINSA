@@ -52,7 +52,7 @@ select JJIM_PRDNUM from jjim where JJIM_CUSID =#{value};
 		PRODUCT.PRD_BRAND, PRODUCT.PRD_COLOR, PRODUCT.PRD_DETAIL, PRODUCT.PRD_DISRATE
 		FROM ORDERS 
 		LEFT JOIN PRODUCT 
-		ON ORDERS.ORDER_PRDNAME = PRODUCT.PRD_NAME
+		ON ORDERS.ORDER_PRDCODE = PRODUCT.PRD_CODE
 		WHERE 
 		PRD_BRAND like concat ('%',#{brand},'%') and
 		PRD_CATEGORY like concat('%',#{category},'%') and
@@ -68,89 +68,5 @@ select JJIM_PRDNUM from jjim where JJIM_CUSID =#{value};
 	</select>
 
 
-	<select id="listPageBestSneakers" parameterType="hashMap" resultType="kr.co.sinsa.biz.product.ProductVO">
-	<![CDATA[
-		SELECT ORDERS.ORDER_PRDNAME, COUNT(*) as count, PRODUCT.PRD_NUM, PRODUCT.PRD_CODE, PRODUCT.PRD_NAME, 
-		PRODUCT.PRD_CATEGORY, PRODUCT.PRD_IMAGE, PRODUCT.PRD_GENDER, PRODUCT.PRD_PRICE, 
-		PRODUCT.PRD_BRAND, PRODUCT.PRD_COLOR, PRODUCT.PRD_DETAIL, PRODUCT.PRD_DISRATE
-		FROM ORDERS 
-		LEFT JOIN PRODUCT 
-		ON ORDERS.ORDER_PRDNAME = PRD_NAME
-		WHERE PRODUCT.PRD_CATEGORY = '스니커즈' and
-		PRD_BRAND like concat ('%',#{brand},'%') and
-		PRD_CATEGORY like concat('%',#{category},'%') and
-		PRD_GENDER like concat('%',#{gender},'%') and
-		PRD_NAME in (SELECT PRD_NAME from product where PRD_BRAND like concat('%',#{name},'%')  or PRD_BRAND like concat('%',#{name},'%'))  and
-		PRD_PRICE > #{minPrice} and 
-		PRD_PRICE < #{maxPrice} and
-		PRD_COLOR in (${color})
-		GROUP BY ORDER_PRDNAME 
-		HAVING COUNT(ORDER_PRDNAME) > 1 
-		ORDER BY count DESC;
-	]]>
-	</select>
-	<select id="listPageBestConverse" parameterType="hashMap" resultType="kr.co.sinsa.biz.product.ProductVO">
-	<![CDATA[
-		SELECT ORDERS.ORDER_PRDNAME, COUNT(*) as count, PRODUCT.PRD_NUM, PRODUCT.PRD_CODE, PRODUCT.PRD_NAME, 
-		PRODUCT.PRD_CATEGORY, PRODUCT.PRD_IMAGE, PRODUCT.PRD_GENDER, PRODUCT.PRD_PRICE, 
-		PRODUCT.PRD_BRAND, PRODUCT.PRD_COLOR, PRODUCT.PRD_DETAIL, PRODUCT.PRD_DISRATE
-		FROM ORDERS 
-		LEFT JOIN PRODUCT 
-		ON ORDERS.ORDER_PRDNAME = PRD_NAME
-		WHERE PRODUCT.PRD_CATEGORY = '캔버스화' and
-		PRD_BRAND like concat ('%',#{brand},'%') and
-		PRD_CATEGORY like concat('%',#{category},'%') and
-		PRD_GENDER like concat('%',#{gender},'%') and
-		PRD_NAME in (SELECT PRD_NAME from product where PRD_BRAND like concat('%',#{name},'%')  or PRD_BRAND like concat('%',#{name},'%'))  and
-		PRD_PRICE > #{minPrice} and 
-		PRD_PRICE < #{maxPrice} and
-		PRD_COLOR in (${color})
-		GROUP BY ORDER_PRDNAME 
-		HAVING COUNT(ORDER_PRDNAME) > 1 
-		ORDER BY count DESC
-	]]>
-	</select>
-	<select id="listPageSlipOnForBest" parameterType="hashMap" resultType="kr.co.sinsa.biz.product.ProductVO">
-	<![CDATA[
-		SELECT ORDERS.ORDER_PRDNAME, COUNT(*) as count, PRODUCT.PRD_NUM, PRODUCT.PRD_CODE, PRODUCT.PRD_NAME, 
-		PRODUCT.PRD_CATEGORY, PRODUCT.PRD_IMAGE, PRODUCT.PRD_GENDER, PRODUCT.PRD_PRICE, 
-		PRODUCT.PRD_BRAND, PRODUCT.PRD_COLOR, PRODUCT.PRD_DETAIL, PRODUCT.PRD_DISRATE 
-		FROM ORDERS 
-		LEFT JOIN PRODUCT 
-		ON ORDERS.ORDER_PRDNAME = PRODUCT.PRD_NAME
-		WHERE PRODUCT.PRD_CATEGORY = '슬립온' and
-		PRD_BRAND like concat ('%',#{brand},'%') and
-		PRD_CATEGORY like concat('%',#{category},'%') and
-		PRD_GENDER like concat('%',#{gender},'%') and
-		PRD_NAME in (SELECT PRD_NAME from product where PRD_BRAND like concat('%',#{name},'%')  or PRD_BRAND like concat('%',#{name},'%'))  and
-		PRD_PRICE > #{minPrice} and 
-		PRD_PRICE < #{maxPrice} and
-		PRD_COLOR in (${color})
-		GROUP BY ORDER_PRDNAME 
-		HAVING COUNT(ORDER_PRDNAME) > 1 
-		ORDER BY count DESC
-	]]>
-	</select>
-	<select id="listPageMuleForBest" parameterType="hashMap" resultType="kr.co.sinsa.biz.product.ProductVO">
-	<![CDATA[
-		SELECT ORDERS.ORDER_PRDNAME, COUNT(*) as count, PRODUCT.PRD_NUM, PRODUCT.PRD_CODE, PRODUCT.PRD_NAME, 
-		PRODUCT.PRD_CATEGORY, PRODUCT.PRD_IMAGE, PRODUCT.PRD_GENDER, PRODUCT.PRD_PRICE, 
-		PRODUCT.PRD_BRAND, PRODUCT.PRD_COLOR, PRODUCT.PRD_DETAIL, PRODUCT.PRD_DISRATE 
-		FROM ORDERS 
-		LEFT JOIN PRODUCT 
-		ON ORDERS.ORDER_PRDNAME = PRODUCT.PRD_NAME
-		WHERE PRODUCT.PRD_CATEGORY = '뮬' and
-		PRD_BRAND like concat ('%',#{brand},'%') and
-		PRD_CATEGORY like concat('%',#{category},'%') and
-		PRD_GENDER like concat('%',#{gender},'%') and
-		PRD_NAME in (SELECT PRD_NAME from product where PRD_BRAND like concat('%',#{name},'%')  or PRD_BRAND like concat('%',#{name},'%'))  and
-		PRD_PRICE > #{minPrice} and 
-		PRD_PRICE < #{maxPrice} and
-		PRD_COLOR in (${color})
-		GROUP BY ORDER_PRDNAME 
-		HAVING COUNT(ORDER_PRDNAME) > 1 
-		ORDER BY count DESC
-	]]>
-	</select>
 
 </mapper>

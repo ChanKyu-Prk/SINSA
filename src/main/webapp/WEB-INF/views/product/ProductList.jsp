@@ -18,6 +18,9 @@
 	<script src="${path}/resources/js/productlist.js" type="text/javascript"></script>
 
 	<style>
+	.sizeList{
+		text-align: center;
+	}
 .pagination {
 	margin-top: 25px;
 	margin-bottom: 25px;
@@ -464,16 +467,21 @@
 												</div>
 											</div>
 											<hr />
-											<div id="cartSize" class="filter__sort">
-												<c:if test=""></c:if>
-                                  					<select class="orderbySelect">
-                                       					<option value="newest">사이즈 선택</option>
-                                      					<option value="size">220</option>
-                                      					<option value="size">230</option>
-                                   					</select>
-                        						</div>
+											     <div id="cartSize" class="filter__sort">
+				                                   
+				                                    <select class="selectStocks">
+				                                        <option value="0">사이즈 선택</option>
+				                                  
+				                                    </select>
+				                                </div>
+											
+											
+                       						
+											<button type="button" id="ajaxToCart${list.PRD_CODE }">
+												상품 담기
+											</button>
 											<button type="button" id="cartModal_close_btn${list.PRD_CODE }">
-												장바구니에 담기
+												창 닫기
 											</button>
 										</div>
 									</div>
@@ -492,27 +500,54 @@
                                 	
 								
                             	<script type="text/javascript">
+                            	var selectSize;
+                            	function sizeClick(e){
+                            		selectSize=$(e).html();
+                            		console.log(selectSize);
+                            	}
+                            
+                            	
+                            		$('#ajaxToCart${list.PRD_CODE }').on('click', function(){
+                            			var numCode = '${list.PRD_NUM }';
+										var sendData = {"code":code, "PRDSIZE":selectSize};
+                            			$.ajax({
+                            				url: '/ajaxToCart',
+                            				method: 'POST',
+                            				data:sendData,
+                            				success:function(data){
+                            					console.log('성성공공');
+                            					
+                            				}
+                            			})
+                            		})
+                            	
 	                            	$('.listToCart${list.PRD_CODE }').on('click', function(){
-	                            		
 		                            	var code = '${list.PRD_CODE }';
 										var sendData = {"code":code};
-	                            		console.log(code);
-	                          	          	
+										var stockArrays = new Array();
+										
 		                            	$.ajax({
 		                            	    url:'/listToCart',
 		                            	    method:'POST',
 		                            	    data:sendData,
 		                            	    success:function(data){
-		                            	    	var respData = data
+		                            	    	var respData = data;
+												var sizeStr = 220;
 		    									console.log(respData);
+		    									stockArrays = respData.stocks;
+		                            	    	console.log("code : " + code);
+		                            	    	console.log("array : " + stockArrays[0]);
+				                            	for(var i=0; i < stockArrays.length; i++){
+			                            			sizeStr += 5; 
+				                            		$('.list').append("<li data-value='0' onclick='sizeClick(this)' class='option sizeList' style='text-align: center; font-size: 20px;'>"+String(sizeStr)+"</li>");
+				                            	}
 		                            	    }
 		                            	});
-	                            	});
+   	                            	});
                             	
                             		$('.product__item__detail${list.PRD_CODE }').on('click', function(){
                             			var prdCode = "${list.PRD_CODE}";
                             			location.href = "/product/prdCode="+prdCode;
-                            			
                             		})
                             		
                             
@@ -931,7 +966,7 @@ $('#search').on('click', function(){
 		color += $(this).val()+'_';
 	});
 	color = color.slice(0, -1);
-
+	
 	location.href = "/product/List/"+condition+"/"+orderby+"/"+category+"/1"
 			+"?color="+color
 			+"&minPrice="+minPrice
