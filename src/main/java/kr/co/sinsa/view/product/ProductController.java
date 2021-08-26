@@ -90,12 +90,19 @@ public class ProductController {
 		return "modaltest";
 	}
 	
+	@ResponseBody
+	@RequestMapping(value = "/ajaxToCart", method = RequestMethod.POST)
+	public Map<String, Object> ajaxToCart(Model model, String code){
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		
+		return map;
+	}
 	
 	@ResponseBody
 	@RequestMapping(value = "/listToCart", method = RequestMethod.POST)
-	public Map<String,String> reqAjax2(Model model, String code, StockVO vo) {
-		System.out.println("ajax 요청 도착!  " + code);
-		Map<String, String> map = new HashMap<String, String>();
+	public Map<String,Object> listToCart(Model model, String code, StockVO vo) {
+		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("code", code);
 		List<StockVO> stock = service.getStock(map);
 		String stockStr = stock.get(0).toString();
@@ -118,22 +125,24 @@ public class ProductController {
 		String STOCK_280 = STOCK_size[12].replace("STOCK_280=", "");
 		String STOCK_285 = STOCK_size[13].replace("STOCK_285=", "");
 		String STOCK_290 = STOCK_size[14].replace("STOCK_290=", "");
-		System.out.println(STOCK_220);
-		System.out.println(STOCK_225);
-		System.out.println(STOCK_230);
-		System.out.println(STOCK_235);
-		System.out.println(STOCK_240);
-		System.out.println(STOCK_245);
-		System.out.println(STOCK_250);
-		System.out.println(STOCK_255);
-		System.out.println(STOCK_260);
-		System.out.println(STOCK_265);
-		System.out.println(STOCK_270);
-		System.out.println(STOCK_275);
-		System.out.println(STOCK_280);
-		System.out.println(STOCK_285);
-		System.out.println(STOCK_290);
+		List<String> stocks = new ArrayList<String>();
+		stocks.add(STOCK_220);
+		stocks.add(STOCK_225);
+		stocks.add(STOCK_230);
+		stocks.add(STOCK_235);
+		stocks.add(STOCK_240);
+		stocks.add(STOCK_245);
+		stocks.add(STOCK_250);
+		stocks.add(STOCK_255);
+		stocks.add(STOCK_260);
+		stocks.add(STOCK_265);
+		stocks.add(STOCK_270);
+		stocks.add(STOCK_275);
+		stocks.add(STOCK_280);
+		stocks.add(STOCK_285);
+		stocks.add(STOCK_290);
 	
+		map.put("stocks", stocks);
 		map.put("code", code);
 		
 	    return map;
@@ -248,16 +257,8 @@ public class ProductController {
 		
 		List<ProductVO> list = null;
 		if(condition.equals("best")) {
+			System.out.println(map.get("category"));
 			list = service.listPageBestShoes(map);
-			if(prdCategory.equals("스니커즈")) {
-				list = service.listPageBestSneakers(map);
-			}else if(prdCategory.equals("캔버스화")) {
-				list = service.listPageBestConverse(map);
-			}else if(prdCategory.equals("슬립온")) {
-				list = service.listPageSlipOnForBest(map);
-			}else if(prdCategory.equals("뮬")) {
-				list = service.listPageMuleForBest(map);
-			}
 		}else {
 			list = service.getList(map);	
 		}
