@@ -66,7 +66,8 @@
 							<p>
 								<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
 								Copyright &copy; Team SINSA 2021. All rights reserved
-								SINSA (박찬규, 정인호, 권혁재, 이보배, 정혁희, 한다연) <button type="button" onclick="location.href='/adminLogin'">바로가기</button>
+								SINSA (박찬규, 정인호, 권혁재, 이보배, 정혁희, 한다연)&nbsp;&nbsp;&nbsp;<button type="button" class="btn btn-outline-success" onclick="location.href='/adminLogin'">바로가기</button> 
+								<!-- <button type="button" onclick="location.href='/adminLogin'">바로가기</button> -->
 								<%-- <a type="button" href="${pageContext.request.contextPath}/adminLogin" title="주문관리페이지로 이동">바로가기</a> --%>
 							</p>
 						</div>
