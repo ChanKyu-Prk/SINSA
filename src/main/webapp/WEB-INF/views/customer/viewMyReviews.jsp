@@ -142,6 +142,9 @@ tr.underline {
 	color: grey;
 }
 
+tr {
+	
+}
 
 .padding0 {
 	padding: 0 !important;
@@ -171,12 +174,19 @@ td {
 .reviews_w {
 	border-radius: 10px 10px 0px 0px;
 	background-color: #EDEFF2;
+
+}
+.reviews_w_col {
+	border-radius: 10px 10px 10px 0px;
+	background-color: white;
 	text-align: center;
 	-ms-user-select: none;
 	-moz-user-select: -moz-none;
 	-webkit-user-select: none;
 	-khtml-user-select: none;
 	user-select: none;
+	border: solid 1px #EDEFF2;
+	cursor:  pointer;
 }
 
 .reviews_s {
@@ -185,7 +195,7 @@ td {
 }
 
 .reviews_s_row {
-	background-color: white;
+	background-color: #EDEFF2;
 	border-radius: 10px 10px 0px 10px;
 	text-align: center;
 	border: solid 1px #EDEFF2;
@@ -194,13 +204,24 @@ td {
 	-webkit-user-select: none;
 	-khtml-user-select: none;
 	user-select: none;
-	cursor:  pointer;
+	
 }
 
 
 .select_row {
 	background-color: white;
 	margin-bottom: 20px;
+}
+.reviews_r{
+background-color: #EDEFF2;
+
+}
+.reviews_r_row{
+background-color: white;
+border-radius: 0px 0px 0px 10px;
+color: white;
+border : solid 1px white;
+
 }
 </style>
 <title>SINSA : 나의 상품 후기</title>
@@ -261,17 +282,19 @@ td {
 				</div>
 
 
-
 				<div class="container orderlist">
 					<div class="row select_row">
 						<!-- 				<div class="col-1 reviews_l"></div> -->
-						<div class="col-3 reviews_w">후기 작성 하기</div>
+						<div class="col-3 reviews_w">
+						<div class="row reviews_w_row">
+								<div class="col-12 reviews_w_col">후기 작성 하기</div>
+							</div></div>
 						<div class="col-3 reviews_s">
 							<div class="row reviews_s_row">
 								<div class="col-12 reviews_s_col">후기 내역 보기</div>
 							</div>
 						</div>
-						<div class="col-6 reviews_r"></div>
+						<div class="col-6  reviews_r"><div class="row reviews_r_row">.</div></div>
 					</div>
 					<div class="row">
 						<div class="col-12 padding0">
@@ -294,7 +317,7 @@ td {
 									</tr>
 								</thead>
 								<c:choose>
-									<c:when test="${fn:length(orderList) == 0}">
+									<c:when test="${fn:length(myReviews) == 0}">
 
 										<tr>
 											<td colspan="6">
@@ -317,13 +340,13 @@ td {
 										</tr>
 									</c:when>
 									<c:otherwise>
-										<c:forEach var="list" items="${orderList}" varStatus="status">
+										<c:forEach var="list" items="${myReviews}" varStatus="status">
 											<tr class="underline">
 
 												<td class="imgtd">
 
 													<div class="td-row">
-														<input type="hidden" value="${list.ORDER_PRDCODE }"
+														<input type="hidden" value=""
 															class="prdcode"> <img class="thumbPic"
 															alt="상품 대표 사진" title="상품 대표 사진"
 															src="/resources/prdImg/shoe.jpg" />
@@ -335,60 +358,23 @@ td {
 													<table>
 														<tr>
 															<td class="prd_brand_td"><span
-																class="prd_brand_span span_margin">${list.PRD_BRAND }</span></td>
+																class="prd_brand_span span_margin"></span></td>
 														</tr>
 														<tr>
 															<td class="prd_name_td"><span
 																class="prd_name_span span_margin"><input
-																	type="hidden" value="${list.ORDER_PRDCODE }"
-																	class="prdcode"> ${list.ORDER_PRDNAME }</span></td>
+																	type="hidden" value=""
+																	class="prdcode"></span></td>
 														</tr>
 														<tr>
-															<td class="prd_size_td">사이즈 : ${list.ORDER_PRDSIZE }
+															<td class="prd_size_td">사이즈 : 
 																mm</td>
 														</tr>
 													</table>
 												</td>
-												<td><fmt:formatDate var="date"
-														value="${list.ORDER_REGDATE }" pattern="yyyy-MM-dd" />
-													${date }</td>
-												<td>${list.ORDER_STATE }</td>
-												<td><c:choose>
-														<c:when test="${list.ORDER_STATE =='배송완료' }">
-															<c:choose>
-																<c:when test="${reviewCheck[status.index] ==0}">
-
-																	<span class="write_btn"> <input type="hidden"
-																		value="${list.ORDER_PRDCODE }" class="ORDER_PRDCODE">
-																		<input type="hidden" value="${list.ORDER_PRDSIZE  }"
-																		class="ORDER_PRDSIZE"> <input type="hidden"
-																		value="${list.ORDER_NUM  }" class="ORDER_NUM ">
-																		후기작성하기
-																	</span>
-
-																</c:when>
-																<c:otherwise>
-											작성완료
-											</c:otherwise>
-															</c:choose>
-
-														</c:when>
-														<c:when test="${list.ORDER_STATE =='취소' }">
-											작성불가 <br>
-											(취소상품)
-											</c:when>
-														<c:when test="${list.ORDER_STATE =='환불' }">
-											작성불가 <br>
-											(환불상품)
-											</c:when>
-														<c:when test="${list.ORDER_STATE =='환불신청' }">
-											작성불가 <br>
-											(환불상품)
-											</c:when>
-														<c:otherwise>
-											배송전
-											</c:otherwise>
-													</c:choose></td>
+												<td>}</td>
+												<td></td>
+												<td></td>
 
 
 											</tr>
@@ -408,7 +394,7 @@ td {
 				</div>
 
 				<!-- paging  부분-->
-				<c:if test="${fn:length(orderList) != 0}">
+				<c:if test="${fn:length(myReviews) != 0}">
 					<ul class="pagination">
 						<c:choose>
 							<c:when test="${date1 != null || date2!= null}">
@@ -616,10 +602,8 @@ td {
 		var date2 = $('#date2').val();
 		location.href = '1?fromDate=' + date1 + '&toDate=' + date2;
 	});
-	
-	
-	$('.reviews_s_col').on("click",function(){
-		location.href= "/myReviews/1";
+	$('.reviews_w_col').on("click",function(){
+		location.href= "/myReviewList/1";
 	});
 </script>
 </html>

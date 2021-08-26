@@ -28,6 +28,7 @@ public interface MyPageService {
 	public List<Integer> reviewCheck(List<MyOrderListVO> orderList,String ID);
 	public ProductVO productSerch(String PRDCODE);
 	public void reviewInsert(ReviewVO vo);
+	public List<ProductVO> productMatchReview(List<ReviewVO> list);
 	
 	
 	
@@ -40,6 +41,10 @@ public interface MyPageService {
 	
 	public List<ProductVO> recentView(Cookie[] cRecentlyVieweds, int page, int listCount);
 	public int countRecentView(Cookie[] cRecentlyVieweds);
+	public int countReviewsDate(Map<String, Object> map);
+	public int countReviews(Map<String, Object> map);
+	public List<ReviewVO> myReviewsDate(Map<String, Object> map);
+	public List<ReviewVO> myReviews(Map<String, Object> map);
 	
 	public boolean passCheck(Map<String,String> map);
 	public void  passChange(Map<String, String> map);

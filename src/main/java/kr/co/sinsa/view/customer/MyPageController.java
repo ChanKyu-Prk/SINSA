@@ -482,4 +482,73 @@ public class MyPageController {
 		return "redirect:/myOrderList/1";
 	}
 
+	@RequestMapping(value = "/myReviews/{page}", method = RequestMethod.GET)
+	public String myReviews(Model model, @PathVariable("page") String pageR,
+			@RequestParam(value = "fromDate", required = false) String date1,
+			@RequestParam(value = "toDate", required = false) String date2, HttpSession session) {
+		
+		UserVO user = (UserVO) session.getAttribute("user");
+		int page = Integer.parseInt(pageR);
+		int limit = 10;
+		int listCount;
+		int startPage;
+		int endPage;
+		int maxPage;
+
+		if (user == null) {
+			return "redirect:/login.do";
+		}
+
+		if (date1 == "")
+			date1 = null;
+		if (date2 == "")
+			date2 = null;
+		String userID = user.getCUS_ID();
+		if (date2 != null || date1 != null) {
+			Map<String, Object> map = new HashMap<String, Object>();
+			Date date1_sqldate = Date.valueOf(date1);
+			Date date2_sqldate = Date.valueOf(date2);
+			map.put("ID", userID);
+			map.put("page", (page - 1) * limit);
+			map.put("date1", date1_sqldate);
+			map.put("date2", date2_sqldate);
+			listCount = myPageSerive.countReviewsDate(map);
+			List<ReviewVO> myReviews = myPageSerive.myReviewsDate(map);
+			
+			model.addAttribute("myReviews", myReviews);
+			model.addAttribute("product", myPageSerive.productMatchReview(myReviews));
+			
+		} else {
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("ID", userID);
+			map.put("page", (page - 1) * limit);
+			listCount = myPageSerive.countReviews(map);
+			List<ReviewVO> myReviews = myPageSerive.myReviews(map);
+			model.addAttribute("myReviews", myReviews);
+			model.addAttribute("product", myPageSerive.productMatchReview(myReviews));
+
+		}
+		model.addAttribute("date1", date1);
+		model.addAttribute("date2", date2);
+		maxPage = (int) ((double) listCount / limit + 0.95);
+		startPage = (((int) ((double) page / 5 + 0.8)) - 1) * 5 + 1;
+		endPage = startPage + 4;
+		if (endPage > maxPage) {
+			endPage = maxPage;
+		}
+		PageInfo pageInfo = new PageInfo();
+		pageInfo.setListCount(listCount);
+		pageInfo.setEndPage(endPage);
+		pageInfo.setStartPage(startPage);
+		pageInfo.setMaxPage(maxPage);
+		pageInfo.setPage(page);
+		model.addAttribute("pageInfo", pageInfo);
+		
+		
+		
+		
+		return "customer/viewMyReviews";
+	}
+	
+	
 }
