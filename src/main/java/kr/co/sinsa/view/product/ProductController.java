@@ -81,9 +81,7 @@ public class ProductController {
 		List<ReviewVO> reviewList = ReviewService.getReviewList(PRD_CODE);
 		
 		int reviewNum = reviewList.size(); //리뷰 갯수
-
-		float avgReview = ReviewService.getAvgReview(PRD_CODE);//REV_STAR 더하고 평균
-		System.out.println("avgReview : " + avgReview);
+		int avgReview = (int)Math.round(ReviewService.getAvgReview(PRD_CODE));//REV_STAR 더하고 평균
 		model.addAttribute("reviewNum", reviewNum);
 		model.addAttribute("avgReview", avgReview);
 

@@ -230,9 +230,13 @@ button:disabled {
 						</a>
 						<h3 class="mb-1">${prdInfo.PRD_NAME}<span class="ml-2 font-weight-normal prdCode">${prdInfo.PRD_CODE}</span></h3>
 						<a class="product__details__rating">
-							<i class="fa fa-star"></i>
-							<i class="fa fa-star-o"></i>
-							<span>${avgReview}(${reviewNum}개 상품평)</span>
+						<c:forEach begin="1" end="${avgReview}" varStatus="loop">
+						    <i class="fa fa-star"></i>
+						</c:forEach>
+						<c:forEach begin="1" end="${5 - avgReview}" varStatus="loop">
+						    <i class="fa fa-star-o"></i>
+						</c:forEach>
+							<span>(${reviewNum}개 상품평)</span>
 						</a>
 						<div class="product__details__code">
 							<span>색상: <span>${prdInfo.PRD_COLOR}</span>
