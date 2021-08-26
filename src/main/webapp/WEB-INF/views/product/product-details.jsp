@@ -229,7 +229,7 @@ button:disabled {
 							${prdInfo.PRD_BRAND} <span><i class="fa fa-angle-right"></i></span>
 						</a>
 						<h3 class="mb-1">${prdInfo.PRD_NAME}<span class="ml-2 font-weight-normal prdCode">${prdInfo.PRD_CODE}</span></h3>
-						<a class="product__details__rating">
+						<a class="product__details__rating" href="#reviewTab">
 						<c:forEach begin="1" end="${avgReview}" varStatus="loop">
 						    <i class="fa fa-star"></i>
 						</c:forEach>
@@ -755,6 +755,11 @@ button:disabled {
 							// 썸네일 없으면 표시 안함
 							$(".product__details__pic__thumb img").on('error', function(e){
 							    $(this).hide();
+							});
+							
+							//상단 리뷰 누르면 하단 리뷰로 이동
+							$( ".product__details__rating" ).on( "click", function() {
+								$( "#reviewTab" ).trigger( "click" );
 							});
 						});
 	</script>
