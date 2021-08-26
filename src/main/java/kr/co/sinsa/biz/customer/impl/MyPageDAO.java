@@ -82,6 +82,22 @@ public class MyPageDAO {
 		SST.insert("myInfo.reviewInsert",vo);
 	}
 	
+	public int countReviewsDate(Map<String, Object> map) {
+		return SST.selectOne("myInfo.countReviewsDate",map);
+	}
+	public int countReviews(Map<String, Object> map) {
+		return SST.selectOne("myInfo.countReviews",map);
+	}
+	
+	public List<ReviewVO> myReviewsDate(Map<String, Object> map){
+	return SST.selectList("myInfo.myReviewsDate",map)	;
+	}
+	public List<ReviewVO> myReviews(Map<String, Object> map){
+		return SST.selectList("myInfo.myReviews",map)	;
+		}
+	public ProductVO productMatchReview(String prdcode) {
+		return SST.selectOne("myInfo.productMatchReview",prdcode);
+	}
 	
 	
 	public List<QnAVO> QnAList(Map<String,Object> map){

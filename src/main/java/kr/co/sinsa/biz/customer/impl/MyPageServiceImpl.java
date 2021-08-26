@@ -137,6 +137,37 @@ public class MyPageServiceImpl implements MyPageService {
 		dao.reviewInsert(vo);
 	}
 
+	
+	@Override
+	public int countReviewsDate(Map<String, Object> map) {
+		return dao.countReviewsDate(map);
+	}
+
+	@Override
+	public int countReviews(Map<String, Object> map) {
+		return dao.countReviews(map);
+		
+	}
+	@Override
+	public List<ReviewVO> myReviewsDate(Map<String, Object> map) {
+		return dao.myReviewsDate(map);
+	}
+
+	@Override
+	public List<ReviewVO> myReviews(Map<String, Object> map) {
+		return dao.myReviews(map);
+	}
+
+	@Override
+	public List<ProductVO> productMatchReview(List<ReviewVO> list) {
+		List<ProductVO> productList = new ArrayList<ProductVO>();
+		for (int i = 0; i < list.size(); i++) {
+			ProductVO product = dao.productMatchReview(list.get(i).getREV_PRDCODE());
+			productList.add(product);
+		}
+		return productList;
+	}
+
 	@Override
 	public List<QnAVO> QnAList(Map<String, Object> map) {
 		return dao.QnAList(map);
