@@ -211,7 +211,7 @@ input[type=number] {
 								src="${pageContext.request.contextPath}/upload\prdImg/${prdInfo.PRD_CODE}.png" alt="mainPic">
 						</div>
 						<div class="product__details__pic__thumb row mx-auto px-0">
-							<img src="${pageContext.request.contextPath}/upload\prdImg/${prdInfo.PRD_CODE}.png" alt="mainPicThumbnail">
+							<img src="${pageContext.request.contextPath}/upload\prdImg/${prdInfo.PRD_CODE}.png" alt="thumbnailMain">
 							<img src="${pageContext.request.contextPath}/upload\prdImg/${prdInfo.PRD_CODE}1.png" alt="thumbnail1">
 							<img src="${pageContext.request.contextPath}/upload\prdImg/${prdInfo.PRD_CODE}2.png" alt="thumbnail2">
 							<img src="${pageContext.request.contextPath}/upload\prdImg/${prdInfo.PRD_CODE}3.png" alt="thumbnail3">
@@ -742,6 +742,11 @@ input[type=number] {
 							$(".product__details__pic__thumb img").hover(function(){
 							   var src = $(this).attr("src");
 							    $(".product__details__pic__item--large").attr("src",src);
+							});
+							
+							// 썸네일 없으면 표시 X
+							$(".product__details__pic__thumb img").on('error', function(e){
+							    $(this).hide();
 							});
 						});
 	</script>
