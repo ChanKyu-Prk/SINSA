@@ -705,15 +705,18 @@
 
 																			<div class="div_button_change_size">
 																				<button class="button_confirm_change_size"
-																					type="button" onclick="checkSize();">확인</button>
+																					type="button" >확인</button>
+																					
+																					<input type="hidden" name="CART_NUM" class="CART_NUM_I"
+																					value="${list.CART_NUM}" /> 
+																					<input type="hidden"
+																					name="CART_PRDNUM" value="${list.CART_PRDNUM}" class="CART_PRDNUM_I"/>
+																				<input type="hidden" name="CUS_ID"
+																					value="${list.CUS_ID}" class="CUS_ID_I"/>
 																			</div>
 																			<div>
 
-																				<input type="hidden" name="CART_NUM"
-																					value="${list.CART_NUM}" /> <input type="hidden"
-																					name="CART_PRDNUM" value="${list.CART_PRDNUM}" />
-																				<input type="hidden" name="CUS_ID"
-																					value="${list.CUS_ID}" />
+																				
 
 
 																			</div>
@@ -1065,14 +1068,18 @@
 
 
 	<script>
-		function checkSize() {
-
+	$('.button_confirm_change_size').on("click",function(){
+		var CART_PRDSIZE = $(this).parent().parent().children('.size_change_row').children().find('.select_size').val();
+var CUS_ID = $(this).parent().find('.CUS_ID_I').val();
+var CART_NUM = $(this).parent().find('.CART_NUM_I').val();
+var CART_PRDNUM = $(this).parent().find('.CART_PRDNUM_I').val();
 			var codeData = {
-				CART_PRDSIZE : $('select[name="CART_PRDSIZE"]').val(),
-				CUS_ID : $('input[name="CUS_ID"]').val(),
-				CART_NUM : $('input[name="CART_NUM"]').val(),
-				CART_PRDNUM : $('input[name="CART_PRDNUM"]').val()
+				CART_PRDSIZE : CART_PRDSIZE,
+				CUS_ID : CUS_ID,
+				CART_NUM : CART_NUM,
+				CART_PRDNUM : CART_PRDNUM
 			}
+			
 			$.ajax({
 				url : "updatesize.do",
 				type : "POST",
@@ -1087,7 +1094,7 @@
 					}
 				}
 			});
-		}
+		});
 	</script>
 
 
