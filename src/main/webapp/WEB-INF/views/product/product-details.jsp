@@ -237,6 +237,7 @@ button:disabled {
 						    <i class="fa fa-star-o"></i>
 						</c:forEach>
 							<span>(${reviewNum}개 상품평)</span>
+
 						</a>
 						<div class="product__details__code">
 							<span>색상: <span>${prdInfo.PRD_COLOR}</span>
