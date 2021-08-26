@@ -2,8 +2,12 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//en" "http://mybaits.org/dtd/mybatis-3-mapper.dtd">
 
 <!-- EmpDAO 인터페이스를 상속받아 사용 -->
-<mapper namespace="kr.co.sinsa.biz.product.ReviewDAO">
+<mapper namespace="ReviewDAO">
 	<select id="reviewList" resultType="kr.co.sinsa.biz.product.ReviewVO">
 		select * from review where REV_PRDCODE=#{REV_PRDCODE}
+	</select>
+	
+	<select id="getAvgReview" parameterType="string" resultType="float">
+		select avg(REV_STAR) from review where REV_PRDCODE = #{REV_PRDCODE}
 	</select>
 </mapper>

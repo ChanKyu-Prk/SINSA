@@ -78,16 +78,14 @@ public class ProductController {
     	StockVO stockVO = stockService.sizeInStock(PRD_CODE);
     	model.addAttribute("stockInfo", stockVO);
     	
-    	ProductVO productVO = ReviewService.getProductVO(PRD_CODE);
 		List<ReviewVO> reviewList = ReviewService.getReviewList(PRD_CODE);
-		List<Integer> reviewInfo = new ArrayList<Integer>();
 		
 		int reviewNum = reviewList.size(); //리뷰 갯수
 
-		for(Object list : reviewList) {
-			System.out.println("list" + list);
-		}
+		float avgReview = ReviewService.getAvgReview(PRD_CODE);//REV_STAR 더하고 평균
+		System.out.println("avgReview : " + avgReview);
 		model.addAttribute("reviewNum", reviewNum);
+		model.addAttribute("avgReview", avgReview);
 
     	return "/product/product-details";
     }

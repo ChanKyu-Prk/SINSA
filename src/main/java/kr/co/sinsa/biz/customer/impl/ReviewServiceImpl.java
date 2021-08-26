@@ -26,6 +26,11 @@ public class ReviewServiceImpl implements ReviewService {
 		
 		return dao.getReviewList(PRD_CODE);
 	}
+
+	@Override
+	public float getAvgReview(String PRD_CODE) {
+		return dao.getAvgReview(PRD_CODE);
+	}
 	
 	
 	

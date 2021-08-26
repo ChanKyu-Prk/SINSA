@@ -25,5 +25,8 @@ public class ReviewDAO {
 		return SST.selectList("ReviewService.getReviewList", PRD_CODE);
 	}
 	
+	public float getAvgReview (String PRD_CODE) {
+		return SST.selectOne("ReviewDAO.getAvgReview", PRD_CODE);
+	}
 
 }
