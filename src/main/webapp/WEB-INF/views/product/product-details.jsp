@@ -188,6 +188,10 @@ input[type=number] {
 #btnJjim{
 	pointer:cursor;
 }
+
+button:disabled {
+	background-color : #B2B2B2;
+}
 </style>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -283,7 +287,7 @@ input[type=number] {
 								<span class="totalPriceCon-num digits">0</span><span class="ml-2">원</span>
 							</div>
 						</div>
-						<button type="button" id= "btnBuy" class="primary-btn col-lg-12 borderNone text-center">바로구매</button>
+						<button type="button" id= "btnBuy" class="primary-btn col-lg-12 borderNone text-center" <%if(inStock == 0){%>disabled<%}%>>바로구매</button>
 						<script type="text/javascript">
 							$("#btnBuy").click(function(){
 								<%if(session.getAttribute("user") == null){%>
@@ -744,7 +748,7 @@ input[type=number] {
 							    $(".product__details__pic__item--large").attr("src",src);
 							});
 							
-							// 썸네일 없으면 표시 X
+							// 썸네일 없으면 표시 안함
 							$(".product__details__pic__thumb img").on('error', function(e){
 							    $(this).hide();
 							});
