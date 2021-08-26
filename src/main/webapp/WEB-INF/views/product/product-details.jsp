@@ -229,11 +229,15 @@ button:disabled {
 							${prdInfo.PRD_BRAND} <span><i class="fa fa-angle-right"></i></span>
 						</a>
 						<h3 class="mb-1">${prdInfo.PRD_NAME}<span class="ml-2 font-weight-normal prdCode">${prdInfo.PRD_CODE}</span></h3>
-						<div class="product__details__rating">
-							<i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
-								class="fa fa-star"></i> <i class="fa fa-star"></i> <i
-								class="fa fa-star"></i> <span>(18개 상품평)</span>
-						</div>
+						<a class="product__details__rating" href="#reviewTab">
+							<c:forEach begin="1" end="${avgReview}" varStatus="loop">
+							    <i class="fa fa-star"></i>
+							</c:forEach>
+							<c:forEach begin="1" end="${5 - avgReview}" varStatus="loop">
+							    <i class="fa fa-star-o"></i>
+							</c:forEach>
+							<span>(${reviewNum}개 상품평)</span>
+						</a>
 						<div class="product__details__code">
 							<span>색상: <span>${prdInfo.PRD_COLOR}</span>
 							</span>
@@ -478,7 +482,7 @@ button:disabled {
 								href="#tabs-1" role="tab" aria-selected="true">상품정보</a></li>
 							<li class="nav-item" role="presentation"><a id="reviewTab"
 								class="nav-link" data-toggle="tab" href="#tabs-2" role="tab"
-								aria-selected="false">상품평&nbsp; <span>(18)</span></a></li>
+								aria-selected="false">상품평&nbsp; <span>(${reviewNum})</span></a></li>
 							<li class="nav-item" role="presentation"><a id="qnaTab"
 								class="nav-link" data-toggle="tab" href="#tabs-3" role="tab"
 								aria-selected="false">상품문의&nbsp;<span>(3)</span></a></li>
@@ -751,6 +755,11 @@ button:disabled {
 							// 썸네일 없으면 표시 안함
 							$(".product__details__pic__thumb img").on('error', function(e){
 							    $(this).hide();
+							});
+							
+							//상단 리뷰 누르면 하단 리뷰로 이동
+							$( ".product__details__rating" ).on( "click", function() {
+								$( "#reviewTab" ).trigger( "click" );
 							});
 						});
 	</script>

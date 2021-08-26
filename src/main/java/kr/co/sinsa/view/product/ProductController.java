@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import kr.co.sinsa.biz.customer.ReviewService;
+import kr.co.sinsa.biz.customer.ReviewVO;
 import kr.co.sinsa.biz.customer.JjimVO;
 import kr.co.sinsa.biz.customer.MyPageService;
 import kr.co.sinsa.biz.product.PageInfo;
@@ -37,6 +39,9 @@ public class ProductController {
 	
 	@Autowired
 	private MyPageService myService;
+	
+	@Autowired
+	private ReviewService ReviewService;
 	
 	// 상세페이지	
 	@RequestMapping("/product/prdCode={prdCode}")
@@ -72,12 +77,15 @@ public class ProductController {
     	StockVO stockVO = stockService.sizeInStock(PRD_CODE);
     	model.addAttribute("stockInfo", stockVO);
     	
-    	
+    	List<ReviewVO> reviewList = ReviewService.getReviewList(PRD_CODE);
 
-//    	List<ReviewVO> reviewVO = reviewDAO.reviewList(PRD_CODE);
-//    	model.addAttribute("reviewInfo", reviewVO);
-
-    	return "/product/product-details";
+		int reviewNum = reviewList.size();
+		int avgReview = (int)Math.round(ReviewService.getAvgReview(PRD_CODE));
+		System.out.println("avgReview : " + avgReview);
+		model.addAttribute("reviewNum", reviewNum);
+		model.addAttribute("avgReview", avgReview);
+		
+		return "/product/product-details";
     }
 		
 	@RequestMapping(value = "/getProductBrandPage")
