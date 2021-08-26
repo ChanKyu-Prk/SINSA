@@ -2,6 +2,7 @@ package kr.co.sinsa.view.product;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -20,6 +21,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.co.sinsa.biz.customer.JjimVO;
 import kr.co.sinsa.biz.customer.MyPageService;
+import kr.co.sinsa.biz.customer.ReviewService;
+import kr.co.sinsa.biz.customer.ReviewVO;
 import kr.co.sinsa.biz.product.PageInfo;
 import kr.co.sinsa.biz.product.ProductService;
 import kr.co.sinsa.biz.product.ProductVO;
@@ -37,6 +40,9 @@ public class ProductController {
 	
 	@Autowired
 	private MyPageService myService;
+	
+	@Autowired
+	private ReviewService ReviewService;
 	
 	// 상세페이지	
 	@RequestMapping("/product/prdCode={prdCode}")
@@ -72,10 +78,16 @@ public class ProductController {
     	StockVO stockVO = stockService.sizeInStock(PRD_CODE);
     	model.addAttribute("stockInfo", stockVO);
     	
-    	
+    	ProductVO productVO = ReviewService.getProductVO(PRD_CODE);
+		List<ReviewVO> reviewList = ReviewService.getReviewList(PRD_CODE);
+		List<Integer> reviewInfo = new ArrayList<Integer>();
+		
+		int reviewNum = reviewList.size(); //리뷰 갯수
 
-//    	List<ReviewVO> reviewVO = reviewDAO.reviewList(PRD_CODE);
-//    	model.addAttribute("reviewInfo", reviewVO);
+		for(Object list : reviewList) {
+			System.out.println("list" + list);
+		}
+		model.addAttribute("reviewNum", reviewNum);
 
     	return "/product/product-details";
     }
