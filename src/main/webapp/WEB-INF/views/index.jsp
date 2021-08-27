@@ -31,7 +31,7 @@
 	width: 25px;
 	height: 25px;
 	margin: 0px 4px 0px 0px !important;
-/* 	padding: 0px 0px 0px 0px; */
+	/* 	padding: 0px 0px 0px 0px; */
 }
 
 .empty_star {
@@ -148,135 +148,31 @@
 
 
 			<div class="row featured__filter">
-				<div class="col-lg-3 col-md-4 col-sm-6 mix all">
 
-					<div class="featured__item">
-						<div class="featured__item__pic set-bg"
-							data-setbg="${path}/resources/img/featured/feature-1.jpg">
-							<ul class="featured__item__pic__hover">
-								<li><a href="#"><i class="fa fa-heart"></i></a></li>
-								<li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-							</ul>
-						</div>
-						<div class="featured__item__text">
-							<h6>BRAND</h6>
-							<h6>NAME</h6>
-							<h5>45,000원</h5>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-3 col-md-4 col-sm-6 mix all">
-					<div class="featured__item">
-						<div class="featured__item__pic set-bg"
-							data-setbg="${path}/resources/img/featured/feature-2.jpg">
-							<ul class="featured__item__pic__hover">
-								<li><a href="#"><i class="fa fa-heart"></i></a></li>
-								<li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-							</ul>
-						</div>
-						<div class="featured__item__text">
-							<h6>BRAND</h6>
-							<h6>NAME</h6>
-							<h5>45,000원</h5>
+
+
+
+				<c:forEach var="list" items="${topProductList}"
+					varStatus="status">
+					<div class="col-lg-3 col-md-4 col-sm-6 mix mule">
+						<div class="featured__item">
+							<div class="featured__item__pic set-bg"
+								data-setbg="${path}/resources/img/featured/feature-1.jpg">
+								<ul class="featured__item__pic__hover">
+									<li><a href="#"><i class="fa fa-heart"></i></a></li>
+									<li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+								</ul>
+							</div>
+							<div class="featured__item__text">
+								<h6>${list.PRD_BRAND}</h6>
+								<h6>${list.PRD_NAME}</h6>
+								<h5>${list.PRD_PRICE}</h5>
+							</div>
 						</div>
 					</div>
-				</div>
-				<div class="col-lg-3 col-md-4 col-sm-6 mix all">
-					<div class="featured__item">
-						<div class="featured__item__pic set-bg"
-							data-setbg="${path}/resources/img/featured/feature-3.jpg">
-							<ul class="featured__item__pic__hover">
-								<li><a href="#"><i class="fa fa-heart"></i></a></li>
-								<li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-							</ul>
-						</div>
-						<div class="featured__item__text">
-							<h6>BRAND</h6>
-							<h6>NAME</h6>
-							<h5>45,000원</h5>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-3 col-md-4 col-sm-6 mix sneakers">
-					<div class="featured__item">
-						<div class="featured__item__pic set-bg"
-							data-setbg="${path}/resources/img/featured/feature-4.jpg">
-							<ul class="featured__item__pic__hover">
-								<li><a href="#"><i class="fa fa-heart"></i></a></li>
-								<li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-							</ul>
-						</div>
-						<div class="featured__item__text">
-							<h6>BRAND</h6>
-							<h6>NAME</h6>
-							<h5>45,000원</h5>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-3 col-md-4 col-sm-6 mix canvas">
-					<div class="featured__item">
-						<div class="featured__item__pic set-bg"
-							data-setbg="${path}/resources/img/featured/feature-5.jpg">
-							<ul class="featured__item__pic__hover">
-								<li><a href="#"><i class="fa fa-heart"></i></a></li>
-								<li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-							</ul>
-						</div>
-						<div class="featured__item__text">
-							<h6>BRAND</h6>
-							<h6>NAME</h6>
-							<h5>45,000원</h5>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-3 col-md-4 col-sm-6 mix slip-on">
-					<div class="featured__item">
-						<div class="featured__item__pic set-bg"
-							data-setbg="${path}/resources/img/featured/feature-6.jpg">
-							<ul class="featured__item__pic__hover">
-								<li><a href="#"><i class="fa fa-heart"></i></a></li>
-								<li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-							</ul>
-						</div>
-						<div class="featured__item__text">
-							<h6>BRAND</h6>
-							<h6>NAME</h6>
-							<h5>45,000원</h5>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-3 col-md-4 col-sm-6 mix slip-on">
-					<div class="featured__item">
-						<div class="featured__item__pic set-bg"
-							data-setbg="${path}/resources/img/featured/feature-7.jpg">
-							<ul class="featured__item__pic__hover">
-								<li><a href="#"><i class="fa fa-heart"></i></a></li>
-								<li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-							</ul>
-						</div>
-						<div class="featured__item__text">
-							<h6>BRAND</h6>
-							<h6>NAME</h6>
-							<h5>45,000원</h5>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-3 col-md-4 col-sm-6 mix mule">
-					<div class="featured__item">
-						<div class="featured__item__pic set-bg"
-							data-setbg="${path}/resources/img/featured/feature-8.jpg">
-							<ul class="featured__item__pic__hover">
-								<li><a href="#"><i class="fa fa-heart"></i></a></li>
-								<li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-							</ul>
-						</div>
-						<div class="featured__item__text">
-							<h6>BRAND</h6>
-							<h6>NAME</h6>
-							<h5>45,000원</h5>
-						</div>
-					</div>
-				</div>
+				</c:forEach>
+				
+					
 			</div>
 		</div>
 	</section>
