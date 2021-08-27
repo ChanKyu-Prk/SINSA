@@ -39,6 +39,10 @@
 	height: 25px;
 	margin: 0px 4px 0px 0px !important;
 }
+
+.div_name_top_trends{
+	padding: 0px 0px 0px 0px !important;
+}
 </style>
 
 
@@ -132,48 +136,92 @@
 					<div class="section-title">
 						<h2>TOP TRENDS</h2>
 					</div>
-					<div class="featured__controls">
-						<ul>
-							<li class="active" data-filter=".all">전체</li>
-							<li data-filter=".sneakers">스니커즈</li>
-							<li data-filter=".canvas">캔버스화</li>
-							<li data-filter=".slip-on">슬립온</li>
-							<li data-filter=".mule">뮬</li>
-						</ul>
+
+
+
+					<div class="col-lg-12">
+						<div class="product__details__tab div_name_top_trends">
+							<ul class="nav nav-tabs" role="tablist">
+								<li class="nav-item" role="presentation"><a
+									class="nav-link active" id="infoTab" data-toggle="tab"
+									href="#tabs-1" role="tab" aria-selected="true">전체</a></li>
+								<li class="nav-item" role="presentation"><a id="reviewTab"
+									class="nav-link" data-toggle="tab" href="#tabs-2" role="tab"
+									aria-selected="false">스니커즈</a></li>
+								<li class="nav-item" role="presentation"><a id="qnaTab"
+									class="nav-link" data-toggle="tab" href="#tabs-3" role="tab"
+									aria-selected="false">뮬</a></li>
+							</ul>
+							<div class="tab-content">
+								<div class="tab-pane active" id="tabs-1" role="tabpanel">
+									<div class="product__details__tab__desc">
+
+
+										<div class="row">
+											<c:forEach var="list" items="${topProductList}"
+												varStatus="status">
+												<div class="col-md-3">
+													<div class="featured__item__pic set-bg"
+														data-setbg="${path}/resources/img/featured/feature-1.jpg">
+														<ul class="featured__item__pic__hover">
+															<li><a href="#"><i class="fa fa-heart"></i></a></li>
+															<li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+														</ul>
+													</div>
+													<div class="featured__item__text">
+														<h6>${list.PRD_BRAND}</h6>
+														<h6>${list.PRD_NAME}</h6>
+														<h5>${list.PRD_PRICE}</h5>
+													</div>
+												</div>
+											</c:forEach>
+										</div>
+
+
+									</div>
+								</div>
+								<div class="tab-pane" id="tabs-2" role="tabpanel">
+									<div class="product__details__tab__desc"></div>
+								</div>
+								<div class="tab-pane" id="tabs-3" role="tabpanel">
+									<div class="product__details__tab__desc"></div>
+								</div>
+							</div>
+						</div>
 					</div>
+
+
+
+
 				</div>
 			</div>
 
 
 
 
-			<div class="row featured__filter">
+			<!-- 			<div class="row featured__filter"> -->
 
+			<%-- 				<c:forEach var="list" items="${topProductList}" --%>
+			<%-- 					varStatus="status"> --%>
+			<!-- 					<div class="col-lg-3 col-md-4 col-sm-6 mix mule"> -->
+			<!-- 						<div class="featured__item"> -->
+			<!-- 							<div class="featured__item__pic set-bg" -->
+			<%-- 								data-setbg="${path}/resources/img/featured/feature-1.jpg"> --%>
+			<!-- 								<ul class="featured__item__pic__hover"> -->
+			<!-- 									<li><a href="#"><i class="fa fa-heart"></i></a></li> -->
+			<!-- 									<li><a href="#"><i class="fa fa-shopping-cart"></i></a></li> -->
+			<!-- 								</ul> -->
+			<!-- 							</div> -->
+			<!-- 							<div class="featured__item__text"> -->
+			<%-- 								<h6>${list.PRD_BRAND}</h6> --%>
+			<%-- 								<h6>${list.PRD_NAME}</h6> --%>
+			<%-- 								<h5>${list.PRD_PRICE}</h5> --%>
+			<!-- 							</div> -->
+			<!-- 						</div> -->
+			<!-- 					</div> -->
+			<%-- 				</c:forEach> --%>
 
-
-
-				<c:forEach var="list" items="${topProductList}"
-					varStatus="status">
-					<div class="col-lg-3 col-md-4 col-sm-6 mix mule">
-						<div class="featured__item">
-							<div class="featured__item__pic set-bg"
-								data-setbg="${path}/resources/img/featured/feature-1.jpg">
-								<ul class="featured__item__pic__hover">
-									<li><a href="#"><i class="fa fa-heart"></i></a></li>
-									<li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-								</ul>
-							</div>
-							<div class="featured__item__text">
-								<h6>${list.PRD_BRAND}</h6>
-								<h6>${list.PRD_NAME}</h6>
-								<h5>${list.PRD_PRICE}</h5>
-							</div>
-						</div>
-					</div>
-				</c:forEach>
-				
-					
-			</div>
+			<!-- 			</div> -->
 		</div>
 	</section>
 	<!-- Featured Section End -->
