@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import kr.co.sinsa.biz.customer.IndexService;
 import kr.co.sinsa.biz.customer.ReviewVO;
+import kr.co.sinsa.biz.orders.OrdersVO;
 import kr.co.sinsa.biz.product.ProductVO;
 
 @Service("IndexService")
@@ -24,6 +25,11 @@ public class IndexServiceImpl implements IndexService {
 	@Override
 	public List<ReviewVO> getReviewList() {
 		return dao.getReviewList();
+	}
+	
+	@Override
+	public List<ProductVO> getTopProductList() {
+		return dao.getTopProductList();
 	}
 	
 	

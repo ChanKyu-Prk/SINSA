@@ -10,7 +10,15 @@
 		<select id="getReviewList" resultType="kr.co.sinsa.biz.customer.ReviewVO"> 
  			select * from REVIEW order by REV_STAR desc limit 3
 		</select> 
-	
+		
+		<select id="getOrderList" resultType="kr.co.sinsa.biz.orders.OrdersVO"> 
+			select order_prdcode from orders group by order_prdcode order by count(order_prdcode) desc limit 2
+<!--  			select order_prdcode from orders group by order_prdcode order by count(order_prdcode) desc; -->
+		</select> 
+		
+		<select id="getTopProductList" parameterType="kr.co.sinsa.biz.product.ProductVO" resultType="kr.co.sinsa.biz.product.ProductVO"> 
+			select * from product where PRD_CODE = #{PRD_CODE}
+		</select> 
 	
 	
 <!-- 	<select id="getCartList" parameterType="kr.co.sinsa.biz.user.UserVO" resultType="kr.co.sinsa.biz.product.CartVO"> -->
