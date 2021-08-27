@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import kr.co.sinsa.biz.customer.IndexService;
 import kr.co.sinsa.biz.customer.ReviewVO;
+import kr.co.sinsa.biz.orders.OrdersVO;
 import kr.co.sinsa.biz.product.ProductVO;
 
 @Controller
@@ -28,7 +29,10 @@ public class IndexController {
 		
 		List<ReviewVO> reviewList = IndexService.getReviewList();
 		model.addAttribute("reviewList", reviewList);
-		System.out.println(reviewList.size());
+		
+		List<ProductVO> topProductList = IndexService.getTopProductList();
+		model.addAttribute("topProductList", topProductList);
+		System.out.println("topProductList" + topProductList);
 		
 		return "index";
 	}
