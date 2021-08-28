@@ -7,6 +7,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import kr.co.sinsa.biz.product.CartVO;
 import kr.co.sinsa.biz.product.ProductVO;
 import kr.co.sinsa.biz.product.StockVO;
 
@@ -39,21 +40,26 @@ public class ProductDAO {
 	public List<ProductVO> listPageBestShoes(Map<String, Object> map){
 		return SST.selectList("ProductList.listPageBestShoes",map);
 	}
-	public List<ProductVO> listPageBestConverse(Map<String, Object> map){
-		return SST.selectList("ProductList.listPageBestConverse",map);
-	}
-	public List<ProductVO> listPageSlipOnForBest(Map<String, Object> map){
-		return SST.selectList("ProductList.listPageSlipOnForBest",map);
-	}
-	public List<ProductVO> listPageBestSneakers(Map<String, Object> map){
-		return SST.selectList("ProductList.listPageBestSneakers",map);
-	}
-	public List<ProductVO> listPageMuleForBest(Map<String, Object> map){
-		return SST.selectList("ProductList.listPageMuleForBest",map);
-	}
 	
 	public int countProductList(Map<String, Object> map){
 		return SST.selectOne("ProductList.countProductList",map);
 	}
+	
+	public List<CartVO> addCart(Map<String, Object> map){
+		return SST.selectList("ProductList.addCart",map);
+	}
 
 }
+
+//	public List<ProductVO> listPageBestConverse(Map<String, Object> map){
+//		return SST.selectList("ProductList.listPageBestConverse",map);
+//	}
+//	public List<ProductVO> listPageSlipOnForBest(Map<String, Object> map){
+//		return SST.selectList("ProductList.listPageSlipOnForBest",map);
+//	}
+//	public List<ProductVO> listPageBestSneakers(Map<String, Object> map){
+//		return SST.selectList("ProductList.listPageBestSneakers",map);
+//	}
+//	public List<ProductVO> listPageMuleForBest(Map<String, Object> map){
+//		return SST.selectList("ProductList.listPageMuleForBest",map);
+//	}
