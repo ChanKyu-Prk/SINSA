@@ -8,6 +8,7 @@ public interface ProductService {
 	
 	public List<ProductVO> getList(Map<String, Object> map);
 	public List<StockVO> getStock(Map<String, Object> map);
+	public List<CartVO> addCart(Map<String, Object> map);
 	public List<ProductVO> listPageBestShoes(Map<String, Object> map);
 	public int countProductList(Map<String, Object> map);
 	public List<Integer> getJjimList(String user);
