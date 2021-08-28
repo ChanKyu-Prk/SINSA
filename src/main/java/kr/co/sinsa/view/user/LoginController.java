@@ -20,6 +20,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import kr.co.sinsa.biz.customer.IndexService;
+import kr.co.sinsa.biz.customer.ReviewVO;
+import kr.co.sinsa.biz.product.ProductVO;
 import kr.co.sinsa.biz.user.CustomerVO;
 import kr.co.sinsa.biz.user.LoginService;
 import kr.co.sinsa.biz.user.UserVO;
@@ -32,6 +35,9 @@ public class LoginController {
 
 	@Autowired
 	private JavaMailSender mailSender;
+	
+	@Autowired
+	private IndexService IndexService;
 
 	@Autowired
 	private void setNaverLoginBO(NaverLoginBO naverLoginBO) {
@@ -106,6 +112,36 @@ public class LoginController {
 				cookie.setMaxAge(0);
 				response.addCookie(cookie);
 			}
+			
+			
+			
+			
+			
+			List<ProductVO> productList = IndexService.getProductList();
+			model.addAttribute("productList", productList);
+			
+			List<ReviewVO> reviewList = IndexService.getReviewList();
+			model.addAttribute("reviewList", reviewList);
+			
+			List<ProductVO> topProductList = IndexService.getTopProductList();
+			model.addAttribute("topProductList", topProductList);
+			
+			List<ProductVO> topSneakersProductList = IndexService.getTopSneakersProductList();
+			model.addAttribute("topSneakersProductList", topSneakersProductList);
+			
+			
+			List<ProductVO> topSportsProductList = IndexService.getTopSportsProductList();
+			
+			for(int i=0; i<topSportsProductList.size(); i++) {
+				if(topSportsProductList.get(i) == null) {
+					topSportsProductList.remove(i);
+				}
+			}
+			
+			model.addAttribute("topSportsProductList", topSportsProductList);
+			
+			
+			
 
 			return "index";
 		}else {

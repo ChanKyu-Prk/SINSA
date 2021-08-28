@@ -1,18 +1,55 @@
 package kr.co.sinsa.view.user;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import kr.co.sinsa.biz.customer.IndexService;
+import kr.co.sinsa.biz.customer.ReviewVO;
+import kr.co.sinsa.biz.product.ProductVO;
 
 @Controller
 public class LogoutController {
 
+	@Autowired
+	private IndexService IndexService;
+	
+	
 	@RequestMapping("/logout.do")
-	public String logout(HttpSession session) throws Exception {
+	public String logout(HttpSession session, Model model) throws Exception {
 		System.out.println("로그아웃 처리");
 		
 		session.invalidate();
+		
+		
+		List<ProductVO> productList = IndexService.getProductList();
+		model.addAttribute("productList", productList);
+		
+		List<ReviewVO> reviewList = IndexService.getReviewList();
+		model.addAttribute("reviewList", reviewList);
+		
+		List<ProductVO> topProductList = IndexService.getTopProductList();
+		model.addAttribute("topProductList", topProductList);
+		
+		List<ProductVO> topSneakersProductList = IndexService.getTopSneakersProductList();
+		model.addAttribute("topSneakersProductList", topSneakersProductList);
+		
+		
+		List<ProductVO> topSportsProductList = IndexService.getTopSportsProductList();
+		
+		for(int i=0; i<topSportsProductList.size(); i++) {
+			if(topSportsProductList.get(i) == null) {
+				topSportsProductList.remove(i);
+			}
+		}
+		
+		model.addAttribute("topSportsProductList", topSportsProductList);
+		
 		return "index";
 		
 	}

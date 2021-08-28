@@ -13,6 +13,7 @@ public interface IndexService {
 	public List<ProductVO> getTopProductList();
 	
 	public List<ProductVO> getTopSneakersProductList();
+	public List<ProductVO> getTopSportsProductList();
 	
 	
 	
