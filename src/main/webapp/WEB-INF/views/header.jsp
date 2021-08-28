@@ -37,6 +37,12 @@
 	height: 80px;
 	width: 210px;
 }
+.navbar_category1 {
+	color: white;
+	font-weight: bold !important;
+	font-size: 19px;
+	padding: 0px 0px 0px 14px;
+}
 </style>
 
 </head>
@@ -50,19 +56,26 @@
 		<div class="humberger__menu__cart">
 			<ul>
 				<li><a href="../jjimList/1"><i class="fa fa-heart"></i> <span>1</span></a></li>
-				<li><a href="../cart.do"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
+				<li><a href="../cart.do"><i class="fa fa-shopping-bag"></i>
+						<span>3</span></a></li>
 			</ul>
 
 		</div>
 		<div class="humberger__menu__widget">
 			<div class="header__top__right__auth">
 				<ul>
-					<%if(session.getAttribute("user") == null){%>
+					<%
+						if (session.getAttribute("user") == null) {
+					%>
 					<li><a href="login.do">로그인</a></li>
 
-					<% }else{%>
+					<%
+						} else {
+					%>
 					<li><a href="logout.do">로그아웃</a></li>
-					<% }%>
+					<%
+						}
+					%>
 
 					<li><a href="join.do">회원가입</a></li>
 					<li><a href="#">주문조회</a></li>
@@ -73,39 +86,39 @@
 			</div>
 
 		</div>
-<!-- 		<ul class="list-group list-group-flush"> -->
-<!-- 			<li class="list-group-item"><a href="#">brand</a></li> -->
-<!-- 			<li class="list-group-item"><a href="#">ALL</a></li> -->
-<!-- 			<li class="list-group-item"><a href="#">men</a></li> -->
-<!-- 			<li class="list-group-item"><a href="#">women</a></li> -->
-<!-- 			<li class="list-group-item"><a href="#">new</a></li> -->
-<!-- 			<li class="list-group-item"><a href="#">best</a></li> -->
-<!-- 		</ul> -->
+		<!-- 		<ul class="list-group list-group-flush"> -->
+		<!-- 			<li class="list-group-item"><a href="#">brand</a></li> -->
+		<!-- 			<li class="list-group-item"><a href="#">ALL</a></li> -->
+		<!-- 			<li class="list-group-item"><a href="#">men</a></li> -->
+		<!-- 			<li class="list-group-item"><a href="#">women</a></li> -->
+		<!-- 			<li class="list-group-item"><a href="#">new</a></li> -->
+		<!-- 			<li class="list-group-item"><a href="#">best</a></li> -->
+		<!-- 		</ul> -->
 
 
 
-				<nav class="humberger__menu__nav mobile-menu">
-					<ul>
-						<li><a href="#">brand</a></li>
-						<li><a href="#">ALL</a></li>
-						<li><a href="#">men</a>
-							<ul class="header__menu__dropdown">
-								<li><a href="#">스니커즈</a></li>
-								<li><a href="#">캔버스화</a></li>
-								<li><a href="#">슬립온</a></li>
-								<li><a href="#">뮬</a></li>
-							</ul></li>
-						<li><a href="#">women</a>
-							<ul class="header__menu__dropdown">
-								<li><a href="#">스니커즈</a></li>
-								<li><a href="#">캔버스화</a></li>
-								<li><a href="#">슬립온</a></li>
-								<li><a href="#">뮬</a></li>
-							</ul></li>
-						<li><a href="#">new</a></li>
-						<li><a href="#">best</a></li>
-					</ul>
-				</nav>
+		<nav class="humberger__menu__nav mobile-menu">
+			<ul>
+				<li><a href="#">brand</a></li>
+				<li><a href="#">ALL</a></li>
+				<li><a href="#">men</a>
+					<ul class="header__menu__dropdown">
+						<li><a href="#">스니커즈</a></li>
+						<li><a href="#">캔버스화</a></li>
+						<li><a href="#">슬립온</a></li>
+						<li><a href="#">뮬</a></li>
+					</ul></li>
+				<li><a href="#">women</a>
+					<ul class="header__menu__dropdown">
+						<li><a href="#">스니커즈</a></li>
+						<li><a href="#">캔버스화</a></li>
+						<li><a href="#">슬립온</a></li>
+						<li><a href="#">뮬</a></li>
+					</ul></li>
+				<li><a href="#">new</a></li>
+				<li><a href="#">best</a></li>
+			</ul>
+		</nav>
 
 		<div id="mobile-menu-wrap"></div>
 
@@ -123,19 +136,27 @@
 						<div class="header__top__right">
 
 
-								<%if(session.getAttribute("user") == null){%>
+							<%
+								if (session.getAttribute("user") == null) {
+							%>
 							<div class="header__top__right__auth">
 								<a href="/login.do">로그인</a>
-								</div>
-								<div class="header__top__right__auth"><a href="/join.do">회원가입</a></div>
-								<% }else{%>
-								<div class="header__top__right__auth">
-								<a href="/logout.do">로그아웃</a>
-								
 							</div>
-							
-							
-							<% }%>
+							<div class="header__top__right__auth">
+								<a href="/join.do">회원가입</a>
+							</div>
+							<%
+								} else {
+							%>
+							<div class="header__top__right__auth">
+								<a href="/logout.do">로그아웃</a>
+
+							</div>
+
+
+							<%
+								}
+							%>
 							<div class="header__top__right__auth">
 								<a href="#">주문조회</a>
 							</div>
@@ -166,17 +187,38 @@
 							<li><a href="/product/List/all/newest/all/1">ALL</a></li>
 							<li><a href="/product/List/men/newest/all/1">men</a>
 								<ul class="header__menu__dropdown">
+									<li><div class="navbar_category1">운동화</div></li>
 									<li><a href="/product/List/men/newest/sneakers/1">스니커즈</a></li>
 									<li><a href="/product/List/men/newest/converse/1">캔버스화</a></li>
 									<li><a href="/product/List/men/newest/slipon/1">슬립온</a></li>
 									<li><a href="/product/List/men/newest/mule/1">뮬</a></li>
+									<li><div>
+											<br>
+										</div></li>
+									<li><div class="navbar_category1">스포츠</div></li>
+									<li><a href="#">런닝화</a></li>
+									<li><a href="#">농구화</a></li>
+									<li><a href="#">골프화</a></li>
+									<li><a href="#">등산화</a></li>
+									<li><a href="#">축구화</a></li>
 								</ul></li>
 							<li><a href="/product/List/women/newest/all/1/">women</a>
 								<ul class="header__menu__dropdown">
+									<li><div class="navbar_category1">운동화</div></li>
 									<li><a href="/product/List/women/newest/sneakers/1">스니커즈</a></li>
 									<li><a href="/product/List/women/newest/converse/1">캔버스화</a></li>
 									<li><a href="/product/List/women/newest/slipon/1">슬립온</a></li>
 									<li><a href="/product/List/women/newest/mule/1">뮬</a></li>
+
+									<li><div>
+											<br>
+										</div></li>
+									<li><div class="navbar_category1">스포츠</div></li>
+									<li><a href="#">런닝화</a></li>
+									<li><a href="#">농구화</a></li>
+									<li><a href="#">골프화</a></li>
+									<li><a href="#">등산화</a></li>
+									<li><a href="#">축구화</a></li>
 								</ul></li>
 							<!-- <li><a href="/product/List/new/newest/all/1">new</a></li> -->
 							<li><a href="/product/List/best/newest/all/1">best</a></li>
@@ -187,7 +229,8 @@
 					<div class="header__cart">
 						<ul>
 							<li><a href="/jjimList/1"><i class="fa fa-heart"></i> <span>1</span></a></li>
-							<li><a href="/cart.do"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
+							<li><a href="/cart.do"><i class="fa fa-shopping-bag"></i>
+									<span>3</span></a></li>
 						</ul>
 					</div>
 				</div>
