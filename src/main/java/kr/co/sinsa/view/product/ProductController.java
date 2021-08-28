@@ -64,18 +64,13 @@ public class ProductController {
 		recentlyViewed.setPath("/");
 		recentlyViewed.setMaxAge(0);
 		response.addCookie(recentlyViewed);
-		recentlyViewed = new Cookie(prdnum , prdnum);
+		recentlyViewed = new Cookie(prdnum, prdnum);
 		recentlyViewed.setPath("/");
 		recentlyViewed.setMaxAge(60*60*24*3);
 		response.addCookie(recentlyViewed);
     	
     	StockVO stockVO = stockService.sizeInStock(PRD_CODE);
     	model.addAttribute("stockInfo", stockVO);
-    	
-    	
-
-//    	List<ReviewVO> reviewVO = reviewDAO.reviewList(PRD_CODE);
-//    	model.addAttribute("reviewInfo", reviewVO);
 
     	return "/product/product-details";
     }
@@ -92,8 +87,23 @@ public class ProductController {
 	
 	@ResponseBody
 	@RequestMapping(value = "/ajaxToCart", method = RequestMethod.POST)
-	public Map<String, Object> ajaxToCart(Model model, String code){
+	public Map<String, Object> ajaxToCart(Model model, 
+			String PRDNUM, 
+			String PRDSIZE, 
+			HttpSession session){
+		
 		Map<String, Object> map = new HashMap<String, Object>();
+		String CUS_ID = null;
+		
+		if((UserVO) session.getAttribute("user") != null) {
+			UserVO user = (UserVO) session.getAttribute("user");
+			CUS_ID = (String)user.getCUS_ID();
+
+			map.put("PRDNUM", PRDNUM);
+			map.put("PRDSIZE", PRDSIZE);
+			map.put("CUS_ID", CUS_ID);
+			service.addCart(map);
+		}
 		
 		
 		return map;

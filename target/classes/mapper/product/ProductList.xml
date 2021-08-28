@@ -67,6 +67,12 @@ select JJIM_PRDNUM from jjim where JJIM_CUSID =#{value};
 	]]>
 	</select>
 
+<select id="addCart" parameterType="Map">
+	<![CDATA[
+		insert into cart(cart_cusid, cart_prdnum, cart_prdsize, cart_prdcount)
+		values(#{CUS_ID}, #{PRDNUM}, #{PRDSIZE}, '1')
+	]]>
+</select>
 
 
 </mapper>

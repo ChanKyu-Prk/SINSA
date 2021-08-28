@@ -7,6 +7,7 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 
+import kr.co.sinsa.biz.product.CartVO;
 import kr.co.sinsa.biz.product.ProductService;
 import kr.co.sinsa.biz.product.ProductVO;
 import kr.co.sinsa.biz.product.StockVO;
@@ -30,6 +31,11 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public List<ProductVO> getList(Map<String, Object> map) {	
 		return DAO.getList(map);
+	}
+	
+	@Override
+	public List<CartVO> addCart(Map<String, Object> map) {	
+		return DAO.addCart(map);
 	}
 	
 	@Override
