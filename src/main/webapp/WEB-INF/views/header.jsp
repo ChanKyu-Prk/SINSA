@@ -37,6 +37,9 @@
 	height: 80px;
 	width: 210px;
 }
+.hyeokhuiStyle {
+	float: left;
+}
 </style>
 
 </head>
@@ -165,18 +168,44 @@
 							<li><a href="/getProductBrandPage">brand</a></li>
 							<li><a href="/product/List/all/newest/all/1">ALL</a></li>
 							<li><a href="/product/List/men/newest/all/1">men</a>
-								<ul class="header__menu__dropdown">
-									<li><a href="/product/List/men/newest/sneakers/1">스니커즈</a></li>
-									<li><a href="/product/List/men/newest/converse/1">캔버스화</a></li>
-									<li><a href="/product/List/men/newest/slipon/1">슬립온</a></li>
-									<li><a href="/product/List/men/newest/mule/1">뮬</a></li>
+								<ul class="header__menu__dropdown" style="height: 260px; width: 272px;">
+									<ul class="hyeokhuiStyle">
+										<li><a href="/product/List/men/newest/sneakers/1">스니커즈</a></li>
+										<li><a href="/product/List/men/newest/converse/1">캔버스화</a></li>
+										<li><a href="/product/List/men/newest/slipon/1">슬립온</a></li>
+										<li><a href="/product/List/men/newest/mule/1">뮬</a></li>
+										<li><a href="#">샌들/슬리퍼</a></li>
+									</ul>
+									<ul class="hyeokhuiStyle">
+										<li><a href="#">러닝화</a></li>
+										<li><a href="#">농구화</a></li>
+										<li><a href="#">축구화</a></li>
+										<li><a href="#">골프화</a></li>
+										<li><a href="#">아웃도어</a></li>
+										<li><a href="#">테니스</a></li>
+										<li><a href="#">트레이닝</a></li>
+										<li><a href="#">스케이트보드화</a></li>
+									</ul>
 								</ul></li>
 							<li><a href="/product/List/women/newest/all/1/">women</a>
-								<ul class="header__menu__dropdown">
-									<li><a href="/product/List/women/newest/sneakers/1">스니커즈</a></li>
-									<li><a href="/product/List/women/newest/converse/1">캔버스화</a></li>
-									<li><a href="/product/List/women/newest/slipon/1">슬립온</a></li>
-									<li><a href="/product/List/women/newest/mule/1">뮬</a></li>
+								<ul class="header__menu__dropdown" style="height: 260px; width: 272px;">
+									<ul class="hyeokhuiStyle">
+										<li><a href="/product/List/women/newest/sneakers/1">스니커즈</a></li>
+										<li><a href="/product/List/women/newest/converse/1">캔버스화</a></li>
+										<li><a href="/product/List/women/newest/slipon/1">슬립온</a></li>
+										<li><a href="/product/List/women/newest/mule/1">뮬</a></li>
+										<li><a href="#">샌들/슬리퍼</a></li>
+									</ul>
+									<ul class="hyeokhuiStyle">
+										<li><a href="#">러닝화</a></li>
+										<li><a href="#">농구화</a></li>
+										<li><a href="#">축구화</a></li>
+										<li><a href="#">골프화</a></li>
+										<li><a href="#">아웃도어</a></li>
+										<li><a href="#">테니스</a></li>
+										<li><a href="#">트레이닝</a></li>
+										<li><a href="#">스케이트보드화</a></li>
+									</ul>
 								</ul></li>
 							<!-- <li><a href="/product/List/new/newest/all/1">new</a></li> -->
 							<li><a href="/product/List/best/newest/all/1">best</a></li>
