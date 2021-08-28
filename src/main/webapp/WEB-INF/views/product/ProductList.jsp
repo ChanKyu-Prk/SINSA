@@ -13,6 +13,8 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>SinSa</title>
     <link rel="stylesheet" href="${path}/resources/css/productList.css" type="text/css">
+   	<link rel="stylesheet" type="text/css" href="${path}/resources/css/base.css" />
+	<link rel="stylesheet" type="text/css" href="${path}/resources/css/buttons.css" />
     <script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
 	<script src="${path}/resources/js/productlist.js" type="text/javascript"></script>
 	<style>
@@ -30,6 +32,7 @@
 		ul.mySize > li:hover ul.li-size { z-index: 9999; display: inline-block; float: left; }
 		ul.mySize > li ul.li-size > li { display: inline-block; float: left;   width: 120px; padding: 5px 10px; background: #eee; border:1px solid #eee; text-align: center;}
 		ul.mySize > li ul.li-size > li:hover { background: #fff; }
+		
 	</style>
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
@@ -161,6 +164,15 @@
                                <li><a href="/product/List/${condition}/${info.orderby}/converse/1?keyword=${keyword }">Converse</a></li>
                                <li><a href="/product/List/${condition}/${info.orderby}/slipon/1?keyword=${keyword }">Slip-on</a></li>
                                <li><a href="/product/List/${condition}/${info.orderby}/mule/1?keyword=${keyword }">Mule</a></li>
+                               <li><a href="#">Sandals/Slipper</a></li>
+                               <li><a href="#">Running</a></li>
+                               <li><a href="#">Basketball</a></li>
+                               <li><a href="#">Soccer</a></li>
+                               <li><a href="#">Golf</a></li>
+                               <li><a href="#">Outdoor</a></li>
+                               <li><a href="#">Tennis</a></li>
+                               <li><a href="#">Training</a></li>
+                               <li><a href="#">Skating</a></li>
                             </ul>
                         </div>
                         <div id="filter">
@@ -206,15 +218,27 @@
 	                                </label>
 	                            </div>
 	                            <div class="sidebar__item__color sidebar__item__color--green">
-	                                <label for="green" id="id06" onmouseout="mout6()" onmouseover="mover6()">
-	                                    Green
-	                                    <input type="checkbox" id="green" name="color" value="green">
+	                                <label for="PK" id="id06" onmouseout="mout6()" onmouseover="mover6()">
+	                                    PK
+	                                    <input type="checkbox" id="PK" name="color" value="PK">
 	                                </label>
 	                            </div>
 	                            <div class="sidebar__item__color sidebar__item__color--white">
-	                                <label for="multi" id="id07" onmouseout="mout7()" onmouseover="mover7()">
-	                                    Multi
-	                                    <input type="checkbox" id="multi" name="color" value="multi">
+	                                <label for="NEON" id="id07" onmouseout="mout7()" onmouseover="mover7()">
+	                                    NEON
+	                                    <input type="checkbox" id="NEON" name="color" value="NEON">
+	                                </label>
+	                            </div>
+	                            <div class="sidebar__item__color sidebar__item__color--white">
+	                                <label for="BG" id="id08" onmouseout="mout8()" onmouseover="mover8()">
+	                                    BG
+	                                    <input type="checkbox" id="BG" name="color" value="BG">
+	                                </label>
+	                            </div>
+	                            <div class="sidebar__item__color sidebar__item__color--white">
+	                                <label for="SK" id="id09" onmouseout="mout9()" onmouseover="mover9()">
+	                                    SK
+	                                    <input type="checkbox" id="SK" name="color" value="SK">
 	                                </label>
 	                            </div>
 	                        </div>
@@ -223,7 +247,7 @@
                     </div>
                 </div>
                 <div class="col-lg-9 col-md-7">
-                    <div class="filter__item">
+                    <div class="filter__item" style="border-top-width: 0px;">
                         <div class="row">
                             <div class="col-lg-4 col-md-5">
                                 <div class="filter__sort">
@@ -265,6 +289,13 @@
 									width:450px; height:330px; margin:50px auto; padding:20px 10px;
 									background:#fff; border: 2px solid #666;
 								}
+								#btnBuy${list.PRD_NUM } {padding-top: 0px; padding-bottom: 0px; height: 41px; width: 221px; display: inline-block;}
+								#bBchild${list.PRD_NUM }{
+									margin-top: 2px; margin-bottom: 2px; margin-right: 2px; margin-left: 2px; padding-top: 5px;
+    								padding-bottom: 5px; height: 37px; width: 217px;
+   								}
+   								#ajaxToCart${list.PRD_CODE } {padding-top: 0px; padding-bottom: 0px; height: 41px; width: 221px; display: inline-block;}
+   								.cartSize${list.PRD_NUM }{ top: -14px; position: relative;}
 	                        </style>
 	                        <div class="col-lg-4 col-md-6 col-sm-6">
 	                            <div class="product__item">
@@ -306,24 +337,25 @@
 												</div>
 											</div>
 											<hr />
-											<div id="cartSize" class="filter__sort">
+											<div id="cartSize" class="filter__sort cartSize${list.PRD_NUM }">
 			                                   <select class="selectStocks">
 			                                       <option value="0">사이즈 선택</option>
 			                                   </select>
 			                                </div>
+			                                <!-- 
 											<button type="button" id="btnBuy${list.PRD_NUM }">
 												바로구매
 											</button>
+			                                 -->
+			                                 <div class="box bg-3" id="btnBuy${list.PRD_NUM }" class="btnBuyStyle${list.PRD_NUM }">
+			                                	<button id="bBchild${list.PRD_NUM }" type="button" class="button button--wayra button--border-medium button--text-upper button--size-s button--text-thick button--inverted">
+			                                		바로 구매
+			                                	</button>
+											 </div>
 										</div>
-									</div>
-									<script type="text/javascript">
-							
-							
-									</script>
 										
-									
-                               
-									
+									</div>
+						
 							
 				                    <div id="cartModal${list.PRD_CODE }">
 										<div class="modal_content">
@@ -348,14 +380,23 @@
 												</div>
 											</div>
 											<hr />
-										    <div id="cartSize" class="filter__sort">
+										    <div id="cartSize" class="filter__sort cartSize${list.PRD_NUM }">
 			                                   <select class="selectStocks">
 			                                       <option value="0">사이즈 선택</option>
 			                                   </select>
 			                                </div>
-										    <button type="button" id="ajaxToCart${list.PRD_CODE }">
+			                                <!-- 
+										   <button type="button" id="ajaxToCart${list.PRD_CODE }">
 												상품 담기
-											</button>
+											</button> 
+			                                 -->
+										  
+									        <div class="box bg-3" id="ajaxToCart${list.PRD_CODE }">
+			                                	<button id="bBchild${list.PRD_NUM }" type="button" class="button button--wayra button--border-medium button--text-upper button--size-s button--text-thick button--inverted">
+			                                		상품 담기
+			                                	</button>
+											</div>
+											
 									
 										</div>
 									</div>
@@ -778,15 +819,16 @@ $('#id06').on("click", function(e){
 // 		$('#green').val('green');
     	m.style.color = "red";
     	clickCheck6 = "true";
-    	$('#green').attr('checked',true);
+    	$('#PK').attr('checked',true);
 	}else if(clickCheck6 === "true"){
 // 		$('#green').val('');
 		m.style.color = "black";
     	clickCheck6 = "false";
-    	$('#green').attr('checked',false);
+    	$('#PK').attr('checked',false);
 	}
 	return false;
 });
+
 
 
 function mover7() {
@@ -809,12 +851,75 @@ $('#id07').on("click", function(e){
 // 		$('#green').val('green');
     	m.style.color = "red";
     	clickCheck7 = "true";
-    	$('#multi').attr('checked',true);
+    	$('#NEON').attr('checked',true);
 	}else if(clickCheck7 === "true"){
 // 		$('#green').val('');
 		m.style.color = "black";
     	clickCheck7 = "false";
-    	$('#multi').attr('checked',false);
+    	$('#NEON').attr('checked',false);
+	}
+	return false;
+});
+
+
+
+function mover8() {
+	var m;
+	m = document.getElementById("id08");
+	m.style.color = "red";								
+}
+var clickCheck8 = "false";
+function mout8() {
+	var m;
+	m = document.getElementById("id08");
+    if(clickCheck8 === "false"){	                                	
+    	m.style.color = "black";
+    }
+}
+$('#id08').on("click", function(e){
+	var m;
+	m = document.getElementById("id08");
+	if(clickCheck8 === "false"){
+// 		$('#green').val('green');
+    	m.style.color = "red";
+    	clickCheck8 = "true";
+    	$('#BG').attr('checked',true);
+	}else if(clickCheck8 === "true"){
+// 		$('#green').val('');
+		m.style.color = "black";
+    	clickCheck8 = "false";
+    	$('#BG').attr('checked',false);
+	}
+	return false;
+});
+
+
+function mover9() {
+	var m;
+	m = document.getElementById("id09");
+	m.style.color = "red";								
+}
+var clickCheck9 = "false";
+function mout9() {
+	var m;
+	m = document.getElementById("id09");
+    if(clickCheck9 === "false"){	                                	
+    	m.style.color = "black";
+    }
+}
+$('#id09').on("click", function(e){
+	var m;
+	m = document.getElementById("id09");
+	if(clickCheck9 === "false"){
+// 		$('#green').val('green');
+    	m.style.color = "red";
+    	clickCheck9 = "true";
+    	$('#SK').attr('checked',true);
+	}else if(clickCheck9 === "true"){
+// 		$('#green').val('');
+		m.style.color = "black";
+    	clickCheck9 = "false";
+    	$('#SK').attr('checked',false);
 	}
 	return false;
 });
@@ -961,5 +1066,11 @@ $('.jjimBtn').on("click",function(){
 			   }
 		  }); 
 });
+(function() {
+	var isSafari = !!navigator.userAgent.match(/Version\/[\d\.]+.*Safari/);
+	if(isSafari) {
+		document.getElementById('support-note').style.display = 'block';
+	}
+})();
 </script>
 </html>
