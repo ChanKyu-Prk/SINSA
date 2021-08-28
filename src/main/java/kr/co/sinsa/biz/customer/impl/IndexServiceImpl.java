@@ -32,6 +32,11 @@ public class IndexServiceImpl implements IndexService {
 		return dao.getTopProductList();
 	}
 	
+	@Override
+	public List<ProductVO> getTopSneakersProductList() {
+		return dao.getTopSneakersProductList();
+	}
+	
 	
 	
 	

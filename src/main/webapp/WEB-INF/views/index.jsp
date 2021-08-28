@@ -194,7 +194,39 @@
                            </div>
                         </div>
                         <div class="tab-pane" id="tabs-2" role="tabpanel">
-                           <div class="product__details__tab__desc"></div>
+                           <div class="product__details__tab__desc">
+                           
+                           
+                           
+                           <div class="row">
+                                 
+                                 <c:forEach var="list" items="${topSneakersProductList}" begin="0" end="7" varStatus="status">
+                                    <div class="col-md-3">
+                                       <div class="featured__item">
+                                          <div class="featured__item__pic set-bg"
+                                             data-setbg="${path}/resources/img/product/나이키디파이올데이.png">
+                                             <ul class="featured__item__pic__hover">
+                                                <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                                                <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                                             </ul>
+                                          </div>
+                                          <div class="featured__item__text">
+                                             <h6 class="toptrends">${list.PRD_BRAND}</h6>
+                                             <h6 class="toptrends">${list.PRD_NAME}</h6>
+                                             <h5 class="toptrends">${list.PRD_PRICE}</h5>
+                                          </div>
+                                          
+                                       </div>
+                                    </div>
+                                 </c:forEach>
+
+
+                              </div>
+                           
+                           
+                           
+                           
+                           </div>
                         </div>
                         <div class="tab-pane" id="tabs-3" role="tabpanel">
                            <div class="product__details__tab__desc"></div>

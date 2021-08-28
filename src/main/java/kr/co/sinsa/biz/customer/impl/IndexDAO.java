@@ -49,6 +49,34 @@ public class IndexDAO {
 		return topProductList;
 	}
 
+	
+	public List<ProductVO> getTopSneakersProductList() {
+		List<OrdersVO> orderList = SST.selectList("IndexService.getOrderList");
+		List<ProductVO> topSneakersProductList = new ArrayList<ProductVO>();
+		ProductVO productVO = new ProductVO();
+
+		
+		if(orderList != null) {
+			if(orderList.size() != 0) {
+				for(int i=0; i<orderList.size(); i++) {
+					
+					productVO.setPRD_CODE(orderList.get(i).getORDER_PRDCODE());
+					topSneakersProductList.add((ProductVO) SST.selectOne("IndexService.getTopSneakersProductList", productVO));
+					
+				}
+			}
+		}
+		
+		for(int i=0; i<topSneakersProductList.size(); i++) {
+			if(topSneakersProductList.get(i) == null) {
+				topSneakersProductList.remove(i);
+			}
+		}
+		
+		
+		return topSneakersProductList;
+	}
+
 
 
 	

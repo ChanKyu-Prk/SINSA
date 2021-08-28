@@ -12,6 +12,8 @@ public interface IndexService {
 	public List<ReviewVO> getReviewList();
 	public List<ProductVO> getTopProductList();
 	
+	public List<ProductVO> getTopSneakersProductList();
+	
 	
 	
 }
