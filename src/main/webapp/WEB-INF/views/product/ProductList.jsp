@@ -13,73 +13,39 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>SinSa</title>
     <link rel="stylesheet" href="${path}/resources/css/productList.css" type="text/css">
-    <script src="http://code.jquery.com/jquery-3.3.1.min.js">
-	</script>
+    <script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
 	<script src="${path}/resources/js/productlist.js" type="text/javascript"></script>
-
 	<style>
-	.sizeList{
-		text-align: center;
-	}
-.pagination {
-	margin-top: 25px;
-	margin-bottom: 25px;
-	justify-content: center;
-}
-		
-		#filter{
-			border-top : 1px solid teal;
-			border-bottom : 1px solid teal;
-			padding-top: 18px;
-			padding-bottom: 18px;
-			margin-bottom: 70px;
-		}
-		#filter #search{
-			background-color: gray;
-			color: white;
-			font-size: 25px;
-			width: 100%;
-			height: 60px;
-			text-align: center;
-			border: none;
-		}
-		
-		.clicked{
-			color: black;
-		}
-		
-		ul.mySize > li {
-			display:inline-block; width: 120px; padding: 5px 10px;
-			background: #eee; border:1px solid #eee; text-align: center; position: relative;
-		}
+		.sizeList{ text-align: center; }
+		.pagination { margin-top: 25px; margin-bottom: 25px; justify-content: center; }
+		#filter{border-top : 1px solid teal; border-bottom : 1px solid teal; padding-top: 18px;
+				padding-bottom: 18px; margin-bottom: 70px;}
+		#filter #search{ background-color: gray; color: white; font-size: 25px; 
+						width: 100%; height: 60px; text-align: center;border: none;}
+		.clicked{ color: black; }
+		ul.mySize > li { display:inline-block; width: 120px; padding: 5px 10px;
+						 background: #eee; border:1px solid #eee; text-align: center; position: relative; }
 		ul.mySize > li:hover { background: #fff; }
 		ul.mySize > li ul.li-size { display: none; position: absolute; top: 30px; left: 0; }
 		ul.mySize > li:hover ul.li-size { z-index: 9999; display: inline-block; float: left; }
 		ul.mySize > li ul.li-size > li { display: inline-block; float: left;   width: 120px; padding: 5px 10px; background: #eee; border:1px solid #eee; text-align: center;}
 		ul.mySize > li ul.li-size > li:hover { background: #fff; }
-	
 	</style>
-
-
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
-
-
 </head>
 <body>
-
-<input type="hidden" value="${info.category }" id="categoryHidden">
-<input type="hidden" value="${info.condition }" id="conditionHidden">
-<input type="hidden" value="${info.orderby }" id="orderbyHidden">
-<input type="hidden" value="${info.color }" id="colorHidden">
-<input type="hidden" value="${info.minPrice }" id="minPriceHidden">
-<input type="hidden" value="${info.maxPrice }" id="maxPriceHidden">
-<input type="hidden" value="${info.keyWord }" id="keyWordHidden">
+	<input type="hidden" value="${info.category }" id="categoryHidden">
+	<input type="hidden" value="${info.condition }" id="conditionHidden">
+	<input type="hidden" value="${info.orderby }" id="orderbyHidden">
+	<input type="hidden" value="${info.color }" id="colorHidden">
+	<input type="hidden" value="${info.minPrice }" id="minPriceHidden">
+	<input type="hidden" value="${info.maxPrice }" id="maxPriceHidden">
+	<input type="hidden" value="${info.keyWord }" id="keyWordHidden">
     <!-- Page Preloder -->
     <div id="preloder">
         <div class="loader"></div>
     </div>
-
     <!-- Humberger Begin -->
     <div class="humberger__menu__overlay"></div>
     <div class="humberger__menu__wrapper">
@@ -137,46 +103,34 @@
             </ul>
         </div>
     </div>
-    <!-- Humberger End -->
-
     <!-- Header Section Begin -->
-		<jsp:include page="../header.jsp" />
+	<jsp:include page="../header.jsp" />
     <!-- Header Section End -->
-
     <!-- Hero Section Begin -->
     <section class="hero hero-normal">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
-                
                 	<div class="hero__search d-flex justify-content-center">
 						<div class="hero__search__form ">
 							<form action="/product/List/all/newest/all/1?keyword=" method="get">
-							
                                 <input type="text" name="keyword" placeholder="찾으시는 상품을 검색해주세요" value = "${info.keyWord }">
                                 <button type="button" id="searchBtn" class="site-btn" >검색</button>
                                 <script>
                                 	document.getElementById("searchBtn").onclick = function(){
                                 		let keyword = document.getElementsByName("keyword")[0].value;
                                 		console.log("검색중...!");
-
                                 		location.href = "/product/List/all/newest/all/1?keyword="+keyword;
                                 	};
                                 </script>
-                                
-								
 							</form>
 						</div>
 					</div>
-
-                    
-                    
                 </div>
             </div>
         </div>
     </section>
     <!-- Hero Section End -->
-
     <!-- Breadcrumb Section Begin -->
     <section class="breadcrumb-section set-bg" data-setbg="${path}/resources/img/breadcrumb.jpg">
         <div class="container">
@@ -194,7 +148,6 @@
         </div>
     </section>
     <!-- Breadcrumb Section End -->
-
     <!-- Product Section Begin -->
     <section class="product spad">
         <div class="container">
@@ -204,45 +157,21 @@
                         <div class="sidebar__item">
                             <h4>품목</h4>
                             <ul>
-                           
-
-	                                <li><a href="/product/List/${condition}/${info.orderby}/sneakers/1?keyword=${keyword }">Sneakers</a></li>
-	                                <li><a href="/product/List/${condition}/${info.orderby}/converse/1?keyword=${keyword }">Converse</a></li>
-	                                <li><a href="/product/List/${condition}/${info.orderby}/slipon/1?keyword=${keyword }">Slip-on</a></li>
-	                                <li><a href="/product/List/${condition}/${info.orderby}/mule/1?keyword=${keyword }">Mule</a></li>
-	                           
-
+                               <li><a href="/product/List/${condition}/${info.orderby}/sneakers/1?keyword=${keyword }">Sneakers</a></li>
+                               <li><a href="/product/List/${condition}/${info.orderby}/converse/1?keyword=${keyword }">Converse</a></li>
+                               <li><a href="/product/List/${condition}/${info.orderby}/slipon/1?keyword=${keyword }">Slip-on</a></li>
+                               <li><a href="/product/List/${condition}/${info.orderby}/mule/1?keyword=${keyword }">Mule</a></li>
                             </ul>
                         </div>
-                        
-                    
                         <div id="filter">
-                       
 	                        <div class="sidebar__item">
-	                            <h4>가격</h4>
-	                            <!-- 
-	                            <div class="price-range-wrap">
-
-	                                <div class="price-range ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content"
-	                                    data-min="10" data-max="5000000">
-	                                    <div class="ui-slider-range ui-corner-all ui-widget-header"></div>
-	                                    <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default"></span>
-	                                    <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default"></span>
-	                                </div>
-	                                <div class="range-slider">
-	                                    <div class="price-input">
-	                                        <input type="text" id="minamount">
-	                                        <input type="text" id="maxamount">
-	                                    </div>
-	                                </div>
-	                            </div>
-	                             -->
-	                             <div style="width: 248px">
+                            	<h4>가격</h4>
+                            	<div style="width: 248px">
 	                             	<input class="price_input" id="minPrice" name="minPrice" type="text" value = "${info.minPrice }" placeholder="최소 금액 입력" maxlength="9" >
 	                             	<span>원 ~</span><br /><br />
 	                             	<input class="price_input" id="maxPrice" name="maxPrice" type="text" value = "${info.maxPrice }" placeholder="최대 금액 입력" maxlength="9" >
 	                             	<span>원</span>
-	                             </div>
+	                            </div>
 	                        </div>
 	                        <div id="color-box" class="sidebar__item sidebar__item__color--option">
 	                            <h4>색상</h4>
@@ -251,7 +180,6 @@
 	                                    White
 	                                    <input type="checkbox" id="white" name="color" value="white">
 	                                </label>
-
 	                            </div>
 	                            <div class="sidebar__item__color sidebar__item__color--gray">
 	                                <label for="grey" id="id02" onmouseout="mout2()" onmouseover="mover2()">
@@ -289,71 +217,28 @@
 	                                    <input type="checkbox" id="multi" name="color" value="multi">
 	                                </label>
 	                            </div>
-            
 	                        </div>
-	                
-	                        
 	                        <input id="search" type="button" value="조건 검색">
-	                        
-
                         </div>
-      
                     </div>
                 </div>
                 <div class="col-lg-9 col-md-7">
-                    <!-- 
-                    <div class="product__discount">
-                    
-                        <div class="section-title product__discount__title">
-                            <h2>특별한 가격으로 만나보세요~</h2>
-                        </div>
-                        
-                        <div class="row">
-                            <div class="product__discount__slider owl-carousel">
-                                <div class="col-lg-4">
-                                    <div class="product__discount__item">
-                                        <div class="product__discount__item__pic set-bg"
-                                            data-setbg="${path}/resources/img/product/discount/pd-1.jpg">
-                                            <div class="product__discount__percent">-20%</div>
-                                        </div>
-                                        <div class="product__discount__item__text">
-                                            <span>Dried Fruit</span>
-                                            <h5><a href="#">Raisin’n’nuts</a></h5>
-                                            <div class="product__item__price">30.00원 <span>36.00원</span></div>
-                                        </div>
-                                        <ul class="product__item__pic__hover" style="bottom: 110px;">
-                                            <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                            <li><a href="#"><i class="fa fa-retweet"><b>바로구매</b></i></a></li>
-                                            <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                    </div>
-                         -->
                     <div class="filter__item">
                         <div class="row">
                             <div class="col-lg-4 col-md-5">
-                           
-                            
                                 <div class="filter__sort">
-                <c:if test=""></c:if>
                                     <select class="orderbySelect">
                                         <option value="newest">신상품순</option>
                                         <option value="highprice" <c:if test="${info.orderby =='highprice'}">selected</c:if>>높은가격순</option>
                                         <option value="lowprice" <c:if test="${info.orderby =='lowprice'}">selected</c:if>>낮은가격순</option>
                                     </select>
-                            </div>
-                            <div class="col-lg-4 col-md-4">
-                                <div class="filter__found">
-                         
+                            	</div>
+                            	<div class="col-lg-4 col-md-4">
+                                	<div class="filter__found">                         
 <%--                                     <h6><span>${page.count  }</span> Products found</h6> --%>
-                            
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-3">
+              		                </div>
+                            	</div>
+                            	<div class="col-lg-4 col-md-3">
                                 <div class="filter__option">
                                 <!-- 
                                     <span class="icon_grid-2x2"></span>
@@ -366,94 +251,90 @@
                     <div class="row">
                           <c:forEach var="list" items="${list }" varStatus="status">
 	                        <style>
-	                        	
                        			#modal${list.PRD_CODE } {
-									display:none;
-									position:absolute;
-									width:100%;
-									height:60%;
-									z-index:999999;
+                       				display:none; position:absolute; width:100%; height:60%; z-index:999999;
 								}
-								
 								#cartModal${list.PRD_CODE } {
-									display:none;
-									position:absolute;
-									width:100%;
-									height:60%;
-									z-index:999999;
+									display:none; position:absolute; width:100%; height:60%; z-index:999999;
 								}
-								
-								
-								
 								#modal${list.PRD_CODE } .modal_content {
-									width:450px;
-									height:295px;
-									margin:50px auto;
-									padding:20px 10px;
-									background:#fff;
-									border: 2px solid #666;
+									width:450px; height:330px; margin:50px auto; padding:20px 10px; 
+									background:#fff; border: 2px solid #666;
 								}
-								
 								#cartModal${list.PRD_CODE } .modal_content {
-									width:450px;
-									height:330px;
-									margin:50px auto;
-									padding:20px 10px;
-									background:#fff;
-									border: 2px solid #666;
+									width:450px; height:330px; margin:50px auto; padding:20px 10px;
+									background:#fff; border: 2px solid #666;
 								}
-								
-							
-						
-							
 	                        </style>
 	                        <div class="col-lg-4 col-md-6 col-sm-6">
 	                            <div class="product__item">
-	                                <div class="product__item__pic set-bg product__item__detail${list.PRD_CODE }" data-setbg="${path}/resources/img/product/${list.PRD_IMAGE }">
-	                                </div>
-                                    <ul class="product__item__pic__hover">
+	                                <div class="product__item__pic set-bg product__item__detail${list.PRD_NUM }" data-setbg="${path}/resources/img/product/${list.PRD_IMAGE }"></div>
+                                    	<ul class="product__item__pic__hover">
                                         <li>
-                                        <a class="jjimBtn"><input type="hidden" value= "${list.PRD_NUM}" class="prdnumj">
-								<c:if test="${jjimcheck[status.index]==0}">
-									<i class="fa fa-heart-o"></i>
-								</c:if>
-								<c:if test="${jjimcheck[status.index]==1}">
-									<i class="fa fa-heart"></i>
-								</c:if>
-					</a></li>
-                                        <li><a id="modal_open_btn${list.PRD_CODE }"><i class="fa fa-retweet"><b>바로구매</b></i></a></li>
+                                        	<a class="jjimBtn"><input type="hidden" value= "${list.PRD_NUM}" class="prdnumj">
+												<c:if test="${jjimcheck[status.index]==0}">
+													<i class="fa fa-heart-o"></i>
+												</c:if>
+												<c:if test="${jjimcheck[status.index]==1}">
+													<i class="fa fa-heart"></i>
+												</c:if>
+											</a>
+										</li>
+                                        <li><a id="modal_open_btn${list.PRD_CODE }"  class="listToBuy${list.PRD_CODE }"><i class="fa fa-retweet"><b>바로구매</b></i></a></li>
                                         <li><a id="cartModal_open_btn${list.PRD_CODE }" class="listToCart${list.PRD_CODE }"><i class="fa fa-shopping-cart"></i></a></li>
                                     </ul>
-                                    
-                              
 				                    <div id="modal${list.PRD_CODE }">
 										<div class="modal_content">
-											<h4>옵션선택</h4>
-											<hr />
-											<img alt="${list.PRD_IMAGE }" width="250px" src="${path}/resources/img/product/${list.PRD_IMAGE }">
-											<br>
-											<span>${list.PRD_BRAND }</span> <br />
-											<span>${list.PRD_NAME }</span>
-											<span>컬러</span>
-											<hr />
-											<button type="button" id="">
-												구매하기
-											</button>
+											<h4 style="display:inline-block;margin-right: 294px;">옵션선택</h4>
 											<button type="button" id="modal_close_btn${list.PRD_CODE }">
-												창 닫기
+													<b>X</b>
+											</button>
+											<hr />
+											<div id="p-Box">
+												<div id="p-Img">
+													<img alt="${list.PRD_IMAGE }" width="250px" src="${path}/resources/img/product/${list.PRD_IMAGE }">
+												</div>
+												<br>
+												<div id="p-Text">
+														<span><b>${list.PRD_BRAND }</b></span> <br />
+														<span>${list.PRD_NAME }</span> <br />
+														<br />
+														<span>COLOR : ${list.PRD_COLOR }</span>
+														<br />												
+														<span>금액 : ${list.PRD_PRICE }원</span>
+														<br />
+												</div>
+											</div>
+											<hr />
+											<div id="cartSize" class="filter__sort">
+			                                   <select class="selectStocks">
+			                                       <option value="0">사이즈 선택</option>
+			                                   </select>
+			                                </div>
+											<button type="button" id="btnBuy${list.PRD_NUM }">
+												바로구매
 											</button>
 										</div>
 									</div>
+									<script type="text/javascript">
+							
+							
+									</script>
+										
+									
                                
 									
 							
 				                    <div id="cartModal${list.PRD_CODE }">
 										<div class="modal_content">
-												<h4>옵션선택</h4>
+												<h4 style="display:inline-block;margin-right: 294px;">옵션선택</h4>
+												<button type="button" id="cartModal_close_btn${list.PRD_CODE }">
+													<b>X</b>
+												</button>
 											<hr />
 											<div id="p-Box">
 												<div id="p-Img">
-												<img alt="${list.PRD_IMAGE }" width="250px" src="${path}/resources/img/product/${list.PRD_IMAGE }">
+													<img alt="${list.PRD_IMAGE }" width="250px" src="${path}/resources/img/product/${list.PRD_IMAGE }">
 												</div>
 												<br>
 												<div id="p-Text">
@@ -467,22 +348,15 @@
 												</div>
 											</div>
 											<hr />
-											     <div id="cartSize" class="filter__sort">
-				                                   
-				                                    <select class="selectStocks">
-				                                        <option value="0">사이즈 선택</option>
-				                                  
-				                                    </select>
-				                                </div>
-											
-											
-                       						
-											<button type="button" id="ajaxToCart${list.PRD_CODE }">
+										    <div id="cartSize" class="filter__sort">
+			                                   <select class="selectStocks">
+			                                       <option value="0">사이즈 선택</option>
+			                                   </select>
+			                                </div>
+										    <button type="button" id="ajaxToCart${list.PRD_CODE }">
 												상품 담기
 											</button>
-											<button type="button" id="cartModal_close_btn${list.PRD_CODE }">
-												창 닫기
-											</button>
+									
 										</div>
 									</div>
 							
@@ -500,43 +374,82 @@
                                 	
 								
                             	<script type="text/javascript">
-                            	var selectSize;
-                            	function sizeClick(e){
-                            		selectSize=$(e).html();
-                            		console.log(selectSize);
-                            	}
-                            
-                            	
-                            		$('#ajaxToCart${list.PRD_CODE }').on('click', function(){
-                            			var numCode = '${list.PRD_NUM }';
-										var sendData = {"code":code, "PRDSIZE":selectSize};
-                            			$.ajax({
-                            				url: '/ajaxToCart',
-                            				method: 'POST',
-                            				data:sendData,
-                            				success:function(data){
-                            					console.log('성성공공');
-                            					
-                            				}
-                            			})
+	                            	var selectSize;
+	                            	function sizeClick(e){
+	                            		selectSize=$(e).html();
+	                            	}
+                            		$('#btnBuy${list.PRD_NUM }').on('click', function(){
+                            			var ORDER_PRDCODE = '${list.PRD_CODE }';
+                            			var ORDER_PRDSIZE = selectSize;
+                            			var ORDER_AMOUNT =  '1';
+                            			var data = {};
+        								var itemList = [];
+        								data["ORDER_PRDCODE"] = ORDER_PRDCODE;
+    									data["ORDER_PRDSIZE"] = ORDER_PRDSIZE;
+    									data["ORDER_AMOUNT"] = ORDER_AMOUNT;
+    									console.log(data["ORDER_AMOUNT"]);
+    									itemList.unshift(data);
+    									
+    									$.ajax({
+    										   url : "/direct/checkout",
+    										   type : "POST",
+    										   data : JSON.stringify(itemList),
+    										    headers: {
+    										      'Accept': 'application/json',
+    										      'Content-Type': 'application/json'
+    										    },
+    										   success : function(data){
+    												location.href="/direct/checkout";
+    										   },
+    										   error : function(){
+    										   		alert("보내기 실패");
+    										   }
+ 										});
                             		})
-                            	
-	                            	$('.listToCart${list.PRD_CODE }').on('click', function(){
-		                            	var code = '${list.PRD_CODE }';
+	                            	$('.listToBuy${list.PRD_CODE }').on('click', function(){	
+	                            		var code = '${list.PRD_CODE }';
 										var sendData = {"code":code};
 										var stockArrays = new Array();
-										
 		                            	$.ajax({
 		                            	    url:'/listToCart',
 		                            	    method:'POST',
 		                            	    data:sendData,
 		                            	    success:function(data){
 		                            	    	var respData = data;
-												var sizeStr = 220;
-		    									console.log(respData);
+		                            	    	var sizeStr = 215;
 		    									stockArrays = respData.stocks;
-		                            	    	console.log("code : " + code);
-		                            	    	console.log("array : " + stockArrays[0]);
+				                            	for(var i=0; i < stockArrays.length; i++){
+			                            			sizeStr += 5; 
+				                            		$('.list').append("<li data-value='0' onclick='sizeClick(this)' class='option sizeList' style='text-align: center; font-size: 20px;'>"+String(sizeStr)+"</li>");
+				                            	}
+		                            	    }
+		                            	});
+	                            	});
+                            		
+	                            	
+	                    
+	                        		$('#ajaxToCart${list.PRD_CODE }').on('click', function(){
+	                        			var numCode = '${list.PRD_NUM }';
+										var sendData = {"PRDNUM":numCode, "PRDSIZE":selectSize};
+	                        			$.ajax({
+	                        				url: '/ajaxToCart',
+	                        				method: 'POST',
+	                        				data:sendData,
+	                        				success:function(data){}
+	                        			})
+	                        		})
+	                            	$('.listToCart${list.PRD_CODE }').on('click', function(){
+		                            	var code = '${list.PRD_CODE }';
+										var sendData = {"code":code};
+										var stockArrays = new Array();
+		                            	$.ajax({
+		                            	    url:'/listToCart',
+		                            	    method:'POST',
+		                            	    data:sendData,
+		                            	    success:function(data){
+		                            	    	var respData = data;
+												var sizeStr = 215;
+		    									stockArrays = respData.stocks;
 				                            	for(var i=0; i < stockArrays.length; i++){
 			                            			sizeStr += 5; 
 				                            		$('.list').append("<li data-value='0' onclick='sizeClick(this)' class='option sizeList' style='text-align: center; font-size: 20px;'>"+String(sizeStr)+"</li>");
@@ -545,19 +458,11 @@
 		                            	});
    	                            	});
                             	
-                            		$('.product__item__detail${list.PRD_CODE }').on('click', function(){
+                            		$('.product__item__detail${list.PRD_NUM }').on('click', function(){
                             			var prdCode = "${list.PRD_CODE}";
                             			location.href = "/product/prdCode="+prdCode;
                             		})
-                            		
                             
-								    $("#modal_open_btn${list.PRD_CODE }").click(function(){
-								    	if(cartCheck === "false"){							    		
-									        $("#modal${list.PRD_CODE }").attr("style", "display:block");
-								        	cartCheck = "true";
-
-								    	}
-								    });
                             		
 								     $("#modal_close_btn${list.PRD_CODE }").click(function(){
 								        if(cartCheck === "true"){								        	
@@ -565,9 +470,35 @@
 									    	 cartCheck = "false";
 								        }
 								    });
-								     
+                            		
+                            		 $("#modal_open_btn${list.PRD_CODE }").click(function(){
+ 								    	<%if(session.getAttribute("user") == null){%>
+ 											var result = confirm("로그인이 필요한 서비스입니다. 로그인하시겠습니까?");
+ 											if(result){
+ 												location.href="/login.do";
+ 												return false;
+ 											}
+ 											else {
+ 												return false;
+ 											}
+ 										<%}%>
+ 								    	if(cartCheck === "false"){							    		
+ 									        $("#modal${list.PRD_CODE }").attr("style", "display:block");
+ 								        	cartCheck = "true";
+ 								    	}
+ 								    });
 								     
 								    $("#cartModal_open_btn${list.PRD_CODE }").click(function(){
+								    	 <%if(session.getAttribute("user") == null){%>
+											var result = confirm("로그인이 필요한 서비스입니다. 로그인하시겠습니까?");
+											if(result){
+												location.href="/login.do";
+												return false;
+											}
+											else {
+												return false;
+											}
+										<%}%>
 									    if(cartCheck === "false"){								    	
 									        $("#cartModal${list.PRD_CODE }").attr("style", "display:block");
 									        cartCheck = "true";
@@ -577,7 +508,7 @@
 								        if(cartCheck === "true"){									        	
 								    	 	$("#cartModal${list.PRD_CODE }").attr("style", "display:none");
 								    	 	cartCheck = "false";
-								    	 	alert("성공적으로 장바구니에 담겼습니다!");
+								    	
 								        }
 								    });      
 								     
