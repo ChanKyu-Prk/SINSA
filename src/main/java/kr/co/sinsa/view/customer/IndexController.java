@@ -32,7 +32,11 @@ public class IndexController {
 		
 		List<ProductVO> topProductList = IndexService.getTopProductList();
 		model.addAttribute("topProductList", topProductList);
-		System.out.println("topProductList" + topProductList);
+		
+		List<ProductVO> topSneakersProductList = IndexService.getTopSneakersProductList();
+		model.addAttribute("topSneakersProductList", topSneakersProductList);
+		System.out.println("topSneakersProductList" + topSneakersProductList);
+		
 		
 		return "index";
 	}
