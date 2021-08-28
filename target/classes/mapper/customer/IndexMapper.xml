@@ -28,6 +28,10 @@
          select * from product where PRD_CODE = #{PRD_CODE} and PRD_CATEGORY IN ('스니커즈', '캔버스화', '슬립온', '뮬')
       </select> 
       
+      <select id="getTopSportsProductList" parameterType="kr.co.sinsa.biz.product.ProductVO" resultType="kr.co.sinsa.biz.product.ProductVO"> 
+         select * from product where PRD_CODE = #{PRD_CODE} and PRD_CATEGORY IN ('런닝화', '농구화', '골프화', '등산화', '축구화')
+      </select> 
+      
       
    
    
