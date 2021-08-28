@@ -26,7 +26,9 @@ public class ReviewDAO {
 	}
 	
 	public float getAvgReview (String PRD_CODE) {
-		return SST.selectOne("ReviewDAO.getAvgReview", PRD_CODE);
+		if(SST.selectOne("ReviewDAO.getAvgReview", PRD_CODE) != null)
+			return SST.selectOne("ReviewDAO.getAvgReview", PRD_CODE);
+		else return 0;
 	}
 	
 

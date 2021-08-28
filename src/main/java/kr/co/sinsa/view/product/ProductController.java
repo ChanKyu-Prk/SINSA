@@ -81,8 +81,10 @@ public class ProductController {
 
 		int reviewNum = reviewList.size();
 		int avgReview = (int)Math.round(ReviewService.getAvgReview(PRD_CODE));
+
 		model.addAttribute("reviewNum", reviewNum);
 		model.addAttribute("avgReview", avgReview);
+		
 		
 		return "/product/product-details";
     }
