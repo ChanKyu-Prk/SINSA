@@ -1081,7 +1081,7 @@ ol {
 -----------------------*/
 
 .sidebar__item {
-	margin-bottom: 35px;
+	margin-bottom: 0px;
 }
 
 .sidebar__item.sidebar__item__color--option {
