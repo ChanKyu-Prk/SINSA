@@ -18,10 +18,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import kr.co.sinsa.biz.customer.ReviewService;
-import kr.co.sinsa.biz.customer.ReviewVO;
 import kr.co.sinsa.biz.customer.JjimVO;
 import kr.co.sinsa.biz.customer.MyPageService;
+import kr.co.sinsa.biz.customer.ReviewService;
+import kr.co.sinsa.biz.customer.ReviewVO;
+import kr.co.sinsa.biz.product.CartVO;
+import kr.co.sinsa.biz.product.DetailReviewService;
 import kr.co.sinsa.biz.product.PageInfo;
 import kr.co.sinsa.biz.product.ProductService;
 import kr.co.sinsa.biz.product.ProductVO;
@@ -42,6 +44,9 @@ public class ProductController {
 	
 	@Autowired
 	private ReviewService ReviewService;
+	
+	@Autowired
+	private DetailReviewService DetailReviewService;
 	
 	// 상세페이지	
 	@RequestMapping("/product/prdCode={prdCode}")
@@ -84,6 +89,18 @@ public class ProductController {
 
 		model.addAttribute("reviewNum", reviewNum);
 		model.addAttribute("avgReview", avgReview);
+		
+		
+		
+		
+		
+		////////////////////////////////////////////////////////////////////////////////////////////////////
+		List<ReviewVO> detailReviewList = DetailReviewService.getDetailReviewList(PRD_CODE);
+		model.addAttribute("detailReviewList", detailReviewList);
+		System.out.println(detailReviewList.get(0).getREV_CONTENT());
+		////////////////////////////////////////////////////////////////////////////////////////////////////
+		
+		
 		
 		
 		return "/product/product-details";
