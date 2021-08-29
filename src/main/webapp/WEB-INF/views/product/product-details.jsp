@@ -242,6 +242,17 @@ button:disabled {
 	height: 330px !important;
 	margin: 0px 30px 0px 0px !important;
 }
+
+.review_list {
+	border-radius: 0px !important;
+	border-right: 1px solid white !important;
+	border-top: 1px solid white !important;
+	border-left: 1px solid white !important;
+}
+
+.review_list:hover {
+	background-color: white !important;
+}
 </style>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -633,17 +644,18 @@ button:disabled {
 							<div class="tab-pane" id="tabs-2" role="tabpanel">
 								<div class="product__details__tab__desc">
 
-									<c:forEach var="list" items="${detailReviewList}"
-										varStatus="status">
 
 
-										<div class="container">
-											<div class="row">
+
+									<div class="container">
+										<div class="row">
+											<c:forEach var="list" items="${detailReviewList}"
+												varStatus="status">
 												<a class="list-group-item list-group-item-action">
 													<div class="row">
 														<div class="col">
 															<div class="row TextCenter" data-toggle="collapse"
-																data-target="#content">
+																data-target="#content${status.index}">
 
 																<span class="col-md-2 span_star"> <c:if
 																		test="${list.REV_STAR eq 0}">
@@ -708,11 +720,11 @@ button:disabled {
 																	</c:if>
 																</span> <span class="col-md-10"> ${list.REV_PRDCODE} /
 																	색상 / 사이즈 | &nbsp;${list.REV_TITLE} </span>
-																<div class="review_content">sdfsdfsdf</div>
+																<div class="review_content">${list.REV_CONTENT}</div>
 
 
 
-																<div id="content" class="collapse">
+																<div id="content${status.index}" class="collapse">
 
 																	<div class="col-md-5 left margin"></div>
 
@@ -735,14 +747,14 @@ button:disabled {
 														</div>
 													</div>
 												</a>
-
-											</div>
+											</c:forEach>
 										</div>
+									</div>
 
 
 
 
-									</c:forEach>
+
 
 
 
