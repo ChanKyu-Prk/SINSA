@@ -651,7 +651,7 @@ button:disabled {
 										<div class="row">
 											<c:forEach var="list" items="${detailReviewList}"
 												varStatus="status">
-												<a class="list-group-item list-group-item-action">
+												<a class="list-group-item list-group-item-action review_list">
 													<div class="row">
 														<div class="col">
 															<div class="row TextCenter" data-toggle="collapse"
@@ -718,8 +718,8 @@ button:disabled {
 																		<img src="${path}/resources/img/star.png" class="star">
 
 																	</c:if>
-																</span> <span class="col-md-10"> ${list.REV_PRDCODE} /
-																	색상 / 사이즈 | &nbsp;${list.REV_TITLE} </span>
+																</span> <span class="col-md-10"> ${list.PRD_NAME} /
+																	${list.PRD_COLOR } / ${list.ORDER_PRDSIZE } | &nbsp;${list.REV_TITLE} </span>
 																<div class="review_content">${list.REV_CONTENT}</div>
 
 
@@ -750,13 +750,6 @@ button:disabled {
 											</c:forEach>
 										</div>
 									</div>
-
-
-
-
-
-
-
 
 
 

@@ -1,12 +1,16 @@
 package kr.co.sinsa.biz.product.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import kr.co.sinsa.biz.customer.ReviewColorSizeVO;
 import kr.co.sinsa.biz.customer.ReviewVO;
+import kr.co.sinsa.biz.product.ProductVO;
+import kr.co.sinsa.biz.product.UserCartProductStockVO;
 
 @Repository
 public class DetailReviewDAO {
@@ -15,10 +19,44 @@ public class DetailReviewDAO {
 	private SqlSessionTemplate SST;
 
 	
-	public List<ReviewVO> getDetailReviewList(String PRD_CODE) {
+	public List<ReviewColorSizeVO> getDetailReviewList(String PRD_CODE) {
 
-		return SST.selectList("DetailReviewService.getDetailReviewList", PRD_CODE);
+		ProductVO productVO = SST.selectOne("DetailReviewService.getProductVO", PRD_CODE);
+		List<ReviewVO> reviewList = new ArrayList<ReviewVO>();
+		reviewList = SST.selectList("DetailReviewService.getDetailReviewList", PRD_CODE);
+		
+		List<ReviewColorSizeVO> reviewColorSizeList = new ArrayList<ReviewColorSizeVO>();
+		
+		for(int i=0; i<reviewList.size(); i++) {
+			
+			ReviewColorSizeVO reviewColorSizeVO = new ReviewColorSizeVO();
+			reviewColorSizeVO.setORDER_PRDSIZE(reviewList.get(i).getREV_ORDERPRDSIZE());
+			reviewColorSizeVO.setPRD_COLOR(productVO.getPRD_COLOR());
+			reviewColorSizeVO.setPRD_NAME(productVO.getPRD_NAME());
+			reviewColorSizeVO.setREV_CONTENT(reviewList.get(i).getREV_CONTENT());
+			reviewColorSizeVO.setREV_CUSID(reviewList.get(i).getREV_CUSID());
+			reviewColorSizeVO.setREV_IMAGE(reviewList.get(i).getREV_IMAGE());
+			reviewColorSizeVO.setREV_NUM(reviewList.get(i).getREV_NUM());
+			reviewColorSizeVO.setREV_ORDERNUM(reviewList.get(i).getREV_ORDERNUM());
+			reviewColorSizeVO.setREV_ORDERPRDSIZE(reviewList.get(i).getREV_ORDERPRDSIZE());
+			reviewColorSizeVO.setREV_PRDCODE(reviewList.get(i).getREV_PRDCODE());
+			reviewColorSizeVO.setREV_REGDATE(reviewList.get(i).getREV_REGDATE());
+			reviewColorSizeVO.setREV_STAR(reviewList.get(i).getREV_STAR());
+			reviewColorSizeVO.setREV_TITLE(reviewList.get(i).getREV_TITLE());
+			
+			reviewColorSizeList.add(reviewColorSizeVO);
+			
+		}
+		
+		
+		
+		return reviewColorSizeList;
 	}
+	
+//	public ProductVO getProductVO(String PRD_CODE) {
+//
+//		return SST.selectOne("DetailReviewService.getProductVO", PRD_CODE);
+//	}
 	
 	
 	

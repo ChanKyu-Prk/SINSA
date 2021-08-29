@@ -6,6 +6,10 @@
 		<select id="getDetailReviewList" parameterType="String" resultType="kr.co.sinsa.biz.customer.ReviewVO">
 			select * from REVIEW where REV_PRDCODE=#{PRD_CODE}
 		</select>
+		
+		<select id="getProductVO" parameterType="String" resultType="kr.co.sinsa.biz.product.ProductVO">
+			select * from PRODUCT where PRD_CODE=#{PRD_CODE}
+		</select>
 	
 	
 	

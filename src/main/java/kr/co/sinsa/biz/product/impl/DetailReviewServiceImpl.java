@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import kr.co.sinsa.biz.customer.ReviewVO;
+import kr.co.sinsa.biz.customer.ReviewColorSizeVO;
 import kr.co.sinsa.biz.product.DetailReviewService;
 
 @Service("DetailReviewService")
@@ -17,10 +17,16 @@ public class DetailReviewServiceImpl implements DetailReviewService {
 	
 	
 	@Override
-	public List<ReviewVO> getDetailReviewList(String PRD_CODE) {
+	public List<ReviewColorSizeVO> getDetailReviewList(String PRD_CODE) {
 		
 		return dao.getDetailReviewList(PRD_CODE);
 	}
+	
+//	@Override
+//	public ProductVO getProductVO(String PRD_CODE) {
+//		
+//		return dao.getProductVO(PRD_CODE);
+//	}
 	
 	
 	

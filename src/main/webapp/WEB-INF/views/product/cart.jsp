@@ -279,6 +279,11 @@
 	height: 2px !important;
 	background: #ccc;
 }
+
+.button_buy{
+	border: 1px solid grey;
+	font-size:17px;
+}
 </style>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -920,7 +925,7 @@
 								<li>총 금액 <span> <%=formatter.format(sum1 - sum2)%></span>
 								</li>
 							</ul>
-							<button id="cartBuyBtn" class="primary-btn col-lg-12">결제하기</button>
+							<button id="cartBuyBtn" class="primary-btn col-lg-12 button_buy">구매하기</button>
 							<script type="text/javascript">
 							$("#cartBuyBtn").click(function(){
 								var changedVal = 0;
