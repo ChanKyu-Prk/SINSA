@@ -20,9 +20,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.co.sinsa.biz.customer.JjimVO;
 import kr.co.sinsa.biz.customer.MyPageService;
+import kr.co.sinsa.biz.customer.ReviewColorSizeVO;
 import kr.co.sinsa.biz.customer.ReviewService;
 import kr.co.sinsa.biz.customer.ReviewVO;
-import kr.co.sinsa.biz.product.CartVO;
 import kr.co.sinsa.biz.product.DetailReviewService;
 import kr.co.sinsa.biz.product.PageInfo;
 import kr.co.sinsa.biz.product.ProductService;
@@ -95,9 +95,12 @@ public class ProductController {
 		
 		
 		////////////////////////////////////////////////////////////////////////////////////////////////////
-		List<ReviewVO> detailReviewList = DetailReviewService.getDetailReviewList(PRD_CODE);
+		List<ReviewColorSizeVO> detailReviewList = DetailReviewService.getDetailReviewList(PRD_CODE);
 		model.addAttribute("detailReviewList", detailReviewList);
 		System.out.println(detailReviewList.get(0).getREV_CONTENT());
+		
+//		ProductVO productVO = DetailReviewService.getProductVO(PRD_CODE);
+		
 		////////////////////////////////////////////////////////////////////////////////////////////////////
 		
 		
