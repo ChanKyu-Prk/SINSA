@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import kr.co.sinsa.biz.customer.ReviewService;
+import kr.co.sinsa.biz.customer.ReviewVO;
 import kr.co.sinsa.biz.customer.JjimVO;
 import kr.co.sinsa.biz.customer.MyPageService;
 import kr.co.sinsa.biz.customer.ReviewColorSizeVO;
@@ -221,8 +223,6 @@ public class ProductController {
 		int minPrice = Integer.parseInt(minPriceR);
 		int maxPrice = Integer.parseInt(maxPriceR);
 		
-		
-		
 		String[] colors=color.split("_");
 		for(int i = 0 ; i < colors.length ; i++) {
 			if(colors[i].equals("white") || colors[i] == "white" ) {
@@ -235,10 +235,14 @@ public class ProductController {
 				colors[i] = "RED";
 			}else if(colors[i].equals("blue") || colors[i] == "blue") {
 				colors[i] = "BLUE";
-			}else if(colors[i].equals("green") || colors[i] == "green") {
-				colors[i] = "GREEN";
-			}else if(colors[i].equals("multi") || colors[i] == "multi") {
-				colors[i] = "MULTI";
+			}else if(colors[i].equals("PK") || colors[i] == "PK") {
+				colors[i] = "PK";
+			}else if(colors[i].equals("NEON") || colors[i] == "NEON") {
+				colors[i] = "NEON";
+			}else if(colors[i].equals("BG") || colors[i] == "BG") {
+				colors[i] = "BG";
+			}else if(colors[i].equals("SK") || colors[i] == "SK") {
+				colors[i] = "SK";
 			}
 		}
 		String colorQuerry = "select PRD_COLOR from product ";
@@ -271,6 +275,24 @@ public class ProductController {
 			prdCategory = "슬립온";
 		} else if (category.equals("mule")) {
 			prdCategory = "뮬";
+		} else if (category.equals("sandals")) {
+			prdCategory = "샌들/슬리퍼";
+		} else if (category.equals("running")) {
+			prdCategory = "런닝화";
+		} else if (category.equals("basketball")) {
+			prdCategory = "농구화";
+		} else if (category.equals("soccer")) {
+			prdCategory = "축구화";
+		} else if (category.equals("golf")) {
+			prdCategory = "골프화";
+		} else if (category.equals("outdoor")) {
+			prdCategory = "등산화";
+		} else if (category.equals("tennis")) {
+			prdCategory = "테니스화";
+		} else if (category.equals("training")) {
+			prdCategory = "트레이닝";
+		} else if (category.equals("skating")) {
+			prdCategory = "스케이팅";
 		}
 
 		String ascdesc = "";
@@ -371,8 +393,6 @@ public class ProductController {
 		} else {
 			myService.removeJjim(jjimVO);
 		}
-		
-		
 		return "success";}
 	}
 	
