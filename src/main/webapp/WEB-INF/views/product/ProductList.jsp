@@ -20,8 +20,8 @@
 	<style>
 		.sizeList{ text-align: center; }
 		.pagination { margin-top: 25px; margin-bottom: 25px; justify-content: center; }
-		#filter{border-top : 1px solid teal; border-bottom : 1px solid teal; padding-top: 18px;
-				padding-bottom: 18px; margin-bottom: 70px;}
+		#filter{border : 1px solid teal; padding : 10px 10px 10px 10px; margin-bottom: 70px;}
+		#sidebar__item__menu{border : 1px solid teal; border-bottom : 0px solid teal; padding : 10px 10px 10px 10px; }
 		#filter #search{ background-color: gray; color: white; font-size: 25px; 
 						width: 100%; height: 60px; text-align: center;border: none;}
 		.clicked{ color: black; }
@@ -117,12 +117,11 @@
                 	<div class="hero__search d-flex justify-content-center">
 						<div class="hero__search__form ">
 							<form action="/product/List/all/newest/all/1?keyword=" method="get">
-                                <input type="text" name="keyword" placeholder="찾으시는 상품을 검색해주세요" value = "${info.keyWord }">
+                                <input type="text" name="keyword" placeholder="찾으시는 상품을 검색해주세요" value = "">
                                 <button type="button" id="searchBtn" class="site-btn" >검색</button>
                                 <script>
                                 	document.getElementById("searchBtn").onclick = function(){
                                 		let keyword = document.getElementsByName("keyword")[0].value;
-                                		console.log("검색중...!");
                                 		location.href = "/product/List/all/newest/all/1?keyword="+keyword;
                                 	};
                                 </script>
@@ -155,24 +154,24 @@
     <section class="product spad">
         <div class="container">
             <div class="row">
-                <div class="col-lg-3 col-md-5">
+                <div class="col-lg-3 col-md-5" style="padding-top: 85px;">
                     <div class="sidebar">
-                        <div class="sidebar__item">
+                        <div class="sidebar__item" id="sidebar__item__menu">
                             <h4>품목</h4>
                             <ul>
                                <li><a href="/product/List/${condition}/${info.orderby}/sneakers/1?keyword=${keyword }">Sneakers</a></li>
                                <li><a href="/product/List/${condition}/${info.orderby}/converse/1?keyword=${keyword }">Converse</a></li>
                                <li><a href="/product/List/${condition}/${info.orderby}/slipon/1?keyword=${keyword }">Slip-on</a></li>
                                <li><a href="/product/List/${condition}/${info.orderby}/mule/1?keyword=${keyword }">Mule</a></li>
-                               <li><a href="#">Sandals/Slipper</a></li>
-                               <li><a href="#">Running</a></li>
-                               <li><a href="#">Basketball</a></li>
-                               <li><a href="#">Soccer</a></li>
-                               <li><a href="#">Golf</a></li>
-                               <li><a href="#">Outdoor</a></li>
-                               <li><a href="#">Tennis</a></li>
-                               <li><a href="#">Training</a></li>
-                               <li><a href="#">Skating</a></li>
+                               <li><a href="/product/List/${condition}/${info.orderby}/sandals/1?keyword=${keyword }">Sandals/Slipper</a></li>
+                               <li><a href="/product/List/${condition}/${info.orderby}/running/1?keyword=${keyword }">Running</a></li>
+                               <li><a href="/product/List/${condition}/${info.orderby}/basketball/1?keyword=${keyword }">Basketball</a></li>
+                               <li><a href="/product/List/${condition}/${info.orderby}/soccer/1?keyword=${keyword }">Soccer</a></li>
+                               <li><a href="/product/List/${condition}/${info.orderby}/golf/1?keyword=${keyword }">Golf</a></li>
+                               <li><a href="/product/List/${condition}/${info.orderby}/outdoor/1?keyword=${keyword }">Outdoor</a></li>
+                               <li><a href="/product/List/${condition}/${info.orderby}/tennis/1?keyword=${keyword }">Tennis</a></li>
+                               <li><a href="/product/List/${condition}/${info.orderby}/training/1?keyword=${keyword }">Training</a></li>
+                               <li><a href="/product/List/${condition}/${info.orderby}/skating/1?keyword=${keyword }">Skating</a></li>
                             </ul>
                         </div>
                         <div id="filter">
@@ -476,7 +475,12 @@
 	                        				url: '/ajaxToCart',
 	                        				method: 'POST',
 	                        				data:sendData,
-	                        				success:function(data){}
+	                        				success:function(data){
+	                        					var toCart = confirm("상품이 장바구니 담겼습니다.\n장바구니로 이동하시겠습니까?");
+	                        					if(toCart){
+	                        						location.href = "/cart.do";
+	                        					}
+	                        				}
 	                        			})
 	                        		})
 	                            	$('.listToCart${list.PRD_CODE }').on('click', function(){
@@ -619,7 +623,7 @@
 								<li class="page-item"><a class="page-link"
 									href="/product/List/${info.condition }/${info.orderby }/${info.category } 
 									/${pageInfo.getEndPage()+1}?color=${info.color}&minPrice=${info.minPrice }
-									&maxPrice=${info.maxPrice }&keyWord=${info.keyWord }}">다음</a></li>
+									&maxPrice=${info.maxPrice }&keyWord=${info.keyWord }">다음</a></li>
 							</c:otherwise>
 						</c:choose>
 
@@ -936,6 +940,8 @@ $(document).ready( function() {
 	var m5 = document.getElementById("id05");
 	var m6 = document.getElementById("id06");
 	var m7 = document.getElementById("id07");
+	var m8 = document.getElementById("id08");
+	var m9 = document.getElementById("id09");
 	for ( var i in colorsArray ) {
         if(colorsArray[i]=='white'){
         	m1.style.color = "red";
@@ -962,15 +968,25 @@ $(document).ready( function() {
         	clickCheck5 = "true";
         	$('#blue').attr('checked',true);
         }
-        if(colorsArray[i]=='green'){
+        if(colorsArray[i]=='PK'){
         	m6.style.color = "red";
         	clickCheck6 = "true";
-        	$('#green').attr('checked',true);
+        	$('#PK').attr('checked',true);
         }
-        if(colorsArray[i]=='multi'){
+        if(colorsArray[i]=='NEON'){
         	m7.style.color = "red";
         	clickCheck7 = "true";
-        	$('#multi').attr('checked',true);
+        	$('#NEON').attr('checked',true);
+        }
+        if(colorsArray[i]=='BG'){
+        	m8.style.color = "red";
+        	clickCheck8 = "true";
+        	$('#BG').attr('checked',true);
+        }
+        if(colorsArray[i]=='SK'){
+        	m9.style.color = "red";
+        	clickCheck9 = "true";
+        	$('#SK').attr('checked',true);
         }
       }
 });
