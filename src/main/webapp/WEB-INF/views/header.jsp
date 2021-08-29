@@ -103,17 +103,27 @@
 				<li><a href="#">ALL</a></li>
 				<li><a href="#">men</a>
 					<ul class="header__menu__dropdown">
-						<li><a href="#">스니커즈</a></li>
-						<li><a href="#">캔버스화</a></li>
-						<li><a href="#">슬립온</a></li>
-						<li><a href="#">뮬</a></li>
+						<li><a href="/product/List/men/newest/sneakers/1">스니커즈</a></li>
+						<li><a href="/product/List/men/newest/converse/1">캔버스화</a></li>
+						<li><a href="/product/List/men/newest/slipon/1">슬립온</a></li>
+						<li><a href="/product/List/men/newest/mule/1">뮬</a></li>
+						<li><a href="/product/List/men/newest/running/1">런닝화</a></li>
+						<li><a href="/product/List/men/newest/basketball/1">농구화</a></li>
+						<li><a href="/product/List/men/newest/golf/1">골프화</a></li>
+						<li><a href="/product/List/men/newest/outdoor/1">등산화</a></li>
+						<li><a href="/product/List/men/newest/soccer/1">축구화</a></li>
 					</ul></li>
 				<li><a href="#">women</a>
 					<ul class="header__menu__dropdown">
-						<li><a href="#">스니커즈</a></li>
-						<li><a href="#">캔버스화</a></li>
-						<li><a href="#">슬립온</a></li>
-						<li><a href="#">뮬</a></li>
+						<li><a href="/product/List/women/newest/sneakers/1">스니커즈</a></li>
+						<li><a href="/product/List/women/newest/converse/1">캔버스화</a></li>
+						<li><a href="/product/List/women/newest/slipon/1">슬립온</a></li>
+						<li><a href="/product/List/women/newest/mule/1">뮬</a></li>
+						<li><a href="/product/List/women/newest/running/1">런닝화</a></li>
+						<li><a href="/product/List/women/newest/basketball/1">농구화</a></li>
+						<li><a href="/product/List/women/newest/golf/1">골프화</a></li>
+						<li><a href="/product/List/women/newest/outdoor/1">등산화</a></li>
+						<li><a href="/product/List/women/newest/soccer/1">축구화</a></li>
 					</ul></li>
 				<li><a href="#">new</a></li>
 				<li><a href="#">best</a></li>
@@ -158,7 +168,7 @@
 								}
 							%>
 							<div class="header__top__right__auth">
-								<a href="#">주문조회</a>
+								<a href="/myOrderList/1">주문조회</a>
 							</div>
 							<div class="header__top__right__auth">
 								<a href="/myOrderList/1">마이페이지</a>
@@ -196,11 +206,11 @@
 											<br>
 										</div></li>
 									<li><div class="navbar_category1">스포츠</div></li>
-									<li><a href="#">런닝화</a></li>
-									<li><a href="#">농구화</a></li>
-									<li><a href="#">골프화</a></li>
-									<li><a href="#">등산화</a></li>
-									<li><a href="#">축구화</a></li>
+									<li><a href="/product/List/men/newest/running/1">런닝화</a></li>
+									<li><a href="/product/List/men/newest/basketball/1">농구화</a></li>
+									<li><a href="/product/List/men/newest/golf/1">골프화</a></li>
+									<li><a href="/product/List/men/newest/outdoor/1">등산화</a></li>
+									<li><a href="/product/List/men/newest/soccer/1">축구화</a></li>
 								</ul></li>
 							<li><a href="/product/List/women/newest/all/1/">women</a>
 								<ul class="header__menu__dropdown">
@@ -214,11 +224,11 @@
 											<br>
 										</div></li>
 									<li><div class="navbar_category1">스포츠</div></li>
-									<li><a href="#">런닝화</a></li>
-									<li><a href="#">농구화</a></li>
-									<li><a href="#">골프화</a></li>
-									<li><a href="#">등산화</a></li>
-									<li><a href="#">축구화</a></li>
+									<li><a href="/product/List/women/newest/running/1">런닝화</a></li>
+									<li><a href="/product/List/women/newest/basketball/1">농구화</a></li>
+									<li><a href="/product/List/women/newest/golf/1">골프화</a></li>
+									<li><a href="/product/List/women/newest/outdoor/1">등산화</a></li>
+									<li><a href="/product/List/women/newest/soccer/1">축구화</a></li>
 								</ul></li>
 							<!-- <li><a href="/product/List/new/newest/all/1">new</a></li> -->
 							<li><a href="/product/List/best/newest/all/1">best</a></li>
