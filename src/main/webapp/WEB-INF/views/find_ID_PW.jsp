@@ -57,7 +57,7 @@
 	/*  	border-bottom: 3px solid black;  */
 }
 
-.tabnav:hover{
+.tabnav:hover {
 	border-bottom: 1px solid white !important;
 }
 
@@ -125,7 +125,6 @@
 .button-login-join {
 	display: block;
 	text-align: center;
-	
 }
 
 .button_login {
@@ -148,7 +147,6 @@
 	border-radius: 0px !important;
 	border: 1px solid #222222 !important;
 	font-weight: bold !important;
-	
 }
 
 .description {
@@ -163,58 +161,55 @@
 	font-size: 30px;
 }
 
-.input_code{
+.input_code {
 	width: 420px !important;
 	border-radius: 0px !important;
-	
 }
 
-.button_code{
+.button_code {
 	margin: 0px 0px 0px 10px;
 	width: 130px !important;
-	
 	border-radius: 0px !important;
-	
 }
 
-.input_email{
+.input_email {
 	width: 420px !important;
 	margin: 0px 0px 0px 0px !important;
 	border-radius: 0px !important;
 }
 
-.button_email{
+.button_email {
 	margin: 0px 0px 0px 10px;
 	width: 130px !important;
-	
 	border-radius: 0px !important;
 }
 
-.input_CUS_NAME_forID{
+.input_CUS_NAME_forID {
 	border-radius: 0px !important;
 }
 
-.button_require_ID{
-	border-radius: 0px !important;
-	background-color: #222020 !important;
-	border: 1px solid #222020 !important;
-}
-
-.button_require_PW{
+.button_require_ID {
 	border-radius: 0px !important;
 	background-color: #222020 !important;
 	border: 1px solid #222020 !important;
 }
 
-.input_CUS_ID_forPW{
+.button_require_PW {
+	border-radius: 0px !important;
+	background-color: #222020 !important;
+	border: 1px solid #222020 !important;
+}
+
+.input_CUS_ID_forPW {
 	border-radius: 0px !important;
 }
 
-.input_CUS_EMAIL_forPW{
+.input_CUS_EMAIL_forPW {
 	border-radius: 0px !important;
+	margin: 0px 0px 0px 0px;
 }
 
-.input_CUS_NAME_forPW{
+.input_CUS_NAME_forPW {
 	border-radius: 0px !important;
 }
 </style>
@@ -248,15 +243,15 @@
 							<div id="fill-out-name"></div>
 						</div>
 
-						
-							<div><label for="email">이메일</label></div>
-							<div class="input-group mb-3">
-							 <input type="text"
-								name="input_CUS_EMAIL_forID" id="CUS_EMAIL"
+
+						<div>
+							<label for="email">이메일</label>
+						</div>
+						<div class="input-group mb-3">
+							<input type="text" name="input_CUS_EMAIL_forID" id="CUS_EMAIL"
 								class="form-control input_CUS_EMAIL_forID input_email"
-								placeholder="이메일을 입력해주세요">
-						
-							<span id="button_receive_code_for_ID"
+								placeholder="이메일을 입력해주세요"> <span
+								id="button_receive_code_for_ID"
 								class="btn btn-outline-secondary button_email"
 								onclick="sendCodeForID();">인증번호 요청</span>
 						</div>
@@ -264,13 +259,14 @@
 					</form>
 
 					<div class="input-group mb-3">
-						<span><input id="inputCodeForID" name="inputCodeForID" type="text"
+						<span><input id="inputCodeForID" name="inputCodeForID"
+							type="text"
 							class="form-control input_check_code_forID input_code"
 							placeholder="인증번호 6자리를 입력해 주세요" aria-label="Recipient's username"
-							aria-describedby="button-addon2" disabled="disabled"></span>
-						<span><button class="btn btn-outline-secondary input_check_code_forID button_code" 
-							type="button" id="button-addon2" onclick="checkCodeForID();"
-							disabled="disabled">인증 확인</button></span>
+							aria-describedby="button-addon2" disabled="disabled"></span> <span><button
+								class="btn btn-outline-secondary input_check_code_forID button_code"
+								type="button" id="button-addon2" onclick="checkCodeForID();"
+								disabled="disabled">인증 확인</button></span>
 					</div>
 
 					<form>
@@ -313,13 +309,14 @@
 							<div id="fill-out-name"></div>
 						</div>
 
+						<div>
+							<label for="email">이메일</label>
+						</div>
 						<div class="input-group mb-3">
-							 <input type="text"
-								name="input_CUS_EMAIL_forPW" id="CUS_EMAIL"
+							<input type="text" name="input_CUS_EMAIL_forPW" id="CUS_EMAIL"
 								class="form-control input_CUS_EMAIL_forPW input_email"
-								placeholder="이메일을 입력해주세요">
-						
-							<span id="button_receive_code_for_PW"
+								placeholder="이메일을 입력해주세요"> <span
+								id="button_receive_code_for_PW"
 								class="btn btn-outline-secondary button_email"
 								onclick="sendCodeForPW();">인증번호 요청</span>
 						</div>
@@ -327,13 +324,14 @@
 
 
 					<div class="input-group mb-3">
-						<span><input id="inputCodeForPW" name="inputCodeForPW" type="text"
+						<span><input id="inputCodeForPW" name="inputCodeForPW"
+							type="text"
 							class="form-control input_check_code_forPW input_code"
 							placeholder="인증번호 6자리를 입력해 주세요" aria-label="Recipient's username"
-							aria-describedby="button-addon2" disabled="disabled"></span>
-						<span><button class="btn btn-outline-secondary input_check_code_forPW button_code" 
-							type="button" id="button-addon2" onclick="checkCodeForPW();"
-							disabled="disabled">인증 확인</button></span>
+							aria-describedby="button-addon2" disabled="disabled"></span> <span><button
+								class="btn btn-outline-secondary input_check_code_forPW button_code"
+								type="button" id="button-addon2" onclick="checkCodeForPW();"
+								disabled="disabled">인증 확인</button></span>
 					</div>
 
 					<form>
@@ -566,31 +564,6 @@
 			});
 		}
 	</script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
