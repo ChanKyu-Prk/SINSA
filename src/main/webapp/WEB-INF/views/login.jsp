@@ -136,7 +136,7 @@
 							<input onclick="checklogin()" type="button" value="로그인"
 								class="btn btn-block py-2 btn-primary button_login"> <span
 								class="text-center my-3 d-block">or</span>
-
+							<input type="hidden" name="referer" value="${prevPage}">
 
 							<div id="naver_id_login" style="text-align: center">
 								<a href="${url}"> <img width="223"

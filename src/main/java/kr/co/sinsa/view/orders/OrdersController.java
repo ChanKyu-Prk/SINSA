@@ -140,7 +140,6 @@ public class OrdersController {
 	@RequestMapping(value = "/checkout/process", method=RequestMethod.POST, produces = "application/json;charset=UTF-8")
     @ResponseBody
 	public String payComplete(@RequestBody List<Map<String, String>> itemLists, OrdersVO ordersVO, RedirectAttributes ra, HttpSession session, HttpServletResponse response) throws Exception {
-		System.out.println("POST");
 		OrdersAndProductVO oapVO = null;
 		List<String> orderList = new ArrayList();
 		String CUS_ID = null;
