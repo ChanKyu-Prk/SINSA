@@ -159,10 +159,10 @@ public class MyPageServiceImpl implements MyPageService {
 	}
 
 	@Override
-	public List<ProductVO> productMatchReview(List<ReviewVO> list) {
-		List<ProductVO> productList = new ArrayList<ProductVO>();
+	public List<OrdersAndProductVO> productMatchReview(List<ReviewVO> list) {
+		List<OrdersAndProductVO> productList = new ArrayList<OrdersAndProductVO>();
 		for (int i = 0; i < list.size(); i++) {
-			ProductVO product = dao.productMatchReview(list.get(i).getREV_PRDCODE());
+			OrdersAndProductVO product = dao.productMatchReview(list.get(i).getREV_ORDERNUM());
 			productList.add(product);
 		}
 		return productList;

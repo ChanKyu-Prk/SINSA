@@ -28,7 +28,7 @@ public interface MyPageService {
 	public List<Integer> reviewCheck(List<MyOrderListVO> orderList,String ID);
 	public ProductVO productSerch(String PRDCODE);
 	public void reviewInsert(ReviewVO vo);
-	public List<ProductVO> productMatchReview(List<ReviewVO> list);
+	public List<OrdersAndProductVO> productMatchReview(List<ReviewVO> list);
 	
 	
 	
