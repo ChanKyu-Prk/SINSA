@@ -48,6 +48,10 @@ public class ProductDAO {
 	public List<CartVO> addCart(Map<String, Object> map){
 		return SST.selectList("ProductList.addCart",map);
 	}
+	
+	public List<ProductVO> getRecommList(String PRD_GENDER){
+		return SST.selectList("ProductDAO.getRecommList", PRD_GENDER);
+	}
 
 }
 

@@ -11,6 +11,19 @@
 	
 	<select resultType="kr.co.sinsa.biz.product.ProductVO" id="info">select * from product where PRD_CODE=#{PRD_CODE} </select>
 	
+	<select id="getRecommList" resultType="kr.co.sinsa.biz.product.ProductVO">
+		SELECT ORDERS.ORDER_PRDNAME, COUNT(*) as count, PRODUCT.PRD_NUM, PRODUCT.PRD_CODE, PRODUCT.PRD_NAME, 
+		PRODUCT.PRD_CATEGORY, PRODUCT.PRD_IMAGE, PRODUCT.PRD_GENDER, PRODUCT.PRD_PRICE, 
+		PRODUCT.PRD_BRAND, PRODUCT.PRD_DISRATE
+		FROM ORDERS 
+		LEFT JOIN PRODUCT 
+		ON ORDERS.ORDER_PRDCODE = PRODUCT.PRD_CODE
+		WHERE 
+		PRD_GENDER like #{gender} 
+		GROUP BY ORDER_PRDNAME 
+		HAVING COUNT(ORDER_PRDNAME) > 1 
+		ORDER BY count DESC
+	</select>
 	
 	<!-- 구분선 -->
 	

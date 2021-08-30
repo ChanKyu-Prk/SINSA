@@ -182,7 +182,7 @@ input[type=number] {
 	font-family: adihaus;
 }
 
-.product__details__price .discntNum {
+.product__details__price .discntNum, .discntNum {
 	text-decoration: line-through;
 	color: #999;
 	font-size: 18px;
@@ -789,40 +789,51 @@ button:disabled {
 		</div>
 	</section>
 	<!-- Product Details Section End -->
-
+	<c:if test="${recommList != null}">
 	<!-- Related Product Section Begin -->
 	<section class="related-product">
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-12">
 					<div class="section-title related__product__title">
-						<h2>관련 상품</h2>
+						<h2>추천 상품</h2>
 					</div>
 				</div>
 			</div>
 			<div class="row">
+				<c:forEach var="list" items="${recommList}">
+				<c:if test="${list.PRD_CODE != prdInfo.PRD_CODE}">
 				<div class="col-lg-3 col-md-4 col-sm-6">
 					<div class="product__item">
 						<div class="product__item__pic set-bg"
-							data-setbg="/resources/img/product/product-1.jpg">
-							<ul class="product__item__pic__hover">
-								<li><a href="#"><i class="fa fa-heart"></i></a></li>
-								<li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-							</ul>
+							data-setbg="${pageContext.request.contextPath}/upload/prdImg/${list.PRD_CODE}.png">
 						</div>
 						<div class="product__item__text">
 							<h6>
-								<a href="#">Crab Pool Security</a>
+								<a href="/product/prdCode=${list.PRD_CODE}">${list.PRD_NAME}</a>
 							</h6>
-							<h5>$30.00</h5>
+							<c:if test="${list.PRD_DISRATE == 0}">
+								<h5 class="digits">${list.PRD_PRICE}</h5>
+							</c:if>
+							<c:if test="${list.PRD_DISRATE != 0}">
+								<c:set var="finalPriceOrg"
+									value="${list.PRD_PRICE-(list.PRD_PRICE*(list.PRD_DISRATE/100))}" />
+								<c:set var="finalPrice"
+									value="${fn:substringBefore(finalPriceOrg, '.')}" />
+								<h5 class="digits discntNum">${list.PRD_PRICE}원</h5>
+								<h5 class="digits">${finalPrice}원</h5>
+							</c:if>
 						</div>
 					</div>
 				</div>
+				</c:if>
+				</c:forEach>
 			</div>
 		</div>
 	</section>
 	<jsp:include page="../footer.jsp" />
 	<!-- Related Product Section End -->
+	</c:if>
 	<script type="text/javascript">
 		$(document)
 				.ready(
