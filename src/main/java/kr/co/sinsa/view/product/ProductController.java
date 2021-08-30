@@ -99,7 +99,7 @@ public class ProductController {
 		////////////////////////////////////////////////////////////////////////////////////////////////////
 		List<ReviewColorSizeVO> detailReviewList = DetailReviewService.getDetailReviewList(PRD_CODE);
 		model.addAttribute("detailReviewList", detailReviewList);
-		System.out.println(detailReviewList.get(0).getREV_CONTENT());
+//		System.out.println(detailReviewList.get(0).getREV_CONTENT());
 		
 //		ProductVO productVO = DetailReviewService.getProductVO(PRD_CODE);
 		

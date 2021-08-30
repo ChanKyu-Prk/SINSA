@@ -291,7 +291,7 @@ outline: none;
 															src="/resources/prdImg/shoe.jpg" />
 
 													</div>
-												</td>
+												</td>	
 
 												<td>
 													<table>

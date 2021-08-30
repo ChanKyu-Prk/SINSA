@@ -272,14 +272,15 @@ order by REV_NUM  desc
 		limit #{page},10;
 	</select>
 
-<select id="productMatchReview" resultType="kr.co.sinsa.biz.product.ProductVO">
-select
-		PRD_CODE ,
-		PRD_NAME ,
-		PRD_BRAND ,
-		PRD_IMAGE
-		from product
-		where PRD_CODE = #{value};
+<select id="productMatchReview" resultType="kr.co.sinsa.biz.orders.OrdersAndProductVO">
+	select
+	ORDERS.ORDER_PRDCODE ,
+	ORDERS.ORDER_PRDNAME ,
+	ORDERS.ORDER_PRDSIZE ,
+	PRODUCT.PRD_BRAND ,
+	PRODUCT.PRD_IMAGE
+	from ORDERS join Product on ORDERS.ORDER_PRDCODE = PRODUCT.PRD_CODE
+	where ORDER_NUM = #{value};
 </select>
 
 
