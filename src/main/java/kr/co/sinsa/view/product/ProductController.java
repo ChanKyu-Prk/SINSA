@@ -174,11 +174,6 @@ public class ProductController {
 		map.put("QNA_CONTENT", QNA_CONTENT);
 		
 		QnaService.insertQNA(map);
-		
-		
-	
-		
-		
 		return map;
 	}
 	
