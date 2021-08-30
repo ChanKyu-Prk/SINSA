@@ -85,21 +85,20 @@ public class ProductController {
     	model.addAttribute("stockInfo", stockVO);
     	
     	List<ReviewVO> reviewList = ReviewService.getReviewList(PRD_CODE);
-
 		int reviewNum = reviewList.size();
 		int avgReview = (int)Math.round(ReviewService.getAvgReview(PRD_CODE));
 
 		model.addAttribute("reviewNum", reviewNum);
 		model.addAttribute("avgReview", avgReview);
 		
+		List<ProductVO> recommList = service.getRecommList(vo.getPRD_GENDER());
 		
-		
-		
+		model.addAttribute("recommList", recommList);
 		
 		////////////////////////////////////////////////////////////////////////////////////////////////////
 		List<ReviewColorSizeVO> detailReviewList = DetailReviewService.getDetailReviewList(PRD_CODE);
 		model.addAttribute("detailReviewList", detailReviewList);
-		System.out.println(detailReviewList.get(0).getREV_CONTENT());
+//		System.out.println(detailReviewList.get(0).getREV_CONTENT());
 		
 //		ProductVO productVO = DetailReviewService.getProductVO(PRD_CODE);
 		
