@@ -19,6 +19,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import kr.co.sinsa.biz.customer.IndexService;
 import kr.co.sinsa.biz.customer.ReviewVO;
@@ -56,10 +57,16 @@ public class LoginController {
 	
 	
 	@RequestMapping(value="/login.do", method=RequestMethod.GET)
-	public String loginView(CustomerVO customerVO, Model model, HttpSession session) {
+	public String loginView(CustomerVO customerVO, Model model, HttpSession session, HttpServletRequest request) {
 		String naverAuthUrl = naverLoginBO.getAuthorizationUrl(session); 
 		System.out.println("네이버:" + naverAuthUrl); 
-		model.addAttribute("url", naverAuthUrl); 
+		model.addAttribute("url", naverAuthUrl);
+
+		String referer = request.getHeader("Referer");
+		String prevPage = referer.substring(referer.indexOf("/", referer.indexOf("/") + 2));
+		System.out.println("prevPage : " + prevPage);
+		model.addAttribute("prevPage", prevPage);
+		
 		return "login";
 	}
 
@@ -68,6 +75,7 @@ public class LoginController {
 
 		String CUS_ID = (String)request.getParameter("CUS_ID");
 		String CUS_NAME = (String)request.getParameter("CUS_NAME");
+		String referer = (String)request.getParameter("referer");
 
 		
 		if(customerVO.getCUS_ID() == null || customerVO.getCUS_ID().equals("")) {
@@ -131,6 +139,15 @@ public class LoginController {
 			
 			
 			List<ProductVO> topSportsProductList = IndexService.getTopSportsProductList();
+			
+			if(referer != null) {
+				return "redirect:"+referer;
+			}
+			
+			if (request.getSession().getAttribute("requestURI") != null) {
+				//http://localhost:8080/product/prdCode=ab1234
+				return "redirect:request.getSession().getAttribute(\"requestURI\")";
+			};
 			
 			for(int i=0; i<topSportsProductList.size(); i++) {
 				if(topSportsProductList.get(i) == null) {
