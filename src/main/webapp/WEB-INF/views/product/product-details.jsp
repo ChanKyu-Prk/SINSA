@@ -267,6 +267,11 @@ button:disabled {
 	width:900px; height:660px; margin:50px auto; padding:20px 10px; 
 	background:#fff; border: 2px solid #666;
 }
+
+#qna-table{
+	border-bottom: 1px solid gray;
+}
+
 </style>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -761,26 +766,36 @@ button:disabled {
 										</li>
 									</ul>
 									<div class="container">
-									<div class="row">
-										<table>
-											<tr>
-												<th>
-													<button type="button" id="modal_open_btn" class="btn-qna" >문의작성</button>
-												</th>
-											</tr>
-										</table>
-										<div id="modal">
+									<div id="modal">
 											<div class="modal_content">
 												<form id="formToInput" method="post">
 													<input type="hidden" id="PRD_NUM" name="PRD_NUM" value="${prdInfo.PRD_NUM}" />
+													<p>
+													<label> 패스워드 </label><br>
 													<input type="text" id="QNA_LOCK" name="QNA_LOCK" />
+													</p>
+													<p>
+													<label> 글 제목 </label><br>
 													<input type="text" id="QNA_TITLE" name="QNA_TITLE" />
-													<input type="text" id="QNA_CONTENT" name="QNA_CONTENT" />
-													<button type="button" onclick="clkBtn()">버튼</button>
+													</p>
+													<p>
+													<label> 글 내용 </label><br>
+													<textarea rows="13" cols="90" id="QNA_CONTENT" name="QNA_CONTENT" ></textarea><br>
+													</p>
+													<button id="clkBtn" type="button" onclick="clkBtn()">확인</button>
+													<button type="button" id="modal_close_btn">닫기</button>
 												</form>
-												<button type="button" id="modal_close_btn">닫기</button>
 											</div>
 										</div>
+									<div class="row">
+										<table>
+											<tr>
+												<th align="right">
+													<button type="button" id="modal_open_btn" class="btn-qna" >문의작성</button>
+												</th>
+											</tr>
+										</table><br>
+										
 										<script type="text/javascript">
 										// 버튼 클릭 시 실행
 										function clkBtn(){
@@ -813,56 +828,60 @@ button:disabled {
 										</script>
 										<br>
 										<div class="row">
-											<table border="1">
+										<c:forEach var="qnaList" items="${qnaList }">
+											<table id="qna-table" style="margin-bottom: 10px;">
 												<c:choose>
 													<c:when test="${empty qnaList }">
-														<tr><td colspan="10" align="center">작성된 문의가 없습니다.</td></tr>
+														<tr><td align="center">작성된 문의가 없습니다.</td></tr>
 													</c:when>
 													<c:when test="${!empty qnaList }">
-														<c:forEach var="qnaList" items="${qnaList }">
 															<tr>
 																<c:choose>
 																	<c:when test="${!empty qnaList.QNA_LOCK }">
-																		<td rowspan="2" style="width: 88px;">
-																			<img alt="lock" src="${path}/resources/img/product/details/lock.png">
+																		<td style="width: 63px;">
+																			<img alt="lock" width="60" src="${path}/resources/img/product/details/lock.png">
 																		</td>
 																	</c:when>
 																	<c:when test="${empty qnaList.QNA_LOCK }">
-																		<td rowspan="2" style="width: 88px;">
-																			<img alt="unlock" src="${path}/resources/img/product/details/unlock.png">
+																		<tdstyle="width: 63px;">
+																			<img alt="unlock" width="60" src="${path}/resources/img/product/details/unlock.png">
 																		</td>
 																	</c:when>
 																</c:choose>
-																<td colspan="2">${qnaList.QNA_TITLE }</td>
-																<c:choose>
-																	<c:when test="${!empty qnaList.QNA_ANSWER }">
-																		<td rowspan="2">답변완료</td>												
-																	</c:when>
-																	<c:when test="${empty qnaList.QNA_ANSWER }">
-																		<td rowspan="2">답변대기</td>												
-																	</c:when>
+																<td style="width: 162px;"><fmt:formatDate value="${qnaList.QNA_REGDATE }" pattern="yyyy-MM-dd" /></td>
+																<td style="width: 605px;">${qnaList.QNA_TITLE }</td>
+																<td>${qnaList.QNA_CUSID }</td>
+															<c:choose>
+															<c:when test="${!empty qnaList.QNA_ANSWER }">
+																<td>답변완료</td>												
+															</c:when>
+															<c:when test="${empty qnaList.QNA_ANSWER }">
+																<td>답변대기</td>												
+															</c:when>
 																</c:choose>
 															</tr>
 															<tr>
-																<td>${qnaList.QNA_REGDATE }</td><td>${qnaList.QNA_CUSID }</td>
+																<td colspan="5">
+																	<input type="password" placeholder="비밀번호 입력" id="qna-content-password">
+																	<input type="button" id="qna-content-password-check" value="확인">
+																</td>
 															</tr>
 															<tr>
-																<td><input type="password" placeholder="비밀번호 입력" id="qna-content-password"></td>
-																<td><input type="button" id="qna-content-password-check" value="확인"></td>
-																<td colspan="4" id="qna-content">
+																<td colspan="5" id="qna-content">
 																	${qnaList.QNA_CONTENT }
 																</td>
 															</tr>
 															<tr>
 																<c:choose>
 																	<c:when test="${!empty qnaList.QNA_ANSWER }">
-																		<td colspan="4">${qnaList.QNA_ANSWER }</td>												
+																		<td colspan="5">${qnaList.QNA_ANSWER }</td>												
 																	</c:when>
 																	<c:otherwise>
-																		<td colspan="4">관리자가 답변을 준비중입니다. 다소 양해 부탁드립니다.</td>
+																		<td colspan="5">관리자가 답변을 준비중입니다. 다소 양해 부탁드립니다.</td>
 																	</c:otherwise>
 																</c:choose>
 															</tr>
+															<tr></tr>
 															
 															<script>
 																$('#qna-content-password-check').on('click', function(){
@@ -874,10 +893,12 @@ button:disabled {
 																	}
 																})
 															</script>
-														</c:forEach>
+														
 													</c:when>
 												</c:choose>
 											</table>
+											<br>
+										</c:forEach>
 										</div>
 									</div>
 									</div>

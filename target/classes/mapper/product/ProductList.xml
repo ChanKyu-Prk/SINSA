@@ -76,14 +76,15 @@ select JJIM_PRDNUM from jjim where JJIM_CUSID =#{value};
 
 <select id="insertQNA" parameterType="Map">
 	<![CDATA[
-		insert into qna(PRD_NUM, QNA_LOCK, QNA_CUSID, QNA_TITLE, QNA_CONTENT, QNA_ANSWER)
-		values(#{PRD_NUM}, #{QNA_LOCK}, #{QNA_CUSID}, #{QNA_TITLE}, #{QNA_CONTENT}, '')
+		insert into qna(PRD_NUM, QNA_LOCK, QNA_CUSID, QNA_TITLE, QNA_CONTENT, QNA_ANSWER, QNA_REGDATE)
+		values(#{PRD_NUM}, #{QNA_LOCK}, #{QNA_CUSID}, #{QNA_TITLE}, #{QNA_CONTENT}, '', now())
 	]]>
 </select>
 
 	<select id="getInfo" parameterType="hashMap" resultType="kr.co.sinsa.biz.product.QnaVO">
 		<![CDATA[
-			select * from qna where prd_num = #{qna_PRD_NUM}
+			select QNA_NUM, PRD_NUM, QNA_LOCK, QNA_CUSID, QNA_TITLE, QNA_CONTENT, QNA_ANSWER, QNA_REGDATE
+			from qna where prd_num = #{qna_PRD_NUM}
 		]]>
 	</select>
 
