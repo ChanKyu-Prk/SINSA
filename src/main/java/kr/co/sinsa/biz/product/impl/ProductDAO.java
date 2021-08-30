@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import kr.co.sinsa.biz.product.CartVO;
 import kr.co.sinsa.biz.product.ProductVO;
+import kr.co.sinsa.biz.product.QnaVO;
 import kr.co.sinsa.biz.product.StockVO;
 
 @Repository
@@ -27,6 +28,11 @@ public class ProductDAO {
 	public ProductVO info(String PRD_CODE) {
 		return SST.selectOne("ProductDAO.info", PRD_CODE);
 	}
+	
+	public QnaVO qnaInfo(String PRD_CODE) {
+		return SST.selectOne("ProductDAO.qnaInfo", PRD_CODE);
+	}
+	
 	
 	public List<ProductVO> getList(Map<String, Object> map){
 		return SST.selectList("ProductList.getList",map);

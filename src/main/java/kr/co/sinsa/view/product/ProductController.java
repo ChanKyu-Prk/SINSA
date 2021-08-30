@@ -18,8 +18,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import kr.co.sinsa.biz.customer.ReviewService;
-import kr.co.sinsa.biz.customer.ReviewVO;
 import kr.co.sinsa.biz.customer.JjimVO;
 import kr.co.sinsa.biz.customer.MyPageService;
 import kr.co.sinsa.biz.customer.ReviewColorSizeVO;
@@ -29,6 +27,8 @@ import kr.co.sinsa.biz.product.DetailReviewService;
 import kr.co.sinsa.biz.product.PageInfo;
 import kr.co.sinsa.biz.product.ProductService;
 import kr.co.sinsa.biz.product.ProductVO;
+import kr.co.sinsa.biz.product.QnaService;
+import kr.co.sinsa.biz.product.QnaVO;
 import kr.co.sinsa.biz.product.StockService;
 import kr.co.sinsa.biz.product.StockVO;
 import kr.co.sinsa.biz.user.UserVO;
@@ -46,6 +46,9 @@ public class ProductController {
 	
 	@Autowired
 	private ReviewService ReviewService;
+
+	@Autowired
+	private QnaService QnaService;
 	
 	@Autowired
 	private DetailReviewService DetailReviewService;
@@ -60,6 +63,7 @@ public class ProductController {
 			
 			ProductVO productVO = service.info(PRD_CODE);		
 			int PRD_NUM = productVO.getPRD_NUM();
+			
 
 	    	jjimVO.setJJIM_CUSID(CUS_ID);
 			jjimVO.setJJIM_PRDNUM(PRD_NUM);
@@ -68,6 +72,13 @@ public class ProductController {
 				model.addAttribute("jjimInfo", chckJjim);
 			} 
 		}
+
+		
+		ProductVO productVO = service.info(PRD_CODE);		
+		int qna_PRD_NUM = productVO.getPRD_NUM();
+		List<QnaVO> qnaList = QnaService.qnaInfo(qna_PRD_NUM);
+		System.out.println("qnaList : " + qnaList);
+		model.addAttribute("qnaList", qnaList);
 		
     	ProductVO vo = service.info(PRD_CODE);
     	model.addAttribute("prdInfo", vo);
@@ -99,7 +110,6 @@ public class ProductController {
 		////////////////////////////////////////////////////////////////////////////////////////////////////
 		List<ReviewColorSizeVO> detailReviewList = DetailReviewService.getDetailReviewList(PRD_CODE);
 		model.addAttribute("detailReviewList", detailReviewList);
-		System.out.println(detailReviewList.get(0).getREV_CONTENT());
 		
 //		ProductVO productVO = DetailReviewService.getProductVO(PRD_CODE);
 		
@@ -140,6 +150,32 @@ public class ProductController {
 			map.put("CUS_ID", CUS_ID);
 			service.addCart(map);
 		}
+		
+		
+		return map;
+	}
+	@ResponseBody
+	@RequestMapping(value = "/formToInput", method = RequestMethod.POST)
+	public Map<String, Object> formToInput(Model model, QnaVO vo, HttpSession session){
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		UserVO user = (UserVO) session.getAttribute("user");
+		int PRD_NUM = vo.getPRD_NUM();
+		String QNA_CUSID = (String)user.getCUS_ID();
+		String QNA_TITLE = vo.getQNA_TITLE(); 
+		int QNA_LOCK = vo.getQNA_LOCK(); 
+		String QNA_CONTENT = vo.getQNA_CONTENT();
+		
+		map.put("PRD_NUM", PRD_NUM);
+		map.put("QNA_LOCK", QNA_LOCK);
+		map.put("QNA_CUSID", QNA_CUSID);
+		map.put("QNA_TITLE", QNA_TITLE);
+		map.put("QNA_CONTENT", QNA_CONTENT);
+		
+		QnaService.insertQNA(map);
+		
+		
+	
 		
 		
 		return map;

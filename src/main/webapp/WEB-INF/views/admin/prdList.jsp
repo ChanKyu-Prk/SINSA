@@ -103,8 +103,7 @@ table {
 		<table style="border: 0px">
 			<tr>
 				<td align="left">
-					<button type="button" class="btn btn-outline-primary btn-sm"
-						onclick="location.href='prdInputForm'">신규 상품 등록</button>
+					<button type="button" class="btn btn-outline-primary btn-sm" onclick="location.href='prdInputForm'">신규 상품 등록</button>
 				</td>
 				<td></td>
 				<td align="right" style="width: 250px;"><input type="button"

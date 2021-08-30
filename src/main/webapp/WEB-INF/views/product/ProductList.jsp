@@ -310,12 +310,12 @@
 												</c:if>
 											</a>
 										</li>
-                                        <li><a id="modal_open_btn${list.PRD_CODE }"  class="listToBuy${list.PRD_CODE }"><i class="fa fa-retweet"><b>바로구매</b></i></a></li>
+                                        <li><a id="modal_open_btn${list.PRD_CODE }" class="listToBuy${list.PRD_CODE }"><i class="fa fa-retweet"><b>바로구매</b></i></a></li>
                                         <li><a id="cartModal_open_btn${list.PRD_CODE }" class="listToCart${list.PRD_CODE }"><i class="fa fa-shopping-cart"></i></a></li>
                                     </ul>
 				                    <div id="modal${list.PRD_CODE }">
 										<div class="modal_content">
-											<h4 style="display:inline-block;margin-right: 294px;">옵션선택</h4>
+											<h4 style="display:inline-block; margin-right: 294px;">옵션선택</h4>
 											<button type="button" id="modal_close_btn${list.PRD_CODE }">
 													<b>X</b>
 											</button>
@@ -326,13 +326,13 @@
 												</div>
 												<br>
 												<div id="p-Text">
-														<span><b>${list.PRD_BRAND }</b></span> <br />
-														<span>${list.PRD_NAME }</span> <br />
-														<br />
-														<span>COLOR : ${list.PRD_COLOR }</span>
-														<br />												
-														<span>금액 : ${list.PRD_PRICE }원</span>
-														<br />
+													<span><b>${list.PRD_BRAND }</b></span> <br />
+													<span>${list.PRD_NAME }</span> <br />
+													<br />
+													<span>COLOR : ${list.PRD_COLOR }</span>
+													<br />												
+													<span>금액 : ${list.PRD_PRICE }원</span>
+													<br />
 												</div>
 											</div>
 											<hr />
@@ -352,10 +352,7 @@
 			                                	</button>
 											 </div>
 										</div>
-										
 									</div>
-						
-							
 				                    <div id="cartModal${list.PRD_CODE }">
 										<div class="modal_content">
 												<h4 style="display:inline-block;margin-right: 294px;">옵션선택</h4>
@@ -389,30 +386,20 @@
 												상품 담기
 											</button> 
 			                                 -->
-										  
 									        <div class="box bg-3" id="ajaxToCart${list.PRD_CODE }">
 			                                	<button id="bBchild${list.PRD_NUM }" type="button" class="button button--wayra button--border-medium button--text-upper button--size-s button--text-thick button--inverted">
 			                                		상품 담기
 			                                	</button>
 											</div>
-											
-									
 										</div>
 									</div>
-							
-									
-								
-				                 
 									</div>
-									
 	                                <div class="product__item__text">
 										<p>
  											<h6>${list.PRD_NAME }</h6>												
  										</p>
                                    		<h5>${list.PRD_PRICE }원</h5>
                                 	</div>
-                                	
-								
                             	<script type="text/javascript">
 	                            	var selectSize;
 	                            	function sizeClick(e){
@@ -555,11 +542,7 @@
 								    	 	cartCheck = "false";
 								    	
 								        }
-								    });      
-								     
-								   
-						
-								    
+								    });
 								</script>
 	                        </div>
 
