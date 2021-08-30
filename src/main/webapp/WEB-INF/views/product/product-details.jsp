@@ -253,6 +253,20 @@ button:disabled {
 .review_list:hover {
 	background-color: white !important;
 }
+
+#qna-content{
+	display: none;
+}
+
+#modal {
+	display:none; position:absolute; width:100%; height:60%; z-index:999999;
+	top: 50px;
+}
+
+#modal .modal_content {
+	width:900px; height:660px; margin:50px auto; padding:20px 10px; 
+	background:#fff; border: 2px solid #666;
+}
 </style>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -643,20 +657,14 @@ button:disabled {
 							</div>
 							<div class="tab-pane" id="tabs-2" role="tabpanel">
 								<div class="product__details__tab__desc">
-
-
-
-
 									<div class="container">
 										<div class="row">
-											<c:forEach var="list" items="${detailReviewList}"
-												varStatus="status">
+											<c:forEach var="list" items="${detailReviewList}" varStatus="status">
 												<a class="list-group-item list-group-item-action review_list">
 													<div class="row">
 														<div class="col">
 															<div class="row TextCenter" data-toggle="collapse"
 																data-target="#content${status.index}">
-
 																<span class="col-md-2 span_star"> <c:if
 																		test="${list.REV_STAR eq 0}">
 																		<img src="${path}/resources/img/empty_star.png"
@@ -721,15 +729,9 @@ button:disabled {
 																</span> <span class="col-md-10"> ${list.PRD_NAME} /
 																	${list.PRD_COLOR } / ${list.ORDER_PRDSIZE } | &nbsp;${list.REV_TITLE} </span>
 																<div class="review_content">${list.REV_CONTENT}</div>
-
-
-
 																<div id="content${status.index}" class="collapse">
-
 																	<div class="col-md-5 left margin"></div>
-
 																	<div class="row">
-
 																		<div class="col-md-12 review_content">
 																			<img
 																				src="${path}/resources/img/product/나이키디파이올데이.png"
@@ -739,9 +741,7 @@ button:disabled {
 																				src="${path}/resources/img/product/나이키디파이올데이.png"
 																				alt="" class="review_img">
 																		</div>
-
 																	</div>
-
 																</div>
 															</div>
 														</div>
@@ -750,26 +750,6 @@ button:disabled {
 											</c:forEach>
 										</div>
 									</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 								</div>
 							</div>
 							<div class="tab-pane" id="tabs-3" role="tabpanel">
@@ -780,9 +760,131 @@ button:disabled {
 												수 있습니다.</p>
 										</li>
 									</ul>
+									<div class="container">
+									<div class="row">
+										<table>
+											<tr>
+												<th>
+													<button type="button" id="modal_open_btn" class="btn-qna" >문의작성</button>
+												</th>
+											</tr>
+										</table>
+										<div id="modal">
+											<div class="modal_content">
+												<form id="formToInput" method="post">
+													<input type="hidden" id="PRD_NUM" name="PRD_NUM" value="${prdInfo.PRD_NUM}" />
+													<input type="text" id="QNA_LOCK" name="QNA_LOCK" />
+													<input type="text" id="QNA_TITLE" name="QNA_TITLE" />
+													<input type="text" id="QNA_CONTENT" name="QNA_CONTENT" />
+													<button type="button" onclick="clkBtn()">버튼</button>
+												</form>
+												<button type="button" id="modal_close_btn">닫기</button>
+											</div>
+										</div>
+										<script type="text/javascript">
+										// 버튼 클릭 시 실행
+										function clkBtn(){
+											// Get form
+											var form = $('#formToInput').serialize();
+											$.ajax({
+												url: '/formToInput',
+												type: "POST",
+												data: form,
+												beforeSend : function() {
+													// 전송 전 실행 코드
+													console.log("ajax 폼 전송");
+												},
+												success: function (data) {
+													// 전송 후 성공 시 실행 코드
+													console.log(data);
+												},
+												error: function (e) {
+													// 전송 후 에러 발생 시 실행 코드
+													console.log("ERROR : ", e);
+												}
+											});
+										}
+										$("#modal_close_btn").click(function(){
+											$("#modal").attr("style", "display:none");
+										})
+										$("#modal_open_btn").click(function(){
+											$("#modal").attr("style", "display:block");
+										})
+										</script>
+										<br>
+										<div class="row">
+											<table border="1">
+												<c:choose>
+													<c:when test="${empty qnaList }">
+														<tr><td colspan="10" align="center">작성된 문의가 없습니다.</td></tr>
+													</c:when>
+													<c:when test="${!empty qnaList }">
+														<c:forEach var="qnaList" items="${qnaList }">
+															<tr>
+																<c:choose>
+																	<c:when test="${!empty qnaList.QNA_LOCK }">
+																		<td rowspan="2" style="width: 88px;">
+																			<img alt="lock" src="${path}/resources/img/product/details/lock.png">
+																		</td>
+																	</c:when>
+																	<c:when test="${empty qnaList.QNA_LOCK }">
+																		<td rowspan="2" style="width: 88px;">
+																			<img alt="unlock" src="${path}/resources/img/product/details/unlock.png">
+																		</td>
+																	</c:when>
+																</c:choose>
+																<td colspan="2">${qnaList.QNA_TITLE }</td>
+																<c:choose>
+																	<c:when test="${!empty qnaList.QNA_ANSWER }">
+																		<td rowspan="2">답변완료</td>												
+																	</c:when>
+																	<c:when test="${empty qnaList.QNA_ANSWER }">
+																		<td rowspan="2">답변대기</td>												
+																	</c:when>
+																</c:choose>
+															</tr>
+															<tr>
+																<td>${qnaList.QNA_REGDATE }</td><td>${qnaList.QNA_CUSID }</td>
+															</tr>
+															<tr>
+																<td><input type="password" placeholder="비밀번호 입력" id="qna-content-password"></td>
+																<td><input type="button" id="qna-content-password-check" value="확인"></td>
+																<td colspan="4" id="qna-content">
+																	${qnaList.QNA_CONTENT }
+																</td>
+															</tr>
+															<tr>
+																<c:choose>
+																	<c:when test="${!empty qnaList.QNA_ANSWER }">
+																		<td colspan="4">${qnaList.QNA_ANSWER }</td>												
+																	</c:when>
+																	<c:otherwise>
+																		<td colspan="4">관리자가 답변을 준비중입니다. 다소 양해 부탁드립니다.</td>
+																	</c:otherwise>
+																</c:choose>
+															</tr>
+															
+															<script>
+																$('#qna-content-password-check').on('click', function(){
+																	var pwdCheck = $('#qna-content-password').val();
+																	if(pwdCheck === '${qnaList.QNA_LOCK}'){
+																		$('#qna-content').css('display','inline-block');
+																	}else{
+																		alert('패스워드가 틀렸습니다. 관리자에게 문의하세요.');
+																	}
+																})
+															</script>
+														</c:forEach>
+													</c:when>
+												</c:choose>
+											</table>
+										</div>
+									</div>
+									</div>
 								</div>
 							</div>
 						</div>
+
 					</div>
 				</div>
 			</div>
