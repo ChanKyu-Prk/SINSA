@@ -95,8 +95,8 @@ public class MyPageDAO {
 	public List<ReviewVO> myReviews(Map<String, Object> map){
 		return SST.selectList("myInfo.myReviews",map)	;
 		}
-	public ProductVO productMatchReview(String prdcode) {
-		return SST.selectOne("myInfo.productMatchReview",prdcode);
+	public OrdersAndProductVO productMatchReview(String REV_ORDERNUM) {
+		return SST.selectOne("myInfo.productMatchReview",REV_ORDERNUM);
 	}
 	
 	

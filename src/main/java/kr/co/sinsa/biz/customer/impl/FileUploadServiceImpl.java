@@ -14,7 +14,7 @@ import kr.co.sinsa.biz.customer.FileUploadService;
 
 @Service("fileUploadService")
 public class FileUploadServiceImpl implements FileUploadService{
-	private static final String SAVE_PATH = "\\resources\\prdImg";
+	private static final String SAVE_PATH = "\\resources\\img\\review";
 	@Override
 	public String reviewImgUpload(List<MultipartFile> multipartFile , HttpServletRequest req) {
 		String fileNames= "";
