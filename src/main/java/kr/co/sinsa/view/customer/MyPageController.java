@@ -1,6 +1,7 @@
 package kr.co.sinsa.view.customer;
 
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -517,6 +518,20 @@ public class MyPageController {
 			
 			model.addAttribute("myReviews", myReviews);
 			model.addAttribute("product", myPageSerive.productMatchReview(myReviews));
+			List<String[]> titleList = new ArrayList<String[]>();
+			List<String[]> imgList = new ArrayList<String[]>();
+			for(int i = 0; i < myReviews.size() ; i++) {
+				String[] title = myReviews.get(i).getREV_TITLE().split("/");
+				titleList.add(title);
+				String[] img = null;
+				if(myReviews.get(i).getREV_IMAGE()!=null) {
+				String str = myReviews.get(i).getREV_IMAGE().substring(0, myReviews.get(i).getREV_IMAGE().length()-1);
+				img = str.split("/");
+				}
+				imgList.add(img);
+			}
+			model.addAttribute("titleList", titleList);
+			model.addAttribute("imgList", imgList);
 			
 		} else {
 			Map<String, Object> map = new HashMap<String, Object>();
@@ -526,6 +541,20 @@ public class MyPageController {
 			List<ReviewVO> myReviews = myPageSerive.myReviews(map);
 			model.addAttribute("myReviews", myReviews);
 			model.addAttribute("product", myPageSerive.productMatchReview(myReviews));
+			List<String[]> titleList = new ArrayList<String[]>();
+			List<String[]> imgList = new ArrayList<String[]>();
+			for(int i = 0; i < myReviews.size() ; i++) {
+				String[] title = myReviews.get(i).getREV_TITLE().split("/");
+				titleList.add(title);
+				String[] img = null;
+				if(myReviews.get(i).getREV_IMAGE()!=null) {
+				String str = myReviews.get(i).getREV_IMAGE().substring(0, myReviews.get(i).getREV_IMAGE().length()-1);
+				img = str.split("/");
+				}
+				imgList.add(img);
+			}
+			model.addAttribute("titleList", titleList);
+			model.addAttribute("imgList", imgList);
 
 		}
 		model.addAttribute("date1", date1);

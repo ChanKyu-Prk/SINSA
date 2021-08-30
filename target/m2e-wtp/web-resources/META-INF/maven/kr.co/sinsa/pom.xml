@@ -15,6 +15,7 @@
 		<org.slf4j-version>1.6.6</org.slf4j-version>
 	</properties>
 	<dependencies>
+<<<<<<< HEAD
 
 
 		<dependency>
@@ -29,6 +30,8 @@
 
 
 
+=======
+>>>>>>> d08285f826f95bfd334e2a92c282b86f5bce6d9f
 		<!-- Spring -->
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -207,7 +210,11 @@
 			<version>4.1.0.Final</version>
 		</dependency>
 
+<<<<<<< HEAD
 
+=======
+		
+>>>>>>> d08285f826f95bfd334e2a92c282b86f5bce6d9f
 		<!-- JSON -->
 		<dependency>
 			<groupId>org.codehaus.jackson</groupId>
