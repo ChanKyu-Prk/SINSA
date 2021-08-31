@@ -82,17 +82,22 @@
 	/* 	width: 1141px; */
 }
 
-.review_title_title{
-	color:grey;
-	font-size:15px;
+.review_title_title {
+	color: grey;
+	font-size: 15px;
 }
 
-.review_title_right{
-	padding: 0px 0px 0px 30px;
-}
+/* .review_title_right { */
+/* 	padding: 0px 0px 0px 30px; */
+/* } */
 
-.review_title_left{
-	padding: 0px 0px 0px 35px;
+/* .review_title_left { */
+/* 	padding: 0px 0px 0px 35px; */
+/* } */
+
+
+.review_image{
+	height: 300px !important;
 }
 </style>
 
@@ -360,7 +365,11 @@
 					<div class="col-lg-4 col-md-4 col-sm-6">
 						<div class="blog__item">
 							<div class="blog__item__pic">
-								<img src="${path}/resources/img/review/상품후기.jpeg" alt="">
+							
+							<c:set var="img_array" value="${fn:split(list.REV_IMAGE,'/')}" />
+							
+<%-- 							<c:out var="image" value='${img_array[0]}' /> --%>
+								<img src="${path}/resources/img/review/${img_array[0]}" alt="" class="review_image">
 							</div>
 							<div class="blog__item__text">
 								<ul>
@@ -444,28 +453,42 @@
 
 								<h5>
 									<c:set var="Array" value="${fn:split(list.REV_TITLE,'/')}" />
-									<div>
-										<span class="review_title_title review_title_left">사이즈 :&nbsp;</span><span><c:out value='${Array[0]}' /></span> <span class="review_title_title review_title_right">색상 :&nbsp;</span><span><c:out
-												value='${Array[1]}' /></span>
+
+
+
+									<div class="container">
+										<div class="row">
+											<div class="col-6">
+												<span class="review_title_title review_title_left">사이즈
+													:&nbsp;</span><span><c:out value='${Array[0]}' /><br></span> <span
+													class="review_title_title review_title_left">착화감
+													:&nbsp;</span><span><c:out value='${Array[2]}' /></span>
+											</div>
+											<div class="col-6">
+												<span class="review_title_title review_title_right">색상
+													:&nbsp;</span><span><c:out value='${Array[1]}' /><br></span> <span
+													class="review_title_title review_title_right">배송
+													:&nbsp;</span><span><c:out value='${Array[3]}' /></span>
+											</div>
+										</div>
 									</div>
-									<div>
-										<span class="review_title_title review_title_left">착화감 :&nbsp;</span><span><c:out value='${Array[2]}' /></span> <span class="review_title_title review_title_right">배송 :&nbsp;</span><span><c:out
-												value='${Array[3]}' /></span>
-									</div>
+
+
+
 								</h5>
-								<c:set var="REV_CONTENT" value="${list.REV_CONTENT}]"/>
+								<c:set var="REV_CONTENT" value="${list.REV_CONTENT}]" />
 								<c:if test="${fn:length(REV_CONTENT) <= 70}">
-								<p>${list.REV_CONTENT}</p>
-								
+									<p>${list.REV_CONTENT}</p>
+
 								</c:if>
 								<c:if test="${fn:length(REV_CONTENT) > 70}">
 								${fn:substring(REV_CONTENT,0,70)}.....
 								
 								</c:if>
-								
-								
-								
-								
+
+
+
+
 							</div>
 						</div>
 					</div>

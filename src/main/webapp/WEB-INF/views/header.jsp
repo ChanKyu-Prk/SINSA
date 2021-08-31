@@ -40,7 +40,7 @@
 .navbar_category1 {
 	color: white;
 	font-weight: bold !important;
-	font-size: 19px;
+	font-size: 20px !important;
 	padding: 0px 0px 0px 14px;
 }
 </style>
@@ -197,7 +197,7 @@
 							<li><a href="/product/List/all/newest/all/1">ALL</a></li>
 							<li><a href="/product/List/men/newest/all/1">men</a>
 								<ul class="header__menu__dropdown">
-									<li><div class="navbar_category1">운동화</div></li>
+									<li><a href="#" class="navbar_category1">운동화</a></li>
 									<li><a href="/product/List/men/newest/sneakers/1">스니커즈</a></li>
 									<li><a href="/product/List/men/newest/converse/1">캔버스화</a></li>
 									<li><a href="/product/List/men/newest/slipon/1">슬립온</a></li>
@@ -205,7 +205,7 @@
 									<li><div>
 											<br>
 										</div></li>
-									<li><div class="navbar_category1">스포츠</div></li>
+									<li><a href="#" class="navbar_category1">스포츠</a></li>
 									<li><a href="/product/List/men/newest/running/1">런닝화</a></li>
 									<li><a href="/product/List/men/newest/basketball/1">농구화</a></li>
 									<li><a href="/product/List/men/newest/golf/1">골프화</a></li>
@@ -214,7 +214,7 @@
 								</ul></li>
 							<li><a href="/product/List/women/newest/all/1/">women</a>
 								<ul class="header__menu__dropdown">
-									<li><div class="navbar_category1">운동화</div></li>
+									<li><a href="#" class="navbar_category1">운동화</a></li>
 									<li><a href="/product/List/women/newest/sneakers/1">스니커즈</a></li>
 									<li><a href="/product/List/women/newest/converse/1">캔버스화</a></li>
 									<li><a href="/product/List/women/newest/slipon/1">슬립온</a></li>
@@ -223,7 +223,7 @@
 									<li><div>
 											<br>
 										</div></li>
-									<li><div class="navbar_category1">스포츠</div></li>
+									<li><a href="#" class="navbar_category1">스포츠</a></li>
 									<li><a href="/product/List/women/newest/running/1">런닝화</a></li>
 									<li><a href="/product/List/women/newest/basketball/1">농구화</a></li>
 									<li><a href="/product/List/women/newest/golf/1">골프화</a></li>
