@@ -1,6 +1,5 @@
 package kr.co.sinsa.admin.controller;
 
-import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -21,7 +20,7 @@ import kr.co.sinsa.admin.vo.PrdVO;
 import kr.co.sinsa.biz.product.PageInfo;
 
 @Controller
-public class PrdContorller {
+public class PrdController {
 
 	@Inject
 	PrdService prdService;

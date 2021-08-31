@@ -182,7 +182,7 @@ input[type=number] {
 	font-family: adihaus;
 }
 
-.product__details__price .discntNum {
+.product__details__price .discntNum, .discntNum {
 	text-decoration: line-through;
 	color: #999;
 	font-size: 18px;
@@ -253,6 +253,25 @@ button:disabled {
 .review_list:hover {
 	background-color: white !important;
 }
+
+#qna-content{
+	display: none;
+}
+
+#modal {
+	display:none; position:absolute; width:100%; height:60%; z-index:999999;
+	top: 50px;
+}
+
+#modal .modal_content {
+	width:900px; height:660px; margin:50px auto; padding:20px 10px; 
+	background:#fff; border: 2px solid #666;
+}
+
+#qna-table{
+	border-bottom: 1px solid gray;
+}
+
 </style>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -643,20 +662,14 @@ button:disabled {
 							</div>
 							<div class="tab-pane" id="tabs-2" role="tabpanel">
 								<div class="product__details__tab__desc">
-
-
-
-
 									<div class="container">
 										<div class="row">
-											<c:forEach var="list" items="${detailReviewList}"
-												varStatus="status">
+											<c:forEach var="list" items="${detailReviewList}" varStatus="status">
 												<a class="list-group-item list-group-item-action review_list">
 													<div class="row">
 														<div class="col">
 															<div class="row TextCenter" data-toggle="collapse"
 																data-target="#content${status.index}">
-
 																<span class="col-md-2 span_star"> <c:if
 																		test="${list.REV_STAR eq 0}">
 																		<img src="${path}/resources/img/empty_star.png"
@@ -721,15 +734,9 @@ button:disabled {
 																</span> <span class="col-md-10"> ${list.PRD_NAME} /
 																	${list.PRD_COLOR } / ${list.ORDER_PRDSIZE } | &nbsp;${list.REV_TITLE} </span>
 																<div class="review_content">${list.REV_CONTENT}</div>
-
-
-
 																<div id="content${status.index}" class="collapse">
-
 																	<div class="col-md-5 left margin"></div>
-
 																	<div class="row">
-
 																		<div class="col-md-12 review_content">
 																			<img
 																				src="${path}/resources/img/product/나이키디파이올데이.png"
@@ -739,9 +746,7 @@ button:disabled {
 																				src="${path}/resources/img/product/나이키디파이올데이.png"
 																				alt="" class="review_img">
 																		</div>
-
 																	</div>
-
 																</div>
 															</div>
 														</div>
@@ -750,26 +755,6 @@ button:disabled {
 											</c:forEach>
 										</div>
 									</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 								</div>
 							</div>
 							<div class="tab-pane" id="tabs-3" role="tabpanel">
@@ -780,49 +765,198 @@ button:disabled {
 												수 있습니다.</p>
 										</li>
 									</ul>
+									<div class="container">
+									<div id="modal">
+											<div class="modal_content">
+												<form id="formToInput" method="post">
+													<input type="hidden" id="PRD_NUM" name="PRD_NUM" value="${prdInfo.PRD_NUM}" />
+													<p>
+													<label> 패스워드 </label><br>
+													<input type="text" id="QNA_LOCK" name="QNA_LOCK" />
+													</p>
+													<p>
+													<label> 글 제목 </label><br>
+													<input type="text" id="QNA_TITLE" name="QNA_TITLE" />
+													</p>
+													<p>
+													<label> 글 내용 </label><br>
+													<textarea rows="13" cols="90" id="QNA_CONTENT" name="QNA_CONTENT" ></textarea><br>
+													</p>
+													<button id="clkBtn" type="button" onclick="clkBtn()">확인</button>
+													<button type="button" id="modal_close_btn">닫기</button>
+												</form>
+											</div>
+										</div>
+									<div class="row">
+										<table>
+											<tr>
+												<th align="right">
+													<button type="button" id="modal_open_btn" class="btn-qna" >문의작성</button>
+												</th>
+											</tr>
+										</table><br>
+										
+										<script type="text/javascript">
+										// 버튼 클릭 시 실행
+										function clkBtn(){
+											// Get form
+											var form = $('#formToInput').serialize();
+											$.ajax({
+												url: '/formToInput',
+												type: "POST",
+												data: form,
+												beforeSend : function() {
+													// 전송 전 실행 코드
+													console.log("ajax 폼 전송");
+												},
+												success: function (data) {
+													// 전송 후 성공 시 실행 코드
+													console.log(data);
+												},
+												error: function (e) {
+													// 전송 후 에러 발생 시 실행 코드
+													console.log("ERROR : ", e);
+												}
+											});
+										}
+										$("#modal_close_btn").click(function(){
+											$("#modal").attr("style", "display:none");
+										})
+										$("#modal_open_btn").click(function(){
+											$("#modal").attr("style", "display:block");
+										})
+										</script>
+										<br>
+										<div class="row">
+										<c:forEach var="qnaList" items="${qnaList }">
+											<table id="qna-table" style="margin-bottom: 10px;">
+												<c:choose>
+													<c:when test="${empty qnaList }">
+														<tr><td align="center">작성된 문의가 없습니다.</td></tr>
+													</c:when>
+													<c:when test="${!empty qnaList }">
+															<tr>
+																<c:choose>
+																	<c:when test="${!empty qnaList.QNA_LOCK }">
+																		<td style="width: 63px;">
+																			<img alt="lock" width="60" src="${path}/resources/img/product/details/lock.png">
+																		</td>
+																	</c:when>
+																	<c:when test="${empty qnaList.QNA_LOCK }">
+																		<tdstyle="width: 63px;">
+																			<img alt="unlock" width="60" src="${path}/resources/img/product/details/unlock.png">
+																		</td>
+																	</c:when>
+																</c:choose>
+																<td style="width: 162px;"><fmt:formatDate value="${qnaList.QNA_REGDATE }" pattern="yyyy-MM-dd" /></td>
+																<td style="width: 605px;">${qnaList.QNA_TITLE }</td>
+																<td>${qnaList.QNA_CUSID }</td>
+															<c:choose>
+															<c:when test="${!empty qnaList.QNA_ANSWER }">
+																<td>답변완료</td>												
+															</c:when>
+															<c:when test="${empty qnaList.QNA_ANSWER }">
+																<td>답변대기</td>												
+															</c:when>
+																</c:choose>
+															</tr>
+															<tr>
+																<td colspan="5">
+																	<input type="password" placeholder="비밀번호 입력" id="qna-content-password">
+																	<input type="button" id="qna-content-password-check" value="확인">
+																</td>
+															</tr>
+															<tr>
+																<td colspan="5" id="qna-content">
+																	${qnaList.QNA_CONTENT }
+																</td>
+															</tr>
+															<tr>
+																<c:choose>
+																	<c:when test="${!empty qnaList.QNA_ANSWER }">
+																		<td colspan="5">${qnaList.QNA_ANSWER }</td>												
+																	</c:when>
+																	<c:otherwise>
+																		<td colspan="5">관리자가 답변을 준비중입니다. 다소 양해 부탁드립니다.</td>
+																	</c:otherwise>
+																</c:choose>
+															</tr>
+															<tr></tr>
+															
+															<script>
+																$('#qna-content-password-check').on('click', function(){
+																	var pwdCheck = $('#qna-content-password').val();
+																	if(pwdCheck === '${qnaList.QNA_LOCK}'){
+																		$('#qna-content').css('display','inline-block');
+																	}else{
+																		alert('패스워드가 틀렸습니다. 관리자에게 문의하세요.');
+																	}
+																})
+															</script>
+														
+													</c:when>
+												</c:choose>
+											</table>
+											<br>
+										</c:forEach>
+										</div>
+									</div>
+									</div>
 								</div>
 							</div>
 						</div>
+
 					</div>
 				</div>
 			</div>
 		</div>
 	</section>
 	<!-- Product Details Section End -->
-
+	<c:if test="${recommList != null}">
 	<!-- Related Product Section Begin -->
 	<section class="related-product">
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-12">
 					<div class="section-title related__product__title">
-						<h2>관련 상품</h2>
+						<h2>추천 상품</h2>
 					</div>
 				</div>
 			</div>
 			<div class="row">
+				<c:forEach var="list" items="${recommList}">
+				<c:if test="${list.PRD_CODE != prdInfo.PRD_CODE}">
 				<div class="col-lg-3 col-md-4 col-sm-6">
 					<div class="product__item">
 						<div class="product__item__pic set-bg"
-							data-setbg="/resources/img/product/product-1.jpg">
-							<ul class="product__item__pic__hover">
-								<li><a href="#"><i class="fa fa-heart"></i></a></li>
-								<li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-							</ul>
+							data-setbg="${pageContext.request.contextPath}/upload/prdImg/${list.PRD_CODE}.png">
 						</div>
 						<div class="product__item__text">
 							<h6>
-								<a href="#">Crab Pool Security</a>
+								<a href="/product/prdCode=${list.PRD_CODE}">${list.PRD_NAME}</a>
 							</h6>
-							<h5>$30.00</h5>
+							<c:if test="${list.PRD_DISRATE == 0}">
+								<h5 class="digits">${list.PRD_PRICE}</h5>
+							</c:if>
+							<c:if test="${list.PRD_DISRATE != 0}">
+								<c:set var="finalPriceOrg"
+									value="${list.PRD_PRICE-(list.PRD_PRICE*(list.PRD_DISRATE/100))}" />
+								<c:set var="finalPrice"
+									value="${fn:substringBefore(finalPriceOrg, '.')}" />
+								<h5 class="digits discntNum">${list.PRD_PRICE}원</h5>
+								<h5 class="digits">${finalPrice}원</h5>
+							</c:if>
 						</div>
 					</div>
 				</div>
+				</c:if>
+				</c:forEach>
 			</div>
 		</div>
 	</section>
 	<jsp:include page="../footer.jsp" />
 	<!-- Related Product Section End -->
+	</c:if>
 	<script type="text/javascript">
 		$(document)
 				.ready(
