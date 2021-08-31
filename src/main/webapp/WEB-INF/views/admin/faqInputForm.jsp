@@ -33,11 +33,12 @@
 				<tr>
 					<td class="q">Q</td>
 					<td><form:input path="faq_q" class="form-control"/></td>
+					<td width=200px></td>
 				</tr>
 				<tr>
 					<td class="a">A</td>
-
 					<td><form:textarea class="form-control" path="faq_a" cols="50" rows="5" /></td>
+					<td></td>
 				</tr>
 				<tr>
 					<td colspan="2" style="text-align:right;"><input type="submit" class="btn btn-primary" value="등록"></td>

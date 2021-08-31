@@ -17,7 +17,7 @@ import kr.co.sinsa.admin.vo.NoticeVO;
 import kr.co.sinsa.biz.product.PageInfo;
 
 @Controller
-public class NoticeContorller {
+public class NoticeController {
 	
 	@Inject
 	NoticeService noticeService;

@@ -15,23 +15,6 @@
 		<org.slf4j-version>1.6.6</org.slf4j-version>
 	</properties>
 	<dependencies>
-<<<<<<< HEAD
-
-
-		<dependency>
-
-			<groupId>com.google.code.gson</groupId>
-
-			<artifactId>gson</artifactId>
-
-			<version>2.8.5</version>
-
-		</dependency>
-
-
-
-=======
->>>>>>> d08285f826f95bfd334e2a92c282b86f5bce6d9f
 		<!-- Spring -->
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -210,11 +193,7 @@
 			<version>4.1.0.Final</version>
 		</dependency>
 
-<<<<<<< HEAD
 
-=======
-		
->>>>>>> d08285f826f95bfd334e2a92c282b86f5bce6d9f
 		<!-- JSON -->
 		<dependency>
 			<groupId>org.codehaus.jackson</groupId>
@@ -241,9 +220,27 @@
 			<version>1.1.1</version>
 		</dependency>
 
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpclient</artifactId>
+			<version>4.5.2</version>
+		</dependency>
 
+		<dependency>
+			<groupId>com.google.code.gson</groupId>
+			<artifactId>gson</artifactId>
+			<version>2.8.0</version>
+		</dependency>
 
 	</dependencies>
+
+  <scm>
+	<url>https://github.com/iamport/iamport-rest-client-java-hc</url>
+  	<connection>scm:git:https://github.com/iamport/iamport-rest-client-java-hc.git</connection>
+  	<developerConnection>scm:git:https://github.com/iamport/iamport-rest-client-java-hc.git</developerConnection>
+  	<tag>HEAD</tag>
+  </scm>
+  
 	<build>
 		<plugins>
 			<plugin>
