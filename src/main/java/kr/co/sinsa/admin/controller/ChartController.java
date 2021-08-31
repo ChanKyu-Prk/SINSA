@@ -34,11 +34,11 @@ public class ChartController {
 
 	
 
-	@RequestMapping(value = "dateIncome", method = RequestMethod.GET)
+	@RequestMapping(value = "/admin/adminIndex", method = RequestMethod.GET)
 
 	public String dateIncome(Locale locale, Model model) {
 
-		return "/dateIncome";
+		return "/admin/adminIndex";
 	}
 
 

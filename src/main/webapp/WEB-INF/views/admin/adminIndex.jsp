@@ -15,7 +15,7 @@
 
 </head>
 <body>
-
+<jsp:include page="adminHeader.jsp" />
 
 <div>
 		<div style="width: 27%" class="chart_container">
@@ -161,5 +161,7 @@
 			})
 		}
 	</script>
+	
+	
 </body>
 </html>
