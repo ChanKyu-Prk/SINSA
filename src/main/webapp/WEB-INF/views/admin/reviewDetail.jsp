@@ -40,10 +40,15 @@ div {
 				<br />
 				<table id="reviewlist" class="table table-bordered"
 					style="text-align: center; border: 0px solid #dddddd">
+					
 					<tr>
 						<td nowrap>고객아이디</td>
-						<td><form:input path="rev_cusid" class="form-control" readonly="true"/></td>
+						<td><form:input path="rev_cusid" class="form-control" readonly="true"/></td> 
+						<%-- <td nowrap>리뷰내용</td>
+						<td rowspan="10"><form:textarea path="rev_content"
+						style="height: 300px; width: 500px;" readonly="true"/></td> --%>
 						
+						<tr>
 						<td nowrap>&nbsp;&nbsp;상품코드&nbsp;&nbsp;</td>
 						<td><form:input path="rev_prdcode" class="form-control" readonly="true"/></td>
 					</tr>
@@ -52,18 +57,21 @@ div {
 					<tr>
 						<td>제목</td>
 						<td><form:input path="rev_title" class="form-control" readonly="true"/></td>
-						  <td>별점</td>
-						<td><form:input path="rev_star" class="form-control" readonly="true"/></td>
-					</tr>
+						</tr>
+						
 					<tr>
-					<td nowrap>이미지</td>
-						<td rowspan="10"><form:textarea path="rev_image"
-								style="height: 200px; width: 500px;" /></td>
-								
-						<td nowrap>리뷰내용</td>
-						<td rowspan="10"><form:textarea path="rev_content"
-								style="height: 200px; width: 500px;" readonly="true"/></td>		
+						 <td>별점</td>
+						 <td><form:input path="rev_star" class="form-control" readonly="true"/></td>
+						 
+						 </tr>
+						<tr>
+						<!-- <td rowspan="10"></td> -->
+						<td nowrap>이미지</td>
+					<c:forEach items="${imgList }" var="imglist">
+						<td rowspan="10"><img alt="리뷰 사진" src="${pageContext.request.contextPath}/resources/img/review/${imglist }" style="height: 200px; width: 500px;" /></td>
+						</c:forEach>
 					</tr>
+					
 				</table>
 				<div align="center">
 					<!-- <input type="button" class="btn btn-danger btn-sm" onclick="javascript:reviewDelete()" value="리뷰삭제" /> -->

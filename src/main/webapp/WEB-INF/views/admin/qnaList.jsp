@@ -132,8 +132,8 @@ table {
 					<td>${ e.prd_num }</td>
 					<td>${ e.qna_title }</td>
 					<td>
-					<c:if test="${!empty fn:trim(e.qna_answer)}">답변완료</c:if>
-             		<c:if test="${empty fn:trim(e.qna_answer)}">답변대기</c:if>
+					<c:if test="${!empty fn:trim(e.qna_answer)}"><font color=whitegreen>답변완료</font></c:if>
+             		<c:if test="${empty fn:trim(e.qna_answer)}"><font color=red>답변대기</font></c:if>
 					</td>
 					<td>
 			<fmt:formatDate value="${e.qna_regdate}" pattern="YYYY-MM-dd" />
