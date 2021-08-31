@@ -7,7 +7,6 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 
-import kr.co.sinsa.biz.product.CartVO;
 import kr.co.sinsa.biz.product.QnaService;
 import kr.co.sinsa.biz.product.QnaVO;
 
@@ -24,5 +23,17 @@ public class QnaServiceImpl implements QnaService{
 	@Override
 	public List<QnaVO> insertQNA(Map<String, Object> map) {	
 		return DAO.insertQNA(map);
+	}
+	@Override
+	public List<QnaVO> updateQNA(Map<String, Object> map) {	
+		return DAO.updateQNA(map);
+	}
+	@Override
+	public List<QnaVO> deleteQNA(Map<String, Object> map) {	
+		return DAO.deleteQNA(map);
+	}
+	@Override
+	public QnaVO selectQNA(String QNA_CUSID) {	
+		return DAO.selectQNA(QNA_CUSID);
 	}
 }

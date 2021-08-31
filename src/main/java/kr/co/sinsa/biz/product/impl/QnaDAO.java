@@ -23,4 +23,14 @@ public class QnaDAO {
 	public List<QnaVO> insertQNA(Map<String, Object> map){
 		return SST.selectList("ProductList.insertQNA", map);
 	}
+	public List<QnaVO> updateQNA(Map<String, Object> map){
+		return SST.selectList("ProductList.updateQNA", map);
+	}
+
+	public List<QnaVO> deleteQNA(Map<String, Object> map){
+		return SST.selectList("ProductList.deleteQNA", map);
+	}
+	public QnaVO selectQNA(String QNA_CUSID){
+		return SST.selectOne("ProductList.selectQNA", QNA_CUSID);
+	}
 }
