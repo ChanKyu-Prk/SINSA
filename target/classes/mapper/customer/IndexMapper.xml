@@ -8,7 +8,7 @@
       </select> 
       
       <select id="getReviewList" resultType="kr.co.sinsa.biz.customer.ReviewVO"> 
-          select * from REVIEW order by REV_STAR desc limit 3
+          select * from REVIEW order by REV_NUM desc limit 3
       </select> 
       
       <select id="getOrderList" resultType="kr.co.sinsa.biz.orders.OrdersVO"> 

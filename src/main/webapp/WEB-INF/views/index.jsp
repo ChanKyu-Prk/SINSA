@@ -17,7 +17,7 @@
 
 
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 
 
 
@@ -58,29 +58,41 @@
 	color: black;
 	font-weight: bold;
 	font-size: 20px;
-	
 	-webkit-text-stroke-color: white
 }
 
 .banner_sinsa {
 	color: black !important;
 	font-size: 30px !important;
-/* 	-webkit-text-stroke-color: white; */
-/* 	-webkit-text-stroke-width: 2px; */
+	/* 	-webkit-text-stroke-color: white; */
+	/* 	-webkit-text-stroke-width: 2px; */
 }
 
 .banner_cover {
 	position: absolute;
-/* 	left: 14px; */
-/* 	top: 100px; */
-/* 	left:80px; */
-/* 	top:160px; */
+	/* 	left: 14px; */
+	/* 	top: 100px; */
+	/* 	left:80px; */
+	/* 	top:160px; */
 	height: 250px;
-	width:350px;
-	
-/* 	height: 411px; */
-/* 	width: 450px; */
-/* 	width: 1141px; */
+	width: 350px;
+
+	/* 	height: 411px; */
+	/* 	width: 450px; */
+	/* 	width: 1141px; */
+}
+
+.review_title_title{
+	color:grey;
+	font-size:15px;
+}
+
+.review_title_right{
+	padding: 0px 0px 0px 30px;
+}
+
+.review_title_left{
+	padding: 0px 0px 0px 35px;
 }
 </style>
 
@@ -121,14 +133,13 @@
 					<div class="hero__item set-bg"
 						data-setbg="${path}/resources/img/banner/베너.jpg">
 						<div class="hero__text">
-<%-- 							<img class="banner_cover" src="${path}/resources/img/banner/베너커버.png">  --%>
-								
-								<span
-								class="banner_sinsa">&nbsp;SINSA</span>
+							<%-- 							<img class="banner_cover" src="${path}/resources/img/banner/베너커버.png">  --%>
+
+							<span class="banner_sinsa">&nbsp;SINSA</span>
 							<h2 class="banner_text">
 								이달의 특가 <br>최대 40% 할인!
 							</h2>
-<!-- 							<p class="banner_text2">지금 특별한 가격을 만나보세요~</p> -->
+							<!-- 							<p class="banner_text2">지금 특별한 가격을 만나보세요~</p> -->
 							<!-- 							<a href="#" class="primary-btn">SHOP NOW</a> -->
 						</div>
 					</div>
@@ -345,6 +356,7 @@
 
 
 				<c:forEach var="list" items="${reviewList}" varStatus="status">
+
 					<div class="col-lg-4 col-md-4 col-sm-6">
 						<div class="blog__item">
 							<div class="blog__item__pic">
@@ -431,9 +443,29 @@
 								</ul>
 
 								<h5>
-									<a href="#">${list.REV_TITLE}</a>
+									<c:set var="Array" value="${fn:split(list.REV_TITLE,'/')}" />
+									<div>
+										<span class="review_title_title review_title_left">사이즈 :&nbsp;</span><span><c:out value='${Array[0]}' /></span> <span class="review_title_title review_title_right">색상 :&nbsp;</span><span><c:out
+												value='${Array[1]}' /></span>
+									</div>
+									<div>
+										<span class="review_title_title review_title_left">착화감 :&nbsp;</span><span><c:out value='${Array[2]}' /></span> <span class="review_title_title review_title_right">배송 :&nbsp;</span><span><c:out
+												value='${Array[3]}' /></span>
+									</div>
 								</h5>
+								<c:set var="REV_CONTENT" value="${list.REV_CONTENT}]"/>
+								<c:if test="${fn:length(REV_CONTENT) <= 70}">
 								<p>${list.REV_CONTENT}</p>
+								
+								</c:if>
+								<c:if test="${fn:length(REV_CONTENT) > 70}">
+								${fn:substring(REV_CONTENT,0,70)}.....
+								
+								</c:if>
+								
+								
+								
+								
 							</div>
 						</div>
 					</div>
