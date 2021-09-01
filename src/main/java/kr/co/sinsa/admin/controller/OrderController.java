@@ -14,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import kr.co.sinsa.admin.dao.CancelData;
 import kr.co.sinsa.admin.service.IamportClient;
@@ -126,7 +127,7 @@ public class OrderController {
 		
 		maxPage = (int) ((double) listCount / limit + 0.95);
 		startPage = (((int) ((double) page / 5 + 0.8)) - 1) * 5 + 1;
-		endPage = startPage + 4;
+		endPage = startPage + 9;
 		if (endPage > maxPage) {
 			endPage = maxPage;
 		}
@@ -150,7 +151,7 @@ public class OrderController {
 	}
 	
 	@RequestMapping("/admin/orderCancel")
-	public String orderCancel(HttpServletRequest request, OrderVO vo) throws Exception {
+	public String orderCancel(HttpServletRequest request, OrderVO vo, RedirectAttributes rttr) throws Exception {
 		IamportClient client;
 
 		String api_key = "1830448691401152";
@@ -158,24 +159,43 @@ public class OrderController {
 
 		client = new IamportClient(api_key, api_secret);
 		
-
 		String token = client.getToken();
-		System.out.println("token : " + token);
 		
 		IamportResponse<Payment> paymentByMerchantUid = client.paymentByMerchantUid(vo.getOrder_num());
-		System.out.println(paymentByMerchantUid.getResponse().getMerchantUid());
 		
-		int cancelAccount = vo.getOrder_price()-vo.getOrder_usepoint();
+		int payment = paymentByMerchantUid.getResponse().getAmount() - paymentByMerchantUid.getResponse().getCancelAmount();
+		int cancelAmount = vo.getOrder_price();
 		
-		CancelData cancel2 = new CancelData(vo.getOrder_num(), false, cancelAccount);
-		IamportResponse<Payment> cancelpayment2 = client.cancelPayment(cancel2);
-		System.out.println(cancelpayment2.getMessage());
-	
-		
-		
-		orderService.order_cancel(vo);
+		if (payment <= 0) {
+			rttr.addFlashAttribute("msg", "이미 전액 취소된 주문입니다.");
+			
+		} else if (cancelAmount < payment) {
+
+			CancelData cancel2 = new CancelData(vo.getOrder_num(), false, cancelAmount);
+			IamportResponse<Payment> cancelpayment2 = client.cancelPayment(cancel2);
+			System.out.println(cancelpayment2.getMessage());
+
+			rttr.addFlashAttribute("msg", "결제금액 " + payment + "원 중 " + cancelAmount + "원 부분 취소됩니다.");
+			
+			orderService.order_cancel(vo);
+			
+		} else if (cancelAmount >= payment) {
+			
+			CancelData cancel2 = new CancelData(vo.getOrder_num(), false);
+			IamportResponse<Payment> cancelpayment2 = client.cancelPayment(cancel2);
+			System.out.println(cancelpayment2.getMessage());
+			
+			rttr.addFlashAttribute("msg", payment + "원 전액 취소됩니다.");
+			
+			orderService.order_cancel(vo);
+			
+		} 
+
+
 		String referer = request.getHeader("Referer");
+		
 		return "redirect:"+referer;
+		
 	}
 	  
 	  

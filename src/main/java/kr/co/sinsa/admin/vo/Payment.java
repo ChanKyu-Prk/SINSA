@@ -49,10 +49,10 @@ public class Payment {
 	String name;
 	
 	@SerializedName("amount")
-	BigDecimal amount;
+	int amount;
 	
 	@SerializedName("cancel_amount")
-	BigDecimal cancel_amount;
+	int cancel_amount;
 	
 	@SerializedName("buyer_name")
 	String buyer_name;
@@ -149,11 +149,11 @@ public class Payment {
 		return name;
 	}
 
-	public BigDecimal getAmount() {
+	public int getAmount() {
 		return amount;
 	}
 
-	public BigDecimal getCancelAmount() {
+	public int getCancelAmount() {
 		return cancel_amount;
 	}
 

@@ -35,6 +35,12 @@ table {
 
 </head>
 <body>
+	<script type="text/javascript">
+	var message = "${msg}";	
+		if (message) {
+			alert(message);				
+		}
+	</script>
 	<jsp:include page="adminHeader.jsp" flush="true" />
 	<br>
 	<br>

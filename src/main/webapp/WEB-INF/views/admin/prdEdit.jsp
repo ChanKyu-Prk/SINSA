@@ -31,7 +31,7 @@ div {
 			<form:form method="post" action="prdUpdate" modelAttribute="prdInfo"
 				enctype="multipart/form-data">
 				<input type="hidden" id="referer" name="referer" value="<%= getreferer %>" />
-				
+				<form:hidden path="prd_image"/>
 				<form:hidden path="prd_num" />
 				<div class="row">
 				
