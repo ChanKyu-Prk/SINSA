@@ -56,6 +56,12 @@
 	font-weight: bold !important;
 	font-size: 18px !important;
 }
+
+.login_box{
+	border: 1px solid white !important;
+	box-shadow: none;
+}
+
 </style>
 
 <%
@@ -98,7 +104,7 @@
 		<div class="container">
 			<div class="row align-items-center justify-content-center">
 				<div class="col-md-12 login">
-					<div class="form-block mx-auto">
+					<div class="form-block mx-auto login_box">
 						<div class="text-center mb-5">
 							<h3 class="text-uppercase">
 								<strong>로그인</strong>
@@ -123,12 +129,13 @@
 									name="id_rem"
 									<%if(CUS_ID.length()>1) out.println("checked"); %> />
 									<div class="control__indicator"></div> </label>
-								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <label
-									class="control control--checkbox mb-3 mb-sm-0"><span
-									class="caption">비밀번호 저장</span> <input type="checkbox"
-									name="pwd_rem"
-									<%if(CUS_PWD.length()>1) out.println("checked"); %> />
-									<div class="control__indicator"></div> </label> <span
+<!-- 								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <label -->
+<!-- 									class="control control--checkbox mb-3 mb-sm-0"><span -->
+<!-- 									class="caption">비밀번호 저장</span> <input type="checkbox" -->
+<!-- 									name="pwd_rem" -->
+<%-- 									<%if(CUS_PWD.length()>1) out.println("checked"); %> /> --%>
+<!-- 									<div class="control__indicator"></div> </label> -->
+									<span
 									class="ml-auto "><a href="find_ID_PWD.do"
 									class="forgot-pass find_id_pw">ID/PW 찾기</a></span>
 							</div>

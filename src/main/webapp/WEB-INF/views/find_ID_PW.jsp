@@ -225,7 +225,7 @@
 
 	<div class="wrapper">
 		<div class="tab">
-			<div class="head">ID/Password 찾기</div>
+			<div class="head"> 아이디/비밀번호 찾기</div>
 			<div class="description">아이디와 비밀번호는 가입 시 입력하신 정보를 통해 찾을 수 있습니다.</div>
 			<ul class="tabnav">
 				<li><a href="#tab01">아이디 찾기</a></li>
