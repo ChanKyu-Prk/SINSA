@@ -15,15 +15,20 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import kr.co.sinsa.admin.dao.CancelData;
+import kr.co.sinsa.admin.service.IamportClient;
+import kr.co.sinsa.admin.service.IamportResponse;
 import kr.co.sinsa.admin.service.OrderService;
 import kr.co.sinsa.admin.vo.OrderVO;
+import kr.co.sinsa.admin.vo.Payment;
 import kr.co.sinsa.biz.product.PageInfo;
 
 @Controller
-public class OrderContorller {
+public class OrderController {
 
 	@Inject
 	OrderService orderService;
+	
 
 	public String today() {
 
@@ -53,7 +58,8 @@ public class OrderContorller {
 			@RequestParam(value = "edate", required = false) String edate,
 			@RequestParam(value = "fieldName", required = false) String fieldName,
 			@RequestParam(value = "searchWord", required = false) String searchWord, OrderVO vo) {
-
+		
+		
 		int page = 1;
 		int limit = 10;
 		int listCount;
@@ -101,7 +107,7 @@ public class OrderContorller {
 			sales = 0;
 		}
 		
-		if (cancelCount > 0) {
+		if (cancelCount > 0 && searchWord != "취소요청") {
 			minus = orderService.minus(map);
 		} else {
 			minus = 0;
@@ -144,7 +150,28 @@ public class OrderContorller {
 	}
 	
 	@RequestMapping("/admin/orderCancel")
-	public String orderCancel(HttpServletRequest request, OrderVO vo) {
+	public String orderCancel(HttpServletRequest request, OrderVO vo) throws Exception {
+		IamportClient client;
+
+		String api_key = "1830448691401152";
+		String api_secret = "d312640ec3ffac59888043ca53d4834031672d583ec9cff4c2a2b99c9b00aacb11c6b0392f14c010";
+
+		client = new IamportClient(api_key, api_secret);
+		
+
+		String token = client.getToken();
+		System.out.println("token : " + token);
+		
+		IamportResponse<Payment> paymentByMerchantUid = client.paymentByMerchantUid(vo.getOrder_num());
+		System.out.println(paymentByMerchantUid.getResponse().getMerchantUid());
+		
+		int cancelAccount = vo.getOrder_price()-vo.getOrder_usepoint();
+		
+		CancelData cancel2 = new CancelData(vo.getOrder_num(), false, cancelAccount);
+		IamportResponse<Payment> cancelpayment2 = client.cancelPayment(cancel2);
+		System.out.println(cancelpayment2.getMessage());
+	
+		
 		
 		orderService.order_cancel(vo);
 		String referer = request.getHeader("Referer");
@@ -152,44 +179,4 @@ public class OrderContorller {
 	}
 	  
 	  
-	/*
-	 * @RequestMapping(value = "/admin/stockAdd", method = RequestMethod.POST)
-	 * public String stockInputForm(HttpServletRequest request, Model model, StockVO
-	 * vo) {
-	 * 
-	 * String pick = request.getParameter("picks"); System.out.println(pick);
-	 * 
-	 * int page = 1; int limit = 10; int listCount; int startPage; int endPage; int
-	 * maxPage;
-	 * 
-	 * Map<String, Object> map = new HashMap<String, Object>(); map.put("pick",
-	 * pick); map.put("page", (page - 1) * 10);
-	 * 
-	 * listCount = stockService.stock_pick_count(map); List<StockVO> list =
-	 * stockService.stock_pick_list(map); model.addAttribute("stockList", list);
-	 * 
-	 * model.addAttribute("stockInfo", vo);
-	 * 
-	 * maxPage = (int) ((double) listCount / limit + 0.95); startPage = (((int)
-	 * ((double) page / 5 + 0.8)) - 1) * 5 + 1; endPage = startPage + 4; if (endPage
-	 * > maxPage) { endPage = maxPage; } PageInfo pageInfo = new PageInfo();
-	 * pageInfo.setListCount(listCount); pageInfo.setEndPage(endPage);
-	 * pageInfo.setStartPage(startPage); pageInfo.setMaxPage(maxPage);
-	 * pageInfo.setPage(page); model.addAttribute("pageInfo", pageInfo);
-	 * 
-	 * return "admin/stockAddForm"; }
-	 * 
-	 * @RequestMapping(value = "/admin/stockInsert", method = RequestMethod.POST)
-	 * public String stockInsert(StockVO vo) { stockService.stock_insert(vo); return
-	 * "redirect:/admin/stockList"; }
-	 * 
-	 * @RequestMapping("/admin/stockEdit") public String stockEdit(Model
-	 * model, @RequestParam String stock_prdcode) { model.addAttribute("stockInfo",
-	 * stockService.stock_info(stock_prdcode)); return "admin/stockEdit"; }
-	 * 
-	 * 
-	 * @RequestMapping("/admin/stockDelete") public String stockDelete(@RequestParam
-	 * String stock_prdcode) { stockService.stock_delete(stock_prdcode); return
-	 * "redirect:/admin/stockList"; }
-	 */
 }
