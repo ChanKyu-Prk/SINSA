@@ -67,7 +67,7 @@ public class PrdController {
 
 		maxPage = (int) ((double) listCount / limit + 0.95);
 		startPage = (((int) ((double) page / 5 + 0.8)) - 1) * 5 + 1;
-		endPage = startPage + 4;
+		endPage = startPage + 9;
 		if (endPage > maxPage) {
 			endPage = maxPage;
 		}

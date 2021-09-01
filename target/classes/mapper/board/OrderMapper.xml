@@ -84,14 +84,13 @@
  			where order_num=${order_num}
  			and order_prdcode='${order_prdcode}'
  			and order_prdsize='${order_prdsize}'
- 			;
-	
-
-		update customer set cus_point=cus_point+${order_usepoint}
-			where cus_id='${order_cusid}';
 			
 	</update>
 	
+	<update  id="order_point_cancel" parameterType="kr.co.sinsa.admin.vo.OrderVO">>
+			update customer set cus_point=cus_point+${order_usepoint}
+			where cus_id='${order_cusid}';
+	</update>
 	
 	<select id="order_pick_list" parameterType="hashmap" resultType="kr.co.sinsa.admin.vo.OrderVO">
 		select s.order_prdcode, p.prd_name, s.order_220, s.order_225, s.order_230, s.order_235, s.order_240, s.order_245, s.order_250, s.order_255, s.order_260, s.order_265, s.order_270, s.order_275, s.order_280, s.order_285, s.order_290

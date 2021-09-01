@@ -146,8 +146,9 @@ div {
 								<form:option value="BLUE" />
 								<form:option value="PK" />
 								<form:option value="NEON" />
-								<form:option value="BG" />
+								<form:option value="YELLOW" />
 								<form:option value="SK" />
+								<form:option value="MULTI" />
 							</form:select></td>
 					</tr>
 					<tr>
