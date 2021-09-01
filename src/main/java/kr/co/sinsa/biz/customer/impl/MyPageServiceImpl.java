@@ -217,7 +217,7 @@ public class MyPageServiceImpl implements MyPageService {
 			}
 		}
 		int end = page + 6;
-		if ((page + 1) * 6 > listCount) {
+		if ((page + 6) > listCount) {
 			end = page + (listCount % 6);
 		}
 		for (int i = page; i < end; i++) {

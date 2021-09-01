@@ -142,7 +142,6 @@ tr.underline {
 	color: grey;
 }
 
-
 .padding0 {
 	padding: 0 !important;
 }
@@ -194,13 +193,17 @@ td {
 	-webkit-user-select: none;
 	-khtml-user-select: none;
 	user-select: none;
-	cursor:  pointer;
+	cursor: pointer;
 }
-
 
 .select_row {
 	background-color: white;
 	margin-bottom: 20px;
+}
+
+.nopadding {
+	margin: 0px !important;
+	padding: 0px !important;
 }
 </style>
 <title>SINSA : 나의 상품 후기</title>
@@ -208,310 +211,313 @@ td {
 <jsp:include page="../header.jsp"></jsp:include>
 
 <body>
-	<div class="container con_top_margin">
-		<div class="row">
-			<jsp:include page="myPageSideBar.jsp"></jsp:include>
-			<div class="col-9">
-				<div class="subjecet">
-					<h3>나의 상품 후기</h3>
-				</div>
-
-				<hr>
-
-
-				<div class="container period_wrap">
-
-
-
-
-					<div class="row period_wrap2">
-
-						<div class="col-5">
-							<div class="row">
-								<div class="col-3 periodBox" id="oneWeek">
-									<span class="tableCel">일주일</span>
-								</div>
-								<div class="col-3 periodBox" id="oneMonth">
-									<span class="tableCel">1개월</span>
-								</div>
-								<div class="col-3 periodBox" id="threeMonth">
-									<span class="tableCel">3개월</span>
-								</div>
-								<div class="col-3 periodBox" id="wholePeriod">
-									<span class="tableCel">전체</span>
-								</div>
-							</div>
-						</div>
-
-						<div class="col-7 dateBox">
-							<div class="row">
-								<div class="col-10">
-									<input type="date" id="date1" value="${date1 }"> ~ <input
-										type="date" id="date2" value="${date2 }">
-								</div>
-								<div class="col-2 periodBox serchBtn">
-									<span class="tableCel">조회</span>
-								</div>
-							</div>
-						</div>
-
-
-
+	<div class="continer nopadding">
+		<jsp:include page="../recentlyViewBar.jsp"></jsp:include>
+		<div class="container con_top_margin">
+			<div class="row">
+				<jsp:include page="myPageSideBar.jsp"></jsp:include>
+				<div class="col-9">
+					<div class="subjecet">
+						<h3>나의 상품 후기</h3>
 					</div>
-				</div>
+
+					<hr>
+
+
+					<div class="container period_wrap">
 
 
 
-				<div class="container orderlist">
-					<div class="row select_row">
-						<!-- 				<div class="col-1 reviews_l"></div> -->
-						<div class="col-3 reviews_w">후기 작성 하기</div>
-						<div class="col-3 reviews_s">
-							<div class="row reviews_s_row">
-								<div class="col-12 reviews_s_col">후기 내역 보기</div>
+
+						<div class="row period_wrap2">
+
+							<div class="col-5">
+								<div class="row">
+									<div class="col-3 periodBox" id="oneWeek">
+										<span class="tableCel">일주일</span>
+									</div>
+									<div class="col-3 periodBox" id="oneMonth">
+										<span class="tableCel">1개월</span>
+									</div>
+									<div class="col-3 periodBox" id="threeMonth">
+										<span class="tableCel">3개월</span>
+									</div>
+									<div class="col-3 periodBox" id="wholePeriod">
+										<span class="tableCel">전체</span>
+									</div>
+								</div>
 							</div>
+
+							<div class="col-7 dateBox">
+								<div class="row">
+									<div class="col-10">
+										<input type="date" id="date1" value="${date1 }"> ~ <input
+											type="date" id="date2" value="${date2 }">
+									</div>
+									<div class="col-2 periodBox serchBtn">
+										<span class="tableCel">조회</span>
+									</div>
+								</div>
+							</div>
+
+
+
 						</div>
-						<div class="col-6 reviews_r"></div>
 					</div>
-					<div class="row">
-						<div class="col-12 padding0">
-							<table>
-								<colgroup>
-									<col style="width: 15%;">
-									<col style="width: 25%;">
-									<col style="width: 20%;">
-									<col style="width: 20%;">
-									<col style="width: 20%;">
 
-								</colgroup>
-								<thead>
-									<tr>
 
-										<th colspan="2">상품정보</th>
-										<th>주문 일자</th>
-										<th>상태</th>
-										<th>후기</th>
-									</tr>
-								</thead>
-								<c:choose>
-									<c:when test="${fn:length(orderList) == 0}">
 
+					<div class="container orderlist">
+						<div class="row select_row">
+							<!-- 				<div class="col-1 reviews_l"></div> -->
+							<div class="col-3 reviews_w">후기 작성 하기</div>
+							<div class="col-3 reviews_s">
+								<div class="row reviews_s_row">
+									<div class="col-12 reviews_s_col">후기 내역 보기</div>
+								</div>
+							</div>
+							<div class="col-6 reviews_r"></div>
+						</div>
+						<div class="row">
+							<div class="col-12 padding0">
+								<table>
+									<colgroup>
+										<col style="width: 15%;">
+										<col style="width: 25%;">
+										<col style="width: 20%;">
+										<col style="width: 20%;">
+										<col style="width: 20%;">
+
+									</colgroup>
+									<thead>
 										<tr>
-											<td colspan="6">
-												<div class="container">
-													<div class="row noOrder_row">
-														<div class="col-12">
-															<svg xmlns="http://www.w3.org/2000/svg" id="exclamation"
-																class="bi bi-exclamation-circle" viewBox="0 0 16 16">
-  <path
-																	d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
-  <path
-																	d="M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995z" />
-</svg>
-															<br>후기 내역이 없습니다.
-														</div>
-													</div>
 
-												</div>
-											</td>
+											<th colspan="2">상품정보</th>
+											<th>주문 일자</th>
+											<th>상태</th>
+											<th>후기</th>
 										</tr>
-									</c:when>
-									<c:otherwise>
-										<c:forEach var="list" items="${orderList}" varStatus="status">
-											<tr class="underline">
+									</thead>
+									<c:choose>
+										<c:when test="${fn:length(orderList) == 0}">
 
-												<td class="imgtd">
-
-													<div class="td-row">
-														<input type="hidden" value="${list.ORDER_PRDCODE }"
-															class="prdcode"> <img class="thumbPic"
-															alt="상품 대표 사진" title="상품 대표 사진"
-															src="/resources/prdImg/shoe.jpg" />
+											<tr>
+												<td colspan="6">
+													<div class="container">
+														<div class="row noOrder_row">
+															<div class="col-12">
+																<svg xmlns="http://www.w3.org/2000/svg" id="exclamation"
+																	class="bi bi-exclamation-circle" viewBox="0 0 16 16">
+  <path
+																		d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+  <path
+																		d="M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995z" />
+</svg>
+																<br>후기 내역이 없습니다.
+															</div>
+														</div>
 
 													</div>
 												</td>
+											</tr>
+										</c:when>
+										<c:otherwise>
+											<c:forEach var="list" items="${orderList}" varStatus="status">
+												<tr class="underline">
 
-												<td>
-													<table>
-														<tr>
-															<td class="prd_brand_td"><span
-																class="prd_brand_span span_margin">${list.PRD_BRAND }</span></td>
-														</tr>
-														<tr>
-															<td class="prd_name_td"><span
-																class="prd_name_span span_margin"><input
-																	type="hidden" value="${list.ORDER_PRDCODE }"
-																	class="prdcode"> ${list.ORDER_PRDNAME }</span></td>
-														</tr>
-														<tr>
-															<td class="prd_size_td">사이즈 : ${list.ORDER_PRDSIZE }
-																mm</td>
-														</tr>
-													</table>
-												</td>
-												<td><fmt:formatDate var="date"
-														value="${list.ORDER_REGDATE }" pattern="yyyy-MM-dd" />
-													${date }</td>
-												<td>${list.ORDER_STATE }</td>
-												<td><c:choose>
-														<c:when test="${list.ORDER_STATE =='배송완료' }">
-															<c:choose>
-																<c:when test="${reviewCheck[status.index] ==0}">
+													<td class="imgtd">
 
-																	<span class="write_btn"> <input type="hidden"
-																		value="${list.ORDER_PRDCODE }" class="ORDER_PRDCODE">
-																		<input type="hidden" value="${list.ORDER_PRDSIZE  }"
-																		class="ORDER_PRDSIZE"> <input type="hidden"
-																		value="${list.ORDER_NUM  }" class="ORDER_NUM ">
-																		후기작성하기
-																	</span>
+														<div class="td-row">
+															<input type="hidden" value="${list.ORDER_PRDCODE }"
+																class="prdcode"> <img class="thumbPic"
+																alt="상품 대표 사진" title="상품 대표 사진"
+																src="/resources/prdImg/shoe.jpg" />
 
-																</c:when>
-																<c:otherwise>
+														</div>
+													</td>
+
+													<td>
+														<table>
+															<tr>
+																<td class="prd_brand_td"><span
+																	class="prd_brand_span span_margin">${list.PRD_BRAND }</span></td>
+															</tr>
+															<tr>
+																<td class="prd_name_td"><span
+																	class="prd_name_span span_margin"><input
+																		type="hidden" value="${list.ORDER_PRDCODE }"
+																		class="prdcode"> ${list.ORDER_PRDNAME }</span></td>
+															</tr>
+															<tr>
+																<td class="prd_size_td">사이즈 : ${list.ORDER_PRDSIZE }
+																	mm</td>
+															</tr>
+														</table>
+													</td>
+													<td><fmt:formatDate var="date"
+															value="${list.ORDER_REGDATE }" pattern="yyyy-MM-dd" />
+														${date }</td>
+													<td>${list.ORDER_STATE }</td>
+													<td><c:choose>
+															<c:when test="${list.ORDER_STATE =='배송완료' }">
+																<c:choose>
+																	<c:when test="${reviewCheck[status.index] ==0}">
+
+																		<span class="write_btn"> <input type="hidden"
+																			value="${list.ORDER_PRDCODE }" class="ORDER_PRDCODE">
+																			<input type="hidden" value="${list.ORDER_PRDSIZE  }"
+																			class="ORDER_PRDSIZE"> <input type="hidden"
+																			value="${list.ORDER_NUM  }" class="ORDER_NUM ">
+																			후기작성하기
+																		</span>
+
+																	</c:when>
+																	<c:otherwise>
 											작성완료
 											</c:otherwise>
-															</c:choose>
+																</c:choose>
 
-														</c:when>
-														<c:when test="${list.ORDER_STATE =='취소' }">
+															</c:when>
+															<c:when test="${list.ORDER_STATE =='취소' }">
 											작성불가 <br>
 											(취소상품)
 											</c:when>
-														<c:when test="${list.ORDER_STATE =='환불' }">
+															<c:when test="${list.ORDER_STATE =='환불' }">
 											작성불가 <br>
 											(환불상품)
 											</c:when>
-														<c:when test="${list.ORDER_STATE =='환불신청' }">
+															<c:when test="${list.ORDER_STATE =='환불신청' }">
 											작성불가 <br>
 											(환불상품)
 											</c:when>
-														<c:otherwise>
+															<c:otherwise>
 											배송전
 											</c:otherwise>
-													</c:choose></td>
+														</c:choose></td>
 
 
-											</tr>
-										</c:forEach>
-
-
-
-
-									</c:otherwise>
-								</c:choose>
-							</table>
+												</tr>
+											</c:forEach>
 
 
 
+
+										</c:otherwise>
+									</c:choose>
+								</table>
+
+
+
+							</div>
 						</div>
 					</div>
+
+					<!-- paging  부분-->
+					<c:if test="${fn:length(orderList) != 0}">
+						<ul class="pagination">
+							<c:choose>
+								<c:when test="${date1 != null || date2!= null}">
+									<c:choose>
+										<c:when test="${pageInfo.getPage()<=1}">
+											<li class="page-item disabled"><a class="page-link"
+												aria-disabled="true">이전</a></li>
+										</c:when>
+										<c:when test="${pageInfo.getStartPage()==1}">
+											<li class="page-item"><a class="page-link"
+												href="${pageInfo.getStartPage()}?fromDate=${date1}&toDate=${date2}"
+												tabindex="-1">이전</a></li>
+										</c:when>
+										<c:otherwise>
+											<li class="page-item"><a class="page-link"
+												href="${pageInfo.getStartPage()-1}?fromDate=${date1}&toDate=${date2}"
+												tabindex="-1">이전</a></li>
+										</c:otherwise>
+									</c:choose>
+
+									<c:forEach begin="${pageInfo.getStartPage()}"
+										end="${pageInfo.getEndPage()}" varStatus="state">
+										<c:choose>
+											<c:when test="${pageInfo.getPage()==state.index}">
+												<li class="page-item active" aria-current="page"><a
+													class="page-link">${state.index}</a></li>
+											</c:when>
+											<c:otherwise>
+												<li class="page-item"><a class="page-link"
+													href="${state.index}?fromDate=${date1}& qtoDate=${date2}">${state.index}</a></li>
+											</c:otherwise>
+										</c:choose>
+									</c:forEach>
+
+									<c:choose>
+										<c:when test="${pageInfo.getPage() >= pageInfo.getMaxPage()}">
+											<li class="page-item disabled"><a class="page-link"
+												aria-disabled="true">다음</a></li>
+										</c:when>
+										<c:when test="${pageInfo.getEndPage()==pageInfo.getMaxPage()}">
+											<li class="page-item"><a class="page-link"
+												href="${pageInfo.getEndPage()}?fromDate=${date1}&toDate=${date2}">다음</a></li>
+										</c:when>
+										<c:otherwise>
+											<li class="page-item"><a class="page-link"
+												href="${pageInfo.getEndPage()+1}?fromDate=${date1}&toDate=${date2}">다음</a></li>
+										</c:otherwise>
+									</c:choose>
+								</c:when>
+
+
+								<c:otherwise>
+									<c:choose>
+										<c:when test="${pageInfo.getPage()<=1}">
+											<li class="page-item disabled"><a class="page-link"
+												aria-disabled="true">이전</a></li>
+										</c:when>
+										<c:when test="${pageInfo.getStartPage()==1}">
+											<li class="page-item"><a class="page-link"
+												href="${pageInfo.getStartPage()}" tabindex="-1">이전</a></li>
+										</c:when>
+										<c:otherwise>
+											<li class="page-item"><a class="page-link"
+												href="${pageInfo.getStartPage()-1}" tabindex="-1">이전</a></li>
+										</c:otherwise>
+									</c:choose>
+
+									<c:forEach begin="${pageInfo.getStartPage()}"
+										end="${pageInfo.getEndPage()}" varStatus="state">
+										<c:choose>
+											<c:when test="${pageInfo.getPage()==state.index}">
+												<li class="page-item active" aria-current="page"><a
+													class="page-link">${state.index}</a></li>
+											</c:when>
+											<c:otherwise>
+												<li class="page-item"><a class="page-link"
+													href="${state.index}">${state.index}</a></li>
+											</c:otherwise>
+										</c:choose>
+									</c:forEach>
+
+									<c:choose>
+										<c:when test="${pageInfo.getPage() >= pageInfo.getMaxPage()}">
+											<li class="page-item disabled"><a class="page-link"
+												aria-disabled="true">다음</a></li>
+										</c:when>
+										<c:when test="${pageInfo.getEndPage()==pageInfo.getMaxPage()}">
+											<li class="page-item"><a class="page-link"
+												href="${pageInfo.getEndPage()}">다음</a></li>
+										</c:when>
+										<c:otherwise>
+											<li class="page-item"><a class="page-link"
+												href="${pageInfo.getEndPage()+1}">다음</a></li>
+										</c:otherwise>
+									</c:choose>
+								</c:otherwise>
+
+							</c:choose>
+
+						</ul>
+					</c:if>
+					<!-- paging 끝 -->
+
 				</div>
-
-				<!-- paging  부분-->
-				<c:if test="${fn:length(orderList) != 0}">
-					<ul class="pagination">
-						<c:choose>
-							<c:when test="${date1 != null || date2!= null}">
-								<c:choose>
-									<c:when test="${pageInfo.getPage()<=1}">
-										<li class="page-item disabled"><a class="page-link"
-											aria-disabled="true">이전</a></li>
-									</c:when>
-									<c:when test="${pageInfo.getStartPage()==1}">
-										<li class="page-item"><a class="page-link"
-											href="${pageInfo.getStartPage()}?fromDate=${date1}&toDate=${date2}"
-											tabindex="-1">이전</a></li>
-									</c:when>
-									<c:otherwise>
-										<li class="page-item"><a class="page-link"
-											href="${pageInfo.getStartPage()-1}?fromDate=${date1}&toDate=${date2}"
-											tabindex="-1">이전</a></li>
-									</c:otherwise>
-								</c:choose>
-
-								<c:forEach begin="${pageInfo.getStartPage()}"
-									end="${pageInfo.getEndPage()}" varStatus="state">
-									<c:choose>
-										<c:when test="${pageInfo.getPage()==state.index}">
-											<li class="page-item active" aria-current="page"><a
-												class="page-link">${state.index}</a></li>
-										</c:when>
-										<c:otherwise>
-											<li class="page-item"><a class="page-link"
-												href="${state.index}?fromDate=${date1}& qtoDate=${date2}">${state.index}</a></li>
-										</c:otherwise>
-									</c:choose>
-								</c:forEach>
-
-								<c:choose>
-									<c:when test="${pageInfo.getPage() >= pageInfo.getMaxPage()}">
-										<li class="page-item disabled"><a class="page-link"
-											aria-disabled="true">다음</a></li>
-									</c:when>
-									<c:when test="${pageInfo.getEndPage()==pageInfo.getMaxPage()}">
-										<li class="page-item"><a class="page-link"
-											href="${pageInfo.getEndPage()}?fromDate=${date1}&toDate=${date2}">다음</a></li>
-									</c:when>
-									<c:otherwise>
-										<li class="page-item"><a class="page-link"
-											href="${pageInfo.getEndPage()+1}?fromDate=${date1}&toDate=${date2}">다음</a></li>
-									</c:otherwise>
-								</c:choose>
-							</c:when>
-
-
-							<c:otherwise>
-								<c:choose>
-									<c:when test="${pageInfo.getPage()<=1}">
-										<li class="page-item disabled"><a class="page-link"
-											aria-disabled="true">이전</a></li>
-									</c:when>
-									<c:when test="${pageInfo.getStartPage()==1}">
-										<li class="page-item"><a class="page-link"
-											href="${pageInfo.getStartPage()}" tabindex="-1">이전</a></li>
-									</c:when>
-									<c:otherwise>
-										<li class="page-item"><a class="page-link"
-											href="${pageInfo.getStartPage()-1}" tabindex="-1">이전</a></li>
-									</c:otherwise>
-								</c:choose>
-
-								<c:forEach begin="${pageInfo.getStartPage()}"
-									end="${pageInfo.getEndPage()}" varStatus="state">
-									<c:choose>
-										<c:when test="${pageInfo.getPage()==state.index}">
-											<li class="page-item active" aria-current="page"><a
-												class="page-link">${state.index}</a></li>
-										</c:when>
-										<c:otherwise>
-											<li class="page-item"><a class="page-link"
-												href="${state.index}">${state.index}</a></li>
-										</c:otherwise>
-									</c:choose>
-								</c:forEach>
-
-								<c:choose>
-									<c:when test="${pageInfo.getPage() >= pageInfo.getMaxPage()}">
-										<li class="page-item disabled"><a class="page-link"
-											aria-disabled="true">다음</a></li>
-									</c:when>
-									<c:when test="${pageInfo.getEndPage()==pageInfo.getMaxPage()}">
-										<li class="page-item"><a class="page-link"
-											href="${pageInfo.getEndPage()}">다음</a></li>
-									</c:when>
-									<c:otherwise>
-										<li class="page-item"><a class="page-link"
-											href="${pageInfo.getEndPage()+1}">다음</a></li>
-									</c:otherwise>
-								</c:choose>
-							</c:otherwise>
-
-						</c:choose>
-
-					</ul>
-				</c:if>
-				<!-- paging 끝 -->
-
 			</div>
 		</div>
 	</div>
@@ -616,10 +622,9 @@ td {
 		var date2 = $('#date2').val();
 		location.href = '1?fromDate=' + date1 + '&toDate=' + date2;
 	});
-	
-	
-	$('.reviews_s_col').on("click",function(){
-		location.href= "/myReviews/1";
+
+	$('.reviews_s_col').on("click", function() {
+		location.href = "/myReviews/1";
 	});
 </script>
 </html>

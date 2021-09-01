@@ -161,11 +161,15 @@ tr {
 .uderline2 {
 	border-bottom: solid 1px #c1bfc1;
 	text-align: left;
-	
 }
-.toggle_td{
-padding : 20px;
 
+.toggle_td {
+	padding: 20px;
+}
+
+.nopadding {
+	margin: 0px !important;
+	padding: 0px !important;
 }
 </style>
 <title>SINSA : 상품 문의</title>
@@ -173,295 +177,301 @@ padding : 20px;
 <jsp:include page="../header.jsp"></jsp:include>
 
 <body>
-	<div class="container con_top_margin">
-		<div class="row">
-			<jsp:include page="myPageSideBar.jsp"></jsp:include>
-			<div class="col-9">
-				<div class="subjecet">
-					<h3>상품 문의</h3>
-				</div>
-
-				<hr>
-
-				<div class="container period_wrap">
-
-
-
-
-					<div class="row period_wrap2">
-
-						<div class="col-5">
-							<div class="row">
-								<div class="col-3 periodBox" id="oneWeek">
-									<span class="tableCel">일주일</span>
-								</div>
-								<div class="col-3 periodBox" id="oneMonth">
-									<span class="tableCel">1개월</span>
-								</div>
-								<div class="col-3 periodBox" id="threeMonth">
-									<span class="tableCel">3개월</span>
-								</div>
-								<div class="col-3 periodBox" id="wholePeriod">
-									<span class="tableCel">전체</span>
-								</div>
-							</div>
-						</div>
-
-						<div class="col-7 dateBox">
-							<div class="row">
-								<div class="col-10">
-									<input type="date" id="date1" value="${date1 }"> ~ <input
-										type="date" id="date2" value="${date2 }">
-								</div>
-								<div class="col-2 periodBox serchBtn">
-									<span class="tableCel">조회</span>
-								</div>
-							</div>
-						</div>
-
-
-
+	<div class="continer nopadding">
+		<jsp:include page="../recentlyViewBar.jsp"></jsp:include>
+		<div class="container con_top_margin">
+			<div class="row">
+				<jsp:include page="myPageSideBar.jsp"></jsp:include>
+				<div class="col-9">
+					<div class="subjecet">
+						<h3>상품 문의</h3>
 					</div>
-				</div>
 
-				<div class="container qnaList">
-					<div class="row">
-						<div class="col-12 padding0"></div>
-						<div class="col-12 padding0">
-							<table>
-								<colgroup>
-									<col style="width: 15%;">
-									<col style="width: 25%;">
-									<col style="width: 30%;">
-									<col style="width: 15%;">
-									<col style="width: 15%;">
+					<hr>
 
-								</colgroup>
-								<thead>
-									<tr>
-										<th colspan="2">상품정보</th>
-										<th>내용</th>
-										<th>작성일</th>
-										<th>처리 상태</th>
-									</tr>
-								</thead>
-								<c:choose>
-									<c:when test="${fn:length(QnAList) == 0}">
+					<div class="container period_wrap">
+
+
+
+
+						<div class="row period_wrap2">
+
+							<div class="col-5">
+								<div class="row">
+									<div class="col-3 periodBox" id="oneWeek">
+										<span class="tableCel">일주일</span>
+									</div>
+									<div class="col-3 periodBox" id="oneMonth">
+										<span class="tableCel">1개월</span>
+									</div>
+									<div class="col-3 periodBox" id="threeMonth">
+										<span class="tableCel">3개월</span>
+									</div>
+									<div class="col-3 periodBox" id="wholePeriod">
+										<span class="tableCel">전체</span>
+									</div>
+								</div>
+							</div>
+
+							<div class="col-7 dateBox">
+								<div class="row">
+									<div class="col-10">
+										<input type="date" id="date1" value="${date1 }"> ~ <input
+											type="date" id="date2" value="${date2 }">
+									</div>
+									<div class="col-2 periodBox serchBtn">
+										<span class="tableCel">조회</span>
+									</div>
+								</div>
+							</div>
+
+
+
+						</div>
+					</div>
+
+					<div class="container qnaList">
+						<div class="row">
+							<div class="col-12 padding0"></div>
+							<div class="col-12 padding0">
+								<table>
+									<colgroup>
+										<col style="width: 15%;">
+										<col style="width: 25%;">
+										<col style="width: 30%;">
+										<col style="width: 15%;">
+										<col style="width: 15%;">
+
+									</colgroup>
+									<thead>
 										<tr>
-											<td colspan="6 ">
-												<div class="container">
-													<div class="row noQnA_row">
-														<div class="col-12 td_center">
-															<svg xmlns="http://www.w3.org/2000/svg" id="exclamation"
-																class="bi bi-exclamation-circle" viewBox="0 0 16 16">
-  <path
-																	d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
-  <path
-																	d="M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995z" />
-</svg>
-															<br>문의 내역이 없습니다.
-														</div>
-													</div>
-
-												</div>
-											</td>
+											<th colspan="2">상품정보</th>
+											<th>내용</th>
+											<th>작성일</th>
+											<th>처리 상태</th>
 										</tr>
+									</thead>
+									<c:choose>
+										<c:when test="${fn:length(QnAList) == 0}">
+											<tr>
+												<td colspan="6 ">
+													<div class="container">
+														<div class="row noQnA_row">
+															<div class="col-12 td_center">
+																<svg xmlns="http://www.w3.org/2000/svg" id="exclamation"
+																	class="bi bi-exclamation-circle" viewBox="0 0 16 16">
+  <path
+																		d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+  <path
+																		d="M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995z" />
+</svg>
+																<br>문의 내역이 없습니다.
+															</div>
+														</div>
 
-									</c:when>
-									<c:otherwise>
-										<c:forEach var="list" items="${QnAList}" varStatus="status">
-
-											<tr class="underline">
-												<td class="imgtd td_center"><input type="hidden"
-													value="${status.index }" class="indexN">
-
-													<div class="td-row ">
-													<input type="hidden" value="${productList[status.index].PRD_CODE }" class="prdcode">
-														<img class="thumbPic" alt="상품 대표 사진" title="상품 대표 사진"
-															src="/resources/prdImg/shoe.jpg" />
-
-													</div></td>
-												<td>
-													<table>
-														<tr>
-															<td class="prd_brand_td td_center"><span
-																class="prd_brand_span span_margin">${productList[status.index].PRD_BRAND }</span></td>
-														</tr>
-														<tr>
-															<td class="prd_name_td td_center"><span
-																class="prd_name_span span_margin">
-																<input type="hidden" value="${productList[status.index].PRD_CODE }" class="prdcode">${productList[status.index].PRD_NAME }</span></td>
-														</tr>
-
-													</table>
+													</div>
 												</td>
-												<td class="td_center">${list.QNA_TITLE }</td>
-												<td class="td_center"><fmt:formatDate var="date"
-														value="${list.QNA_REGDATE }" pattern="yyyy-MM-dd" />
-													${date }<br></td>
-												<td class="td_center"><c:choose>
-														<c:when test="${list.QNA_ANSWER == null }">
+											</tr>
+
+										</c:when>
+										<c:otherwise>
+											<c:forEach var="list" items="${QnAList}" varStatus="status">
+
+												<tr class="underline">
+													<td class="imgtd td_center"><input type="hidden"
+														value="${status.index }" class="indexN">
+
+														<div class="td-row ">
+															<input type="hidden"
+																value="${productList[status.index].PRD_CODE }"
+																class="prdcode"> <img class="thumbPic"
+																alt="상품 대표 사진" title="상품 대표 사진"
+																src="/resources/prdImg/shoe.jpg" />
+
+														</div></td>
+													<td>
+														<table>
+															<tr>
+																<td class="prd_brand_td td_center"><span
+																	class="prd_brand_span span_margin">${productList[status.index].PRD_BRAND }</span></td>
+															</tr>
+															<tr>
+																<td class="prd_name_td td_center"><span
+																	class="prd_name_span span_margin"> <input
+																		type="hidden"
+																		value="${productList[status.index].PRD_CODE }"
+																		class="prdcode">${productList[status.index].PRD_NAME }</span></td>
+															</tr>
+
+														</table>
+													</td>
+													<td class="td_center">${list.QNA_TITLE }</td>
+													<td class="td_center"><fmt:formatDate var="date"
+															value="${list.QNA_REGDATE }" pattern="yyyy-MM-dd" />
+														${date }<br></td>
+													<td class="td_center"><c:choose>
+															<c:when test="${list.QNA_ANSWER == null }">
 												미답변
 												</c:when>
-														<c:otherwise>
+															<c:otherwise>
 												답변완료
 												</c:otherwise>
-													</c:choose></td>
-											</tr>
+														</c:choose></td>
+												</tr>
 
-											<tr>
-
-
-												<td colspan="5">
-													<table id="qna_content${status.index }" class="qna_content">
-														<colgroup>
-															<col style="width: 20%;">
-															<col style="width: 80%;">
-														</colgroup>
-														<tr class="uderline2">
-															<td class="toggle_td">질문</td>
-															<td class="toggle_td">${list.QNA_CONTENT }</td>
-														</tr>
-														<c:if test="${fn:length(list.QNA_ANSWER) != 0 }">
-														<tr class="uderline2">
-															<td class="toggle_td">답변</td>
-															<td class="toggle_td">${list.QNA_ANSWER }</td>
-
-														</tr>
-														</c:if>
-													</table>
-												</td>
-											</tr>
-
-										</c:forEach>
-									</c:otherwise>
-								</c:choose>
-
-							</table>
+												<tr>
 
 
+													<td colspan="5">
+														<table id="qna_content${status.index }"
+															class="qna_content">
+															<colgroup>
+																<col style="width: 20%;">
+																<col style="width: 80%;">
+															</colgroup>
+															<tr class="uderline2">
+																<td class="toggle_td">질문</td>
+																<td class="toggle_td">${list.QNA_CONTENT }</td>
+															</tr>
+															<c:if test="${fn:length(list.QNA_ANSWER) != 0 }">
+																<tr class="uderline2">
+																	<td class="toggle_td">답변</td>
+																	<td class="toggle_td">${list.QNA_ANSWER }</td>
 
+																</tr>
+															</c:if>
+														</table>
+													</td>
+												</tr>
+
+											</c:forEach>
+										</c:otherwise>
+									</c:choose>
+
+								</table>
+
+
+
+							</div>
 						</div>
 					</div>
+
+
+
+
+
+
+
+
+
+
+
+
+					<!-- paging  부분-->
+					<c:if test="${fn:length(QnAList) != 0}">
+						<ul class="pagination">
+							<c:choose>
+								<c:when test="${date1 != null || date2!= null}">
+									<c:choose>
+										<c:when test="${pageInfo.getPage()<=1}">
+											<li class="page-item disabled"><a class="page-link"
+												aria-disabled="true">이전</a></li>
+										</c:when>
+										<c:when test="${pageInfo.getStartPage()==1}">
+											<li class="page-item"><a class="page-link"
+												href="${pageInfo.getStartPage()}?fromDate=${date1}&toDate=${date2}"
+												tabindex="-1">이전</a></li>
+										</c:when>
+										<c:otherwise>
+											<li class="page-item"><a class="page-link"
+												href="${pageInfo.getStartPage()-1}?fromDate=${date1}&toDate=${date2}"
+												tabindex="-1">이전</a></li>
+										</c:otherwise>
+									</c:choose>
+
+									<c:forEach begin="${pageInfo.getStartPage()}"
+										end="${pageInfo.getEndPage()}" varStatus="state">
+										<c:choose>
+											<c:when test="${pageInfo.getPage()==state.index}">
+												<li class="page-item active" aria-current="page"><a
+													class="page-link">${state.index}</a></li>
+											</c:when>
+											<c:otherwise>
+												<li class="page-item"><a class="page-link"
+													href="${state.index}?fromDate=${date1}&toDate=${date2}">${state.index}</a></li>
+											</c:otherwise>
+										</c:choose>
+									</c:forEach>
+
+									<c:choose>
+										<c:when test="${pageInfo.getPage() >= pageInfo.getMaxPage()}">
+											<li class="page-item disabled"><a class="page-link"
+												aria-disabled="true">다음</a></li>
+										</c:when>
+										<c:when test="${pageInfo.getEndPage()==pageInfo.getMaxPage()}">
+											<li class="page-item"><a class="page-link"
+												href="${pageInfo.getEndPage()}?fromDate=${date1}&toDate=${date2}">다음</a></li>
+										</c:when>
+										<c:otherwise>
+											<li class="page-item"><a class="page-link"
+												href="${pageInfo.getEndPage()+1}?fromDate=${date1}&toDate=${date2}">다음</a></li>
+										</c:otherwise>
+									</c:choose>
+								</c:when>
+
+								<c:otherwise>
+									<c:choose>
+										<c:when test="${pageInfo.getPage()<=1}">
+											<li class="page-item disabled"><a class="page-link"
+												aria-disabled="true">이전</a></li>
+										</c:when>
+										<c:when test="${pageInfo.getStartPage()==1}">
+											<li class="page-item"><a class="page-link"
+												href="${pageInfo.getStartPage()}" tabindex="-1">이전</a></li>
+										</c:when>
+										<c:otherwise>
+											<li class="page-item"><a class="page-link"
+												href="${pageInfo.getStartPage()-1}" tabindex="-1">이전</a></li>
+										</c:otherwise>
+									</c:choose>
+
+									<c:forEach begin="${pageInfo.getStartPage()}"
+										end="${pageInfo.getEndPage()}" varStatus="state">
+										<c:choose>
+											<c:when test="${pageInfo.getPage()==state.index}">
+												<li class="page-item active" aria-current="page"><a
+													class="page-link">${state.index}</a></li>
+											</c:when>
+											<c:otherwise>
+												<li class="page-item"><a class="page-link"
+													href="${state.index}">${state.index}</a></li>
+											</c:otherwise>
+										</c:choose>
+									</c:forEach>
+
+									<c:choose>
+										<c:when test="${pageInfo.getPage() >= pageInfo.getMaxPage()}">
+											<li class="page-item disabled"><a class="page-link"
+												aria-disabled="true">다음</a></li>
+										</c:when>
+										<c:when test="${pageInfo.getEndPage()==pageInfo.getMaxPage()}">
+											<li class="page-item"><a class="page-link"
+												href="${pageInfo.getEndPage()}">다음</a></li>
+										</c:when>
+										<c:otherwise>
+											<li class="page-item"><a class="page-link"
+												href="${pageInfo.getEndPage()+1}">다음</a></li>
+										</c:otherwise>
+									</c:choose>
+								</c:otherwise>
+
+							</c:choose>
+
+						</ul>
+					</c:if>
+					<!-- paging 끝 -->
+
 				</div>
-
-
-
-
-
-
-
-
-
-
-
-
-				<!-- paging  부분-->
-				<c:if test="${fn:length(QnAList) != 0}">
-					<ul class="pagination">
-						<c:choose>
-							<c:when test="${date1 != null || date2!= null}">
-								<c:choose>
-									<c:when test="${pageInfo.getPage()<=1}">
-										<li class="page-item disabled"><a class="page-link"
-											aria-disabled="true">이전</a></li>
-									</c:when>
-									<c:when test="${pageInfo.getStartPage()==1}">
-										<li class="page-item"><a class="page-link"
-											href="${pageInfo.getStartPage()}?fromDate=${date1}&toDate=${date2}"
-											tabindex="-1">이전</a></li>
-									</c:when>
-									<c:otherwise>
-										<li class="page-item"><a class="page-link"
-											href="${pageInfo.getStartPage()-1}?fromDate=${date1}&toDate=${date2}"
-											tabindex="-1">이전</a></li>
-									</c:otherwise>
-								</c:choose>
-
-								<c:forEach begin="${pageInfo.getStartPage()}"
-									end="${pageInfo.getEndPage()}" varStatus="state">
-									<c:choose>
-										<c:when test="${pageInfo.getPage()==state.index}">
-											<li class="page-item active" aria-current="page"><a
-												class="page-link">${state.index}</a></li>
-										</c:when>
-										<c:otherwise>
-											<li class="page-item"><a class="page-link"
-												href="${state.index}?fromDate=${date1}&toDate=${date2}">${state.index}</a></li>
-										</c:otherwise>
-									</c:choose>
-								</c:forEach>
-
-								<c:choose>
-									<c:when test="${pageInfo.getPage() >= pageInfo.getMaxPage()}">
-										<li class="page-item disabled"><a class="page-link"
-											aria-disabled="true">다음</a></li>
-									</c:when>
-									<c:when test="${pageInfo.getEndPage()==pageInfo.getMaxPage()}">
-										<li class="page-item"><a class="page-link"
-											href="${pageInfo.getEndPage()}?fromDate=${date1}&toDate=${date2}">다음</a></li>
-									</c:when>
-									<c:otherwise>
-										<li class="page-item"><a class="page-link"
-											href="${pageInfo.getEndPage()+1}?fromDate=${date1}&toDate=${date2}">다음</a></li>
-									</c:otherwise>
-								</c:choose>
-							</c:when>
-
-							<c:otherwise>
-								<c:choose>
-									<c:when test="${pageInfo.getPage()<=1}">
-										<li class="page-item disabled"><a class="page-link"
-											aria-disabled="true">이전</a></li>
-									</c:when>
-									<c:when test="${pageInfo.getStartPage()==1}">
-										<li class="page-item"><a class="page-link"
-											href="${pageInfo.getStartPage()}"
-											tabindex="-1">이전</a></li>
-									</c:when>
-									<c:otherwise>
-										<li class="page-item"><a class="page-link"
-											href="${pageInfo.getStartPage()-1}"
-											tabindex="-1">이전</a></li>
-									</c:otherwise>
-								</c:choose>
-
-								<c:forEach begin="${pageInfo.getStartPage()}"
-									end="${pageInfo.getEndPage()}" varStatus="state">
-									<c:choose>
-										<c:when test="${pageInfo.getPage()==state.index}">
-											<li class="page-item active" aria-current="page"><a
-												class="page-link">${state.index}</a></li>
-										</c:when>
-										<c:otherwise>
-											<li class="page-item"><a class="page-link"
-												href="${state.index}">${state.index}</a></li>
-										</c:otherwise>
-									</c:choose>
-								</c:forEach>
-
-								<c:choose>
-									<c:when test="${pageInfo.getPage() >= pageInfo.getMaxPage()}">
-										<li class="page-item disabled"><a class="page-link"
-											aria-disabled="true">다음</a></li>
-									</c:when>
-									<c:when test="${pageInfo.getEndPage()==pageInfo.getMaxPage()}">
-										<li class="page-item"><a class="page-link"
-											href="${pageInfo.getEndPage()}">다음</a></li>
-									</c:when>
-									<c:otherwise>
-										<li class="page-item"><a class="page-link"
-											href="${pageInfo.getEndPage()+1}">다음</a></li>
-									</c:otherwise>
-								</c:choose>
-							</c:otherwise>
-
-						</c:choose>
-
-					</ul>
-				</c:if>
-				<!-- paging 끝 -->
-
 			</div>
 		</div>
 	</div>
@@ -474,7 +484,7 @@ padding : 20px;
 	$('.underline').on("mouseout", function() {
 		$(this).css("background-color", "white");
 	});
-	
+
 	$('.thumbPic').on("mouseover", function() {
 		$(this).css("cursor", "pointer");
 	});
@@ -488,18 +498,18 @@ padding : 20px;
 	});
 	$('.thumbPic').on("click", function() {
 		var PRD_CODE = $(this).parent().find('.prdcode').val();
-		location.href = "/product/prdCode="+PRD_CODE;
+		location.href = "/product/prdCode=" + PRD_CODE;
 	});
 
 	$('.prd_brand_span').on("click", function() {
-		location.href ="#" ;
+		location.href = "#";
 	});
 
 	$('.prd_name_span').on("click", function() {
 		var PRD_CODE = $(this).find('.prdcode').val();
-		location.href = "/product/prdCode="+PRD_CODE;
+		location.href = "/product/prdCode=" + PRD_CODE;
 	});
-	
+
 	$('#date1').on("change", function() {
 		var date1 = $('#date1').val();
 		var date2 = $('#date2').val();
