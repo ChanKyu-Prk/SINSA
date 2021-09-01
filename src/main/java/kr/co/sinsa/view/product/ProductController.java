@@ -316,12 +316,12 @@ public class ProductController {
 				colors[i] = "BLUE";
 			}else if(colors[i].equals("PK") || colors[i] == "PK") {
 				colors[i] = "PK";
-			}else if(colors[i].equals("NEON") || colors[i] == "NEON") {
-				colors[i] = "NEON";
+			}else if(colors[i].equals("MULTI") || colors[i] == "MULTI") {
+				colors[i] = "MULTI";
 			}else if(colors[i].equals("BG") || colors[i] == "BG") {
 				colors[i] = "BG";
-			}else if(colors[i].equals("SK") || colors[i] == "SK") {
-				colors[i] = "SK";
+			}else if(colors[i].equals("YELLOW") || colors[i] == "YELLOW") {
+				colors[i] = "YELLOW";
 			}
 		}
 		String colorQuerry = "select PRD_COLOR from product ";

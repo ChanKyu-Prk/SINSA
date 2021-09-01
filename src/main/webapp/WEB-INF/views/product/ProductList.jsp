@@ -32,7 +32,6 @@
 		ul.mySize > li:hover ul.li-size { z-index: 9999; display: inline-block; float: left; }
 		ul.mySize > li ul.li-size > li { display: inline-block; float: left;   width: 120px; padding: 5px 10px; background: #eee; border:1px solid #eee; text-align: center;}
 		ul.mySize > li ul.li-size > li:hover { background: #fff; }
-		
 	</style>
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
@@ -223,9 +222,9 @@
 	                                </label>
 	                            </div>
 	                            <div class="sidebar__item__color sidebar__item__color--white">
-	                                <label for="NEON" id="id07" onmouseout="mout7()" onmouseover="mover7()">
-	                                    NEON
-	                                    <input type="checkbox" id="NEON" name="color" value="NEON">
+	                                <label for="MULTI" id="id07" onmouseout="mout7()" onmouseover="mover7()">
+	                                    MULTI
+	                                    <input type="checkbox" id="MULTI" name="color" value="MULTI">
 	                                </label>
 	                            </div>
 	                            <div class="sidebar__item__color sidebar__item__color--white">
@@ -235,9 +234,9 @@
 	                                </label>
 	                            </div>
 	                            <div class="sidebar__item__color sidebar__item__color--white">
-	                                <label for="SK" id="id09" onmouseout="mout9()" onmouseover="mover9()">
-	                                    SK
-	                                    <input type="checkbox" id="SK" name="color" value="SK">
+	                                <label for="YELLOW" id="id09" onmouseout="mout9()" onmouseover="mover9()">
+	                                    YELLOW
+	                                    <input type="checkbox" id="YELLOW" name="color" value="YELLOW">
 	                                </label>
 	                            </div>
 	                        </div>
@@ -838,12 +837,12 @@ $('#id07').on("click", function(e){
 // 		$('#green').val('green');
     	m.style.color = "red";
     	clickCheck7 = "true";
-    	$('#NEON').attr('checked',true);
+    	$('#MULTI').attr('checked',true);
 	}else if(clickCheck7 === "true"){
 // 		$('#green').val('');
 		m.style.color = "black";
     	clickCheck7 = "false";
-    	$('#NEON').attr('checked',false);
+    	$('#MULTI').attr('checked',false);
 	}
 	return false;
 });
@@ -901,12 +900,12 @@ $('#id09').on("click", function(e){
 // 		$('#green').val('green');
     	m.style.color = "red";
     	clickCheck9 = "true";
-    	$('#SK').attr('checked',true);
+    	$('#YELLOW').attr('checked',true);
 	}else if(clickCheck9 === "true"){
 // 		$('#green').val('');
 		m.style.color = "black";
     	clickCheck9 = "false";
-    	$('#SK').attr('checked',false);
+    	$('#YELLOW').attr('checked',false);
 	}
 	return false;
 });
@@ -956,20 +955,20 @@ $(document).ready( function() {
         	clickCheck6 = "true";
         	$('#PK').attr('checked',true);
         }
-        if(colorsArray[i]=='NEON'){
+        if(colorsArray[i]=='MULTI'){
         	m7.style.color = "red";
         	clickCheck7 = "true";
-        	$('#NEON').attr('checked',true);
+        	$('#MULTI').attr('checked',true);
         }
         if(colorsArray[i]=='BG'){
         	m8.style.color = "red";
         	clickCheck8 = "true";
         	$('#BG').attr('checked',true);
         }
-        if(colorsArray[i]=='SK'){
+        if(colorsArray[i]=='YELLOW'){
         	m9.style.color = "red";
         	clickCheck9 = "true";
-        	$('#SK').attr('checked',true);
+        	$('#YELLOW').attr('checked',true);
         }
       }
 });
