@@ -370,7 +370,7 @@ input[type=number] {
 							        IMP.request_pay({
 							        	pg : 'inicis',
 							            pay_method : 'card',
-							            merchant_uid : new Date().getTime(),
+							            merchant_uid : ORDER_NUM,
 							            name : '[SINSA 상품 결제 ]',
 							            amount : finalPrice,
 							            buyer_email : '${cusInfo.CUS_EMAIL}',
@@ -388,6 +388,7 @@ input[type=number] {
 							            		headers: {
 												      'Accept': 'application/json',
 												      'Content-Type': 'application/json'
+
 												}
 							            	}).done(function(data) {
 							            			msg = '결제가 완료되었습니다.';

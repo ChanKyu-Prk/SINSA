@@ -51,7 +51,7 @@ public class AdminController {
 			HttpSession session = req.getSession();
 			session.setAttribute("AdminVO", vo);
 			
-			return "redirect:/admin/customerList";
+			return "redirect:/admin/adminIndex";
 		} else {
 			model.addAttribute("msg", 1);
 			return "admin/adminLogin";

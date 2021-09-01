@@ -34,7 +34,7 @@
 <body>
 	<nav class="navbar navbar-expand-lg navbar-dark sticky-top order-lg-2"
 		style="background-color: rgba(0, 0, 0, 0.8); position: sticky;">
-		<a class="navbar-brand" href="${pageContext.request.contextPath}"
+		<a class="navbar-brand" href="${pageContext.request.contextPath}/admin/adminIndex"  
 			style="font-family: arial; font-weight: 800; color: #cbe4ff" title="메인페이지로 이동">SINSA 관리자모드</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
 			data-target="#navbarSupportedContent"

@@ -97,15 +97,7 @@ public class CartController {
 	public String deleteCartList(UserCartProductStockVO userCartProductStockVO, Model model, HttpSession session, HttpServletRequest request){
 		
 		UserVO user = (UserVO)session.getAttribute("user");
-//		int CART_PRDNUM = Integer.parseInt((String) request.getParameter("CART_PRDNUM"));
-//		
-//		DeleteCartListVO vo = new DeleteCartListVO();
-//		vo.setUserID(user.getCUS_ID());
-//		vo.setPrdNum(CART_PRDNUM);
-		
-		System.out.println(userCartProductStockVO.getCART_PRDSIZE());
-		System.out.println(userCartProductStockVO.getCART_PRDNUM());
-		System.out.println(userCartProductStockVO.getCUS_ID());
+
 		
 		cartService.deleteCartList(userCartProductStockVO);
 		
@@ -117,7 +109,6 @@ public class CartController {
 	public String deleteAll(UserCartProductStockVO userCartProductStockVO, Model model, HttpSession session) {
 		UserVO user = (UserVO)session.getAttribute("user");
 		userCartProductStockVO.setCUS_ID(user.getCUS_ID());
-		System.out.println(userCartProductStockVO);
 		
 		cartService.deleteAll(userCartProductStockVO);
 
@@ -131,7 +122,6 @@ public class CartController {
 	public String updateCount(UserCartProductStockVO userCartProductStockVO, Model model, HttpSession session) {
 		UserVO user = (UserVO)session.getAttribute("user");
 		userCartProductStockVO.setCUS_ID(user.getCUS_ID());
-		System.out.println(userCartProductStockVO);
 		
 		cartService.updateCartProductCount(userCartProductStockVO);
 
@@ -143,7 +133,6 @@ public class CartController {
 	public int updateSize(UserCartProductStockVO userCartProductStockVO, Model model, HttpSession session) {
 		UserVO user = (UserVO)session.getAttribute("user");
 		userCartProductStockVO.setCUS_ID(user.getCUS_ID());
-		System.out.println(userCartProductStockVO);
 		
 		int checkNum = cartService.updateSize(userCartProductStockVO);
 

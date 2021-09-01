@@ -75,11 +75,13 @@ td.a {
 								<td class="q">#${ e.faq_num }</td>
 								<td><input type="text" name="faq_q" class="form-control"
 									value="${ e.faq_q }" /></td>
+								<td width=200px></td>
 							</tr>
 							<tr>
 								<td class="a">A</td>
 								<td><textarea name="faq_a" cols="50" rows="5"
 										class="form-control">${ e.faq_a }</textarea></td>
+								<td></td>
 							</tr>
 
 							<tr>

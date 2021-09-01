@@ -77,9 +77,8 @@ public class ProductController {
 		int qna_PRD_NUM = productVO.getPRD_NUM();
 		
 		List<QnaVO> qnaList = QnaService.qnaInfo(qna_PRD_NUM);
-		
-		System.out.println("qnaList : " + qnaList);
 		model.addAttribute("qnaList", qnaList);
+		PageInfo pageInfo = new PageInfo();
 		
     	ProductVO vo = service.info(PRD_CODE);
     	model.addAttribute("prdInfo", vo);
@@ -156,26 +155,74 @@ public class ProductController {
 		return map;
 	}
 	@ResponseBody
-	@RequestMapping(value = "/formToInput", method = RequestMethod.POST)
-	public Map<String, Object> formToInput(Model model, QnaVO vo, HttpSession session){
+	@RequestMapping(value = "/formToInput/{CRUD}", method = RequestMethod.POST)
+	public Map<String, Object> formToInput(Model model, QnaVO vo, HttpSession session,
+			@PathVariable("CRUD") String CRUD){
+		System.out.println(CRUD+" : CRUD");
 		Map<String, Object> map = new HashMap<String, Object>();
-		
 		UserVO user = (UserVO) session.getAttribute("user");
-		int PRD_NUM = vo.getPRD_NUM();
-		String QNA_CUSID = (String)user.getCUS_ID();
-		String QNA_TITLE = vo.getQNA_TITLE(); 
-		int QNA_LOCK = vo.getQNA_LOCK(); 
-		String QNA_CONTENT = vo.getQNA_CONTENT();
+		if(CRUD.equals("insert")) {
+			int PRD_NUM = vo.getPRD_NUM();
+			String QNA_CUSID = (String)user.getCUS_ID();
+			String QNA_TITLE = vo.getQNA_TITLE(); 
+			int QNA_LOCK = vo.getQNA_LOCK(); 
+			String QNA_CONTENT = vo.getQNA_CONTENT();
+			
+			map.put("PRD_NUM", PRD_NUM);
+			map.put("QNA_LOCK", QNA_LOCK);
+			map.put("QNA_CUSID", QNA_CUSID);
+			map.put("QNA_TITLE", QNA_TITLE);
+			map.put("QNA_CONTENT", QNA_CONTENT);
+			
+			QnaService.insertQNA(map);
+			
+			
+			QnaVO vo2 = QnaService.selectQNA(QNA_CUSID);
+			int QNA_NUM = vo2.getQNA_NUM();
+			PRD_NUM = vo2.getPRD_NUM();
+			QNA_CUSID = vo2.getQNA_CUSID();
+			QNA_TITLE = vo2.getQNA_TITLE();
+			QNA_LOCK = vo2.getQNA_LOCK();
+			QNA_CONTENT = vo2.getQNA_CONTENT();
+			
+			map.put("QNA_NUM", QNA_NUM);
+			map.put("PRD_NUM", PRD_NUM);
+			map.put("QNA_LOCK", QNA_LOCK);
+			map.put("QNA_CUSID", QNA_CUSID);
+			map.put("QNA_TITLE", QNA_TITLE);
+			map.put("QNA_CONTENT", QNA_CONTENT);
+
+			
+			return map;
+		}else if(CRUD.equals("delete")) {
+			int QNA_NUM = vo.getQNA_NUM();
+			map.put("QNA_NUM", QNA_NUM);
+			QnaService.deleteQNA(map);
+		}else if(CRUD.equals("update")) {
+			int PRD_NUM = vo.getPRD_NUM();
+			int QNA_NUM = vo.getQNA_NUM();
+			String QNA_CUSID = (String)user.getCUS_ID();
+			String QNA_TITLE = vo.getQNA_TITLE(); 
+			int QNA_LOCK = vo.getQNA_LOCK(); 
+			String QNA_CONTENT = vo.getQNA_CONTENT();
+			System.out.println(QNA_CONTENT);
+			System.out.println(QNA_LOCK);
+			System.out.println(QNA_TITLE);
+			System.out.println(QNA_NUM);
+			
+			map.put("PRD_NUM", PRD_NUM);
+			map.put("QNA_LOCK", QNA_LOCK);
+			map.put("QNA_CUSID", QNA_CUSID);
+			map.put("QNA_TITLE", QNA_TITLE);
+			map.put("QNA_CONTENT", QNA_CONTENT);
+			map.put("QNA_NUM", QNA_NUM);
+			
+			QnaService.updateQNA(map);
+		}
 		
-		map.put("PRD_NUM", PRD_NUM);
-		map.put("QNA_LOCK", QNA_LOCK);
-		map.put("QNA_CUSID", QNA_CUSID);
-		map.put("QNA_TITLE", QNA_TITLE);
-		map.put("QNA_CONTENT", QNA_CONTENT);
-		
-		QnaService.insertQNA(map);
 		return map;
 	}
+
 	
 	@ResponseBody
 	@RequestMapping(value = "/listToCart", method = RequestMethod.POST)

@@ -207,17 +207,41 @@ table {
 							<form:form method="post" action="orderCancel" modelAttribute="orderInfo">
 								<form:hidden path="order_num" value="${ e.order_num }" />
 								<form:hidden path="order_cusid" value="${ e.order_cusid }" />
+								<form:hidden path="order_prdcode" value="${ e.order_prdcode }" />
+								<form:hidden path="order_prdsize" value="${ e.order_prdsize }" />
 								<form:hidden path="order_price" value="${ e.order_price }" />
 								<form:hidden path="order_usepoint" value="${ e.order_usepoint }" />
 											<td style="padding:6px 3px;" >${ e.order_delivcomp }</td>
 											<td style="padding:6px 3px;">${ e.order_delivnum }</td>
 											<td style="padding:6px 3px;">
-												<button type="submit" class="btn btn-danger btn-sm" onclick="javascript:alert('취소처리되었습니다');">취소처리</button>
+												<button type="submit" class="btn btn-danger btn-sm">취소처리</button>
+												<script
+												  src="https://code.jquery.com/jquery-3.3.1.min.js"
+												  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+												  crossorigin="anonymous"></script><!-- jQuery CDN --->
+<!-- 												<script>
+												  var url = document.location.href;
+												  function cancelPay() {
+												    jQuery.ajax({
+												      "url": "admin/orderCancel", // 예: http://www.myservice.com/payments/cancel
+												      "type": "POST",
+												      "contentType": "application/json",
+												      "data": JSON.stringify({
+												        "merchant_uid": "${e.order_num}", // 예: ORD20180131-0000011
+												        "cancel_request_amount": ${order_price}, // 환불금액
+												        "reason": "테스트 결제 환불" // 환불사유
+												      }),
+												      "dataType": "json"
+												    });
+												    alert('취소처리되었습니다');
+												  }
+												</script> -->
+												
 											</td>
 							</form:form>
 										</c:when>
 										<c:when test="${ e.order_state == '취소완료' }">
-											<td style="padding:6px 3px;">테스트테스트${ e.order_delivcomp }</td>
+											<td style="padding:6px 3px;">${ e.order_delivcomp }</td>
 											<td style="padding:6px 3px;">${ e.order_delivnum }</td>
 											<td style="padding:6px 3px;">
 												<input type="button" class="btn btn-danger btn-sm" aria-pressed="true" value="취소완료" disabled/>

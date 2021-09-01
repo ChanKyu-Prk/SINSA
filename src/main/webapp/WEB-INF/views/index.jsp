@@ -17,7 +17,7 @@
 
 
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 
 
 
@@ -58,29 +58,44 @@
 	color: black;
 	font-weight: bold;
 	font-size: 20px;
-	
 	-webkit-text-stroke-color: white
 }
 
 .banner_sinsa {
 	color: black !important;
 	font-size: 30px !important;
-/* 	-webkit-text-stroke-color: white; */
-/* 	-webkit-text-stroke-width: 2px; */
+	/* 	-webkit-text-stroke-color: white; */
+	/* 	-webkit-text-stroke-width: 2px; */
 }
 
 .banner_cover {
 	position: absolute;
-/* 	left: 14px; */
-/* 	top: 100px; */
-/* 	left:80px; */
-/* 	top:160px; */
+	/* 	left: 14px; */
+	/* 	top: 100px; */
+	/* 	left:80px; */
+	/* 	top:160px; */
 	height: 250px;
-	width:350px;
-	
-/* 	height: 411px; */
-/* 	width: 450px; */
-/* 	width: 1141px; */
+	width: 350px;
+
+	/* 	height: 411px; */
+	/* 	width: 450px; */
+	/* 	width: 1141px; */
+}
+
+.review_title_title {
+	color: grey;
+	font-size: 15px;
+}
+
+/* .review_title_right { */
+/* 	padding: 0px 0px 0px 30px; */
+/* } */
+
+/* .review_title_left { */
+/* 	padding: 0px 0px 0px 35px; */
+/* } */
+.review_image {
+	height: 300px !important;
 }
 </style>
 
@@ -121,14 +136,13 @@
 					<div class="hero__item set-bg"
 						data-setbg="${path}/resources/img/banner/베너.jpg">
 						<div class="hero__text">
-<%-- 							<img class="banner_cover" src="${path}/resources/img/banner/베너커버.png">  --%>
-								
-								<span
-								class="banner_sinsa">&nbsp;SINSA</span>
+							<%-- 							<img class="banner_cover" src="${path}/resources/img/banner/베너커버.png">  --%>
+
+							<span class="banner_sinsa">&nbsp;SINSA</span>
 							<h2 class="banner_text">
 								이달의 특가 <br>최대 40% 할인!
 							</h2>
-<!-- 							<p class="banner_text2">지금 특별한 가격을 만나보세요~</p> -->
+							<!-- 							<p class="banner_text2">지금 특별한 가격을 만나보세요~</p> -->
 							<!-- 							<a href="#" class="primary-btn">SHOP NOW</a> -->
 						</div>
 					</div>
@@ -151,8 +165,19 @@
 						<div class="col-lg-3">
 							<a href="#">
 								<div class="featured__item">
+
+
+
+
+
+									<c:set var="newProduct_img_array"
+										value="${fn:split(list.PRD_IMAGE,'/')}" />
+
 									<div class="featured__item__pic set-bg"
-										data-setbg="${path}/resources/img/product/나이키디파이올데이.png">
+										data-setbg="${path}/resources/img/product/${newProduct_img_array[0]}">
+
+
+
 
 									</div>
 									<div class="featured__item__text">
@@ -208,8 +233,11 @@
 												varStatus="status">
 												<div class="col-md-3">
 													<div class="featured__item">
+														<c:set var="bestProduct_img_array"
+															value="${fn:split(list.PRD_IMAGE,'/')}" />
+
 														<div class="featured__item__pic set-bg"
-															data-setbg="${path}/resources/img/product/나이키디파이올데이.png">
+															data-setbg="${path}/resources/img/product/${bestProduct_img_array[0]}">
 															<ul class="featured__item__pic__hover">
 																<li><a href="#"><i class="fa fa-heart"></i></a></li>
 																<li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
@@ -240,8 +268,11 @@
 												begin="0" end="7" varStatus="status">
 												<div class="col-md-3">
 													<div class="featured__item">
+														<c:set var="bestSneakersProduct_img_array"
+															value="${fn:split(list.PRD_IMAGE,'/')}" />
+
 														<div class="featured__item__pic set-bg"
-															data-setbg="${path}/resources/img/product/나이키디파이올데이.png">
+															data-setbg="${path}/resources/img/product/${bestSneakersProduct_img_array[0]}">
 															<ul class="featured__item__pic__hover">
 																<li><a href="#"><i class="fa fa-heart"></i></a></li>
 																<li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
@@ -274,8 +305,11 @@
 												begin="0" end="7" varStatus="status">
 												<div class="col-md-3">
 													<div class="featured__item">
+														<c:set var="bestSportSProduct_img_array"
+															value="${fn:split(list.PRD_IMAGE,'/')}" />
+
 														<div class="featured__item__pic set-bg"
-															data-setbg="${path}/resources/img/product/나이키디파이올데이.png">
+															data-setbg="${path}/resources/img/product/${bestSportSProduct_img_array[0]}">
 															<ul class="featured__item__pic__hover">
 																<li><a href="#"><i class="fa fa-heart"></i></a></li>
 																<li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
@@ -315,12 +349,12 @@
 			<div class="row">
 				<div class="col-lg-6 col-md-6 col-sm-6">
 					<div class="banner__pic">
-						<img src="${path}/resources/img/banner/banner-1.jpg" alt="">
+						<img src="${path}/resources/img/banner/베너.jpg" alt="">
 					</div>
 				</div>
 				<div class="col-lg-6 col-md-6 col-sm-6">
 					<div class="banner__pic">
-						<img src="${path}/resources/img/banner/banner-2.jpg" alt="">
+						<img src="${path}/resources/img/banner/베너.jpg" alt="">
 					</div>
 				</div>
 			</div>
@@ -345,10 +379,16 @@
 
 
 				<c:forEach var="list" items="${reviewList}" varStatus="status">
+
 					<div class="col-lg-4 col-md-4 col-sm-6">
 						<div class="blog__item">
 							<div class="blog__item__pic">
-								<img src="${path}/resources/img/review/상품후기.jpeg" alt="">
+
+								<c:set var="img_array" value="${fn:split(list.REV_IMAGE,'/')}" />
+
+								<%-- 							<c:out var="image" value='${img_array[0]}' /> --%>
+								<img src="${path}/resources/img/review/${img_array[0]}" alt=""
+									class="review_image">
 							</div>
 							<div class="blog__item__text">
 								<ul>
@@ -431,9 +471,43 @@
 								</ul>
 
 								<h5>
-									<a href="#">${list.REV_TITLE}</a>
+									<c:set var="Array" value="${fn:split(list.REV_TITLE,'/')}" />
+
+
+
+									<div class="container">
+										<div class="row">
+											<div class="col-6">
+												<span class="review_title_title review_title_left">사이즈
+													:&nbsp;</span><span><c:out value='${Array[0]}' /><br></span>
+												<span class="review_title_title review_title_left">착화감
+													:&nbsp;</span><span><c:out value='${Array[2]}' /></span>
+											</div>
+											<div class="col-6">
+												<span class="review_title_title review_title_right">색상
+													:&nbsp;</span><span><c:out value='${Array[1]}' /><br></span>
+												<span class="review_title_title review_title_right">배송
+													:&nbsp;</span><span><c:out value='${Array[3]}' /></span>
+											</div>
+										</div>
+									</div>
+
+
+
 								</h5>
-								<p>${list.REV_CONTENT}</p>
+								<c:set var="REV_CONTENT" value="${list.REV_CONTENT}]" />
+								<c:if test="${fn:length(REV_CONTENT) <= 70}">
+									<p>${list.REV_CONTENT}</p>
+
+								</c:if>
+								<c:if test="${fn:length(REV_CONTENT) > 70}">
+								${fn:substring(REV_CONTENT,0,70)}.....
+								
+								</c:if>
+
+
+
+
 							</div>
 						</div>
 					</div>

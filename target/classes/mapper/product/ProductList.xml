@@ -80,11 +80,28 @@ select JJIM_PRDNUM from jjim where JJIM_CUSID =#{value};
 		values(#{PRD_NUM}, #{QNA_LOCK}, #{QNA_CUSID}, #{QNA_TITLE}, #{QNA_CONTENT}, '', now())
 	]]>
 </select>
+<select id="updateQNA" parameterType="Map">
+	<![CDATA[
+		update qna
+		set QNA_LOCK=#{QNA_LOCK}, QNA_TITLE=#{QNA_TITLE}, QNA_CONTENT=#{QNA_CONTENT}
+		where QNA_NUM=#{QNA_NUM}
+	]]>
+</select>
+<select id="deleteQNA" parameterType="Map" resultType="kr.co.sinsa.biz.product.QnaVO">
+	<![CDATA[
+		DELETE FROM QNA WHERE QNA_NUM=#{QNA_NUM}
+	]]>
+</select>
+<select id="selectQNA" parameterType="String" resultType="kr.co.sinsa.biz.product.QnaVO">
+	<![CDATA[
+		select * from qna where qna_cusid = #{QNA_CUSID} order by qna_num desc limit 1
+	]]>
+</select>
 
 	<select id="getInfo" parameterType="hashMap" resultType="kr.co.sinsa.biz.product.QnaVO">
 		<![CDATA[
 			select QNA_NUM, PRD_NUM, QNA_LOCK, QNA_CUSID, QNA_TITLE, QNA_CONTENT, QNA_ANSWER, QNA_REGDATE
-			from qna where prd_num = #{qna_PRD_NUM}
+			from qna where prd_num = #{qna_PRD_NUM} order by qna_num desc
 		]]>
 	</select>
 

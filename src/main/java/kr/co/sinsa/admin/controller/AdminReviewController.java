@@ -1,5 +1,6 @@
 package kr.co.sinsa.admin.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -95,7 +96,23 @@ public class AdminReviewController {
 	
 	@RequestMapping("/admin/reviewDetail")
 	public String reviewDetail(Model model, @RequestParam int rev_num) {
-		model.addAttribute("reviewInfo", reviewService.review_info(rev_num));
+		AdminReviewVO review = reviewService.review_info(rev_num);
+		model.addAttribute("reviewInfo", review);
+
+	
+			String[] title = review.getRev_title().split("/");
+
+			String[] img = null;
+			if(review.getRev_image()!=null) {
+			String str = review.getRev_image().substring(0, review.getRev_image().length()-1);
+			img = str.split("/");
+
+			}
+			System.out.println(img);
+			System.out.println(img[0]);
+			model.addAttribute("titleList", title);
+			model.addAttribute("imgList", img);
+		
 		return "admin/reviewDetail";
 	}
 
