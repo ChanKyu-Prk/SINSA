@@ -201,8 +201,8 @@ body {
 						<div class="row">
 							<div class="col-3 state_box">결제 완료</div>
 							<div class="col-3 state_box">배송중</div>
-							<div class="col-3 state_box">배송 완료</div>
-							<div class="col-3 state_box">취소/환불</div>
+							<div class="col-3 state_box">구매 확정</div>
+							<div class="col-3 state_box">취소/반품</div>
 						</div>
 						<hr>
 
@@ -331,16 +331,22 @@ body {
 															class="ORDER_NUM">${list.ORDER_NUM }</span></td>
 													<td><fmt:formatNumber value="${list.ORDER_PRICE }"
 															type="number" />원<br>(${list.ORDER_AMOUNT}개)</td>
-													<td>${list.ORDER_STATE }<c:if
+																	<td>${list.ORDER_STATE }<c:if
 															test="${list.ORDER_STATE =='배송중' }">
 															<br>
 															<button type="button" class="delivBtn"
 																data-toggle="modal" data-target="#exampleModalCenter">배송조회</button>
-
+															<button type="button" class="confirmedBtn">구매확정</button>
 															<input type="hidden" value="${list.ORDER_DELIVCOMP }"
 																class="delivcomp">
 															<input type="hidden" value="${list.ORDER_DELIVNUM }"
 																class="delivnum">
+																<input type="hidden" value="${list.ORDER_PRDCODE }"
+																class="prdcode">
+															<input type="hidden" value="${list.ORDER_NUM }"
+																class="orderum">
+															<input type="hidden" value="${list.ORDER_PRDSIZE }"
+																class="prdsize">
 														</c:if> <c:if test="${list.ORDER_STATE =='결제완료' }">
 															<input type="hidden" value="${list.ORDER_PRDCODE }"
 																class="prdcode">
@@ -348,18 +354,8 @@ body {
 																class="orderum">
 															<input type="hidden" value="${list.ORDER_PRDSIZE }"
 																class="prdsize">
-															<button type="button" class="cancelBtn">주문취소</button>
 															<br>
-														</c:if> <c:if test="${list.ORDER_STATE =='배송완료' }">
-															<br>
-															<input type="hidden" value="${list.ORDER_PRDCODE }"
-																class="prdcode">
-															<input type="hidden" value="${list.ORDER_NUM }"
-																class="orderum">
-															<input type="hidden" value="${list.ORDER_PRDSIZE }"
-																class="prdsize">
-															<button type="button" class="refundBtn">환불신청</button>
-														</c:if>
+														</c:if> 
 													</td>
 												</tr>
 											</c:forEach>

@@ -464,23 +464,43 @@ public class MyPageController {
 	}
 
 	@RequestMapping(value = "/refund", method = RequestMethod.GET)
-	public String refund(String prdcode, String orderum, String prdsize) {
+	public String refund(String prdcode, String orderum, String prdsize, String reason) {
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("prdcode", prdcode);
 		map.put("orderum", orderum);
 		map.put("prdsize", prdsize);
+		map.put("orderstate", "반품요청/"+reason);
 		myPageSerive.refund(map);
-		return "redirect:/myOrderList/1";
+		return "redirect:/myOrderStatus/"+orderum;
 	}
 
 	@RequestMapping(value = "/cancel", method = RequestMethod.GET)
-	public String cancel(String prdcode, String orderum, String prdsize) {
+	public String cancel(String prdcode, String orderum, String prdsize, String reason) {
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("prdcode", prdcode);
 		map.put("orderum", orderum);
 		map.put("prdsize", prdsize);
+		map.put("orderstate", "취소요청/"+reason);
 		myPageSerive.cancel(map);
-		return "redirect:/myOrderList/1";
+		return "redirect:/myOrderStatus/"+orderum;
+	}
+	@RequestMapping(value = "/allRefund", method = RequestMethod.GET)
+	public String allRefund(String orderum , String reason) {
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("orderum", orderum);
+		map.put("orderstate", "일괄반품요청/"+reason);
+		myPageSerive.allRefund(map);
+		
+		return "redirect:/myOrderStatus/"+orderum;
+	}
+
+	@RequestMapping(value = "/allCancel", method = RequestMethod.GET)
+	public String allCancel(String orderum , String reason) {
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("orderum", orderum);
+		map.put("orderstate", "일괄취소요청/"+reason);
+		myPageSerive.allCancel(map);
+		return "redirect:/myOrderStatus/"+orderum;
 	}
 
 	@RequestMapping(value = "/myReviews/{page}", method = RequestMethod.GET)

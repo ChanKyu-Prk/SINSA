@@ -233,7 +233,8 @@ where REV_CUSID = #{ID} and REV_REGDATE  >= #{date1} and REV_REGDATE  < DATE_add
 		where REV_CUSID = #{ID};
 	</select>
 
-	<select id="myReviewsDate" parameterType="Map" resultType="kr.co.sinsa.biz.customer.ReviewVO">
+	<select id="myReviewsDate" parameterType="Map"
+		resultType="kr.co.sinsa.biz.customer.ReviewVO">
 <![CDATA[
 select 
 REV_NUM ,
@@ -254,7 +255,8 @@ order by REV_NUM  desc
 ]]>
 
 	</select>
-	<select id="myReviews" parameterType="Map" resultType="kr.co.sinsa.biz.customer.ReviewVO">
+	<select id="myReviews" parameterType="Map"
+		resultType="kr.co.sinsa.biz.customer.ReviewVO">
 		select
 		REV_NUM ,
 		REV_ORDERNUM ,
@@ -269,19 +271,21 @@ order by REV_NUM  desc
 		from review
 		where REV_CUSID = #{ID}
 		order by REV_NUM desc
-		limit #{page},10;
+		limit
+		#{page},10;
 	</select>
 
-<select id="productMatchReview" resultType="kr.co.sinsa.biz.orders.OrdersAndProductVO">
-	select
-	ORDERS.ORDER_PRDCODE ,
-	ORDERS.ORDER_PRDNAME ,
-	ORDERS.ORDER_PRDSIZE ,
-	PRODUCT.PRD_BRAND ,
-	PRODUCT.PRD_IMAGE
-	from ORDERS join Product on ORDERS.ORDER_PRDCODE = PRODUCT.PRD_CODE
-	where ORDER_NUM = #{value};
-</select>
+	<select id="productMatchReview"
+		resultType="kr.co.sinsa.biz.orders.OrdersAndProductVO">
+		select
+		ORDERS.ORDER_PRDCODE ,
+		ORDERS.ORDER_PRDNAME ,
+		ORDERS.ORDER_PRDSIZE ,
+		PRODUCT.PRD_BRAND ,
+		PRODUCT.PRD_IMAGE
+		from ORDERS join Product on ORDERS.ORDER_PRDCODE = PRODUCT.PRD_CODE
+		where ORDER_NUM = #{value};
+	</select>
 
 
 
@@ -400,7 +404,7 @@ order by REV_NUM  desc
 		update orders
 		set
 		ORDER_STATE =
-		'환불신청'
+		#{orderstate}
 		where
 		ORDER_NUM = #{orderum} and
 		ORDER_PRDCODE = #{prdcode} and
@@ -412,11 +416,31 @@ order by REV_NUM  desc
 		update orders
 		set
 		ORDER_STATE =
-		'취소'
+		#{orderstate}
 		where
 		ORDER_NUM = #{orderum} and
 		ORDER_PRDCODE = #{prdcode} and
 		ORDER_PRDSIZE = #{prdsize};
+
+	</update>
+
+	<update id="allRefund" parameterType="Map">
+		update orders
+		set
+		ORDER_STATE =
+		#{orderstate}
+		where
+		ORDER_NUM = #{orderum};
+
+	</update>
+
+	<update id="allCancel" parameterType="Map">
+		update orders
+		set
+		ORDER_STATE =
+		#{orderstate}
+		where
+		ORDER_NUM = #{orderum};
 
 	</update>
 

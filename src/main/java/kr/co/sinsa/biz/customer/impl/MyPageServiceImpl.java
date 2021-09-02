@@ -50,18 +50,24 @@ public class MyPageServiceImpl implements MyPageService {
 		int payEnd = dao.countState(map);
 		map.replace("STATE", "배송중");
 		int delivery = dao.countState(map);
-		map.replace("STATE", "배송완료");
+		map.replace("STATE", "구매확정");
 		int deliveryEnd = dao.countState(map);
-		map.replace("STATE", "취소");
+		map.replace("STATE", "취소요청");
 		int cancel = dao.countState(map);
-		map.replace("STATE", "환불신청");
+		map.replace("STATE", "일괄취소요청");
+		int allCancel = dao.countState(map);
+		map.replace("STATE", "취소완료");
+		int cancelEnd = dao.countState(map);
+		map.replace("STATE", "반품요청");
 		int refund = dao.countState(map);
-		map.replace("STATE", "환불");
+		map.replace("STATE", "일괄반품요청");
+		int allRefund = dao.countState(map);
+		map.replace("STATE", "반품완료");
 		int refundEnd = dao.countState(map);
 		countState.put("payEnd", payEnd);
 		countState.put("delivery", delivery);
 		countState.put("deliveryEnd", deliveryEnd);
-		countState.put("cancel", cancel + refund + refundEnd);
+		countState.put("cancel", allRefund+  allCancel+cancel + cancelEnd + refund + refundEnd);
 		return countState;
 	}
 
@@ -69,21 +75,27 @@ public class MyPageServiceImpl implements MyPageService {
 	public Map<String, Integer> countStateDate(Map<String, Object> map) {
 		Map<String, Integer> countState = new HashMap<String, Integer>();
 		map.put("STATE", "결제완료");
-		int payEnd = dao.countStateDate(map);
+		int payEnd = dao.countState(map);
 		map.replace("STATE", "배송중");
-		int delivery = dao.countStateDate(map);
-		map.replace("STATE", "배송완료");
-		int deliveryEnd = dao.countStateDate(map);
-		map.replace("STATE", "취소");
-		int cancel = dao.countStateDate(map);
-		map.replace("STATE", "환불신청");
-		int refund = dao.countStateDate(map);
-		map.replace("STATE", "환불");
-		int refundEnd = dao.countStateDate(map);
+		int delivery = dao.countState(map);
+		map.replace("STATE", "구매확정");
+		int deliveryEnd = dao.countState(map);
+		map.replace("STATE", "취소요청");
+		int cancel = dao.countState(map);
+		map.replace("STATE", "일괄취소요청");
+		int allCancel = dao.countState(map);
+		map.replace("STATE", "취소완료");
+		int cancelEnd = dao.countState(map);
+		map.replace("STATE", "반품요청");
+		int refund = dao.countState(map);
+		map.replace("STATE", "일괄반품요청");
+		int allRefund = dao.countState(map);
+		map.replace("STATE", "반품완료");
+		int refundEnd = dao.countState(map);
 		countState.put("payEnd", payEnd);
 		countState.put("delivery", delivery);
 		countState.put("deliveryEnd", deliveryEnd);
-		countState.put("cancel", cancel + refund + refundEnd);
+		countState.put("cancel", allRefund+  allCancel+cancel + cancelEnd + refund + refundEnd);
 		return countState;
 	}
 
@@ -137,7 +149,6 @@ public class MyPageServiceImpl implements MyPageService {
 		dao.reviewInsert(vo);
 	}
 
-	
 	@Override
 	public int countReviewsDate(Map<String, Object> map) {
 		return dao.countReviewsDate(map);
@@ -146,8 +157,9 @@ public class MyPageServiceImpl implements MyPageService {
 	@Override
 	public int countReviews(Map<String, Object> map) {
 		return dao.countReviews(map);
-		
+
 	}
+
 	@Override
 	public List<ReviewVO> myReviewsDate(Map<String, Object> map) {
 		return dao.myReviewsDate(map);
@@ -267,13 +279,24 @@ public class MyPageServiceImpl implements MyPageService {
 	@Override
 	public void refund(Map<String, String> map) {
 		dao.refund(map);
-		
+
 	}
-	
+
 	@Override
 	public void cancel(Map<String, String> map) {
 		dao.cancel(map);
-		
+	}
+
+	@Override
+	public void allRefund(Map<String,String> map) {
+		dao.allRefund(map);
+
+	}
+
+	@Override
+	public void allCancel(Map<String,String> map) {
+		dao.allCancel(map);
+
 	}
 
 	@Override
@@ -290,7 +313,7 @@ public class MyPageServiceImpl implements MyPageService {
 	public int removeJjim(JjimVO jjimVO) {
 		return dao.removeJjim(jjimVO);
 	}
-	
+
 	@Override
 	public int addCart(CartVO vo) {
 		return dao.addCart(vo);

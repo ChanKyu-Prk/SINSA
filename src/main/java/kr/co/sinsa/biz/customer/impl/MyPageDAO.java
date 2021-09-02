@@ -157,6 +157,14 @@ public class MyPageDAO {
 		SST.update("myInfo.cancel",map);
 	}
 	
+	public void allRefund(Map<String,String> map) {
+		SST.update("myInfo.allRefund",map);
+	}
+	
+	public void allCancel(Map<String,String> map) {
+		SST.update("myInfo.allCancel",map);
+	}
+	
 	public int addJjim(JjimVO vo) {
 		return SST.insert("myInfo.addJjim", vo);
 	}

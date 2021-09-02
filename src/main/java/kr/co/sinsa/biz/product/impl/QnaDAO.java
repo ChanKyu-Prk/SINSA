@@ -16,8 +16,8 @@ public class QnaDAO {
 	private SqlSessionTemplate SST;
 	
 
-	public List<QnaVO> qnaInfo(int qna_PRD_NUM){
-		return SST.selectList("ProductList.getInfo", qna_PRD_NUM);
+	public List<QnaVO> qnaInfo(Map<String, Object> map){
+		return SST.selectList("ProductList.getInfo", map);
 	}
 	
 	public List<QnaVO> insertQNA(Map<String, Object> map){

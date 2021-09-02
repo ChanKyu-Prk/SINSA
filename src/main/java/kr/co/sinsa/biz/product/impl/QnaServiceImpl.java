@@ -17,8 +17,8 @@ public class QnaServiceImpl implements QnaService{
 	private QnaDAO DAO;
 	
 	@Override
-	public List<QnaVO> qnaInfo(int qna_PRD_NUM) {
-		return DAO.qnaInfo(qna_PRD_NUM);
+	public List<QnaVO> qnaInfo(Map<String, Object> map) {
+		return DAO.qnaInfo(map);
 	}
 	@Override
 	public List<QnaVO> insertQNA(Map<String, Object> map) {	
