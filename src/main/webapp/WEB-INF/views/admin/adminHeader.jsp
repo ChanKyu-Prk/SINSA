@@ -30,7 +30,12 @@
 	type="text/css">
 	
 </head>
+<style>
+a:hover{
+	color: magenta;
+}
 
+</style>
 <body>
 	<nav class="navbar navbar-expand-lg navbar-dark sticky-top order-lg-2"
 		style="background-color: rgba(0, 0, 0, 0.8); position: sticky;">

@@ -165,38 +165,58 @@ public class OrderController {
 		
 		int payment = paymentByMerchantUid.getResponse().getAmount() - paymentByMerchantUid.getResponse().getCancelAmount();
 		int cancelAmount = vo.getOrder_price();
+		int allcancelAmount = orderService.all_cancel_amount(vo);
+		String tt = vo.getOrder_state();
 		
-		if (payment <= 0) {
+		
+		
+		if (payment <= 0 || payment == 3000) {
 			rttr.addFlashAttribute("msg", "이미 전액 취소된 주문입니다.");
 			
-		} else if (cancelAmount < payment) {
-
-			CancelData cancel2 = new CancelData(vo.getOrder_num(), false, cancelAmount);
-			IamportResponse<Payment> cancelpayment2 = client.cancelPayment(cancel2);
-			System.out.println(cancelpayment2.getMessage());
-
-			rttr.addFlashAttribute("msg", "결제금액 " + payment + "원 중 " + cancelAmount + "원 부분 취소됩니다.");
+		} else if (!tt.contains("일괄")) {
 			
+			if(tt.contains("*")) cancelAmount -= 3000;
+			
+			if(cancelAmount < payment) {
+				CancelData cancel2 = new CancelData(vo.getOrder_num(), false, cancelAmount);
+				IamportResponse<Payment> cancelpayment2 = client.cancelPayment(cancel2);
+				System.out.println(cancelpayment2.getMessage());
+				if(tt.contains("*")) {
+					rttr.addFlashAttribute("msg", "결제금액 " + payment + "원 중 반품비 3000원 제외 " + cancelAmount + "원 부분 취소됩니다.");
+				} else {
+					rttr.addFlashAttribute("msg", "결제금액 " + payment + "원 중 " + cancelAmount + "원 부분 취소됩니다.");
+				}
+			} else if ( cancelAmount <= payment+vo.getOrder_usepoint()) {
+				CancelData cancel2 = new CancelData(vo.getOrder_num(), false);
+				IamportResponse<Payment> cancelpayment2 = client.cancelPayment(cancel2);
+				System.out.println(cancelpayment2.getMessage());
+				rttr.addFlashAttribute("msg", "포인트 사용 금액을 제외한 결제금액 " + payment + "원  취소됩니다.");
+			}
 			orderService.order_cancel(vo);
+		
 			
-		} else if (cancelAmount >= payment) {
+		} else if (tt.contains("일괄")) {
 			
-			CancelData cancel2 = new CancelData(vo.getOrder_num(), false);
-			IamportResponse<Payment> cancelpayment2 = client.cancelPayment(cancel2);
-			System.out.println(cancelpayment2.getMessage());
+			if(tt.contains("*")) allcancelAmount -= 3000;
+			if(allcancelAmount <= payment) {
 			
-			rttr.addFlashAttribute("msg", payment + "원 전액 취소됩니다.");
+				CancelData cancel2 = new CancelData(vo.getOrder_num(), false, allcancelAmount);
+				IamportResponse<Payment> cancelpayment2 = client.cancelPayment(cancel2);
+				System.out.println(cancelpayment2.getMessage());
+				if(tt.contains("*")) {
+					rttr.addFlashAttribute("msg", "결제금액 " + payment + "원 중 반품비 3000원 제외 " + allcancelAmount + "원 취소됩니다.");
+				} else {
+					rttr.addFlashAttribute("msg", payment + "원 전액 취소됩니다.");
+				}
+			}
+			orderService.order_all_cancel(vo);
 			
-			orderService.order_cancel(vo);
+		} else {
+			rttr.addFlashAttribute("알 수 없는 오류가 발생하였습니다.");
 			
 		} 
-
-
 		String referer = request.getHeader("Referer");
-		
 		return "redirect:"+referer;
 		
-	}
-	  
-	  
+	} 
 }

@@ -63,6 +63,16 @@ public class OrderServiceImpl implements OrderService {
 	}
 	
 	@Override
+	public void order_all_cancel(OrderVO vo) {
+		dao.order_all_cancel(vo);
+	}
+	
+	@Override
+	public int all_cancel_amount(OrderVO vo) {
+		return dao.all_cancel_amount(vo);
+	}
+	
+	@Override
 	public OrderVO order_info(String order_num) {
 		return dao.order_info(order_num);
 	}
