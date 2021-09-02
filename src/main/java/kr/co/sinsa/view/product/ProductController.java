@@ -73,7 +73,7 @@ public class ProductController {
 			} 
 		}
 
-//		Map<String, Object> map = new HashMap<String, Object>();
+		Map<String, Object> map = new HashMap<String, Object>();
 //		ProductVO productVO = service.info(PRD_CODE);		
 //		int qna_PRD_NUM = productVO.getPRD_NUM();
 //		int page = Integer.parseInt(pageR);
