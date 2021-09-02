@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 
 <!DOCTYPE html>
 <html>
@@ -45,32 +46,32 @@ div {
 					</colgroup>
 					<tr>
 						<td class="imgtd"><div class="img_td_row">
-								<img class="reviewPicAdd" alt="상품 사진 추가" title="상품 사진 추가"
+								<img class="prdPicAdd" alt="상품 사진 추가" title="상품 사진 추가"
 									src="/resources/img/camera.png" />
 
 							</div></td>
 						<td class="imgtd"><div class="img_td_row">
-								<img class="reviewPic" alt="상품 사진" title="상품 사진" id="reviewPic0"
+								<img class="prdPic" alt="상품 사진" title="상품 사진" id="prdPic0"
 									src="/resources/img/default.png" />
 
 							</div></td>
 						<td class="imgtd"><div class="img_td_row">
-								<img class="reviewPic" alt="상품 사진" title="상품 사진" id="reviewPic1"
+								<img class="prdPic" alt="상품 사진" title="상품 사진" id="prdPic1"
 									src="/resources/img/default.png" />
 
 							</div></td>
 						<td class="imgtd"><div class="img_td_row">
-								<img class="reviewPic" alt="상품 사진" title="상품 사진" id="reviewPic2"
+								<img class="prdPic" alt="상품 사진" title="상품 사진" id="prdPic2"
 									src="/resources/img/default.png" />
 
 							</div></td>
 						<td class="imgtd"><div class="img_td_row">
-								<img class="reviewPic" alt="상품 사진" title="상품 사진" id="reviewPic3"
+								<img class="prdPic" alt="상품 사진" title="상품 사진" id="prdPic3"
 									src="/resources/img/default.png" />
 
 							</div></td>
 						<td class="imgtd"><div class="img_td_row">
-								<img class="reviewPic" alt="상품 사진" title="상품 사진" id="reviewPic4"
+								<img class="prdPic" alt="상품 사진" title="상품 사진" id="prdPic4"
 									src="/resources/img/default.png" />
 
 							</div></td>
@@ -162,7 +163,7 @@ div {
 				</div>
 		</form:form>
 	</div>
-
+</div>
 	<script src="${path}/resources/js/jquery-3.3.1.min.js"></script>
 	<script src="${path}/resources/js/bootstrap.min.js"></script>
 	<script src="${path}/resources/js/jquery-ui.min.js"></script>
@@ -173,23 +174,23 @@ div {
 
 </body>
 <script>
-$('.reviewPicAdd').on("click", function() {
+$('.prdPicAdd').on("click", function() {
 	$('#input_file').trigger('click');
 });
 
 $(window).resize(function() {
-	var imgWidth = $('.reviewPic').width();
-	$('.reviewPic').height(imgWidth);
+	var imgWidth = $('.prdPic').width();
+	$('.prdPic').height(imgWidth);
 });
 
 $('#input_file').on("change", handlerIngsFilesSelect);
 
 function handlerIngsFilesSelect(e) {
-	$('#reviewPic0').removeAttr("src").attr("src",
+	$('#prdPic0').removeAttr("src").attr("src",
 			"/resources/img/default.png");
-	$('#reviewPic1').removeAttr("src").attr("src",
+	$('#prdPic1').removeAttr("src").attr("src",
 			"/resources/img/default.png");
-	$('#reviewPic2').removeAttr("src").attr("src",
+	$('#prdPic2').removeAttr("src").attr("src",
 			"/resources/img/default.png");
 
 	var sel_files = [];
@@ -207,7 +208,7 @@ function handlerIngsFilesSelect(e) {
 
 		var reader = new FileReader();
 		reader.onload = function(e) {
-			$('#reviewPic' + index).attr("src", e.target.result);
+			$('#prdPic' + index).attr("src", e.target.result);
 			index++;
 		}
 		reader.readAsDataURL(f);

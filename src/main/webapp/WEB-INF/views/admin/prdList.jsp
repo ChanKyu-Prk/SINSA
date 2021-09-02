@@ -149,7 +149,7 @@ table {
 									%>
 									<td style="vertical-align:middle;"><img src="${pageContext.request.contextPath}\upload\prdImg\<%= img %>.png" width="100px"></td>
 									<td style="vertical-align:middle;">${ e.prd_code }</td>
-									<td style="vertical-align:middle;"><a href="prdInfo?prd_num=${ e.prd_num }">${ e.prd_name }</a></td>
+									<td style="vertical-align:middle;"><a href="../product/prdCode=${ e.prd_code }" target="_blank">${ e.prd_name }</a></td>
 									<td style="vertical-align:middle;">${e.prd_category}</td>
 									<td style="vertical-align:middle;">${e.prd_gender}</td>
 									<td style="vertical-align:middle;"><fmt:formatNumber value="${e.prd_price}"

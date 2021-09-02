@@ -51,6 +51,14 @@ public class OrderDAOImpl implements OrderDAO {
 	public void order_cancel(OrderVO vo) {
 		sqlSession.update("OrderDAO.order_cancel", vo);
 	}
+	
+	public void order_all_cancel(OrderVO vo) {
+		sqlSession.update("OrderDAO.order_all_cancel", vo);
+	}
+	
+	public int all_cancel_amount(OrderVO vo) {
+		return sqlSession.selectOne("OrderDAO.all_cancel_amount", vo);
+	}
 
 	public void auto_complete() {
 		sqlSession.delete("OrderDAO.auto_complete");

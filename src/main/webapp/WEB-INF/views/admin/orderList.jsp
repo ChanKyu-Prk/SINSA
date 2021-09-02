@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <!DOCTYPE html>
 <html>
@@ -40,7 +41,49 @@ table {
 		if (message) {
 			alert(message);				
 		}
+		
 	</script>
+				<script>
+			$(window).load(function() {
+
+			    $("td.ordernum").each(function() {
+
+			        var rows = $("td.ordernum:contains('" + $(this).text() + "')");
+
+			              if (rows.length > 1) {
+
+			            rows.eq(0).attr("rowspan", rows.length);
+			            rows.parent().find("td:eq(1)").attr("rowspan", rows.length);	
+			            rows.parent().find("td:eq(2)").attr("rowspan", rows.length);	
+			            rows.parent().find("td:eq(7)").attr("rowspan", rows.length);	
+			            rows.parent().find("td:eq(8)").attr("rowspan", rows.length);
+			            rows.parent().find("td:eq(9)").attr("rowspan", rows.length);
+			            rows.parent().find("td:eq(13)").attr("rowspan", rows.length);
+			            
+			            var timerows = rows.parent().find("td:eq(1)");
+			            var idrows = rows.parent().find("td:eq(2)");
+			            var namerows = rows.parent().find("td:eq(7)");
+			            var telrows = rows.parent().find("td:eq(8)");
+			            var addrows = rows.parent().find("td:eq(9)");
+			            var memorows = rows.parent().find("td:eq(13)");
+			            
+			            rows.not(":eq(0)").remove();
+
+			            timerows.not(":eq(0)").remove();
+			            idrows.not(":eq(0)").remove();
+			            namerows.not(":eq(0)").remove();
+			            telrows.not(":eq(0)").remove();
+			            addrows.not(":eq(0)").remove();
+			            memorows.not(":eq(0)").remove();
+			            
+			          
+
+			        }
+
+			    });
+
+			});
+			</script>
 	<jsp:include page="adminHeader.jsp" flush="true" />
 	<br>
 	<br>
@@ -48,7 +91,7 @@ table {
 	<center><h2>주문 관리</h2></center>
 	<br>
 	<p>${ sdate } ~ ${ edate } 기간 내  검색된 주문 건수 ${ allcount - cancelcount }건, 환불 요청 및 처리 건수 ${ cancelcount }건</p>
-	<p>( 매출금액 <fmt:formatNumber value="${ sales - minus }" pattern="#,###,###"/>원, 환불금액 <fmt:formatNumber value="${ minus }" pattern="#,###,###"/>원 )</p><br>
+	<p>( 매출금액 <fmt:formatNumber value="${ sales - minus }" pattern="#,###,###"/>원, 취소금액 <fmt:formatNumber value="${ minus }" pattern="#,###,###"/>원 )</p><br>
 	
 	<br>
 			<form>
@@ -130,7 +173,7 @@ table {
 			<br>
 			<br>
 			
-			<table class="table table-hover" id="thetable"
+			<table class="table" id="thetable"
 				style="text-align: center; border: 0px solid #dddddd">
 				<thead>
 					<tr>
@@ -165,7 +208,7 @@ table {
 
 							<c:forEach var="e" items="${ orderList }">
 								<tr>
-									<td style="padding:6px 3px;">${ e.order_num }</td>
+									<td class="ordernum" style="padding:6px 3px;">${ e.order_num }</td>
 									<td style="padding:6px 3px;"><fmt:formatDate pattern="yy-MM-dd HH:mm:ss" value="${ e.order_regdate }" /></td>
 									<td style="padding:6px 3px;">${ e.order_cusid }</td>
 									<td style="padding:6px 3px;">${ e.order_prdcode }</td>
@@ -209,7 +252,7 @@ table {
 							</form:form>			
 										</c:when>
 							
-										<c:when test="${ e.order_state == '취소요청' }">
+										<c:when test="${ fn:contains(e.order_state, '취소요청')}">
 							<form:form method="post" action="orderCancel" modelAttribute="orderInfo">
 								<form:hidden path="order_num" value="${ e.order_num }" />
 								<form:hidden path="order_cusid" value="${ e.order_cusid }" />
@@ -217,36 +260,16 @@ table {
 								<form:hidden path="order_prdsize" value="${ e.order_prdsize }" />
 								<form:hidden path="order_price" value="${ e.order_price }" />
 								<form:hidden path="order_usepoint" value="${ e.order_usepoint }" />
+								<form:hidden path="order_state" value="${ e.order_state }" />
 											<td style="padding:6px 3px;" >${ e.order_delivcomp }</td>
 											<td style="padding:6px 3px;">${ e.order_delivnum }</td>
 											<td style="padding:6px 3px;">
 												<button type="submit" class="btn btn-danger btn-sm">취소처리</button>
-												<script
-												  src="https://code.jquery.com/jquery-3.3.1.min.js"
-												  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-												  crossorigin="anonymous"></script><!-- jQuery CDN --->
-<!-- 												<script>
-												  var url = document.location.href;
-												  function cancelPay() {
-												    jQuery.ajax({
-												      "url": "admin/orderCancel", // 예: http://www.myservice.com/payments/cancel
-												      "type": "POST",
-												      "contentType": "application/json",
-												      "data": JSON.stringify({
-												        "merchant_uid": "${e.order_num}", // 예: ORD20180131-0000011
-												        "cancel_request_amount": ${order_price}, // 환불금액
-												        "reason": "테스트 결제 환불" // 환불사유
-												      }),
-												      "dataType": "json"
-												    });
-												    alert('취소처리되었습니다');
-												  }
-												</script> -->
-												
+
 											</td>
 							</form:form>
 										</c:when>
-										<c:when test="${ e.order_state == '취소완료' }">
+										<c:when test="${ fn:contains(e.order_state, '취소완료') }">
 											<td style="padding:6px 3px;">${ e.order_delivcomp }</td>
 											<td style="padding:6px 3px;">${ e.order_delivnum }</td>
 											<td style="padding:6px 3px;">
@@ -272,6 +295,7 @@ table {
 
 				</tbody>
 			</table>
+
 			<div align="center">
 				<ul class="pagination">
 					<c:choose>
