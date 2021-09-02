@@ -255,10 +255,6 @@ button:disabled {
 	background-color: white !important;
 }
 
-#qna-content{
-	display: none;
-}
-
 #modal {
 	display:none; position:absolute; width:100%; height:60%; z-index:999999;
 	top: 50px;
@@ -291,6 +287,7 @@ button:disabled {
 	background-color: black;
 	color: white;
 }
+.pagination { margin-top: 25px; margin-bottom: 25px; justify-content: center; }
 </style>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -670,7 +667,7 @@ button:disabled {
 								class="nav-link" data-toggle="tab" href="#tabs-2" role="tab"
 								aria-selected="false">상품평&nbsp; <span>(${reviewNum})</span></a></li>
 							<li class="nav-item" role="presentation"><a id="qnaTab"
-								class="nav-link" data-toggle="tab" href="#tabs-3" role="tab"
+								class="nav-link" onclick="getQnaList(1)" data-toggle="tab" href="#tabs-3" role="tab"
 								aria-selected="false">상품문의&nbsp;<span>(3)</span></a></li>
 						</ul>
 						<div class="tab-content">
@@ -788,33 +785,31 @@ button:disabled {
 									</ul>
 									<div class="container" id="container-qna">
 									<div id="modal">
-											<div class="modal_content">
-												<form id="formToInput" method="post">
-													<input type="hidden" id="PRD_NUM" name="PRD_NUM" value="${prdInfo.PRD_NUM}" />
-													<p>
+										<div class="modal_content">
+											<form id="formToInput" method="post">
+												<input type="hidden" id="PRD_NUM" name="PRD_NUM" class="PRD_NUM" value="" />
+												<p>
 													<label> 패스워드 </label><br>
 													<input type="text" id="QNA_LOCK" name="QNA_LOCK" />
-													</p>
-													<p>
+												</p>
+												<p>
 													<label> 글 제목 </label><br>
 													<input type="text" id="QNA_TITLE" name="QNA_TITLE" />
-													</p>
-													<p>
+												</p>
+												<p>
 													<label> 글 내용 </label><br>
 													<textarea rows="13" cols="90" id="QNA_CONTENT" name="QNA_CONTENT" ></textarea><br>
-													</p>
-													<button type="button" id="modal_close_btn">닫기</button>
-												</form>
+												</p>
 													<button type="button" id="id-of-insert-qna" onclick="clkBtn(this.id)">확인</button>
-											</div>
+													<button type="button" id="modal_close_btn">닫기</button>
+											</form>
 										</div>
+									</div>
 									<div class="row">
-											<div class="btn-qna-block">
-												<input type="button" id="modal_open_btn" class="btn-qna" value="문의쓰기" />
-											</div>
-										<br>
+										<div class="btn-qna-block">
+											<input type="button" id="modal_open_btn" class="btn-qna" value="문의쓰기" />
+										</div><br>
 										<script type="text/javascript">
-										
 										$('#replyDelete').on('click', function(){
 											<%if(session.getAttribute("user") == null){%>
 	 											var result = confirm("로그인이 필요한 서비스입니다. 로그인하시겠습니까?");
@@ -827,7 +822,6 @@ button:disabled {
 	 											}
  											<%}%>
 										})
-										
 										$("#modal_close_btn").click(function(){
 											$("#modal").attr("style", "display:none");
 										})
@@ -848,33 +842,31 @@ button:disabled {
 										</script>
 										<br>
 										<div class="row" id="qna-row">
-										<c:if test="${empty qnaList }">
-											<div id="empty-qna-description">작성된 문의가 없습니다.</div>
-										</c:if>
-										<c:forEach var="qnaList" items="${qnaList }">
-											<div id="modal${qnaList.QNA_NUM }">
+										<div id="empty-qna-description"></div>
+										<c:forEach var="qnaList" items="${qnaList }" varStatus="state">
+											<div id="modal${state.index }">
 												<div class="modal_content">
-													<form id="formToInput${qnaList.QNA_NUM }" method="post">
+													<form id="formToInput${state.index }" method="post">
 														<input type="hidden" id="QNA_NUM" name="QNA_NUM" value="${qnaList.QNA_NUM }" />
 														<input type="hidden" id="PRD_NUM" name="PRD_NUM" value="${prdInfo.PRD_NUM}" />
 														<p>
-														<label> 패스워드 </label><br>
-														<input type="password" id="QNA_LOCK" name="QNA_LOCK" value="${qnaList.QNA_LOCK }"/>
+															<label> 패스워드 </label><br>
+															<input type="password" id="QNA_LOCK" name="QNA_LOCK" value="${qnaList.QNA_LOCK }"/>
 														</p>
 														<p>
-														<label> 글 제목 </label><br>
-														<input type="text" id="QNA_TITLE" name="QNA_TITLE" value="${qnaList.QNA_TITLE }" />
+															<label> 글 제목 </label><br>
+															<input type="text" id="QNA_TITLE" name="QNA_TITLE" value="${qnaList.QNA_TITLE }" />
 														</p>
 														<p>
-														<label> 글 내용 </label><br>
-														<textarea rows="13" cols="90" id="QNA_CONTENT" name="QNA_CONTENT">${qnaList.QNA_CONTENT }</textarea><br>
+															<label> 글 내용 </label><br>
+															<textarea rows="13" cols="90" id="QNA_CONTENT" name="QNA_CONTENT">${qnaList.QNA_CONTENT }</textarea><br>
 														</p>
-														<button type="button" id="modal_close_btn${qnaList.QNA_NUM }">닫기</button>
+														<button type="button" id="id-of-insert-qna" onclick="clkBtn${state.index }(this.id)">확인</button>
+														<button type="button" id="modal_close_btn${state.index }">닫기</button>
 													</form>
-														<button type="button" id="id-of-insert-qna" onclick="clkBtn${qnaList.QNA_NUM }(this.id)">확인</button>
 												</div>
 											</div>
-											<div id="qna-open-content${qnaList.QNA_NUM }">
+											<div id="qna-open-content${state.index }">
 												<div class="modal_content">
 													<input type="password" placeholder="비밀번호 입력" 
 														id="qna-content-password${qnaList.QNA_NUM}">
@@ -882,52 +874,55 @@ button:disabled {
 														class="qna-content-password-check${qnaList.QNA_NUM}" value="확인">
 												</div>
 											</div>
-											<table id="qna-table${qnaList.QNA_NUM }" onclick="qnaPwdCheck${qnaList.QNA_NUM }()" class="qna-table-class" style="margin-bottom: 10px; border-bottom: 1px solid grey;">
+											<table id="qna-table${state.index }" onclick="qnaPwdCheck${state.index }()" class="qna-table-class" style="margin-bottom: 10px; border-bottom: 1px solid grey;">
 												<c:choose>
 													<c:when test="${!empty qnaList }">
-															<tr>
-																<td id="img-qna">
-																	<img alt="lock" style="width: 26px;" 
-																		src="${path}/resources/img/product/details/lock.png">
-																</td>
-															
-																<td style="width: 99px;">
+														<tr>
+															<td id="img-qna">
+																<img alt="lock" style="width: 26px;" 
+																	src="${path}/resources/img/product/details/lock.png">
+															</td>
+															<td style="width: 99px;">
 																<fmt:formatDate value="${qnaList.QNA_REGDATE }" 
 																	pattern="yyyy-MM-dd" /></td>
-																<td style="width: 605px;">${qnaList.QNA_TITLE }</td>
-																<td>${qnaList.QNA_CUSID }</td>
+															<td style="width: 605px;">${qnaList.QNA_TITLE }</td>
+															<td>${qnaList.QNA_CUSID }</td>
 															<c:choose>
-															<c:when test="${!empty qnaList.QNA_ANSWER }">
-																<td>답변완료</td>												
-															</c:when>
-															<c:when test="${empty qnaList.QNA_ANSWER }">
-																<td>답변대기</td>												
-															</c:when>
-																</c:choose>
+																<c:when test="${!empty qnaList.QNA_ANSWER }">
+																	<td>답변완료</td>												
+																</c:when>
+																<c:when test="${empty qnaList.QNA_ANSWER }">
+																	<td>답변대기</td>												
+																</c:when>
+															</c:choose>
 																<td style="width: 49px;">
-																<form id="formToDelete${qnaList.QNA_NUM}" method="post">
-																	<input type="hidden" id="QNA_NUM" name="QNA_NUM" 
+																	<form id="formToDelete${qnaList.QNA_NUM}" method="post">
+																		<input type="hidden" id="QNA_NUM" name="QNA_NUM" 
 																		value="${qnaList.QNA_NUM}" />
-																	<input type="button" onclick="clkBtnList${qnaList.QNA_NUM}(this.id)" 
+																		<input type="button" onclick="clkBtnList${qnaList.QNA_NUM}(this.id)" 
 																		id="id-of-delete-qna${qnaList.QNA_NUM}" class="delete-qna" value="삭제">
-																</form>
+																	</form>
 																</td>
 																<td style="width: 58px;">
 																	<input type="button" id="modal_open_btn${qnaList.QNA_NUM}" class="btn-qna" value="수정" />
 																</td>
 															</tr>
 															<tr>
-																<td colspan="5" id="qna-content${qnaList.QNA_NUM}">
+																<td></td>
+																<td></td>
+																<td class="qna-content${qnaList.QNA_NUM}">
 																	${qnaList.QNA_CONTENT }
 																</td>
 															</tr>
 															<tr>
+																<td></td>
+																<td></td>
 																<c:choose>
 																	<c:when test="${!empty qnaList.QNA_ANSWER }">
-																		<td colspan="5">${qnaList.QNA_ANSWER }</td>												
+																		<td class="qna-content${qnaList.QNA_NUM}">${qnaList.QNA_ANSWER }</td>												
 																	</c:when>
 																	<c:otherwise>
-																		<td colspan="5">관리자가 답변을 준비중입니다. 다소 양해 부탁드립니다.</td>
+																		<td class="qna-content${qnaList.QNA_NUM}">ㄴ관리자가 답변을 준비중입니다. 다소 양해 부탁드립니다.</td>
 																	</c:otherwise>
 																</c:choose>
 															</tr>
@@ -937,27 +932,31 @@ button:disabled {
 											</table>
 											<br>
 											<style>
-												#modal${qnaList.QNA_NUM } {
+												#modal${state.index } {
 													display:none; position:absolute; width:100%; height:60%; z-index:999999;
 													top: 50px;
 												}
 												
-												#modal${qnaList.QNA_NUM } .modal_content {
+												#modal${state.index } .modal_content {
 													width:900px; height:660px; margin:50px auto; padding:20px 10px; 
 													background:#fff; border: 2px solid #666;
 												}
-												#qna-open-content${qnaList.QNA_NUM } {
+												#qna-open-content${state.index } {
 													display:none; position:absolute; width:100%; height:60%; z-index:999999;
 													top: 50px;
 												}
 												
-												#qna-open-content${qnaList.QNA_NUM } .modal_content {
+												#qna-open-content${state.index } .modal_content {
 													width:900px; height:660px; margin:50px auto; padding:20px 10px; 
 													background:#fff; border: 2px solid #666;
+												}
+												.qna-content${state.index }{
+													display: none;
 												}
 											</style>
-											<script type="text/javascript">
-												function qnaPwdCheck${qnaList.QNA_NUM }(){
+											
+											<script type="text/javascript">												
+											function qnaPwdCheck${state.index }(){
 													<%if(session.getAttribute("user") == null){%>
 		 											var result = confirm("로그인이 필요한 서비스입니다. 로그인하시겠습니까?");
 		 											if(result){
@@ -968,8 +967,9 @@ button:disabled {
 		 												return false;
 		 											}
 		 										<%}%>	
-		 											$("#qna-open-content${qnaList.QNA_NUM }").attr("style", "display:block");
+		 											$("#qna-open-content${state.index }").attr("style", "display:block");
 												}
+												
 												$("#modal_open_btn${qnaList.QNA_NUM}").click(function(){
 													<%if(session.getAttribute("user") == null){%>
 		 											var result = confirm("로그인이 필요한 서비스입니다. 로그인하시겠습니까?");
@@ -981,10 +981,10 @@ button:disabled {
 		 												return false;
 		 											}
 		 										<%}%>
-													$("#modal${qnaList.QNA_NUM }").attr("style", "display:block");
+													$("#modal${state.index }").attr("style", "display:block");
 												})
 												$("#modal_close_btn${qnaList.QNA_NUM}").click(function(){
-													$("#modal${qnaList.QNA_NUM }").attr("style", "display:none");
+													$("#modal${state.index }").attr("style", "display:none");
 												})
 												$('.qna-content-password-check${qnaList.QNA_NUM}').on('click', function(){
 													var pwdCheck = $('#qna-content-password${qnaList.QNA_NUM}').val();
@@ -992,8 +992,8 @@ button:disabled {
 														if($(this).attr('id') === 'replyWrite'){
 															$('#qna-content').css('display','inline-block');																			
 														}else if($(this).attr('id') === 'replyOpen'){
-															$('#qna-open-content${qnaList.QNA_NUM }').css('display','none');
-															$('#qna-content${qnaList.QNA_NUM}').css('display','inline-block');
+															$('#qna-open-content${state.index }').css('display','none');
+															$('.qna-content${qnaList.QNA_NUM}').css('display','inline-block');
 														}
 													}else if(pwdCheck === ''){
 														alert('패스워드를 입력해주세요.');
@@ -1003,7 +1003,7 @@ button:disabled {
 												});
 												function clkBtnList${qnaList.QNA_NUM}(clickedId){
 													var CRUD = clickedId;
-													var remove = '${qnaList.QNA_NUM }';
+													var remove = '${state.index }';
 													var pwdCheck = $('#qna-content-password${qnaList.QNA_NUM}').val();
 													if(pwdCheck === '${qnaList.QNA_LOCK}'){
 														var form = $('#formToDelete${qnaList.QNA_NUM}').serialize();
@@ -1017,11 +1017,11 @@ button:disabled {
 													}
 													qnaAjax(form, CRUD, remove);
 												};
-												function clkBtn${qnaList.QNA_NUM }(clickedId){
+												function clkBtn${state.index }(clickedId){
 													var CRUD = clickedId;
 													var PRD_CODE = '${prdInfo.PRD_CODE}';
 													if(CRUD === 'id-of-insert-qna'){
-														var form = $('#formToInput${qnaList.QNA_NUM }').serialize();
+														var form = $('#formToInput${state.index }').serialize();
 														CRUD = 'update';
 														qnaAjax(form, CRUD, PRD_CODE);
 													}
@@ -1032,15 +1032,12 @@ button:disabled {
 										function clkBtn(clickedId){
 											var CRUD = clickedId;
 											var PRD_CODE = '${prdInfo.PRD_CODE}';
-											console.log(PRD_CODE);
 											if(CRUD === 'id-of-insert-qna'){
 												var form = $('#formToInput').serialize();
 												CRUD = 'insert';
 												qnaAjax(form, CRUD, PRD_CODE);
 											}
 										}
-										
-										
 										function qnaAjax(form, CRUD, code){
 											var source = ajaxlist();
 											console.log(source);
@@ -1054,9 +1051,9 @@ button:disabled {
 												},
 												success: function (data) {
 													if(CRUD === 'insert'){
-														/*location.href = "/product/prdCode="+code;*/
-														console.log(source);
-														$('#container-qna').empty();
+														location.href = "/product/prdCode="+code+"/${pageInfo.getPage()}";
+														/*console.log(source);*/
+														/*$('#container-qna').empty();*/
 														/*$('#container-qna').html(source);*/
 													}else if(CRUD === 'delete'){
 														$('#qna-table'+code).remove();
@@ -1079,16 +1076,61 @@ button:disabled {
 									aria-disabled="true">이전</a></li>
 							</c:when>
 							<c:when test="${pageInfo.getStartPage()==1}">
-							
+								<li class="page-item">
+									<a class="page-link" 
+									onclick="getQnaList(${pageInfo.getStartPage()})"
+									 tabindex="-1">이전</a>
+								</li>
 							</c:when>
 							<c:otherwise>
-								
+								<li class="page-item">
+									<a class="page-link" 
+									onclick="getQnaList(${pageInfo.getStartPage()-1})"
+									 tabindex="-1">이전</a>
+								</li>
+							</c:otherwise>
+						</c:choose>
+						<c:forEach begin="${pageInfo.getStartPage()}"
+							end="${pageInfo.getEndPage()}" varStatus="state">
+							<c:choose>
+								<c:when test="${pageInfo.getPage()==state.index}">
+									<li class="page-item active" aria-current="page">
+										<a class="page-link">${state.index}</a>
+									</li>
+								</c:when>
+								<c:otherwise>
+									<li class="page-item">
+										<a class="page-link"
+										onclick="getQnaList(${state.index})">
+										${state.index}</a>
+									</li>
+								</c:otherwise>
+							</c:choose>
+						</c:forEach>
+						<c:choose>
+							<c:when test="${pageInfo.getPage() >= pageInfo.getMaxPage()}">
+								<li class="page-item disabled">
+									<a class="page-link" aria-disabled="true">다음</a></li>
+							</c:when>
+							<c:when test="${pageInfo.getEndPage()==pageInfo.getMaxPage()}">
+								<li class="page-item">
+									<a class="page-link"
+									onclick="getQnaList(${pageInfo.getEndPage()})">
+									다음</a>
+								</li>
+							</c:when>
+							<c:otherwise>
+								<li class="page-item">
+									<a class="page-link"
+									onclick="getQnaList(${pageInfo.getEndPage()+1})">
+									다음</a>
+								</li>
 							</c:otherwise>
 						</c:choose>
 					</ul>
-						
-						
 									</div>
+									
+									
 									</div>
 								</div>
 							</div>
@@ -1377,6 +1419,50 @@ button:disabled {
 										$("#reviewTab").trigger("click");
 									});
 						});
+
+						
+						function loginCheck(){
+							var result = confirm("로그인이 필요한 서비스입니다. 로그인하시겠습니까?");
+								if(result){
+									location.href="/login.do";
+									return false;
+								}
+								else {
+									return false;
+								}
+						}
+						function getQnaList(pageR){
+							var prd_code = '${prdInfo.PRD_CODE}';
+							var prd_num = '${prdInfo.PRD_NUM}';
+							var arrays = new Array();
+							
+							var sendData = {
+									"prdCode":prd_code, 
+									"pageR":pageR
+									};
+							$.ajax({
+								url : "/qnaListForm",
+								type : "POST",
+								data : sendData,
+								success:function(data){
+									//$('#container-qna').empty();
+									arrays = data.qnaList;
+									//$('#container-qna').html();
+									//console.log(arrays[0]);
+									
+									$('.PRD_NUM').val(prd_num);
+									if(arrays[0] === undefined){
+										$('#empty-qna-description').html('작성된 문의가 없습니다.')										
+									}else{
+										$('#empty-qna-description').html('상품 Q&A')
+									}
+									
+								}
+							})
+						}
+			
+						
+						
 	</script>
 </body>
 </html>

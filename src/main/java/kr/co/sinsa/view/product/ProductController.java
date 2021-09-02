@@ -55,7 +55,8 @@ public class ProductController {
 	
 	// 상세페이지	
 	@RequestMapping("/product/prdCode={prdCode}")
-    public String getInfo(Model model, @PathVariable("prdCode") String PRD_CODE, JjimVO jjimVO, HttpServletResponse response, HttpSession session) {
+    public String getInfo(Model model, @PathVariable("prdCode") String PRD_CODE,
+    								   JjimVO jjimVO, HttpServletResponse response, HttpSession session) {
 		String CUS_ID = null;
 		if((UserVO) session.getAttribute("user") != null) {
 			UserVO user = (UserVO) session.getAttribute("user");
@@ -72,13 +73,34 @@ public class ProductController {
 			} 
 		}
 
-		
-		ProductVO productVO = service.info(PRD_CODE);		
-		int qna_PRD_NUM = productVO.getPRD_NUM();
-		
-		List<QnaVO> qnaList = QnaService.qnaInfo(qna_PRD_NUM);
-		model.addAttribute("qnaList", qnaList);
-		PageInfo pageInfo = new PageInfo();
+//		Map<String, Object> map = new HashMap<String, Object>();
+//		ProductVO productVO = service.info(PRD_CODE);		
+//		int qna_PRD_NUM = productVO.getPRD_NUM();
+//		int page = Integer.parseInt(pageR);
+//		int limit = 10;
+//		int listCount;
+//		int startPage;
+//		int endPage;
+//		int maxPage;
+//		
+//		map.put("qna_PRD_NUM", qna_PRD_NUM);
+//		map.put("page", (page - 1) * limit);
+//		List<QnaVO> qnaList = QnaService.qnaInfo(map);
+//		model.addAttribute("qnaList", qnaList);
+//		listCount = service.countQNAList(map);
+//		maxPage = (int) ((double) listCount / limit + 0.95);
+//		startPage = (((int) ((double) page / 5 + 0.8)) - 1) * 5 + 1;
+//		endPage = startPage + 4;
+//		if (endPage > maxPage) {
+//			endPage = maxPage;
+//		}
+//		PageInfo pageInfo = new PageInfo();
+//		pageInfo.setListCount(listCount);
+//		pageInfo.setEndPage(endPage);
+//		pageInfo.setStartPage(startPage);
+//		pageInfo.setMaxPage(maxPage);
+//		pageInfo.setPage(page);
+//		model.addAttribute("pageInfo", pageInfo);
 		
     	ProductVO vo = service.info(PRD_CODE);
     	model.addAttribute("prdInfo", vo);
@@ -205,11 +227,7 @@ public class ProductController {
 			String QNA_TITLE = vo.getQNA_TITLE(); 
 			int QNA_LOCK = vo.getQNA_LOCK(); 
 			String QNA_CONTENT = vo.getQNA_CONTENT();
-			System.out.println(QNA_CONTENT);
-			System.out.println(QNA_LOCK);
-			System.out.println(QNA_TITLE);
-			System.out.println(QNA_NUM);
-			
+
 			map.put("PRD_NUM", PRD_NUM);
 			map.put("QNA_LOCK", QNA_LOCK);
 			map.put("QNA_CUSID", QNA_CUSID);
@@ -334,15 +352,10 @@ public class ProductController {
 		}
 		
 		String gender = "";
-
 		if (condition.equals("men") || condition == "men") {
 			gender = "남";
 		} else if (condition.equals("women") || condition == "women") {
 			gender = "여";
-		} else if (condition.equals("new")) {
-
-		} else if (condition.equals("best")) {
-
 		}
 
 		String prdCategory = "";
@@ -385,8 +398,8 @@ public class ProductController {
 			orderby = "PRD_PRICE";
 			ascdesc = "desc";
 		}
-
 		
+
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("name", keyword);
 		map.put("category", prdCategory);
@@ -402,7 +415,6 @@ public class ProductController {
 		
 		List<ProductVO> list = null;
 		if(condition.equals("best")) {
-			System.out.println(map.get("category"));
 			list = service.listPageBestShoes(map);
 		}else {
 			list = service.getList(map);	
@@ -416,7 +428,7 @@ public class ProductController {
 				int prdnum = list.get(i).getPRD_NUM();
 				for (int j = 0 ; j < jjimList.size(); j ++) {
 					int jjjim = jjimList.get(j);
-					
+
 					if(jjjim == prdnum) {
 						jjim =1 ;
 					}
@@ -429,8 +441,6 @@ public class ProductController {
 			}
 		}
 		model.addAttribute("jjimcheck", jjimcheck);
-		
-//		service.getStock(list);
 		model.addAttribute("list", list);
 
 
