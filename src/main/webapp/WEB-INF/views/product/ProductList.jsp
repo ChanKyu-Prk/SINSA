@@ -294,6 +294,7 @@
    								}
    								#ajaxToCart${list.PRD_CODE } {padding-top: 0px; padding-bottom: 0px; height: 41px; width: 221px; display: inline-block;}
    								.cartSize${list.PRD_NUM }{ top: -14px; position: relative;}
+   								.product__item__detail${list.PRD_NUM }{cursor: pointer}
 	                        </style>
 	                        <div class="col-lg-4 col-md-6 col-sm-6">
 	                            <div class="product__item">
@@ -393,7 +394,7 @@
 										</div>
 									</div>
 									</div>
-	                                <div class="product__item__text">
+	                                <div class="product__item__text product__item__detail${list.PRD_NUM }">
 										<p>
  											<h6>${list.PRD_NAME }</h6>												
  										</p>
@@ -438,7 +439,7 @@
 										var stockArrays = new Array();
 		                            	$.ajax({
 		                            	    url:'/listToCart',
-		                            	    method:'POST',
+		                            	    method:"POST",
 		                            	    data:sendData,
 		                            	    success:function(data){
 		                            	    	var respData = data;
@@ -491,7 +492,7 @@
                             	
                             		$('.product__item__detail${list.PRD_NUM }').on('click', function(){
                             			var prdCode = "${list.PRD_CODE}";
-                            			location.href = "/product/prdCode="+prdCode+"/1";
+                            			location.href = "/product/prdCode="+prdCode;
                             		})
                             
                             		
