@@ -491,7 +491,7 @@
                             	
                             		$('.product__item__detail${list.PRD_NUM }').on('click', function(){
                             			var prdCode = "${list.PRD_CODE}";
-                            			location.href = "/product/prdCode="+prdCode;
+                            			location.href = "/product/prdCode="+prdCode+"/1";
                             		})
                             
                             		
@@ -562,7 +562,6 @@
 									href="/product/List/${info.condition }/${info.orderby }/${info.category } 
 									/${pageInfo.getStartPage()}?color=${info.color}&minPrice=${info.minPrice }
 									&maxPrice=${info.maxPrice }&keyWord=${info.keyWord }"
-									
 									tabindex="-1">이전</a></li>
 							</c:when>
 							<c:otherwise>
@@ -573,7 +572,6 @@
 									tabindex="-1">이전</a></li>
 							</c:otherwise>
 						</c:choose>
-
 						<c:forEach begin="${pageInfo.getStartPage()}"
 							end="${pageInfo.getEndPage()}" varStatus="state">
 							<c:choose>
@@ -589,7 +587,6 @@
 								</c:otherwise>
 							</c:choose>
 						</c:forEach>
-
 						<c:choose>
 							<c:when test="${pageInfo.getPage() >= pageInfo.getMaxPage()}">
 								<li class="page-item disabled"><a class="page-link"
@@ -608,7 +605,6 @@
 									&maxPrice=${info.maxPrice }&keyWord=${info.keyWord }">다음</a></li>
 							</c:otherwise>
 						</c:choose>
-
 					</ul>
                 </div>
             </div>

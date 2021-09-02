@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 public interface QnaService {
-	public List<QnaVO> qnaInfo(int qna_PRD_NUM);
+	public List<QnaVO> qnaInfo(Map<String, Object> map);
 	public List<QnaVO> insertQNA(Map<String, Object> map);
 	public List<QnaVO> updateQNA(Map<String, Object> map);
 	public List<QnaVO> deleteQNA(Map<String, Object> map);

@@ -40,6 +40,11 @@ PRD_COLOR in (${color})
 ;
  ]]> 
 </select>
+<select id="countQNAList" parameterType="Map" resultType="int">
+<![CDATA[
+	select count(*) from qna 
+ ]]> 
+</select>
 
 <select id="getJjimList" resultType="int">
 select JJIM_PRDNUM from jjim where JJIM_CUSID =#{value};
@@ -101,7 +106,7 @@ select JJIM_PRDNUM from jjim where JJIM_CUSID =#{value};
 	<select id="getInfo" parameterType="hashMap" resultType="kr.co.sinsa.biz.product.QnaVO">
 		<![CDATA[
 			select QNA_NUM, PRD_NUM, QNA_LOCK, QNA_CUSID, QNA_TITLE, QNA_CONTENT, QNA_ANSWER, QNA_REGDATE
-			from qna where prd_num = #{qna_PRD_NUM} order by qna_num desc
+			from qna where prd_num = #{qna_PRD_NUM} order by qna_num desc limit #{page},10;
 		]]>
 	</select>
 
