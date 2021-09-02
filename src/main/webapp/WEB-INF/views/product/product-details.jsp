@@ -25,7 +25,6 @@
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 <title>${prdInfo.PRD_CODE}&nbsp;${prdInfo.PRD_CODE}&nbsp;-&nbsp;SINSA</title>
 <script src="${path}/resources/js/productlist.js" type="text/javascript"></script>
-
 <style type="text/css">
 .product__details__pic__thumb {
 	justify-content: space-between;
@@ -646,12 +645,12 @@ button:disabled {
 						</div>
 						<ul>
 							<li><b>재고</b><span> <%
- 	if (inStock > 0) {
- %>IN STOCK<%
- 	} else {
- %>SOLD OUT<%
- 	}
- %>
+												 	if (inStock > 0) {
+												 %>IN STOCK<%
+												 	} else {
+												 %>SOLD OUT<%
+												 	}
+												 %>
 							</span></li>
 							<li><b>배송</b><span>무료 배송</span></li>
 						</ul>
@@ -667,7 +666,7 @@ button:disabled {
 								class="nav-link" data-toggle="tab" href="#tabs-2" role="tab"
 								aria-selected="false">상품평&nbsp; <span>(${reviewNum})</span></a></li>
 							<li class="nav-item" role="presentation"><a id="qnaTab"
-								class="nav-link" onclick="getQnaList(1)" data-toggle="tab" href="#tabs-3" role="tab"
+								class="nav-link" onclick="QnaList(1)" data-toggle="tab" href="#tabs-3" role="tab"
 								aria-selected="false">상품문의&nbsp;<span>(3)</span></a></li>
 						</ul>
 						<div class="tab-content">
@@ -784,6 +783,11 @@ button:disabled {
 										</li>
 									</ul>
 									<div class="container" id="container-qna">
+									
+									
+									
+									
+									
 									<div id="modal">
 										<div class="modal_content">
 											<form id="formToInput" method="post">
@@ -805,7 +809,11 @@ button:disabled {
 											</form>
 										</div>
 									</div>
-									<div class="row">
+									
+									
+									
+
+								<div class="row">
 										<div class="btn-qna-block">
 											<input type="button" id="modal_open_btn" class="btn-qna" value="문의쓰기" />
 										</div><br>
@@ -843,8 +851,13 @@ button:disabled {
 										<br>
 										<div class="row" id="qna-row">
 										<div id="empty-qna-description"></div>
+										
+										
 										<c:forEach var="qnaList" items="${qnaList }" varStatus="state">
-											<div id="modal${state.index }">
+										
+										
+										
+											<div id="modal${state.index }" class="modal">
 												<div class="modal_content">
 													<form id="formToInput${state.index }" method="post">
 														<input type="hidden" id="QNA_NUM" name="QNA_NUM" value="${qnaList.QNA_NUM }" />
@@ -866,6 +879,10 @@ button:disabled {
 													</form>
 												</div>
 											</div>
+											
+											
+											
+											
 											<div id="qna-open-content${state.index }">
 												<div class="modal_content">
 													<input type="password" placeholder="비밀번호 입력" 
@@ -874,13 +891,16 @@ button:disabled {
 														class="qna-content-password-check${qnaList.QNA_NUM}" value="확인">
 												</div>
 											</div>
+											
+											
+											
+											
 											<table id="qna-table${state.index }" onclick="qnaPwdCheck${state.index }()" class="qna-table-class" style="margin-bottom: 10px; border-bottom: 1px solid grey;">
 												<c:choose>
 													<c:when test="${!empty qnaList }">
 														<tr>
 															<td id="img-qna">
-																<img alt="lock" style="width: 26px;" 
-																	src="${path}/resources/img/product/details/lock.png">
+																<img alt="lock" style="width: 26px;" src="${path}/resources/img/product/details/lock.png">
 															</td>
 															<td style="width: 99px;">
 																<fmt:formatDate value="${qnaList.QNA_REGDATE }" 
@@ -955,7 +975,8 @@ button:disabled {
 												}
 											</style>
 											
-											<script type="text/javascript">												
+											<script type="text/javascript">		
+											
 											function qnaPwdCheck${state.index }(){
 													<%if(session.getAttribute("user") == null){%>
 		 											var result = confirm("로그인이 필요한 서비스입니다. 로그인하시겠습니까?");
@@ -1129,6 +1150,7 @@ button:disabled {
 						</c:choose>
 					</ul>
 									</div>
+									
 									
 									
 									</div>
@@ -1431,11 +1453,9 @@ button:disabled {
 									return false;
 								}
 						}
-						function getQnaList(pageR){
+						function QnaList(pageR){
 							var prd_code = '${prdInfo.PRD_CODE}';
-							var prd_num = '${prdInfo.PRD_NUM}';
 							var arrays = new Array();
-							
 							var sendData = {
 									"prdCode":prd_code, 
 									"pageR":pageR
@@ -1445,23 +1465,72 @@ button:disabled {
 								type : "POST",
 								data : sendData,
 								success:function(data){
-									//$('#container-qna').empty();
+									$('#container-qna').empty();
 									arrays = data.qnaList;
+									console.log(arrays[0].qna_REGDATE);
+									for(var i=0; i<arrays.length;i++){
+										$('#container-qna').append(
+										'<table id="qna-table'+i+'" onclick="qnaPwdCheck'+i+'()" class="qna-table-class" style="margin-bottom: 10px; border-bottom: 1px solid grey;">'
+										+'<tr>'
+										+'<td id="img-qna"><img alt="lock" style="width: 26px;" src="${path}/resources/img/product/details/lock.png">'
+										+'</td>'
+										+'<td style="width: 99px;">'+arrays[i].qna_REGDATE+''
+										+'</td>'
+										+'<td style="width: 605px;">'
+										+''+arrays[i].qna_TITLE+''
+										+'</td>'
+										+'<td>'
+										+''+arrays[i].qna_CUISD+''
+										+'</td>'
+										+'<td>답변대기</td>'
+										+'<td style="width: 49px;">'
+										+'<form id="formToDelete'+i+'" method="post">'
+										+'<input type="hidden" id="QNA_NUM" name="QNA_NUM" value="'+arrays[i].qna_NUM+'" />'
+										+'<input type="button" onclick="clkBtnList'+i+'(this.id)" id="id-of-delete-qna'+i+'" class="delete-qna" value="삭제">'
+										+'</form>'
+										+'</td>'
+										+'<td style="width: 58px;">'
+										+'<input type="button" id="modal_open_btn'+i+'" class="btn-qna" value="수정" />'
+										+'</td>'
+										+'</tr>'
+										+'<tr>'
+										+'<td></td>'
+										+'<td></td>'
+										+'<td class="qna-content'+i+'">'
+										+''+arrays[i].qna_CONTENT+''
+										+'</td>'
+										+'</tr>'
+										+'<tr>'
+										+'<td></td>'
+										+'<td></td>'
+										+'<td class="qna-content'+i+'">'+arrays[i].qna_CONTENT+'</td>'
+										+'</tr><tr></tr>'
+										+'</table>'
+										)
+									}
 									//$('#container-qna').html();
-									//console.log(arrays[0]);
-									
+									console.log(arrays[0]);
+									var pI = data.pageInfo;
+									console.log(pI);
+									$('#container-qna').append(''
+						
+									)
+									/*
 									$('.PRD_NUM').val(prd_num);
 									if(arrays[0] === undefined){
 										$('#empty-qna-description').html('작성된 문의가 없습니다.')										
 									}else{
 										$('#empty-qna-description').html('상품 Q&A')
+										for(var i=0; i< arrays.length; i++){
+											console.log(arrays[i]);
+										}
 									}
+									*/
 									
 								}
 							})
 						}
 			
-						
 						
 	</script>
 </body>

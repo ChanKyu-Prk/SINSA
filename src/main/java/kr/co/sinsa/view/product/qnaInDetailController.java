@@ -43,6 +43,7 @@ public class qnaInDetailController {
 		map.put("qna_PRD_NUM", qna_PRD_NUM);
 		map.put("page", (page - 1) * limit);
 		List<QnaVO> qnaList = QnaService.qnaInfo(map);
+		System.out.println(qnaList.get(0).getQNA_REGDATE());
 		listCount = service.countQNAList(map);
 		maxPage = (int) ((double) listCount / limit + 0.95);
 		startPage = (((int) ((double) page / 5 + 0.8)) - 1) * 5 + 1;
@@ -57,8 +58,7 @@ public class qnaInDetailController {
 		pageInfo.setMaxPage(maxPage);
 		pageInfo.setPage(page);
 		map.put("pageInfo", pageInfo);
-		
-		model.addAttribute("qnaList", qnaList);
+		map.put("qnaList", qnaList);
 		
 		return map;
 	}
