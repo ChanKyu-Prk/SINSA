@@ -976,9 +976,13 @@ button:disabled {
 											</style>
 											
 											<script type="text/javascript">		
-											
+											/*
 											function qnaPwdCheck${state.index }(){
+												*/
+													<%-- 
 													<%if(session.getAttribute("user") == null){%>
+													--%> 
+													/*
 		 											var result = confirm("로그인이 필요한 서비스입니다. 로그인하시겠습니까?");
 		 											if(result){
 		 												location.href="/login.do";
@@ -987,9 +991,15 @@ button:disabled {
 		 											else {
 		 												return false;
 		 											}
+													*/
+													<%-- 
 		 										<%}%>	
+													--%>
+													/*
 		 											$("#qna-open-content${state.index }").attr("style", "display:block");
 												}
+													*/
+									
 												
 												$("#modal_open_btn${qnaList.QNA_NUM}").click(function(){
 													<%if(session.getAttribute("user") == null){%>
@@ -1022,6 +1032,7 @@ button:disabled {
 														alert('패스워드가 틀렸습니다. 관리자에게 문의하세요.');
 													}
 												});
+												/*
 												function clkBtnList${qnaList.QNA_NUM}(clickedId){
 													var CRUD = clickedId;
 													var remove = '${state.index }';
@@ -1038,6 +1049,8 @@ button:disabled {
 													}
 													qnaAjax(form, CRUD, remove);
 												};
+												*/
+												/*
 												function clkBtn${state.index }(clickedId){
 													var CRUD = clickedId;
 													var PRD_CODE = '${prdInfo.PRD_CODE}';
@@ -1047,6 +1060,7 @@ button:disabled {
 														qnaAjax(form, CRUD, PRD_CODE);
 													}
 												}
+												*/
 											</script>
 										</c:forEach>
 										<script type="text/javascript">
@@ -1090,7 +1104,7 @@ button:disabled {
 										}
 										</script>
 										</div>
-					<ul class="pagination">
+					<!-- 
 						<c:choose>
 							<c:when test="${pageInfo.getPage()<=1}">
 								<li class="page-item disabled"><a class="page-link"
@@ -1111,6 +1125,9 @@ button:disabled {
 								</li>
 							</c:otherwise>
 						</c:choose>
+						
+						 -->
+						 <!-- 
 						<c:forEach begin="${pageInfo.getStartPage()}"
 							end="${pageInfo.getEndPage()}" varStatus="state">
 							<c:choose>
@@ -1128,6 +1145,8 @@ button:disabled {
 								</c:otherwise>
 							</c:choose>
 						</c:forEach>
+						  -->
+						  <!-- 
 						<c:choose>
 							<c:when test="${pageInfo.getPage() >= pageInfo.getMaxPage()}">
 								<li class="page-item disabled">
@@ -1148,12 +1167,13 @@ button:disabled {
 								</li>
 							</c:otherwise>
 						</c:choose>
-					</ul>
+						   -->				
 									</div>
-									
-									
-									
 									</div>
+									<!-- 페이징 구분 -->
+									<ul class="pagination">
+									</ul>
+									
 								</div>
 							</div>
 						</div>
@@ -1457,30 +1477,37 @@ button:disabled {
 							var prd_code = '${prdInfo.PRD_CODE}';
 							var arrays = new Array();
 							var sendData = {
-									"prdCode":prd_code, 
-									"pageR":pageR
-									};
+								"prdCode":prd_code, 
+								"pageR":pageR
+							};
 							$.ajax({
 								url : "/qnaListForm",
 								type : "POST",
 								data : sendData,
 								success:function(data){
-									$('#container-qna').empty();
 									arrays = data.qnaList;
 									console.log(arrays[0].qna_REGDATE);
+									const trade_date = new Date(arrays[0].qna_REGDATE).toLocaleString();
+									console.log(arrays[0]);							
+									$('#container-qna').empty();
+									if(arrays[0] === undefined){
+										$('#container-qna').append('<div id="empty-qna-description">작성된 문의가 없습니다.</div>');									
+									}else{
+										$('#container-qna').append('<div id="empty-qna-description">상품 Q&A</div>');
+									}
 									for(var i=0; i<arrays.length;i++){
 										$('#container-qna').append(
 										'<table id="qna-table'+i+'" onclick="qnaPwdCheck'+i+'()" class="qna-table-class" style="margin-bottom: 10px; border-bottom: 1px solid grey;">'
 										+'<tr>'
 										+'<td id="img-qna"><img alt="lock" style="width: 26px;" src="${path}/resources/img/product/details/lock.png">'
 										+'</td>'
-										+'<td style="width: 99px;">'+arrays[i].qna_REGDATE+''
+										+'<td style="width: 99px;">'+new Date(arrays[i].qna_REGDATE).toLocaleDateString()+''
 										+'</td>'
 										+'<td style="width: 605px;">'
 										+''+arrays[i].qna_TITLE+''
 										+'</td>'
 										+'<td>'
-										+''+arrays[i].qna_CUISD+''
+										+''+arrays[i].qna_CUSID+''
 										+'</td>'
 										+'<td>답변대기</td>'
 										+'<td style="width: 49px;">'
@@ -1508,25 +1535,58 @@ button:disabled {
 										+'</table>'
 										)
 									}
-									//$('#container-qna').html();
+								
 									console.log(arrays[0]);
 									var pI = data.pageInfo;
-									console.log(pI);
-									$('#container-qna').append(''
-						
-									)
-									/*
-									$('.PRD_NUM').val(prd_num);
-									if(arrays[0] === undefined){
-										$('#empty-qna-description').html('작성된 문의가 없습니다.')										
-									}else{
-										$('#empty-qna-description').html('상품 Q&A')
-										for(var i=0; i< arrays.length; i++){
-											console.log(arrays[i]);
-										}
-									}
-									*/
-									
+									console.log("pI.page : "+pI.page);
+									console.log("pI.startPage : "+pI.startPage);
+									console.log("pI.endPage : "+pI.endPage);
+									console.log("pI.maxPage : "+pI.maxPage);
+									console.log("pI.listCount : "+pI.listCount);
+									//페이징 처리 로직
+								     $(".pagination").empty();  //페이징에 필요한 객체내부를 비워준다.
+									if(pI.page <= 1){ // 현재 페이지가
+										$(".pagination").append(
+											'<li class="page-item disabled"><a class="page-link" aria-disabled="true">이전</a></li>'
+										);
+			}else if(pI.startPage === 1){
+				$(".pagination").append(
+					'<li class="page-item"><a class="page-link" onclick="QnaList('+pI.startPage+')" tabindex="-1">이전</a></li>'
+				);
+			}else{
+				$(".pagination").append(
+					'<li class="page-item"><a class="page-link" onclick="QnaList('+pI.startPage+'-1})" tabindex="-1">이전</a></li>'
+				);
+			};	
+			
+			for(var i=pI.startPage; i<=pI.endPage; i++){
+				if(pI.page === i){
+					$(".pagination").append(	
+						'<li class="page-item active" aria-current="page"><a class="page-link">'+i+'</a></li>'
+					);
+				}else{
+					$(".pagination").append(	
+						'<li class="page-item"><a class="page-link" onclick="QnaList('+i+')">'+i+'</a></li>'
+					);					
+				}
+			};
+
+			if(pI.page >= pI.maxPage){
+				$(".pagination").append(
+					'<li class="page-item disabled"><a class="page-link" aria-disabled="true">다음</a></li>'
+				)
+			
+				
+			}else if (pI.endPage === pI.maxPage) {
+				$(".pagination").append(
+						'<li class="page-item"><a class="page-link" onclick="QnaList('+pI.endPage+')">다음</a></li>'
+					)
+			}else {
+				$(".pagination").append(
+					'<li class="page-item"><a class="page-link" onclick="QnaList('+pI.endPage+'+1)">다음</a></li>'
+					)
+			}
+	
 								}
 							})
 						}
