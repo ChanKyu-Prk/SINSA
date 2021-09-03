@@ -317,13 +317,13 @@ button:disabled {
 								src="${pageContext.request.contextPath}/upload\prdImg/${prdInfo.PRD_CODE}.png"
 								alt="thumbnailMain"> <img
 								src="${pageContext.request.contextPath}/upload\prdImg/${prdInfo.PRD_CODE}1.png"
-								alt="thumbnail1"> <img
+								alt="thumbnail1" onerror="this.style.display='none'"> <img
 								src="${pageContext.request.contextPath}/upload\prdImg/${prdInfo.PRD_CODE}2.png"
-								alt="thumbnail2"> <img
+								alt="thumbnail2" onerror="this.style.display='none'"> <img
 								src="${pageContext.request.contextPath}/upload\prdImg/${prdInfo.PRD_CODE}3.png"
-								alt="thumbnail3"> <img
+								alt="thumbnail3" onerror="this.style.display='none'"> <img
 								src="${pageContext.request.contextPath}/upload\prdImg/${prdInfo.PRD_CODE}4.png"
-								alt="thumbnail4">
+								alt="thumbnail4" onerror="this.style.display='none'">
 						</div>
 					</div>
 				</div>
@@ -425,24 +425,15 @@ button:disabled {
 												$(".amount")
 														.each(
 																function(event) {
-																	var liNum = $(
-																			this)
-																			.val(); //선택된 수량
-																	var liOpt = $(
-																			this)
-																			.attr(
-																					"data-opt"); // STOCK_260
-																	var btnNum = $(
-																			this)
-																			.parents(
-																					"#priceContainer")
-																			.find(
+																	var liNum = $(this).val(); //선택된 수량
+																	var liOpt = $(this).attr("data-opt"); // STOCK_260
+																	var btnNum = $(this).parents("#priceContainer").find(
 																					"button[value="
 																							+ liOpt
 																							+ "] > small")
 																			.attr(
 																					"data-stocknum");
-																	if (liNum > btnNum) {
+																	if (parseInt(liNum) > parseInt(btnNum)) {
 																		alert("준비된 수량을 초과했습니다.");
 																		stopFunc += 1;
 																		return false;
@@ -1381,12 +1372,6 @@ button:disabled {
 														".product__details__pic__item--large")
 														.attr("src", src);
 											});
-
-							// 썸네일 없으면 표시 안함
-							$(".product__details__pic__thumb img").on('error',
-									function(e) {
-										$(this).hide();
-									});
 
 							//상단 리뷰 누르면 하단 리뷰로 이동
 							$(".product__details__rating").on("click",
