@@ -1,5 +1,4 @@
-# TEAM_SINSA
-# Spring Project
+# TEAM_SINSA Spring Project
 
 - 팀장 : 박찬규
 - 부팀장 : 정인호
