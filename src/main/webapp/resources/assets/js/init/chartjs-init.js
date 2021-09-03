@@ -182,7 +182,7 @@
     var myChart = new Chart( ctx, {
         type: 'line',
         data: {
-            labels: [ "January", "February", "March", "April", "May", "June", "July" ],
+            labels: [ "1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월" ],
             datasets: [
                 {
                     label: "My First dataset",
@@ -383,6 +383,15 @@
             responsive: true
         }
     } );
+    
+    
+    
+    
+    
+    var Jan = $(".1월").val();
+    
+    
+    
 
     // single bar chart
     var ctx = document.getElementById( "singelBarChart" );
