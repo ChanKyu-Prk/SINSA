@@ -35,9 +35,22 @@ public class ChartController {
 	
 
 	@RequestMapping(value = "/admin/adminIndex", method = RequestMethod.GET)
-
 	public String dateIncome(Locale locale, Model model) {
-
+		
+		
+		List<Integer> salesList = ChartService.getSalesList();
+		model.addAttribute("salesList", salesList);
+		
+		int year = ChartService.getYear();
+		model.addAttribute("year", year);
+		
+		int totalSales = ChartService.getTotalSales();
+		model.addAttribute("totalSales", totalSales);
+		
+		int totalSalesAmount = ChartService.getTotalSalesAmount();
+		model.addAttribute("totalSalesAmount", totalSalesAmount);
+		
+		
 		return "/admin/adminIndex";
 	}
 

@@ -21,9 +21,26 @@ public class ChartServiceImpl implements ChartService {
 	public List<ProductVO> getProductList() {
 		return dao.getProductList();
 	}
-
-
-
+	
+	@Override
+	public List<Integer> getSalesList() {
+		return dao.getSalesList();
+	}
+	
+	@Override
+	public int getYear() {
+		return dao.getYear();
+	}
+	
+	@Override
+	public int getTotalSales() {
+		return dao.getTotalSales();
+	}
+	
+	@Override
+	public int getTotalSalesAmount() {
+		return dao.getTotalSalesAmount();
+	}
 
 
 

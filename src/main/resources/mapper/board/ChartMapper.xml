@@ -13,6 +13,68 @@
 		select * from product
 
 	</select>
+	
+	
+	<select id="getSales1" resultType="Integer">
+		select sum(order_price) from orders where date_format(order_regdate, '%Y-%m') = DATE_FORMAT(now(),'2021-01')
+	</select>
+	
+	<select id="getSales2" resultType="Integer">
+		select sum(order_price) from orders where date_format(order_regdate, '%Y-%m') = DATE_FORMAT(now(),'2021-02')
+	</select>
+	
+	<select id="getSales3" resultType="Integer">
+		select sum(order_price) from orders where date_format(order_regdate, '%Y-%m') = DATE_FORMAT(now(),'2021-03')
+	</select>
+	
+	<select id="getSales4" resultType="Integer">
+		select sum(order_price) from orders where date_format(order_regdate, '%Y-%m') = DATE_FORMAT(now(),'2021-04')
+	</select>
+	
+	<select id="getSales5" resultType="Integer">
+		select sum(order_price) from orders where date_format(order_regdate, '%Y-%m') = DATE_FORMAT(now(),'2021-05')
+	</select>
+	
+	<select id="getSales6" resultType="Integer">
+		select sum(order_price) from orders where date_format(order_regdate, '%Y-%m') = DATE_FORMAT(now(),'2021-06')
+	</select>
+	
+	<select id="getSales7" resultType="Integer">
+		select sum(order_price) from orders where date_format(order_regdate, '%Y-%m') = DATE_FORMAT(now(),'2021-07')
+	</select>
+	
+	<select id="getSales8" resultType="Integer">
+		select sum(order_price) from orders where date_format(order_regdate, '%Y-%m') = DATE_FORMAT(now(),'2021-08')
+	</select>
+	
+	<select id="getSales9" resultType="Integer">
+		select sum(order_price) from orders where date_format(order_regdate, '%Y-%m') = DATE_FORMAT(now(),'2021-09')
+	</select>
+	
+	<select id="getSales10" resultType="Integer">
+		select sum(order_price) from orders where date_format(order_regdate, '%Y-%m') = DATE_FORMAT(now(),'2021-10')
+	</select>
+	
+	<select id="getSales11" resultType="Integer">
+		select sum(order_price) from orders where date_format(order_regdate, '%Y-%m') = DATE_FORMAT(now(),'2021-11')
+	</select>
+	
+	<select id="getSales12" resultType="Integer">
+		select sum(order_price) from orders where date_format(order_regdate, '%Y-%m') = DATE_FORMAT(now(),'2021-12')
+	</select>
+	
+	
+	<select id="getYear" resultType="Integer">
+		select date_format(order_regdate, '%Y') from orders order by order_regdate limit 1
+	</select>
+	
+	<select id="getTotalSales" resultType="Integer">
+		select sum(order_price) from orders where date_format(order_regdate, '%Y') = DATE_FORMAT(now(),'2021')
+	</select>
+	
+	<select id="getTotalSalesAmount" resultType="Integer">
+		select count(order_num) from orders where date_format(order_regdate, '%Y') = DATE_FORMAT(now(),'2021')
+	</select>
 
 
 
