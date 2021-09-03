@@ -490,14 +490,13 @@ input[type=number] {
 					$(".usePoint").val('');
 					return false;
 				}
-				//총 결제금액
-				totalPriceCon_num = $(".totalOrgPrice").text().replaceAll(',', '') - $(".totalDiscnt").text().replaceAll(',', '') - usePoint ;
+				totalPriceCon_num = $(".totalOrgPrice").text().replaceAll(',', '') - $(".totalDiscnt").text().replaceAll(',', '');
 				//사용 포인트가 총 결제금액보다 많을 시 alert
 				if(parseInt(totalPriceCon_num) < parseInt(usePoint)){
 					alert("사용한 포인트가 결제 금액을 초과하였습니다.");
 					$(".usePoint").val('');
-					totalPriceCon_num = $(".totalOrgPrice").text().replaceAll(',', '') - $(".totalDiscnt").text().replaceAll(',', '')
 				}
+				totalPriceCon_num = $(".totalOrgPrice").text().replaceAll(',', '') - $(".totalDiscnt").text().replaceAll(',', '')- usePoint;
 				$(".totalPriceCon-num").text(totalPriceCon_num);
 				numberWithDigits();
 			});
