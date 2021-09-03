@@ -280,9 +280,9 @@
 	background: #ccc;
 }
 
-.button_buy{
+.button_buy {
 	border: 1px solid grey;
-	font-size:17px;
+	font-size: 17px;
 }
 </style>
 <script
@@ -356,15 +356,32 @@
 												<div class="row">
 
 													<div class="col-lg-3 col-md-9">
+
+
+
+
+
+														<c:set var="product_img_array"
+															value="${fn:split(list.PRD_IMAGE,'/')}" />
+
+														<!-- 														<div class="featured__item__pic set-bg" -->
+														<%-- 															data-setbg="${path}/resources/img/product/${product_img_array[0]}"> --%>
+
+
+
+
+
 														<a href="product/prdCode=${list.PRD_CODE}"><img
-															src="${path}/resources/img/cart/cart-1.jpg" alt=""></a>
+															src="${path}/resources/img/product/${product_img_array[0]}"
+															alt=""></a>
 													</div>
 
 													<div class="col-lg-9 col-md-3">
 														<div class="brand">${list.PRD_BRAND}</div>
 														<div>
 															<a class="product_name"
-																href="product/prdCode=${list.PRD_CODE}">${list.PRD_NAME}<span class="pl-1 prdCode">${list.PRD_CODE}</span></a>
+																href="product/prdCode=${list.PRD_CODE}">${list.PRD_NAME}<span
+																class="pl-1 prdCode">${list.PRD_CODE}</span></a>
 														</div>
 														<div>
 															<a class="product_color"
@@ -402,7 +419,8 @@
 
 																			<div class="row size_change_modal_detail">
 																				<div class="col-lg-3 col-md-9 size_change_modal_img">
-																					<img src="${path}/resources/img/cart/cart-1.jpg"
+																					<img
+																						src="${path}/resources/img/product/${product_img_array[0]}"
 																						alt="">
 
 																				</div>
@@ -416,6 +434,8 @@
 																						${list.CART_PRDSIZE}</div>
 
 																				</div>
+
+
 
 																			</div>
 
@@ -710,21 +730,16 @@
 
 																			<div class="div_button_change_size">
 																				<button class="button_confirm_change_size"
-																					type="button" >확인</button>
-																					
-																					<input type="hidden" name="CART_NUM" class="CART_NUM_I"
-																					value="${list.CART_NUM}" /> 
-																					<input type="hidden"
-																					name="CART_PRDNUM" value="${list.CART_PRDNUM}" class="CART_PRDNUM_I"/>
+																					type="button">확인</button>
+
+																				<input type="hidden" name="CART_NUM"
+																					class="CART_NUM_I" value="${list.CART_NUM}" /> <input
+																					type="hidden" name="CART_PRDNUM"
+																					value="${list.CART_PRDNUM}" class="CART_PRDNUM_I" />
 																				<input type="hidden" name="CUS_ID"
-																					value="${list.CUS_ID}" class="CUS_ID_I"/>
+																					value="${list.CUS_ID}" class="CUS_ID_I" />
 																			</div>
-																			<div>
-
-																				
-
-
-																			</div>
+																			<div></div>
 																		</div>
 
 																	</form>
@@ -759,19 +774,20 @@
 													<span class="won">원</span>
 												</c:if></td>
 											<td class="shoping__cart__quantity">
-													<form action="updatecart.do" method="POST"
-														onsubmit="return alert('수량이 변경되었습니다');">
-														<div class="quantity">
-															<div id="count${status.index}" class="pro-qty">
-																<input  class="amount" name="CART_PRDCOUNT" data-lastVal = "${list.CART_PRDCOUNT}"
-																	value="${list.CART_PRDCOUNT}" readonly />
-															</div>
+												<form action="updatecart.do" method="POST"
+													onsubmit="return alert('수량이 변경되었습니다');">
+													<div class="quantity">
+														<div id="count${status.index}" class="pro-qty">
+															<input class="amount" name="CART_PRDCOUNT"
+																data-lastVal="${list.CART_PRDCOUNT}"
+																value="${list.CART_PRDCOUNT}" readonly />
 														</div>
-														<input type="hidden" name="CART_NUM"
-															value="${list.CART_NUM}" /> <input
-															class="button_qty_change" type="submit" value="변경" />
-													</form>
-												</td>
+													</div>
+													<input type="hidden" name="CART_NUM"
+														value="${list.CART_NUM}" /> <input
+														class="button_qty_change" type="submit" value="변경" />
+												</form>
+											</td>
 											<td class="shoping__cart__total"><c:set
 													var="previousTotalPrice"
 													value="${price * list.CART_PRDCOUNT}" /> <c:set
@@ -795,65 +811,116 @@
 
 												<div id="previousTotalPrice"></div></td>
 											<td class="shoping__cart__item__close">
-											
-											
-											
-												<button id="directBtn${status.index}" class="buy_rightnow" type="submit">바로구매</button>
-												<script type="text/javascript">
-												$("#directBtn${status.index}").click(function(){
-													
-													
-													
-													var select_value = $(this).parent("td").parent("tr").find(".select_size option:selected").val();
-													
-													
-													if(select_value.indexOf("품절") != -1){
-														alert("해당 사이즈 품절 되었습니다.");
-														return false;
-													}
-													
-													
-													
-													
-			
-													var ORDER_PRDCODE = $(this).parents("tr").find(".prdCode").text();
-													var ORDER_PRDSIZE = $(this).parents("tr").find(".qty-size").text();
-													var ORDER_AMOUNT = $(this).parents("tr").find(".amount").val();
-													var lastVal = $(this).parents("tr").find(".amount").attr("data-lastval");
-													if(lastVal != ORDER_AMOUNT){
-														var result = confirm("변경된 수량을 저장하시겠습니까?\n변경전 : " + lastVal + " => 변경후 : " + ORDER_AMOUNT);
-														if(!result){
-															$(this).parents("tr").find(".amount").val(lastVal);
-															alert("변경을 취소하였습니다.");
-															return false;
-														} else {
-															$(this).parents("tr").find(".button_qty_change").trigger('click');
-														}
-													}
-													//JSON 형태로 데이터 생성
-													var data = {};
-													var itemList = [];
-														data["ORDER_PRDCODE"] = ORDER_PRDCODE;
-														data["ORDER_PRDSIZE"] = ORDER_PRDSIZE;
-														data["ORDER_AMOUNT"] = ORDER_AMOUNT;
-														itemList.unshift(data);
-														  $.ajax({
-														   url : "/cart/checkout",
-														   type : "POST",
-														   data : JSON.stringify(itemList),
-														    headers: {
-														      'Accept': 'application/json',
-														      'Content-Type': 'application/json'
-														    },
-														   success : function(data){
-																location.href="/cart/checkout";
-														   },
-														   error : function(){
-														    alert("보내기 실패");
-														   }
-														  });
-												});
-											</script>
+
+
+
+												<button id="directBtn${status.index}" class="buy_rightnow"
+													type="submit">바로구매</button> <script type="text/javascript">
+														$(
+																"#directBtn${status.index}")
+																.click(
+																		function() {
+
+																			var select_value = $(
+																					this)
+																					.parent(
+																							"td")
+																					.parent(
+																							"tr")
+																					.find(
+																							".select_size option:selected")
+																					.val();
+
+																			if (select_value
+																					.indexOf("품절") != -1) {
+																				alert("해당 사이즈 품절 되었습니다.");
+																				return false;
+																			}
+
+																			var ORDER_PRDCODE = $(
+																					this)
+																					.parents(
+																							"tr")
+																					.find(
+																							".prdCode")
+																					.text();
+																			var ORDER_PRDSIZE = $(
+																					this)
+																					.parents(
+																							"tr")
+																					.find(
+																							".qty-size")
+																					.text();
+																			var ORDER_AMOUNT = $(
+																					this)
+																					.parents(
+																							"tr")
+																					.find(
+																							".amount")
+																					.val();
+																			var lastVal = $(
+																					this)
+																					.parents(
+																							"tr")
+																					.find(
+																							".amount")
+																					.attr(
+																							"data-lastval");
+																			if (lastVal != ORDER_AMOUNT) {
+																				var result = confirm("변경된 수량을 저장하시겠습니까?\n변경전 : "
+																						+ lastVal
+																						+ " => 변경후 : "
+																						+ ORDER_AMOUNT);
+																				if (!result) {
+																					$(
+																							this)
+																							.parents(
+																									"tr")
+																							.find(
+																									".amount")
+																							.val(
+																									lastVal);
+																					alert("변경을 취소하였습니다.");
+																					return false;
+																				} else {
+																					$(
+																							this)
+																							.parents(
+																									"tr")
+																							.find(
+																									".button_qty_change")
+																							.trigger(
+																									'click');
+																				}
+																			}
+																			//JSON 형태로 데이터 생성
+																			var data = {};
+																			var itemList = [];
+																			data["ORDER_PRDCODE"] = ORDER_PRDCODE;
+																			data["ORDER_PRDSIZE"] = ORDER_PRDSIZE;
+																			data["ORDER_AMOUNT"] = ORDER_AMOUNT;
+																			itemList
+																					.unshift(data);
+																			$
+																					.ajax({
+																						url : "/cart/checkout",
+																						type : "POST",
+																						data : JSON
+																								.stringify(itemList),
+																						headers : {
+																							'Accept' : 'application/json',
+																							'Content-Type' : 'application/json'
+																						},
+																						success : function(
+																								data) {
+																							location.href = "/cart/checkout";
+																						},
+																						error : function() {
+																							alert("보내기 실패");
+																						}
+																					});
+																		});
+													</script>
 
 												<form id="form" name="form" action="cart.do" method="post"
 													onsubmit="return confirm('장바구니에서 해당 상품을 삭제 하시겠습니까?');">
@@ -870,7 +937,8 @@
 													</button>
 
 
-												</form></td>
+												</form>
+											</td>
 										</tr>
 
 									</c:forEach>
@@ -945,62 +1013,104 @@
 							</ul>
 							<button id="cartBuyBtn" class="primary-btn col-lg-12 button_buy">구매하기</button>
 							<script type="text/javascript">
-							$("#cartBuyBtn").click(function(){
-								var changedVal = 0;
-								$('.buy_rightnow').each(function (index, item) {
-									var curVal = $(this).parents("tr").find(".amount").val();
-									var lastVal = $(this).parents("tr").find(".amount").attr("data-lastval");
-									if(lastVal != curVal){
-										$(this).parents("tr").find(".amount").val(lastVal);
-										changedVal+=1;
-									}
-								});
-								if(changedVal > 0){
-									alert("저장되지 않은 수량변경이 있습니다.");
-									alert("수량을 초기화 합니다.");
-									return false;
-								}
-								var ORDER_PRDCODE = $(".prdCode").map(function() {
-								    return $(this).text();
-								}).get();
-								var ORDER_PRDSIZE = $(".qty-size").map(function() {
-								    return $(this).text();
-								}).get();
-								var ORDER_AMOUNT = $('.amount').map(function() {
-								    return this.value;
-								}).get();
-								
-								//JSON 형태로 데이터 생성
-								var data = {};
-								var itemList = [];
-								if(ORDER_AMOUNT.length == 0){
-									alert("옵션을 선택해주세요.");
-									return false;
-								}
-								for(var i=0; i<ORDER_AMOUNT.length; i++){
-									data = {};
-									data["ORDER_PRDCODE"] = ORDER_PRDCODE[i];
-									data["ORDER_PRDSIZE"] = ORDER_PRDSIZE[i];
-									data["ORDER_AMOUNT"] = ORDER_AMOUNT[i];
-									itemList.push(data);
-								}
-									  $.ajax({
-									   url : "/cart/checkout",
-									   type : "POST",
-									   data : JSON.stringify(itemList),
-									    headers: {
-									      'Accept': 'application/json',
-									      'Content-Type': 'application/json'
-									    },
-									   success : function(data){
-											location.href="/cart/checkout";
-									   },
-									   error : function(){
-									    alert("보내기 실패");
-									   }
-									  });
-							});
-						</script>
+								$("#cartBuyBtn")
+										.click(
+												function() {
+													var changedVal = 0;
+													$('.buy_rightnow')
+															.each(
+																	function(
+																			index,
+																			item) {
+																		var curVal = $(
+																				this)
+																				.parents(
+																						"tr")
+																				.find(
+																						".amount")
+																				.val();
+																		var lastVal = $(
+																				this)
+																				.parents(
+																						"tr")
+																				.find(
+																						".amount")
+																				.attr(
+																						"data-lastval");
+																		if (lastVal != curVal) {
+																			$(
+																					this)
+																					.parents(
+																							"tr")
+																					.find(
+																							".amount")
+																					.val(
+																							lastVal);
+																			changedVal += 1;
+																		}
+																	});
+													if (changedVal > 0) {
+														alert("저장되지 않은 수량변경이 있습니다.");
+														alert("수량을 초기화 합니다.");
+														return false;
+													}
+													var ORDER_PRDCODE = $(
+															".prdCode")
+															.map(
+																	function() {
+																		return $(
+																				this)
+																				.text();
+																	}).get();
+													var ORDER_PRDSIZE = $(
+															".qty-size")
+															.map(
+																	function() {
+																		return $(
+																				this)
+																				.text();
+																	}).get();
+													var ORDER_AMOUNT = $(
+															'.amount')
+															.map(
+																	function() {
+																		return this.value;
+																	}).get();
+
+													//JSON 형태로 데이터 생성
+													var data = {};
+													var itemList = [];
+													if (ORDER_AMOUNT.length == 0) {
+														alert("옵션을 선택해주세요.");
+														return false;
+													}
+													for (var i = 0; i < ORDER_AMOUNT.length; i++) {
+														data = {};
+														data["ORDER_PRDCODE"] = ORDER_PRDCODE[i];
+														data["ORDER_PRDSIZE"] = ORDER_PRDSIZE[i];
+														data["ORDER_AMOUNT"] = ORDER_AMOUNT[i];
+														itemList.push(data);
+													}
+													$
+															.ajax({
+																url : "/cart/checkout",
+																type : "POST",
+																data : JSON
+																		.stringify(itemList),
+																headers : {
+																	'Accept' : 'application/json',
+																	'Content-Type' : 'application/json'
+																},
+																success : function(
+																		data) {
+																	location.href = "/cart/checkout";
+																},
+																error : function() {
+																	alert("보내기 실패");
+																}
+															});
+												});
+							</script>
 						</div>
 					</div>
 				</div>
@@ -1091,33 +1201,38 @@
 
 
 	<script>
-	$('.button_confirm_change_size').on("click",function(){
-		var CART_PRDSIZE = $(this).parent().parent().children('.size_change_row').children().find('.select_size').val();
-var CUS_ID = $(this).parent().find('.CUS_ID_I').val();
-var CART_NUM = $(this).parent().find('.CART_NUM_I').val();
-var CART_PRDNUM = $(this).parent().find('.CART_PRDNUM_I').val();
-			var codeData = {
-				CART_PRDSIZE : CART_PRDSIZE,
-				CUS_ID : CUS_ID,
-				CART_NUM : CART_NUM,
-				CART_PRDNUM : CART_PRDNUM
-			}
-			
-			$.ajax({
-				url : "updatesize.do",
-				type : "POST",
-				data : codeData,
-				success : function(result) {
-					var num = result;
-					if (num > 0) {
-						alert("동일한 옵션이 존재합니다.");
-					} else {
-						alert("상품이 수정되었습니다.");
-						location.href = "/cart.do";
+		$('.button_confirm_change_size').on(
+				"click",
+				function() {
+					var CART_PRDSIZE = $(this).parent().parent().children(
+							'.size_change_row').children().find('.select_size')
+							.val();
+					var CUS_ID = $(this).parent().find('.CUS_ID_I').val();
+					var CART_NUM = $(this).parent().find('.CART_NUM_I').val();
+					var CART_PRDNUM = $(this).parent().find('.CART_PRDNUM_I')
+							.val();
+					var codeData = {
+						CART_PRDSIZE : CART_PRDSIZE,
+						CUS_ID : CUS_ID,
+						CART_NUM : CART_NUM,
+						CART_PRDNUM : CART_PRDNUM
 					}
-				}
-			});
-		});
+
+					$.ajax({
+						url : "updatesize.do",
+						type : "POST",
+						data : codeData,
+						success : function(result) {
+							var num = result;
+							if (num > 0) {
+								alert("동일한 옵션이 존재합니다.");
+							} else {
+								alert("상품이 수정되었습니다.");
+								location.href = "/cart.do";
+							}
+						}
+					});
+				});
 	</script>
 
 
