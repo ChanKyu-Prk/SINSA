@@ -782,16 +782,10 @@ button:disabled {
 												수 있습니다.</p>
 										</li>
 									</ul>
-									<div class="container" id="container-qna">
-									
-									
-									
-									
-									
 									<div id="modal">
 										<div class="modal_content">
 											<form id="formToInput" method="post">
-												<input type="hidden" id="PRD_NUM" name="PRD_NUM" class="PRD_NUM" value="" />
+												<input type="hidden" id="PRD_NUM" name="PRD_NUM" class="PRD_NUM" value="${prdInfo.PRD_NUM}" />
 												<p>
 													<label> 패스워드 </label><br>
 													<input type="text" id="QNA_LOCK" name="QNA_LOCK" />
@@ -804,48 +798,24 @@ button:disabled {
 													<label> 글 내용 </label><br>
 													<textarea rows="13" cols="90" id="QNA_CONTENT" name="QNA_CONTENT" ></textarea><br>
 												</p>
-													<button type="button" id="id-of-insert-qna" onclick="clkBtn(this.id)">확인</button>
+													<input type="button" id="qnaWrite-id" onclick="qnaWrite(this.id)" value="쓰기" />
 													<button type="button" id="modal_close_btn">닫기</button>
 											</form>
 										</div>
 									</div>
-									
-									
-									
 
-								<div class="row">
-										<div class="btn-qna-block">
-											<input type="button" id="modal_open_btn" class="btn-qna" value="문의쓰기" />
-										</div><br>
+									<div class="container" id="container-qna">
+										<div class="row">
 										<script type="text/javascript">
 										$('#replyDelete').on('click', function(){
 											<%if(session.getAttribute("user") == null){%>
-	 											var result = confirm("로그인이 필요한 서비스입니다. 로그인하시겠습니까?");
-	 											if(result){
-	 												location.href="/login.do";
-	 												return false;
-	 											}
-	 											else {
-	 												return false;
-	 											}
+											loginCheck();
  											<%}%>
 										})
 										$("#modal_close_btn").click(function(){
 											$("#modal").attr("style", "display:none");
 										})
-										$("#modal_open_btn").click(function(){
-											<%if(session.getAttribute("user") == null){%>
- 											var result = confirm("로그인이 필요한 서비스입니다. 로그인하시겠습니까?");
- 											if(result){
- 												location.href="/login.do";
- 												return false;
- 											}
- 											else {
- 												return false;
- 											}
- 											<%}%>
-											$("#modal").attr("style", "display:block");
-										})
+
 									
 										</script>
 										<br>
@@ -1064,44 +1034,7 @@ button:disabled {
 											</script>
 										</c:forEach>
 										<script type="text/javascript">
-										function clkBtn(clickedId){
-											var CRUD = clickedId;
-											var PRD_CODE = '${prdInfo.PRD_CODE}';
-											if(CRUD === 'id-of-insert-qna'){
-												var form = $('#formToInput').serialize();
-												CRUD = 'insert';
-												qnaAjax(form, CRUD, PRD_CODE);
-											}
-										}
-										function qnaAjax(form, CRUD, code){
-											var source = ajaxlist();
-											console.log(source);
-											$.ajax({
-												url: '/formToInput/'+CRUD,
-												type: "POST",
-												data: form,
-												beforeSend : function() {
-													// 전송 전 실행 코드
-													console.log("ajax 폼 전송");
-												},
-												success: function (data) {
-													if(CRUD === 'insert'){
-														location.href = "/product/prdCode="+code+"/${pageInfo.getPage()}";
-														/*console.log(source);*/
-														/*$('#container-qna').empty();*/
-														/*$('#container-qna').html(source);*/
-													}else if(CRUD === 'delete'){
-														$('#qna-table'+code).remove();
-													}else if(CRUD === 'update'){
-														location.href = "/product/prdCode="+code;
-													}
-												},
-												error: function (e) {
-													// 전송 후 에러 발생 시 실행 코드
-													console.log("ERROR : ", e);
-												}
-											});
-										}
+										
 										</script>
 										</div>
 					<!-- 
@@ -1461,8 +1394,48 @@ button:disabled {
 										$("#reviewTab").trigger("click");
 									});
 						});
-
+						function modalOpenBtn(){
+							console.log('실행은 하니?');
+							<%if(session.getAttribute("user") == null){%>
+							loginCheck();
+							<%}%>
+							$("#modal").attr("style", "display:block");							
+						}
+						function qnaWrite(clickedId){
+							var CRUD = clickedId;
+							var PRD_CODE = '${prdInfo.PRD_CODE}';
+							if(CRUD === 'qnaWrite-id'){
+								var form = $('#formToInput').serialize();
+								CRUD = 'insert';
+								qnaCrud(form, CRUD, PRD_CODE);
+							}
+						}
+						function qnaCrud(form, CRUD, code){
+							$.ajax({
+								url: '/formToInput/'+CRUD,
+								type: "POST",
+								data: form,
+								success: function (data) {
+									if(CRUD === 'insert'){
+										QnaList(1);
+									}else if(CRUD === 'delete'){
+										$('#qna-table'+code).remove();
+									}else if(CRUD === 'update'){
+										location.href = "/product/prdCode="+code;
+									}
+								},
+								error: function (e) {
+									console.log("ERROR : ", e);
+								},
+								complete: function(){
+									if(CRUD === 'insert'){
+										$("#modal").attr("style", "display:none");
+									}
+								}
+							})
+						}
 						
+
 						function loginCheck(){
 							var result = confirm("로그인이 필요한 서비스입니다. 로그인하시겠습니까?");
 								if(result){
@@ -1473,6 +1446,7 @@ button:disabled {
 									return false;
 								}
 						}
+					
 						function QnaList(pageR){
 							var prd_code = '${prdInfo.PRD_CODE}';
 							var arrays = new Array();
@@ -1486,8 +1460,8 @@ button:disabled {
 								data : sendData,
 								success:function(data){
 									arrays = data.qnaList;
-									console.log(arrays[0].qna_REGDATE);
-									const trade_date = new Date(arrays[0].qna_REGDATE).toLocaleString();
+									//console.log(arrays[0].qna_REGDATE);
+									//const trade_date = new Date(arrays[0].qna_REGDATE).toLocaleString();
 									console.log(arrays[0]);							
 									$('#container-qna').empty();
 									if(arrays[0] === undefined){
@@ -1495,6 +1469,7 @@ button:disabled {
 									}else{
 										$('#container-qna').append('<div id="empty-qna-description">상품 Q&A</div>');
 									}
+									$('#container-qna').append('<div class="btn-qna-block"><input type="button" onclick="modalOpenBtn()" id="modal_open_btn" class="btn-qna" value="문의쓰기" /></div><br>');
 									for(var i=0; i<arrays.length;i++){
 										$('#container-qna').append(
 										'<table id="qna-table'+i+'" onclick="qnaPwdCheck'+i+'()" class="qna-table-class" style="margin-bottom: 10px; border-bottom: 1px solid grey;">'
