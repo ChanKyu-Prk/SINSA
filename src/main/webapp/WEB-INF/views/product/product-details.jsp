@@ -425,24 +425,15 @@ button:disabled {
 												$(".amount")
 														.each(
 																function(event) {
-																	var liNum = $(
-																			this)
-																			.val(); //선택된 수량
-																	var liOpt = $(
-																			this)
-																			.attr(
-																					"data-opt"); // STOCK_260
-																	var btnNum = $(
-																			this)
-																			.parents(
-																					"#priceContainer")
-																			.find(
+																	var liNum = $(this).val(); //선택된 수량
+																	var liOpt = $(this).attr("data-opt"); // STOCK_260
+																	var btnNum = $(this).parents("#priceContainer").find(
 																					"button[value="
 																							+ liOpt
 																							+ "] > small")
 																			.attr(
 																					"data-stocknum");
-																	if (liNum > btnNum) {
+																	if (parseInt(liNum) > parseInt(btnNum)) {
 																		alert("준비된 수량을 초과했습니다.");
 																		stopFunc += 1;
 																		return false;
