@@ -39,11 +39,13 @@ public class IndexController {
 		
 		List<ProductVO> topSportsProductList = IndexService.getTopSportsProductList();
 		
-		for(int i=0; i<topSportsProductList.size(); i++) {
-			if(topSportsProductList.get(i) == null) {
-				topSportsProductList.remove(i);
-			}
-		}
+		
+		
+//		for(int i=0; i<topSportsProductList.size(); i++) {
+//			if(topSportsProductList.get(i) == null) {
+//				topSportsProductList.remove(i);
+//			}
+//		}
 		
 		model.addAttribute("topSportsProductList", topSportsProductList);
 		System.out.println(topSportsProductList);

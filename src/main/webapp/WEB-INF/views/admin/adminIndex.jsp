@@ -179,6 +179,19 @@
 					</div>
 				</div>
 				<!-- /# column -->
+				
+				<!-- /# column -->
+
+				<div class="col-lg-6">
+					<div class="card">
+						<div class="card-body">
+							<h4 class="mb-3">${year}년 판매건수 브랜드 top5</h4>
+							<canvas id="pieChart"></canvas>
+						</div>
+					</div>
+				</div>
+				<!-- /# column -->
+				
 
 
 				<div class="col-lg-6">
@@ -251,17 +264,7 @@
 				<!-- /# column -->
 
 
-				<!-- /# column -->
-
-				<div class="col-lg-6">
-					<div class="card">
-						<div class="card-body">
-							<h4 class="mb-3">Pie Chart</h4>
-							<canvas id="pieChart"></canvas>
-						</div>
-					</div>
-				</div>
-				<!-- /# column -->
+				
 
 
 				<div class="col-lg-6">
@@ -515,7 +518,7 @@
 	                    borderWidth: "1",
 	                    backgroundColor: "rgba(0, 194, 146, 0.5)",
 	                    pointHighlightStroke: "rgba(26,179,148,1)",
-	                    data: [ ${salesList[0]}, ${salesList[1]}, ${salesList[2]}, ${salesList[3]}, ${salesList[4]}, ${salesList[5]}, ${salesList[6]}, ${salesList[7]}, ${salesList[8]}, ${salesList[9]}, ${salesList[10]}, ${salesList[11]}, ${salesList[12]} ]
+	                    data: [ ${salesList[0]}, ${salesList[1]}, ${salesList[2]}, ${salesList[3]}, ${salesList[4]}, ${salesList[5]}, ${salesList[6]}, ${salesList[7]}, ${salesList[8]}, ${salesList[9]}, ${salesList[10]}, ${salesList[11]}, ${salesList[12]} ],
 	                            }
 	                        ]
 	        },
@@ -613,17 +616,19 @@
 	        type: 'pie',
 	        data: {
 	            datasets: [ {
-	                data: [ ${topBrandList[0].BRAND_ORDERCOUNT}, ${topBrandList[1].BRAND_ORDERCOUNT},${topBrandList[2].BRAND_ORDERCOUNT}, ${topBrandList[3].BRAND_ORDERCOUNT}],
+	                data: [ ${topBrandList[0].BRAND_ORDERCOUNT}, ${topBrandList[1].BRAND_ORDERCOUNT},${topBrandList[2].BRAND_ORDERCOUNT}, ${topBrandList[3].BRAND_ORDERCOUNT}, ${topBrandList[4].BRAND_ORDERCOUNT}],
 	                backgroundColor: [
 	                                    "rgba(0, 194, 146,0.9)",
 	                                    "rgba(0, 194, 146,0.7)",
 	                                    "rgba(0, 194, 146,0.5)",
+	                                    "rgba(0,0,0,0.07)",
 	                                    "rgba(0,0,0,0.07)"
 	                                ],
 	                hoverBackgroundColor: [
 	                                    "rgba(0, 194, 146,0.9)",
 	                                    "rgba(0, 194, 146,0.7)",
 	                                    "rgba(0, 194, 146,0.5)",
+	                                    "rgba(0,0,0,0.07)",
 	                                    "rgba(0,0,0,0.07)"
 	                                ]
 
@@ -632,7 +637,8 @@
 	                            "${topBrandList[0].BRAND}",
 	                            "${topBrandList[1].BRAND}",
 	                            "${topBrandList[2].BRAND}",
-	                            "${topBrandList[3].BRAND}"
+	                            "${topBrandList[3].BRAND}",
+	                            "${topBrandList[4].BRAND}"
 	                        ]
 	        },
 	        options: {

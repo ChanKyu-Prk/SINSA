@@ -45,6 +45,9 @@ public class IndexDAO {
 			}
 		}
 		
+		while (topProductList.remove(null)) {
+        }
+		
 		
 		return topProductList;
 	}
@@ -67,11 +70,16 @@ public class IndexDAO {
 			}
 		}
 		
-		for(int i=0; i<topSneakersProductList.size(); i++) {
-			if(topSneakersProductList.get(i) == null) {
-				topSneakersProductList.remove(i);
-			}
-		}
+		
+		while (topSneakersProductList.remove(null)) {
+        }
+		
+		
+//		for(int i=0; i<topSneakersProductList.size(); i++) {
+//			if(topSneakersProductList.get(i) == null) {
+//				topSneakersProductList.remove(i);
+//			}
+//		}
 		
 		
 		return topSneakersProductList;
@@ -99,12 +107,13 @@ public class IndexDAO {
 			}
 		}
 		
-		
-		for(int i=0; i<topSportsProductList.size(); i++) {
-			if(topSportsProductList.get(i) == null) {
-				topSportsProductList.remove(i);
-			}
-		}
+		while (topSportsProductList.remove(null)) {
+        }
+//		for(int i=0; i<topSportsProductList.size(); i++) {
+//			if(topSportsProductList.get(i) == null) {
+//				topSportsProductList.remove(i);
+//			}
+//		}
 		
 //		List<ProductVO> topSportsList = new ArrayList<ProductVO>();
 //		for(int i=0; i<topSportsProductList.size(); i++) {
