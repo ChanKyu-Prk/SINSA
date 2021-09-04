@@ -85,4 +85,78 @@
 		select count(*) from QNA where qna_answer is null
 	</select> 
 	
+	
+	
+	
+	
+	<select id="get10MaleUsersList" resultType="Integer">
+		select sum(if(date_format(now(), '%Y')-substring(cus_birth, 1, 4) between 0 and 19, 1, 0)) from customer where cus_gender='남성';
+	</select> 
+	
+	<select id="get20MaleUsersList" resultType="Integer">
+		select sum(if(date_format(now(), '%Y')-substring(cus_birth, 1, 4) between 20 and 29, 1, 0)) from customer where cus_gender='남성';
+	</select> 
+	
+	<select id="get30MaleUsersList" resultType="Integer">
+		select sum(if(date_format(now(), '%Y')-substring(cus_birth, 1, 4) between 30 and 39, 1, 0)) from customer where cus_gender='남성';
+	</select> 
+	
+	<select id="get40MaleUsersList" resultType="Integer">
+		select sum(if(date_format(now(), '%Y')-substring(cus_birth, 1, 4) between 40 and 49, 1, 0)) from customer where cus_gender='남성';
+	</select> 
+	
+	<select id="get50MaleUsersList" resultType="Integer">
+		select sum(if(date_format(now(), '%Y')-substring(cus_birth, 1, 4) between 50 and 59, 1, 0)) from customer where cus_gender='남성';
+	</select> 
+	
+	<select id="get60MaleUsersList" resultType="Integer">
+		select sum(if(date_format(now(), '%Y')-substring(cus_birth, 1, 4) between 60 and 100, 1, 0)) from customer where cus_gender='남성';
+	</select> 
+	
+	<select id="get10FemaleUsersList" resultType="Integer">
+		select sum(if(date_format(now(), '%Y')-substring(cus_birth, 1, 4) between 0 and 19, 1, 0)) from customer where cus_gender='여성';
+	</select> 
+	
+	<select id="get20FemaleUsersList" resultType="Integer">
+		select sum(if(date_format(now(), '%Y')-substring(cus_birth, 1, 4) between 20 and 29, 1, 0)) from customer where cus_gender='여성';
+	</select> 
+	
+	<select id="get30FemaleUsersList" resultType="Integer">
+		select sum(if(date_format(now(), '%Y')-substring(cus_birth, 1, 4) between 30 and 39, 1, 0)) from customer where cus_gender='여성';
+	</select> 
+	
+	<select id="get40FemaleUsersList" resultType="Integer">
+		select sum(if(date_format(now(), '%Y')-substring(cus_birth, 1, 4) between 40 and 49, 1, 0)) from customer where cus_gender='여성';
+	</select> 
+	
+	<select id="get50FemaleUsersList" resultType="Integer">
+		select sum(if(date_format(now(), '%Y')-substring(cus_birth, 1, 4) between 50 and 59, 1, 0)) from customer where cus_gender='여성';
+	</select> 
+	
+	<select id="get60FemaleUsersList" resultType="Integer">
+		select sum(if(date_format(now(), '%Y')-substring(cus_birth, 1, 4) between 60 and 100, 1, 0)) from customer where cus_gender='여성';
+	</select> 
+	
+	
+	
+	
+	<select id="getOrderList" resultType="kr.co.sinsa.biz.orders.OrdersVO">
+		select * from orders
+	</select> 
+	
+	<select id="getTopBrandPrdList" parameterType="String" resultType="kr.co.sinsa.biz.product.ProductVO">
+		select * from product where prd_code = #{ORDER_PRDCODE}
+	</select> 
+	
+
+	
+	
+<!-- 	select prd_brand from product group by prd_brand order by count(prd_brand) desc limit 5; -->
+	
+	
+	
+	
+	
+	
+	
 </mapper> 

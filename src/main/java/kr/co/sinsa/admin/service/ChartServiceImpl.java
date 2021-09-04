@@ -1,11 +1,13 @@
 package kr.co.sinsa.admin.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kr.co.sinsa.admin.dao.ChartDAO;
+import kr.co.sinsa.admin.vo.TopBrandVO;
 import kr.co.sinsa.biz.product.ProductVO;
 
 
@@ -50,6 +52,16 @@ public class ChartServiceImpl implements ChartService {
 	@Override
 	public int getTotalQna() {
 		return dao.getTotalQna();
+	}
+	
+	@Override
+	public List<Integer> getUsersCountList() {
+		return dao.getUsersCountList();
+	}
+	
+	@Override
+	public List<TopBrandVO> getTopBrandList() {
+		return dao.getTopBrandList();
 	}
 
 
