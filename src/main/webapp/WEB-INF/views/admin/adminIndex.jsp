@@ -173,7 +173,7 @@
 				<div class="col-lg-6">
 					<div class="card">
 						<div class="card-body">
-							<h4 class="mb-3">Bar chart</h4>
+							<h4 class="mb-3">연령/성 회원 수</h4>
 							<canvas id="barChart"></canvas>
 						</div>
 					</div>
@@ -540,18 +540,18 @@
 	    var myChart = new Chart( ctx, {
 	        type: 'bar',
 	        data: {
-	            labels: [ "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul" ],
+	            labels: [ "10대 이하", "20대", "30대", "40대", "50대", "60대이상" ],
 	            datasets: [
 	                {
-	                    label: "ㄴㄴㄴㄴㄴㄴ",
-	                    data: [ 65, 59, 80, 81, 56, 55, 45 ],
+	                    label: "남성",
+	                    data: [ ${usersCountList[0]}, ${usersCountList[1]}, ${usersCountList[2]}, ${usersCountList[3]}, ${usersCountList[4]}, ${usersCountList[5]}],
 	                    borderColor: "rgba(0, 194, 146, 0.9)",
 	                    borderWidth: "0",
 	                    backgroundColor: "rgba(0, 194, 146, 0.5)"
 	                            },
 	                {
-	                    label: "My Second dataset",
-	                    data: [ 28, 48, 40, 19, 86, 27, 76 ],
+	                    label: "여성",
+	                    data: [ ${usersCountList[6]}, ${usersCountList[7]}, ${usersCountList[8]}, ${usersCountList[9]}, ${usersCountList[10]}, ${usersCountList[11]} ],
 	                    borderColor: "rgba(0,0,0,0.09)",
 	                    borderWidth: "0",
 	                    backgroundColor: "rgba(0,0,0,0.07)"
@@ -613,7 +613,7 @@
 	        type: 'pie',
 	        data: {
 	            datasets: [ {
-	                data: [ 45, 25, 20, 10 ],
+	                data: [ ${topBrandList[0].BRAND_ORDERCOUNT}, ${topBrandList[1].BRAND_ORDERCOUNT},${topBrandList[2].BRAND_ORDERCOUNT}, ${topBrandList[3].BRAND_ORDERCOUNT}],
 	                backgroundColor: [
 	                                    "rgba(0, 194, 146,0.9)",
 	                                    "rgba(0, 194, 146,0.7)",
@@ -629,9 +629,10 @@
 
 	                            } ],
 	            labels: [
-	                            "green",
-	                            "green",
-	                            "green"
+	                            "${topBrandList[0].BRAND}",
+	                            "${topBrandList[1].BRAND}",
+	                            "${topBrandList[2].BRAND}",
+	                            "${topBrandList[3].BRAND}"
 	                        ]
 	        },
 	        options: {

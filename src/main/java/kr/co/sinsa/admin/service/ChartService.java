@@ -2,6 +2,7 @@ package kr.co.sinsa.admin.service;
 
 import java.util.List;
 
+import kr.co.sinsa.admin.vo.TopBrandVO;
 import kr.co.sinsa.biz.product.ProductVO;
 
 public interface ChartService {
@@ -20,5 +21,8 @@ public interface ChartService {
 	
 	public int getTotalQna();
 	
-
+	public List<Integer> getUsersCountList();
+	
+	public List<TopBrandVO> getTopBrandList();
+	
 }
