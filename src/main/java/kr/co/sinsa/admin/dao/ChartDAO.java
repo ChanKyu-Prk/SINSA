@@ -109,6 +109,10 @@ public class ChartDAO  {
 		for(int i=0; i<orderList.size(); i++) {
 			topBrandPrdList.add((ProductVO)SST.selectOne("ChartService.getTopBrandPrdList", orderList.get(i).getORDER_PRDCODE()));
 		}
+		
+		while (topBrandPrdList.remove(null)) {
+        }
+
 
 
 		System.out.println("topBrandPrdList" + topBrandPrdList);
@@ -158,7 +162,7 @@ public class ChartDAO  {
 		});
 
 
-		System.out.println("topBrandList111=" + topBrandList.get(0).getBRAND_ORDERCOUNT() + topBrandList.get(1).getBRAND_ORDERCOUNT() + topBrandList.get(2).getBRAND_ORDERCOUNT() + topBrandList.get(3).getBRAND_ORDERCOUNT());
+//		System.out.println("topBrandList111=" + topBrandList.get(0).getBRAND_ORDERCOUNT() + topBrandList.get(1).getBRAND_ORDERCOUNT() + topBrandList.get(2).getBRAND_ORDERCOUNT() + topBrandList.get(3).getBRAND_ORDERCOUNT());
 
 
 
