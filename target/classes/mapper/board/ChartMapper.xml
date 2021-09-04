@@ -76,8 +76,13 @@
 		select count(order_num) from orders where date_format(order_regdate, '%Y') = DATE_FORMAT(now(),'2021')
 	</select>
 
-
-
-
-
+	<select id="getTotalUsers" resultType="Integer">
+		select count(cus_num) from customer where date_format(cus_regdate, '%Y') = DATE_FORMAT(now(), '2021')
+	</select>
+	 
+	
+	<select id="getTotalQna" resultType="Integer">
+		select count(*) from QNA where qna_answer is null
+	</select> 
+	
 </mapper> 

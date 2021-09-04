@@ -41,6 +41,16 @@ public class ChartServiceImpl implements ChartService {
 	public int getTotalSalesAmount() {
 		return dao.getTotalSalesAmount();
 	}
+	
+	@Override
+	public int getTotalUsers() {
+		return dao.getTotalUsers();
+	}
+	
+	@Override
+	public int getTotalQna() {
+		return dao.getTotalQna();
+	}
 
 
 

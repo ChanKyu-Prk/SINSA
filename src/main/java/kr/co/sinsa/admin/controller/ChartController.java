@@ -50,6 +50,11 @@ public class ChartController {
 		int totalSalesAmount = ChartService.getTotalSalesAmount();
 		model.addAttribute("totalSalesAmount", totalSalesAmount);
 		
+		int totalQna = ChartService.getTotalQna();
+		model.addAttribute("totalQna", totalQna);
+		
+		int totalUsers = ChartService.getTotalUsers();
+		model.addAttribute("totalUsers", totalUsers);
 		
 		return "/admin/adminIndex";
 	}

@@ -60,6 +60,16 @@ public class ChartDAO {
 		int totalSalesAmount = SST.selectOne("ChartService.getTotalSalesAmount");
 		return totalSalesAmount;
 	}
+	
+	public int getTotalUsers() {
+		int totalUsers = SST.selectOne("ChartService.getTotalUsers");
+		return totalUsers;
+	}
+	
+	public int getTotalQna() {
+		int totalQna = SST.selectOne("ChartService.getTotalQna");
+		return totalQna;
+	}
 
 	
 
