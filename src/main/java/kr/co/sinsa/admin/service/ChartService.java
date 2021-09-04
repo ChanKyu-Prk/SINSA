@@ -15,5 +15,10 @@ public interface ChartService {
 	public int getTotalSales();
 	
 	public int getTotalSalesAmount();
+	
+	public int getTotalUsers();
+	
+	public int getTotalQna();
+	
 
 }

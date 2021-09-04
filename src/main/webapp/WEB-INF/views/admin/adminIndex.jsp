@@ -89,6 +89,27 @@
 						</div>
 					</div>
 				</div>
+				
+				<div class="col-lg-3 col-md-6">
+					<div class="card">
+						<div class="card-body">
+							<div class="stat-widget-five">
+								<div class="stat-icon dib flat-color-4">
+									<i class="pe-7s-users"></i>
+								</div>
+								<div class="stat-content">
+									<div class="text-left dib">
+										<div class="stat-text">
+										<%-- <fmt:formatNumber value="${users}" pattern="#,###" />명 --%>
+											 <span class="count">${totalUsers}</span>명
+										</div>
+										<div class="stat-heading">고객 수</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
 
 				<div class="col-lg-3 col-md-6">
 					<div class="card">
@@ -100,7 +121,7 @@
 								<div class="stat-content">
 									<div class="text-left dib">
 										<div class="stat-text">
-											<span class="count">${totalSalesAmount}</span>
+											<span class="count">${totalSalesAmount}</span>건
 										</div>
 										<div class="stat-heading">${year}년 판매건수</div>
 									</div>
@@ -120,29 +141,9 @@
 								<div class="stat-content">
 									<div class="text-left dib">
 										<div class="stat-text">
-											<span class="count">349</span>
+											<span class="count">${totalQna }</span>건
 										</div>
-										<div class="stat-heading">Templates</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<div class="col-lg-3 col-md-6">
-					<div class="card">
-						<div class="card-body">
-							<div class="stat-widget-five">
-								<div class="stat-icon dib flat-color-4">
-									<i class="pe-7s-users"></i>
-								</div>
-								<div class="stat-content">
-									<div class="text-left dib">
-										<div class="stat-text">
-											<span class="count">2986</span>
-										</div>
-										<div class="stat-heading">Clients</div>
+										<div class="stat-heading">미답변 문의 수</div>
 									</div>
 								</div>
 							</div>
@@ -151,27 +152,8 @@
 				</div>
 			</div>
 			<!-- /Widgets -->
-
-
-
 		</div>
 	</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 	<!-- Content -->
 	<div class="content">
 		<div class="animated fadeIn">
