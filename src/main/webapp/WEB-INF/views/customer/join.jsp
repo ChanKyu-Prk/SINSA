@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-	<c:set var="path" value="${pageContext.request.contextPath}" />
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<c:set var="path" value="${pageContext.request.contextPath}" />
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,7 +17,108 @@
 
 <link rel="stylesheet" href="${path}/resources/css/join.css"
 	type="text/css">
-<body >
+<style>
+@media screen and (max-width: 720px) {
+	.wrap {
+		width: 90%;
+		margin: auto;
+	}
+	.id_input_re_0 {
+		font-size: 12px;
+	}
+	.id_input_re_1 {
+		font-size: 12px;
+	}
+	.id_input_re_2 {
+		font-size: 12px;
+	}
+	.id_input_re_3 {
+		font-size: 12px;
+	}
+	.pw_input {
+		font-size: 12px;
+	}
+	.id_input {
+		font-size: 12px;
+	}
+	.pw_input_re_0 {
+		font-size: 12px;
+	}
+	.pw_input_re {
+		font-size: 12px;
+	}
+	.pwck_input {
+		font-size: 12px;
+	}
+	.pwck_input_re_0 {
+		font-size: 12px;
+	}
+	.pwck_input_re {
+		font-size: 12px;
+	}
+	.user_input {
+		font-size: 12px;
+	}
+	.user_input_re {
+		font-size: 12px;
+	}
+	.user_input_re_0 {
+		font-size: 12px;
+	}
+	.tel_input {
+		font-size: 12px;
+	}
+	.tel_input_re {
+		font-size: 12px;
+	}
+	.tel_input_re_0 {
+		font-size: 12px;
+	}
+	.birth_input_re {
+		font-size: 12px;
+	}
+	.gender_input_re {
+		font-size: 12px;
+	}
+	.mail_input {
+		font-size: 12px;
+	}
+	.mail_input_2 {
+		font-size: 12px;
+	}
+	.mail_input_re {
+		font-size: 12px;
+	}
+	.mail_input_re_0 {
+		font-size: 12px;
+	}
+	.mail_check_input_box {
+		font-size: 12px;
+	}
+	.mail_check_button_c {
+		font-size: 12px;
+	}
+	.mail_check_button_c2 {
+		font-size: 12px;
+	}
+	.address_input_1 {
+		font-size: 12px;
+	}
+	.address_input_2 {
+		font-size: 12px;
+	}
+	.address_input_4 {
+		font-size: 12px;
+	}
+	.addr_input_re {
+		font-size: 12px;
+	}
+	#send {
+		font-size: 12px;
+	}
+}
+</style>
+<body>
 
 
 	<div class="container-h">
@@ -75,15 +176,16 @@
 				<div class="tel_wrap">
 					<div class="tel_name">전화번호</div>
 					<div class="tel_input_box">
-						<input class="tel_input" name="CUS_TEL" placeholder="  '-'없이 입력해 주세요">
+						<input class="tel_input" name="CUS_TEL"
+							placeholder="  '-'없이 입력해 주세요">
 					</div>
 					<div>
 						<span class="tel_input_re">필수 입력사항 입니다.</span> <span
 							class="tel_input_re_0">숫자만 입력 가능합니다.</span>
 					</div>
 				</div>
-				
-				
+
+
 				<div class="birth_wrap">
 					<div class="container BGC">
 						<div class="row">
@@ -144,8 +246,10 @@
 							<div class="col-3 padding0">
 								<select class="mail_input_select col-12">
 									<option value="" selected>직접 입력</option>
-									<option value="google.com">google.com</option>
+									<option value="gmail.com">gmail.com</option>
 									<option value="naver.com">naver.com</option>
+									<option value="hanmail.net">hanmail.net</option>
+									<option value="yahoo.co.kr">yahoo.co.kr</option>
 								</select>
 							</div>
 						</div>

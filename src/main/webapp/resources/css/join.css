@@ -6,13 +6,13 @@
 }
 
 body {
-/* 	background-color: #f5f5f5 !important; */
+	/* 	background-color: #f5f5f5 !important; */
+	
 }
-
 
 /* 화면 전체 렙 */
 .container-h {
-	background-color:#fff;
+	background-color: #fff;
 }
 
 /* content 랩 */
@@ -533,3 +533,4 @@ input::placeholder {
 #mail_check_input_box_true {
 	background-color: white;
 }
+

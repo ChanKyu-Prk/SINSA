@@ -64,4 +64,6 @@ public interface MyPageService {
 	public int addCart(CartVO cartVO);
 	
 	public int chckDeleteCart(String CUS_ID);
+	
+	public void decide(Map<String,String> map);
 }

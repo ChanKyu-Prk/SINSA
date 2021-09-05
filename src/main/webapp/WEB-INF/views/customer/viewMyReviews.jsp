@@ -11,6 +11,45 @@
 <meta charset="UTF-8">
 
 <style type="text/css">
+.table2 {
+	display: none;
+}
+
+.period_wrap2 {
+	padding-left: 10px;
+	padding-right: 10px;
+	height: 35px;
+}
+
+@media screen and (max-width: 720px) {
+	.tilde {
+		display: none;
+	}
+	#date1 {
+		width: 100%;
+	}
+	#date2 {
+		width: 100%;
+	}
+	.datecol {
+		padding: 0 !important;
+	}
+	.period_wrap2 {
+		height: 150px;
+	}
+	.table1 {
+		display: none;
+	}
+	.table2 {
+		display: table;
+	}
+}
+
+.tilde {
+	margin: 0;
+	padding: 0;
+}
+
 .con_top_margin {
 	margin-top: 40px;
 }
@@ -29,12 +68,6 @@
 	padding-top: 30px;
 	padding-bottom: 30px;
 	background-color: #EDEFF2;
-}
-
-.period_wrap2 {
-	padding-left: 10px;
-	padding-right: 10px;
-	height: 35px;
 }
 
 .periodBox {
@@ -94,7 +127,7 @@
 }
 
 .thumbPic {
-	height: 100%;
+	height: auto;
 }
 
 .orderlist {
@@ -290,11 +323,23 @@ td {
 	cursor: pointer;
 	position: relative;
 	text-align: right;
+	width: 100px;
+	height: 100px;
+}
+
+.reviewPic {
+	width: 280px;
+	height: 280px;
+}
+
+.reviewPic2 {
+	width: 120px;
+	height: 120px;
 }
 
 .piclenth {
 	position: absolute;
-	right: 15px;
+	right: 0px;
 	width: 25px;
 	height: 25px;
 	background-color: rgba(0, 0, 0, 0.8);
@@ -305,6 +350,22 @@ td {
 .nopadding {
 	margin: 0px !important;
 	padding: 0px !important;
+}
+
+.contentsTD {
+	text-align: left !important;
+	background-color: white;
+	padding : 10px;
+}
+
+a.page-link{
+color: black !important;
+}
+.page-item.active
+.page-link{
+background-color: black !important;
+border-color: black !important;
+color: white !important;
 }
 </style>
 <title>SINSA : 나의 상품 후기</title>
@@ -317,7 +378,7 @@ td {
 		<div class="container con_top_margin">
 			<div class="row">
 				<jsp:include page="myPageSideBar.jsp"></jsp:include>
-				<div class="col-9">
+				<div class="col-sm-12 col-md-9">
 					<div class="subjecet">
 						<h3>나의 상품 후기</h3>
 					</div>
@@ -332,7 +393,7 @@ td {
 
 						<div class="row period_wrap2">
 
-							<div class="col-5">
+							<div class="col-sm-12 col-md-5">
 								<div class="row">
 									<div class="col-3 periodBox" id="oneWeek">
 										<span class="tableCel">일주일</span>
@@ -349,13 +410,14 @@ td {
 								</div>
 							</div>
 
-							<div class="col-7 dateBox">
+							<div class="col-sm-12 col-md-7 dateBox">
 								<div class="row">
-									<div class="col-10">
-										<input type="date" id="date1" value="${date1 }"> ~ <input
-											type="date" id="date2" value="${date2 }">
+									<div class="col-sm-12 col-md-10 datecol">
+										<input type="date" id="date1" value="${date1 }"> <span
+											class="tilde">~</span> <input type="date" id="date2"
+											value="${date2 }">
 									</div>
-									<div class="col-2 periodBox serchBtn">
+									<div class="col-sm-12 col-md-2 periodBox serchBtn">
 										<span class="tableCel">조회</span>
 									</div>
 								</div>
@@ -370,22 +432,22 @@ td {
 					<div class="container orderlist">
 						<div class="row select_row">
 							<!-- 				<div class="col-1 reviews_l"></div> -->
-							<div class="col-3 reviews_w">
+							<div class="col-5 col-md-3 reviews_w">
 								<div class="row reviews_w_row">
 									<div class="col-12 reviews_w_col">후기 작성 하기</div>
 								</div>
 							</div>
-							<div class="col-3 reviews_s">
+							<div class="col-5 col-md-3 reviews_s">
 								<div class="row reviews_s_row">
 									<div class="col-12 reviews_s_col">후기 내역 보기</div>
 								</div>
 							</div>
-							<div class="col-6  reviews_r">
+							<div class="col-2 col-md-6  reviews_r">
 								<div class="row reviews_r_row">.</div>
 							</div>
 						</div>
 						<div class="row">
-							<div class="col-12 padding0">
+							<div class="col-12 padding0 table1">
 								<table>
 									<colgroup>
 										<col style="width: 15%;">
@@ -436,7 +498,7 @@ td {
 																value="${product[status.index].ORDER_PRDCODE }"
 																class="prdcode"> <img class="thumbPic"
 																alt="상품 대표 사진" title="상품 대표 사진"
-																src="/resources/prdImg/shoe.jpg" />
+																src="${pageContext.request.contextPath}/resources/prdImg/${product[status.index].ORDER_PRDCODE }.png" />
 
 														</div>
 													</td>
@@ -570,9 +632,6 @@ td {
 																</tr>
 															</c:if>
 															<tr class="content_tr">
-																<td>${list.REV_CONTENT }</td>
-															</tr>
-															<tr>
 																<td>
 																	<div class="container ">
 																		<div class="row rev_row">
@@ -591,7 +650,9 @@ td {
 																	</div>
 																</td>
 															</tr>
+
 														</table>
+
 													</td>
 													<td class="imgtd"><c:if
 															test="${imgList[status.index] !=null }">
@@ -604,6 +665,9 @@ td {
 															</div>
 														</c:if></td>
 												</tr>
+												<tr>
+													<td colspan="4" class="contentsTD">${list.REV_CONTENT }</td>
+												</tr>
 												<tr class="underline">
 													<td colspan="4 ">
 														<table class="imgTable backWhite">
@@ -612,12 +676,261 @@ td {
 																<col width="33%">
 																<col width="33%">
 															</colgroup>
+
+															<tr>
+
+																<c:forEach var="imglist"
+																	items="${imgList[status.index]}" varStatus="status">
+																	<td><img class="reviewPic" alt="리뷰 대표 사진"
+																		title="리뷰 대표 사진"
+																		src="${pageContext.request.contextPath}/resources/img/review/${imglist }" />
+																	</td>
+																</c:forEach>
+
+															</tr>
+														</table>
+
+													</td>
+												</tr>
+
+											</c:forEach>
+
+
+
+
+										</c:otherwise>
+									</c:choose>
+								</table>
+
+
+
+							</div>
+
+
+
+							<div class="col-12 padding0 table2">
+								<table>
+									<colgroup>
+										<col style="width: 20%;">
+										<col style="width: 30%;">
+										<col style="width: 50%;">
+
+									</colgroup>
+									<thead>
+										<tr>
+
+											<th colspan="2">상품정보</th>
+											<th>내용</th>
+											<th></th>
+										</tr>
+									</thead>
+									<c:choose>
+										<c:when test="${fn:length(myReviews) == 0}">
+
+											<tr>
+												<td colspan="6">
+													<div class="container">
+														<div class="row noOrder_row">
+															<div class="col-12">
+																<svg xmlns="http://www.w3.org/2000/svg" id="exclamation"
+																	class="bi bi-exclamation-circle" viewBox="0 0 16 16">
+  <path
+																		d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+  <path
+																		d="M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995z" />
+</svg>
+																<br>후기 내역이 없습니다.
+															</div>
+														</div>
+
+													</div>
+												</td>
+											</tr>
+										</c:when>
+										<c:otherwise>
+											<c:forEach var="list" items="${myReviews}" varStatus="status">
+												<tr class="backWhite">
+
+													<td class="imgtd">
+
+														<div class="td-row">
+															<input type="hidden"
+																value="${product[status.index].ORDER_PRDCODE }"
+																class="prdcode"> <img class="thumbPic"
+																alt="상품 대표 사진" title="상품 대표 사진"
+																src="${pageContext.request.contextPath}/resources/prdImg/${product[status.index].ORDER_PRDCODE }.png" />
+
+														</div>
+													</td>
+
+													<td>
+														<table>
+															<tr>
+																<td class="prd_brand_td"><span
+																	class="prd_brand_span span_margin">${product[status.index].PRD_BRAND }</span></td>
+															</tr>
+															<tr>
+																<td class="prd_name_td"><span
+																	class="prd_name_span span_margin"><input
+																		type="hidden"
+																		value="${product[status.index].ORDER_PRDCODE }"
+																		class="prdcode">${product[status.index].ORDER_PRDNAME }</span></td>
+															</tr>
+															<tr>
+																<td class="prd_size_td">사이즈 :
+																	${product[status.index].ORDER_PRDSIZE } mm</td>
+															</tr>
+														</table>
+													</td>
+													<td>
+														<table>
+															<tr>
+																<td class="regdate"><i class="fa fa-calendar-o "></i>
+																	<fmt:formatDate value="${list.REV_REGDATE}"
+																		pattern="yyyy-MM-dd" /></td>
+															</tr>
+															<c:if test="${list.REV_STAR eq 0}">
+																<tr>
+																	<td class="star">
+																		<div>
+																			<img src="${path}/resources/img/empty_star.png"
+																				class="empty_star"> <img
+																				src="${path}/resources/img/empty_star.png"
+																				class="empty_star"> <img
+																				src="${path}/resources/img/empty_star.png"
+																				class="empty_star"> <img
+																				src="${path}/resources/img/empty_star.png"
+																				class="empty_star"> <img
+																				src="${path}/resources/img/empty_star.png"
+																				class="empty_star">
+																		</div>
+																	</td>
+																</tr>
+															</c:if>
+															<c:if test="${list.REV_STAR eq 1}">
+																<tr>
+																	<td class="star">
+																		<div>
+																			<img src="${path}/resources/img/star.png"
+																				class="star"> <img
+																				src="${path}/resources/img/empty_star.png"
+																				class="empty_star"> <img
+																				src="${path}/resources/img/empty_star.png"
+																				class="empty_star"> <img
+																				src="${path}/resources/img/empty_star.png"
+																				class="empty_star"> <img
+																				src="${path}/resources/img/empty_star.png"
+																				class="empty_star">
+																		</div>
+																	</td>
+																</tr>
+															</c:if>
+															<c:if test="${list.REV_STAR eq 2}">
+																<tr>
+																	<td class="star">
+																		<div>
+																			<img src="${path}/resources/img/star.png"
+																				class="star"> <img
+																				src="${path}/resources/img/star.png" class="star">
+																			<img src="${path}/resources/img/empty_star.png"
+																				class="empty_star"> <img
+																				src="${path}/resources/img/empty_star.png"
+																				class="empty_star"> <img
+																				src="${path}/resources/img/empty_star.png"
+																				class="empty_star">
+																		</div>
+																	</td>
+																</tr>
+															</c:if>
+															<c:if test="${list.REV_STAR eq 3}">
+																<tr>
+																	<td class="star">
+																		<div>
+																			<img src="${path}/resources/img/star.png"
+																				class="star"> <img
+																				src="${path}/resources/img/star.png" class="star">
+																			<img src="${path}/resources/img/star.png"
+																				class="star"> <img
+																				src="${path}/resources/img/empty_star.png"
+																				class="empty_star"> <img
+																				src="${path}/resources/img/empty_star.png"
+																				class="empty_star">
+																		</div>
+																	</td>
+																</tr>
+															</c:if>
+															<c:if test="${list.REV_STAR eq 4}">
+																<tr>
+																	<td class="star">
+																		<div>
+																			<img src="${path}/resources/img/star.png"
+																				class="star"> <img
+																				src="${path}/resources/img/star.png" class="star">
+																			<img src="${path}/resources/img/star.png"
+																				class="star"> <img
+																				src="${path}/resources/img/star.png" class="star">
+																			<img src="${path}/resources/img/empty_star.png"
+																				class="empty_star">
+																		</div>
+																	</td>
+																</tr>
+															</c:if>
+															<c:if test="${list.REV_STAR eq 5}">
+																<tr>
+																	<td class="star">
+																		<div>
+																			<img src="${path}/resources/img/star.png"
+																				class="star"> <img
+																				src="${path}/resources/img/star.png" class="star">
+																			<img src="${path}/resources/img/star.png"
+																				class="star"> <img
+																				src="${path}/resources/img/star.png" class="star">
+																			<img src="${path}/resources/img/star.png"
+																				class="star">
+																		</div>
+																	</td>
+																</tr>
+															</c:if>
+															<tr class="content_tr">
+																<td>
+																	<div class="container ">
+																		<div class="row rev_row">
+
+																			<div class="col-12 review_title">
+																				사이즈 :<span class="review_span">
+																					${titleList[status.index][0] }</span><br>색상 :<span
+																					class="review_span">
+																					${titleList[status.index][1] }</span><br>착화감 :<span
+																					class="review_span">
+																					${titleList[status.index][2] }</span><br>배송 :<span
+																					class="review_span">
+																					${titleList[status.index][3] }</span>
+																			</div>
+																		</div>
+																	</div>
+																</td>
+															</tr>
+
+														</table>
+													</td>
+												</tr>
+												<tr class="underline">
+													<td colspan="4 ">
+														<table class="imgTable2 backWhite">
+															<colgroup>
+																<col width="33%">
+																<col width="33%">
+																<col width="33%">
+															</colgroup>
+															<tr>
+																<td colspan="3" class="contentsTD">${list.REV_CONTENT }</td>
+															</tr>
 															<tr>
 
 
 																<c:forEach var="imglist"
 																	items="${imgList[status.index]}" varStatus="status">
-																	<td><img class="reviewThumbPic" alt="리뷰 대표 사진"
+																	<td><img class="reviewPic2" alt="리뷰 대표 사진"
 																		title="리뷰 대표 사진"
 																		src="${pageContext.request.contextPath}/resources/img/review/${imglist }" />
 																	</td>
@@ -762,26 +1075,15 @@ td {
 			function() {
 				var test = $(this).find('.displayState');
 				if (test.val() < 1) {
-					$(this).parent().parent().next().children().find(
+					$(this).parent().parent().next().next().children().find(
 							'.imgTable').css("display", "inline-block");
 					test.val(1);
 				} else {
 
-					$(this).parent().parent().next().children().find(
+					$(this).parent().parent().next().next().children().find(
 							'.imgTable').css("display", "none");
 					test.val(0);
 				}
-			});
-
-	$('.write_btn').on(
-			"click",
-			function() {
-				var ORDERNUM = $(this).find('.ORDER_NUM').val();
-				var ORDERPRDSIZE = $(this).find('.ORDER_PRDSIZE').val();
-				var PRDCODE = $(this).find('.ORDER_PRDCODE').val();
-
-				location.href = '/reviewWrite/' + ORDERNUM + '/' + ORDERPRDSIZE
-						+ '/' + PRDCODE;
 			});
 
 	$('.thumbPic').on("mouseover", function() {

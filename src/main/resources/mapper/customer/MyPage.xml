@@ -90,8 +90,8 @@
 		select
 		count(*)
 		from ORDERS
-		where ORDER_CUSID = #{ID} and ORDER_STATE =
-		#{STATE};
+		where ORDER_CUSID = #{ID} and ORDER_STATE
+		like concat('%',#{STATE},'%');
 	</select>
 
 	<select id="countStateDate" parameterType="Map" resultType="int">
@@ -99,7 +99,7 @@
 		select
 		count(*)
 		from ORDERS 
-		where ORDER_CUSID = #{ID} and ORDER_REGDATE >= #{date1} and ORDER_REGDATE < DATE_add(#{date2},INTERVAL 1 Day) and ORDER_STATE = #{STATE};
+		where ORDER_CUSID = #{ID} and ORDER_REGDATE >= #{date1} and ORDER_REGDATE < DATE_add(#{date2},INTERVAL 1 Day) and ORDER_STATE like concat('%',#{STATE},'%');
 			]]>
 	</select>
 
@@ -283,8 +283,10 @@ order by REV_NUM  desc
 		ORDERS.ORDER_PRDSIZE ,
 		PRODUCT.PRD_BRAND ,
 		PRODUCT.PRD_IMAGE
-		from ORDERS join Product on ORDERS.ORDER_PRDCODE = PRODUCT.PRD_CODE
-		where ORDER_NUM = #{value};
+		from ORDERS
+		join Product on ORDERS.ORDER_PRDCODE = PRODUCT.PRD_CODE
+		where ORDER_NUM
+		= #{value} limit 1;
 	</select>
 
 
@@ -407,7 +409,8 @@ order by REV_NUM  desc
 		#{orderstate}
 		where
 		ORDER_NUM = #{orderum} and
-		ORDER_PRDCODE = #{prdcode} and
+		ORDER_PRDCODE = #{prdcode}
+		and
 		ORDER_PRDSIZE = #{prdsize};
 
 	</update>
@@ -419,7 +422,8 @@ order by REV_NUM  desc
 		#{orderstate}
 		where
 		ORDER_NUM = #{orderum} and
-		ORDER_PRDCODE = #{prdcode} and
+		ORDER_PRDCODE = #{prdcode}
+		and
 		ORDER_PRDSIZE = #{prdsize};
 
 	</update>
@@ -481,4 +485,15 @@ order by REV_NUM  desc
 		delete from CART where CART_CUSID=#{CART_CUSID}
 	</delete>
 
+
+
+	<update id="decide" parameterType="Map">
+		update orders
+		set
+		ORDER_STATE = '구매확정'
+		WHERE
+		ORDER_NUM = #{orderum} AND
+		ORDER_PRDCODE = #{prdcode} AND
+		ORDER_PRDSIZE = #{prdsize};
+	</update>
 </mapper>

@@ -12,6 +12,45 @@
 <title>SINSA : 주문 내역 조회</title>
 <jsp:include page="../header.jsp"></jsp:include>
 <style type="text/css">
+.table2 {
+	display: none;
+}
+
+.period_wrap2 {
+	padding-left: 10px;
+	padding-right: 10px;
+	height: 35px;
+}
+
+@media screen and (max-width: 720px) {
+	.tilde {
+		display: none;
+	}
+	#date1 {
+		width: 100%;
+	}
+	#date2 {
+		width: 100%;
+	}
+	.datecol {
+		padding: 0 !important;
+	}
+	.period_wrap2 {
+		height: 150px;
+	}
+	.table1 {
+		display: none;
+	}
+	.table2 {
+		display: table;
+	}
+}
+
+.tilde {
+	margin: 0;
+	padding: 0;
+}
+
 .con_top_margin {
 	margin-top: 40px;
 }
@@ -28,12 +67,6 @@
 .period_wrap {
 	padding: 10px;
 	background-color: #EDEFF2;
-}
-
-.period_wrap2 {
-	padding-left: 10px;
-	padding-right: 10px;
-	height: 35px;
 }
 
 .periodBox {
@@ -129,6 +162,10 @@ th {
 	font-size: 18px;
 	font-weight: bold;
 }
+.prd_name_td2 {
+	font-size: 12x;
+	font-weight: bold;
+}
 
 .prd_size_td {
 	font-size: 12px;
@@ -173,6 +210,24 @@ body {
 	margin: 0px !important;
 	padding: 0px !important;
 }
+
+.btn {
+	background-color: white;
+	border: 1px solid #c1bfc1;
+	padding: 5px;
+	margin-bottom: 2px;
+}
+
+a.page-link {
+	color: black;
+}
+
+.page-item.active
+.page-link {
+	background-color: black;
+	border-color: black;
+	color: white !important;
+}
 </style>
 </head>
 
@@ -182,7 +237,7 @@ body {
 		<div class="container con_top_margin">
 			<div class="row">
 				<jsp:include page="myPageSideBar.jsp"></jsp:include>
-				<div class="col-9 main_div">
+				<div class="col-sm-12 col-md-9 main_div">
 					<div class="subjecet">
 						<h3>주문 내역 조회</h3>
 					</div>
@@ -208,7 +263,7 @@ body {
 
 						<div class="row period_wrap2">
 
-							<div class="col-5">
+							<div class="col-sm-12 col-md-5">
 								<div class="row">
 									<div class="col-3 periodBox" id="oneWeek">
 										<span class="tableCel">일주일</span>
@@ -225,13 +280,14 @@ body {
 								</div>
 							</div>
 
-							<div class="col-7 dateBox">
+							<div class="col-sm-12 col-md-7 dateBox">
 								<div class="row">
-									<div class="col-10">
-										<input type="date" id="date1" value="${date1 }"> ~ <input
-											type="date" id="date2" value="${date2 }">
+									<div class="col-sm-12 col-md-10 datecol">
+										<input type="date" id="date1" value="${date1 }"> <span
+											class="tilde">~</span> <input type="date" id="date2"
+											value="${date2 }">
 									</div>
-									<div class="col-2 periodBox serchBtn">
+									<div class="col-sm-12 col-md-2 periodBox serchBtn">
 										<span class="tableCel">조회</span>
 									</div>
 								</div>
@@ -246,7 +302,7 @@ body {
 
 					<div class="container orderlist">
 						<div class="row">
-							<div class="col-12 padding0">
+							<div class="col-12 padding0 table1">
 								<table>
 									<colgroup>
 										<col style="width: 15%;">
@@ -292,6 +348,7 @@ body {
 										</c:when>
 										<c:otherwise>
 											<c:forEach var="list" items="${orderList}" varStatus="status">
+												<c:set var="state" value="${fn:split(list.ORDER_STATE,'/')}" />
 												<tr class="underline">
 
 													<td class="imgtd">
@@ -300,7 +357,7 @@ body {
 															<input type="hidden" value="${list.ORDER_PRDCODE }"
 																class="prdcode"> <img class="thumbPic"
 																alt="상품 대표 사진" title="상품 대표 사진"
-																src="/resources/prdImg/shoe.jpg" />
+																src="${pageContext.request.contextPath}/resources/prdImg/${list.ORDER_PRDCODE }.png" />
 
 														</div>
 													</td>
@@ -331,32 +388,32 @@ body {
 															class="ORDER_NUM">${list.ORDER_NUM }</span></td>
 													<td><fmt:formatNumber value="${list.ORDER_PRICE }"
 															type="number" />원<br>(${list.ORDER_AMOUNT}개)</td>
-																	<td>${list.ORDER_STATE }<c:if
-															test="${list.ORDER_STATE =='배송중' }">
+													<td><c:choose>
+															<c:when test="${state[0] =='일괄취소요청' }">
+											취소요청
+											</c:when>
+															<c:when test="${state[0] =='일괄반품요청' }">
+											반품요청
+											</c:when>
+															<c:otherwise>
+											${state[0]}
+											</c:otherwise>
+														</c:choose> <c:if test="${list.ORDER_STATE =='배송중' }">
 															<br>
-															<button type="button" class="delivBtn"
+															<button type="button" class="delivBtn btn"
 																data-toggle="modal" data-target="#exampleModalCenter">배송조회</button>
-															<button type="button" class="confirmedBtn">구매확정</button>
+															<button type="button" class="confirmedBtn btn">구매확정</button>
 															<input type="hidden" value="${list.ORDER_DELIVCOMP }"
 																class="delivcomp">
 															<input type="hidden" value="${list.ORDER_DELIVNUM }"
 																class="delivnum">
-																<input type="hidden" value="${list.ORDER_PRDCODE }"
-																class="prdcode">
-															<input type="hidden" value="${list.ORDER_NUM }"
-																class="orderum">
-															<input type="hidden" value="${list.ORDER_PRDSIZE }"
-																class="prdsize">
-														</c:if> <c:if test="${list.ORDER_STATE =='결제완료' }">
 															<input type="hidden" value="${list.ORDER_PRDCODE }"
 																class="prdcode">
 															<input type="hidden" value="${list.ORDER_NUM }"
 																class="orderum">
 															<input type="hidden" value="${list.ORDER_PRDSIZE }"
 																class="prdsize">
-															<br>
-														</c:if> 
-													</td>
+														</c:if></td>
 												</tr>
 											</c:forEach>
 
@@ -365,6 +422,141 @@ body {
 
 										</c:otherwise>
 									</c:choose>
+								</table>
+
+
+
+							</div>
+							<div class="col-12 padding0 table2">
+								<table>
+									<colgroup>
+										<col style="width: 30%;">
+										<col style="width: 40%;">
+										<col style="width: 30%;">
+
+									</colgroup>
+									<thead>
+										<tr>
+											<th>상품정보</th>
+											<th> 주문일자<br>주문번호<br>결제금액(수량)
+											</th>
+											<th>상태</th>
+										</tr>
+									</thead>
+									<c:choose>
+										<c:when test="${fn:length(orderList) == 0}">
+
+											<tr>
+												<td colspan="6">
+													<div class="container">
+														<div class="row noOrder_row">
+															<div class="col-12">
+																<svg xmlns="http://www.w3.org/2000/svg" id="exclamation"
+																	class="bi bi-exclamation-circle" viewBox="0 0 16 16">
+  <path
+																		d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+  <path
+																		d="M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995z" />
+</svg>
+																<br>주문 내역이 없습니다.
+															</div>
+														</div>
+
+													</div>
+												</td>
+											</tr>
+										</c:when>
+										<c:otherwise>
+											<c:forEach var="list" items="${orderList}" varStatus="status">
+												<c:set var="state" value="${fn:split(list.ORDER_STATE,'/')}" />
+												<tr class="underline">
+
+
+
+													<td>
+														<table>
+															<tr>
+																<td class="imgtd">
+
+																	<div class="td-row">
+																		<input type="hidden" value="${list.ORDER_PRDCODE }"
+																			class="prdcode"> <img class="thumbPic"
+																			alt="상품 대표 사진" title="상품 대표 사진"
+																			src="/resources/prdImg/shoe.jpg" />
+
+																	</div>
+																</td>
+															</tr>
+									
+															<tr>
+																<td class="prd_name_td2"><span
+																	class="prd_name_span span_margin"><input
+																		type="hidden" value="${list.ORDER_PRDCODE }"
+																		class="prdcode">${list.ORDER_PRDNAME }</span></td>
+															</tr>
+											
+														</table>
+													</td>
+
+
+
+
+
+
+
+
+
+													<td><table>
+															<tr>
+																<td><fmt:formatDate var="date"
+																		value="${list.ORDER_REGDATE }" pattern="yyyy-MM-dd" />
+																	${date }</td>
+															</tr>
+															<tr>
+																<td><span class="prd_order_num_span span_margin">
+																		<input type="hidden" value="${list.ORDER_NUM }"
+																		class="ORDER_NUM">${list.ORDER_NUM }</span></td>
+															</tr>
+															<tr>
+																<td><fmt:formatNumber value="${list.ORDER_PRICE }"
+																		type="number" />원 (${list.ORDER_AMOUNT}개)</td>
+															</tr>
+														</table></td>
+
+													<td><c:choose>
+															<c:when test="${state[0] =='일괄취소요청' }">
+											취소요청
+											</c:when>
+															<c:when test="${state[0] =='일괄반품요청' }">
+											반품요청
+											</c:when>
+															<c:otherwise>
+											${state[0]}
+											</c:otherwise>
+														</c:choose> <c:if test="${list.ORDER_STATE =='배송중' }">
+															<br>
+															<button type="button" class="delivBtn btn"
+																data-toggle="modal" data-target="#exampleModalCenter">배송조회</button>
+															<button type="button" class="confirmedBtn btn">구매확정</button>
+															<input type="hidden" value="${list.ORDER_DELIVCOMP }"
+																class="delivcomp">
+															<input type="hidden" value="${list.ORDER_DELIVNUM }"
+																class="delivnum">
+															<input type="hidden" value="${list.ORDER_PRDCODE }"
+																class="prdcode">
+															<input type="hidden" value="${list.ORDER_NUM }"
+																class="orderum">
+															<input type="hidden" value="${list.ORDER_PRDSIZE }"
+																class="prdsize">
+														</c:if></td>
+
+
+												</tr>
+
+											</c:forEach>
+										</c:otherwise>
+									</c:choose>
+
 								</table>
 
 

@@ -11,6 +11,41 @@
 <meta charset="UTF-8">
 
 <style type="text/css">
+.period_wrap2 {
+	padding-left: 10px;
+	padding-right: 10px;
+	height: 35px;
+}
+
+@media screen and (max-width: 720px) {
+	.tilde {
+		display: none;
+	}
+	#date1 {
+		width: 100%;
+	}
+	#date2 {
+		width: 100%;
+	}
+	.datecol {
+		padding: 0 !important;
+	}
+	.period_wrap2 {
+		height: 150px;
+	}
+	.table1 {
+		display: none;
+	}
+	.table2 {
+		display: table;
+	}
+}
+
+.tilde {
+	margin: 0;
+	padding: 0;
+}
+
 .con_top_margin {
 	margin-top: 40px;
 }
@@ -29,12 +64,6 @@
 	padding-top: 30px;
 	padding-bottom: 30px;
 	background-color: #EDEFF2;
-}
-
-.period_wrap2 {
-	padding-left: 10px;
-	padding-right: 10px;
-	height: 35px;
 }
 
 .periodBox {
@@ -171,6 +200,15 @@ tr {
 	margin: 0px !important;
 	padding: 0px !important;
 }
+a.page-link{
+color: black !important;
+}
+.page-item.active
+.page-link{
+background-color: black !important;
+border-color: black !important;
+color: white !important;
+}
 </style>
 <title>SINSA : 상품 문의</title>
 </head>
@@ -182,7 +220,7 @@ tr {
 		<div class="container con_top_margin">
 			<div class="row">
 				<jsp:include page="myPageSideBar.jsp"></jsp:include>
-				<div class="col-9">
+				<div class="col-sm-12 col-md-9">
 					<div class="subjecet">
 						<h3>상품 문의</h3>
 					</div>
@@ -196,7 +234,7 @@ tr {
 
 						<div class="row period_wrap2">
 
-							<div class="col-5">
+							<div class="col-sm-12 col-md-5">
 								<div class="row">
 									<div class="col-3 periodBox" id="oneWeek">
 										<span class="tableCel">일주일</span>
@@ -213,13 +251,14 @@ tr {
 								</div>
 							</div>
 
-							<div class="col-7 dateBox">
+							<div class="col-sm-12 col-md-7 dateBox">
 								<div class="row">
-									<div class="col-10">
-										<input type="date" id="date1" value="${date1 }"> ~ <input
-											type="date" id="date2" value="${date2 }">
+									<div class="col-sm-12 col-md-10 datecol">
+										<input type="date" id="date1" value="${date1 }"> <span
+											class="tilde">~</span> <input type="date" id="date2"
+											value="${date2 }">
 									</div>
-									<div class="col-2 periodBox serchBtn">
+									<div class="col-sm-12 col-md-2 periodBox serchBtn">
 										<span class="tableCel">조회</span>
 									</div>
 								</div>
@@ -230,7 +269,7 @@ tr {
 						</div>
 					</div>
 
-					<div class="container qnaList">
+					<div class="container qnaList table1">
 						<div class="row">
 							<div class="col-12 padding0"></div>
 							<div class="col-12 padding0">
@@ -286,7 +325,7 @@ tr {
 																value="${productList[status.index].PRD_CODE }"
 																class="prdcode"> <img class="thumbPic"
 																alt="상품 대표 사진" title="상품 대표 사진"
-																src="/resources/prdImg/shoe.jpg" />
+																src="${pageContext.request.contextPath}/resources/prdImg/${productList[status.index].PRD_CODE }.png" />
 
 														</div></td>
 													<td>
@@ -356,7 +395,130 @@ tr {
 						</div>
 					</div>
 
+					<div class="container qnaList table2">
+						<div class="row">
+							<div class="col-12 padding0"></div>
+							<div class="col-12 padding0">
+								<table>
+									<colgroup>
+										<col style="width: 30%;">
+										<col style="width: 30%;">
+										<col style="width: 40%;">
 
+									</colgroup>
+									<thead>
+										<tr>
+											<th colspan="2">상품정보</th>
+											<th>내용<br>작성일<br>처리 상태</th>
+										
+										</tr>
+									</thead>
+									<c:choose>
+										<c:when test="${fn:length(QnAList) == 0}">
+											<tr>
+												<td colspan="3 ">
+													<div class="container">
+														<div class="row noQnA_row">
+															<div class="col-12 td_center">
+																<svg xmlns="http://www.w3.org/2000/svg" id="exclamation"
+																	class="bi bi-exclamation-circle" viewBox="0 0 16 16">
+  <path
+																		d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+  <path
+																		d="M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995z" />
+</svg>
+																<br>문의 내역이 없습니다.
+															</div>
+														</div>
+
+													</div>
+												</td>
+											</tr>
+
+										</c:when>
+										<c:otherwise>
+											<c:forEach var="list" items="${QnAList}" varStatus="status">
+
+												<tr class="underline">
+													<td class="imgtd td_center"><input type="hidden"
+														value="${status.index }" class="indexN">
+
+														<div class="td-row ">
+															<input type="hidden"
+																value="${productList[status.index].PRD_CODE }"
+																class="prdcode"> <img class="thumbPic"
+																alt="상품 대표 사진" title="상품 대표 사진"
+																src="${pageContext.request.contextPath}/resources/prdImg/${productList[status.index].PRD_CODE }.png" />
+
+														</div></td>
+													<td>
+														<table>
+															<tr>
+																<td class="prd_brand_td td_center"><span
+																	class="prd_brand_span span_margin">${productList[status.index].PRD_BRAND }</span></td>
+															</tr>
+															<tr>
+																<td class="prd_name_td td_center"><span
+																	class="prd_name_span span_margin"> <input
+																		type="hidden"
+																		value="${productList[status.index].PRD_CODE }"
+																		class="prdcode">${productList[status.index].PRD_NAME }</span></td>
+															</tr>
+
+														</table>
+													</td>
+													<td><table><tr><td class="td_center">${list.QNA_TITLE }</td>
+													</tr><tr><td class="td_center"><fmt:formatDate var="date"
+															value="${list.QNA_REGDATE }" pattern="yyyy-MM-dd" />
+														${date }<br></td></tr><tr><td class="td_center"><c:choose>
+															<c:when test="${list.QNA_ANSWER == null }">
+												미답변
+												</c:when>
+															<c:otherwise>
+												답변완료
+												</c:otherwise>
+														</c:choose></td></tr></table></td>
+													
+													
+													
+												</tr>
+
+												<tr>
+
+
+													<td colspan="3">
+														<table id="qna_content${status.index }B"
+															class="qna_content">
+															<colgroup>
+																<col style="width: 20%;">
+																<col style="width: 80%;">
+															</colgroup>
+															<tr class="uderline2">
+																<td class="toggle_td">질문</td>
+																<td class="toggle_td">${list.QNA_CONTENT }</td>
+															</tr>
+															<c:if test="${fn:length(list.QNA_ANSWER) != 0 }">
+																<tr class="uderline2">
+																	<td class="toggle_td">답변</td>
+																	<td class="toggle_td">${list.QNA_ANSWER }</td>
+
+																</tr>
+															</c:if>
+														</table>
+													</td>
+												</tr>
+
+											</c:forEach>
+										</c:otherwise>
+									</c:choose>
+
+								</table>
+
+
+
+							</div>
+						</div>
+					</div>
 
 
 
@@ -569,6 +731,7 @@ tr {
 	$('.underline').click(function() {
 		var index = $(this).find('.indexN').val();
 		$('#qna_content' + index).toggle();
+		$('#qna_content' + index+'B').toggle();
 	});
 </script>
 </html>

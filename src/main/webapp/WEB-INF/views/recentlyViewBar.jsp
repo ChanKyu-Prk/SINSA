@@ -7,6 +7,12 @@
 
 <meta charset="UTF-8">
 <style type="text/css">
+@media screen and (max-width: 720px) {
+.recentlyViewBar {
+display: none;
+}
+
+  }
 .recentlyViewBar {
 	position: -webkit-sticky;
 	position: sticky;
@@ -177,7 +183,7 @@
 														+ '<span class="prdInfo"><div class="prdBrand">'
 														+ recPrdBrand[i]
 														+ '</div><div class="prdName">'
-														+ recPrdName[1]
+														+ recPrdName[i]
 														+ '</div><div class="prdprice">'
 														+ recPrdPrice[i]
 														+ '원</div></div></span></td>'
@@ -208,7 +214,7 @@
 														+ '<span class="prdInfo"><div class="prdBrand">'
 														+ recPrdBrand[i]
 														+ '</div><div class="prdName">'
-														+ recPrdName[1]
+														+ recPrdName[i]
 														+ '</div><div class="prdprice">'
 														+ recPrdPrice[i]
 														+ '원</div></div></span></td>'
@@ -241,7 +247,7 @@
 														+ '<span class="prdInfo"><div class="prdBrand">'
 														+ recPrdBrand[i]
 														+ '</div><div class="prdName">'
-														+ recPrdName[1]
+														+ recPrdName[i]
 														+ '</div><div class="prdprice">'
 														+ recPrdPrice[i]
 														+ '원</div></div></span></td>'
@@ -335,7 +341,7 @@
 																		+ '<span class="prdInfo"><div class="prdBrand">'
 																		+ recPrdBrand[i]
 																		+ '</div><div class="prdName">'
-																		+ recPrdName[1]
+																		+ recPrdName[i]
 																		+ '</div><div class="prdprice">'
 																		+ recPrdPrice[i]
 																		+ '원</div></div></span></td>'
@@ -367,7 +373,7 @@
 																		+ '<span class="prdInfo"><div class="prdBrand">'
 																		+ recPrdBrand[i]
 																		+ '</div><div class="prdName">'
-																		+ recPrdName[1]
+																		+ recPrdName[i]
 																		+ '</div><div class="prdprice">'
 																		+ recPrdPrice[i]
 																		+ '원</div></div></span></td>'
@@ -401,7 +407,7 @@
 																		+ '<span class="prdInfo"><div class="prdBrand">'
 																		+ recPrdBrand[i]
 																		+ '</div><div class="prdName">'
-																		+ recPrdName[1]
+																		+ recPrdName[i]
 																		+ '</div><div class="prdprice">'
 																		+ recPrdPrice[i]
 																		+ '원</div></div></span></td>'
@@ -499,7 +505,7 @@
 																		+ '<span class="prdInfo"><div class="prdBrand">'
 																		+ recPrdBrand[i]
 																		+ '</div><div class="prdName">'
-																		+ recPrdName[1]
+																		+ recPrdName[i]
 																		+ '</div><div class="prdprice">'
 																		+ recPrdPrice[i]
 																		+ '원</div></div></span></td>'
@@ -531,7 +537,7 @@
 																		+ '<span class="prdInfo"><div class="prdBrand">'
 																		+ recPrdBrand[i]
 																		+ '</div><div class="prdName">'
-																		+ recPrdName[1]
+																		+ recPrdName[i]
 																		+ '</div><div class="prdprice">'
 																		+ recPrdPrice[i]
 																		+ '원</div></div></span></td>'
@@ -565,7 +571,7 @@
 																		+ '<span class="prdInfo"><div class="prdBrand">'
 																		+ recPrdBrand[i]
 																		+ '</div><div class="prdName">'
-																		+ recPrdName[1]
+																		+ recPrdName[i]
 																		+ '</div><div class="prdprice">'
 																		+ recPrdPrice[i]
 																		+ '원</div></div></span></td>'

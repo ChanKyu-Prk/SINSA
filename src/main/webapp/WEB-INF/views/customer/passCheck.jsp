@@ -81,6 +81,9 @@ padding : 0px !important;
 	height: 40px;
 	border: 1px solid #c1bfc1;
 }
+@media screen and (max-width: 720px) {
+.passwWrap {width: 100%;}
+}
 </style>
 <title>SINSA : ${page }</title>
 </head>
@@ -90,7 +93,7 @@ padding : 0px !important;
 	<div class="container con_top_margin">
 		<div class="row">
 			<jsp:include page="myPageSideBar.jsp"></jsp:include>
-			<div class="col-9">
+			<div class="col-sm-12 col-md-9">
 				<div class="subjecet">
 					<span>${page }</span>
 				</div>

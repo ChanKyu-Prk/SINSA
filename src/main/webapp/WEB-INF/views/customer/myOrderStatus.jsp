@@ -12,6 +12,19 @@
 <jsp:include page="../header.jsp"></jsp:include>
 
 <style type="text/css">
+.table2 {
+	display: none;
+}
+
+@media screen and (max-width: 720px) {
+	.table1 {
+		display: none;
+	}
+	.table2 {
+		display: table;
+	}
+}
+
 .con_top_margin {
 	margin-top: 40px;
 }
@@ -182,8 +195,20 @@ option {
 }
 
 .allCancel {
+	
+}
+
+.allbutton_row {
+	margin-top: 15px;
+	text-align: right;
+	right: 8px;
+}
+
+.btn {
 	background-color: white;
 	border: 1px solid #c1bfc1;
+	padding: 5px;
+	margin-bottom: 2px;
 }
 </style>
 <title>SINSA : 주문 내역 조회</title>
@@ -195,7 +220,7 @@ option {
 		<div class="container con_top_margin">
 			<div class="row">
 				<jsp:include page="myPageSideBar.jsp"></jsp:include>
-				<div class="col-9">
+				<div class="col-sm-12 col-md-9">
 					<div class="subjecet">
 						<h3>주문 상세 내역</h3>
 					</div>
@@ -203,13 +228,13 @@ option {
 
 					<div class="container period_wrap">
 						<div class="row">
-							<div class="col-6 period_box">
+							<div class="col-sm-12 col-md-6 period_box">
 								주문일자 :
 								<fmt:formatDate var="date" value="${orderList[0].ORDER_REGDATE}"
 									pattern="yyyy-MM-dd" />
 								${date }
 							</div>
-							<div class="col-6 period_box">주문번호 :
+							<div class="col-sm-12 col-md-6 period_box">주문번호 :
 								${orderList[0].ORDER_NUM }</div>
 						</div>
 
@@ -218,8 +243,9 @@ option {
 
 
 					<div class="container orderlist">
+
 						<div class="row">
-							<div class="col-12 padding0">
+							<div class="col-12 padding0 table1">
 								<table>
 									<colgroup>
 										<col style="width: 15%;">
@@ -242,6 +268,8 @@ option {
 									</thead>
 
 									<c:forEach var="list" items="${orderList}" varStatus="status">
+										<c:set var="state" value="${fn:split(list.ORDER_STATE,'/')}" />
+
 										<tr class="underline">
 
 											<td class="imgtd">
@@ -278,12 +306,21 @@ option {
 											<td>${list.ORDER_AMOUNT}개</td>
 											<td><fmt:formatNumber value="${list.ORDER_PRICE }"
 													type="number" />원</td>
-											<td>${list.ORDER_STATE }<c:if
-													test="${list.ORDER_STATE =='배송중' }">
+											<td><c:choose>
+													<c:when test="${state[0] =='일괄취소요청' }">
+											취소요청
+											</c:when>
+													<c:when test="${state[0] =='일괄반품요청' }">
+											반품요청
+											</c:when>
+													<c:otherwise>
+											${state[0]}
+											</c:otherwise>
+												</c:choose> <c:if test="${list.ORDER_STATE =='배송중' }">
 													<br>
-													<button type="button" class="delivBtn" data-toggle="modal"
-														data-target="#exampleModalCenter">배송조회</button>
-													<button type="button" class="" data-toggle="modal"
+													<button type="button" class="delivBtn btn"
+														data-toggle="modal" data-target="#exampleModalCenter">배송조회</button>
+													<button type="button" class="btn" data-toggle="modal"
 														data-target="#refundmodal">반품신청</button>
 													<div class="modal" id="refundmodal" tabindex="-1"
 														role="dialog" aria-labelledby="exampleModalCenterTitle"
@@ -327,7 +364,7 @@ option {
 																			<input type="hidden" value="${list.ORDER_NUM }"
 																				class="orderum"> <input type="hidden"
 																				value="${list.ORDER_PRDSIZE }" class="prdsize"><input
-																				type="button" class="refundBtn" value="확인" />
+																				type="button" class="refundBtn btn" value="확인" />
 																		</div>
 																	</div>
 																</div>
@@ -335,17 +372,16 @@ option {
 															</div>
 														</div>
 													</div>
-													<button type="button" class="confirmedBtn">구매확정</button>
+													<button type="button" class="decideBtn btn">구매확정</button>
 													<input type="hidden" value="${list.ORDER_DELIVCOMP }"
 														class="delivcomp">
 													<input type="hidden" value="${list.ORDER_DELIVNUM }"
 														class="delivnum">
-										
+
 												</c:if> <c:if test="${list.ORDER_STATE =='결제완료' }">
 
-													<button type="button" class="" data-toggle="modal"
+													<button type="button" class="btn" data-toggle="modal"
 														data-target="#cancelmodal">주문취소</button>
-
 													<div class="modal" id="cancelmodal" tabindex="-1"
 														role="dialog" aria-labelledby="exampleModalCenterTitle"
 														aria-hidden="true">
@@ -381,7 +417,7 @@ option {
 																			<input type="hidden" value="${list.ORDER_NUM }"
 																				class="orderum"> <input type="hidden"
 																				value="${list.ORDER_PRDSIZE }" class="prdsize">
-																			<input type="button" class="cancelBtn" value="확인" />
+																			<input type="button" class="cancelBtn btn" value="확인" />
 																		</div>
 																	</div>
 																</div>
@@ -390,22 +426,251 @@ option {
 														</div>
 													</div>
 													<br>
-												</c:if>
+												</c:if></td>
+										</tr>
+									</c:forEach>
+								</table>
+							</div>
+							<div class="col-12 padding0 table2">
+								<table>
+									<colgroup>
+										<col style="width: 25%;">
+										<col style="width: 25%;">
+										<col style="width: 25%;">
+										<col style="width: 25%;">
+
+									</colgroup>
+									<thead>
+										<tr>
+											<th colspan="2">상품정보</th>
+											<th>적립금<br>수량<br>결제금액
+											</th>
+											<th>상태</th>
+										</tr>
+									</thead>
+
+									<c:forEach var="list" items="${orderList}" varStatus="status">
+										<c:set var="state" value="${fn:split(list.ORDER_STATE,'/')}" />
+
+										<tr class="underline">
+
+											<td class="imgtd">
+
+												<div class="td-row">
+													<input type="hidden" value="${list.ORDER_PRDCODE }"
+														class="prdcode"> <img class="thumbPic"
+														alt="상품 대표 사진" title="상품 대표 사진"
+														src="/resources/prdImg/shoe.jpg" />
+
+												</div>
 											</td>
+
+											<td>
+												<table>
+													<tr>
+														<td class="prd_brand_td"><span
+															class="prd_brand_span span_margin">${list.PRD_BRAND }</span></td>
+													</tr>
+													<tr>
+														<td class="prd_name_td"><span
+															class="prd_name_span span_margin"><input
+																type="hidden" value="${list.ORDER_PRDCODE }"
+																class="prdcode">${list.ORDER_PRDNAME }</span></td>
+													</tr>
+													<tr>
+														<td class="prd_size_td">사이즈 : ${list.ORDER_PRDSIZE }
+															mm</td>
+													</tr>
+												</table>
+											</td>
+
+											<td><table>
+													<tr>
+														<td><fmt:formatNumber
+																value="${list.ORDER_PRICE*0.03 }" type="number" />원</td>
+													</tr>
+													<tr>
+														<td>${list.ORDER_AMOUNT}개</td>
+													</tr>
+													<tr>
+														<td><fmt:formatNumber value="${list.ORDER_PRICE }"
+																type="number" />원</td>
+													</tr>
+												</table></td>
+
+
+
+
+											<td><c:choose>
+													<c:when test="${state[0] =='일괄취소요청' }">
+											취소요청
+											</c:when>
+													<c:when test="${state[0] =='일괄반품요청' }">
+											반품요청
+											</c:when>
+													<c:otherwise>
+											${state[0]}
+											</c:otherwise>
+												</c:choose> <c:if test="${list.ORDER_STATE =='배송중' }">
+													<br>
+													<button type="button" class="delivBtn btn"
+														data-toggle="modal" data-target="#exampleModalCenter">배송조회</button>
+													<button type="button" class="btn" data-toggle="modal"
+														data-target="#refundmodal2">반품신청</button>
+													<div class="modal" id="refundmodal2" tabindex="-1"
+														role="dialog" aria-labelledby="exampleModalCenterTitle"
+														aria-hidden="true">
+														<div class="modal-dialog modal-dialog-centered"
+															role="document">
+															<div class="modal-content">
+																<div class="modal-header">
+																	<h5 class="modal-title" id="exampleModalLongTitle">반품
+																		신청</h5>
+																	<button type="button" class="close"
+																		data-dismiss="modal">
+																		<span aria-hidden="true">&times;</span>
+																	</button>
+																</div>
+																<div class="container-fluid">
+																	<div class="row">
+																		<div class="col-12">
+																			<select class="cancel_select ">
+																				<option value="" selected disabled>반품 사유</option>
+																				<option value="상품불량">상품 불량</option>
+																				<option value="오배송">오배송</option>
+																				<option value="배송누락">배송누락</option>
+																				<option value="고객변심*">고객 변심 (주의! 반품택배비
+																					3,000원 고객 부담)</option>
+																				<option value="변경*">색상 및 사이즈 변경 (주의! 반품택배비
+																					3,000원 고객 부담)</option>
+																				<option value="잘못주문*">다른 상품 잘못 주문 (주의!
+																					반품택배비 3,000원 고객 부담)</option>
+																				<option value="기타*">기타 (주의! 반품택배비 3,000원 고객
+																					부담)</option>
+																			</select>
+																		</div>
+																		<div class="guidediv">※ 카드 취소 승인까지 카드사 영업일 기준
+																			3~5일 소요될 수 있습니다.</div>
+																		<div class="allCanceldiv col-12">
+																			<input type="hidden"
+																				value="${orderList[0].ORDER_NUM }"
+																				class="allordernum"> <input type="hidden"
+																				value="${list.ORDER_PRDCODE }" class="prdcode">
+																			<input type="hidden" value="${list.ORDER_NUM }"
+																				class="orderum"> <input type="hidden"
+																				value="${list.ORDER_PRDSIZE }" class="prdsize"><input
+																				type="button" class="refundBtn btn" value="확인" />
+																		</div>
+																	</div>
+																</div>
+
+															</div>
+														</div>
+													</div>
+													<input type="hidden" value="${list.ORDER_PRDCODE }"
+														class="prdcode">
+													<input type="hidden" value="${list.ORDER_NUM }"
+														class="orderum">
+													<input type="hidden" value="${list.ORDER_PRDSIZE }"
+														class="prdsize">
+													<button type="button" class="decideBtn btn">구매확정</button>
+													<input type="hidden" value="${list.ORDER_DELIVCOMP }"
+														class="delivcomp">
+													<input type="hidden" value="${list.ORDER_DELIVNUM }"
+														class="delivnum">
+
+												</c:if> <c:if test="${list.ORDER_STATE =='결제완료' }">
+
+													<button type="button" class="btn" data-toggle="modal"
+														data-target="#cancelmodal2">주문취소</button>
+													<div class="modal" id="cancelmodal2" tabindex="-1"
+														role="dialog" aria-labelledby="exampleModalCenterTitle"
+														aria-hidden="true">
+														<div class="modal-dialog modal-dialog-centered"
+															role="document">
+															<div class="modal-content">
+																<div class="modal-header">
+																	<h5 class="modal-title" id="exampleModalLongTitle">주문
+																		취소</h5>
+																	<button type="button" class="close"
+																		data-dismiss="modal">
+																		<span aria-hidden="true">&times;</span>
+																	</button>
+																</div>
+																<div class="container-fluid">
+																	<div class="row">
+																		<div class="col-12">
+																			<select class="cancel_select ">
+																				<option value="" selected disabled>취소 사유</option>
+																				<option value="배송지연">배송지연</option>
+																				<option value="고객변심">고객변심</option>
+																				<option value="잘못주문">다른 상품 잘못 주문</option>
+																			</select>
+
+																		</div>
+																		<div class="guidediv">※ 카드 취소 승인까지 카드사 영업일 기준
+																			3~5일 소요될 수 있습니다.</div>
+																		<div class="allCanceldiv col-12">
+																			<input type="hidden"
+																				value="${orderList[0].ORDER_NUM }"
+																				class="allordernum"> <input type="hidden"
+																				value="${list.ORDER_PRDCODE }" class="prdcode">
+																			<input type="hidden" value="${list.ORDER_NUM }"
+																				class="orderum"> <input type="hidden"
+																				value="${list.ORDER_PRDSIZE }" class="prdsize">
+																			<input type="button" class="cancelBtn btn" value="확인" />
+																		</div>
+																	</div>
+																</div>
+
+															</div>
+														</div>
+													</div>
+													<br>
+												</c:if></td>
 										</tr>
 									</c:forEach>
 								</table>
 							</div>
 						</div>
 					</div>
+
+
+
+
+
+
 					<div class="container cancel-wrap">
 						<div class="row">
-							<div class="col-12">
+							<div class="col-12 allbutton_row">
 
-								<button type="button" class="" data-toggle="modal"
-									data-target="#allcancelmodal">전체 취소</button>
-								<button type="button" class="" data-toggle="modal"
-									data-target="#allrefundmodal">전체 반품</button>
+								<c:if test="${fn:length(orderList)>1}">
+
+									<c:set var="stateTest1" value="0" />
+									<c:forEach var="list" items="${orderList}" varStatus="status">
+										<c:set var="stateTest2"
+											value="${fn:split(list.ORDER_STATE,'/')}" />
+										<c:if test="${stateTest2[0] =='결제완료'}">
+											<c:set var="stateTest1" value="${stateTest1 + 1 }" />
+										</c:if>
+									</c:forEach>
+									<c:if test="${stateTest1 == fn:length(orderList)}">
+										<button type="button" class="btn" data-toggle="modal"
+											data-target="#allcancelmodal">전체 취소</button>
+									</c:if>
+									<c:set var="stateTest3" value="0" />
+									<c:forEach var="list" items="${orderList}" varStatus="status">
+										<c:set var="stateTest4"
+											value="${fn:split(list.ORDER_STATE,'/')}" />
+										<c:if test="${stateTest4[0] =='배송중'}">
+											<c:set var="stateTest3" value="${stateTest3 + 1 }" />
+										</c:if>
+									</c:forEach>
+									<c:if test="${stateTest3 == fn:length(orderList)}">
+										<button type="button" class="btn" data-toggle="modal"
+											data-target="#allrefundmodal">전체 반품</button>
+									</c:if>
+								</c:if>
 							</div>
 						</div>
 					</div>
@@ -415,7 +680,7 @@ option {
 
 
 
-							<div class="col-7">
+							<div class="col-sm-12 col-md-7">
 								<h4>배송지 정보</h4>
 								<hr class="blackUnderLine">
 								<table>
@@ -452,7 +717,7 @@ option {
 
 
 
-							<div class="col-5">
+							<div class="col-sm-12 col-md-5">
 								<h4>결제 정보</h4>
 								<hr class="blackUnderLine">
 								<table>
@@ -495,7 +760,8 @@ option {
 												items="${orderList }">
 												<c:set var="orderTotal"
 													value="${orderTotal + list.ORDER_PRICE }" />
-											</c:forEach> <fmt:formatNumber value="${orderTotal }" type="number" />원</td>
+											</c:forEach> <fmt:formatNumber value="${orderTotal -usePoint}"
+												type="number" />원</td>
 									</tr>
 								</table>
 								<hr>
@@ -623,7 +889,7 @@ option {
 						<div class="allCanceldiv col-12">
 							<input type="hidden" value="${orderList[0].ORDER_NUM }"
 								class="allordernum"><input type="button"
-								class="allCancel" value="확인" />
+								class="allCancel btn" value="확인" />
 						</div>
 					</div>
 				</div>
@@ -665,7 +931,7 @@ option {
 						<div class="allCanceldiv col-12">
 							<input type="hidden" value="${orderList[0].ORDER_NUM }"
 								class="allordernum"><input type="button"
-								class="allRefund" value="확인" />
+								class="allRefund btn" value="확인" />
 						</div>
 					</div>
 				</div>
@@ -882,8 +1148,20 @@ option {
 				var reason = $(this).parent().parent().children().find(
 						'.cancel_select').val();
 				var ordernum = $(this).parent().find('.allordernum').val();
-				location.href = "/allCancel?orderum=" + ordernum + "&reason="
+				location.href = "/allRefund?orderum=" + ordernum + "&reason="
 						+ reason;
 			});
+	$('.decideBtn')
+			.on(
+					"click",
+					function() {
+						var prdcode = $(this).parent().find('.prdcode').val();
+						var orderum = $(this).parent().find('.orderum').val();
+						var prdsize = $(this).parent().find('.prdsize').val();
+
+						location.href = '/decide?prdcode=' + prdcode
+								+ '&orderum=' + orderum + '&prdsize=' + prdsize
+								+ "&returnPage=1";
+					});
 </script>
 </html>

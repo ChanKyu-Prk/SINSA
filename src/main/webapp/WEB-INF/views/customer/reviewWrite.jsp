@@ -158,10 +158,10 @@ table {
 }
 
 #submitBtn {
-	background-color: #0b89fd;
-	border: 0;
+	background-color: white;
+	border: 1px solid #c1bfc1;
 	outline: 0;
-	padding: 10px;
+		padding: 5px;
 	width: 150px;
 }
 
@@ -169,6 +169,17 @@ table {
 	text-align: center;
 	margin-top: 10px;
 	margin-bottom: 30px;
+}
+
+@media screen and (max-width: 720px){
+#contentArea{
+margin-left: 0 ;
+margin-right: 0;
+}
+.imgtd{
+padding : 0;
+
+}
 }
 </style>
 <title>SINSA : 후기 작성</title>
@@ -179,7 +190,7 @@ table {
 	<div class="container con_top_margin">
 		<div class="row">
 			<jsp:include page="myPageSideBar.jsp"></jsp:include>
-			<div class="col-9">
+			<div class="col-sm-12 col-md-9">
 				<div class="subjecet">
 					<h3>후기 작성</h3>
 				</div>
@@ -190,8 +201,8 @@ table {
 
 						<table>
 							<colgroup>
-								<col style="width: 20%;">
-								<col style="width: 80%;">
+								<col style="width: 25%;">
+								<col style="width: 65%;">
 							</colgroup>
 							<tr>
 								<td class="imgtd">
@@ -251,7 +262,7 @@ table {
 
 
 
-							<div class="col-6">
+							<div class="col-sm-12 col-md-6">
 								<div class="row">
 									<div class="col-12 Tbold">사이즈</div>
 								</div>
@@ -274,7 +285,7 @@ table {
 
 
 
-							<div class="col-6">
+							<div class="col-sm-12 col-md-6">
 								<div class="row">
 									<div class="col-12 Tbold">색상</div>
 								</div>
@@ -297,7 +308,7 @@ table {
 
 
 
-							<div class="col-6">
+							<div class="col-sm-12 col-md-6">
 								<div class="row">
 									<div class="col-12 Tbold">착화감</div>
 								</div>
@@ -317,7 +328,7 @@ table {
 								</div>
 							</div>
 
-							<div class="col-6">
+							<div class="col-sm-12 col-md-6">
 								<div class="row">
 									<div class="col-12 Tbold">배송</div>
 								</div>
@@ -357,7 +368,8 @@ table {
 									<col width="25%">
 									<col width="25%">
 								</colgroup>
-								<tr>
+								<tr class="imgtr">
+								
 									<td class="imgtd"><div class="img_td_row">
 											<img class="reviewPic" alt="리뷰 사진" title="리뷰 사진"
 												id="reviewPic0" src="/resources/img/default.png" />
@@ -384,7 +396,7 @@ table {
 
 						</div>
 
-						<div class="row">
+						<div class="row content_row">
 
 							<textarea rows="5" cols="56" name="REV_CONTENT" id="contentArea"
 								placeholder="10자 이상 작성해 주세요"></textarea>
