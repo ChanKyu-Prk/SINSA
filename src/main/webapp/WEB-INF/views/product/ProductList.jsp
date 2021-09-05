@@ -401,12 +401,22 @@
                                    		<h5>${list.PRD_PRICE }원</h5>
                                 	</div>
                             	<script type="text/javascript">
-	                            	var selectSize;
-	                            	function sizeClick(e){
-	                            		selectSize=$(e).html();
+                            		function soldOutAlert(){
+                            			selectSize = "soldOut";
+                            		}
+	                            	var selectSize="";
+	                            	function sizeClick(size){
+	                            		selectSize=size;
 	                            	}
                             		$('#btnBuy${list.PRD_NUM }').on('click', function(){
                             			var ORDER_PRDCODE = '${list.PRD_CODE }';
+                            			if(selectSize === "soldOut"){
+                            				alert("품절입니다.");
+                            				return false;
+                            			}else if(selectSize === ""){
+                            				alert("사이즈를 선택해주세요.");
+                            				return false;
+                            			}
                             			var ORDER_PRDSIZE = selectSize;
                             			var ORDER_AMOUNT =  '1';
                             			var data = {};
@@ -442,13 +452,37 @@
 		                            	    method:"POST",
 		                            	    data:sendData,
 		                            	    success:function(data){
+	                            	    		$('.list').empty();
 		                            	    	var respData = data;
-		                            	    	var sizeStr = 215;
-		    									stockArrays = respData.stocks;
-				                            	for(var i=0; i < stockArrays.length; i++){
-			                            			sizeStr += 5; 
-				                            		$('.list').append("<li data-value='0' onclick='sizeClick(this)' class='option sizeList' style='text-align: center; font-size: 20px;'>"+String(sizeStr)+"</li>");
-				                            	}
+		                            	    	stockArrays[0] = respData.STOCK_220;
+		                            	    	stockArrays[1] = respData.STOCK_225;
+		                            	    	stockArrays[2] = respData.STOCK_230;
+		                            	    	stockArrays[3] = respData.STOCK_235;
+		                            	    	stockArrays[4] = respData.STOCK_240;
+		                            	    	stockArrays[5] = respData.STOCK_245;
+		                            	    	stockArrays[6] = respData.STOCK_250;
+		                            	    	stockArrays[7] = respData.STOCK_255;
+		                            	    	stockArrays[8] = respData.STOCK_260;
+		                            	    	stockArrays[9] = respData.STOCK_265;
+		                            	    	stockArrays[10] = respData.STOCK_270;
+		                            	    	stockArrays[11] = respData.STOCK_275;
+		                            	    	stockArrays[12] = respData.STOCK_280;
+		                            	    	stockArrays[13] = respData.STOCK_285;
+		                            	    	stockArrays[14] = respData.STOCK_290;
+		                            	    	if(respData.stocks !== "null"){
+		                            	    		var sizeStr = 215;
+		                            	    		for(var i=0; i < stockArrays.length; i++){
+				                            	    	sizeStr += 5;
+		                            	    			if(stockArrays[i] === 0){
+		                            	    				$('.list').append("<li data-value='0' class='option sizeList' onclick='soldOutAlert()' style='text-align: center; font-size: 20px;'>"+String(sizeStr)+"[품절]"+"</li>");
+		                            	    			}else{
+		                            	    				$('.list').append("<li data-value='0' onclick='sizeClick(this.id)' id="+String(sizeStr)+" class='option sizeList' style='text-align: center; font-size: 20px;'>"+String(sizeStr)+"["+stockArrays[i]+"]"+"</li>");
+		                                                }
+		                            	    		}
+		                            	    	}else{
+		                            	    		$('.list').append("<li data-value='0' class='option sizeList' style='text-align: center; font-size: 20px;'>[재입고중]</li>");
+		                            	    	}
+				                            
 		                            	    }
 		                            	});
 	                            	});
@@ -457,6 +491,13 @@
 	                    
 	                        		$('#ajaxToCart${list.PRD_CODE }').on('click', function(){
 	                        			var numCode = '${list.PRD_NUM }';
+	                        			if(selectSize === "soldOut"){
+                            				alert("품절입니다.");
+                            				return false;
+                            			}else if(selectSize === ""){
+                            				alert("사이즈를 선택해주세요.");
+                            				return false;
+                            			}
 										var sendData = {"PRDNUM":numCode, "PRDSIZE":selectSize};
 	                        			$.ajax({
 	                        				url: '/ajaxToCart',
@@ -479,13 +520,36 @@
 		                            	    method:'POST',
 		                            	    data:sendData,
 		                            	    success:function(data){
+		                            	    	$('.list').empty();
 		                            	    	var respData = data;
-												var sizeStr = 215;
-		    									stockArrays = respData.stocks;
-				                            	for(var i=0; i < stockArrays.length; i++){
-			                            			sizeStr += 5; 
-				                            		$('.list').append("<li data-value='0' onclick='sizeClick(this)' class='option sizeList' style='text-align: center; font-size: 20px;'>"+String(sizeStr)+"</li>");
-				                            	}
+		                            	    	stockArrays[0] = respData.STOCK_220;
+		                            	    	stockArrays[1] = respData.STOCK_225;
+		                            	    	stockArrays[2] = respData.STOCK_230;
+		                            	    	stockArrays[3] = respData.STOCK_235;
+		                            	    	stockArrays[4] = respData.STOCK_240;
+		                            	    	stockArrays[5] = respData.STOCK_245;
+		                            	    	stockArrays[6] = respData.STOCK_250;
+		                            	    	stockArrays[7] = respData.STOCK_255;
+		                            	    	stockArrays[8] = respData.STOCK_260;
+		                            	    	stockArrays[9] = respData.STOCK_265;
+		                            	    	stockArrays[10] = respData.STOCK_270;
+		                            	    	stockArrays[11] = respData.STOCK_275;
+		                            	    	stockArrays[12] = respData.STOCK_280;
+		                            	    	stockArrays[13] = respData.STOCK_285;
+		                            	    	stockArrays[14] = respData.STOCK_290;
+		                            	    	if(respData.stocks !== "null"){
+		                            	    		var sizeStr = 215;
+		                            	    		for(var i=0; i < stockArrays.length; i++){
+				                            	    	sizeStr += 5;
+		                            	    			if(stockArrays[i] === 0){
+		                            	    				$('.list').append("<li data-value='0' class='option sizeList' onclick='soldOutAlert()' style='text-align: center; font-size: 20px;'>"+String(sizeStr)+"[품절]"+"</li>");
+		                            	    			}else{
+		                            	    				$('.list').append("<li data-value='0' onclick='sizeClick(this.id)' id="+String(sizeStr)+" class='option sizeList' style='text-align: center; font-size: 20px;'>"+String(sizeStr)+"["+stockArrays[i]+"]"+"</li>");
+		                                                }
+		                            	    		}
+		                            	    	}else{
+		                            	    		$('.list').append("<li data-value='0' class='option sizeList' style='text-align: center; font-size: 20px;'>[재입고중]</li>");
+		                            	    	}
 		                            	    }
 		                            	});
    	                            	});

@@ -32,8 +32,6 @@ public class qnaInDetailController {
 	@RequestMapping(value = "/qnaListForm", method=RequestMethod.POST)
 	public Map<String, Object> qnaListForm(Model model, String prdCode, String pageR)
 	{
-		System.out.println("page : " + pageR); // 페이지번호 가져오기 성공
-		System.out.println("prdCode : " + prdCode); //상품 코드 가져오기 성공
 		Map<String, Object> map = new HashMap<String, Object>();
 		ProductVO productVO = service.info(prdCode);
 		int qna_PRD_NUM = productVO.getPRD_NUM();
@@ -47,8 +45,8 @@ public class qnaInDetailController {
 		map.put("qna_PRD_NUM", qna_PRD_NUM);
 		map.put("page", (page - 1) * limit);
 		List<QnaVO> qnaList = QnaService.qnaInfo(map);
-		//System.out.println(qnaList.get(0).getQNA_REGDATE());
 		listCount = service.countQNAList(map);
+		System.out.println("listCount : " + listCount);
 		maxPage = (int) ((double) listCount / limit + 0.95);
 		startPage = (((int) ((double) page / 5 + 0.8)) - 1) * 5 + 1;
 		endPage = startPage + 4;
@@ -71,7 +69,6 @@ public class qnaInDetailController {
 	@RequestMapping(value = "/formToInput/{CRUD}", method = RequestMethod.POST)
 	public Map<String, Object> formToInput(Model model, QnaVO vo, HttpSession session,
 			@PathVariable("CRUD") String CRUD){
-		System.out.println(CRUD+" : CRUD");
 		Map<String, Object> map = new HashMap<String, Object>();
 		UserVO user = (UserVO) session.getAttribute("user");
 		if(CRUD.equals("insert")) {
