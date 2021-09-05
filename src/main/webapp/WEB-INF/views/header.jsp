@@ -45,8 +45,8 @@
 	padding: 0px 0px 0px 14px;
 }
 
-.button_cart{
-	background-color:white;
+.button_cart {
+	background-color: white;
 	border: 1px solid white !important;
 }
 </style>
@@ -78,7 +78,7 @@
 					<%
 						} else {
 					%>
-					<li><a href="logout.do">로그아웃</a></li>
+					<li><a id="logout_button">로그아웃</a></li>
 					<%
 						}
 					%>
@@ -165,7 +165,7 @@
 								} else {
 							%>
 							<div class="header__top__right__auth">
-								<a href="/logout.do">로그아웃</a>
+								<a class="logout_button" type="button" onclick="logout_button();">로그아웃</a>
 
 							</div>
 
@@ -245,11 +245,13 @@
 					<div class="header__cart">
 						<ul>
 							<li><a href="/jjimList/1"><i class="fa fa-heart"></i> <span>1</span></a></li>
-							<li><button class="button_cart"><a class="cart_login_check" onclick="cart_login_check();">
-									<i class="fa fa-shopping-bag"></i> <span>3</span>
-								</a></button></li>
-								
-								
+							<li><button class="button_cart">
+									<a class="cart_login_check" onclick="cart_login_check();">
+										<i class="fa fa-shopping-bag"></i> <span>3</span>
+									</a>
+								</button></li>
+
+
 						</ul>
 					</div>
 				</div>
@@ -262,20 +264,40 @@
 	<!-- Header Section End -->
 
 	<script>
-		function cart_login_check(){
-// 			var checkLogin = confirm('로그인이 필요한 서비스 입니다. 로그인 하시겠습니까?');
-			<%if(session.getAttribute("user") != null){%>
-				location.href="/cart.do";
-				return false;
-				
-			<%}%>
-			
-			if(confirm('로그인이 필요한 서비스 입니다. 로그인 하시겠습니까?') == true){
-				location.href="/login.do";
+	
+	/* gnb_area 로그아웃 버튼 작동 */
+	 function logout_button(){
+		$.ajax({
+			type : "POST",
+			url : "/logout.do",
+			success : function(data) {
+				document.location.reload();
+			}
+		});
+	}
+	
+	
+		function cart_login_check() {
+			// 			var checkLogin = confirm('로그인이 필요한 서비스 입니다. 로그인 하시겠습니까?');
+	<%if (session.getAttribute("user") != null) {%>
+		location.href = "/cart.do";
+			return false;
+	<%}%>
+		if (confirm('로그인이 필요한 서비스 입니다. 로그인 하시겠습니까?') == true) {
+				location.href = "/login.do";
 				return false;
 			}
 		}
 	</script>
+
+
+
+	<script>
+		
+	</script>
+
+
+
 
 
 </body>
