@@ -1,3 +1,5 @@
+<%@page import="kr.co.sinsa.biz.user.UserVO"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -260,7 +262,7 @@ button:disabled {
 }
 
 #modal .modal_content {
-	width:900px; height:660px; margin:50px auto; padding:20px 10px; 
+	width:58%; height:750px; margin:50px auto; padding:20px 10px; 
 	background:#fff; border: 2px solid #666;
 }
 #empty-qna-description{
@@ -777,20 +779,21 @@ button:disabled {
 										<div class="modal_content">
 											<form id="formToInput" method="post">
 												<input type="hidden" id="PRD_NUM" name="PRD_NUM" class="PRD_NUM" value="${prdInfo.PRD_NUM}" />
+												<p><h2 style="text-align:center;">상품Q&A 작성</h2><hr /></p>
 												<p>
-													<label> 패스워드 </label><br>
-													<input type="text" id="QNA_LOCK" name="QNA_LOCK" />
+													<label> 패스워드* </label><br>
+													<input type="password" id="QNA_LOCK" name="QNA_LOCK" required="required" />
 												</p>
 												<p>
-													<label> 글 제목 </label><br>
-													<input type="text" id="QNA_TITLE" name="QNA_TITLE" />
+													<label> 제목* </label><br>
+													<input type="text" id="QNA_TITLE" name="QNA_TITLE" required="required" />
 												</p>
 												<p>
-													<label> 글 내용 </label><br>
-													<textarea rows="13" cols="90" id="QNA_CONTENT" name="QNA_CONTENT" ></textarea><br>
+													<label> 문의 내용 입력* </label><br>
+													<textarea rows="13" cols="90" id="QNA_CONTENT" name="QNA_CONTENT" required="required"></textarea><br>
 												</p>
 													<input type="button" id="qnaWrite-id" onclick="qnaWrite(this.id)" value="쓰기" />
-													<button type="button" id="modal_close_btn">닫기</button>
+													<input type="button" id="modal_close_btn" value="닫기" />
 											</form>
 										</div>
 									</div>
@@ -823,14 +826,7 @@ button:disabled {
 											
 											
 											
-											<div id="qna-open-content${state.index }">
-												<div class="modal_content">
-													<input type="password" placeholder="비밀번호 입력" 
-														id="qna-content-password${qnaList.QNA_NUM}">
-													<input type="button" id="replyOpen" 
-														class="qna-content-password-check${qnaList.QNA_NUM}" value="확인">
-												</div>
-											</div>
+											
 											
 											
 											
@@ -932,9 +928,8 @@ button:disabled {
 		 										<%}%>
 													$("#modal${state.index }").attr("style", "display:block");
 												})
-												$("#modal_close_btn${qnaList.QNA_NUM}").click(function(){
-													$("#modal${state.index }").attr("style", "display:none");
-												})
+												
+												
 												$('.qna-content-password-check${qnaList.QNA_NUM}').on('click', function(){
 													var pwdCheck = $('#qna-content-password${qnaList.QNA_NUM}').val();
 													if(pwdCheck === '${qnaList.QNA_LOCK}'){
@@ -1328,7 +1323,7 @@ button:disabled {
 										$("#reviewTab").trigger("click");
 									});
 						});
-						function modalOpenBtn(){
+						function modalOpenBtn(ch){
 							<%if(session.getAttribute("user") == null){%>
 							loginCheck();
 							<%}%>
@@ -1337,10 +1332,24 @@ button:disabled {
 						function qnaWrite(clickedId){
 							var CRUD = clickedId;
 							var PRD_CODE = '${prdInfo.PRD_CODE}';
+							var page;
+							var CONTENT = $('#QNA_CONTENT').val();
+							var TITLE = $('#QNA_TITLE').val();
+							var LOCK = $('#QNA_LOCK').val();
+							if(CONTENT === null || CONTENT === ""){
+								alert("내용이 비었습니다.");
+								return false;
+							}else if(TITLE === null || TITLE === ""){
+								alert("문의 제목을 작성해주세요.");
+								return false;
+							}else if(LOCK === null || LOCK ===""){
+								alert("패스워드가 비었습니다.");
+								return false;
+							}
 							if(CRUD === 'qnaWrite-id'){
 								var form = $('#formToInput').serialize();
 								CRUD = 'insert';
-								qnaCrud(form, CRUD, PRD_CODE);
+								qnaCrud(form, CRUD, PRD_CODE, page);
 							}
 						}
 						function qnaUpdate(updateNumbering){
@@ -1350,28 +1359,44 @@ button:disabled {
 							<%}%>
 							$("#modal"+updateNumbering).attr("style", "display:block");
 						}
-						function continueQnaUpdate(updateNumbering){
+						function continueQnaUpdate(updateNumbering, page){
+							var CONTENT = $('#QNA_CONTENT'+updateNumbering).val();
+							var TITLE = $('#QNA_TITLE'+updateNumbering).val();
+							var LOCK = $('#QNA_LOCK'+updateNumbering).val();
+							if(CONTENT === null || CONTENT === ""){
+								alert("내용이 비었습니다.");
+								return false;
+							}else if(TITLE === null || TITLE === ""){
+								alert("문의 제목을 작성해주세요.");
+								return false;
+							}else if(LOCK === null || LOCK ===""){
+								alert("패스워드가 비었습니다.");
+								return false;
+							}
 							var CRUD = 'update';
 							var CODE = updateNumbering;
 							var form = $('#formToInput'+updateNumbering).serialize();
-							qnaCrud(form, CRUD, CODE);
+							qnaCrud(form, CRUD, CODE, page);
 						}
-						function qnaDelete(deleteNumbering){
+						function qnaDelete(deleteNumbering, thisId){
 							<%if(session.getAttribute("user") == null){%>
 							loginCheck();
 							return false;
-							<%}%>
-							var CRUD = 'delete';
-							console.log('deleteNumbering : ' + deleteNumbering);
-							var CODE = deleteNumbering;
-							var isForm = 'formToDelete'+deleteNumbering;
-							console.log('isForm : ' + isForm);
-							var form = $('#'+isForm).serialize();
-							qnaCrud(form, CRUD, CODE);
+							<%}else{
+								UserVO id = (UserVO)session.getAttribute("user");
+								String CutId = id.getCUS_ID();
+								pageContext.setAttribute("CutId", new String[]{CutId});
+							}%>
+							var checkID= "${CutId[0]}";
+							if(thisId != checkID){
+								alert("게시물을 작성한 계정만 게시물을 삭제할 수 있습니다.");
+								return false;
+							}
+							$("#qna-open-content-delete"+deleteNumbering).attr("style", "display:block");
 						}
 						
 						
-						function qnaCrud(form, CRUD, CODE){
+						function qnaCrud(form, CRUD, CODE, page){
 							$.ajax({
 								url: '/formToInput/'+CRUD,
 								type: "POST",
@@ -1382,7 +1407,7 @@ button:disabled {
 									}else if(CRUD === 'delete'){
 										$('#qna-table'+CODE).remove();
 									}else if(CRUD === 'update'){
-										QnaList(1);
+										QnaList(page);
 									}
 								},
 								error: function (e) {
@@ -1397,8 +1422,6 @@ button:disabled {
 								}
 							})
 						}
-						
-
 						function loginCheck(){
 							var result = confirm("로그인이 필요한 서비스입니다. 로그인하시겠습니까?");
 								if(result){
@@ -1409,6 +1432,55 @@ button:disabled {
 									return false;
 								}
 						}
+						function openContent(qnaNumbering,thisId){
+							<%if(session.getAttribute("user") == null){%>
+							loginCheck();
+							return false;
+							<%}else{
+								UserVO id = (UserVO)session.getAttribute("user");
+								String CutId = id.getCUS_ID();
+								pageContext.setAttribute("CutId", new String[]{CutId});
+							}%>
+							var checkID= "${CutId[0]}";
+							if(thisId != checkID){
+								alert("게시물 작성자만 게시물을 볼 수 있습니다.");
+								return false;
+							}
+							$("#qna-open-content"+qnaNumbering).attr("style", "display:block");
+						}
+						function replyOpen(qnaNumbering) {
+							var correctPwd = $('#correct-pwd'+qnaNumbering).val();
+							var comparePwd = $("#qna-content-password"+qnaNumbering).val();
+							if(correctPwd != comparePwd || comparePwd === null){
+								alert("패스워드를 다시 확인해주세요.");
+							}else{
+								$('#qna-open-content'+qnaNumbering).css('display','none');
+								$('.qna-content'+qnaNumbering).css('display','block');
+							}
+						}
+						function replyOpenDelete(qnaNumbering) {
+							var correctPwd = $('#correct-pwd-delete'+qnaNumbering).val();
+							var comparePwd = $("#qna-content-password-delete"+qnaNumbering).val();
+							if(correctPwd != comparePwd || comparePwd === null){
+								alert("패스워드를 다시 확인해주세요.");
+							}else{
+								$('#qna-open-content-delete'+qnaNumbering).css('display','none');
+								var CRUD = 'delete';
+								var CODE = qnaNumbering;
+								var isForm = 'formToDelete'+qnaNumbering;
+								var form = $('#'+isForm).serialize();
+								var page;
+								qnaCrud(form, CRUD, CODE, page);
+							}
+						}
+						function replyCancle(qnaNumbering){
+							$('#qna-open-content'+qnaNumbering).css('display','none');
+							$('#qna-open-content-delete'+qnaNumbering).css('display','none');
+						}
+						function modalCloseBtn(qnaNumbering){
+							$("#modal"+qnaNumbering).attr("style", "display:none");
+						}
+						
 					
 						function QnaList(pageR){
 							var prd_code = '${prdInfo.PRD_CODE}';
@@ -1422,58 +1494,62 @@ button:disabled {
 								type : "POST",
 								data : sendData,
 								success:function(data){
-									arrays = data.qnaList;
-									//console.log(arrays[0].qna_REGDATE);
-									//const trade_date = new Date(arrays[0].qna_REGDATE).toLocaleString();
-									console.log(arrays[0]);							
+									arrays = data.qnaList;							
+									var pI = data.pageInfo;
 									$('#container-qna').empty();
 									if(arrays[0] === undefined){
 										$('#container-qna').append('<div id="empty-qna-description">작성된 문의가 없습니다.</div>');									
 									}else{
-										$('#container-qna').append('<div id="empty-qna-description">상품 Q&A</div>');
+										$('#container-qna').append('<div id="empty-qna-description"><h4>< 상품 Q&A ></h4></div>');
 									}
-									$('#container-qna').append('<div class="btn-qna-block"><input type="button" onclick="modalOpenBtn()" id="modal_open_btn" class="btn-qna" value="문의쓰기" /></div><br>');
+									$('#container-qna').append('<div class="btn-qna-block"><input type="button" onclick="modalOpenBtn(1)" id="modal_open_btn" class="btn-qna" value="문의쓰기" /></div><br>');
 									for(var i=0; i<arrays.length;i++){
+										 var id;
 										$('#container-qna').append(
 										 '<div id="modal'+i+'" class="modal">'
-										+'<div class="modal_content">'
-										+'<form id="formToInput'+i+'" method="post">'
-										+'<input type="hidden" id="QNA_NUM" name="QNA_NUM" value="'+arrays[i].qna_NUM+'" />'
-										+'<input type="hidden" id="PRD_NUM" name="PRD_NUM" value="'+${prdInfo.PRD_NUM}+'" />'
-										+'<p>'
-										+'<label> 패스워드 </label><br>'
-										+'<input type="password" id="QNA_LOCK" name="QNA_LOCK" value=""/>'
-										+'</p>'
-										+'<p>'
-										+'<label> 글 제목 </label><br>'
-										+'<input type="text" id="QNA_TITLE" name="QNA_TITLE" value="'+arrays[i].qna_TITLE+'" />'
-										+'</p>'
-										+'<p>'
-										+'<label> 글 내용 </label><br>'
-										+'<textarea rows="13" cols="90" id="QNA_CONTENT" name="QNA_CONTENT">'+arrays[i].qna_CONTENT+'</textarea><br>'
-										+'</p>'
-										+'<button type="button" id="id-of-insert-qna" onclick="continueQnaUpdate('+i+')">확인</button>'
-										+'<button type="button" id="modal_close_btn'+i+'">닫기</button>'
-										+'</form>'
+											+'<div class="modal_content">'
+												+'<form id="formToInput'+i+'" method="post">'
+													+'<p><h2 style="text-align:center;">상품Q&A 수정</h2><hr /></p>'
+													+'<input type="hidden" id="QNA_NUM" name="QNA_NUM" value="'+arrays[i].qna_NUM+'" />'
+													+'<input type="hidden" id="PRD_NUM" name="PRD_NUM" value="'+${prdInfo.PRD_NUM}+'" />'
+													+'<p><label> 패스워드* </label><br>'
+													+'<input type="password" id="QNA_LOCK'+i+'" name="QNA_LOCK" value=""/></p>'
+													+'<p><label> 글 제목* </label><br>'
+													+'<input type="text" id="QNA_TITLE'+i+'" name="QNA_TITLE" value="'+arrays[i].qna_TITLE+'" /></p>'
+													+'<p><label> 글 내용* </label><br>'
+													+'<textarea rows="13" cols="90" id="QNA_CONTENT'+i+'" name="QNA_CONTENT">'+arrays[i].qna_CONTENT+'</textarea><br></p>'
+													+'<input type="button" id="id-of-insert-qna" onclick="continueQnaUpdate('+i+', '+pI.page+')" value="확인" />'
+													+'<input type="button" onclick="modalCloseBtn('+i+')" id="modal_close_btn" value="닫기" / >'
+												+'</form>'
+											+'</div>'
 										+'</div>'
-										+'</div>'
+										+'<div id="qna-open-content'+i+'"><div class="modal_content">'
+										+'<div id="replypw">문의글 비밀번호를 입력해주세요.</div>'
+										+'<hr/>'
+										+'<input type="hidden" id="correct-pwd'+i+'" value="'+arrays[i].qna_LOCK+'">'
+										+'<input type="password" placeholder="비밀번호 입력" size="30" id="qna-content-password'+i+'"><br>'
+										+'<div id="reply">'
+										+'<input type="button" id="replyOpen" onclick="replyOpen('+i+')" class="qna-content-password-check'+i+'" value="확인">'
+										+'<input type="button" id="replyCancle" onclick="replyCancle('+i+')" class="qna-content-password-check'+i+'" value="취소">'
+										+'</div></div></div>'
+										+'<div id="qna-open-content-delete'+i+'"><div class="modal_content">'
+										+'<div id="replypw">문의글 비밀번호를 입력해주세요.</div>'
+										+'<hr/>'
+										+'<input type="hidden" id="correct-pwd-delete'+i+'" value="'+arrays[i].qna_LOCK+'">'
+										+'<input type="password" placeholder="비밀번호 입력" size="30" id="qna-content-password-delete'+i+'"><br>'
+										+'<div id="reply">'
+										+'<input type="button" id="replyOpen" onclick="replyOpenDelete('+i+')" class="qna-content-password-check'+i+'" value="확인">'
+										+'<input type="button" id="replyCancle" onclick="replyCancle('+i+')" class="qna-content-password-check'+i+'" value="취소">'
+										+'</div></div></div>'
 										+'<table id="qna-table'+i+'" class="qna-table-class" style="margin-bottom: 10px; border-bottom: 1px solid grey;">'
-										+'<tr>'
-										+'<td id="img-qna"><img alt="lock" style="width: 26px;" src="${path}/resources/img/product/details/lock.png">'
-										+'</td>'
-										+'<td style="width: 99px;">'+new Date(arrays[i].qna_REGDATE).toLocaleDateString()+''
-										+'</td>'
-										+'<td style="width: 605px;">'
-										+''+arrays[i].qna_TITLE+''
-										+'</td>'
-										+'<td>'
-										+''+arrays[i].qna_CUSID+''
-										+'</td>'
-										+'<td>답변대기</td>'
-										+'<td style="width: 49px;">'
+										+'<tr><td id="img-qna"><img alt="lock" style="width: 26px;" src="${path}/resources/img/product/details/lock.png"></td>'
+										+'<td style="width: 99px;">'+new Date(arrays[i].qna_REGDATE).toLocaleDateString()+'</td>'
+										+'<td style="width: 605px;" id="'+arrays[i].qna_CUSID+'" onclick="openContent('+i+',this.id)">'+arrays[i].qna_TITLE+'</td>'
+										+'<td style="width: 130px;">'+arrays[i].qna_CUSID+'</td>'
+										+'<td style="width: 91px;" id="aCheck'+i+'">답변대기</td><td style="width: 49px;">'
 										+'<form id="formToDelete'+i+'" method="post">'
 										+'<input type="hidden" id="QNA_NUM" name="QNA_NUM" value="'+arrays[i].qna_NUM+'" />'
-										+'<input type="button" onclick="qnaDelete('+i+')" id="delete-qna" class="delete-qna" value="삭제">'
+										+'<input type="button" onclick="qnaDelete('+i+',this.id)" id="'+arrays[i].qna_CUSID+'" class="delete-qna" value="삭제">'
 										+'</form>'
 										+'</td>'
 										+'<td style="width: 58px;">'
@@ -1483,29 +1559,33 @@ button:disabled {
 										+'<tr>'
 										+'<td></td>'
 										+'<td></td>'
-										+'<td class="qna-content'+i+'">'
-										+''+arrays[i].qna_CONTENT+''
-										+'</td>'
-										+'</tr>'
-										+'<tr>'
-										+'<td></td>'
-										+'<td></td>'
 										+'<td class="qna-content'+i+'">'+arrays[i].qna_CONTENT+'</td>'
-										+'</tr><tr></tr>'
+										+'</tr><tr><td></td><td></td><td class="qna-content'+i+'"><textarea rows="10" cols="80" placeholder="A.관리자가 답변을 준비중입니다." value="'+arrays[i].qna_ANSWER+' readonly="readonly" disabled>'+arrays[i].qna_ANSWER+'</textarea></td></tr>'
 										+'</table>'
-										+'<style>#modal'+i+' {display:none; position:absolute; width:100%; height:120%; z-index:999999; top: 50px;}'
-										+'#modal'+i+' .modal_content {width:900px; height:660px; margin:50px auto; padding:20px 10px;'
+										+'<style>'
+										+'#replypw{margin:0 10%; text-align: center}'
+										+'#reply{margin:0 20%;}'
+										+'#modal'+i+' {display:none; position:absolute; width:100%; height:175%; z-index:999999; top: 50px;}'
+										+'#replyOpen {display:inline-block; margin-right: 8px; width:100px;}'
+										+'#replyCancle {display:inline-block; width:100px;}'
+										+'#modal'+i+' .modal_content {width:58%; height:750px; margin:50px auto; padding:20px 10px;'
 										+'background:#fff; border: 2px solid #666;}'
-										+'#qna-open-content'+i+' {display:none; position:absolute; width:100%; height:60%; z-index:999999; top: 50px;}'
-										+'#qna-open-content'+i+' .modal_content {'
-										+'width:900px; height:660px; margin:50px auto; padding:20px 10px; '
+										+'#qna-open-content'+i+' {display:none; position:absolute; width:80%; height:22%; z-index:999999;}'
+										+'#qna-open-content-delete'+i+' {display:none; position:absolute; width:80%; height:22%; z-index:999999;}'
+										+'#qna-open-content'+i+' .modal_content {width:40%; height:190px; margin:50px auto; padding:20px 10px; '
 										+'background:#fff; border: 2px solid #666;}'
-										+'.qna-content'+i+'{display: none;}</style>'
+										+'#qna-open-content-delete'+i+' .modal_content {width:40%; height:190px; margin:50px auto; padding:20px 10px; '
+										+'background:#fff; border: 2px solid #666;}'
+										+'.qna-content'+i+'{display: none;} #qna-content-password'+i+'{display:block; margin: auto;}'
+										+'#qna-content-password-delete'+i+'{display:block; margin: auto;}</style>'
 										)
+										console.log("ddd :"+arrays[i].qna_ANSWER);
+										if(arrays[i].qna_ANSWER != ""){
+											 $('#aCheck'+i).text('답변완료');
+									 	}
 									}
 								
 									console.log(arrays[0]);
-									var pI = data.pageInfo;
 									console.log("pI.page : "+pI.page);
 									console.log("pI.startPage : "+pI.startPage);
 									console.log("pI.endPage : "+pI.endPage);

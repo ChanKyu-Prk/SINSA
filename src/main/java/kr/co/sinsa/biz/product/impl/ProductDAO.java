@@ -18,8 +18,8 @@ public class ProductDAO {
 	
 	
 	
-	public List<StockVO> getStock(Map<String, Object> map){
-		return SST.selectList("ProductList.getStock",map);
+	public StockVO getStock(Map<String, Object> map){
+		return SST.selectOne("ProductList.getStock",map);
 	}
 	
 	

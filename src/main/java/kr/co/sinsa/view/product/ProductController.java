@@ -184,47 +184,34 @@ public class ProductController {
 	public Map<String,Object> listToCart(Model model, String code, StockVO vo) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("code", code);
-		List<StockVO> stock = service.getStock(map);
-		String stockStr = stock.get(0).toString();
-		String cutStr = "StockVO [STOCK_PRDCODE=" + code + ", ";
-		stockStr = stockStr.replace(cutStr, "");
-		String[] STOCK_size = stockStr.split(", "); 
-		STOCK_size[14] = STOCK_size[14].replace("]", "");
-		String STOCK_220 = STOCK_size[0].replace("STOCK_220=", "");
-		String STOCK_225 = STOCK_size[1].replace("STOCK_225=", "");
-		String STOCK_230 = STOCK_size[2].replace("STOCK_230=", "");
-		String STOCK_235 = STOCK_size[3].replace("STOCK_235=", "");
-		String STOCK_240 = STOCK_size[4].replace("STOCK_240=", "");
-		String STOCK_245 = STOCK_size[5].replace("STOCK_245=", "");
-		String STOCK_250 = STOCK_size[6].replace("STOCK_250=", "");
-		String STOCK_255 = STOCK_size[7].replace("STOCK_255=", "");
-		String STOCK_260 = STOCK_size[8].replace("STOCK_260=", "");
-		String STOCK_265 = STOCK_size[9].replace("STOCK_265=", "");
-		String STOCK_270 = STOCK_size[10].replace("STOCK_270=", "");
-		String STOCK_275 = STOCK_size[11].replace("STOCK_275=", "");
-		String STOCK_280 = STOCK_size[12].replace("STOCK_280=", "");
-		String STOCK_285 = STOCK_size[13].replace("STOCK_285=", "");
-		String STOCK_290 = STOCK_size[14].replace("STOCK_290=", "");
-		List<String> stocks = new ArrayList<String>();
-		stocks.add(STOCK_220);
-		stocks.add(STOCK_225);
-		stocks.add(STOCK_230);
-		stocks.add(STOCK_235);
-		stocks.add(STOCK_240);
-		stocks.add(STOCK_245);
-		stocks.add(STOCK_250);
-		stocks.add(STOCK_255);
-		stocks.add(STOCK_260);
-		stocks.add(STOCK_265);
-		stocks.add(STOCK_270);
-		stocks.add(STOCK_275);
-		stocks.add(STOCK_280);
-		stocks.add(STOCK_285);
-		stocks.add(STOCK_290);
-	
+
+
+		vo = service.getStock(map);
+		List<Integer> stocks = new ArrayList<Integer>();
+		if(vo == null) {
+			map.put("stocks", "null");
+			map.put("code", code);
+		    return map;			
+		}else {
+			map.put("STOCK_220", vo.getSTOCK_220()); //15
+			map.put("STOCK_225", vo.getSTOCK_225()); //4
+			map.put("STOCK_230", vo.getSTOCK_230()); //4
+			map.put("STOCK_235", vo.getSTOCK_235()); //4
+			map.put("STOCK_240", vo.getSTOCK_240()); //4
+			map.put("STOCK_245", vo.getSTOCK_245()); //4
+			map.put("STOCK_250", vo.getSTOCK_250()); //4
+			map.put("STOCK_255", vo.getSTOCK_255()); //4
+			map.put("STOCK_260", vo.getSTOCK_260()); //4
+			map.put("STOCK_265", vo.getSTOCK_265()); //4
+			map.put("STOCK_270", vo.getSTOCK_270()); //4
+			map.put("STOCK_275", vo.getSTOCK_275()); //4
+			map.put("STOCK_280", vo.getSTOCK_280()); //3
+			map.put("STOCK_285", vo.getSTOCK_285()); //2
+			map.put("STOCK_290", vo.getSTOCK_290()); //1
+		}
 		map.put("stocks", stocks);
 		map.put("code", code);
-		
+
 	    return map;
 	}
 	

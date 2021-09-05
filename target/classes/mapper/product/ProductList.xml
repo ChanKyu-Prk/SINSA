@@ -42,7 +42,7 @@ PRD_COLOR in (${color})
 </select>
 <select id="countQNAList" parameterType="Map" resultType="int">
 <![CDATA[
-	select count(*) from qna 
+	select count(*) from qna where PRD_NUM=#{qna_PRD_NUM}
  ]]> 
 </select>
 

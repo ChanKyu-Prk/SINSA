@@ -24,7 +24,7 @@ public class ProductServiceImpl implements ProductService {
 	}
 	
 	@Override
-	public List<StockVO> getStock(Map<String, Object> map) {	
+	public StockVO getStock(Map<String, Object> map) {	
 		return DAO.getStock(map);
 	}
 	
