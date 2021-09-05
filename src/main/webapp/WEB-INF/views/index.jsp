@@ -87,6 +87,11 @@
 	font-size: 15px;
 }
 
+/* .index_banner_below{ */
+/* 	height:300px !important; */
+/* 	width: 600px !important; */
+/* } */
+
 /* .review_title_right { */
 /* 	padding: 0px 0px 0px 30px; */
 /* } */
@@ -96,6 +101,7 @@
 /* } */
 .review_image {
 	height: 300px !important;
+	
 }
 </style>
 
@@ -349,12 +355,12 @@
 			<div class="row">
 				<div class="col-lg-6 col-md-6 col-sm-6">
 					<div class="banner__pic">
-						<img src="${path}/resources/img/banner/베너.jpg" alt="">
+						<img src="${path}/resources/img/banner/인덱스아래7.png" alt="">
 					</div>
 				</div>
-				<div class="col-lg-6 col-md-6 col-sm-6">
+				<div class="col-lg-6 col-md-6 col-sm-6 ">
 					<div class="banner__pic">
-						<img src="${path}/resources/img/banner/베너.jpg" alt="">
+						<img src="${path}/resources/img/banner/인덱스아래6.png" alt="">
 					</div>
 				</div>
 			</div>
