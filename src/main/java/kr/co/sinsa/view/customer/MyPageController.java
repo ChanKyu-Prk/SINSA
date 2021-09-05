@@ -599,5 +599,19 @@ public class MyPageController {
 		return "customer/viewMyReviews";
 	}
 	
+	@RequestMapping(value = "/decide", method = RequestMethod.GET)
+	public String decide(String prdcode, String orderum, String prdsize ,String returnPage) {
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("prdcode", prdcode);
+		map.put("orderum", orderum);
+		map.put("prdsize", prdsize);
+		myPageSerive.decide(map);
+		if(returnPage == "1") {
+		return "redirect:/myOrderStatus/"+orderum;
+		}else {
+			return "redirect:/myOrderStatus/"+orderum;
+		}
+	}
+	
 	
 }

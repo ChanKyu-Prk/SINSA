@@ -48,16 +48,16 @@ public class SNSLoginControlloer {
 		JSONObject response_obj = (JSONObject) jsonObj.get("response");
 		String naverID = (String) response_obj.get("id");
 		String email = (String) response_obj.get("email");
-		System.out.println(response_obj);
+
 		int cus_num = snsloginsvc.naverIdCheck(naverID);
 		boolean emailCheck = snsloginsvc.emailCheck(email);
 		if (cus_num != -1) {
 			UserVO user = snsloginsvc.getUser(cus_num);
 			session.setAttribute("user", user); // 세션 생성
 			model.addAttribute("result", apiResult);
-			return "index";
+			return "redirect:/";
 		} else if(emailCheck) {
-			return "index";
+			return "redirect:/";
 		}
 		else{
 			CustomerVO vo = new CustomerVO();
@@ -82,14 +82,14 @@ public class SNSLoginControlloer {
 			UserVO user = snsloginsvc.snsJoin(vo, naverID);
 			session.setAttribute("user", user); // 세션 생성
 			model.addAttribute("result", apiResult);
-			return "index";
+			return "redirect:/";
 		}
 
 	}
 
 	@RequestMapping(value = "/logout", method = { RequestMethod.GET, RequestMethod.POST })
 	public String logout(HttpSession session) throws IOException {
-		System.out.println("여기는 logout");
+
 		session.invalidate();
 		return "redirect:view/loginTest.jsp";
 	}

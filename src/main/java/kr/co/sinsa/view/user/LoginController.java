@@ -59,7 +59,6 @@ public class LoginController {
 	@RequestMapping(value="/login.do", method=RequestMethod.GET)
 	public String loginView(CustomerVO customerVO, Model model, HttpSession session, HttpServletRequest request) {
 		String naverAuthUrl = naverLoginBO.getAuthorizationUrl(session); 
-		System.out.println("네이버:" + naverAuthUrl); 
 		model.addAttribute("url", naverAuthUrl);
 
 		String referer = request.getHeader("Referer");

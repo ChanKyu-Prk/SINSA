@@ -123,6 +123,28 @@ margin-top : 20px;
 margin-bottom : 20px;
 border: 1px solid #c1bfc1;
 }
+
+@media screen and (max-width: 720px) {
+
+.pw_input_re {
+font-size: 12px
+}
+.pw_input_re_0 {
+font-size: 12px
+}
+.pwck_input_re {
+font-size: 12px
+}
+.pwck_input_re_0 {
+font-size: 12px
+}
+.pw_input{
+font-size: 12px
+}
+.pwck_input{
+font-size: 12px
+}
+}
 </style>
 <title>SINSA : 비밀번호 변경</title>
 </head>
@@ -132,7 +154,7 @@ border: 1px solid #c1bfc1;
 	<div class="container con_top_margin">
 		<div class="row">
 			<jsp:include page="myPageSideBar.jsp"></jsp:include>
-			<div class="col-9">
+			<div class="col-sm-12 col-md-9">
 				<div class="subjecet">
 					<span>비밀번호 변경</span>
 				</div>

@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -418,17 +418,21 @@ input::placeholder {
 	background-color: white;
 }
 
-
-.change_button{
-border : solid 1px ;
-height : 40px;
-width : 150px;
-float : right;
-margin-top : 20px;
-margin-bottom : 20px;
-border: 1px solid #c1bfc1;
+.change_button {
+	border: solid 1px;
+	height: 40px;
+	width: 150px;
+	float: right;
+	margin-top: 20px;
+	margin-bottom: 20px;
+	border: 1px solid #c1bfc1;
 }
 
+@media screen and (max-width: 720px) {
+	.fontsize {
+		font-size: 12px;
+	}
+}
 </style>
 <title>SINSA : 개인정보 수정</title>
 </head>
@@ -438,7 +442,7 @@ border: 1px solid #c1bfc1;
 	<div class="container con_top_margin">
 		<div class="row">
 			<jsp:include page="myPageSideBar.jsp"></jsp:include>
-			<div class="col-9">
+			<div class="col-sm-12 col-md-9">
 				<div class="subjecet">
 					<span>개인정보 수정</span>
 				</div>
@@ -510,8 +514,8 @@ border: 1px solid #c1bfc1;
 							<div class="mail_wrap">
 
 								<div class="mail_name">이메일</div>
-								<input type="hidden" value="${email[0] }" id="email1">
-								<input type="hidden" value="${email[1] }" id="email2">
+								<input type="hidden" value="${email[0] }" id="email1"> <input
+									type="hidden" value="${email[1] }" id="email2">
 								<div class="container">
 
 									<div class="row">
@@ -540,8 +544,10 @@ border: 1px solid #c1bfc1;
 											id="mail_input_select">
 											<select class="mail_input_select col-12">
 												<option value="" selected>직접 입력</option>
-												<option value="google.com">google.com</option>
+												<option value="gmail.com">gmail.com</option>
 												<option value="naver.com">naver.com</option>
+												<option value="hanmail.net">hanmail.net</option>
+												<option value="yahoo.co.kr">yahoo.co.kr</option>
 											</select>
 										</div>
 									</div>
@@ -571,7 +577,8 @@ border: 1px solid #c1bfc1;
 												</div>
 											</div>
 											<div class="mail_check_button col-3">
-												<span class="vetical_middle" id="send">인증번호 전송</span>
+												<span class="vetical_middle fontsize" id="send">인증번호
+													전송</span>
 											</div>
 
 
@@ -579,11 +586,11 @@ border: 1px solid #c1bfc1;
 										</div>
 										<div class="row">
 											<div class="col-9 padding0">
-											<div class="row email_row_3">
-											</div></div>
-												<div class="email_cancel col-3">
-													<span class="vetical_middle">이메일 변경취소</span>
-												</div>
+												<div class="row email_row_3"></div>
+											</div>
+											<div class="email_cancel col-3">
+												<span class="vetical_middle fontsize">이메일 변경취소</span>
+											</div>
 										</div>
 									</div>
 
@@ -607,7 +614,8 @@ border: 1px solid #c1bfc1;
 										<div class="row padding0">
 											<div class="address_input_1_box col-9 padding0">
 												<input class="address_input_1" id="sample4_postcode"
-													placeholder="우편번호" name="CUS_ADDR_1" value="${fn:substring(addr[0],1,6) }">
+													placeholder="우편번호" name="CUS_ADDR_1"
+													value="${fn:substring(addr[0],1,6) }">
 											</div>
 											<div class="address_button col-3 padding0">
 												<span class="vetical_middle"
@@ -1003,8 +1011,7 @@ border: 1px solid #c1bfc1;
 		$('.mail_input_re').css("display", "none");
 		$('.mail_input_re_0').css("display", "none");
 	});
-	
-	
+
 	$('.address_input_1')
 			.on(
 					"propertychange change keyup paste input",

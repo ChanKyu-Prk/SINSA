@@ -52,22 +52,14 @@ public class MyPageServiceImpl implements MyPageService {
 		int delivery = dao.countState(map);
 		map.replace("STATE", "구매확정");
 		int deliveryEnd = dao.countState(map);
-		map.replace("STATE", "취소요청");
-		int cancel = dao.countState(map);
-		map.replace("STATE", "일괄취소요청");
-		int allCancel = dao.countState(map);
-		map.replace("STATE", "취소완료");
+		map.replace("STATE", "취소");
 		int cancelEnd = dao.countState(map);
-		map.replace("STATE", "반품요청");
+		map.replace("STATE", "반품");
 		int refund = dao.countState(map);
-		map.replace("STATE", "일괄반품요청");
-		int allRefund = dao.countState(map);
-		map.replace("STATE", "반품완료");
-		int refundEnd = dao.countState(map);
 		countState.put("payEnd", payEnd);
 		countState.put("delivery", delivery);
 		countState.put("deliveryEnd", deliveryEnd);
-		countState.put("cancel", allRefund+  allCancel+cancel + cancelEnd + refund + refundEnd);
+		countState.put("cancel",  cancelEnd + refund );
 		return countState;
 	}
 
@@ -80,22 +72,14 @@ public class MyPageServiceImpl implements MyPageService {
 		int delivery = dao.countState(map);
 		map.replace("STATE", "구매확정");
 		int deliveryEnd = dao.countState(map);
-		map.replace("STATE", "취소요청");
-		int cancel = dao.countState(map);
-		map.replace("STATE", "일괄취소요청");
-		int allCancel = dao.countState(map);
-		map.replace("STATE", "취소완료");
+		map.replace("STATE", "취소");
 		int cancelEnd = dao.countState(map);
-		map.replace("STATE", "반품요청");
+		map.replace("STATE", "반품");
 		int refund = dao.countState(map);
-		map.replace("STATE", "일괄반품요청");
-		int allRefund = dao.countState(map);
-		map.replace("STATE", "반품완료");
-		int refundEnd = dao.countState(map);
 		countState.put("payEnd", payEnd);
 		countState.put("delivery", delivery);
 		countState.put("deliveryEnd", deliveryEnd);
-		countState.put("cancel", allRefund+  allCancel+cancel + cancelEnd + refund + refundEnd);
+		countState.put("cancel",cancelEnd + refund );
 		return countState;
 	}
 
@@ -327,6 +311,11 @@ public class MyPageServiceImpl implements MyPageService {
 	@Override
 	public int chckDeleteCart(String CUS_ID) {
 		return dao.chckDeleteCart(CUS_ID);
+	}
+
+	@Override
+	public void decide(Map<String, String> map) {
+		dao.decide(map);
 	}
 
 }

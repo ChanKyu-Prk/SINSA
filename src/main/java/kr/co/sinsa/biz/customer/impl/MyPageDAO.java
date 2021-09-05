@@ -189,4 +189,8 @@ public class MyPageDAO {
 		return SST.delete("myInfo.chckDeleteCart",CUS_ID);
 	}
 	
+	public void decide(Map<String,String> map) {
+		SST.update("myInfo.decide",map);
+	}
+	
 }

@@ -78,6 +78,15 @@
 	margin-bottom: 25px;
 	justify-content: center;
 }
+a.page-link{
+color: black !important;
+}
+.page-item.active
+.page-link{
+background-color: black !important;
+border-color: black !important;
+color: white !important;
+}
 </style>
 <title>SINSA : 최근 본 상품</title>
 </head>
@@ -87,7 +96,7 @@
 	<div class="container con_top_margin">
 		<div class="row">
 			<jsp:include page="myPageSideBar.jsp"></jsp:include>
-			<div class="col-9">
+			<div class="col-sm-12 col-md-9">
 				<div class="subjecet">
 					<h3>최근 본 상품</h3>
 				</div>
