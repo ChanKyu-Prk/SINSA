@@ -928,7 +928,7 @@ var code = ""; //이메일전송 인증번호 저장위한 코드
 
 							if (ajt = 1) {
 								if (confirm("회원가입을 하시겠습니까?") == true) { //확인
-
+									alert("회원가입이 정상적으로 완료 되었습니다.");
 									document.removefrm.submit();
 
 								} else { //취소

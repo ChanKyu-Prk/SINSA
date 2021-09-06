@@ -254,6 +254,7 @@ $('.changeSub')
 			event.stopPropagation()
 			}else if (ajt = 1) {
 				if (confirm("비밀번호를 변경 하시겠습니까?") == true) { //확인
+					alert("비밀번호가 정상적으로 수정되었습니다.");
 					document.removefrm.submit();
 				} else { //취소
 					event.preventDefault();

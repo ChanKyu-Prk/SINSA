@@ -1255,6 +1255,7 @@ input::placeholder {
 						} else {
 							if (ajt = 1) {
 								if (confirm("회원 정보를 변경 하시겠습니까?") == true) { //확인
+									alert("회원정보가 정상적으로 수정되었습니다.");
 									document.removefrm.submit();
 								} else { //취소
 									event.preventDefault();

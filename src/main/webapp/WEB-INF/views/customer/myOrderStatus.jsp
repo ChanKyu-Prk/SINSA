@@ -210,10 +210,40 @@ option {
 	padding: 5px;
 	margin-bottom: 2px;
 }
+
+.decideModelSINSA {
+	font-size: 20px;
+	font-weight: bold;
+}
+
+.decideModelSINSA2 {
+	font-weight: bold;
+}
+
+.decideModalRow {
+	padding: 20px;
+}
+
+.decideCancle {
+	background-color: white;
+	border: 1px solid #c1bfc1;
+	margin-bottom: 2px;
+	width: 45%;
+	padding-bottom: 5px;
+	padding-top: 5px;
+}
+
+.decideBtn {
+	background-color: white;
+	border: 1px solid #c1bfc1;
+	margin-bottom: 2px;
+	width: 45%;
+	padding-bottom: 5px;
+	padding-top: 5px;
+}
 </style>
 <title>SINSA : 주문 내역 조회</title>
 </head>
-
 <body>
 	<div class="continer nopadding">
 		<jsp:include page="../recentlyViewBar.jsp"></jsp:include>
@@ -372,7 +402,44 @@ option {
 															</div>
 														</div>
 													</div>
-													<button type="button" class="decideBtn btn">구매확정</button>
+													<button class="btn" data-toggle="modal"
+														data-target="#decideModal">구매확정</button>
+
+													<div class="modal decideModal" id="decideModal"
+														tabindex="-1" role="dialog"
+														aria-labelledby="exampleModalCenterTitle"
+														aria-hidden="true">
+														<div class="modal-dialog modal-dialog-centered"
+															role="document">
+															<div class="modal-content">
+
+																<div class="container-fluid">
+																	<div class="row decideModalRow">
+																		<div class="col-12">
+																			<span class="decideModelSINSA">SINSA</span><br>
+																			<br> <span class="decideModelSINSA2">"구매
+																				확정"을 하시면 교환/반품을 하실수 없습니다.<br> 구매확정을 하시겠습니까?
+																			</span>
+																		</div>
+																	</div>
+																	<div class="row decideModalRow">
+
+																		<div class="col-12">
+																			<input type="hidden" value="${list.ORDER_PRDCODE }"
+																				class="prdcode"> <input type="hidden"
+																				value="${list.ORDER_NUM }" class="orderum">
+																			<input type="hidden" value="${list.ORDER_PRDSIZE }"
+																				class="prdsize">
+																			<button type="button" class="decideCancle"
+																				data-dismiss="modal">취소</button>
+																			<button type="button" class="decideBtn">확인</button>
+																		</div>
+																	</div>
+																</div>
+
+															</div>
+														</div>
+													</div>
 													<input type="hidden" value="${list.ORDER_DELIVCOMP }"
 														class="delivcomp">
 													<input type="hidden" value="${list.ORDER_DELIVNUM }"
@@ -573,7 +640,44 @@ option {
 														class="orderum">
 													<input type="hidden" value="${list.ORDER_PRDSIZE }"
 														class="prdsize">
-													<button type="button" class="decideBtn btn">구매확정</button>
+													<button class="btn" data-toggle="modal"
+														data-target="#decideModal2">구매확정</button>
+
+													<div class="modal decideModal" id="decideModal2"
+														tabindex="-1" role="dialog"
+														aria-labelledby="exampleModalCenterTitle"
+														aria-hidden="true">
+														<div class="modal-dialog modal-dialog-centered"
+															role="document">
+															<div class="modal-content">
+
+																<div class="container-fluid">
+																	<div class="row decideModalRow">
+																		<div class="col-12">
+																			<span class="decideModelSINSA">SINSA</span><br>
+																			<br> <span class="decideModelSINSA2">"구매
+																				확정"을 하시면 교환/반품을 하실수 없습니다.<br> 구매확정을 하시겠습니까?
+																			</span>
+																		</div>
+																	</div>
+																	<div class="row decideModalRow">
+
+																		<div class="col-12">
+																			<input type="hidden" value="${list.ORDER_PRDCODE }"
+																				class="prdcode"> <input type="hidden"
+																				value="${list.ORDER_NUM }" class="orderum">
+																			<input type="hidden" value="${list.ORDER_PRDSIZE }"
+																				class="prdsize">
+																			<button type="button" class="decideCancle"
+																				data-dismiss="modal">취소</button>
+																			<button type="button" class="decideBtn">확인</button>
+																		</div>
+																	</div>
+																</div>
+
+															</div>
+														</div>
+													</div>
 													<input type="hidden" value="${list.ORDER_DELIVCOMP }"
 														class="delivcomp">
 													<input type="hidden" value="${list.ORDER_DELIVNUM }"
@@ -1079,33 +1183,41 @@ option {
 								});
 					})
 
-	$('.refundBtn')
-			.on(
-					"click",
-					function() {
-						var prdcode = $(this).parent().find('.prdcode').val();
-						var orderum = $(this).parent().find('.orderum').val();
-						var prdsize = $(this).parent().find('.prdsize').val();
-						var reason = $(this).parent().parent().children().find(
-								'.cancel_select').val();
-						location.href = '/refund?prdcode=' + prdcode
-								+ '&orderum=' + orderum + '&prdsize=' + prdsize
-								+ "&reason=" + reason;
-					});
+	$('.refundBtn').on(
+			"click",
+			function() {
+				var prdcode = $(this).parent().find('.prdcode').val();
+				var orderum = $(this).parent().find('.orderum').val();
+				var prdsize = $(this).parent().find('.prdsize').val();
+				var reason = $(this).parent().parent().children().find(
+						'.cancel_select').val();
+				if (reason == null) {
+					alert("반품 사유를 선택해 주세요");
+				} else {
+					alert("반품 처리 되었습니다.");
+					location.href = '/refund?prdcode=' + prdcode + '&orderum='
+							+ orderum + '&prdsize=' + prdsize + "&reason="
+							+ reason;
+				}
+			});
 
-	$('.cancelBtn')
-			.on(
-					"click",
-					function() {
-						var prdcode = $(this).parent().find('.prdcode').val();
-						var orderum = $(this).parent().find('.orderum').val();
-						var prdsize = $(this).parent().find('.prdsize').val();
-						var reason = $(this).parent().parent().children().find(
-								'.cancel_select').val();
-						location.href = '/cancel?prdcode=' + prdcode
-								+ '&orderum=' + orderum + '&prdsize=' + prdsize
-								+ "&reason=" + reason;
-					});
+	$('.cancelBtn').on(
+			"click",
+			function() {
+				var prdcode = $(this).parent().find('.prdcode').val();
+				var orderum = $(this).parent().find('.orderum').val();
+				var prdsize = $(this).parent().find('.prdsize').val();
+				var reason = $(this).parent().parent().children().find(
+						'.cancel_select').val();
+				if (reason == null) {
+					alert("취소 사유를 선택해 주세요");
+				} else {
+					alert("취소 처리 되었습니다.");
+					location.href = '/cancel?prdcode=' + prdcode + '&orderum='
+							+ orderum + '&prdsize=' + prdsize + "&reason="
+							+ reason;
+				}
+			});
 
 	$('.thumbPic').on("mouseover", function() {
 		$(this).css("cursor", "pointer");
@@ -1139,8 +1251,13 @@ option {
 				var reason = $(this).parent().parent().children().find(
 						'.cancel_select').val();
 				var ordernum = $(this).parent().find('.allordernum').val();
-				location.href = "/allCancel?orderum=" + ordernum + "&reason="
-						+ reason;
+				if (reason == null) {
+					alert("취소 사유를 선택해 주세요");
+				} else {
+					alert("취소 처리 되었습니다.");
+					location.href = "/allCancel?orderum=" + ordernum
+							+ "&reason=" + reason;
+				}
 			});
 	$('.allRefund').on(
 			"click",
@@ -1148,20 +1265,23 @@ option {
 				var reason = $(this).parent().parent().children().find(
 						'.cancel_select').val();
 				var ordernum = $(this).parent().find('.allordernum').val();
-				location.href = "/allRefund?orderum=" + ordernum + "&reason="
-						+ reason;
+				if (reason == null) {
+					alert("반품 사유를 선택해 주세요");
+				} else {
+					alert("반품 처리 되었습니다.");
+					location.href = "/allRefund?orderum=" + ordernum
+							+ "&reason=" + reason;
+				}
 			});
-	$('.decideBtn')
-			.on(
-					"click",
-					function() {
-						var prdcode = $(this).parent().find('.prdcode').val();
-						var orderum = $(this).parent().find('.orderum').val();
-						var prdsize = $(this).parent().find('.prdsize').val();
-
-						location.href = '/decide?prdcode=' + prdcode
-								+ '&orderum=' + orderum + '&prdsize=' + prdsize
-								+ "&returnPage=1";
-					});
+	$('.decideBtn').on(
+			"click",
+			function() {
+				var prdcode = $(this).parent().find('.prdcode').val();
+				var orderum = $(this).parent().find('.orderum').val();
+				var prdsize = $(this).parent().find('.prdsize').val();
+				alert("구매확정 되었습니다.");
+				location.href = '/decide?prdcode=' + prdcode + '&orderum='
+						+ orderum + '&prdsize=' + prdsize + "&returnPage=1";
+			});
 </script>
 </html>
