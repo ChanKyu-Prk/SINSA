@@ -1528,7 +1528,7 @@ ol {
 }
 
 .product__item {
-	margin-bottom: 50px;
+	margin-bottom: -15px;
 }
 
 .product__item:hover .product__item__pic .product__item__pic__hover {
@@ -1544,9 +1544,9 @@ ol {
 
 .product__item__pic__hover {
 	position: absolute;
-	left: 0;
-	bottom: 143px;
-	width: 100%;
+	left: 55px;
+	bottom: 110px;
+	width: 65%;
 	text-align: center;
 	-webkit-transition: all, 0.5s;
 	-moz-transition: all, 0.5s;

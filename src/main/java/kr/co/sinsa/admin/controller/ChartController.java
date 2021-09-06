@@ -35,6 +35,10 @@ public class ChartController {
 		List<Integer> salesList = ChartService.getSalesList();
 		model.addAttribute("salesList", salesList);
 		
+		List<Integer> dailySalesList = ChartService.getDailySalesList();
+		model.addAttribute("dailySalesList", dailySalesList);
+		System.out.println("dailySalesList" + dailySalesList);
+		
 		int year = ChartService.getYear();
 		model.addAttribute("year", year);
 		
@@ -56,7 +60,6 @@ public class ChartController {
 		
 		List<TopBrandVO> topBrandList = ChartService.getTopBrandList();
 		model.addAttribute("topBrandList", topBrandList);
-		System.out.println("topBrandList" + topBrandList);
 		
 		
 		

@@ -30,6 +30,11 @@ public class ChartServiceImpl implements ChartService {
 	}
 	
 	@Override
+	public List<Integer> getDailySalesList(){
+		return dao.getDailySalesList();
+	}
+	
+	@Override
 	public int getYear() {
 		return dao.getYear();
 	}
