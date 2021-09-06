@@ -496,4 +496,24 @@ order by REV_NUM  desc
 		ORDER_PRDCODE = #{prdcode} AND
 		ORDER_PRDSIZE = #{prdsize};
 	</update>
+	
+	<delete id="leave">
+	delete from customer
+	where CUS_ID = #{value};
+	</delete>
+	
+	<select id="findCusnum" resultType="int">
+	select CUS_NUM from customer
+	where CUS_ID = #{value};
+	</select>
+	
+	<delete id="leaveSNS">
+	delete from SNS_INFO
+	where cusnum = #{value};
+	</delete>
+	
+	<select id="canleave" resultType="kr.co.sinsa.biz.customer.MyOrderListVO">
+	select ORDER_STATE from ORDERS where 
+	ORDER_CUSID = #{value};
+	</select>
 </mapper>
