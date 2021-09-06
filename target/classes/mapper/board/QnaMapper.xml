@@ -32,7 +32,7 @@
 	
 	
 	<update id="qna_update" parameterType="kr.co.sinsa.admin.vo.QnaVO">
-	update qna set prd_num=#{prd_num}, qna_lock=#{qna_lock}, qna_cusid=#{qna_cusid}, qna_title=#{qna_title}, 
+	update qna set prd_num=#{prd_num}, qna_cusid=#{qna_cusid}, qna_title=#{qna_title}, 
 	qna_content=#{qna_content}, qna_answer=#{qna_answer} where qna_num=#{qna_num}
 	</update>
 	

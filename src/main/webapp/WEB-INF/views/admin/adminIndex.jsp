@@ -197,7 +197,7 @@
 				<div class="col-lg-6">
 					<div class="card">
 						<div class="card-body">
-							<h4 class="mb-3">${year}월간매출</h4>
+							<h4 class="mb-3">${year}금일 시간대별 매출</h4>
 							<canvas id="singelBarChart"></canvas>
 						</div>
 					</div>
@@ -724,11 +724,11 @@
 	    var myChart = new Chart( ctx, {
 	        type: 'bar',
 	        data: {
-	            labels: [ "1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월" ],
+	            labels: [ "00시", "02시", "04시", "06시", "08시", "10시", "12시", "14시", "16시", "18시", "20시", "22시" ],
 	            datasets: [
 	                {
 	                    label: "매출액",
-	                    data: [ ${salesList[0]}, ${salesList[1]}, ${salesList[2]}, ${salesList[3]}, ${salesList[4]}, ${salesList[5]}, ${salesList[6]}, ${salesList[7]}, ${salesList[8]}, ${salesList[9]}, ${salesList[10]}, ${salesList[11]}, ${salesList[12]} ],
+	                    data: [ ${dailySalesList[0]}, ${dailySalesList[1]}, ${dailySalesList[2]}, ${dailySalesList[3]}, ${dailySalesList[4]}, ${dailySalesList[5]}, ${dailySalesList[6]}, ${dailySalesList[7]}, ${dailySalesList[8]}, ${dailySalesList[9]}, ${dailySalesList[10]}, ${dailySalesList[11]}, ${dailySalesList[12]} ],
 	                    borderColor: "rgba(0, 194, 146, 0.9)",
 	                    borderWidth: "0",
 	                    backgroundColor: "rgba(0, 194, 146, 0.5)"

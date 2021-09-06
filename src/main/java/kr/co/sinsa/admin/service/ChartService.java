@@ -11,6 +11,8 @@ public interface ChartService {
 	
 	public List<Integer> getSalesList();
 	
+	public List<Integer> getDailySalesList();
+	
 	public int getYear();
 	
 	public int getTotalSales();
