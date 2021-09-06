@@ -206,53 +206,53 @@
 		<table id="brand-name-box">
 			<tr>
 				<td class="col1"> 
-					<a href="/product/List/all/newest/all/1?brand=nike">
+					<a href="/product/List/nike/newest/all/1">
 						<img src="${path}/resources/img/나이키로고.png" alt="나이키로고">
 					</a>
 				</td>
 				<td class="col2"> 
-					<a href="/product/List/all/newest/all/1?brand=adidas">
+					<a href="/product/List/adidas/newest/all/1">
 						<img src="${path}/resources/img/아디다스로고.png" alt=" 아디다스로고">
 					</a>
 				</td>
 				<td class="col3">
-					<a href="/product/List/all/newest/all/1?brand=vans">
+					<a href="/product/List/vans/newest/all/1">
 						<img src="${path}/resources/img/반스로고.png" alt="반스로고">
 					</a> 
 				</td>
 				<td class="col4">
-					<a href="/product/List/all/newest/all/1?brand=converse">
+					<a href="/product/List/converse/newest/all/1">
 						<img src="${path}/resources/img/컨버스로고.png" alt="컨버스로고">
 					</a> 
 				</td>
 				<td class="col5">
-					<a href="/product/List/all/newest/all/1?brand=puma">
+					<a href="/product/List/puma/newest/all/1">
 						<img src="${path}/resources/img/퓨마로고.png" alt="푸마로고">
 					</a> 
 				</td>
 			</tr>
 			<tr>
 				<td> 
-					<a href="/product/List/all/newest/all/1?brand=fila">
+					<a href="/product/List/fila/newest/all/1">
 						<img src="${path}/resources/img/휠라로고.png" alt="휠라로고" >
 					</a>
 				</td>
 				<td> 
-					<a href="/product/List/all/newest/all/1?brand=newbalance">
+					<a href="/product/List/newbalance/newest/all/1">
 						<img src="${path}/resources/img/뉴발란스 로고.png" alt="뉴발란스로고" >
 					</a>
 				</td>
 				<td>
-					<a href="/product/List/all/newest/all/1?brand=reebok">
+					<a href="/product/List/reebok/newest/all/1">
 						<img src="${path}/resources/img/리복로고.png" alt="리복로고" ></td>
 					</a> 
 				<td> 
-					<a href="/product/List/all/newest/all/1?brand=lacoste">
+					<a href="/product/List/lacoste/newest/all/1">
 						<img src="${path}/resources/img/라코스테로고.png" width="120px;"  alt="라코스테로고" >
 					</a>
 				</td>
 				<td> 
-					<a href="/product/List/all/newest/all/1?brand=asics">
+					<a href="/product/List/asics/newest/all/1">
 						<img src="${path}/resources/img/아식스로고.png" width="150px;" alt="아식스로고" >
 					</a>
 				</td>

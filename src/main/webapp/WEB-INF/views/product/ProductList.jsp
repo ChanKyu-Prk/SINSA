@@ -20,8 +20,15 @@
 	<style>
 		.sizeList{ text-align: center; }
 		.pagination { margin-top: 25px; margin-bottom: 25px; justify-content: center; }
-		#filter{border : 1px solid teal; padding : 10px 10px 10px 10px; margin-bottom: 70px;}
-		#sidebar__item__menu{border : 1px solid teal; border-bottom : 0px solid teal; padding : 10px 10px 10px 10px; }
+		a.page-link { color: black !important; }
+
+		.page-item.active .page-link {
+		   background-color: black !important;
+		   border-color: black !important;
+		   color: white !important;
+		 }
+		#filter{ padding : 10px 10px 10px 10px; margin-bottom: 70px;}
+		#sidebar__item__menu{ padding : 10px 10px 10px 10px; }
 		#filter #search{ background-color: gray; color: white; font-size: 25px; 
 						width: 100%; height: 60px; text-align: center;border: none;}
 		.clicked{ color: black; }
@@ -153,7 +160,7 @@
     <section class="product spad">
         <div class="container">
             <div class="row">
-                <div class="col-lg-3 col-md-5" style="padding-top: 85px;">
+                <div class="col-lg-3 col-md-5">
                     <div class="sidebar">
                         <div class="sidebar__item" id="sidebar__item__menu">
                             <h4>품목</h4>
@@ -247,8 +254,8 @@
                 <div class="col-lg-9 col-md-7">
                     <div class="filter__item" style="border-top-width: 0px;">
                         <div class="row">
-                            <div class="col-lg-4 col-md-5">
-                                <div class="filter__sort">
+                            <div class="col-lg-4 col-md-5" style="top: -20px;">
+                                <div class="filter__sort" style="width: 110px; margin-left: 100px;">
                                     <select class="orderbySelect">
                                         <option value="newest">신상품순</option>
                                         <option value="highprice" <c:if test="${info.orderby =='highprice'}">selected</c:if>>높은가격순</option>
@@ -257,20 +264,15 @@
                             	</div>
                             	<div class="col-lg-4 col-md-4">
                                 	<div class="filter__found">                         
-<%--                                     <h6><span>${page.count  }</span> Products found</h6> --%>
               		                </div>
                             	</div>
                             	<div class="col-lg-4 col-md-3">
                                 <div class="filter__option">
-                                <!-- 
-                                    <span class="icon_grid-2x2"></span>
-                                    <span class="icon_ul"></span>
-                                 -->
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="row">
+                    <div class="row" style="height: 1500px;">
                           <c:forEach var="list" items="${list }" varStatus="status">
 	                        <style>
                        			#modal${list.PRD_CODE } {
@@ -294,11 +296,11 @@
    								}
    								#ajaxToCart${list.PRD_CODE } {padding-top: 0px; padding-bottom: 0px; height: 41px; width: 221px; display: inline-block;}
    								.cartSize${list.PRD_NUM }{ top: -14px; position: relative;}
-   								.product__item__detail${list.PRD_NUM }{cursor: pointer}
+   								.gotodetail${list.PRD_NUM }{cursor: pointer;}
 	                        </style>
 	                        <div class="col-lg-4 col-md-6 col-sm-6">
 	                            <div class="product__item">
-	                                <div class="product__item__pic set-bg product__item__detail${list.PRD_NUM }" data-setbg="${path}/resources/img/product/${list.PRD_IMAGE }"></div>
+	                                <div class="product__item__pic set-bg gotodetail${list.PRD_NUM }" data-setbg="${path}/resources/img/product/${list.PRD_IMAGE }"></div>
                                     	<ul class="product__item__pic__hover">
                                         <li>
                                         	<a class="jjimBtn"><input type="hidden" value= "${list.PRD_NUM}" class="prdnumj">
@@ -396,7 +398,7 @@
 									</div>
 	                                <div class="product__item__text product__item__detail${list.PRD_NUM }">
 										<p>
- 											<h6>${list.PRD_NAME }</h6>												
+ 											<h6 class="gotodetail${list.PRD_NUM }">${list.PRD_NAME }</h6>												
  										</p>
                                    		<h5>${list.PRD_PRICE }원</h5>
                                 	</div>
@@ -554,7 +556,7 @@
 		                            	});
    	                            	});
                             	
-                            		$('.product__item__detail${list.PRD_NUM }').on('click', function(){
+                            		$('.gotodetail${list.PRD_NUM }').on('click', function(){
                             			var prdCode = "${list.PRD_CODE}";
                             			location.href = "/product/prdCode="+prdCode;
                             		})
@@ -1052,8 +1054,8 @@ $('.li-size').find('li').on('click', function(){
 $('#search').on('click', function(){
 	var minPrice = $('#minPrice').val();
 	var maxPrice = $('#maxPrice').val();
-	var condition = $('#categoryHidden').val()
-	var category  = $('#conditionHidden').val();
+	var condition = $('#conditionHidden').val();
+	var category  = $('#categoryHidden').val();
 	var orderby = $('#orderbyHidden').val();
 	var keyWord = $('#keyWordHidden').val();
 	var color = "";
