@@ -214,7 +214,6 @@ public class ProductController {
 
 	    return map;
 	}
-	
 	@RequestMapping(value = "/product/List/{condition}/{orderby}/{category}/{page}", method = RequestMethod.GET)
 	public String getProductList(Model model, @PathVariable("condition") String condition,
 			@PathVariable("category") String category, @PathVariable("orderby") String orderby,
@@ -340,9 +339,15 @@ public class ProductController {
 		List<ProductVO> list = null;
 		if(condition.equals("best")) {
 			list = service.listPageBestShoes(map);
+		}else if(!condition.equals("best") && !condition.equals("men") && !condition.equals("women") && !condition.equals("all")){
+			brand = condition;
+			map.put("brand", brand);
+			listCount = service.countProductList(map);
+			list = service.getList(map);
 		}else {
-			list = service.getList(map);	
+			list = service.getList(map);				
 		}
+		
 		List<Integer> jjimcheck = new ArrayList<Integer>();
 		UserVO user = (UserVO) session.getAttribute("user");
 		if(user !=null) {

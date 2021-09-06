@@ -289,6 +289,14 @@ button:disabled {
 	color: white;
 }
 .pagination { margin-top: 25px; margin-bottom: 25px; justify-content: center; }
+a.page-link {
+   color: black !important;
+}
+.page-item.active .page-link {
+   background-color: black !important;
+   border-color: black !important;
+   color: white !important;
+}
 </style>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
