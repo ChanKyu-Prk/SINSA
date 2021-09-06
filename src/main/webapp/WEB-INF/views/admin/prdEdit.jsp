@@ -58,27 +58,27 @@ div {
 							</div></td>
 						<td class="imgtd"><div class="img_td_row">
 								<img class="reviewPic" alt="상품 사진" title="상품 사진" id="reviewPic0"
-									src="${pageContext.request.contextPath}\upload\prdImg\ ${param.prd_code}.png" />
+									src="${pageContext.request.contextPath}/resources/prdImg/ ${param.prd_code}.png" />
 
 							</div></td>
 						<td class="imgtd"><div class="img_td_row">
 								<img class="reviewPic" alt="상품 사진" title="상품 사진" id="reviewPic1"
-									src="${pageContext.request.contextPath}\upload\prdImg\ ${param.prd_code}1.png" />
+									src="${pageContext.request.contextPath}/resources/prdImg/ ${param.prd_code}1.png" />
 
 							</div></td>
 						<td class="imgtd"><div class="img_td_row">
 								<img class="reviewPic" alt="상품 사진" title="상품 사진" id="reviewPic2"
-									src="${pageContext.request.contextPath}\upload\prdImg\ ${param.prd_code}2.png" />
+									src="${pageContext.request.contextPath}/resources/prdImg/ ${param.prd_code}2.png" />
 
 							</div></td>
 						<td class="imgtd"><div class="img_td_row">
 								<img class="reviewPic" alt="상품 사진" title="상품 사진" id="reviewPic3"
-									src="${pageContext.request.contextPath}\upload\prdImg\ ${param.prd_code}3.png" />
+									src="${pageContext.request.contextPath}/resources/prdImg/ ${param.prd_code}3.png" />
 
 							</div></td>
 						<td class="imgtd"><div class="img_td_row">
 								<img class="reviewPic" alt="상품 사진" title="상품 사진" id="reviewPic4"
-									src="${pageContext.request.contextPath}\upload\prdImg\ ${param.prd_code}4.png" />
+									src="${pageContext.request.contextPath}/resources/prdImg/ ${param.prd_code}4.png" />
 
 							</div></td>
 					</tr>

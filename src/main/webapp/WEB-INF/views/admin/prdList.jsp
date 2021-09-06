@@ -147,7 +147,7 @@ table {
 									<%
 									String img = (String)pageContext.getAttribute("img");
 									%>
-									<td style="vertical-align:middle;"><img src="${pageContext.request.contextPath}\upload\prdImg\<%= img %>.png" width="100px"></td>
+									<td style="vertical-align:middle;"><img src="${pageContext.request.contextPath}/resources/prdImg/<%= img %>.png" width="100px"></td>
 									<td style="vertical-align:middle;">${ e.prd_code }</td>
 									<td style="vertical-align:middle;"><a href="../product/prdCode=${ e.prd_code }" target="_blank">${ e.prd_name }</a></td>
 									<td style="vertical-align:middle;">${e.prd_category}</td>
