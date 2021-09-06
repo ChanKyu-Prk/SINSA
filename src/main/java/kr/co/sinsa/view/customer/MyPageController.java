@@ -426,6 +426,48 @@ public class MyPageController {
 
 	}
 
+	
+	@RequestMapping(value = "/leave", method = RequestMethod.GET)
+	public String leavePassCheck(Model model, HttpSession session) {
+		UserVO user = (UserVO) session.getAttribute("user");
+		if (user == null) {
+			return "redirect:/login.do";
+		}
+		model.addAttribute("page", "회원탈퇴");
+		return "customer/passCheck";
+	}
+	
+	
+	@RequestMapping(value = "/leave", method = RequestMethod.POST)
+	public String leave(Model model, @RequestParam(value = "password", required = false) String password,
+			HttpSession session) {
+		UserVO user = (UserVO) session.getAttribute("user");
+		if (user == null) {
+			return "redirect:/login.do";
+		}
+		if (password != null) {
+			Map<String, String> map = new HashMap<String, String>();
+			map.put("ID", user.getCUS_ID());
+			map.put("PASSWORD", password);
+			boolean passMatch = myPageSerive.passCheck(map);
+			if (passMatch) {
+				model.addAttribute("canleave", myPageSerive.canleave(user.getCUS_ID()));
+				return "customer/leave";
+			} else {
+				return "redirect:/leave";
+			}
+		} else {
+			
+			myPageSerive.leave(user.getCUS_ID());
+			session.invalidate();
+			return "redirect:/";
+		}
+
+	}
+	
+	
+	
+	
 	@RequestMapping(value = "/reviewWrite/{ORDERNUM}/{ORDERPRDSIZE}/{PRDCODE}", method = RequestMethod.GET)
 	public String reviewWrite(Model model, @PathVariable("ORDERNUM") String ORDERNUM,
 			@PathVariable("ORDERPRDSIZE") String ORDERPRDSIZE, @PathVariable("PRDCODE") String PRDCODE,

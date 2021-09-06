@@ -318,4 +318,23 @@ public class MyPageServiceImpl implements MyPageService {
 		dao.decide(map);
 	}
 
+	@Override
+	public void leave(String userID) {
+		dao.leave(userID);
+	}
+
+	@Override
+	public String canleave(String ORDER_CUSID) {
+		String result = "O";
+		List<MyOrderListVO> list= dao.canleave(ORDER_CUSID);
+		for(int i = 0 ; i < list.size() ; i ++) {
+			if(!list.get(i).getORDER_STATE().equals("구매확정") ) {
+			result = "X";	
+			}
+		}
+		return result;
+	}
+	
+	
+
 }

@@ -66,4 +66,7 @@ public interface MyPageService {
 	public int chckDeleteCart(String CUS_ID);
 	
 	public void decide(Map<String,String> map);
-}
+	
+	public void leave(String userID);
+	public String canleave(String ORDER_CUSID);
+	}
