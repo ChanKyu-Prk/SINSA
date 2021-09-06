@@ -48,6 +48,27 @@ public class ChartDAO  {
 		return salesList;
 
 	}
+	
+	
+	public List<Integer> getDailySalesList(){
+		List<Integer> dailySalesList = new ArrayList<Integer>();
+		
+		dailySalesList.add((Integer) SST.selectOne("ChartService.getDailySales1"));
+		dailySalesList.add((Integer) SST.selectOne("ChartService.getDailySales2"));
+		dailySalesList.add((Integer) SST.selectOne("ChartService.getDailySales3"));
+		dailySalesList.add((Integer) SST.selectOne("ChartService.getDailySales4"));
+		dailySalesList.add((Integer) SST.selectOne("ChartService.getDailySales5"));
+		dailySalesList.add((Integer) SST.selectOne("ChartService.getDailySales6"));
+		dailySalesList.add((Integer) SST.selectOne("ChartService.getDailySales7"));
+		dailySalesList.add((Integer) SST.selectOne("ChartService.getDailySales8"));
+		dailySalesList.add((Integer) SST.selectOne("ChartService.getDailySales9"));
+		dailySalesList.add((Integer) SST.selectOne("ChartService.getDailySales10"));
+		dailySalesList.add((Integer) SST.selectOne("ChartService.getDailySales11"));
+		dailySalesList.add((Integer) SST.selectOne("ChartService.getDailySales12"));
+		
+		return dailySalesList;
+		
+	}
 
 	public int getYear() {
 		int year = SST.selectOne("ChartService.getYear");
