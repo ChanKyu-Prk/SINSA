@@ -495,25 +495,26 @@ padding : 0;
 	}
 
 	$('#submitBtn').on("click", function() {
-		if ($(':radio[name="REV_STAR"]:checked').length < 1) {
-			event.preventDefault();
-		}
-		if ($(':radio[name="Tsize"]:checked').length < 1) {
-			event.preventDefault();
-		}
-		if ($(':radio[name="Tcolor"]:checked').length < 1) {
-			event.preventDefault();
-		}
-		if ($(':radio[name="Tsense"]:checked').length < 1) {
-			event.preventDefault();
-		}
-		if ($(':radio[name="Tdelv"]:checked').length < 1) {
-			event.preventDefault();
-		}
 		var content = $('#contentArea').val();
-		if (content.length < 10) {
+		
+		if($(':radio[name="REV_STAR"]:checked').length < 1 || $(':radio[name="Tsize"]:checked').length < 1||
+				$(':radio[name="Tcolor"]:checked').length < 1|| $(':radio[name="Tsense"]:checked').length < 1||
+				$(':radio[name="Tdelv"]:checked').length < 1 || content.length < 10){
+			if($(':radio[name="REV_STAR"]:checked').length < 1 || $(':radio[name="Tsize"]:checked').length < 1||
+					$(':radio[name="Tcolor"]:checked').length < 1|| $(':radio[name="Tsense"]:checked').length < 1||
+					$(':radio[name="Tdelv"]:checked').length < 1 ){
+			alert("선택사항을 모두 체크해주세요");
+			event.preventDefault();
+			}else if (content.length < 10) {
+			alert("10자 이상 작성해 주세요");
 			event.preventDefault();
 		}
+		
+		}else{
+			alert("후기가 정상적으로 작성되었습니다.");
+			
+		}
+		
 	});
 </script>
 </html>

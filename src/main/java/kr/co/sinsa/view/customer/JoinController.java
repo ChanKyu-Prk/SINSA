@@ -40,7 +40,7 @@ public class JoinController {
 				+ request.getParameter("CUS_ADDR_5") +"|"+request.getParameter("CUS_ADDR_4");
 		vo.setCUS_ADDR(address);
 		joinService.join(vo);
-		return "redirect:/";
+		return "redirect:/login.do";
 	}
 
 	@RequestMapping(value = "/IdCheck", method = RequestMethod.POST)
