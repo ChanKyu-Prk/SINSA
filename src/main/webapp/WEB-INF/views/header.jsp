@@ -6,6 +6,8 @@
 <!DOCTYPE html>
 <html>
 <head>
+<script src="https://kit.fontawesome.com/848d8f1fa9.js"
+	crossorigin="anonymous"></script>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 
@@ -49,6 +51,15 @@
 	background-color: white;
 	border: 1px solid white !important;
 }
+
+ul{
+   list-style:none;
+   }
+   
+.mobile_menu{
+	margin:0px 0px 4px 0px !important;
+}
+
 </style>
 
 </head>
@@ -73,20 +84,20 @@
 					<%
 						if (session.getAttribute("user") == null) {
 					%>
-					<li><a href="login.do">로그인</a></li>
+					<li class="mobile_menu"><a href="login.do"><i class="fas fa-sign-in-alt mobile_icon"></i>&nbsp;&nbsp;로그인</a></li>
 
 					<%
 						} else {
 					%>
-					<li><a id="logout_button">로그아웃</a></li>
+					<li class="mobile_menu"><a id="logout_button" href="/logout.do"><i class="fas fa-sign-out-alt mobile_icon"></i>&nbsp;&nbsp;로그아웃</a></li>
 					<%
 						}
 					%>
 
-					<li><a href="join.do">회원가입</a></li>
-					<li><a href="#">주문조회</a></li>
-					<li><a href="#">마이페이지</a></li>
-					<li><a href="#">고객센터</a></li>
+					<li class="mobile_menu"><a href="/join.do"><i class="fas fa-user-plus mobile_icon"></i>&nbsp;회원가입</a></li>
+					<li class="mobile_menu"><a href="/myOrderList/1"><i class="fas fa-search mobile_icon"></i>&nbsp;&nbsp;주문조회</a></li>
+					<li class="mobile_menu"><a href="/myOrderList/1"><i class="fas fa-file mobile_icon"></i>&nbsp;&nbsp;&nbsp;마이페이지</a></li>
+					<li class="mobile_menu"><a href="#"><i class="fas fa-door-open mobile_icon"></i>&nbsp;고객센터</a></li>
 				</ul>
 
 			</div>
@@ -105,34 +116,46 @@
 
 		<nav class="humberger__menu__nav mobile-menu">
 			<ul>
-				<li><a href="#">brand</a></li>
-				<li><a href="#">ALL</a></li>
-				<li><a href="#">men</a>
+				<li><a href="/getProductBrandPage">brand</a></li>
+							<li><a href="/product/List/all/newest/all/1">ALL</a></li>
+							<li><a href="/product/List/men/newest/all/1">men</a>
 					<ul class="header__menu__dropdown">
-						<li><a href="/product/List/men/newest/sneakers/1">스니커즈</a></li>
-						<li><a href="/product/List/men/newest/converse/1">캔버스화</a></li>
-						<li><a href="/product/List/men/newest/slipon/1">슬립온</a></li>
-						<li><a href="/product/List/men/newest/mule/1">뮬</a></li>
-						<li><a href="/product/List/men/newest/running/1">런닝화</a></li>
-						<li><a href="/product/List/men/newest/basketball/1">농구화</a></li>
-						<li><a href="/product/List/men/newest/golf/1">골프화</a></li>
-						<li><a href="/product/List/men/newest/outdoor/1">등산화</a></li>
-						<li><a href="/product/List/men/newest/soccer/1">축구화</a></li>
+						<li><a href="#" class="navbar_category1">운동화</a></li>
+									<li><a href="/product/List/men/newest/sneakers/1">스니커즈</a></li>
+									<li><a href="/product/List/men/newest/converse/1">캔버스화</a></li>
+									<li><a href="/product/List/men/newest/slipon/1">슬립온</a></li>
+									<li><a href="/product/List/men/newest/mule/1">뮬</a></li>
+									<li><div>
+											<br>
+										</div></li>
+						<li><a href="#" class="navbar_category1">스포츠</a></li>
+									<li><a href="/product/List/men/newest/running/1">런닝화</a></li>
+									<li><a href="/product/List/men/newest/basketball/1">농구화</a></li>
+									<li><a href="/product/List/men/newest/golf/1">골프화</a></li>
+									<li><a href="/product/List/men/newest/outdoor/1">등산화</a></li>
+									<li><a href="/product/List/men/newest/soccer/1">축구화</a></li>
+								</ul></li>
 					</ul></li>
 				<li><a href="#">women</a>
 					<ul class="header__menu__dropdown">
-						<li><a href="/product/List/women/newest/sneakers/1">스니커즈</a></li>
-						<li><a href="/product/List/women/newest/converse/1">캔버스화</a></li>
-						<li><a href="/product/List/women/newest/slipon/1">슬립온</a></li>
-						<li><a href="/product/List/women/newest/mule/1">뮬</a></li>
-						<li><a href="/product/List/women/newest/running/1">런닝화</a></li>
-						<li><a href="/product/List/women/newest/basketball/1">농구화</a></li>
-						<li><a href="/product/List/women/newest/golf/1">골프화</a></li>
-						<li><a href="/product/List/women/newest/outdoor/1">등산화</a></li>
-						<li><a href="/product/List/women/newest/soccer/1">축구화</a></li>
-					</ul></li>
-				<li><a href="#">new</a></li>
-				<li><a href="#">best</a></li>
+						<li><a href="#" class="navbar_category1">운동화</a></li>
+									<li><a href="/product/List/women/newest/sneakers/1">스니커즈</a></li>
+									<li><a href="/product/List/women/newest/converse/1">캔버스화</a></li>
+									<li><a href="/product/List/women/newest/slipon/1">슬립온</a></li>
+									<li><a href="/product/List/women/newest/mule/1">뮬</a></li>
+
+									<li><div>
+											<br>
+										</div></li>
+						<li><a href="#" class="navbar_category1">스포츠</a></li>
+									<li><a href="/product/List/women/newest/running/1">런닝화</a></li>
+									<li><a href="/product/List/women/newest/basketball/1">농구화</a></li>
+									<li><a href="/product/List/women/newest/golf/1">골프화</a></li>
+									<li><a href="/product/List/women/newest/outdoor/1">등산화</a></li>
+									<li><a href="/product/List/women/newest/soccer/1">축구화</a></li>
+								</ul></li>
+<!-- 				<li><a href="#">new</a></li> -->
+				<li><a href="/product/List/best/newest/all/1">best</a></li>
 			</ul>
 		</nav>
 
