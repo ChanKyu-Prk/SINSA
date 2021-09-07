@@ -383,8 +383,7 @@
 														<div class="brand">${list.PRD_BRAND}</div>
 														<div>
 															<a class="product_name"
-																href="product/prdCode=${list.PRD_CODE}">${list.PRD_NAME}<span
-																class="pl-1 prdCode">${list.PRD_CODE}</span></a>
+																href="product/prdCode=${list.PRD_CODE}">${list.PRD_NAME}</a>
 														</div>
 														<div>
 															<a class="product_color"
@@ -423,7 +422,7 @@
 																			<div class="row size_change_modal_detail">
 																				<div class="col-lg-3 col-md-9 size_change_modal_img">
 																					<img
-																						src="${path}/resources/img/product/${product_img_array[0]}"
+																						src="${pageContext.request.contextPath}/resources/prdImg/${list.PRD_CODE}.png"
 																						alt="">
 
 																				</div>
