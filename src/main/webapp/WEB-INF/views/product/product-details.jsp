@@ -319,20 +319,20 @@ a.page-link {
 					<div class="product__details__pic">
 						<div class="product__details__pic__item">
 							<img class="product__details__pic__item--large"
-								src="${pageContext.request.contextPath}/upload\prdImg/${prdInfo.PRD_CODE}.png"
+								src="${pageContext.request.contextPath}/resources/prdImg/${prdInfo.PRD_CODE}.png"
 								alt="mainPic">
 						</div>
 						<div class="product__details__pic__thumb row mx-auto px-0">
 							<img
-								src="${pageContext.request.contextPath}/upload\prdImg/${prdInfo.PRD_CODE}.png"
+								src="${pageContext.request.contextPath}/resources/prdImg/${prdInfo.PRD_CODE}.png"
 								alt="thumbnailMain"> <img
-								src="${pageContext.request.contextPath}/upload\prdImg/${prdInfo.PRD_CODE}1.png"
+								src="${pageContext.request.contextPath}/resources/prdImg/${prdInfo.PRD_CODE}1.png"
 								alt="thumbnail1" onerror="this.style.display='none'"> <img
-								src="${pageContext.request.contextPath}/upload\prdImg/${prdInfo.PRD_CODE}2.png"
+								src="${pageContext.request.contextPath}/resources/prdImg/${prdInfo.PRD_CODE}2.png"
 								alt="thumbnail2" onerror="this.style.display='none'"> <img
-								src="${pageContext.request.contextPath}/upload\prdImg/${prdInfo.PRD_CODE}3.png"
+								src="${pageContext.request.contextPath}/resources/prdImg/${prdInfo.PRD_CODE}3.png"
 								alt="thumbnail3" onerror="this.style.display='none'"> <img
-								src="${pageContext.request.contextPath}/upload\prdImg/${prdInfo.PRD_CODE}4.png"
+								src="${pageContext.request.contextPath}/resources/prdImg/${prdInfo.PRD_CODE}4.png"
 								alt="thumbnail4" onerror="this.style.display='none'">
 						</div>
 					</div>
