@@ -15,6 +15,7 @@ import kr.co.sinsa.biz.customer.QnAVO;
 import kr.co.sinsa.biz.customer.ReviewVO;
 import kr.co.sinsa.biz.orders.OrdersAndProductVO;
 import kr.co.sinsa.biz.product.ProductVO;
+import kr.co.sinsa.biz.product.StockVO;
 import kr.co.sinsa.biz.user.UserVO;
 
 @Repository
@@ -61,6 +62,12 @@ public class MyPageDAO {
 
 	public int countJjimList(Map<String, Object> map) {
 		return SST.selectOne("myInfo.countJjimList", map);
+	}
+	public List<Integer> getJjimList(String user) {
+		return SST.selectList("ProductList.getJjimList",user);
+	}
+	public StockVO getStock(String PRD_CODE) {
+		return SST.selectOne("myInfo.getStock",PRD_CODE);
 	}
 
 	public int reviewCheck(Map<String, String> map) {
@@ -187,4 +194,5 @@ public class MyPageDAO {
 	public List<MyOrderListVO> canleave(String ORDER_CUSID){
 		return SST.selectList("myInfo.canleave",ORDER_CUSID);
 	}
+	
 }

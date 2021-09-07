@@ -7,6 +7,7 @@ import javax.servlet.http.Cookie;
 
 import kr.co.sinsa.biz.orders.OrdersAndProductVO;
 import kr.co.sinsa.biz.product.ProductVO;
+import kr.co.sinsa.biz.product.StockVO;
 import kr.co.sinsa.biz.user.UserVO;
 
 public interface MyPageService {
@@ -24,6 +25,8 @@ public interface MyPageService {
 	
 	public List<ProductVO> jjimList(Map<String,Object> map);
 	public int countJjimList(Map<String,Object> map);
+	public List<Integer> getJjimList(String user);
+	public StockVO getStock(String PRD_CODE);
 	
 	public List<Integer> reviewCheck(List<MyOrderListVO> orderList,String ID);
 	public ProductVO productSerch(String PRDCODE);

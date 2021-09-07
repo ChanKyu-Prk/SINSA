@@ -11,6 +11,9 @@
 <meta charset="UTF-8">
 
 <style type="text/css">
+.table2 {
+		display: none;
+	}
 .period_wrap2 {
 	padding-left: 10px;
 	padding-right: 10px;

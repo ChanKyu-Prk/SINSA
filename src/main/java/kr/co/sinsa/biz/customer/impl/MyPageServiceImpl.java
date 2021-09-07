@@ -19,6 +19,7 @@ import kr.co.sinsa.biz.customer.QnAVO;
 import kr.co.sinsa.biz.customer.ReviewVO;
 import kr.co.sinsa.biz.orders.OrdersAndProductVO;
 import kr.co.sinsa.biz.product.ProductVO;
+import kr.co.sinsa.biz.product.StockVO;
 import kr.co.sinsa.biz.user.UserVO;
 
 @Service("myPageService")
@@ -106,6 +107,16 @@ public class MyPageServiceImpl implements MyPageService {
 	@Override
 	public int countJjimList(Map<String, Object> map) {
 		return dao.countJjimList(map);
+	}
+	
+	@Override
+	public List<Integer> getJjimList(String user) {
+		return dao.getJjimList(user);
+	}
+
+	@Override
+	public StockVO getStock(String PRD_CODE) {
+		return dao.getStock(PRD_CODE);
 	}
 
 	@Override
