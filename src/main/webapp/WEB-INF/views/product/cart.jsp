@@ -41,22 +41,18 @@
 .header__top__right__auth {
 	margin: 15px;
 }
-
 .shoping__cart__item {
 	margin: 30px;
 }
-
 /* .before discount{ */
 /*    text-decoration:line-through; */
 /* } */
 .changecount {
 	border: 1px solid grey;
 }
-
 .sumup {
 	color: black !important;
 }
-
 .previousPrice {
 	text-decoration: line-through !important;
 	color: grey;
@@ -64,7 +60,6 @@
 	text-align: right !important;
 	padding: 0px 7px 0px 0px
 }
-
 .previousTotalPrice {
 	text-decoration: line-through !important;
 	color: grey;
@@ -72,7 +67,6 @@
 	text-align: right !important;
 	padding: 0px 9px 0px 0px
 }
-
 .throwout {
 	margin: 0px 5px 0px 0px;
 	border: 1px solid grey;
@@ -82,7 +76,6 @@
 	padding: 0px 0px 0px 0px !important;
 	font-size: 16px !important;
 }
-
 .keepshopping {
 	margin: 0px 0px 0px 0px;
 	border: 1px solid grey;
@@ -94,23 +87,18 @@
 	font-weight: bold !important;
 	font-size: 16px !important;
 }
-
 .noProduct {
 	text-align: center !important;
 }
-
 .noProductIcon {
 	margin: 100px 0px 40px 0px;
 }
-
 .optionModal {
 	height: 470px;
 }
-
 .size_change_modal_img {
 	padding: 0px 15px 0px 0px !important;
 }
-
 .countselectbox {
 	height: 32px;
 	line-height: 30px;
@@ -118,30 +106,25 @@
 	z-index: 10 !important;
 	size: 3 !important;
 }
-
 .select_size {
 	width: 310px !important;
 }
-
 .nice-select .list {
 	max-height: 150px;
 	overflow: scroll !important;
 	width: 305px !important;
 }
-
 .btn-outline-secondary {
 	color: #262525 !important;
 	background-color: #f7f7f7 !important;
 	border-color: #ddd !important;
 	border-radius: 0px !important;
 }
-
 .btn-outline-secondary:hover {
 	color: #262525 !important;
 	background-color: #f7f7f7 !important;
 	border-color: black !important;
 }
-
 .modal_button_size_change {
 	border: 1px solid grey;
 	width: 73px !important;
@@ -150,7 +133,6 @@
 	font-size: 13px !important;
 	padding: 6px 8px 6px 8px !important;
 }
-
 .button_confirm_change_size {
 	border: 1px solid #222020;
 	width: 100px !important;
@@ -160,35 +142,29 @@
 	color: white;
 	font-weight: bold;
 }
-
 .div_button_change_size {
 	text-align: center !important;
 	margin: 47px 0px 0px 0px !important;
 }
-
 .modal-body {
 	height: 500px !important;
 }
-
 .pro-qty {
 	border: 1px solid #ddd;
 	text-align: center;
 	width: 100px !important;
 	background-color: #f7f7f7 !important;
 }
-
 #count {
 	border-right: 1px solid #ddd;
 	border-left: 1px solid #ddd;
 }
-
 .button_qty_change {
 	border: 1px solid grey;
 	width: 100px !important;
 	height: 35px;
 	background-color: white;
 }
-
 .buy_rightnow {
 	border: 1px solid grey;
 	width: 100px !important;
@@ -198,7 +174,6 @@
 	color: white;
 	font-weight: bold;
 }
-
 .delete_one {
 	border: 1px solid grey;
 	width: 100px !important;
@@ -206,85 +181,67 @@
 	margin: 0px 0px 7px 0px;
 	background-color: white;
 }
-
 .size_change_modal {
 	top: 20%;
 }
-
 .char_size {
 	text-align: left !important;
 	padding: 9px 0px 0px 0px;
 	margin: 0px 0px 0px 0px !important;
 }
-
 .size_change_row {
 	margin: 40px 0px 40px 0px !important;
 }
-
 .size_change_modal_detail {
 	margin: 6px 0px 20px 0px !important;
 }
-
 .brand {
 	font-weight: bold;
 }
-
 .product_name {
 	color: grey;
 	font-size: 14px;
 }
-
 .product_name:hover {
 	color: grey;
 }
-
 .product_color {
 	color: grey;
 	font-size: 14px;
 }
-
 .product_color:hover {
 	color: grey;
 }
-
 .product_size {
 	color: grey;
 	font-size: 14px;
 }
-
 .product_size:hover {
 	color: grey;
 }
-
 .pre_won {
 	font-size: 14px;
 }
-
 .won {
 	font-size: 16px;
 }
-
 .shoping__cart__table table tbody tr td.shoping__cart__item {
 	width: 550px !important;
 }
-
 .modal_hr1 {
 	border: 0;
 	height: 2px !important;
 	background: #ccc;
 }
-
 .modal_hr2 {
 	border: 0;
 	height: 2px !important;
 	background: #ccc;
 }
-
 .button_buy {
 	border: 1px solid grey;
 	font-size: 17px;
 }
-
 .shopping_cart_text{
 	color:#222020 !important;
 	margin: 50px 0px 0px 0px !important;
@@ -383,7 +340,8 @@
 														<div class="brand">${list.PRD_BRAND}</div>
 														<div>
 															<a class="product_name"
-																href="product/prdCode=${list.PRD_CODE}">${list.PRD_NAME}</a>
+																href="product/prdCode=${list.PRD_CODE}">${list.PRD_NAME}<span
+																class="pl-1 prdCode">${list.PRD_CODE}</span></a>
 														</div>
 														<div>
 															<a class="product_color"
@@ -822,7 +780,6 @@
 																"#directBtn${status.index}")
 																.click(
 																		function() {
-
 																			var select_value = $(
 																					this)
 																					.parent(
@@ -832,13 +789,11 @@
 																					.find(
 																							".select_size option:selected")
 																					.val();
-
 																			if (select_value
 																					.indexOf("품절") != -1) {
 																				alert("해당 사이즈 품절 되었습니다.");
 																				return false;
 																			}
-
 																			var ORDER_PRDCODE = $(
 																					this)
 																					.parents(
@@ -1078,7 +1033,6 @@
 																	function() {
 																		return this.value;
 																	}).get();
-
 													//JSON 형태로 데이터 생성
 													var data = {};
 													var itemList = [];
@@ -1138,16 +1092,13 @@
 
 	<script>
 		// function delete_event(){
-
 		// 	if (confirm('장바구니에서 해당 상품을 삭제 하시겠습니까?');) {
 		// 		document.getElementById('form').submit();
 		// 	}else{
 		// 		return false;
 		// 	}
 		// }
-
 		// function updateCount_event(){
-
 		// 	alert('수량이 변경되었습니다');
 		// }
 	</script>
@@ -1156,9 +1107,7 @@
 	<script>
 		function choose(size) {
 			var resultElement = document.getElementById('result');
-
 			var writeSize = resultElement.innerText;
-
 			if (size === '220') {
 				writeSize = "220";
 			} else if (size === '225') {
@@ -1190,9 +1139,7 @@
 			} else if (size === '290') {
 				writeSize = "290";
 			}
-
 			resultElement.innerText = writeSize;
-
 		}
 	</script>
 
@@ -1219,7 +1166,6 @@
 						CART_NUM : CART_NUM,
 						CART_PRDNUM : CART_PRDNUM
 					}
-
 					$.ajax({
 						url : "updatesize.do",
 						type : "POST",

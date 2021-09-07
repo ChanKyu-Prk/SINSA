@@ -28,8 +28,8 @@ public class CartDAO {
 
 	public List<ProductVO> getCartProductList(List<CartVO> cartList) {
 		List<ProductVO> cartProductList = new ArrayList<ProductVO>();
-//		List<StockVO> cartStockList = new ArrayList<StockVO>();
-//		List<UserCartProductStockVO> userCartProductStockList = new ArrayList<UserCartProductStockVO>();
+		//		List<StockVO> cartStockList = new ArrayList<StockVO>();
+		//		List<UserCartProductStockVO> userCartProductStockList = new ArrayList<UserCartProductStockVO>();
 		ProductVO productVO = new ProductVO();
 
 
@@ -38,29 +38,29 @@ public class CartDAO {
 				for(int i=0; i<cartList.size(); i++) {
 					productVO.setPRD_NUM(cartList.get(i).getCART_PRDNUM());
 					cartProductList.add((ProductVO) SST.selectOne("CartService.getCartProductList", productVO));
-					
-//					productVO.setPRD_CODE(cartProductList.get(i).getPRD_CODE());
-//					cartStockList.add((StockVO) SST.selectOne("CartService.getCartStockList", productVO));
-					
+
+					//					productVO.setPRD_CODE(cartProductList.get(i).getPRD_CODE());
+					//					cartStockList.add((StockVO) SST.selectOne("CartService.getCartStockList", productVO));
+
 				}
 			}
 		}
-		
+
 		return cartProductList;
 	}
-	
+
 	public List<StockVO> getCartStockList(List<ProductVO> cartProductList) {
 		List<StockVO> cartStockList = new ArrayList<StockVO>();
 		StockVO stockVO = new StockVO();
-		
+
 		if(cartProductList != null) {
 			if(cartProductList.size() != 0) {
 				for(int i=0; i<cartProductList.size(); i++) {
-					
-					
+
+
 					stockVO.setSTOCK_PRDCODE(cartProductList.get(i).getPRD_CODE());
 					cartStockList.add((StockVO) SST.selectOne("CartService.getCartStockList", stockVO));
-					
+
 				}
 			}
 		}
@@ -71,25 +71,37 @@ public class CartDAO {
 
 		SST.delete("CartService.deleteCartList", userCartProductStockVO);
 	}
-	
+
 	public void deleteAll(UserCartProductStockVO vo) {
 
 		SST.delete("CartService.deleteAll", vo);
 	}
-	
+
 	public void updateCartProductCount(UserCartProductStockVO vo) {
 
 		SST.update("CartService.updateCartProductCount", vo);
 	}
+
+//	public int updateSize(UserCartProductStockVO vo) {
+//
+//		List<UserCartProductStockVO> checkSizeList = SST.selectList("CartService.getCheckSizeList", vo);
+//		int checkNum = checkSizeList.size();
+//		if(checkNum == 0) {
+//			SST.update("CartService.updateSize", vo);
+//		}
+//
+//		return checkNum;
+//	}
 	
 	public int updateSize(UserCartProductStockVO vo) {
-		
-		List<UserCartProductStockVO> checkSizeList = SST.selectList("CartService.getCheckSizeList", vo);
-		int checkNum = checkSizeList.size();
+
+		int checkNum = SST.selectOne("CartService.checkSizeNum", vo);
 		if(checkNum == 0) {
 			SST.update("CartService.updateSize", vo);
 		}
 
 		return checkNum;
 	}
+
+
 }
