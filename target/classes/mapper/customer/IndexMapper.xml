@@ -12,7 +12,7 @@
       </select> 
       
       <select id="getOrderList" resultType="kr.co.sinsa.biz.orders.OrdersVO"> 
-         select order_prdcode from orders group by order_prdcode order by count(order_prdcode) desc limit 8
+         select order_prdcode from orders group by order_prdcode order by count(order_prdcode) desc 
 <!--           select order_prdcode from orders group by order_prdcode order by count(order_prdcode) desc; -->
       </select> 
       

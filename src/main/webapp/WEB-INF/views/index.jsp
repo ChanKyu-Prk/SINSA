@@ -180,7 +180,7 @@
 										value="${fn:split(list.PRD_IMAGE,'/')}" />
 
 									<div class="featured__item__pic set-bg"
-										data-setbg="${path}/resources/img/product/${newProduct_img_array[0]}">
+										data-setbg="${pageContext.request.contextPath}/resources/prdImg/${list.PRD_CODE}.png">
 
 
 
@@ -236,14 +236,14 @@
 
 
 											<c:forEach var="list" items="${topProductList}"
-												varStatus="status">
+												varStatus="status" begin="0" end="7">
 												<div class="col-md-3">
 													<div class="featured__item">
 														<c:set var="bestProduct_img_array"
 															value="${fn:split(list.PRD_IMAGE,'/')}" />
 
 														<div class="featured__item__pic set-bg"
-															data-setbg="${path}/resources/img/product/${bestProduct_img_array[0]}">
+															data-setbg="${pageContext.request.contextPath}/resources/prdImg/${list.PRD_CODE}.png">
 															<ul class="featured__item__pic__hover">
 																<li><a href="#"><i class="fa fa-heart"></i></a></li>
 																<li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
@@ -278,7 +278,7 @@
 															value="${fn:split(list.PRD_IMAGE,'/')}" />
 
 														<div class="featured__item__pic set-bg"
-															data-setbg="${path}/resources/img/product/${bestSneakersProduct_img_array[0]}">
+															data-setbg="${pageContext.request.contextPath}/resources/prdImg/${list.PRD_CODE}.png">
 															<ul class="featured__item__pic__hover">
 																<li><a href="#"><i class="fa fa-heart"></i></a></li>
 																<li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
@@ -315,7 +315,7 @@
 															value="${fn:split(list.PRD_IMAGE,'/')}" />
 
 														<div class="featured__item__pic set-bg"
-															data-setbg="${path}/resources/img/product/${bestSportSProduct_img_array[0]}">
+															data-setbg="${pageContext.request.contextPath}/resources/prdImg/${list.PRD_CODE}.png">
 															<ul class="featured__item__pic__hover">
 																<li><a href="#"><i class="fa fa-heart"></i></a></li>
 																<li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
