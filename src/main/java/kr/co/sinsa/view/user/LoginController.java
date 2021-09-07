@@ -139,11 +139,13 @@ public class LoginController {
 			
 			List<ProductVO> topSportsProductList = IndexService.getTopSportsProductList();
 			
-			if(referer != null) {
-				return "redirect:"+referer;
+			if(referer.substring(1,8).equals("product")) {
+				return "redirect:"+referer;					
 			}
 			
 			if (request.getSession().getAttribute("requestURI") != null) {
+				System.out.println("HI22");
+
 				//http://localhost:8080/product/prdCode=ab1234
 				return "redirect:request.getSession().getAttribute(\"requestURI\")";
 			};

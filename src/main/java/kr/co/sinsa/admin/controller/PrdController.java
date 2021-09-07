@@ -97,12 +97,13 @@ public class PrdController {
 	}
 			
 	@RequestMapping(value = "/admin/prdInsert", method = RequestMethod.POST)
-	public String prdInsert(PrdVO vo, @RequestParam(required = false) List<MultipartFile> multipartFile) {
+	public String prdInsert(PrdVO vo, @RequestParam(required = false) List<MultipartFile> multipartFile,
+			HttpServletRequest req) {
 		
 		if (multipartFile.get(0).isEmpty()) {
 			prdService.prd_insert(vo);
 		} else {
-			String fileNames = upload.prdImgUpload(multipartFile);
+			String fileNames = upload.prdImgUpload(multipartFile, req, vo);
 			vo.setPrd_image(fileNames);
 			prdService.prd_insert(vo);
 		}
@@ -118,11 +119,11 @@ public class PrdController {
 			
 	@RequestMapping("/admin/prdUpdate")
 	public String prdUpdate(HttpServletRequest request, Model model, PrdVO vo,
-			@RequestParam(required = false) List<MultipartFile> multipartFile) {
+			@RequestParam(required = false) List<MultipartFile> multipartFile, HttpServletRequest req) {
 		if (multipartFile.get(0).isEmpty()) {
 			prdService.prd_update(vo);
 		} else {
-			String fileNames = upload.prdImgUpload(multipartFile);
+			String fileNames = upload.prdImgUpload(multipartFile, req, vo);
 			vo.setPrd_image(fileNames);
 			prdService.prd_update(vo);
 		}
