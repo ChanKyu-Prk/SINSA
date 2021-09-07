@@ -30,6 +30,7 @@ import kr.co.sinsa.biz.customer.QnAVO;
 import kr.co.sinsa.biz.customer.ReviewVO;
 import kr.co.sinsa.biz.product.PageInfo;
 import kr.co.sinsa.biz.product.ProductVO;
+import kr.co.sinsa.biz.product.StockVO;
 import kr.co.sinsa.biz.user.UserVO;
 
 @Controller
@@ -151,7 +152,31 @@ public class MyPageController {
 			Map<String, Object> map = new HashMap<String, Object>();
 			map.put("ID", userID);
 			map.put("page", (page - 1) * limit);
-			model.addAttribute("jjimList", myPageSerive.jjimList(map));
+			List<ProductVO> jjimList = myPageSerive.jjimList(map);
+			model.addAttribute("jjimList", jjimList);
+			
+			List<StockVO> stock = new ArrayList<StockVO>();	
+			for(int i = 0 ; i < jjimList.size() ; i ++) {
+				stock.add(myPageSerive.getStock(jjimList.get(i).getPRD_CODE()));				
+			}
+			model.addAttribute("stock", stock);
+			
+			List<Integer> jjimcheck = new ArrayList<Integer>();
+			List<Integer> jjimCheckList = myPageSerive.getJjimList(user.getCUS_ID());
+			for (int i = 0; i < jjimList.size(); i++) {
+				int jjim = 0;
+				int prdnum = jjimList.get(i).getPRD_NUM();
+				for (int j = 0; j < jjimCheckList.size(); j++) {
+					int jjjim = jjimCheckList.get(j);
+					if (jjjim == prdnum) {
+						jjim = 1;
+					}
+				}
+				jjimcheck.add(jjim);
+			}
+			System.out.println(stock.get(0));
+			System.out.println(jjimcheck);
+			model.addAttribute("jjimcheck", jjimcheck);
 			listCount = myPageSerive.countJjimList(map);
 			maxPage = (int) ((double) listCount / limit + 0.95);
 			startPage = (((int) ((double) page / 5 + 0.8)) - 1) * 5 + 1;
@@ -159,6 +184,7 @@ public class MyPageController {
 			if (endPage > maxPage) {
 				endPage = maxPage;
 			}
+
 			PageInfo pageInfo = new PageInfo();
 			pageInfo.setListCount(listCount);
 			pageInfo.setEndPage(endPage);
@@ -232,9 +258,8 @@ public class MyPageController {
 	}
 
 	@RequestMapping(value = "/recentView/{page}", method = RequestMethod.GET)
-	public String recentView(Model model, 
-			@PathVariable("page") String pageR,
-			HttpSession session, HttpServletRequest request) {
+	public String recentView(Model model, @PathVariable("page") String pageR, HttpSession session,
+			HttpServletRequest request) {
 		UserVO user = (UserVO) session.getAttribute("user");
 		Cookie[] cRecentlyVieweds = request.getCookies();
 		int page = Integer.parseInt(pageR);
@@ -243,7 +268,6 @@ public class MyPageController {
 		int startPage;
 		int endPage;
 		int maxPage;
-	
 
 		if (user == null) {
 			return "redirect:/login.do";
@@ -269,8 +293,7 @@ public class MyPageController {
 	}
 
 	@RequestMapping(value = "/myProductQnA/{page}", method = RequestMethod.GET)
-	public String myProductQnA(Model model,
-			@PathVariable("page") String pageR,
+	public String myProductQnA(Model model, @PathVariable("page") String pageR,
 			@RequestParam(value = "fromDate", required = false) String date1,
 			@RequestParam(value = "toDate", required = false) String date2, HttpSession session) {
 		UserVO user = (UserVO) session.getAttribute("user");
@@ -426,7 +449,6 @@ public class MyPageController {
 
 	}
 
-	
 	@RequestMapping(value = "/leave", method = RequestMethod.GET)
 	public String leavePassCheck(Model model, HttpSession session) {
 		UserVO user = (UserVO) session.getAttribute("user");
@@ -436,8 +458,7 @@ public class MyPageController {
 		model.addAttribute("page", "회원탈퇴");
 		return "customer/passCheck";
 	}
-	
-	
+
 	@RequestMapping(value = "/leave", method = RequestMethod.POST)
 	public String leave(Model model, @RequestParam(value = "password", required = false) String password,
 			HttpSession session) {
@@ -457,17 +478,14 @@ public class MyPageController {
 				return "redirect:/leave";
 			}
 		} else {
-			
+
 			myPageSerive.leave(user.getCUS_ID());
 			session.invalidate();
 			return "redirect:/";
 		}
 
 	}
-	
-	
-	
-	
+
 	@RequestMapping(value = "/reviewWrite/{ORDERNUM}/{ORDERPRDSIZE}/{PRDCODE}", method = RequestMethod.GET)
 	public String reviewWrite(Model model, @PathVariable("ORDERNUM") String ORDERNUM,
 			@PathVariable("ORDERPRDSIZE") String ORDERPRDSIZE, @PathVariable("PRDCODE") String PRDCODE,
@@ -511,9 +529,9 @@ public class MyPageController {
 		map.put("prdcode", prdcode);
 		map.put("orderum", orderum);
 		map.put("prdsize", prdsize);
-		map.put("orderstate", "반품요청/"+reason);
+		map.put("orderstate", "반품요청/" + reason);
 		myPageSerive.refund(map);
-		return "redirect:/myOrderStatus/"+orderum;
+		return "redirect:/myOrderStatus/" + orderum;
 	}
 
 	@RequestMapping(value = "/cancel", method = RequestMethod.GET)
@@ -522,34 +540,35 @@ public class MyPageController {
 		map.put("prdcode", prdcode);
 		map.put("orderum", orderum);
 		map.put("prdsize", prdsize);
-		map.put("orderstate", "취소요청/"+reason);
+		map.put("orderstate", "취소요청/" + reason);
 		myPageSerive.cancel(map);
-		return "redirect:/myOrderStatus/"+orderum;
+		return "redirect:/myOrderStatus/" + orderum;
 	}
+
 	@RequestMapping(value = "/allRefund", method = RequestMethod.GET)
-	public String allRefund(String orderum , String reason) {
+	public String allRefund(String orderum, String reason) {
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("orderum", orderum);
-		map.put("orderstate", "일괄반품요청/"+reason);
+		map.put("orderstate", "일괄반품요청/" + reason);
 		myPageSerive.allRefund(map);
-		
-		return "redirect:/myOrderStatus/"+orderum;
+
+		return "redirect:/myOrderStatus/" + orderum;
 	}
 
 	@RequestMapping(value = "/allCancel", method = RequestMethod.GET)
-	public String allCancel(String orderum , String reason) {
+	public String allCancel(String orderum, String reason) {
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("orderum", orderum);
-		map.put("orderstate", "일괄취소요청/"+reason);
+		map.put("orderstate", "일괄취소요청/" + reason);
 		myPageSerive.allCancel(map);
-		return "redirect:/myOrderStatus/"+orderum;
+		return "redirect:/myOrderStatus/" + orderum;
 	}
 
 	@RequestMapping(value = "/myReviews/{page}", method = RequestMethod.GET)
 	public String myReviews(Model model, @PathVariable("page") String pageR,
 			@RequestParam(value = "fromDate", required = false) String date1,
 			@RequestParam(value = "toDate", required = false) String date2, HttpSession session) {
-		
+
 		UserVO user = (UserVO) session.getAttribute("user");
 		int page = Integer.parseInt(pageR);
 		int limit = 10;
@@ -577,24 +596,25 @@ public class MyPageController {
 			map.put("date2", date2_sqldate);
 			listCount = myPageSerive.countReviewsDate(map);
 			List<ReviewVO> myReviews = myPageSerive.myReviewsDate(map);
-			
+
 			model.addAttribute("myReviews", myReviews);
 			model.addAttribute("product", myPageSerive.productMatchReview(myReviews));
 			List<String[]> titleList = new ArrayList<String[]>();
 			List<String[]> imgList = new ArrayList<String[]>();
-			for(int i = 0; i < myReviews.size() ; i++) {
+			for (int i = 0; i < myReviews.size(); i++) {
 				String[] title = myReviews.get(i).getREV_TITLE().split("/");
 				titleList.add(title);
 				String[] img = null;
-				if(myReviews.get(i).getREV_IMAGE()!=null) {
-				String str = myReviews.get(i).getREV_IMAGE().substring(0, myReviews.get(i).getREV_IMAGE().length()-1);
-				img = str.split("/");
+				if (myReviews.get(i).getREV_IMAGE() != null) {
+					String str = myReviews.get(i).getREV_IMAGE().substring(0,
+							myReviews.get(i).getREV_IMAGE().length() - 1);
+					img = str.split("/");
 				}
 				imgList.add(img);
 			}
 			model.addAttribute("titleList", titleList);
 			model.addAttribute("imgList", imgList);
-			
+
 		} else {
 			Map<String, Object> map = new HashMap<String, Object>();
 			map.put("ID", userID);
@@ -605,13 +625,14 @@ public class MyPageController {
 			model.addAttribute("product", myPageSerive.productMatchReview(myReviews));
 			List<String[]> titleList = new ArrayList<String[]>();
 			List<String[]> imgList = new ArrayList<String[]>();
-			for(int i = 0; i < myReviews.size() ; i++) {
+			for (int i = 0; i < myReviews.size(); i++) {
 				String[] title = myReviews.get(i).getREV_TITLE().split("/");
 				titleList.add(title);
 				String[] img = null;
-				if(myReviews.get(i).getREV_IMAGE()!=null) {
-				String str = myReviews.get(i).getREV_IMAGE().substring(0, myReviews.get(i).getREV_IMAGE().length()-1);
-				img = str.split("/");
+				if (myReviews.get(i).getREV_IMAGE() != null) {
+					String str = myReviews.get(i).getREV_IMAGE().substring(0,
+							myReviews.get(i).getREV_IMAGE().length() - 1);
+					img = str.split("/");
 				}
 				imgList.add(img);
 			}
@@ -634,26 +655,22 @@ public class MyPageController {
 		pageInfo.setMaxPage(maxPage);
 		pageInfo.setPage(page);
 		model.addAttribute("pageInfo", pageInfo);
-		
-		
-		
-		
+
 		return "customer/viewMyReviews";
 	}
-	
+
 	@RequestMapping(value = "/decide", method = RequestMethod.GET)
-	public String decide(String prdcode, String orderum, String prdsize ,String returnPage) {
+	public String decide(String prdcode, String orderum, String prdsize, String returnPage) {
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("prdcode", prdcode);
 		map.put("orderum", orderum);
 		map.put("prdsize", prdsize);
 		myPageSerive.decide(map);
-		if(returnPage == "1") {
-		return "redirect:/myOrderStatus/"+orderum;
-		}else {
-			return "redirect:/myOrderStatus/"+orderum;
+		if (returnPage == "1") {
+			return "redirect:/myOrderStatus/" + orderum;
+		} else {
+			return "redirect:/myOrderStatus/" + orderum;
 		}
 	}
-	
-	
+
 }

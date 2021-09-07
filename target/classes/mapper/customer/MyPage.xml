@@ -516,4 +516,11 @@ order by REV_NUM  desc
 	select ORDER_STATE from ORDERS where 
 	ORDER_CUSID = #{value};
 	</select>
+	
+	<select id="getStock"
+	resultType="kr.co.sinsa.biz.product.StockVO">
+	select * from stock
+	where
+	STOCK_PRDCODE = #{value};
+	</select>
 </mapper>

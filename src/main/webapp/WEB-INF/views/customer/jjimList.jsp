@@ -2,14 +2,17 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-
+<meta name="description" content="Ogani Template">
+<meta name="keywords" content="Ogani, unica, creative, html">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
 <style type="text/css">
 .con_top_margin {
 	margin-top: 40px;
@@ -85,16 +88,119 @@
 	padding: 0px !important;
 }
 
-a.page-link{
-color: black !important;
+a.page-link {
+	color: black !important;
 }
+
 .page-item.active
-.page-link{
-background-color: black !important;
-border-color: black !important;
-color: white !important;
+.page-link {
+	background-color: black !important;
+	border-color: black !important;
+	color: white !important;
+}
+
+.product__item__pic__hover li a.buyNow {
+	width: 70px;
+	border-radius: 20px;
+	padding-right: 5px;
+	padding-left: 5px;
+}
+
+.product__item__pic__hover li a {
+	cursor: pointer;
+}
+
+.cartModalBtn {
+	display: none;
+}
+
+.buyNowBtn {
+	display: none;
+}
+
+.nice-select.open .list {
+	overflow: auto;
+	max-height: 250px;
+	width: 210px !important;
+}
+
+.selectStocks {
+	width: 100% !important;
+}
+
+.marginbottom {
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+
+.modalImgDiv {
+	margin: 0 !important;
+	padding: 15px !important;
+}
+
+.modalInfoDiv {
+	margin: 0 !important;
+	padding: 15px !important;
+}
+
+.subBtn {
+	display: table;
+	text-align: center;
+	width: 100%;
+	border: solid 1px #e8e8e8;
+	height: 100%;
+	border-radius: 5px;
+	cursor: pointer;
+}
+
+.subBtnS {
+	display: table-cell;
+	vertical-align: middle;
+}
+
+hr.mo {
+	margin: 10px;
+}
+
+.brandrow {
+	height: 20%;
+	color: #808080;
+	font-size: 15px;
+}
+
+.namerow {
+	height: 40%;
+	font-size: 25px;
+	font-weight: bold;
+}
+
+.colorrow {
+	height: 20%;
+	font-size: 15px;
+}
+
+.pricerow {
+	height: 20%;
+	font-size: 15px;
+}
+
+.nopadding {
+	padding: 0;
+}
+
+.fc {
+	color: #808080;
+}
+
+.infos {
+	padding-left: 15px;
+}
+
+.inforow {
+	
 }
 </style>
+
 <title>SINSA : 찜 목록</title>
 </head>
 <jsp:include page="../header.jsp"></jsp:include>
@@ -109,11 +215,7 @@ color: white !important;
 					<div class="subjecet">
 						<h3>찜 목록</h3>
 					</div>
-
 					<hr>
-
-
-
 
 
 					<c:choose>
@@ -143,50 +245,181 @@ color: white !important;
 
 
 							<div class="row">
-								<c:forEach var="list" items="${jjimList }">
+								<c:forEach var="list" items="${jjimList }" varStatus="status">
+
 									<div class="col-lg-4 col-md-6 col-sm-6">
 										<div class="product__item">
 											<div class="product__item__pic set-bg"
-												data-setbg="/resources/img/default.png">
+												data-setbg="/resources/prdImg/adidas1.jpg">
 												<ul class="product__item__pic__hover">
-													<li><a href="#"><i class="fa fa-heart"></i></a></li>
-													<li><a id="modal_open_btn"><i
-															class="fa fa-retweet"><b>바로구매</b></i></a></li>
-													<li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+													<li onclick="event.cancelBubble= true;"><a
+														class="jjim"><i class="fa fa-heart"></i></a></li>
+													<li onclick="event.cancelBubble= true;"><a
+														class="buyNow"><i class="fa">바로구매</i></a></li>
+													<li onclick="event.cancelBubble= true;"><a
+														class="showpingCart"><i class="fa fa-shopping-cart"></i></a></li>
+
 												</ul>
+
+
 											</div>
-											<div id="modal">
-												<div class="modal_content">
-													<h2>모달 창</h2>
+											<button class="buyNowBtn" data-toggle="modal"
+												data-target="#buyNowModal${status.index }"></button>
+											<div class="modal" id="buyNowModal${status.index }"
+												tabindex="-1" role="dialog"
+												aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+												<div class="modal-dialog modal-dialog-centered"
+													role="document">
+													<div class="modal-content">
+														<div class="modal-header">
+															<h5 class="modal-title" id="exampleModalLongTitle">바로구매</h5>
+															<button type="button" class="close" data-dismiss="modal">
+																<span aria-hidden="true">&times;</span>
+															</button>
+														</div>
+														<div class="container-fluid">
+															<div class="row">
+																<div class="col-4 modalImgDiv">
+																	<img alt="" src="/resources/prdImg/adidas1.jpg">
 
-													<p>모달 창 입니다.</p>
+																</div>
+																<div class="col-8 modalInfoDiv">
+																	<div class="row brandrow infos">${list.PRD_BRAND }</div>
+																	<div class="row namerow infos">${list.PRD_NAME }</div>
 
-													<button type="button" id="modal_close_btn">모달 창 닫기
-													</button>
+																	<div class="row colorrow">
+																		<div class="col-3  infos fc">색상 :</div>
+																		<div class="col-9 nopadding">${list.PRD_COLOR }</div>
+																	</div>
+																	<div class="row pricerow">
+
+																		<div class="col-3  infos fc">가격 :</div>
+																		<div class="col-9 nopadding">
+																			<fmt:formatNumber value="${list.PRD_PRICE }"
+																				type="number" />
+																			원
+																		</div>
+																	</div>
+
+
+
+
+																</div>
+															</div>
+															<hr class="mo" />
+															<div class="row marginbottom">
+																<div class="col-6">
+																	<select class="selectStocks">
+																		<option value="" selected="selected">사이즈 선택</option>
+																		<c:forEach begin="220" end="290" step="5"
+																			varStatus="var">
+																			<c:set value="${stock[status.index]}" var="stock1" />
+																			<c:set value="STOCK_${var.index }" var="stock2" />
+																			<c:set value="${ stock1[stock2]}" var="stock3" />
+																			<c:if test="${ stock3 >0}">
+																				<option value="${var.index }">${var.index }&nbsp;&nbsp;(
+																					${stock3 }개)</option>
+																			</c:if>
+																		</c:forEach>
+																	</select>
+																</div>
+																<div class="col-6">
+																	<div class="subBtn">
+																		<span class="subBtnS">바로 구매</span>
+																	</div>
+																</div>
+
+															</div>
+														</div>
+
+													</div>
 												</div>
 											</div>
+											<button class="cartModalBtn" data-toggle="modal"
+												data-target="#cartModal${status.index }"></button>
+											<div class="modal" id="cartModal${status.index }"
+												tabindex="-1" role="dialog"
+												aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+												<div class="modal-dialog modal-dialog-centered"
+													role="document">
+													<div class="modal-content">
+														<div class="modal-header">
+															<h5 class="modal-title" id="exampleModalLongTitle">장바구니에
+																담기</h5>
+															<button type="button" class="close" data-dismiss="modal">
+																<span aria-hidden="true">&times;</span>
+															</button>
+														</div>
+														<div class="container-fluid">
+															<div class="row">
+																<div class="col-4 modalImgDiv">
+																	<img alt="" src="/resources/prdImg/adidas1.jpg">
+
+																</div>
+																<div class="col-8 modalInfoDiv">
+																	<div class="row brandrow infos">${list.PRD_BRAND }</div>
+																	<div class="row namerow infos">${list.PRD_NAME }</div>
+
+																	<div class="row colorrow">
+																		<div class="col-3  infos fc">색상 :</div>
+																		<div class="col-9 nopadding">${list.PRD_COLOR }</div>
+																	</div>
+																	<div class="row pricerow">
+
+																		<div class="col-3  infos fc">가격 :</div>
+																		<div class="col-9 nopadding">
+																			<fmt:formatNumber value="${list.PRD_PRICE }"
+																				type="number" />
+																			원
+																		</div>
+																	</div>
+
+
+
+
+																</div>
+															</div>
+															<hr class="mo" />
+															<div class="row marginbottom">
+																<div class="col-6">
+																	<select class="selectStocks">
+																		<option value="" selected="selected">사이즈 선택</option>
+																		<c:forEach begin="220" end="290" step="5"
+																			varStatus="var">
+																			<c:set value="${stock[status.index]}" var="stock1" />
+																			<c:set value="STOCK_${var.index }" var="stock2" />
+																			<c:set value="${ stock1[stock2]}" var="stock3" />
+																			<c:if test="${ stock3 >0}">
+																				<option value="${var.index }">${var.index }&nbsp;&nbsp;(
+																					${stock3 }개)</option>
+																			</c:if>
+																		</c:forEach>
+																	</select>
+																</div>
+																<div class="col-6">
+																	<div class="subBtn">
+																		<span class="subBtnS">담기</span>
+																	</div>
+																</div>
+
+															</div>
+														</div>
+
+													</div>
+												</div>
+											</div>
+
 											<div class="product__item__text">
-												<p>
-												<h6>${list.PRD_NAME }</h6>
-												</p>
-												<h5>${list.PRD_PRICE }원</h5>
+												<h6>
+													<a href="#">${list.PRD_NAME }</a>
+												</h6>
+												<h5>
+													<fmt:formatNumber value="${list.PRD_PRICE }" type="number" />
+													원
+												</h5>
 											</div>
 										</div>
 									</div>
-
-									<script>
-										$("#modal_open_btn").click(
-												function() {
-													$("#modal").attr("style",
-															"display:block");
-												});
-
-										$("#modal_close_btn").click(
-												function() {
-													$("#modal").attr("style",
-															"display:none");
-												});
-									</script>
 
 								</c:forEach>
 							</div>
@@ -257,6 +490,19 @@ color: white !important;
 </body>
 
 <script>
-	
+	$('.product__item__pic').on("click", function() {
+		location.href = "/";
+	});
+
+	$('.buyNow').on("click", function() {
+		$(this).closest('.product__item__pic').next().click();
+	});
+	$('.showpingCart').on("click", function() {
+		$(this).closest('.product__item__pic').next().next().next().click();
+	});
+
+	$('.jjim').on("click", function() {
+
+	});
 </script>
 </html>

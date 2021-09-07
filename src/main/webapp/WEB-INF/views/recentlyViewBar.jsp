@@ -37,14 +37,14 @@ display: none;
 }
 
 .recentlyViewBar_table {
-	
+	text-align: center !important
 }
 
 .recentlyViewBar_title {
 	height: 50px;
 	font-size: 10pt;
 	font-weight: bold;
-	text-align: center;
+	text-align: center !important;
 }
 
 .recentlyViewBar_td {
