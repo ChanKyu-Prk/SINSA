@@ -345,7 +345,24 @@ public class MyPageServiceImpl implements MyPageService {
 		}
 		return result;
 	}
+
+	@Override
+	public boolean checkSNS(String id) {
+		boolean result = false ; 
+		int cusnum = dao.getCusNum(id);
+		String check = dao.checkSNS(cusnum);
+		if(check.equals("O") || check == "O") {
+			result = true;
+		}
+		return result;
+	}
 	
+	@Override
+	public String checkSNS2(String id) {	
+		int cusnum = dao.getCusNum(id);
+		String check = dao.checkSNS(cusnum);
+		return check;
+	}
 	
 
 }

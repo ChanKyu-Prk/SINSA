@@ -14,7 +14,14 @@
 	</insert>
 
 	<select id="idCheck" resultType="int">
-		select count(*) from customer where CUS_ID = #{CUS_ID}
+		select count(*) from customer
+		where CUS_ID = #{CUS_ID}
 	</select>
+
+	<select id="mailCheck" resultType="int">
+		select count(*) from customer
+		where CUS_EMAIL = #{CUS_EMAIL}
+	</select>
+
 
 </mapper>

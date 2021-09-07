@@ -72,4 +72,8 @@ public interface MyPageService {
 	
 	public void leave(String userID);
 	public String canleave(String ORDER_CUSID);
+		
+	public boolean checkSNS(String id);
+	public String checkSNS2(String id);
+	
 	}

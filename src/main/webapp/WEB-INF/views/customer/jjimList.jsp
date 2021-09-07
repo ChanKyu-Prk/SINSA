@@ -9,10 +9,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<meta name="description" content="Ogani Template">
-<meta name="keywords" content="Ogani, unica, creative, html">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
 <style type="text/css">
 .con_top_margin {
 	margin-top: 40px;
@@ -195,7 +192,9 @@ hr.mo {
 .infos {
 	padding-left: 15px;
 }
-
+.prodBox {
+	height: 400px;
+}
 
 </style>
 
@@ -245,179 +244,203 @@ hr.mo {
 							<div class="row">
 								<c:forEach var="list" items="${jjimList }" varStatus="status">
 
-									<div class="col-lg-4 col-md-6 col-sm-6">
-										<div class="product__item">
-											<div class="product__item__pic set-bg"
-												data-setbg="/resources/prdImg/adidas1.jpg">
-												<ul class="product__item__pic__hover">
-													<li onclick="event.cancelBubble= true;"><a
-														class="jjim"><i class="fa fa-heart"></i></a></li>
-													<li onclick="event.cancelBubble= true;"><a
-														class="buyNow"><i class="fa">바로구매</i></a></li>
-													<li onclick="event.cancelBubble= true;"><a
-														class="showpingCart"><i class="fa fa-shopping-cart"></i></a></li>
+									<div class="col-lg-4 col-md-6 col-sm-6 prodBox">
+									<div class="product__item">
+										<div class="product__item__pic set-bg"
+											data-setbg="${pageContext.request.contextPath}/resources/prdImg/${list.PRD_CODE }.png"
+											onclick="location.href='/product/prdCode=${list.PRD_CODE}';">
+											<ul class="product__item__pic__hover">
+												<li onclick="event.cancelBubble= true;"><a
+													class="jjimBtn"><input type="hidden"
+														value="${list.PRD_NUM}" class="prdnumj"> <c:if
+															test="${jjimcheck[status.index]==0}">
+															<i class="fa fa-heart-o"></i>
+														</c:if> <c:if test="${jjimcheck[status.index]==1}">
+															<i class="fa fa-heart"></i>
+														</c:if> </a></li>
+												<li>
+												<li onclick="event.cancelBubble= true;"><a
+													class="buyNow"><i class="fa">바로구매</i></a></li>
+												<li onclick="event.cancelBubble= true;"><a
+													class="showpingCart"><i class="fa fa-shopping-cart"></i></a></li>
 
-												</ul>
-
-
-											</div>
-											<button class="buyNowBtn" data-toggle="modal"
-												data-target="#buyNowModal${status.index }"></button>
-											<div class="modal" id="buyNowModal${status.index }"
-												tabindex="-1" role="dialog"
-												aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-												<div class="modal-dialog modal-dialog-centered"
-													role="document">
-													<div class="modal-content">
-														<div class="modal-header">
-															<h5 class="modal-title" id="exampleModalLongTitle">바로구매</h5>
-															<button type="button" class="close" data-dismiss="modal">
-																<span aria-hidden="true">&times;</span>
-															</button>
-														</div>
-														<div class="container-fluid">
-															<div class="row">
-																<div class="col-4 modalImgDiv">
-																	<img alt="" src="/resources/prdImg/adidas1.jpg">
-
-																</div>
-																<div class="col-8 modalInfoDiv">
-																	<div class="row brandrow infos">${list.PRD_BRAND }</div>
-																	<div class="row namerow infos">${list.PRD_NAME }</div>
-
-																	<div class="row colorrow">
-																		<div class="col-3  infos fc">색상 :</div>
-																		<div class="col-9 nopadding">${list.PRD_COLOR }</div>
-																	</div>
-																	<div class="row pricerow">
-
-																		<div class="col-3  infos fc">가격 :</div>
-																		<div class="col-9 nopadding">
-																			<fmt:formatNumber value="${list.PRD_PRICE }"
-																				type="number" />
-																			원
-																		</div>
-																	</div>
+											</ul>
 
 
-
-
-																</div>
-															</div>
-															<hr class="mo" />
-															<div class="row marginbottom">
-																<div class="col-6">
-																	<select class="selectStocks">
-																		<option value="" selected="selected">사이즈 선택</option>
-																		<c:forEach begin="220" end="290" step="5"
-																			varStatus="var">
-																			<c:set value="${stock[status.index]}" var="stock1" />
-																			<c:set value="STOCK_${var.index }" var="stock2" />
-																			<c:set value="${ stock1[stock2]}" var="stock3" />
-																			<c:if test="${ stock3 >0}">
-																				<option value="${var.index }">${var.index }&nbsp;&nbsp;(
-																					${stock3 }개)</option>
-																			</c:if>
-																		</c:forEach>
-																	</select>
-																</div>
-																<div class="col-6">
-																	<div class="subBtn">
-																		<span class="subBtnS">바로 구매</span>
-																	</div>
-																</div>
-
-															</div>
-														</div>
-
+										</div>
+										<button class="buyNowBtn" data-toggle="modal"
+											data-target="#buyNowModal${status.index }"></button>
+										<div class="modal" id="buyNowModal${status.index }"
+											tabindex="-1" role="dialog"
+											aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+											<div class="modal-dialog modal-dialog-centered"
+												role="document">
+												<div class="modal-content">
+													<div class="modal-header">
+														<h5 class="modal-title" id="exampleModalLongTitle">바로구매</h5>
+														<button type="button" class="close" data-dismiss="modal">
+															<span aria-hidden="true">&times;</span>
+														</button>
 													</div>
-												</div>
-											</div>
-											<button class="cartModalBtn" data-toggle="modal"
-												data-target="#cartModal${status.index }"></button>
-											<div class="modal" id="cartModal${status.index }"
-												tabindex="-1" role="dialog"
-												aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-												<div class="modal-dialog modal-dialog-centered"
-													role="document">
-													<div class="modal-content">
-														<div class="modal-header">
-															<h5 class="modal-title" id="exampleModalLongTitle">장바구니에
-																담기</h5>
-															<button type="button" class="close" data-dismiss="modal">
-																<span aria-hidden="true">&times;</span>
-															</button>
-														</div>
-														<div class="container-fluid">
-															<div class="row">
-																<div class="col-4 modalImgDiv">
-																	<img alt="" src="/resources/prdImg/adidas1.jpg">
-
-																</div>
-																<div class="col-8 modalInfoDiv">
-																	<div class="row brandrow infos">${list.PRD_BRAND }</div>
-																	<div class="row namerow infos">${list.PRD_NAME }</div>
-
-																	<div class="row colorrow">
-																		<div class="col-3  infos fc">색상 :</div>
-																		<div class="col-9 nopadding">${list.PRD_COLOR }</div>
-																	</div>
-																	<div class="row pricerow">
-
-																		<div class="col-3  infos fc">가격 :</div>
-																		<div class="col-9 nopadding">
-																			<fmt:formatNumber value="${list.PRD_PRICE }"
-																				type="number" />
-																			원
-																		</div>
-																	</div>
-
-
-
-
-																</div>
-															</div>
-															<hr class="mo" />
-															<div class="row marginbottom">
-																<div class="col-6">
-																	<select class="selectStocks">
-																		<option value="" selected="selected">사이즈 선택</option>
-																		<c:forEach begin="220" end="290" step="5"
-																			varStatus="var">
-																			<c:set value="${stock[status.index]}" var="stock1" />
-																			<c:set value="STOCK_${var.index }" var="stock2" />
-																			<c:set value="${ stock1[stock2]}" var="stock3" />
-																			<c:if test="${ stock3 >0}">
-																				<option value="${var.index }">${var.index }&nbsp;&nbsp;(
-																					${stock3 }개)</option>
-																			</c:if>
-																		</c:forEach>
-																	</select>
-																</div>
-																<div class="col-6">
-																	<div class="subBtn">
-																		<span class="subBtnS">담기</span>
-																	</div>
-																</div>
+													<div class="container-fluid">
+														<div class="row">
+															<div class="col-sm-12 col-md-4 modalImgDiv">
+																<img alt=""
+																	src="${pageContext.request.contextPath}/resources/prdImg/${list.PRD_CODE }.png">
 
 															</div>
-														</div>
+															<div class="col-sm-12 col-md-8 modalInfoDiv">
+																<div class="row brandrow infos">${list.PRD_BRAND }</div>
+																<div class="row namerow infos">${list.PRD_NAME }</div>
 
+																<div class="row colorrow">
+																	<div class="col-3  infos fc">색상 :</div>
+																	<div class="col-9 nopadding">${list.PRD_COLOR }</div>
+																</div>
+																<div class="row pricerow">
+
+																	<div class="col-3  infos fc">가격 :</div>
+																	<div class="col-9 nopadding">
+																		<fmt:formatNumber value="${list.PRD_PRICE }"
+																			type="number" />
+																		원
+																	</div>
+																</div>
+															</div>
+														</div>
+														<hr class="mo" />
+														<div class="row marginbottom selectRow">
+															<div class="col-6">
+																<select class="selectStocks">
+																	<c:set value="0" var="count" />
+																	<option value="" selected="selected"
+																		disabled="disabled">사이즈 선택</option>
+																	<c:forEach begin="220" end="290" step="5"
+																		varStatus="var">
+																		<c:set value="${stock[status.index]}" var="stock1" />
+																		<c:set value="STOCK_${var.index }" var="stock2" />
+																		<c:set value="${ stock1[stock2]}" var="stock3" />
+																		<c:if test="${ stock3 >0}">
+																			<option value="${var.index }">${var.index }&nbsp;&nbsp;(
+																				${stock3 }개)</option>
+																			<c:set value="1" var="count" />
+																		</c:if>
+																	</c:forEach>
+																	<c:if test="${ count == 0}">
+																		<option value="" disabled="disabled">품절
+																			되었습니다.</option>
+																	</c:if>
+																</select>
+															</div>
+															<div class="col-6">
+																<div class="subBtn">
+																	<input type="hidden" value="${list.PRD_CODE}"
+																		class="numCode"> <span
+																		class="subBtnS goByebtn">바로 구매</span>
+																</div>
+															</div>
+
+														</div>
 													</div>
-												</div>
-											</div>
 
-											<div class="product__item__text">
-												<h6>
-													<a href="#">${list.PRD_NAME }</a>
-												</h6>
-												<h5>
-													<fmt:formatNumber value="${list.PRD_PRICE }" type="number" />
-													원
-												</h5>
+												</div>
 											</div>
 										</div>
+
+
+										<button class="cartModalBtn" data-toggle="modal"
+											data-target="#cartModal${status.index }"></button>
+
+										<div class="modal" id="cartModal${status.index }"
+											tabindex="-1" role="dialog"
+											aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+											<div class="modal-dialog modal-dialog-centered"
+												role="document">
+												<div class="modal-content">
+													<div class="modal-header">
+														<h5 class="modal-title" id="exampleModalLongTitle">장바구니에
+															담기</h5>
+														<button type="button" class="close" data-dismiss="modal">
+															<span aria-hidden="true">&times;</span>
+														</button>
+													</div>
+													<div class="container-fluid">
+														<div class="row">
+															<div class="col-sm-12 col-md-4 modalImgDiv">
+																<img alt=""
+																	src="${pageContext.request.contextPath}/resources/prdImg/${list.PRD_CODE }.png">
+
+															</div>
+															<div class="col-sm-12 col-md-8 modalInfoDiv">
+																<div class="row brandrow infos">${list.PRD_BRAND }</div>
+																<div class="row namerow infos">${list.PRD_NAME }</div>
+
+																<div class="row colorrow">
+																	<div class="col-3  infos fc">색상 :</div>
+																	<div class="col-9 nopadding">${list.PRD_COLOR }</div>
+																</div>
+																<div class="row pricerow">
+
+																	<div class="col-3  infos fc">가격 :</div>
+																	<div class="col-9 nopadding">
+																		<fmt:formatNumber value="${list.PRD_PRICE }"
+																			type="number" />
+																		원
+																	</div>
+																</div>
+															</div>
+														</div>
+														<hr class="mo" />
+														<div class="row marginbottom selectRow">
+															<div class="col-6">
+																<select class="selectStocks">
+																	<c:set value="0" var="count" />
+																	<option value="" selected="selected"
+																		disabled="disabled">사이즈 선택</option>
+																	<c:forEach begin="220" end="290" step="5"
+																		varStatus="var">
+																		<c:set value="${stock[status.index]}" var="stock1" />
+																		<c:set value="STOCK_${var.index }" var="stock2" />
+																		<c:set value="${ stock1[stock2]}" var="stock3" />
+																		<c:if test="${ stock3 >0}">
+																			<option value="${var.index }">${var.index }&nbsp;&nbsp;(
+																				${stock3 }개)</option>
+																			<c:set value="1" var="count" />
+																		</c:if>
+																	</c:forEach>
+																	<c:if test="${ count == 0}">
+																		<option value="" disabled="disabled" class="soldout">품절
+																			되었습니다.</option>
+																	</c:if>
+																</select>
+															</div>
+															<div class="col-6">
+																<div class="subBtn">
+																	<input type="hidden" value="${list.PRD_NUM}"
+																		class="numCode"> <span
+																		class="subBtnS goCartBtn">담기</span>
+																</div>
+															</div>
+
+														</div>
+													</div>
+
+												</div>
+											</div>
+										</div>
+
+										<div class="product__item__text">
+											<h6>
+												<a href='/product/prdCode=${list.PRD_CODE}' class=>${list.PRD_NAME }</a>
+											</h6>
+											<h5>
+												<fmt:formatNumber value="${list.PRD_PRICE }" type="number" />
+												원
+											</h5>
+										</div>
 									</div>
+								</div>
+
 
 								</c:forEach>
 							</div>
@@ -488,19 +511,116 @@ hr.mo {
 </body>
 
 <script>
-	$('.product__item__pic').on("click", function() {
-		location.href = "/";
-	});
+$('.jjimBtn').on("click", function() {
+	var prdnum = $(this).find('.prdnumj').val();
+	var data = {
+		prdnum : prdnum
+	}
+	var btn = $(this).find("i");
+	$.ajax({
+		type : "POST",
+		url : "/dojjim",
+		data : data,
+		success : function(result) {
 
-	$('.buyNow').on("click", function() {
-		$(this).closest('.product__item__pic').next().click();
-	});
-	$('.showpingCart').on("click", function() {
-		$(this).closest('.product__item__pic').next().next().next().click();
-	});
+			if (result == 'login') {
+				var con = confirm("로그인이 필요한 서비스입니다.\n로그인하시겠습니까?");
+				if (con) {
+					location.href = "/login.do";
+					return false;
+				} else {
+					return false;
+				}
+			} else {
+				if (btn.hasClass("fa-heart-o")) {
+					btn.removeClass("fa-heart-o");
+					btn.addClass("fa-heart");
+				} else {
+					btn.removeClass("fa-heart");
+					btn.addClass("fa-heart-o");
+				}
+			}
 
-	$('.jjim').on("click", function() {
-
+		},
+		error : function() {
+			alert("보내기 실패");
+		}
 	});
+});
+
+
+$('.buyNow').on("click", function() {
+
+	$(this).closest('.product__item__pic').next().click();
+});
+$('.showpingCart').on("click", function() {
+
+	$(this).closest('.product__item__pic').next().next().next().click();
+});
+
+$('.goCartBtn')
+		.on(
+				"click",
+				function() {
+					var numCode = $(this).parent().find('.numCode').val();
+					var selectSize = $(this).closest('.selectRow')
+							.children().find('.selectStocks').val();
+					if (selectSize === null) {
+						alert("사이즈를 선택해주세요.");
+						return false;
+					}
+					var sendData = {
+						"PRDNUM" : numCode,
+						"PRDSIZE" : selectSize
+					};
+					$
+							.ajax({
+								url : '/ajaxToCart',
+								method : 'POST',
+								data : sendData,
+								success : function(data) {
+									var toCart = confirm("상품이 장바구니 담겼습니다.\n장바구니로 이동하시겠습니까?");
+									if (toCart) {
+										location.href = "/cart.do";
+									}
+								}
+							})
+				})
+
+$('.goByebtn').on(
+		"click",
+		function() {
+
+			var ORDER_PRDCODE = $(this).parent().find('.numCode').val();
+			var ORDER_PRDSIZE = $(this).closest('.selectRow').children()
+					.find('.selectStocks').val();
+			if (ORDER_PRDSIZE === null) {
+				alert("사이즈를 선택해주세요.");
+				return false;
+			}
+			var ORDER_AMOUNT = '1';
+			var data = {};
+			var itemList = [];
+			data["ORDER_PRDCODE"] = ORDER_PRDCODE;
+			data["ORDER_PRDSIZE"] = ORDER_PRDSIZE;
+			data["ORDER_AMOUNT"] = ORDER_AMOUNT;
+			itemList.unshift(data);
+
+			$.ajax({
+				url : "/direct/checkout",
+				type : "POST",
+				data : JSON.stringify(itemList),
+				headers : {
+					'Accept' : 'application/json',
+					'Content-Type' : 'application/json'
+				},
+				success : function(data) {
+					location.href = "/direct/checkout";
+				},
+				error : function() {
+					alert("보내기 실패");
+				}
+			});
+		})
 </script>
 </html>

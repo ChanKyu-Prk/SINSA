@@ -37,7 +37,8 @@ display: none;
 }
 
 .recentlyViewBar_table {
-	text-align: center !important
+	text-align: center !important;
+	width: 100%;
 }
 
 .recentlyViewBar_title {

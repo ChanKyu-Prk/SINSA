@@ -47,6 +47,21 @@ public class SNSLoginServiceImpl implements SNSLoginService{
 		return dao.getUser(cus_num);
 	}
 
+	@Override
+	public int Link(String email,String naverID) {
+		int cusnum = dao.getCusNumToEamil(email);
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("cusnum", cusnum);
+		map.put("naverID", naverID);
+		dao.Link(map);
+		return cusnum;
+	}
+
+	@Override
+	public String getID(String email) {
+		return dao.getID(email);
+	}
+
 	
 	
 

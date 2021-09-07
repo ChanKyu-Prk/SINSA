@@ -22,4 +22,13 @@ public class JoinServiceImpl implements JoinService {
 		return joinDAO.idCheck(CUS_ID);
 	}
 
+	@Override
+	public boolean mailCheck(String email) {
+		boolean result = false;
+		if(joinDAO.mailCheck(email)!=0) {
+			result = true;
+		}
+		return result;
+	}
+
 }

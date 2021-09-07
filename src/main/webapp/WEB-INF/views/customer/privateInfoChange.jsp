@@ -669,6 +669,7 @@ input::placeholder {
 
 
 			</div>
+			<input type="hidden" class="snscheck" value="${snscheck }">
 			<hr />
 
 
@@ -980,6 +981,12 @@ input::placeholder {
 	});
 
 	$('.mail_update_btn').on("click", function() {
+		var snscheck = $('.snscheck').val();
+
+		if(snscheck == "O"){
+			alert('네이버 아이디로 회원가입한 고객님의 메일주소는 변경할 수 없습니다.');
+			
+		}else{
 		$('.mail_update_btn').css("display", "none");
 		$('#mail_input_select').css("display", "inline-block");
 		$('#mail_check_wrap').css("display", "block");
@@ -991,6 +998,7 @@ input::placeholder {
 		$('.mail_input').css("background-color", "white");
 		$('.mail_input_2').css("background-color", "white");
 		$('.email-row').css("background-color", "white");
+		}
 	});
 
 	$('.email_cancel').on("click", function() {

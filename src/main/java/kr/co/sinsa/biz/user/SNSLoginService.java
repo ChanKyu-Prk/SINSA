@@ -6,4 +6,7 @@ public interface SNSLoginService {
 	public boolean emailCheck(String email);
 	public UserVO getUser(int cus_num);
 	public UserVO snsJoin(CustomerVO vo,String naverID);
+	public int Link(String email,String naverID);
+	public String getID(String email);
+	
 }

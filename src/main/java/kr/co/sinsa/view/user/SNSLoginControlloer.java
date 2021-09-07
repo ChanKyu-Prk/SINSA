@@ -57,7 +57,10 @@ public class SNSLoginControlloer {
 			model.addAttribute("result", apiResult);
 			return "redirect:/";
 		} else if(emailCheck) {
-			return "redirect:/";
+			model.addAttribute("naverID",naverID);
+			model.addAttribute("email",email);
+			model.addAttribute("ID",snsloginsvc.getID(email));
+			return "/customer/SNSLink";
 		}
 		else{
 			CustomerVO vo = new CustomerVO();
@@ -82,11 +85,20 @@ public class SNSLoginControlloer {
 			UserVO user = snsloginsvc.snsJoin(vo, naverID);
 			session.setAttribute("user", user); // 세션 생성
 			model.addAttribute("result", apiResult);
-			return "redirect:/";
+			
+			return "/customer/SNSJoinComplete";
 		}
 
 	}
 
+	@RequestMapping(value = "/SNSLink", method = RequestMethod.POST )
+	public String Link(String email, String naverID,HttpSession session){
+		int cus_num = snsloginsvc.Link(email,naverID);
+		UserVO user = snsloginsvc.getUser(cus_num);
+		session.setAttribute("user", user);
+		return "/customer/SNSLinkComplete";
+	}
+	
 	@RequestMapping(value = "/logout", method = { RequestMethod.GET, RequestMethod.POST })
 	public String logout(HttpSession session) throws IOException {
 

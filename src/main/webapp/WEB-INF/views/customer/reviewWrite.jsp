@@ -37,17 +37,17 @@ table {
 }
 
 .prd_brand_td {
-	font-size: 12px;
+	font-size: 25px;
 	color: grey;
 }
 
 .prd_name_td {
-	font-size: 18px;
+	font-size: 25px;
 	font-weight: bold;
 }
 
 .prd_size_td {
-	font-size: 12px;
+	font-size: 20px;
 	color: grey;
 }
 
@@ -209,7 +209,7 @@ padding : 0;
 
 									<div class="td-row">
 										<img class="thumbPic" alt="상품 대표 사진" title="상품 대표 사진"
-											src="/resources/prdImg/shoe.jpg" />
+											src="${pageContext.request.contextPath}/resources/prdImg/${product.PRD_CODE }.png" />
 
 									</div>
 								</td>

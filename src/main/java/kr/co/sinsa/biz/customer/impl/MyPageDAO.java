@@ -195,4 +195,13 @@ public class MyPageDAO {
 		return SST.selectList("myInfo.canleave",ORDER_CUSID);
 	}
 	
+	public int getCusNum(String id) {
+		return SST.selectOne("myInfo.getCusNum",id);
+	}
+	public String checkSNS(int cusnum) {
+		return SST.selectOne("myInfo.checkSNS",cusnum);
+	}
+	
+	
+	
 }

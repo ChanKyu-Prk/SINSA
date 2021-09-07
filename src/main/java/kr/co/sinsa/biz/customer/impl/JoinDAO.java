@@ -19,4 +19,9 @@ public class JoinDAO {
 		return SST.selectOne("JoinDAO.idCheck",CUS_ID);
 	}
 
+	public int mailCheck(String eamil) {
+		return SST.selectOne("JoinDAO.mailCheck",eamil);
+		
+	}
+	
 }
