@@ -196,9 +196,7 @@ hr.mo {
 	padding-left: 15px;
 }
 
-.inforow {
-	
-}
+
 </style>
 
 <title>SINSA : 찜 목록</title>

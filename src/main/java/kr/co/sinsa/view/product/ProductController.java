@@ -369,6 +369,12 @@ public class ProductController {
 					jjimcheck.add(0);
 			}
 		}
+		
+		List<StockVO> stock = new ArrayList<StockVO>();	
+		for(int i = 0 ; i < list.size() ; i ++) {
+			stock.add(myService.getStock(list.get(i).getPRD_CODE()));				
+		}
+		model.addAttribute("stock", stock);
 		model.addAttribute("jjimcheck", jjimcheck);
 		model.addAttribute("list", list);
 
