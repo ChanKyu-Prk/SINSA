@@ -225,7 +225,7 @@
 
 	<div class="wrapper">
 		<div class="tab">
-			<div class="head"> 아이디/비밀번호 찾기</div>
+			<div class="head">아이디/비밀번호 찾기</div>
 			<div class="description">아이디와 비밀번호는 가입 시 입력하신 정보를 통해 찾을 수 있습니다.</div>
 			<ul class="tabnav">
 				<li><a href="#tab01">아이디 찾기</a></li>
@@ -370,7 +370,6 @@
 
 
 	<script type="text/javascript">
-		//아이디찾기
 		var arr1 = new Array();
 		<c:forEach items="${customerList}" var="customerList">
 		arr1.push({
@@ -379,13 +378,13 @@
 		});
 		</c:forEach>
 
-		var customerList = '<c:out value="${customerList}"/>';
 		var codeCheckForID = $(".input_check_code_forID");
 		var button_require_ID = $(".button_require_ID");
 
 		var codeForID = "";
 		var CUS_ID = "";
-
+		
+		//인증번호 보내기
 		function sendCodeForID() {
 			var count = 0;
 			var codeData = {
@@ -404,16 +403,13 @@
 
 				if (arr1[i].CUS_NAME === codeData.CUS_NAME
 						&& arr1[i].CUS_EMAIL === codeData.CUS_EMAIL) {
-					// 					alert(arr1.length);
-					$
-							.ajax({
+							$.ajax({
 								url : "sendCodeForID.do",
 								type : "POST",
 								data : codeData,
 								success : function(result) {
 									codeForID = result;
-									document
-											.getElementById('button_receive_code_for_ID').innerHTML = "재요청";
+									document.getElementById('button_receive_code_for_ID').innerHTML = "재요청";
 									codeCheckForID.attr("disabled", false);
 
 									alert("인증번호가 발송되었습니다.");
@@ -426,10 +422,8 @@
 							&& codeData.CUS_EMAIL.length >= 1) {
 						alert("입력정보와 일치하는 회원정보가 존재하지 않습니다.");
 					}
-
 				}
 			}
-
 		}
 
 		function checkCodeForID() {

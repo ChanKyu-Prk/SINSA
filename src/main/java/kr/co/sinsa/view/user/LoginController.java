@@ -93,33 +93,17 @@ public class LoginController {
 
 			Cookie cookie = null;
 			String id = request.getParameter("CUS_ID");
-			String pw = request.getParameter("CUS_PWD");
 			String id_rem = request.getParameter("id_rem");
-			String pwd_rem = request.getParameter("pwd_rem");
 
-			if(id_rem != null && id_rem.trim().equals("on")) {
-				cookie = new Cookie("CUS_ID", java.net.URLEncoder.encode(id));
-				//				cookie.setDomain("localhost");
-				cookie.setMaxAge(60*60*24*365);
-				response.addCookie(cookie);
+			if(id_rem != null && id_rem.trim().equals("on")) { //아이디 저장에 체크가 되어있으면
+				cookie = new Cookie("CUS_ID", java.net.URLEncoder.encode(id, "UTF-8")); //입력된 사용자 아이디를 인코딩하여 쿠키에 저장
+				cookie.setMaxAge(60*60*24*365); //1년 기간 설정
+				response.addCookie(cookie); // 저장된 쿠키를 response객체에 저장
 			}else {
 				cookie = new Cookie("CUS_ID", null);
 				cookie.setMaxAge(0);
 				response.addCookie(cookie);
 			}
-
-
-			if(pwd_rem != null && pwd_rem.trim().equals("on")) {
-				cookie = new Cookie("CUS_PWD", java.net.URLEncoder.encode(pw));
-				//				cookie.setDomain("localhost");
-				cookie.setMaxAge(60*60*24*365);
-				response.addCookie(cookie);
-			}else {
-				cookie = new Cookie("CUS_PWD", null);
-				cookie.setMaxAge(0);
-				response.addCookie(cookie);
-			}
-
 
 
 

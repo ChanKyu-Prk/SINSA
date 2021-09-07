@@ -36,19 +36,9 @@ public class IndexController {
 		List<ProductVO> topSneakersProductList = IndexService.getTopSneakersProductList();
 		model.addAttribute("topSneakersProductList", topSneakersProductList);
 		
-		
 		List<ProductVO> topSportsProductList = IndexService.getTopSportsProductList();
 		
-		
-		
-//		for(int i=0; i<topSportsProductList.size(); i++) {
-//			if(topSportsProductList.get(i) == null) {
-//				topSportsProductList.remove(i);
-//			}
-//		}
-		
 		model.addAttribute("topSportsProductList", topSportsProductList);
-		System.out.println(topSportsProductList);
 		
 		return "index";
 	}
