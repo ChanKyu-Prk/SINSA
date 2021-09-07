@@ -163,10 +163,9 @@
 
 	<select id="jjimList" parameterType="Map"
 		resultType="kr.co.sinsa.biz.product.ProductVO">
-		select product.* from product join JJIM on JJIM.JJIM_PRDNUM
+		select product.* from JJIM join product  on JJIM.JJIM_PRDNUM
 		= product.PRD_NUM
 		where JJIM.JJIM_CUSID = #{ID}
-
 		limit #{page},6;
 	</select>
 
