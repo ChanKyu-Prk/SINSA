@@ -336,164 +336,169 @@ option {
 											<td>${list.ORDER_AMOUNT}개</td>
 											<td><fmt:formatNumber value="${list.ORDER_PRICE }"
 													type="number" />원</td>
-											<td><c:choose>
-													<c:when test="${state[0] =='일괄취소요청' }">
+											<td class="stateTd${status.index}"><span><c:choose>
+														<c:when test="${state[0] =='일괄취소요청' }">
 											취소요청
 											</c:when>
-													<c:when test="${state[0] =='일괄반품요청' }">
+														<c:when test="${state[0] =='일괄반품요청' }">
 											반품요청
 											</c:when>
-													<c:otherwise>
+														<c:otherwise>
 											${state[0]}
 											</c:otherwise>
-												</c:choose> <c:if test="${list.ORDER_STATE =='배송중' }">
-													<br>
-													<button type="button" class="delivBtn btn"
-														data-toggle="modal" data-target="#exampleModalCenter">배송조회</button>
-													<button type="button" class="btn" data-toggle="modal"
-														data-target="#refundmodal">반품신청</button>
-													<div class="modal" id="refundmodal" tabindex="-1"
-														role="dialog" aria-labelledby="exampleModalCenterTitle"
-														aria-hidden="true">
-														<div class="modal-dialog modal-dialog-centered"
-															role="document">
-															<div class="modal-content">
-																<div class="modal-header">
-																	<h5 class="modal-title" id="exampleModalLongTitle">반품
-																		신청</h5>
-																	<button type="button" class="close"
-																		data-dismiss="modal">
-																		<span aria-hidden="true">&times;</span>
-																	</button>
-																</div>
-																<div class="container-fluid">
-																	<div class="row">
-																		<div class="col-12">
-																			<select class="cancel_select ">
-																				<option value="" selected disabled>반품 사유</option>
-																				<option value="상품불량">상품 불량</option>
-																				<option value="오배송">오배송</option>
-																				<option value="배송누락">배송누락</option>
-																				<option value="고객변심*">고객 변심 (주의! 반품택배비
-																					3,000원 고객 부담)</option>
-																				<option value="변경*">색상 및 사이즈 변경 (주의! 반품택배비
-																					3,000원 고객 부담)</option>
-																				<option value="잘못주문*">다른 상품 잘못 주문 (주의!
-																					반품택배비 3,000원 고객 부담)</option>
-																				<option value="기타*">기타 (주의! 반품택배비 3,000원 고객
-																					부담)</option>
-																			</select>
-																		</div>
-																		<div class="guidediv">※ 카드 취소 승인까지 카드사 영업일 기준
-																			3~5일 소요될 수 있습니다.</div>
-																		<div class="allCanceldiv col-12">
-																			<input type="hidden"
-																				value="${orderList[0].ORDER_NUM }"
-																				class="allordernum"> <input type="hidden"
-																				value="${list.ORDER_PRDCODE }" class="prdcode">
-																			<input type="hidden" value="${list.ORDER_NUM }"
-																				class="orderum"> <input type="hidden"
-																				value="${list.ORDER_PRDSIZE }" class="prdsize"><input
-																				type="button" class="refundBtn btn" value="확인" />
+													</c:choose> <c:if test="${list.ORDER_STATE =='배송중' }">
+														<br>
+														<button type="button" class="delivBtn btn"
+															data-toggle="modal" data-target="#exampleModalCenter">배송조회</button>
+														<button type="button" class="btn" data-toggle="modal"
+															data-target="#refundmodal${status.index }">반품신청</button>
+														<div class="modal" id="refundmodal${status.index }"
+															tabindex="-1" role="dialog"
+															aria-labelledby="exampleModalCenterTitle"
+															aria-hidden="true">
+															<div class="modal-dialog modal-dialog-centered"
+																role="document">
+																<div class="modal-content">
+																	<div class="modal-header">
+																		<h5 class="modal-title" id="exampleModalLongTitle">반품
+																			신청</h5>
+																		<button type="button" class="close"
+																			data-dismiss="modal">
+																			<span aria-hidden="true">&times;</span>
+																		</button>
+																	</div>
+																	<div class="container-fluid">
+																		<div class="row">
+																			<div class="col-12">
+																				<select class="cancel_select ">
+																					<option value="" selected disabled>반품 사유</option>
+																					<option value="상품불량">상품 불량</option>
+																					<option value="오배송">오배송</option>
+																					<option value="배송누락">배송누락</option>
+																					<option value="고객변심*">고객 변심 (주의! 반품택배비
+																						3,000원 고객 부담)</option>
+																					<option value="변경*">색상 및 사이즈 변경 (주의! 반품택배비
+																						3,000원 고객 부담)</option>
+																					<option value="잘못주문*">다른 상품 잘못 주문 (주의!
+																						반품택배비 3,000원 고객 부담)</option>
+																					<option value="기타*">기타 (주의! 반품택배비 3,000원
+																						고객 부담)</option>
+																				</select>
+																			</div>
+																			<div class="guidediv">※ 카드 취소 승인까지 카드사 영업일 기준
+																				3~5일 소요될 수 있습니다.</div>
+																			<div class="allCanceldiv col-12">
+																				<input type="hidden"
+																					value="${orderList[0].ORDER_NUM }"
+																					class="allordernum"> <input type="hidden"
+																					value="${list.ORDER_PRDCODE }" class="prdcode">
+																				<input type="hidden" value="${list.ORDER_NUM }"
+																					class="orderum"> <input type="hidden"
+																					value="${list.ORDER_PRDSIZE }" class="prdsize"><input
+																					type="button" class="refundBtn btn" value="확인" />
+																			</div>
 																		</div>
 																	</div>
-																</div>
 
+																</div>
 															</div>
 														</div>
-													</div>
-													<button class="btn" data-toggle="modal"
-														data-target="#decideModal">구매확정</button>
+														<button class="btn" data-toggle="modal"
+															data-target="#decideModal${status.index }">구매확정</button>
 
-													<div class="modal decideModal" id="decideModal"
-														tabindex="-1" role="dialog"
-														aria-labelledby="exampleModalCenterTitle"
-														aria-hidden="true">
-														<div class="modal-dialog modal-dialog-centered"
-															role="document">
-															<div class="modal-content">
+														<div class="modal decideModal"
+															id="decideModal${status.index }" tabindex="-1"
+															role="dialog" aria-labelledby="exampleModalCenterTitle"
+															aria-hidden="true">
+															<div class="modal-dialog modal-dialog-centered"
+																role="document">
+																<div class="modal-content">
 
-																<div class="container-fluid">
-																	<div class="row decideModalRow">
-																		<div class="col-12">
-																			<span class="decideModelSINSA">SINSA</span><br>
-																			<br> <span class="decideModelSINSA2">"구매
-																				확정"을 하시면 교환/반품을 하실수 없습니다.<br> 구매확정을 하시겠습니까?
-																			</span>
+																	<div class="container-fluid">
+																		<div class="row decideModalRow">
+																			<div class="col-12">
+																				<span class="decideModelSINSA">SINSA</span><br>
+																				<br> <span class="decideModelSINSA2">"구매
+																					확정"을 하시면 교환/반품을 하실수 없습니다.<br> 구매확정을 하시겠습니까?
+																				</span>
+																			</div>
+																		</div>
+																		<div class="row decideModalRow">
+
+																			<div class="col-12">
+																				<input type="hidden" value="${list.ORDER_PRDCODE }"
+																					class="prdcode"> <input type="hidden"
+																					value="${list.ORDER_NUM }" class="orderum">
+																				<input type="hidden" value="${list.ORDER_PRDSIZE }"
+																					class="prdsize">
+																				<button type="button" class="decideCancle"
+																					data-dismiss="modal">취소</button>
+																				<input type="hidden" value="${status.index }"
+																					class="index">
+																				<button type="button" class="decideBtn">확인</button>
+																			</div>
 																		</div>
 																	</div>
-																	<div class="row decideModalRow">
 
-																		<div class="col-12">
-																			<input type="hidden" value="${list.ORDER_PRDCODE }"
-																				class="prdcode"> <input type="hidden"
-																				value="${list.ORDER_NUM }" class="orderum">
-																			<input type="hidden" value="${list.ORDER_PRDSIZE }"
-																				class="prdsize">
-																			<button type="button" class="decideCancle"
-																				data-dismiss="modal">취소</button>
-																			<button type="button" class="decideBtn">확인</button>
-																		</div>
-																	</div>
 																</div>
-
 															</div>
 														</div>
-													</div>
-													<input type="hidden" value="${list.ORDER_DELIVCOMP }"
-														class="delivcomp">
-													<input type="hidden" value="${list.ORDER_DELIVNUM }"
-														class="delivnum">
+														<input type="hidden" value="${list.ORDER_DELIVCOMP }"
+															class="delivcomp">
+														<input type="hidden" value="${list.ORDER_DELIVNUM }"
+															class="delivnum">
 
-												</c:if> <c:if test="${list.ORDER_STATE =='결제완료' }">
+													</c:if> <c:if test="${list.ORDER_STATE =='결제완료' }">
 
-													<button type="button" class="btn" data-toggle="modal"
-														data-target="#cancelmodal">주문취소</button>
-													<div class="modal" id="cancelmodal" tabindex="-1"
-														role="dialog" aria-labelledby="exampleModalCenterTitle"
-														aria-hidden="true">
-														<div class="modal-dialog modal-dialog-centered"
-															role="document">
-															<div class="modal-content">
-																<div class="modal-header">
-																	<h5 class="modal-title" id="exampleModalLongTitle">주문
-																		취소</h5>
-																	<button type="button" class="close"
-																		data-dismiss="modal">
-																		<span aria-hidden="true">&times;</span>
-																	</button>
-																</div>
-																<div class="container-fluid">
-																	<div class="row">
-																		<div class="col-12">
-																			<select class="cancel_select ">
-																				<option value="" selected disabled>취소 사유</option>
-																				<option value="배송지연">배송지연</option>
-																				<option value="고객변심">고객변심</option>
-																				<option value="잘못주문">다른 상품 잘못 주문</option>
-																			</select>
+														<button type="button" class="btn" data-toggle="modal"
+															data-target="#cancelmodal${status.index }">주문취소</button>
+														<div class="modal" id="cancelmodal${status.index }"
+															tabindex="-1" role="dialog"
+															aria-labelledby="exampleModalCenterTitle"
+															aria-hidden="true">
+															<div class="modal-dialog modal-dialog-centered"
+																role="document">
+																<div class="modal-content">
+																	<div class="modal-header">
+																		<h5 class="modal-title" id="exampleModalLongTitle">주문
+																			취소</h5>
+																		<button type="button" class="close"
+																			data-dismiss="modal">
+																			<span aria-hidden="true">&times;</span>
+																		</button>
+																	</div>
+																	<div class="container-fluid">
+																		<div class="row">
+																			<div class="col-12">
+																				<select class="cancel_select ">
+																					<option value="" selected disabled>취소 사유</option>
+																					<option value="배송지연">배송지연</option>
+																					<option value="고객변심">고객변심</option>
+																					<option value="잘못주문">다른 상품 잘못 주문</option>
+																				</select>
 
-																		</div>
-																		<div class="guidediv">※ 카드 취소 승인까지 카드사 영업일 기준
-																			3~5일 소요될 수 있습니다.</div>
-																		<div class="allCanceldiv col-12">
-																			<input type="hidden"
-																				value="${orderList[0].ORDER_NUM }"
-																				class="allordernum"> <input type="hidden"
-																				value="${list.ORDER_PRDCODE }" class="prdcode">
-																			<input type="hidden" value="${list.ORDER_NUM }"
-																				class="orderum"> <input type="hidden"
-																				value="${list.ORDER_PRDSIZE }" class="prdsize">
-																			<input type="button" class="cancelBtn btn" value="확인" />
+																			</div>
+																			<div class="guidediv">※ 카드 취소 승인까지 카드사 영업일 기준
+																				3~5일 소요될 수 있습니다.</div>
+																			<div class="allCanceldiv col-12">
+																				<input type="hidden"
+																					value="${orderList[0].ORDER_NUM }"
+																					class="allordernum"> <input type="hidden"
+																					value="${list.ORDER_PRDCODE }" class="prdcode">
+																				<input type="hidden" value="${list.ORDER_NUM }"
+																					class="orderum"> <input type="hidden"
+																					value="${list.ORDER_PRDSIZE }" class="prdsize">
+																				<input type="button" class="cancelBtn btn"
+																					value="확인" />
+																			</div>
 																		</div>
 																	</div>
-																</div>
 
+																</div>
 															</div>
 														</div>
-													</div>
-													<br>
-												</c:if></td>
+														<br>
+													</c:if></span></td>
 										</tr>
 									</c:forEach>
 								</table>
@@ -568,170 +573,175 @@ option {
 
 
 
-											<td><c:choose>
-													<c:when test="${state[0] =='일괄취소요청' }">
+											<td class="stateTd${status.index}"><span><c:choose>
+														<c:when test="${state[0] =='일괄취소요청' }">
 											취소요청
 											</c:when>
-													<c:when test="${state[0] =='일괄반품요청' }">
+														<c:when test="${state[0] =='일괄반품요청' }">
 											반품요청
 											</c:when>
-													<c:otherwise>
+														<c:otherwise>
 											${state[0]}
 											</c:otherwise>
-												</c:choose> <c:if test="${list.ORDER_STATE =='배송중' }">
-													<br>
-													<button type="button" class="delivBtn btn"
-														data-toggle="modal" data-target="#exampleModalCenter">배송조회</button>
-													<button type="button" class="btn" data-toggle="modal"
-														data-target="#refundmodal2">반품신청</button>
-													<div class="modal" id="refundmodal2" tabindex="-1"
-														role="dialog" aria-labelledby="exampleModalCenterTitle"
-														aria-hidden="true">
-														<div class="modal-dialog modal-dialog-centered"
-															role="document">
-															<div class="modal-content">
-																<div class="modal-header">
-																	<h5 class="modal-title" id="exampleModalLongTitle">반품
-																		신청</h5>
-																	<button type="button" class="close"
-																		data-dismiss="modal">
-																		<span aria-hidden="true">&times;</span>
-																	</button>
-																</div>
-																<div class="container-fluid">
-																	<div class="row">
-																		<div class="col-12">
-																			<select class="cancel_select ">
-																				<option value="" selected disabled>반품 사유</option>
-																				<option value="상품불량">상품 불량</option>
-																				<option value="오배송">오배송</option>
-																				<option value="배송누락">배송누락</option>
-																				<option value="고객변심*">고객 변심 (주의! 반품택배비
-																					3,000원 고객 부담)</option>
-																				<option value="변경*">색상 및 사이즈 변경 (주의! 반품택배비
-																					3,000원 고객 부담)</option>
-																				<option value="잘못주문*">다른 상품 잘못 주문 (주의!
-																					반품택배비 3,000원 고객 부담)</option>
-																				<option value="기타*">기타 (주의! 반품택배비 3,000원 고객
-																					부담)</option>
-																			</select>
-																		</div>
-																		<div class="guidediv">※ 카드 취소 승인까지 카드사 영업일 기준
-																			3~5일 소요될 수 있습니다.</div>
-																		<div class="allCanceldiv col-12">
-																			<input type="hidden"
-																				value="${orderList[0].ORDER_NUM }"
-																				class="allordernum"> <input type="hidden"
-																				value="${list.ORDER_PRDCODE }" class="prdcode">
-																			<input type="hidden" value="${list.ORDER_NUM }"
-																				class="orderum"> <input type="hidden"
-																				value="${list.ORDER_PRDSIZE }" class="prdsize"><input
-																				type="button" class="refundBtn btn" value="확인" />
+													</c:choose> <c:if test="${list.ORDER_STATE =='배송중' }">
+														<br>
+														<button type="button" class="delivBtn btn"
+															data-toggle="modal" data-target="#exampleModalCenter">배송조회</button>
+														<button type="button" class="btn" data-toggle="modal"
+															data-target="#refundmodal2${status.index }b">반품신청</button>
+														<div class="modal" id="refundmodal2${status.index }b"
+															tabindex="-1" role="dialog"
+															aria-labelledby="exampleModalCenterTitle"
+															aria-hidden="true">
+															<div class="modal-dialog modal-dialog-centered"
+																role="document">
+																<div class="modal-content">
+																	<div class="modal-header">
+																		<h5 class="modal-title" id="exampleModalLongTitle">반품
+																			신청</h5>
+																		<button type="button" class="close"
+																			data-dismiss="modal">
+																			<span aria-hidden="true">&times;</span>
+																		</button>
+																	</div>
+																	<div class="container-fluid">
+																		<div class="row">
+																			<div class="col-12">
+																				<select class="cancel_select ">
+																					<option value="" selected disabled>반품 사유</option>
+																					<option value="상품불량">상품 불량</option>
+																					<option value="오배송">오배송</option>
+																					<option value="배송누락">배송누락</option>
+																					<option value="고객변심*">고객 변심 (주의! 반품택배비
+																						3,000원 고객 부담)</option>
+																					<option value="변경*">색상 및 사이즈 변경 (주의! 반품택배비
+																						3,000원 고객 부담)</option>
+																					<option value="잘못주문*">다른 상품 잘못 주문 (주의!
+																						반품택배비 3,000원 고객 부담)</option>
+																					<option value="기타*">기타 (주의! 반품택배비 3,000원
+																						고객 부담)</option>
+																				</select>
+																			</div>
+																			<div class="guidediv">※ 카드 취소 승인까지 카드사 영업일 기준
+																				3~5일 소요될 수 있습니다.</div>
+																			<div class="allCanceldiv col-12">
+																				<input type="hidden"
+																					value="${orderList[0].ORDER_NUM }"
+																					class="allordernum"> <input type="hidden"
+																					value="${list.ORDER_PRDCODE }" class="prdcode">
+																				<input type="hidden" value="${list.ORDER_NUM }"
+																					class="orderum"> <input type="hidden"
+																					value="${list.ORDER_PRDSIZE }" class="prdsize"><input
+																					type="button" class="refundBtn btn" value="확인" />
+																			</div>
 																		</div>
 																	</div>
-																</div>
 
+																</div>
 															</div>
 														</div>
-													</div>
-													<input type="hidden" value="${list.ORDER_PRDCODE }"
-														class="prdcode">
-													<input type="hidden" value="${list.ORDER_NUM }"
-														class="orderum">
-													<input type="hidden" value="${list.ORDER_PRDSIZE }"
-														class="prdsize">
-													<button class="btn" data-toggle="modal"
-														data-target="#decideModal2">구매확정</button>
+														<input type="hidden" value="${list.ORDER_PRDCODE }"
+															class="prdcode">
+														<input type="hidden" value="${list.ORDER_NUM }"
+															class="orderum">
+														<input type="hidden" value="${list.ORDER_PRDSIZE }"
+															class="prdsize">
+														<button class="btn" data-toggle="modal"
+															data-target="#decideModal2${status.index }b">구매확정</button>
 
-													<div class="modal decideModal" id="decideModal2"
-														tabindex="-1" role="dialog"
-														aria-labelledby="exampleModalCenterTitle"
-														aria-hidden="true">
-														<div class="modal-dialog modal-dialog-centered"
-															role="document">
-															<div class="modal-content">
+														<div class="modal decideModal"
+															id="decideModal2${status.index }b" tabindex="-1"
+															role="dialog" aria-labelledby="exampleModalCenterTitle"
+															aria-hidden="true">
+															<div class="modal-dialog modal-dialog-centered"
+																role="document">
+																<div class="modal-content">
 
-																<div class="container-fluid">
-																	<div class="row decideModalRow">
-																		<div class="col-12">
-																			<span class="decideModelSINSA">SINSA</span><br>
-																			<br> <span class="decideModelSINSA2">"구매
-																				확정"을 하시면 교환/반품을 하실수 없습니다.<br> 구매확정을 하시겠습니까?
-																			</span>
+																	<div class="container-fluid">
+																		<div class="row decideModalRow">
+																			<div class="col-12">
+																				<span class="decideModelSINSA">SINSA</span><br>
+																				<br> <span class="decideModelSINSA2">"구매
+																					확정"을 하시면 교환/반품을 하실수 없습니다.<br> 구매확정을 하시겠습니까?
+																				</span>
+																			</div>
+																		</div>
+																		<div class="row decideModalRow">
+
+																			<div class="col-12">
+																				<input type="hidden" value="${list.ORDER_PRDCODE }"
+																					class="prdcode"> <input type="hidden"
+																					value="${list.ORDER_NUM }" class="orderum">
+																				<input type="hidden" value="${list.ORDER_PRDSIZE }"
+																					class="prdsize">
+																				<button type="button" class="decideCancle"
+																					data-dismiss="modal">취소</button>
+																				<input type="hidden" value="${status.index }"
+																					class="index">
+																				<button type="button" class="decideBtn">확인</button>
+																			</div>
 																		</div>
 																	</div>
-																	<div class="row decideModalRow">
 
-																		<div class="col-12">
-																			<input type="hidden" value="${list.ORDER_PRDCODE }"
-																				class="prdcode"> <input type="hidden"
-																				value="${list.ORDER_NUM }" class="orderum">
-																			<input type="hidden" value="${list.ORDER_PRDSIZE }"
-																				class="prdsize">
-																			<button type="button" class="decideCancle"
-																				data-dismiss="modal">취소</button>
-																			<button type="button" class="decideBtn">확인</button>
-																		</div>
-																	</div>
 																</div>
-
 															</div>
 														</div>
-													</div>
-													<input type="hidden" value="${list.ORDER_DELIVCOMP }"
-														class="delivcomp">
-													<input type="hidden" value="${list.ORDER_DELIVNUM }"
-														class="delivnum">
+														<input type="hidden" value="${list.ORDER_DELIVCOMP }"
+															class="delivcomp">
+														<input type="hidden" value="${list.ORDER_DELIVNUM }"
+															class="delivnum">
 
-												</c:if> <c:if test="${list.ORDER_STATE =='결제완료' }">
+													</c:if> <c:if test="${list.ORDER_STATE =='결제완료' }">
 
-													<button type="button" class="btn" data-toggle="modal"
-														data-target="#cancelmodal2">주문취소</button>
-													<div class="modal" id="cancelmodal2" tabindex="-1"
-														role="dialog" aria-labelledby="exampleModalCenterTitle"
-														aria-hidden="true">
-														<div class="modal-dialog modal-dialog-centered"
-															role="document">
-															<div class="modal-content">
-																<div class="modal-header">
-																	<h5 class="modal-title" id="exampleModalLongTitle">주문
-																		취소</h5>
-																	<button type="button" class="close"
-																		data-dismiss="modal">
-																		<span aria-hidden="true">&times;</span>
-																	</button>
-																</div>
-																<div class="container-fluid">
-																	<div class="row">
-																		<div class="col-12">
-																			<select class="cancel_select ">
-																				<option value="" selected disabled>취소 사유</option>
-																				<option value="배송지연">배송지연</option>
-																				<option value="고객변심">고객변심</option>
-																				<option value="잘못주문">다른 상품 잘못 주문</option>
-																			</select>
+														<button type="button" class="btn" data-toggle="modal"
+															data-target="#cancelmodal2${status.index }b">주문취소</button>
+														<div class="modal" id="cancelmodal2${status.index }b"
+															tabindex="-1" role="dialog"
+															aria-labelledby="exampleModalCenterTitle"
+															aria-hidden="true">
+															<div class="modal-dialog modal-dialog-centered"
+																role="document">
+																<div class="modal-content">
+																	<div class="modal-header">
+																		<h5 class="modal-title" id="exampleModalLongTitle">주문
+																			취소</h5>
+																		<button type="button" class="close"
+																			data-dismiss="modal">
+																			<span aria-hidden="true">&times;</span>
+																		</button>
+																	</div>
+																	<div class="container-fluid">
+																		<div class="row">
+																			<div class="col-12">
+																				<select class="cancel_select ">
+																					<option value="" selected disabled>취소 사유</option>
+																					<option value="배송지연">배송지연</option>
+																					<option value="고객변심">고객변심</option>
+																					<option value="잘못주문">다른 상품 잘못 주문</option>
+																				</select>
 
-																		</div>
-																		<div class="guidediv">※ 카드 취소 승인까지 카드사 영업일 기준
-																			3~5일 소요될 수 있습니다.</div>
-																		<div class="allCanceldiv col-12">
-																			<input type="hidden"
-																				value="${orderList[0].ORDER_NUM }"
-																				class="allordernum"> <input type="hidden"
-																				value="${list.ORDER_PRDCODE }" class="prdcode">
-																			<input type="hidden" value="${list.ORDER_NUM }"
-																				class="orderum"> <input type="hidden"
-																				value="${list.ORDER_PRDSIZE }" class="prdsize">
-																			<input type="button" class="cancelBtn btn" value="확인" />
+																			</div>
+																			<div class="guidediv">※ 카드 취소 승인까지 카드사 영업일 기준
+																				3~5일 소요될 수 있습니다.</div>
+																			<div class="allCanceldiv col-12">
+																				<input type="hidden"
+																					value="${orderList[0].ORDER_NUM }"
+																					class="allordernum"> <input type="hidden"
+																					value="${list.ORDER_PRDCODE }" class="prdcode">
+																				<input type="hidden" value="${list.ORDER_NUM }"
+																					class="orderum"> <input type="hidden"
+																					value="${list.ORDER_PRDSIZE }" class="prdsize">
+																				<input type="button" class="cancelBtn btn"
+																					value="확인" />
+																			</div>
 																		</div>
 																	</div>
-																</div>
 
+																</div>
 															</div>
 														</div>
-													</div>
-													<br>
-												</c:if></td>
+														<br>
+													</c:if></span></td>
 										</tr>
 									</c:forEach>
 								</table>
@@ -1279,9 +1289,24 @@ option {
 				var prdcode = $(this).parent().find('.prdcode').val();
 				var orderum = $(this).parent().find('.orderum').val();
 				var prdsize = $(this).parent().find('.prdsize').val();
-				alert("구매확정 되었습니다.");
-				location.href = '/decide?prdcode=' + prdcode + '&orderum='
-						+ orderum + '&prdsize=' + prdsize + "&returnPage=1";
+				var index = $(this).parent().find('.index').val();
+				var state = $('.stateTd'+index);
+				
+				$.ajax({
+					url : '/decide?prdcode=' + prdcode + '&orderum=' + orderum
+							+ '&prdsize=' + prdsize,
+					type : "GET",
+					success : function() {
+						alert("구매확정 되었습니다.");
+						$('.decideCancle').click();
+						state.children().remove();
+						state.append('구매확정');
+					},
+					error : function() {
+						alert("보내기 실패");
+					}
+				});
+
 			});
 </script>
 </html>

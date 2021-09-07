@@ -174,8 +174,6 @@ public class MyPageController {
 				}
 				jjimcheck.add(jjim);
 			}
-			System.out.println(stock.get(0));
-			System.out.println(jjimcheck);
 			model.addAttribute("jjimcheck", jjimcheck);
 			listCount = myPageSerive.countJjimList(map);
 			maxPage = (int) ((double) listCount / limit + 0.95);
@@ -274,7 +272,30 @@ public class MyPageController {
 		} else {
 
 			listCount = myPageSerive.countRecentView(cRecentlyVieweds);
-			model.addAttribute("recentView", myPageSerive.recentView(cRecentlyVieweds, (page - 1) * limit, listCount));
+			List<ProductVO> recView = myPageSerive.recentView(cRecentlyVieweds, (page - 1) * limit, listCount);
+			model.addAttribute("recentView",recView);
+			
+			List<StockVO> stock = new ArrayList<StockVO>();	
+			for(int i = 0 ; i < recView.size() ; i ++) {
+				stock.add(myPageSerive.getStock(recView.get(i).getPRD_CODE()));				
+			}
+			model.addAttribute("stock", stock);
+			
+			List<Integer> jjimcheck = new ArrayList<Integer>();
+			List<Integer> jjimCheckList = myPageSerive.getJjimList(user.getCUS_ID());
+			for (int i = 0; i < recView.size(); i++) {
+				int jjim = 0;
+				int prdnum = recView.get(i).getPRD_NUM();
+				for (int j = 0; j < jjimCheckList.size(); j++) {
+					int jjjim = jjimCheckList.get(j);
+					if (jjjim == prdnum) {
+						jjim = 1;
+					}
+				}
+				jjimcheck.add(jjim);
+			}
+			model.addAttribute("jjimcheck", jjimcheck);
+		
 			maxPage = (int) ((double) listCount / limit + 0.95);
 			startPage = (((int) ((double) page / 5 + 0.8)) - 1) * 5 + 1;
 			endPage = startPage + 4;
@@ -361,6 +382,12 @@ public class MyPageController {
 		if (user == null) {
 			return "redirect:/login.do";
 		}
+		if(myPageSerive.checkSNS(user.getCUS_ID())) {
+			model.addAttribute("page", "비밀번호 변경");
+			model.addAttribute("SNS","O");
+			return "customer/passCheck";
+			
+		}
 		model.addAttribute("page", "비밀번호 변경");
 		return "customer/passCheck";
 	}
@@ -400,6 +427,18 @@ public class MyPageController {
 		if (user == null) {
 			return "redirect:/login.do";
 		}
+		if(myPageSerive.checkSNS(user.getCUS_ID())) {
+			CustomerVO myInfo = myPageSerive.myInfo(user);
+			String[] email = myInfo.getCUS_EMAIL().split("@");
+			String[] fullAddr = myInfo.getCUS_ADDR().split("\\|");
+			model.addAttribute("email", email);
+			model.addAttribute("addr", fullAddr);
+			model.addAttribute("myInfo", myInfo);
+			String snscheck = myPageSerive.checkSNS2(user.getCUS_ID());
+			model.addAttribute("snscheck",snscheck);
+			return "customer/privateInfoChange";
+			
+		}
 		model.addAttribute("page", "개인정보 수정");
 		return "customer/passCheck";
 	}
@@ -415,10 +454,10 @@ public class MyPageController {
 			@RequestParam(value = "CUS_ADDR_4", required = false) String CUS_ADDR_4,
 			@RequestParam(value = "CUS_ADDR_5", required = false) String CUS_ADDR_5, HttpSession session) {
 		UserVO user = (UserVO) session.getAttribute("user");
-
 		if (user == null) {
 			return "redirect:/login.do";
 		}
+		
 		if (password != null) {
 			Map<String, String> map = new HashMap<String, String>();
 			map.put("ID", user.getCUS_ID());
@@ -428,6 +467,7 @@ public class MyPageController {
 				CustomerVO myInfo = myPageSerive.myInfo(user);
 				String[] email = myInfo.getCUS_EMAIL().split("@");
 				String[] fullAddr = myInfo.getCUS_ADDR().split("\\|");
+				
 				model.addAttribute("email", email);
 				model.addAttribute("addr", fullAddr);
 				model.addAttribute("myInfo", myInfo);
@@ -454,6 +494,11 @@ public class MyPageController {
 		UserVO user = (UserVO) session.getAttribute("user");
 		if (user == null) {
 			return "redirect:/login.do";
+		}
+		if(myPageSerive.checkSNS(user.getCUS_ID())) {
+
+			return "customer/leave";
+			
 		}
 		model.addAttribute("page", "회원탈퇴");
 		return "customer/passCheck";
@@ -660,17 +705,15 @@ public class MyPageController {
 	}
 
 	@RequestMapping(value = "/decide", method = RequestMethod.GET)
-	public String decide(String prdcode, String orderum, String prdsize, String returnPage) {
+	public String decide(String prdcode, String orderum, String prdsize) {
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("prdcode", prdcode);
 		map.put("orderum", orderum);
 		map.put("prdsize", prdsize);
 		myPageSerive.decide(map);
-		if (returnPage == "1") {
 			return "redirect:/myOrderStatus/" + orderum;
-		} else {
-			return "redirect:/myOrderStatus/" + orderum;
-		}
+	
+	
 	}
 
 }

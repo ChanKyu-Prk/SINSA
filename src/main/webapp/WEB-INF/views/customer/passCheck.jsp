@@ -51,14 +51,15 @@
 
 .pw_input_box {
 	position: relative;
-	margin-top : 15px;
-
+	margin-top: 15px;
 }
-.marginAuto{
+
+.marginAuto {
 	margin: auto;
 	display: table-cell;
 	vertical-align: middle;
 }
+
 .pw_input {
 	width: 100%;
 	height: 40px;
@@ -69,20 +70,40 @@
 	text-align: left;
 	width: 50%;
 	margin: auto;
-	display : table;
+	display: table;
 	min-height: 200px;
 }
-.padding_0{
-padding : 0px !important;
+
+.padding_0 {
+	padding: 0px !important;
 }
+
 .submitBtn {
 	width: 100%;
 	float: right;
 	height: 40px;
 	border: 1px solid #c1bfc1;
 }
+.notice{
+text-align: center;
+width:80%;
+height: 100px;
+margin: auto;
+background-color: #EDEFF2;
+display: table;
+font-weight: bold;
+font-size: 25px;
+margin-top: 150px;
+margin-bottom: 150px;
+}
+.notice span{
+display: table-cell;
+vertical-align: middle;
+}
 @media screen and (max-width: 720px) {
-.passwWrap {width: 100%;}
+	.passwWrap {
+		width: 100%;
+	}
 }
 </style>
 <title>SINSA : ${page }</title>
@@ -99,39 +120,49 @@ padding : 0px !important;
 				</div>
 				<hr>
 
+
 				<c:choose>
-					<c:when test="${page == '비밀번호 변경' }">
-						<form action="/passChange" method="post">
-					</c:when>
-					<c:when test="${page == '개인정보 수정' }">
-						<form action="/privateInfoChange" method="post">
+					<c:when test="${SNS == 'O' }">
+
+						<div class="notice"><span>네이버 아이디로 회원가입한 고객님의 비밀번호는<br> 변경할 수 없습니다.</span></div>
+						
 					</c:when>
 					<c:otherwise>
-						<form action="leave" method="post">
-					</c:otherwise>
-				</c:choose>
-				<div class="passwWrap">
-					<div class=" container marginAuto">
-						<div class="row">비밀번호 입력</div>
-						<div class="row pw_input_box">
-							<div class="col-10 padding_0">
-								<input type="password" class="pw_input" name="password"
-									placeholder="비밀번호를 입력하세요."> <i
-									class="far fa-eye pw-eye1"></i> <i
-									class="far fa-eye-slash pw-eye1-1"></i>
-							</div>
+						<c:choose>
+							<c:when test="${page == '비밀번호 변경' }">
+								<form action="/passChange" method="post">
+							</c:when>
+							<c:when test="${page == '개인정보 수정' }">
+								<form action="/privateInfoChange" method="post">
+							</c:when>
+							<c:otherwise>
+								<form action="leave" method="post">
+							</c:otherwise>
+						</c:choose>
+						<div class="passwWrap">
+							<div class=" container marginAuto">
+								<div class="row">비밀번호 입력</div>
+								<div class="row pw_input_box">
+									<div class="col-10 padding_0">
+										<input type="password" class="pw_input" name="password"
+											placeholder="비밀번호를 입력하세요."> <i
+											class="far fa-eye pw-eye1"></i> <i
+											class="far fa-eye-slash pw-eye1-1"></i>
+									</div>
 
-							<div class="col-2 padding_0">
-								<input type="submit" value="확인" class="submitBtn">
+									<div class="col-2 padding_0">
+										<input type="submit" value="확인" class="submitBtn">
+									</div>
+								</div>
+
+
+
 							</div>
 						</div>
+						</form>
+					</c:otherwise>
 
-
-
-					</div>
-				</div>
-				</form>
-
+				</c:choose>
 			</div>
 			<hr />
 		</div>
@@ -153,7 +184,7 @@ padding : 0px !important;
 			$('.pw_input').attr("type", "password");
 		});
 	});
-	
+
 	$('.pw_input').on("focusin", function() {
 		$('.pw_input').css("border-color", "black");
 	});

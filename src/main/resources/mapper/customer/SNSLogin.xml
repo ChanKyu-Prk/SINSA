@@ -35,10 +35,29 @@
 	where CUS_ID = #{value};
 	</select>
 	
+	<select id="getCusNumToEamil" resultType="int">
+	select CUS_NUM
+	from customer
+	where CUS_EMAIL = #{value};
+	</select>
+	
 	<insert id="insertSnsInfo"
 	parameterType="Map">
-	INSERT INTO SNS_INFO(CUSNUM, naverID) 
-	VALUES(#{CUSNUM},#{naverID})
+	INSERT INTO SNS_INFO(CUSNUM, naverID, signUpWithSns) 
+	VALUES(#{CUSNUM},#{naverID},'O')
 	</insert>
+	
+	<insert id="Link"
+	parameterType="Map">
+	INSERT INTO SNS_INFO(CUSNUM, naverID, signUpWithSns) 
+	VALUES(#{cusnum},#{naverID},'')
+	</insert>
+	
+	
+	<select id="getID" resultType="String">
+	select CUS_ID
+	from customer
+	where CUS_EMAIL = #{value};
+	</select>
 	
 </mapper>

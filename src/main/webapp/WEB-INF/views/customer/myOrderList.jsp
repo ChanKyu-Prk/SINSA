@@ -110,6 +110,27 @@
 	text-align: center;
 	font-size: 30px;
 	font-weight: bold;
+	cursor: default;
+}
+
+#delivINGNumber {
+	text-align: center;
+	font-size: 30px;
+	font-weight: bold;
+	background: none;
+	border: none;
+	width: 50px;
+	color: #212529;
+}
+
+#delivENDNumber {
+	text-align: center;
+	font-size: 30px;
+	font-weight: bold;
+	background: none;
+	border: none;
+	width: 50px;
+	color: #212529;
 }
 
 .state_box {
@@ -162,6 +183,7 @@ th {
 	font-size: 18px;
 	font-weight: bold;
 }
+
 .prd_name_td2 {
 	font-size: 12x;
 	font-weight: bold;
@@ -228,6 +250,37 @@ a.page-link {
 	border-color: black;
 	color: white !important;
 }
+
+.decideModelSINSA {
+	font-size: 20px;
+	font-weight: bold;
+}
+
+.decideModelSINSA2 {
+	font-weight: bold;
+}
+
+.decideModalRow {
+	padding: 20px;
+}
+
+.decideCancle {
+	background-color: white;
+	border: 1px solid #c1bfc1;
+	margin-bottom: 2px;
+	width: 45%;
+	padding-bottom: 5px;
+	padding-top: 5px;
+}
+
+.decideBtn {
+	background-color: white;
+	border: 1px solid #c1bfc1;
+	margin-bottom: 2px;
+	width: 45%;
+	padding-bottom: 5px;
+	padding-top: 5px;
+}
 </style>
 </head>
 
@@ -248,8 +301,14 @@ a.page-link {
 					<div class="container period_wrap">
 						<div class="row">
 							<div class="col-3 state_C">${countState.payEnd }</div>
-							<div class="col-3 state_C">${countState.delivery }</div>
-							<div class="col-3 state_C">${countState.deliveryEnd }</div>
+							<div class="col-3 state_C">
+								<input type="text" disabled value="${countState.delivery }"
+									id="delivINGNumber">
+							</div>
+							<div class="col-3 state_C">
+								<input type="text"  disabled value="${countState.deliveryEnd }"
+									id="delivENDNumber">
+							</div>
 							<div class="col-3 state_C">${countState.cancel }</div>
 						</div>
 
@@ -388,32 +447,71 @@ a.page-link {
 															class="ORDER_NUM">${list.ORDER_NUM }</span></td>
 													<td><fmt:formatNumber value="${list.ORDER_PRICE }"
 															type="number" />원<br>(${list.ORDER_AMOUNT}개)</td>
-													<td><c:choose>
-															<c:when test="${state[0] =='일괄취소요청' }">
+													<td class="stateTd${status.index}"><span><c:choose>
+																<c:when test="${state[0] =='일괄취소요청' }">
 											취소요청
 											</c:when>
-															<c:when test="${state[0] =='일괄반품요청' }">
+																<c:when test="${state[0] =='일괄반품요청' }">
 											반품요청
 											</c:when>
-															<c:otherwise>
+																<c:otherwise>
 											${state[0]}
 											</c:otherwise>
-														</c:choose> <c:if test="${list.ORDER_STATE =='배송중' }">
-															<br>
-															<button type="button" class="delivBtn btn"
-																data-toggle="modal" data-target="#exampleModalCenter">배송조회</button>
-															<button type="button" class="confirmedBtn btn">구매확정</button>
-															<input type="hidden" value="${list.ORDER_DELIVCOMP }"
-																class="delivcomp">
-															<input type="hidden" value="${list.ORDER_DELIVNUM }"
-																class="delivnum">
-															<input type="hidden" value="${list.ORDER_PRDCODE }"
-																class="prdcode">
-															<input type="hidden" value="${list.ORDER_NUM }"
-																class="orderum">
-															<input type="hidden" value="${list.ORDER_PRDSIZE }"
-																class="prdsize">
-														</c:if></td>
+															</c:choose> <c:if test="${list.ORDER_STATE =='배송중' }">
+																<br>
+																<button type="button" class="delivBtn btn"
+																	data-toggle="modal" data-target="#exampleModalCenter">배송조회</button>
+																<button class="btn" data-toggle="modal"
+																	data-target="#decideModal${status.index }">구매확정</button>
+
+																<div class="modal decideModal"
+																	id="decideModal${status.index }" tabindex="-1"
+																	role="dialog" aria-labelledby="exampleModalCenterTitle"
+																	aria-hidden="true">
+																	<div class="modal-dialog modal-dialog-centered"
+																		role="document">
+																		<div class="modal-content">
+
+																			<div class="container-fluid">
+																				<div class="row decideModalRow">
+																					<div class="col-12">
+																						<span class="decideModelSINSA">SINSA</span><br>
+																						<br> <span class="decideModelSINSA2">"구매
+																							확정"을 하시면 교환/반품을 하실수 없습니다.<br> 구매확정을 하시겠습니까?
+																						</span>
+																					</div>
+																				</div>
+																				<div class="row decideModalRow">
+
+																					<div class="col-12">
+																						<input type="hidden"
+																							value="${list.ORDER_PRDCODE }" class="prdcode">
+																						<input type="hidden" value="${list.ORDER_NUM }"
+																							class="orderum"> <input type="hidden"
+																							value="${list.ORDER_PRDSIZE }" class="prdsize">
+																						<button type="button" class="decideCancle"
+																							data-dismiss="modal">취소</button>
+																							<input type="hidden" value="${status.index }"
+																					class="index">
+																						<button type="button" class="decideBtn">확인</button>
+																					</div>
+																				</div>
+																			</div>
+
+																		</div>
+																	</div>
+																</div>
+																<input type="hidden" value="${list.ORDER_DELIVCOMP }"
+																	class="delivcomp">
+																<input type="hidden" value="${list.ORDER_DELIVNUM }"
+																	class="delivnum">
+																<input type="hidden" value="${list.ORDER_PRDCODE }"
+																	class="prdcode">
+																<input type="hidden" value="${list.ORDER_NUM }"
+																	class="orderum">
+																<input type="hidden" value="${list.ORDER_PRDSIZE }"
+																	class="prdsize">
+															</c:if></span></td>
 												</tr>
 											</c:forEach>
 
@@ -438,7 +536,7 @@ a.page-link {
 									<thead>
 										<tr>
 											<th>상품정보</th>
-											<th> 주문일자<br>주문번호<br>결제금액(수량)
+											<th>주문일자<br>주문번호<br>결제금액(수량)
 											</th>
 											<th>상태</th>
 										</tr>
@@ -487,19 +585,16 @@ a.page-link {
 																	</div>
 																</td>
 															</tr>
-									
+
 															<tr>
 																<td class="prd_name_td2"><span
 																	class="prd_name_span span_margin"><input
 																		type="hidden" value="${list.ORDER_PRDCODE }"
 																		class="prdcode">${list.ORDER_PRDNAME }</span></td>
 															</tr>
-											
+
 														</table>
 													</td>
-
-
-
 
 
 
@@ -523,32 +618,70 @@ a.page-link {
 															</tr>
 														</table></td>
 
-													<td><c:choose>
-															<c:when test="${state[0] =='일괄취소요청' }">
+													<td class="stateTd${status.index}"><span><c:choose>
+																<c:when test="${state[0] =='일괄취소요청' }">
 											취소요청
 											</c:when>
-															<c:when test="${state[0] =='일괄반품요청' }">
+																<c:when test="${state[0] =='일괄반품요청' }">
 											반품요청
 											</c:when>
-															<c:otherwise>
+																<c:otherwise>
 											${state[0]}
 											</c:otherwise>
-														</c:choose> <c:if test="${list.ORDER_STATE =='배송중' }">
-															<br>
-															<button type="button" class="delivBtn btn"
-																data-toggle="modal" data-target="#exampleModalCenter">배송조회</button>
-															<button type="button" class="confirmedBtn btn">구매확정</button>
-															<input type="hidden" value="${list.ORDER_DELIVCOMP }"
-																class="delivcomp">
-															<input type="hidden" value="${list.ORDER_DELIVNUM }"
-																class="delivnum">
-															<input type="hidden" value="${list.ORDER_PRDCODE }"
-																class="prdcode">
-															<input type="hidden" value="${list.ORDER_NUM }"
-																class="orderum">
-															<input type="hidden" value="${list.ORDER_PRDSIZE }"
-																class="prdsize">
-														</c:if></td>
+															</c:choose> <c:if test="${list.ORDER_STATE =='배송중' }">
+																<br>
+																<button type="button" class="delivBtn btn"
+																	data-toggle="modal" data-target="#exampleModalCenter">배송조회</button>
+																<button class="btn" data-toggle="modal"
+																	data-target="#decideModal${status.index }b">구매확정</button>
+																<div class="modal decideModal"
+																	id="decideModal${status.index }b" tabindex="-1"
+																	role="dialog" aria-labelledby="exampleModalCenterTitle"
+																	aria-hidden="true">
+																	<div class="modal-dialog modal-dialog-centered"
+																		role="document">
+																		<div class="modal-content">
+
+																			<div class="container-fluid">
+																				<div class="row decideModalRow">
+																					<div class="col-12">
+																						<span class="decideModelSINSA">SINSA</span><br>
+																						<br> <span class="decideModelSINSA2">"구매
+																							확정"을 하시면 교환/반품을 하실수 없습니다.<br> 구매확정을 하시겠습니까?
+																						</span>
+																					</div>
+																				</div>
+																				<div class="row decideModalRow">
+
+																					<div class="col-12">
+																						<input type="hidden"
+																							value="${list.ORDER_PRDCODE }" class="prdcode">
+																						<input type="hidden" value="${list.ORDER_NUM }"
+																							class="orderum"> <input type="hidden"
+																							value="${list.ORDER_PRDSIZE }" class="prdsize">
+																						<button type="button" class="decideCancle"
+																							data-dismiss="modal">취소</button>
+																							<input type="hidden" value="${status.index }"
+																					class="index">
+																						<button type="button" class="decideBtn">확인</button>
+																					</div>
+																				</div>
+																			</div>
+
+																		</div>
+																	</div>
+																</div>
+																<input type="hidden" value="${list.ORDER_DELIVCOMP }"
+																	class="delivcomp">
+																<input type="hidden" value="${list.ORDER_DELIVNUM }"
+																	class="delivnum">
+																<input type="hidden" value="${list.ORDER_PRDCODE }"
+																	class="prdcode">
+																<input type="hidden" value="${list.ORDER_NUM }"
+																	class="orderum">
+																<input type="hidden" value="${list.ORDER_PRDSIZE }"
+																	class="prdsize">
+															</c:if></span></td>
 
 
 												</tr>
@@ -974,6 +1107,39 @@ a.page-link {
 		var date2 = $('#date2').val();
 		location.href = '1?fromDate=' + date1 + '&toDate=' + date2;
 	});
+
+	$('.decideBtn')
+			.on(
+					"click",
+					function() {
+						var prdcode = $(this).parent().find('.prdcode').val();
+						var orderum = $(this).parent().find('.orderum').val();
+						var prdsize = $(this).parent().find('.prdsize').val();
+						var index = $(this).parent().find('.index').val();
+						var state = $('.stateTd'+index);
+						var delivINGNumber = ($('#delivINGNumber').val() - 1);
+						var delivENDNumber = (parseInt($('#delivENDNumber')
+								.val()) + 1);
+
+						$.ajax({
+							url : '/decide?prdcode=' + prdcode + '&orderum='
+									+ orderum + '&prdsize=' + prdsize,
+							type : "GET",
+							success : function() {
+								alert("구매확정 되었습니다.");
+								$('.decideCancle').click();
+								state.children().remove();
+								state.append('구매확정');
+
+								$('#delivINGNumber').val(delivINGNumber);
+								$('#delivENDNumber').val(delivENDNumber);
+							},
+							error : function() {
+								alert("보내기 실패");
+							}
+						});
+
+					});
 </script>
 
 </html>

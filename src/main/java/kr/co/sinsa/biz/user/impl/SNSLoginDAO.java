@@ -38,7 +38,18 @@ public class SNSLoginDAO {
 	public int getCusNum(String ID) {
 		return SST.selectOne("SNSLogin.getCusNum",ID);
 	}
+	public int getCusNumToEamil(String eamil) {
+		return SST.selectOne("SNSLogin.getCusNumToEamil",eamil);
+	}
 	public void insertSnsInfo(Map<String, Object> map) {
 		SST.insert("SNSLogin.insertSnsInfo",map);
+	}
+	public void Link(Map<String, Object> map) {
+		SST.insert("SNSLogin.Link",map);
+		
+	}
+	
+	public String getID(String email) {
+		return SST.selectOne("SNSLogin.getID",email);
 	}
 }

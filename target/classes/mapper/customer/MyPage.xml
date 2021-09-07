@@ -165,7 +165,7 @@
 		resultType="kr.co.sinsa.biz.product.ProductVO">
 		select product.* from JJIM join product  on JJIM.JJIM_PRDNUM
 		= product.PRD_NUM
-		where JJIM.JJIM_CUSID = #{ID}
+		where JJIM.JJIM_CUSID = #{ID} order by JJIM_REGDATE desc
 		limit #{page},6;
 	</select>
 
@@ -522,4 +522,28 @@ order by REV_NUM  desc
 	where
 	STOCK_PRDCODE = #{value};
 	</select>
+	
+	
+	<select id="getCusNum"
+	resultType="int">
+	select CUS_NUM from customer
+	where
+	CUS_ID = #{value};
+	</select>
+	
+	<select id="checkSNS"
+	resultType="String">
+	select signUpWithSns from sns_info
+	where
+	cusnum = #{value};
+	</select>
+	
+	
+	
+	
+	
+	
+	
+	
+	
 </mapper>
