@@ -62,6 +62,8 @@ ul{
 
 </style>
 
+			<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
 	<!-- Humberger Begin -->
@@ -78,6 +80,8 @@ ul{
 			</ul>
 
 		</div>
+	
+			
 		<div class="humberger__menu__widget">
 			<div class="header__top__right__auth">
 				<ul>
@@ -266,17 +270,19 @@ ul{
 				</div>
 				<div class="col-lg-3">
 					<div class="header__cart">
-						<ul>
-							<li><a href="/jjimList/1"><i class="fa fa-heart"></i> <span>1</span></a></li>
-							<li><button class="button_cart">
-									<a class="cart_login_check" onclick="cart_login_check();">
-										<i class="fa fa-shopping-bag"></i> <span>3</span>
-									</a>
-								</button></li>
-
-
-						</ul>
+				
 					</div>
+					<script type="text/javascript">
+	$
+		.getJSON(
+				"http://localhost:8090/cartandjjim",
+				function(data) {
+		$('.header__cart').append(
+		'<ul><li><a href="/jjimList/1"><i class="fa fa-heart"></i> <span>'	
+		+data.headerJJIMCount+'</span></a></li><li><button class="button_cart"><a class="cart_login_check" onclick="cart_login_check();"><i class="fa fa-shopping-bag"></i> <span>'
+		+data.headerCartCount+'</span></a></button></li></ul>');
+				})
+				</script>
 				</div>
 			</div>
 			<div class="humberger__open">
@@ -311,13 +317,15 @@ ul{
 				return false;
 			}
 		}
-	</script>
-
-
-
-	<script>
+		
+		
+	
+		
 		
 	</script>
+
+
+
 
 
 

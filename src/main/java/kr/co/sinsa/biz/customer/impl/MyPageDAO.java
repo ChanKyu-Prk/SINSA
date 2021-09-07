@@ -201,6 +201,12 @@ public class MyPageDAO {
 	public String checkSNS(int cusnum) {
 		return SST.selectOne("myInfo.checkSNS",cusnum);
 	}
+	public int countCart(String id) {
+		return SST.selectOne("myInfo.countCart",id);
+	}
+	public int countjjim(String id) {
+		return SST.selectOne("myInfo.countjjim",id);
+	}
 	
 	
 	

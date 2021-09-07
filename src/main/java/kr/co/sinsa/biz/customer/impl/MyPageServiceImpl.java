@@ -363,6 +363,19 @@ public class MyPageServiceImpl implements MyPageService {
 		String check = dao.checkSNS(cusnum);
 		return check;
 	}
+
+	@Override
+	public int countCart(String id) {
+		return dao.countCart(id);
+	}
+
+	@Override
+	public int countjjim(String id) {
+		return dao.countjjim(id);
+	}
 	
 
+	
+	
+	
 }
