@@ -188,7 +188,7 @@ ul{
 								} else {
 							%>
 							<div class="header__top__right__auth">
-								<a class="logout_button" type="button" onclick="logout_button();">로그아웃</a>
+								<a class="logout_button" type="button" href="/logout.do">로그아웃</a>
 
 							</div>
 
@@ -289,15 +289,15 @@ ul{
 	<script>
 	
 	/* gnb_area 로그아웃 버튼 작동 */
-	 function logout_button(){
-		$.ajax({
-			type : "POST",
-			url : "/logout.do",
-			success : function(data) {
-				document.location.reload();
-			}
-		});
-	}
+// 	 function logout_button(){
+// 		$.ajax({
+// 			type : "POST",
+// 			url : "/logout.do",
+// 			success : function(data) {
+// 				document.location.reload();
+// 			}
+// 		});
+// 	}
 	
 	
 		function cart_login_check() {
