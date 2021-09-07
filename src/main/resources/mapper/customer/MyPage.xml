@@ -541,7 +541,18 @@ order by REV_NUM  desc
 	
 	
 	
-	
+	<select id="countCart" resultType="int">
+		select
+		count(*)
+		from cart
+		where CART_CUSID = #{ID} 
+	</select>
+	<select id="countjjim" resultType="int">
+		select
+		count(*)
+		from jjim
+		where JJIM_CUSID = #{ID} 
+	</select>
 	
 	
 	

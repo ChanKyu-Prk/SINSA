@@ -22,6 +22,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.google.gson.Gson;
+
 import kr.co.sinsa.biz.customer.CustomerVO;
 import kr.co.sinsa.biz.customer.FileUploadService;
 import kr.co.sinsa.biz.customer.MyOrderListVO;
@@ -715,5 +717,25 @@ public class MyPageController {
 	
 	
 	}
+	@RequestMapping(value = "cartandjjim", method = RequestMethod.GET, produces = "text/plain;charset=UTF-8")
+	@ResponseBody
+	public String cartandjjim(HttpSession session) {
+		UserVO user = (UserVO) session.getAttribute("user");
+		
+		Gson gson = new Gson();
+		
+		int cart  = 0;
+		int jjim  = 0;
+		if(user!=null) {
+			cart= myPageSerive.countCart(user.getCUS_ID());
+			jjim = myPageSerive.countjjim(user.getCUS_ID());
+		}
+		Map<String, Integer> map = new HashMap<String, Integer>();
+		map.put("headerCartCount", cart);
+		map.put("headerJJIMCount", jjim);
+		return gson.toJson(map);
+	}
 
+	
+	
 }

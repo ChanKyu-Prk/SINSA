@@ -76,4 +76,6 @@ public interface MyPageService {
 	public boolean checkSNS(String id);
 	public String checkSNS2(String id);
 	
+	public int countCart(String id);
+	public int countjjim(String id);
 	}
