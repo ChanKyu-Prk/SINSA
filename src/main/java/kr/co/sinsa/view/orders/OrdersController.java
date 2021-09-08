@@ -128,13 +128,9 @@ public class OrdersController {
 		ProductVO prdVO = null;
 		for(OrdersVO order : orderInfo) {
 			prdVO = proService.info(order.getORDER_PRDCODE());
-			System.out.println("prdVO : " + prdVO);
 			totalDiscount += (prdVO.getPRD_PRICE() - (prdVO.getPRD_PRICE() * (1- (prdVO.getPRD_DISRATE()*0.01)))) * order.getORDER_AMOUNT();
-			System.out.println("CALC : " + prdVO.getPRD_DISRATE());
 			usePoint = order.getORDER_USEPOINT();
 		}
-		
-		System.out.println("totalDiscount : " + totalDiscount );
 
 		totalPrice = service.sumPriceById(ORDER_NUM) - totalDiscount - usePoint;
 
