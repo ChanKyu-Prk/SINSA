@@ -40,4 +40,9 @@ public class OrdersServiceImpl implements OrdersSerivce{
 	public List<OrdersVO> selOrdersById(OrdersVO ordersVO) throws Exception {
 		return dao.selOrdersById(ordersVO);
 	}
+
+	@Override
+	public int sumPriceById(String ORDER_NUM) throws Exception {
+		return dao.sumPriceById(ORDER_NUM);
+	}
 }

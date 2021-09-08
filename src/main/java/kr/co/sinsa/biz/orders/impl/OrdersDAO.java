@@ -34,4 +34,8 @@ public class OrdersDAO {
 	public List<OrdersVO> selOrdersById(OrdersVO ordersVO){
 		return SST.selectList("OrdersDAO.selOrdersById", ordersVO);
 	}
+	
+	public int sumPriceById(String ORDER_NUM) {
+		return SST.selectOne("OrdersDAO.sumPriceById", ORDER_NUM);
+	}
 }
