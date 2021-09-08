@@ -114,21 +114,25 @@ public class OrdersController {
 		String CUS_ID = null;
 		int totalPrice = 0;
 		int usePoint = 0;
+		
 		if((UserVO) session.getAttribute("user") != null) {
 			UserVO user = (UserVO) session.getAttribute("user");
 			CUS_ID = (String)user.getCUS_ID();
 		}
-		ordersVO.setORDER_CUSID(CUS_ID);
+//		ordersVO.setORDER_CUSID(CUS_ID);
+		ordersVO.setORDER_CUSID("dhan03");
 		ordersVO.setORDER_NUM(ORDER_NUM);
 		
 		List<OrdersVO> orderInfo = service.selOrdersById(ordersVO);
+
 		ProductVO prdVO = null;
 		for(OrdersVO order : orderInfo) {
 			prdVO = proService.info(order.getORDER_PRDCODE());
-			totalPrice += order.getORDER_PRICE()*(1-(prdVO.getPRD_DISRATE()*0.01));
+			totalPrice += prdVO.getPRD_PRICE() * (1- (prdVO.getPRD_DISRATE()*0.01));
 			usePoint = order.getORDER_USEPOINT();
 		}
-		totalPrice -= usePoint;
+		totalPrice = totalPrice - usePoint;
+
 		model.addAttribute("ORDER_NUM", ORDER_NUM);
 		model.addAttribute("totalPrice", totalPrice);
 		model.addAttribute("usePoint",usePoint);
