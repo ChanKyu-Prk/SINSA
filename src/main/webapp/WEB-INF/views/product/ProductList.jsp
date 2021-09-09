@@ -225,7 +225,7 @@ hr.mo {
 <body>
 	<%
 		UserVO user = (UserVO) session.getAttribute("user");
-	if(user != null){
+		if(user != null){
 	%>
 	<input type="hidden" value="<%= user.getCUS_ID() %>" id="USERID">
 	<%}else{ %>
@@ -238,11 +238,7 @@ hr.mo {
 	<input type="hidden" value="${info.minPrice }" id="minPriceHidden">
 	<input type="hidden" value="${info.maxPrice }" id="maxPriceHidden">
 	<input type="hidden" value="${info.keyWord }" id="keyWordHidden">
-
-
-
 	<jsp:include page="../header.jsp" />
-
 	<section class="hero hero-normal">
 		<div class="container">
 			<div class="row">
@@ -341,37 +337,37 @@ hr.mo {
 								<h4>색상</h4>
 								<div class="sidebar__item__color sidebar__item__color--white">
 									<label for="white" id="id01" onmouseout="mout1()"
-										onmouseover="mover1()"> White <input type="checkbox"
+										onmouseover="mover1()"> WHITE <input type="checkbox"
 										id="white" name="color" value="white">
 									</label>
 								</div>
 								<div class="sidebar__item__color sidebar__item__color--gray">
 									<label for="grey" id="id02" onmouseout="mout2()"
-										onmouseover="mover2()"> Grey <input type="checkbox"
+										onmouseover="mover2()"> GREY <input type="checkbox"
 										id="grey" name="color" value="grey">
 									</label>
 								</div>
 								<div class="sidebar__item__color sidebar__item__color--red">
 									<label for="red" id="id03" onmouseout="mout3()"
-										onmouseover="mover3()"> Red <input type="checkbox"
+										onmouseover="mover3()"> RED <input type="checkbox"
 										id="red" name="color" value="red">
 									</label>
 								</div>
 								<div class="sidebar__item__color sidebar__item__color--black">
 									<label for="black" id="id04" onmouseout="mout4()"
-										onmouseover="mover4()"> Black <input type="checkbox"
+										onmouseover="mover4()"> BLACK <input type="checkbox"
 										id="black" name="color" value="black">
 									</label>
 								</div>
 								<div class="sidebar__item__color sidebar__item__color--blue">
 									<label for="blue" id="id05" onmouseout="mout5()"
-										onmouseover="mover5()"> Blue <input type="checkbox"
+										onmouseover="mover5()"> BLUE <input type="checkbox"
 										id="blue" name="color" value="blue">
 									</label>
 								</div>
 								<div class="sidebar__item__color sidebar__item__color--green">
 									<label for="PK" id="id06" onmouseout="mout6()"
-										onmouseover="mover6()"> PK <input type="checkbox"
+										onmouseover="mover6()"> PINK <input type="checkbox"
 										id="PK" name="color" value="PK">
 									</label>
 								</div>
@@ -381,13 +377,13 @@ hr.mo {
 										id="MULTI" name="color" value="MULTI">
 									</label>
 								</div>
-								<div class="sidebar__item__color sidebar__item__color--white">
+								<div class="sidebar__item__color sidebar__item__color--green">
 									<label for="BG" id="id08" onmouseout="mout8()"
-										onmouseover="mover8()"> BG <input type="checkbox"
+										onmouseover="mover8()"> GREEN <input type="checkbox"
 										id="BG" name="color" value="BG">
 									</label>
 								</div>
-								<div class="sidebar__item__color sidebar__item__color--white">
+								<div class="sidebar__item__color sidebar__item__color--yellow">
 									<label for="YELLOW" id="id09" onmouseout="mout9()"
 										onmouseover="mover9()"> YELLOW <input type="checkbox"
 										id="YELLOW" name="color" value="YELLOW">
@@ -398,9 +394,6 @@ hr.mo {
 						</div>
 					</div>
 				</div>
-
-
-
 				<div class="col-sm-12 col-md-9">
 					<div class="filter__item">
 						<div class="row sort_row">
@@ -424,7 +417,6 @@ hr.mo {
 						</div>
 						<div class="row">
 							<c:forEach var="list" items="${list }" varStatus="status">
-
 								<div class="col-lg-4 col-md-6 col-sm-6 prodBox">
 									<div class="product__item">
 										<div class="product__item__pic set-bg"
@@ -439,15 +431,14 @@ hr.mo {
 														</c:if> <c:if test="${jjimcheck[status.index]==1}">
 															<i class="fa fa-heart"></i>
 														</c:if> </a></li>
-												<li>
+												<li onclick="event.cancelBubble= true;">
+													<a class="buyNow">
+														<i class="fa">바로구매</i>
+													</a>
+												</li>
 												<li onclick="event.cancelBubble= true;"><a
-													class="buyNow"><i class="fa">바로구매</i></a></li>
-												<li onclick="event.cancelBubble= true;"><a
-													class="showpingCart"><i class="fa fa-shopping-cart"></i></a></li>
-
+													class="shoppingCart"><i class="fa fa-shopping-cart"></i></a></li>
 											</ul>
-
-
 										</div>
 										<button class="buyNowBtn" data-toggle="modal"
 											data-target="#buyNowModal${status.index }"></button>
@@ -468,19 +459,35 @@ hr.mo {
 															<div class="col-4 modalImgDiv">
 																<img alt=""
 																	src="${pageContext.request.contextPath}/resources/prdImg/${list.PRD_CODE }.png">
-
 															</div>
 															<div class="col-8 modalInfoDiv">
 																<div class="row brandrow infos">${list.PRD_BRAND }</div>
 																<div class="row namerow infos">${list.PRD_NAME }</div>
-
 																<div class="row colorrow">
 																	<div class="col-3  infos fc">색상 :</div>
-																	<div class="col-9 nopadding">${list.PRD_COLOR }</div>
+																	<c:choose>
+																		<c:when test="${list.PRD_COLOR == 'BK'}">
+																			<div class="col-9 nopadding">BLACK</div>																			
+																		</c:when>
+																		<c:when test="${list.PRD_COLOR == 'BG'}">
+																			<div class="col-9 nopadding">GREEN</div>																			
+																		</c:when>
+																		<c:when test="${list.PRD_COLOR == 'WH'}">
+																			<div class="col-9 nopadding">WHITE</div>																			
+																		</c:when>
+																		<c:when test="${list.PRD_COLOR == 'PK'}">
+																			<div class="col-9 nopadding">PINK</div>																			
+																		</c:when>
+																		<c:when test="${list.PRD_COLOR == 'BL'}">
+																			<div class="col-9 nopadding">BLUE</div>																			
+																		</c:when>
+																		<c:otherwise>																		
+																			<div class="col-9 nopadding">${list.PRD_COLOR }</div>
+																		</c:otherwise>
+																	</c:choose>
 																</div>
 																<div class="row pricerow">
-
-																	<div class="col-3  infos fc">가격 :</div>
+																	<div class="col-3 infos fc">가격 :</div>
 																	<div class="col-9 nopadding">
 																		<fmt:formatNumber value="${list.PRD_PRICE }"
 																			type="number" />
@@ -520,18 +527,14 @@ hr.mo {
 																		class="subBtnS goByebtn">바로 구매</span>
 																</div>
 															</div>
-
 														</div>
 													</div>
-
 												</div>
 											</div>
 										</div>
-
-
+										
 										<button class="cartModalBtn" data-toggle="modal"
 											data-target="#cartModal${status.index }"></button>
-
 										<div class="modal" id="cartModal${status.index }"
 											tabindex="-1" role="dialog"
 											aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -561,7 +564,6 @@ hr.mo {
 																	<div class="col-9 nopadding">${list.PRD_COLOR }</div>
 																</div>
 																<div class="row pricerow">
-
 																	<div class="col-3  infos fc">가격 :</div>
 																	<div class="col-9 nopadding">
 																		<fmt:formatNumber value="${list.PRD_PRICE }"
@@ -602,14 +604,11 @@ hr.mo {
 																		class="subBtnS goCartBtn">담기</span>
 																</div>
 															</div>
-
 														</div>
 													</div>
-
 												</div>
 											</div>
 										</div>
-
 										<div class="product__item__text">
 											<h6>
 												<a href='/product/prdCode=${list.PRD_CODE}' class=>${list.PRD_NAME }</a>
@@ -621,15 +620,8 @@ hr.mo {
 										</div>
 									</div>
 								</div>
-
-
-
-
 							</c:forEach>
 						</div>
-
-
-
 						<ul class="pagination">
 							<c:choose>
 								<c:when test="${pageInfo.getPage()<=1}">
@@ -691,11 +683,8 @@ hr.mo {
 		</div>
 	</section>
 	<!-- Product Section End -->
-
 	<!-- Footer Section Begin -->
 	<!-- Footer Section End -->
-
-
 </body>
 <jsp:include page="../footer.jsp" />
 
@@ -717,12 +706,10 @@ hr.mo {
 		var m;
 		m = document.getElementById("id01");
 		if (clickCheck1 === "false") {
-			// 		$('#white').val('white');
 			m.style.color = "red";
 			clickCheck1 = "true";
 			$('#white').attr('checked', true);
 		} else if (clickCheck1 === "true") {
-			// 		$('#white').val('');
 			m.style.color = "black";
 			clickCheck1 = "false";
 			$('#white').attr('checked', false);
@@ -747,7 +734,6 @@ hr.mo {
 		var m;
 		m = document.getElementById("id02");
 		if (clickCheck2 === "false") {
-			// 		$('#gray').val('gray');
 			m.style.color = "red";
 			clickCheck2 = "true";
 			$('#grey').attr('checked', true);
@@ -1072,15 +1058,12 @@ hr.mo {
 				var category = $('#conditionHidden').val();
 				var keyWord = $('#keyWordHidden').val();
 				var color = $('#colorHidden').val();
-
 				var orderby = $('.orderbySelect').val();
-
 				location.href = "/product/List/" + condition + "/" + orderby
 						+ "/" + category + "/1" + "?color=" + color
 						+ "&minPrice=" + minPrice + "&maxPrice=" + maxPrice
 						+ "&keyWord=" + keyWord;
 			});
-
 	$('.jjimBtn').on("click", function() {
 		var prdnum = $(this).find('.prdnumj').val();
 		var data = {
@@ -1092,7 +1075,6 @@ hr.mo {
 			url : "/dojjim",
 			data : data,
 			success : function(result) {
-
 				if (result == 'login') {
 					var con = confirm("로그인이 필요한 서비스입니다.\n로그인하시겠습니까?");
 					if (con) {
@@ -1110,7 +1092,6 @@ hr.mo {
 						btn.addClass("fa-heart-o");
 					}
 				}
-
 			},
 			error : function() {
 				alert("보내기 실패");
@@ -1123,7 +1104,6 @@ hr.mo {
 			document.getElementById('support-note').style.display = 'block';
 		}
 	})();
-
 	$('.buyNow').on("click", function() {
 		var user = $('#USERID').val();	
 		if (user == "") {
@@ -1134,11 +1114,10 @@ hr.mo {
 			} else {
 				return false;
 			}
-
 		}
 		$(this).closest('.product__item__pic').next().click();
 	});
-	$('.showpingCart').on("click", function() {
+	$('.shoppingCart').on("click", function() {
 		var user = $('#USERID').val();	
 		if (user == "") {
 			var result = confirm("로그인이 필요한 서비스입니다.\n로그인하시겠습니까?");
@@ -1148,11 +1127,9 @@ hr.mo {
 			} else {
 				return false;
 			}
-
 		}
 		$(this).closest('.product__item__pic').next().next().next().click();
 	});
-
 	$('.goCartBtn')
 			.on(
 					"click",
@@ -1185,7 +1162,6 @@ hr.mo {
 	$('.goByebtn').on(
 			"click",
 			function() {
-
 				var ORDER_PRDCODE = $(this).parent().find('.numCode').val();
 				var ORDER_PRDSIZE = $(this).closest('.selectRow').children()
 						.find('.selectStocks').val();
