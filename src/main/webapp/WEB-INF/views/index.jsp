@@ -195,7 +195,6 @@
 							</a>
 						</div>
 					</c:forEach>
-
 				</div>
 			</div>
 		</div>
@@ -210,9 +209,6 @@
 					<div class="section-title">
 						<h2>TOP TRENDS</h2>
 					</div>
-
-
-
 					<div class="col-lg-12">
 						<div class="product__details__tab div_name_top_trends">
 							<ul class="nav nav-tabs" role="tablist">

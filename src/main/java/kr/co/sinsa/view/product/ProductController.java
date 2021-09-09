@@ -74,33 +74,6 @@ public class ProductController {
 		}
 
 		Map<String, Object> map = new HashMap<String, Object>();
-//		ProductVO productVO = service.info(PRD_CODE);		
-//		int qna_PRD_NUM = productVO.getPRD_NUM();
-//		int page = Integer.parseInt(pageR);
-//		int limit = 10;
-//		int listCount;
-//		int startPage;
-//		int endPage;
-//		int maxPage;
-//		
-//		map.put("qna_PRD_NUM", qna_PRD_NUM);
-//		map.put("page", (page - 1) * limit);
-//		List<QnaVO> qnaList = QnaService.qnaInfo(map);
-//		model.addAttribute("qnaList", qnaList);
-//		listCount = service.countQNAList(map);
-//		maxPage = (int) ((double) listCount / limit + 0.95);
-//		startPage = (((int) ((double) page / 5 + 0.8)) - 1) * 5 + 1;
-//		endPage = startPage + 4;
-//		if (endPage > maxPage) {
-//			endPage = maxPage;
-//		}
-//		PageInfo pageInfo = new PageInfo();
-//		pageInfo.setListCount(listCount);
-//		pageInfo.setEndPage(endPage);
-//		pageInfo.setStartPage(startPage);
-//		pageInfo.setMaxPage(maxPage);
-//		pageInfo.setPage(page);
-//		model.addAttribute("pageInfo", pageInfo);
 		
     	ProductVO vo = service.info(PRD_CODE);
     	model.addAttribute("prdInfo", vo);
@@ -172,8 +145,6 @@ public class ProductController {
 			map.put("CUS_ID", CUS_ID);
 			service.addCart(map);
 		}
-		
-		
 		return map;
 	}
 
@@ -225,23 +196,24 @@ public class ProductController {
 			@RequestParam(value = "maxPrice", required = false, defaultValue = "150000") String maxPriceR,
 			HttpSession session) throws Exception {
 		Map<String, String> info = new HashMap<String, String>();
-		info.put("condition", condition);
-		info.put("orderby", orderby);
-		info.put("category", category);
+		info.put("condition", condition); // all
+		info.put("orderby", orderby); //newest
+		info.put("category", category); // all
 		info.put("keyWord", keyword);
 		info.put("brand", brand);
 		info.put("color", color);
 		info.put("minPrice", minPriceR);
 		info.put("maxPrice", maxPriceR);
 		model.addAttribute("info", info);
-		int page = Integer.parseInt(pageR);
+		//info.condition : all		//info.orderby : newest		//info.category : all
+		int page = Integer.parseInt(pageR); // 1
 		int limit = 12;
 		int listCount;
 		int startPage;
 		int endPage;
 		int maxPage;
-		int minPrice = Integer.parseInt(minPriceR);
-		int maxPrice = Integer.parseInt(maxPriceR);
+		int minPrice = Integer.parseInt(minPriceR); // defaultValue : 0
+		int maxPrice = Integer.parseInt(maxPriceR);	// defaultValue : 150,000
 		
 		String[] colors=color.split("_");
 		for(int i = 0 ; i < colors.length ; i++) {
@@ -321,16 +293,16 @@ public class ProductController {
 			orderby = "PRD_PRICE";
 			ascdesc = "desc";
 		}
-		
+		//orderby : "neweast" => 	//orderby : "PRD_NUM" //ascdesc = "desc"
 
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("name", keyword);
 		map.put("category", prdCategory);
 		map.put("gender", gender);
-		map.put("minPrice", minPrice);
-		map.put("maxPrice", maxPrice);
-		map.put("orderby", orderby);
-		map.put("ascdesc", ascdesc);
+		map.put("minPrice", minPrice); // defaultValue : 0
+		map.put("maxPrice", maxPrice); // defaultValue : 150,000
+		map.put("orderby", orderby); // "PRD_NUM"
+		map.put("ascdesc", ascdesc); // "desc"
 		map.put("color", colorQuerry);
 		map.put("brand", brand);
 		map.put("page", (page - 1) * limit);
