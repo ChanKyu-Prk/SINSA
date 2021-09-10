@@ -319,7 +319,30 @@ a.page-link {
 #QNA_TITLE{
 	width: 100%;
 }
+.review_image{
+   height: 300px !important;
+   width: 350px !important;
+   margin: 0px 10px 0px 0px !important;
+}
 
+.reviewThumbPic{
+   height: 100px;
+   width: 100px;
+}
+
+.main_review_img{
+   padding: 0px 0px 0px 90px !important;
+}
+
+.piclenth {
+   position: absolute;
+   right: 0px;
+   width: 25px;
+   height: 25px;
+   background-color: rgba(0, 0, 0, 0.8);
+   color: white;
+   margin-top: -25px;
+}
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
@@ -703,95 +726,140 @@ a.page-link {
 								<div class="product__details__tab__desc">
 									<div class="container">
 										<div class="row">
-											<c:forEach var="list" items="${detailReviewList}" varStatus="status">
-												<a class="list-group-item list-group-item-action review_list">
-													<div class="row">
-														<div class="col">
-															<div class="row TextCenter" data-toggle="collapse"
-																data-target="#content${status.index}">
-																<span class="col-md-2 span_star"> <c:if
-																		test="${list.REV_STAR eq 0}">
-																		<img src="${path}/resources/img/empty_star.png"
-																			class="empty_star">
-																		<img src="${path}/resources/img/empty_star.png"
-																			class="empty_star">
-																		<img src="${path}/resources/img/empty_star.png"
-																			class="empty_star">
-																		<img src="${path}/resources/img/empty_star.png"
-																			class="empty_star">
-																		<img src="${path}/resources/img/empty_star.png"
-																			class="empty_star">
+											<c:forEach var="list" items="${detailReviewList}"
+                                    varStatus="status">
+                                    <a
+                                       class="list-group-item list-group-item-action review_list">
+                                       <div class="row">
+                                          <div class="col">
+                                             <div class="row TextCenter" data-toggle="collapse"
+                                                data-target="#content${status.index}">
+                                                <span class="col-md-2 span_star"> <c:if
+                                                      test="${list.REV_STAR eq 0}">
+                                                      <img src="${path}/resources/img/empty_star.png"
+                                                         class="empty_star">
+                                                      <img src="${path}/resources/img/empty_star.png"
+                                                         class="empty_star">
+                                                      <img src="${path}/resources/img/empty_star.png"
+                                                         class="empty_star">
+                                                      <img src="${path}/resources/img/empty_star.png"
+                                                         class="empty_star">
+                                                      <img src="${path}/resources/img/empty_star.png"
+                                                         class="empty_star">
 
-																	</c:if> <c:if test="${list.REV_STAR eq 1}">
-																		<div style="display: flex;">
-																			<img src="${path}/resources/img/star.png"
-																				class="star"> <img
-																				src="${path}/resources/img/empty_star.png"
-																				class="empty_star"> <img
-																				src="${path}/resources/img/empty_star.png"
-																				class="empty_star"> <img
-																				src="${path}/resources/img/empty_star.png"
-																				class="empty_star"> <img
-																				src="${path}/resources/img/empty_star.png"
-																				class="empty_star">
-																		</div>
-																	</c:if> <c:if test="${list.REV_STAR eq 2}">
-																		<img src="${path}/resources/img/star.png" class="star">
-																		<img src="${path}/resources/img/star.png" class="star">
-																		<img src="${path}/resources/img/empty_star.png"
-																			class="empty_star">
-																		<img src="${path}/resources/img/empty_star.png"
-																			class="empty_star">
-																		<img src="${path}/resources/img/empty_star.png"
-																			class="empty_star">
+                                                   </c:if> <c:if test="${list.REV_STAR eq 1}">
+                                                      <div style="display: flex;">
+                                                         <img src="${path}/resources/img/star.png"
+                                                            class="star"> <img
+                                                            src="${path}/resources/img/empty_star.png"
+                                                            class="empty_star"> <img
+                                                            src="${path}/resources/img/empty_star.png"
+                                                            class="empty_star"> <img
+                                                            src="${path}/resources/img/empty_star.png"
+                                                            class="empty_star"> <img
+                                                            src="${path}/resources/img/empty_star.png"
+                                                            class="empty_star">
+                                                      </div>
+                                                   </c:if> <c:if test="${list.REV_STAR eq 2}">
+                                                      <img src="${path}/resources/img/star.png" class="star">
+                                                      <img src="${path}/resources/img/star.png" class="star">
+                                                      <img src="${path}/resources/img/empty_star.png"
+                                                         class="empty_star">
+                                                      <img src="${path}/resources/img/empty_star.png"
+                                                         class="empty_star">
+                                                      <img src="${path}/resources/img/empty_star.png"
+                                                         class="empty_star">
 
-																	</c:if> <c:if test="${list.REV_STAR eq 3}">
-																		<img src="${path}/resources/img/star.png" class="star">
-																		<img src="${path}/resources/img/star.png" class="star">
-																		<img src="${path}/resources/img/star.png" class="star">
-																		<img src="${path}/resources/img/empty_star.png"
-																			class="empty_star">
-																		<img src="${path}/resources/img/empty_star.png"
-																			class="empty_star">
+                                                   </c:if> <c:if test="${list.REV_STAR eq 3}">
+                                                      <img src="${path}/resources/img/star.png" class="star">
+                                                      <img src="${path}/resources/img/star.png" class="star">
+                                                      <img src="${path}/resources/img/star.png" class="star">
+                                                      <img src="${path}/resources/img/empty_star.png"
+                                                         class="empty_star">
+                                                      <img src="${path}/resources/img/empty_star.png"
+                                                         class="empty_star">
 
-																	</c:if> <c:if test="${list.REV_STAR eq 4}">
-																		<img src="${path}/resources/img/star.png" class="star">
-																		<img src="${path}/resources/img/star.png" class="star">
-																		<img src="${path}/resources/img/star.png" class="star">
-																		<img src="${path}/resources/img/star.png" class="star">
-																		<img src="${path}/resources/img/empty_star.png"
-																			class="empty_star">
+                                                   </c:if> <c:if test="${list.REV_STAR eq 4}">
+                                                      <img src="${path}/resources/img/star.png" class="star">
+                                                      <img src="${path}/resources/img/star.png" class="star">
+                                                      <img src="${path}/resources/img/star.png" class="star">
+                                                      <img src="${path}/resources/img/star.png" class="star">
+                                                      <img src="${path}/resources/img/empty_star.png"
+                                                         class="empty_star">
 
-																	</c:if> <c:if test="${list.REV_STAR eq 5}">
-																		<img src="${path}/resources/img/star.png" class="star">
-																		<img src="${path}/resources/img/star.png" class="star">
-																		<img src="${path}/resources/img/star.png" class="star">
-																		<img src="${path}/resources/img/star.png" class="star">
-																		<img src="${path}/resources/img/star.png" class="star">
+                                                   </c:if> <c:if test="${list.REV_STAR eq 5}">
+                                                      <img src="${path}/resources/img/star.png" class="star">
+                                                      <img src="${path}/resources/img/star.png" class="star">
+                                                      <img src="${path}/resources/img/star.png" class="star">
+                                                      <img src="${path}/resources/img/star.png" class="star">
+                                                      <img src="${path}/resources/img/star.png" class="star">
 
-																	</c:if>
-																</span> <span class="col-md-10"> ${list.PRD_NAME} /
-																	${list.PRD_COLOR } / ${list.ORDER_PRDSIZE } | &nbsp;${list.REV_TITLE} </span>
-																<div class="review_content">${list.REV_CONTENT}</div>
-																<div id="content${status.index}" class="collapse">
-																	<div class="col-md-5 left margin"></div>
-																	<div class="row">
-																		<div class="col-md-12 review_content">
-																			<img
-																				src="${path}/resources/img/product/나이키디파이올데이.png"
-																				alt="" class="review_img"> <img
-																				src="${path}/resources/img/product/나이키디파이올데이.png"
-																				alt="" class="review_img"> <img
-																				src="${path}/resources/img/product/나이키디파이올데이.png"
-																				alt="" class="review_img">
-																		</div>
-																	</div>
-																</div>
-															</div>
-														</div>
-													</div>
-												</a>
-											</c:forEach>
+                                                   </c:if>
+                                                </span> <span class="col-md-10"> ${list.PRD_NAME} /
+                                                   ${list.PRD_COLOR } / ${list.ORDER_PRDSIZE } |
+                                                   &nbsp;${list.REV_TITLE} </span>
+                                                   
+                                                   
+                                                   
+                                                   
+                                                <span class="col-md-9 review_content">${list.REV_CONTENT}</span>
+                                                
+                                                <c:set var="img_array"
+                                                            value="${fn:split(list.REV_IMAGE,'/')}" />
+                                                
+                                                <c:if
+                                             test="${img_array[0] !=null }">
+                                             <span class="col-md-2 main_review_img">
+                                                <input type="hidden" value="0" class="displayState">
+                                                <img class="reviewThumbPic" alt="리뷰 대표 사진"
+                                                   title="리뷰 대표 사진"
+                                                   src="${path}/resources/img/review/${img_array[0]}" />
+                                                <div class="piclenth">&nbsp;&nbsp;${fn:length(img_array)}</div>
+                                             </span>
+                                          </c:if>
+                                                
+                                                
+                                                
+                                                <div id="content${status.index}" class="collapse">
+                                                   <div class="col-md-5 left margin"></div>
+                                                   <div class="row">
+                                                      <div class="col-md-12 review_content">
+
+
+
+                                                         <%--                      <c:out var="image" value='${img_array[0]}' /> --%>
+                                                         <img
+                                                            src="${path}/resources/img/review/${img_array[0]}"
+                                                            alt="" class="review_image">
+                                                            <img
+                                                            src="${path}/resources/img/review/${img_array[1]}"
+                                                            alt="" class="review_image">
+                                                            <img
+                                                            src="${path}/resources/img/review/${img_array[2]}"
+                                                            alt="" class="review_image">
+
+
+
+
+
+
+
+
+
+
+                                                         <!--                                               <img -->
+                                                         <%--                                                             src="${path}/resources/img/product/나이키디파이올데이.png" --%>
+                                                         <!--                                                             alt="" class="review_img"> <img -->
+                                                         <%--                                                             src="${path}/resources/img/product/나이키디파이올데이.png" --%>
+                                                         <!--                                                             alt="" class="review_img"> -->
+                                                      </div>
+                                                   </div>
+                                                </div>
+                                             </div>
+                                          </div>
+                                       </div>
+                                    </a>
+                                 </c:forEach>
 										</div>
 									</div>
 								</div>
