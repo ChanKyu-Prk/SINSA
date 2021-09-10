@@ -86,7 +86,13 @@ public class ProductController {
 		recentlyViewed.setPath("/");
 		recentlyViewed.setMaxAge(60*60*24*3);
 		response.addCookie(recentlyViewed);
-    	
+		
+		int qlistCount;
+		int qna_PRD_NUM = vo.getPRD_NUM();
+		map.put("qna_PRD_NUM", qna_PRD_NUM);
+		qlistCount = service.countQNAList(map);
+		model.addAttribute("qlistCount", qlistCount);
+		
     	StockVO stockVO = stockService.sizeInStock(PRD_CODE);
     	model.addAttribute("stockInfo", stockVO);
     	
