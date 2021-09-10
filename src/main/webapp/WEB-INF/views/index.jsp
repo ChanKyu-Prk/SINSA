@@ -293,13 +293,7 @@
 													</div>
 												</div>
 											</c:forEach>
-
-
 										</div>
-
-
-
-
 									</div>
 								</div>
 								<div class="tab-pane" id="tabs-3" role="tabpanel">
