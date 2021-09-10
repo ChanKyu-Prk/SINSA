@@ -290,7 +290,7 @@ hr.mo {
 				<div class="col-sm-12 col-md-3">
 					<div class="sidebar">
 						<div class="sidebar__item" id="sidebar__item__menu">
-							<h4>품목</h4>
+							<h4>운동화</h4>
 							<ul>
 								<li><a
 									href="/product/List/${condition}/${info.orderby}/sneakers/1?keyword=${keyword }">Sneakers</a></li>
@@ -300,8 +300,10 @@ hr.mo {
 									href="/product/List/${condition}/${info.orderby}/slipon/1?keyword=${keyword }">Slip-on</a></li>
 								<li><a
 									href="/product/List/${condition}/${info.orderby}/mule/1?keyword=${keyword }">Mule</a></li>
-								<li><a
-									href="/product/List/${condition}/${info.orderby}/sandals/1?keyword=${keyword }">Sandals/Slipper</a></li>
+							</ul>
+							<br><br>
+							<h4>스포츠</h4>
+							<ul>
 								<li><a
 									href="/product/List/${condition}/${info.orderby}/running/1?keyword=${keyword }">Running</a></li>
 								<li><a
@@ -312,14 +314,9 @@ hr.mo {
 									href="/product/List/${condition}/${info.orderby}/golf/1?keyword=${keyword }">Golf</a></li>
 								<li><a
 									href="/product/List/${condition}/${info.orderby}/outdoor/1?keyword=${keyword }">Outdoor</a></li>
-								<li><a
-									href="/product/List/${condition}/${info.orderby}/tennis/1?keyword=${keyword }">Tennis</a></li>
-								<li><a
-									href="/product/List/${condition}/${info.orderby}/training/1?keyword=${keyword }">Training</a></li>
-								<li><a
-									href="/product/List/${condition}/${info.orderby}/skating/1?keyword=${keyword }">Skating</a></li>
 							</ul>
 						</div>
+						<br>
 						<div id="filter">
 							<div class="sidebar__item">
 								<h4>가격</h4>
@@ -332,6 +329,7 @@ hr.mo {
 									<span>원</span>
 								</div>
 							</div>
+							<br>
 							<div id="color-box"
 								class="sidebar__item sidebar__item__color--option">
 								<h4>색상</h4>

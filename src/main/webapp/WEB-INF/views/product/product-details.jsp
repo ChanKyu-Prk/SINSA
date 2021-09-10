@@ -307,7 +307,7 @@ a.page-link {
 }
 .btn-qnaNew{
 		background-color: black !important;
-		color: yellow !important;
+		color: white !important;
 		background-image: none !important;
 }
 .btn-qna-hidden{
@@ -712,7 +712,7 @@ a.page-link {
 								aria-selected="false">상품평&nbsp; <span>(${reviewNum})</span></a></li>
 							<li class="nav-item" role="presentation"><a id="qnaTab"
 								class="nav-link" onclick="QnaList(1)" data-toggle="tab" href="#tabs-3" role="tab"
-								aria-selected="false">상품문의&nbsp;<span>(--)</span></a></li>
+								aria-selected="false">상품문의&nbsp;<span>(${qlistCount})</span></a></li>
 						</ul>
 						<div class="tab-content">
 							<div class="tab-pane active" id="tabs-1" role="tabpanel">
@@ -889,8 +889,17 @@ a.page-link {
 														<input type="hidden" id="PRD_NUM" name="PRD_NUM" class="PRD_NUM" value="${prdInfo.PRD_NUM}" />
 												  <p><label> 제목* </label><br><input type="text" id="QNA_TITLE" name="QNA_TITLE" 
 												  	required="required" value=""/></p>
-												  <p><label> 패스워드* </label><br><input type="password" id="QNA_LOCK" name="QNA_LOCK" 
+												   
+												  <p>
+												  <input type="radio" style=" margin-right: 10px;" id="QNA_LOCK0" name="QNA_LOCK" value="0" checked >
+												  <label for="QNA_LOCK" style=" margin-right: 10px;">비밀글</label>												   
+												  <input type="radio" style=" margin-right: 10px;" id="QNA_LOCK1" name="QNA_LOCK" value="1" >
+												  <label for="QNA_LOCK">공개글</label>
+												   </p>
+												 <!--  
+												 <p><label> 패스워드* </label><br><input type="password" id="QNA_LOCK0" name="QNA_LOCK" 
 												  	required="required" value=""/></p>
+												 --> 
 												  <p><label> 문의 내용 입력* </label><br><textarea rows="10" cols="60" id="QNA_CONTENT" 
 												  	name="QNA_CONTENT" required="required"></textarea><br></p>
 													</form></div>
@@ -899,13 +908,13 @@ a.page-link {
 																onclick="qnaWrite(this.id)">쓰기</button>
 																<button type="button" class="btn btn-default" 
 																id="modal_close_btn" data-dismiss="modal">닫기</button>
-														</div></div></div></div></div></div>'
+														</div></div></div></div></div></div>
 									<div class="container" id="container-qna">
 									</div>
 									<!-- 페이징 구분 -->
 									<ul class="pagination">
 									</ul>
-									
+									<input type="hidden" id="hidden-page">
 								</div>
 							</div>
 						</div>
@@ -1193,28 +1202,25 @@ a.page-link {
 							<%}%>
 							$("#QNA_TITLE").val("");
 							$("#QNA_LOCK").val("");
-							alert("!!");
 							$("#btn-qna-hidden-id").click();							
 						}
 						function qnaWrite(clickedId){
-							alert("!!");
 							var CRUD = clickedId;
 							var PRD_CODE = '${prdInfo.PRD_CODE}';
 							var page;
 							var CONTENT = $('#QNA_CONTENT').val();
 							var TITLE = $('#QNA_TITLE').val();
-							var LOCK = $('#QNA_LOCK').val();
+							var LOCK = $('input[name="QNA_LOCK"]:checked').val();
+				
 							if(CONTENT === null || CONTENT === ""){
 								alert("내용이 비었습니다.");
 								return false;
 							}else if(TITLE === null || TITLE === ""){
 								alert("문의 제목을 작성해주세요.");
 								return false;
-							}else if(LOCK === null || LOCK ===""){
-								alert("패스워드가 비었습니다.");
-								return false;
 							}
 							if(CRUD === 'qnaWrite-id'){
+								
 								var form = $('#formToInput').serialize();
 								CRUD = 'insert';
 								qnaCrud(form, CRUD, PRD_CODE, page);
@@ -1225,12 +1231,12 @@ a.page-link {
 							loginCheck();
 							return false;
 							<%}%>
-							$("#modal"+updateNumbering).attr("style", "display:block");
+							$("#btn-qna-hidden-id"+updateNumbering).click();
 						}
 						function continueQnaUpdate(updateNumbering, page){
 							var CONTENT = $('#QNA_CONTENT'+updateNumbering).val();
 							var TITLE = $('#QNA_TITLE'+updateNumbering).val();
-							var LOCK = $('#QNA_LOCK'+updateNumbering).val();
+							var LOCK = $('input[name="QNA_LOCK'+updateNumbering+'"]:checked').val();
 							if(CONTENT === null || CONTENT === ""){
 								alert("내용이 비었습니다.");
 								return false;
@@ -1246,7 +1252,7 @@ a.page-link {
 							var form = $('#formToInput'+updateNumbering).serialize();
 							qnaCrud(form, CRUD, CODE, page);
 						}
-						function qnaDelete(deleteNumbering, thisId){
+						function qnaDelete(deleteNumbering, thisId, page){
 							<%if(session.getAttribute("user") == null){%>
 							loginCheck();
 							return false;
@@ -1260,38 +1266,42 @@ a.page-link {
 								alert("게시물을 작성한 계정만 게시물을 삭제할 수 있습니다.");
 								return false;
 							}
-							$("#qna-open-content-delete"+deleteNumbering).attr("style", "display:block");
+							var result = confirm("정말로 삭제하시겠습니까?");
+							if(result){
+								var CRUD = 'delete';
+								var CODE = deleteNumbering;
+								var isForm = 'formToDelete'+deleteNumbering;
+								var form = $('#'+isForm).serialize();
+								qnaCrud(form, CRUD, CODE, page);								
+							}else{
+								return false;
+							}
 						}
 						
 						
 						function qnaCrud(form, CRUD, CODE, page){
 							$.ajax({
-										
 								url: '/formToInput/'+CRUD,
 								type: "POST",
 								data: form,
 								success: function (data) {
 									if(CRUD === 'insert'){
-										alert("!!!");
 										QnaList(1);
 										$('#modal_close_btn').click();
 									}else if(CRUD === 'delete'){
-										$('#qna-table'+CODE).remove();
-									}else if(CRUD === 'update'){
 										QnaList(page);
+									}else{
+										$('#modal_close_btn'+CODE).click();
+										setTimeout(function(){
+											QnaList(page);
+										}, 500);
 									}
 								},
 								error: function (e) {
 									console.log("ERROR : ", e);
-								},
-								complete: function(){
-									if(CRUD === 'insert'){
-										$("#modal").attr("style", "display:none");
-									}else{
-										$("#modal"+CODE).attr("style", "display:none");
-									}
 								}
 							})
+							
 						}
 						function loginCheck(){
 							var result = confirm("로그인이 필요한 서비스입니다. 로그인하시겠습니까?");
@@ -1303,7 +1313,7 @@ a.page-link {
 									return false;
 								}
 						}
-						function openContent(qnaNumbering,thisId){
+						function openContent(qnaNumbering,thisId,lock){
 							<%if(session.getAttribute("user") == null){%>
 							loginCheck();
 							return false;
@@ -1313,22 +1323,15 @@ a.page-link {
 								pageContext.setAttribute("CutId", new String[]{CutId});
 							}%>
 							var checkID= "${CutId[0]}";
-							if(thisId != checkID){
-								alert("게시물 작성자만 게시물을 볼 수 있습니다.");
-								return false;
+							if(lock === "0" || lock === 0){
+								if(thisId != checkID){
+									alert("비밀글은 작성자만 볼 수 있습니다.");
+									return false;
+								}
 							}
-							$("#qna-open-content"+qnaNumbering).attr("style", "display:block");
+							$(".qna-content"+qnaNumbering).attr("style", "display:block");								
 						}
-						function replyOpen(qnaNumbering) {
-							var correctPwd = $('#correct-pwd'+qnaNumbering).val();
-							var comparePwd = $("#qna-content-password"+qnaNumbering).val();
-							if(correctPwd != comparePwd || comparePwd === null){
-								alert("패스워드를 다시 확인해주세요.");
-							}else{
-								$('#qna-open-content'+qnaNumbering).css('display','none');
-								$('.qna-content'+qnaNumbering).css('display','block');
-							}
-						}
+						
 						function replyOpenDelete(qnaNumbering) {
 							var correctPwd = $('#correct-pwd-delete'+qnaNumbering).val();
 							var comparePwd = $("#qna-content-password-delete"+qnaNumbering).val();
@@ -1336,12 +1339,7 @@ a.page-link {
 								alert("패스워드를 다시 확인해주세요.");
 							}else{
 								$('#qna-open-content-delete'+qnaNumbering).css('display','none');
-								var CRUD = 'delete';
-								var CODE = qnaNumbering;
-								var isForm = 'formToDelete'+qnaNumbering;
-								var form = $('#'+isForm).serialize();
-								var page;
-								qnaCrud(form, CRUD, CODE, page);
+								
 							}
 						}
 						function replyCancle(qnaNumbering){
@@ -1368,6 +1366,7 @@ a.page-link {
 								success:function(data){
 									arrays = data.qnaList;							
 									var pI = data.pageInfo;
+									$('#hidden-page').attr("onclick","QnaList("+pI.page+")");
 									$('#container-qna').empty();
 									if(arrays[0] === undefined){
 										$('#container-qna').append('<div id="empty-qna-description" >작성된 문의가 없습니다.</div>');									
@@ -1375,37 +1374,50 @@ a.page-link {
 										$('#container-qna').append('<div id="empty-qna-description" style="margin-bottom: 55px;"><h4>< 상품 Q&A ></h4></div>');
 									}
 									$('#container-qna').append(
-											'<div align="right">'
+											'<div style="margin-bottom:10px;" align="right">'
 											+'<button type="button" onclick="modalOpenBtn()" class="btn btn-primary btn-lg btn-qnaNew">문의쓰기</button>'
 											+'</div>'
 									);
 									for(var i=0; i<arrays.length;i++){
 										 var id;
 										$('#container-qna').append(
-										 '<div id="modal'+i+'" class="modal">'
-											+'<div class="modal_content">'
-												+'<form id="formToInput'+i+'" method="post">'
-													+'<p><h2 style="text-align:center;">상품Q&A 수정</h2><hr /></p>'
-													+'<input type="hidden" id="QNA_NUM" name="QNA_NUM" value="'+arrays[i].qna_NUM+'" />'
-													+'<input type="hidden" id="PRD_NUM" name="PRD_NUM" value="'+${prdInfo.PRD_NUM}+'" />'
-													+'<p><label> 패스워드* </label><br>'
-													+'<input type="password" id="QNA_LOCK'+i+'" name="QNA_LOCK" value=""/></p>'
-													+'<p><label> 글 제목* </label><br>'
-													+'<input type="text" id="QNA_TITLE'+i+'" name="QNA_TITLE" value="'+arrays[i].qna_TITLE+'" /></p>'
-													+'<p><label> 글 내용* </label><br>'
-													+'<textarea rows="13" cols="90" id="QNA_CONTENT'+i+'" name="QNA_CONTENT">'+arrays[i].qna_CONTENT+'</textarea><br></p>'
-													+'<input type="button" id="id-of-insert-qna" onclick="continueQnaUpdate('+i+', '+pI.page+')" value="확인" />'
-													+'<input type="button" onclick="modalCloseBtn('+i+')" id="modal_close_btn" value="닫기" / >'
-												+'</form>'
-											+'</div>'
-										+'</div>'
+										'<div class="container" ><div class="container-fluid">'
+										+'<button type="button" id="btn-qna-hidden-id'+i+'" class="btn btn-primary btn-lg btn-qna-hidden" '
+											+'data-toggle="modal" data-target="#myModal'+i+'"></button>'
+											+'<div class="modal fade" id="myModal'+i+'" tabindex="-1" role="dialog"' 
+											+'aria-labelledby="myModalLabel" aria-hidden="true">'	
+												+'<div class="modal-dialog">'
+												+'<div class="modal-content">'
+												+'<div class="modal-header">'
+												+'<h4 class="modal-title" id="myModalLabel">상품Q&A 수정</h4>'
+												+'<button type="button" class="close" data-dismiss="modal" aria-label="Close">'
+												+'<span aria-hidden="true">&times;</span></button></div>'
+												+'<div class="modal-body"><form id="formToInput'+i+'" method="post">'
+												+'<input type="hidden" id="QNA_NUM'+i+'" name="QNA_NUM" value="'+arrays[i].qna_NUM+'" />'
+												+'<input type="hidden" id="PRD_NUM'+i+'" name="PRD_NUM" value="'+${prdInfo.PRD_NUM}+'" />'
+										 +'<p><label> 제목* </label><br><input type="text" id="QNA_TITLE'+i+'" name="QNA_TITLE" ' 
+										  +'required="required" value="'+arrays[i].qna_TITLE+'"/></p>'	
+										  +'<p>'
+										  +'<input type="radio" style=" margin-right: 10px;" id="QNA_LOCK0" name="QNA_LOCK'+i+'" value="0" checked>'
+										  +'<label for="QNA_LOCK" style=" margin-right: 10px;" >비밀글</label>'												   
+										  +'<input type="radio" style=" margin-right: 10px;" id="QNA_LOCK1" name="QNA_LOCK'+i+'" value="1">'
+										  +'<label for="QNA_LOCK">공개글</label>'
+										   +'</p>'
+										  +'<p><label> 문의 내용 입력* </label><br><textarea rows="10" cols="60" id="QNA_CONTENT'+i+'" '
+										  +'name="QNA_CONTENT" required="required">'+arrays[i].qna_CONTENT+'</textarea><br></p>'	
+											+'</form></div>'
+													+'<div class="modal-footer">'
+													+'<button type="button" class="btn btn-primary" id="qnaWrite-id" '
+														+'onclick="continueQnaUpdate('+i+', '+pI.page+')">쓰기</button>'
+														+'<button type="button" class="btn btn-default close_btn" '
+														+'id="modal_close_btn'+i+'" data-dismiss="modal">닫기</button>'
+												+'</div></div></div></div></div></div>'
 										+'<div id="qna-open-content'+i+'"><div class="modal_content">'
 										+'<div id="replypw">문의글 비밀번호를 입력해주세요.</div>'
 										+'<hr/>'
 										+'<input type="hidden" id="correct-pwd'+i+'" value="'+arrays[i].qna_LOCK+'">'
 										+'<input type="password" placeholder="비밀번호 입력" size="30" id="qna-content-password'+i+'"><br>'
 										+'<div id="reply">'
-										+'<input type="button" id="replyOpen" onclick="replyOpen('+i+')" class="qna-content-password-check'+i+'" value="확인">'
 										+'<input type="button" id="replyCancle" onclick="replyCancle('+i+')" class="qna-content-password-check'+i+'" value="취소">'
 										+'</div></div></div>'
 										+'<div id="qna-open-content-delete'+i+'"><div class="modal_content">'
@@ -1418,14 +1430,14 @@ a.page-link {
 										+'<input type="button" id="replyCancle" onclick="replyCancle('+i+')" class="qna-content-password-check'+i+'" value="취소">'
 										+'</div></div></div>'
 										+'<table id="qna-table'+i+'" class="qna-table-class" style="margin-bottom: 10px; border-bottom: 1px solid grey;">'
-										+'<tr><td id="img-qna"><img alt="lock" style="width: 26px;" src="${path}/resources/img/product/details/lock.png"></td>'
+										+'<tr><td id="security-qna'+i+'">'+arrays[i].qna_LOCK+'</td>'
 										+'<td style="width: 99px;">'+new Date(arrays[i].qna_REGDATE).toLocaleDateString()+'</td>'
-										+'<td style="width: 605px;" id="'+arrays[i].qna_CUSID+'" onclick="openContent('+i+',this.id)">'+arrays[i].qna_TITLE+'</td>'
+										+'<td style="width: 605px;" id="'+arrays[i].qna_CUSID+'" onclick="openContent('+i+',this.id,'+arrays[i].qna_LOCK+')">'+arrays[i].qna_TITLE+'</td>'
 										+'<td style="width: 130px;">'+arrays[i].qna_CUSID+'</td>'
 										+'<td style="width: 91px;" id="aCheck'+i+'">답변대기</td><td style="width: 49px;">'
 										+'<form id="formToDelete'+i+'" method="post">'
 										+'<input type="hidden" id="QNA_NUM" name="QNA_NUM" value="'+arrays[i].qna_NUM+'" />'
-										+'<input type="button" onclick="qnaDelete('+i+',this.id)" id="'+arrays[i].qna_CUSID+'" class="delete-qna" value="삭제">'
+										+'<input type="button" onclick="qnaDelete('+i+',this.id, '+pI.page+')" id="'+arrays[i].qna_CUSID+'" class="delete-qna" value="삭제">'
 										+'</form>'
 										+'</td>'
 										+'<td style="width: 58px;">'
@@ -1435,7 +1447,7 @@ a.page-link {
 										+'<tr>'
 										+'<td></td>'
 										+'<td></td>'
-										+'<td class="qna-content'+i+'">'+arrays[i].qna_CONTENT+'</td>'
+										+'<td class="qna-content'+i+'" id="qna-content'+i+'" value="check" >'+arrays[i].qna_CONTENT+'</td>'
 										+'</tr><tr><td></td><td></td><td class="qna-content'+i+'"><textarea rows="10" cols="80" placeholder="A.관리자가 답변을 준비중입니다." value="'+arrays[i].qna_ANSWER+' readonly="readonly" disabled>'+arrays[i].qna_ANSWER+'</textarea></td></tr>'
 										+'</table>'
 										+'<style>'
@@ -1455,10 +1467,16 @@ a.page-link {
 										+'.qna-content'+i+'{display: none;} #qna-content-password'+i+'{display:block; margin: auto;}'
 										+'#qna-content-password-delete'+i+'{display:block; margin: auto;}</style>'
 										)
-										console.log("ddd :"+arrays[i].qna_ANSWER);
 										if(arrays[i].qna_ANSWER != ""){
 											 $('#aCheck'+i).text('답변완료');
 									 	}
+										var sq = $('#security-qna'+i).text();
+										console.log(sq+"? sq");
+										if(sq === '0'){
+											$('#security-qna'+i).html('[비밀글]&nbsp&nbsp&nbsp&nbsp');
+										}else{
+											$('#security-qna'+i).html('[공개글]&nbsp&nbsp&nbsp&nbsp');
+										}
 									}
 								
 									console.log(arrays[0]);

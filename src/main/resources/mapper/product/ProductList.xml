@@ -46,6 +46,7 @@ PRD_COLOR in (${color})
  ]]> 
 </select>
 
+
 <select id="getJjimList" resultType="int">
 select JJIM_PRDNUM from jjim where JJIM_CUSID =#{value};
 </select>
