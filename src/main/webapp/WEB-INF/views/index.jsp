@@ -130,11 +130,19 @@
 				<div class="col-lg-12">
 					<div class="hero__search d-flex justify-content-center">
 						<div class="hero__search__form ">
-							<form action="#">
-								<input type="text" placeholder="찾으시는 상품을 검색해주세요">
-								<button type="submit" class="site-btn">
-									<i class="fa fa-search"></i>
-								</button>
+							<form action="/product/List/all/newest/all/1?keyword="
+								method="get">
+								<input type="text" name="keyword" placeholder="찾으시는 상품을 검색해주세요"
+									value="">
+								<button type="button" id="searchBtn" class="site-btn">검색</button>
+								<script>
+									document.getElementById("searchBtn").onclick = function() {
+										let keyword = document
+												.getElementsByName("keyword")[0].value;
+										location.href = "/product/List/all/newest/all/1?keyword="
+												+ keyword;
+									};
+								</script>
 							</form>
 						</div>
 					</div>
