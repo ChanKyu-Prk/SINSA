@@ -213,6 +213,7 @@ public class ProductController {
 		model.addAttribute("info", info);
 		
 		int page = Integer.parseInt(pageR); 
+		System.out.println(page); //1
 		int limit = 12;
 		int listCount;
 		int startPage;

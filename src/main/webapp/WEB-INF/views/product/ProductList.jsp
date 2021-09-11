@@ -340,31 +340,31 @@ hr.mo {
 										id="white" name="color" value="white">
 									</label>
 								</div>
-								<div class="sidebar__item__color sidebar__item__color--gray">
+								<div class="sidebar__item__color sidebar__item__color--white">
 									<label for="grey" id="id02" onmouseout="mout2()"
 										onmouseover="mover2()"> GREY <input type="checkbox"
 										id="grey" name="color" value="grey">
 									</label>
 								</div>
-								<div class="sidebar__item__color sidebar__item__color--red">
+								<div class="sidebar__item__color sidebar__item__color--white">
 									<label for="red" id="id03" onmouseout="mout3()"
 										onmouseover="mover3()"> RED <input type="checkbox"
 										id="red" name="color" value="red">
 									</label>
 								</div>
-								<div class="sidebar__item__color sidebar__item__color--black">
+								<div class="sidebar__item__color sidebar__item__color--white">
 									<label for="black" id="id04" onmouseout="mout4()"
 										onmouseover="mover4()"> BLACK <input type="checkbox"
 										id="black" name="color" value="black">
 									</label>
 								</div>
-								<div class="sidebar__item__color sidebar__item__color--blue">
+								<div class="sidebar__item__color sidebar__item__color--white">
 									<label for="blue" id="id05" onmouseout="mout5()"
 										onmouseover="mover5()"> BLUE <input type="checkbox"
 										id="blue" name="color" value="blue">
 									</label>
 								</div>
-								<div class="sidebar__item__color sidebar__item__color--green">
+								<div class="sidebar__item__color sidebar__item__color--white">
 									<label for="PK" id="id06" onmouseout="mout6()"
 										onmouseover="mover6()"> PINK <input type="checkbox"
 										id="PK" name="color" value="PK">
@@ -376,13 +376,13 @@ hr.mo {
 										id="MULTI" name="color" value="MULTI">
 									</label>
 								</div>
-								<div class="sidebar__item__color sidebar__item__color--green">
+								<div class="sidebar__item__color sidebar__item__color--white">
 									<label for="BG" id="id08" onmouseout="mout8()"
 										onmouseover="mover8()"> GREEN <input type="checkbox"
 										id="BG" name="color" value="BG">
 									</label>
 								</div>
-								<div class="sidebar__item__color sidebar__item__color--yellow">
+								<div class="sidebar__item__color sidebar__item__color--white">
 									<label for="YELLOW" id="id09" onmouseout="mout9()"
 										onmouseover="mover9()"> YELLOW <input type="checkbox"
 										id="YELLOW" name="color" value="YELLOW">
