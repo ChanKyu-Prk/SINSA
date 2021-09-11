@@ -682,6 +682,7 @@
 // 	        },
 // 	        options: {
 // 	            responsive: true
+
 // 	        }
 // 	    } );
 
