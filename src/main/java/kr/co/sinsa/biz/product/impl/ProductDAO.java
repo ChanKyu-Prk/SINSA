@@ -44,6 +44,10 @@ public class ProductDAO {
 	public int countProductList(Map<String, Object> map){
 		return SST.selectOne("ProductList.countProductList",map);
 	}
+	public List<Integer> BestCount(Map<String, Object> map){
+		return SST.selectList("ProductList.BestCount",map);
+	}
+	
 	public int countQNAList(Map<String, Object> map){
 		return SST.selectOne("ProductList.countQNAList",map);
 	}

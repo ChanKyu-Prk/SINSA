@@ -57,6 +57,10 @@ public class ProductServiceImpl implements ProductService {
 	public List<ProductVO> listPageBestShoes(Map<String, Object> map) {	
 		return DAO.listPageBestShoes(map);
 	}
+	@Override
+	public List<Integer> BestCount(Map<String, Object> map) {	
+		return DAO.BestCount(map);
+	}
 	
 	@Override
 	public List<ProductVO> getRecommList(String PRD_GENDER){

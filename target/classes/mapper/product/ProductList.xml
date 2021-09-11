@@ -68,8 +68,28 @@ select JJIM_PRDNUM from jjim where JJIM_CUSID =#{value};
 		PRD_PRICE < #{maxPrice} and
 		PRD_COLOR in (${color})
 		GROUP BY ORDER_PRDNAME 
-		HAVING COUNT(ORDER_PRDNAME) > 1 
+		HAVING COUNT(ORDER_PRDNAME) > 0 
 		ORDER BY count DESC
+	]]>
+	</select>
+	
+		<select id="BestCount" parameterType="Map" resultType="int">
+	<![CDATA[
+		SELECT COUNT(*) as count
+		FROM ORDERS 
+		LEFT JOIN PRODUCT 
+		ON ORDERS.ORDER_PRDCODE = PRODUCT.PRD_CODE
+		WHERE 
+		PRD_BRAND like concat ('%',#{brand},'%') and
+		PRD_CATEGORY like concat('%',#{category},'%') and
+		PRD_GENDER like concat('%',#{gender},'%') and
+		PRD_NAME in (SELECT PRD_NAME from product where PRD_BRAND like concat('%',#{name},'%')  or PRD_BRAND like concat('%',#{name},'%'))  and
+		PRD_PRICE > #{minPrice} and 
+		PRD_PRICE < #{maxPrice} and
+		PRD_COLOR in (${color})
+		GROUP BY ORDER_PRDNAME 
+		HAVING COUNT(ORDER_PRDNAME) > 0 
+		ORDER BY count DESC;
 	]]>
 	</select>
 
