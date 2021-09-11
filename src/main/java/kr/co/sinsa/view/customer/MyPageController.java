@@ -43,22 +43,72 @@ public class MyPageController {
 	@Autowired
 	private FileUploadService upload;
 
-	@RequestMapping(value = "/myPage.do", method = RequestMethod.GET)
-	public String myPage(Model model, CustomerVO vo, HttpSession session) {
+	@RequestMapping(value = "/myPage", method = RequestMethod.GET)
+	public String myPage(Model model, CustomerVO vo, HttpSession session,HttpServletRequest request) {
 		UserVO user = (UserVO) session.getAttribute("user");
+		Cookie[] cRecentlyVieweds = request.getCookies();
 		if (user == null) {
 			return "redirect:login.do";
 		} else {
+			
+			
+			
+			int countRecViewList = myPageSerive.countRecentView(cRecentlyVieweds);
+			
+			List<ProductVO> recView = myPageSerive.myPageRecView(cRecentlyVieweds,countRecViewList);			
+			List<StockVO> recStock = new ArrayList<StockVO>();	
+			for(int i = 0 ; i < recView.size() ; i ++) {
+				recStock.add(myPageSerive.getStock(recView.get(i).getPRD_CODE()));				
+			}
+			List<Integer> recJjimcheck = new ArrayList<Integer>();
+			List<Integer> recJjimCheckList = myPageSerive.getJjimList(user.getCUS_ID());
+			for (int i = 0; i < recView.size(); i++) {
+				int jjim = 0;
+				int prdnum = recView.get(i).getPRD_NUM();
+				for (int j = 0; j < recJjimCheckList.size(); j++) {
+					int jjjim = recJjimCheckList.get(j);
+					if (jjjim == prdnum) {
+						jjim = 1;
+					}
+				}
+				recJjimcheck.add(jjim);
+			}
+			
+			List<ProductVO> jjimList = myPageSerive.myPageJjimList(user.getCUS_ID());			
+			List<StockVO> jjimStock = new ArrayList<StockVO>();	
+			for(int i = 0 ; i < jjimList.size() ; i ++) {
+				jjimStock.add(myPageSerive.getStock(jjimList.get(i).getPRD_CODE()));				
+			}
+			List<Integer> jjimcheck = new ArrayList<Integer>();
+			List<Integer> jjimCheckList = myPageSerive.getJjimList(user.getCUS_ID());
+			for (int i = 0; i < jjimList.size(); i++) {
+				int jjim = 0;
+				int prdnum = jjimList.get(i).getPRD_NUM();
+				for (int j = 0; j < jjimCheckList.size(); j++) {
+					int jjjim = jjimCheckList.get(j);
+					if (jjjim == prdnum) {
+						jjim = 1;
+					}
+				}
+				jjimcheck.add(jjim);
+			}
+			model.addAttribute("recStock", recStock);	
+			model.addAttribute("jjimStock", jjimStock);	
+			model.addAttribute("recJjimcheck", recJjimcheck);
+			model.addAttribute("jjimcheck", jjimcheck);
 			model.addAttribute("myInfo", myPageSerive.myInfo(user));
+			model.addAttribute("countJjimList", myPageSerive.countjjim(user.getCUS_ID()));
+			model.addAttribute("countCartList", myPageSerive.countCart(user.getCUS_ID()));
+			model.addAttribute("countRecViewList",countRecViewList );
+			model.addAttribute("countRecOrderList", myPageSerive.countRecOrderState(user.getCUS_ID()));
+			model.addAttribute("jjimList", jjimList);
+			model.addAttribute("recentView", recView);
+			
+			
 			return "customer/myPage";
 		}
 	}
 
-	@RequestMapping(value = "/test1", method = RequestMethod.GET)
-	public String test() {
-
-		return "customer/delevTest";
-	}
 
 	@RequestMapping(value = "/delev", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
 	@ResponseBody
@@ -177,7 +227,7 @@ public class MyPageController {
 				jjimcheck.add(jjim);
 			}
 			model.addAttribute("jjimcheck", jjimcheck);
-			listCount = myPageSerive.countJjimList(map);
+			listCount = myPageSerive.countJjimList(userID);
 			maxPage = (int) ((double) listCount / limit + 0.95);
 			startPage = (((int) ((double) page / 5 + 0.8)) - 1) * 5 + 1;
 			endPage = startPage + 4;

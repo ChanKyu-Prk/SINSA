@@ -60,8 +60,8 @@ public class MyPageDAO {
 		return SST.selectList("myInfo.jjimList", map);
 	}
 
-	public int countJjimList(Map<String, Object> map) {
-		return SST.selectOne("myInfo.countJjimList", map);
+	public int countJjimList(String userID) {
+		return SST.selectOne("myInfo.countJjimList", userID);
 	}
 	public List<Integer> getJjimList(String user) {
 		return SST.selectList("ProductList.getJjimList",user);
@@ -208,6 +208,12 @@ public class MyPageDAO {
 		return SST.selectOne("myInfo.countjjim",id);
 	}
 	
+	public List<ProductVO> myPageJjimList(String userID) {
+		return SST.selectList("myInfo.myPageJjimList",userID);	
+	}
 	
+	public int countRecOrderState(Map<String, String> map) {
+		return SST.selectOne("myInfo.countRecOrderState", map);
+	}
 	
 }

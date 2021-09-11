@@ -24,7 +24,7 @@ public interface MyPageService {
 	public List<OrdersAndProductVO> orderStatus(String ORDER_NUM);
 	
 	public List<ProductVO> jjimList(Map<String,Object> map);
-	public int countJjimList(Map<String,Object> map);
+	public int countJjimList(String userID);
 	public List<Integer> getJjimList(String user);
 	public StockVO getStock(String PRD_CODE);
 	
@@ -78,4 +78,9 @@ public interface MyPageService {
 	
 	public int countCart(String id);
 	public int countjjim(String id);
-	}
+	
+	public List<ProductVO> myPageRecView(Cookie[] cRecentlyVieweds, int listCount);
+	public List<ProductVO> myPageJjimList(String userID);
+	public Map<String, Integer> countRecOrderState(String userID);
+	
+}

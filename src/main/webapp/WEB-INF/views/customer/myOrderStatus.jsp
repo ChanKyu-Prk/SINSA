@@ -9,7 +9,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<jsp:include page="../header.jsp"></jsp:include>
+
 
 <style type="text/css">
 .table2 {
@@ -242,7 +242,8 @@ option {
 	padding-top: 5px;
 }
 </style>
-<title>SINSA : 주문 내역 조회</title>
+<title>SINSA : 주문 내역 상세</title>
+<jsp:include page="../header.jsp"></jsp:include>
 </head>
 <body>
 	<div class="continer nopadding">

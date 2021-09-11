@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+					"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="customerCenter"><!-- 클래스명 -->
+
+
+	<select id="faq" resultType="kr.co.sinsa.admin.vo.FAQVO">
+		select FAQ_Q, FAQ_A from FAQ
+		order by
+		FAQ_NUM desc;
+	</select>
+
+	<select id="notice" resultType="kr.co.sinsa.admin.vo.NoticeVO">
+		select NOTICE_NUM, NOTICE_TITLE,
+		NOTICE_REGDATE from NOTICE
+		order by NOTICE_NUM desc
+		limit #{value},10;
+	</select>
+	
+	<select id="countNotice"
+		resultType="int">
+		select count(*) from NOTICE;
+	</select>
+
+	<select id="noticeDetail"
+		resultType="kr.co.sinsa.admin.vo.NoticeVO">
+		select NOTICE_NUM, NOTICE_TITLE, NOTICE_REGDATE,
+		NOTICE_CONTENT from NOTICE
+		where NOTICE_NUM = #{value};
+	</select>
+
+
+</mapper>

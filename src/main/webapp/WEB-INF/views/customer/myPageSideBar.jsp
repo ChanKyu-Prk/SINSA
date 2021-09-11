@@ -38,7 +38,7 @@
 			<div class="addmargin"></div>
 			<h4>나의 정보</h4>
 			<ul>
-				<li><a href="#">나의 정보</a></li>
+				<li><a href="/myPage">회원 정보</a></li>
 				<li><a href="/privateInfoChange">개인정보 수정</a></li>
 				<li><a href="/passChange">비밀번호 변경</a></li>
 				<li><a href="/leave">회원 탈퇴</a></li>
@@ -67,7 +67,7 @@
 			<div class="sidebar__item col-6">
 				<h4>나의 정보</h4>
 				<ul>
-					<li><a href="#">나의 정보</a></li>
+					<li><a href="/myPage">히원 정보</a></li>
 					<li><a href="/privateInfoChange">개인정보 수정</a></li>
 					<li><a href="/passChange">비밀번호 변경</a></li>
 					<li><a href="/leave">회원 탈퇴</a></li>
