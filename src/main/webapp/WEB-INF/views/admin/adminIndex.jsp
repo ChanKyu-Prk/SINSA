@@ -519,9 +519,9 @@
 // 	                            },
 	                {
 	                    label: "매출액",
-	                    borderColor: "rgba(0, 194, 146, 0.9)",
+	                    borderColor: "rgba(153, 255, 153, 0.9)",
 	                    borderWidth: "1",
-	                    backgroundColor: "rgba(0, 194, 146, 0.5)",
+	                    backgroundColor: "rgba(153, 255, 153, 0.5)",
 	                    pointHighlightStroke: "rgba(26,179,148,1)",
 	                    data: [ ${salesList[0]}, ${salesList[1]}, ${salesList[2]}, ${salesList[3]}, ${salesList[4]}, ${salesList[5]}, ${salesList[6]}, ${salesList[7]}, ${salesList[8]}, ${salesList[9]}, ${salesList[10]}, ${salesList[11]}, ${salesList[12]} ],
 	                            }
@@ -553,16 +553,16 @@
 	                {
 	                    label: "남성",
 	                    data: [ ${usersCountList[0]}, ${usersCountList[1]}, ${usersCountList[2]}, ${usersCountList[3]}, ${usersCountList[4]}, ${usersCountList[5]}],
-	                    borderColor: "rgba(0, 194, 146, 0.9)",
+	                    borderColor: "rgba(0, 153, 255, 0.9)",
 	                    borderWidth: "0",
-	                    backgroundColor: "rgba(0, 194, 146, 0.5)"
+	                    backgroundColor: "rgba(0, 153, 255, 0.5)"
 	                            },
 	                {
 	                    label: "여성",
 	                    data: [ ${usersCountList[6]}, ${usersCountList[7]}, ${usersCountList[8]}, ${usersCountList[9]}, ${usersCountList[10]}, ${usersCountList[11]} ],
-	                    borderColor: "rgba(0,0,0,0.09)",
+	                    borderColor: "rgba(0, 153, 255, 0.09)",
 	                    borderWidth: "0",
-	                    backgroundColor: "rgba(0,0,0,0.07)"
+	                    backgroundColor: "rgba(0, 153, 255, 0.07)"
 	                            }
 	                        ]
 	        },
@@ -623,18 +623,18 @@
 	            datasets: [ {
 	                data: [ ${topBrandList[0].BRAND_ORDERCOUNT}, ${topBrandList[1].BRAND_ORDERCOUNT},${topBrandList[2].BRAND_ORDERCOUNT}, ${topBrandList[3].BRAND_ORDERCOUNT}, ${topBrandList[4].BRAND_ORDERCOUNT}],
 	                backgroundColor: [
-	                                    "rgba(0, 194, 146,0.9)",
-	                                    "rgba(0, 194, 146,0.7)",
-	                                    "rgba(0, 194, 146,0.5)",
-	                                    "rgba(0,0,0,0.07)",
-	                                    "rgba(0,0,0,0.07)"
+	                                    "rgba(102, 153, 255 ,0.9)",
+	                                    "rgba(77, 255, 77,0.7)",
+	                                    "rgba(255, 255, 102,0.5)",
+	                                    "rgba(255, 153, 153,0.9)",
+	                                    "rgba(255, 51, 0,0.07)"
 	                                ],
 	                hoverBackgroundColor: [
-	                                    "rgba(0, 194, 146,0.9)",
-	                                    "rgba(0, 194, 146,0.7)",
-	                                    "rgba(0, 194, 146,0.5)",
-	                                    "rgba(0,0,0,0.07)",
-	                                    "rgba(0,0,0,0.07)"
+	                                    "rgba(102, 153, 255 ,0.9)",
+	                                    "rgba(77, 255, 77,0.7)",
+	                                    "rgba(255, 255, 102,0.5)",
+	                                    "rgba(255, 153, 153 ,0.9)",
+	                                    "rgba(255, 51, 0,0.07)"
 	                                ]
 
 	                            } ],
@@ -735,9 +735,9 @@
 	                {
 	                    label: "매출액",
 	                    data: [ ${dailySalesList[0]}, ${dailySalesList[1]}, ${dailySalesList[2]}, ${dailySalesList[3]}, ${dailySalesList[4]}, ${dailySalesList[5]}, ${dailySalesList[6]}, ${dailySalesList[7]}, ${dailySalesList[8]}, ${dailySalesList[9]}, ${dailySalesList[10]}, ${dailySalesList[11]}, ${dailySalesList[12]} ],
-	                    borderColor: "rgba(0, 194, 146, 0.9)",
+	                    borderColor: "rgba(153, 255, 153, 0.9)",
 	                    borderWidth: "0",
-	                    backgroundColor: "rgba(0, 194, 146, 0.5)"
+	                    backgroundColor: "rgba(153, 255, 153, 0.5)"
 	                            }
 	                        ]
 	        },
