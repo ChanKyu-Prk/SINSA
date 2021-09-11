@@ -12,6 +12,7 @@ public interface ProductService {
 	public List<ProductVO> listPageBestShoes(Map<String, Object> map);
 	public int countQNAList(Map<String, Object> map);
 	public int countProductList(Map<String, Object> map);
+	public List<Integer> BestCount(Map<String, Object> map);
 	public List<Integer> getJjimList(String user);
 	public List<ProductVO> getRecommList(String PRD_GENDER);
 

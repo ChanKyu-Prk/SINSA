@@ -202,24 +202,24 @@ public class ProductController {
 			@RequestParam(value = "maxPrice", required = false, defaultValue = "150000") String maxPriceR,
 			HttpSession session) throws Exception {
 		Map<String, String> info = new HashMap<String, String>();
-		info.put("condition", condition); // all
-		info.put("orderby", orderby); //newest
-		info.put("category", category); // all
+		info.put("condition", condition); 
+		info.put("orderby", orderby); 
+		info.put("category", category); 
 		info.put("keyWord", keyword);
 		info.put("brand", brand);
 		info.put("color", color);
 		info.put("minPrice", minPriceR);
 		info.put("maxPrice", maxPriceR);
 		model.addAttribute("info", info);
-		//info.condition : all		//info.orderby : newest		//info.category : all
-		int page = Integer.parseInt(pageR); // 1
+		
+		int page = Integer.parseInt(pageR); 
 		int limit = 12;
 		int listCount;
 		int startPage;
 		int endPage;
 		int maxPage;
-		int minPrice = Integer.parseInt(minPriceR); // defaultValue : 0
-		int maxPrice = Integer.parseInt(maxPriceR);	// defaultValue : 150,000
+		int minPrice = Integer.parseInt(minPriceR); 
+		int maxPrice = Integer.parseInt(maxPriceR);	
 		
 		String[] colors=color.split("_");
 		for(int i = 0 ; i < colors.length ; i++) {
@@ -299,7 +299,7 @@ public class ProductController {
 			orderby = "PRD_PRICE";
 			ascdesc = "desc";
 		}
-		//orderby : "neweast" => 	//orderby : "PRD_NUM" //ascdesc = "desc"
+
 
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("name", keyword);
@@ -317,6 +317,9 @@ public class ProductController {
 		List<ProductVO> list = null;
 		if(condition.equals("best")) {
 			list = service.listPageBestShoes(map);
+			List<Integer> bCount = new ArrayList<Integer>();
+			bCount = service.BestCount(map);
+			listCount = bCount.size();
 		}else if(!condition.equals("best") && !condition.equals("men") && !condition.equals("women") && !condition.equals("all")){
 			brand = condition;
 			map.put("brand", brand);
