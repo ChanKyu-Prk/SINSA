@@ -101,7 +101,6 @@
 /* } */
 .review_image {
 	height: 300px !important;
-	
 }
 </style>
 
@@ -169,7 +168,7 @@
 
 					<c:forEach var="list" items="${productList}" varStatus="status">
 						<div class="col-lg-3">
-							<a href="#">
+							<a href="/product/prdCode=${list.PRD_CODE}">
 								<div class="featured__item">
 
 
@@ -234,24 +233,26 @@
 											<c:forEach var="list" items="${topProductList}"
 												varStatus="status" begin="0" end="7">
 												<div class="col-md-3">
-													<div class="featured__item">
-														<c:set var="bestProduct_img_array"
-															value="${fn:split(list.PRD_IMAGE,'/')}" />
+													<a href="/product/prdCode=${list.PRD_CODE}">
+														<div class="featured__item">
+															<c:set var="bestProduct_img_array"
+																value="${fn:split(list.PRD_IMAGE,'/')}" />
 
-														<div class="featured__item__pic set-bg"
-															data-setbg="${pageContext.request.contextPath}/resources/prdImg/${list.PRD_CODE}.png">
-															<ul class="featured__item__pic__hover">
-																<li><a href="#"><i class="fa fa-heart"></i></a></li>
-																<li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-															</ul>
-														</div>
-														<div class="featured__item__text">
-															<h6 class="toptrends">${list.PRD_BRAND}</h6>
-															<h6 class="toptrends">${list.PRD_NAME}</h6>
-															<h5 class="toptrends">${list.PRD_PRICE}</h5>
-														</div>
+															<div class="featured__item__pic set-bg"
+																data-setbg="${pageContext.request.contextPath}/resources/prdImg/${list.PRD_CODE}.png">
+																<!-- 															<ul class="featured__item__pic__hover"> -->
+																<!-- 																<li><a href="#"><i class="fa fa-heart"></i></a></li> -->
+																<!-- 																<li><a href="#"><i class="fa fa-shopping-cart"></i></a></li> -->
+																<!-- 															</ul> -->
+															</div>
+															<div class="featured__item__text">
+																<h6 class="toptrends">${list.PRD_BRAND}</h6>
+																<h6 class="toptrends">${list.PRD_NAME}</h6>
+																<h5 class="toptrends">${list.PRD_PRICE}</h5>
+															</div>
 
-													</div>
+														</div>
+													</a>
 												</div>
 											</c:forEach>
 
@@ -269,24 +270,26 @@
 											<c:forEach var="list" items="${topSneakersProductList}"
 												begin="0" end="7" varStatus="status">
 												<div class="col-md-3">
-													<div class="featured__item">
-														<c:set var="bestSneakersProduct_img_array"
-															value="${fn:split(list.PRD_IMAGE,'/')}" />
+													<a href="/product/prdCode=${list.PRD_CODE}">
+														<div class="featured__item">
+															<c:set var="bestSneakersProduct_img_array"
+																value="${fn:split(list.PRD_IMAGE,'/')}" />
 
-														<div class="featured__item__pic set-bg"
-															data-setbg="${pageContext.request.contextPath}/resources/prdImg/${list.PRD_CODE}.png">
-															<ul class="featured__item__pic__hover">
-																<li><a href="#"><i class="fa fa-heart"></i></a></li>
-																<li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-															</ul>
-														</div>
-														<div class="featured__item__text">
-															<h6 class="toptrends">${list.PRD_BRAND}</h6>
-															<h6 class="toptrends">${list.PRD_NAME}</h6>
-															<h5 class="toptrends">${list.PRD_PRICE}</h5>
-														</div>
+															<div class="featured__item__pic set-bg"
+																data-setbg="${pageContext.request.contextPath}/resources/prdImg/${list.PRD_CODE}.png">
+																<!-- 															<ul class="featured__item__pic__hover"> -->
+																<!-- 																<li><a href="#"><i class="fa fa-heart"></i></a></li> -->
+																<!-- 																<li><a href="#"><i class="fa fa-shopping-cart"></i></a></li> -->
+																<!-- 															</ul> -->
+															</div>
+															<div class="featured__item__text">
+																<h6 class="toptrends">${list.PRD_BRAND}</h6>
+																<h6 class="toptrends">${list.PRD_NAME}</h6>
+																<h5 class="toptrends">${list.PRD_PRICE}</h5>
+															</div>
 
-													</div>
+														</div>
+													</a>
 												</div>
 											</c:forEach>
 
@@ -306,24 +309,26 @@
 											<c:forEach var="list" items="${topSportsProductList}"
 												begin="0" end="7" varStatus="status">
 												<div class="col-md-3">
-													<div class="featured__item">
-														<c:set var="bestSportSProduct_img_array"
-															value="${fn:split(list.PRD_IMAGE,'/')}" />
+													<a href="/product/prdCode=${list.PRD_CODE}">
+														<div class="featured__item">
+															<c:set var="bestSportSProduct_img_array"
+																value="${fn:split(list.PRD_IMAGE,'/')}" />
 
-														<div class="featured__item__pic set-bg"
-															data-setbg="${pageContext.request.contextPath}/resources/prdImg/${list.PRD_CODE}.png">
-															<ul class="featured__item__pic__hover">
-																<li><a href="#"><i class="fa fa-heart"></i></a></li>
-																<li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-															</ul>
-														</div>
-														<div class="featured__item__text">
-															<h6 class="toptrends">${list.PRD_BRAND}</h6>
-															<h6 class="toptrends">${list.PRD_NAME}</h6>
-															<h5 class="toptrends">${list.PRD_PRICE}</h5>
-														</div>
+															<div class="featured__item__pic set-bg"
+																data-setbg="${pageContext.request.contextPath}/resources/prdImg/${list.PRD_CODE}.png">
+																<!-- 															<ul class="featured__item__pic__hover"> -->
+																<!-- 																<li><a href="#"><i class="fa fa-heart"></i></a></li> -->
+																<!-- 																<li><a href="#"><i class="fa fa-shopping-cart"></i></a></li> -->
+																<!-- 															</ul> -->
+															</div>
+															<div class="featured__item__text">
+																<h6 class="toptrends">${list.PRD_BRAND}</h6>
+																<h6 class="toptrends">${list.PRD_NAME}</h6>
+																<h5 class="toptrends">${list.PRD_PRICE}</h5>
+															</div>
 
-													</div>
+														</div>
+													</a>
 												</div>
 											</c:forEach>
 
@@ -356,13 +361,16 @@
 				</div>
 				<div class="col-lg-6 col-md-6 col-sm-6 ">
 					<div class="banner__pic">
-						<img src="${path}/resources/img/banner/인덱스아래6.png" alt="">
+						<img src="${path}/resources/img/banner/인덱스아래7.png" alt="">
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 	<!-- Banner End -->
+
+
+
 
 
 
