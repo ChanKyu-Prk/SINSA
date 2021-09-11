@@ -616,7 +616,7 @@
 
 	    //pie chart
 	    var ctx = document.getElementById( "pieChart" );
-	    ctx.height = 300;
+	    ctx.height = 150;
 	    var myChart = new Chart( ctx, {
 	        type: 'pie',
 	        data: {
@@ -757,30 +757,6 @@
 	} )( jQuery );
     
     </script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 </body>
 </html>
