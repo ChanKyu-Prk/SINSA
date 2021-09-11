@@ -27,6 +27,7 @@
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 <title>${prdInfo.PRD_CODE}&nbsp;${prdInfo.PRD_CODE}&nbsp;-&nbsp;SINSA</title>
 <script src="${path}/resources/js/productlist.js" type="text/javascript"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <style type="text/css">
 .product__details__pic__thumb {
 	justify-content: space-between;
@@ -297,9 +298,53 @@ a.page-link {
    border-color: black !important;
    color: white !important;
 }
+.writeQnaBtn{
+	display: none;
+}
+.modalInfoDiv {
+	margin: 0 !important;
+	padding: 15px !important;
+}
+.btn-qnaNew{
+		background-color: black !important;
+		color: white !important;
+		background-image: none !important;
+}
+.btn-qna-hidden{
+	display: none !important;
+}
+#QNA_LOCK{
+	width: 100%;
+}
+#QNA_TITLE{
+	width: 100%;
+}
+.review_image{
+   height: 300px !important;
+   width: 350px !important;
+   margin: 0px 10px 0px 0px !important;
+}
+
+.reviewThumbPic{
+   height: 100px;
+   width: 100px;
+}
+
+.main_review_img{
+   padding: 0px 0px 0px 90px !important;
+}
+
+.piclenth {
+   position: absolute;
+   right: 0px;
+   width: 25px;
+   height: 25px;
+   background-color: rgba(0, 0, 0, 0.8);
+   color: white;
+   margin-top: -25px;
+}
 </style>
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 </head>
 
@@ -464,7 +509,6 @@ a.page-link {
 														.map(function() {
 															return this.value;
 														}).get();
-
 												//JSON 형태로 데이터 생성
 												var data = {};
 												var itemList = [];
@@ -668,7 +712,7 @@ a.page-link {
 								aria-selected="false">상품평&nbsp; <span>(${reviewNum})</span></a></li>
 							<li class="nav-item" role="presentation"><a id="qnaTab"
 								class="nav-link" onclick="QnaList(1)" data-toggle="tab" href="#tabs-3" role="tab"
-								aria-selected="false">상품문의&nbsp;<span>(3)</span></a></li>
+								aria-selected="false">상품문의&nbsp;<span>(${qlistCount})</span></a></li>
 						</ul>
 						<div class="tab-content">
 							<div class="tab-pane active" id="tabs-1" role="tabpanel">
@@ -682,95 +726,140 @@ a.page-link {
 								<div class="product__details__tab__desc">
 									<div class="container">
 										<div class="row">
-											<c:forEach var="list" items="${detailReviewList}" varStatus="status">
-												<a class="list-group-item list-group-item-action review_list">
-													<div class="row">
-														<div class="col">
-															<div class="row TextCenter" data-toggle="collapse"
-																data-target="#content${status.index}">
-																<span class="col-md-2 span_star"> <c:if
-																		test="${list.REV_STAR eq 0}">
-																		<img src="${path}/resources/img/empty_star.png"
-																			class="empty_star">
-																		<img src="${path}/resources/img/empty_star.png"
-																			class="empty_star">
-																		<img src="${path}/resources/img/empty_star.png"
-																			class="empty_star">
-																		<img src="${path}/resources/img/empty_star.png"
-																			class="empty_star">
-																		<img src="${path}/resources/img/empty_star.png"
-																			class="empty_star">
+											<c:forEach var="list" items="${detailReviewList}"
+                                    varStatus="status">
+                                    <a
+                                       class="list-group-item list-group-item-action review_list">
+                                       <div class="row">
+                                          <div class="col">
+                                             <div class="row TextCenter" data-toggle="collapse"
+                                                data-target="#content${status.index}">
+                                                <span class="col-md-2 span_star"> <c:if
+                                                      test="${list.REV_STAR eq 0}">
+                                                      <img src="${path}/resources/img/empty_star.png"
+                                                         class="empty_star">
+                                                      <img src="${path}/resources/img/empty_star.png"
+                                                         class="empty_star">
+                                                      <img src="${path}/resources/img/empty_star.png"
+                                                         class="empty_star">
+                                                      <img src="${path}/resources/img/empty_star.png"
+                                                         class="empty_star">
+                                                      <img src="${path}/resources/img/empty_star.png"
+                                                         class="empty_star">
 
-																	</c:if> <c:if test="${list.REV_STAR eq 1}">
-																		<div style="display: flex;">
-																			<img src="${path}/resources/img/star.png"
-																				class="star"> <img
-																				src="${path}/resources/img/empty_star.png"
-																				class="empty_star"> <img
-																				src="${path}/resources/img/empty_star.png"
-																				class="empty_star"> <img
-																				src="${path}/resources/img/empty_star.png"
-																				class="empty_star"> <img
-																				src="${path}/resources/img/empty_star.png"
-																				class="empty_star">
-																		</div>
-																	</c:if> <c:if test="${list.REV_STAR eq 2}">
-																		<img src="${path}/resources/img/star.png" class="star">
-																		<img src="${path}/resources/img/star.png" class="star">
-																		<img src="${path}/resources/img/empty_star.png"
-																			class="empty_star">
-																		<img src="${path}/resources/img/empty_star.png"
-																			class="empty_star">
-																		<img src="${path}/resources/img/empty_star.png"
-																			class="empty_star">
+                                                   </c:if> <c:if test="${list.REV_STAR eq 1}">
+                                                      <div style="display: flex;">
+                                                         <img src="${path}/resources/img/star.png"
+                                                            class="star"> <img
+                                                            src="${path}/resources/img/empty_star.png"
+                                                            class="empty_star"> <img
+                                                            src="${path}/resources/img/empty_star.png"
+                                                            class="empty_star"> <img
+                                                            src="${path}/resources/img/empty_star.png"
+                                                            class="empty_star"> <img
+                                                            src="${path}/resources/img/empty_star.png"
+                                                            class="empty_star">
+                                                      </div>
+                                                   </c:if> <c:if test="${list.REV_STAR eq 2}">
+                                                      <img src="${path}/resources/img/star.png" class="star">
+                                                      <img src="${path}/resources/img/star.png" class="star">
+                                                      <img src="${path}/resources/img/empty_star.png"
+                                                         class="empty_star">
+                                                      <img src="${path}/resources/img/empty_star.png"
+                                                         class="empty_star">
+                                                      <img src="${path}/resources/img/empty_star.png"
+                                                         class="empty_star">
 
-																	</c:if> <c:if test="${list.REV_STAR eq 3}">
-																		<img src="${path}/resources/img/star.png" class="star">
-																		<img src="${path}/resources/img/star.png" class="star">
-																		<img src="${path}/resources/img/star.png" class="star">
-																		<img src="${path}/resources/img/empty_star.png"
-																			class="empty_star">
-																		<img src="${path}/resources/img/empty_star.png"
-																			class="empty_star">
+                                                   </c:if> <c:if test="${list.REV_STAR eq 3}">
+                                                      <img src="${path}/resources/img/star.png" class="star">
+                                                      <img src="${path}/resources/img/star.png" class="star">
+                                                      <img src="${path}/resources/img/star.png" class="star">
+                                                      <img src="${path}/resources/img/empty_star.png"
+                                                         class="empty_star">
+                                                      <img src="${path}/resources/img/empty_star.png"
+                                                         class="empty_star">
 
-																	</c:if> <c:if test="${list.REV_STAR eq 4}">
-																		<img src="${path}/resources/img/star.png" class="star">
-																		<img src="${path}/resources/img/star.png" class="star">
-																		<img src="${path}/resources/img/star.png" class="star">
-																		<img src="${path}/resources/img/star.png" class="star">
-																		<img src="${path}/resources/img/empty_star.png"
-																			class="empty_star">
+                                                   </c:if> <c:if test="${list.REV_STAR eq 4}">
+                                                      <img src="${path}/resources/img/star.png" class="star">
+                                                      <img src="${path}/resources/img/star.png" class="star">
+                                                      <img src="${path}/resources/img/star.png" class="star">
+                                                      <img src="${path}/resources/img/star.png" class="star">
+                                                      <img src="${path}/resources/img/empty_star.png"
+                                                         class="empty_star">
 
-																	</c:if> <c:if test="${list.REV_STAR eq 5}">
-																		<img src="${path}/resources/img/star.png" class="star">
-																		<img src="${path}/resources/img/star.png" class="star">
-																		<img src="${path}/resources/img/star.png" class="star">
-																		<img src="${path}/resources/img/star.png" class="star">
-																		<img src="${path}/resources/img/star.png" class="star">
+                                                   </c:if> <c:if test="${list.REV_STAR eq 5}">
+                                                      <img src="${path}/resources/img/star.png" class="star">
+                                                      <img src="${path}/resources/img/star.png" class="star">
+                                                      <img src="${path}/resources/img/star.png" class="star">
+                                                      <img src="${path}/resources/img/star.png" class="star">
+                                                      <img src="${path}/resources/img/star.png" class="star">
 
-																	</c:if>
-																</span> <span class="col-md-10"> ${list.PRD_NAME} /
-																	${list.PRD_COLOR } / ${list.ORDER_PRDSIZE } | &nbsp;${list.REV_TITLE} </span>
-																<div class="review_content">${list.REV_CONTENT}</div>
-																<div id="content${status.index}" class="collapse">
-																	<div class="col-md-5 left margin"></div>
-																	<div class="row">
-																		<div class="col-md-12 review_content">
-																			<img
-																				src="${path}/resources/img/product/나이키디파이올데이.png"
-																				alt="" class="review_img"> <img
-																				src="${path}/resources/img/product/나이키디파이올데이.png"
-																				alt="" class="review_img"> <img
-																				src="${path}/resources/img/product/나이키디파이올데이.png"
-																				alt="" class="review_img">
-																		</div>
-																	</div>
-																</div>
-															</div>
-														</div>
-													</div>
-												</a>
-											</c:forEach>
+                                                   </c:if>
+                                                </span> <span class="col-md-10"> ${list.PRD_NAME} /
+                                                   ${list.PRD_COLOR } / ${list.ORDER_PRDSIZE } |
+                                                   &nbsp;${list.REV_TITLE} </span>
+                                                   
+                                                   
+                                                   
+                                                   
+                                                <span class="col-md-9 review_content">${list.REV_CONTENT}</span>
+                                                
+                                                <c:set var="img_array"
+                                                            value="${fn:split(list.REV_IMAGE,'/')}" />
+                                                
+                                                <c:if
+                                             test="${img_array[0] !=null }">
+                                             <span class="col-md-2 main_review_img">
+                                                <input type="hidden" value="0" class="displayState">
+                                                <img class="reviewThumbPic" alt="리뷰 대표 사진"
+                                                   title="리뷰 대표 사진"
+                                                   src="${path}/resources/img/review/${img_array[0]}" />
+                                                <div class="piclenth">&nbsp;&nbsp;${fn:length(img_array)}</div>
+                                             </span>
+                                          </c:if>
+                                                
+                                                
+                                                
+                                                <div id="content${status.index}" class="collapse">
+                                                   <div class="col-md-5 left margin"></div>
+                                                   <div class="row">
+                                                      <div class="col-md-12 review_content">
+
+
+
+                                                         <%--                      <c:out var="image" value='${img_array[0]}' /> --%>
+                                                         <img
+                                                            src="${path}/resources/img/review/${img_array[0]}"
+                                                            alt="" class="review_image">
+                                                            <img
+                                                            src="${path}/resources/img/review/${img_array[1]}"
+                                                            alt="" class="review_image">
+                                                            <img
+                                                            src="${path}/resources/img/review/${img_array[2]}"
+                                                            alt="" class="review_image">
+
+
+
+
+
+
+
+
+
+
+                                                         <!--                                               <img -->
+                                                         <%--                                                             src="${path}/resources/img/product/나이키디파이올데이.png" --%>
+                                                         <!--                                                             alt="" class="review_img"> <img -->
+                                                         <%--                                                             src="${path}/resources/img/product/나이키디파이올데이.png" --%>
+                                                         <!--                                                             alt="" class="review_img"> -->
+                                                      </div>
+                                                   </div>
+                                                </div>
+                                             </div>
+                                          </div>
+                                       </div>
+                                    </a>
+                                 </c:forEach>
 										</div>
 									</div>
 								</div>
@@ -783,273 +872,49 @@ a.page-link {
 												수 있습니다.</p>
 										</li>
 									</ul>
-									<div id="modal">
-										<div class="modal_content">
-											<form id="formToInput" method="post">
-												<input type="hidden" id="PRD_NUM" name="PRD_NUM" class="PRD_NUM" value="${prdInfo.PRD_NUM}" />
-												<p><h2 style="text-align:center;">상품Q&A 작성</h2><hr /></p>
-												<p>
-													<label> 패스워드* </label><br>
-													<input type="password" id="QNA_LOCK" name="QNA_LOCK" required="required" />
-												</p>
-												<p>
-													<label> 제목* </label><br>
-													<input type="text" id="QNA_TITLE" name="QNA_TITLE" required="required" />
-												</p>
-												<p>
-													<label> 문의 내용 입력* </label><br>
-													<textarea rows="13" cols="90" id="QNA_CONTENT" name="QNA_CONTENT" required="required"></textarea><br>
-												</p>
-													<input type="button" id="qnaWrite-id" onclick="qnaWrite(this.id)" value="쓰기" />
-													<input type="button" id="modal_close_btn" value="닫기" />
-											</form>
-										</div>
-									</div>
-
+								 	
+					
+									<div class="container" ><div class="container-fluid">
+												<button type="button" id="btn-qna-hidden-id" class="btn btn-primary btn-lg btn-qna-hidden" 
+													data-toggle="modal" data-target="#myModal"></button>
+													<div class="modal fade" id="myModal" tabindex="-1" role="dialog" 
+														aria-labelledby="myModalLabel" aria-hidden="true">
+														<div class="modal-dialog">
+														<div class="modal-content">
+														<div class="modal-header">
+														<h4 class="modal-title" id="myModalLabel">상품Q&A 작성</h4>
+														<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+														<span aria-hidden="true">&times;</span></button></div>
+														<div class="modal-body"><form id="formToInput" method="post">
+														<input type="hidden" id="PRD_NUM" name="PRD_NUM" class="PRD_NUM" value="${prdInfo.PRD_NUM}" />
+												  <p><label> 제목* </label><br><input type="text" id="QNA_TITLE" name="QNA_TITLE" 
+												  	required="required" value=""/></p>
+												   
+												  <p>
+												  <input type="radio" style=" margin-right: 10px;" id="QNA_LOCK0" name="QNA_LOCK" value="0" checked >
+												  <label for="QNA_LOCK" style=" margin-right: 10px;">비밀글</label>												   
+												  <input type="radio" style=" margin-right: 10px;" id="QNA_LOCK1" name="QNA_LOCK" value="1" >
+												  <label for="QNA_LOCK">공개글</label>
+												   </p>
+												 <!--  
+												 <p><label> 패스워드* </label><br><input type="password" id="QNA_LOCK0" name="QNA_LOCK" 
+												  	required="required" value=""/></p>
+												 --> 
+												  <p><label> 문의 내용 입력* </label><br><textarea rows="10" cols="60" id="QNA_CONTENT" 
+												  	name="QNA_CONTENT" required="required"></textarea><br></p>
+													</form></div>
+															<div class="modal-footer">
+															<button type="button" class="btn btn-primary" id="qnaWrite-id" 
+																onclick="qnaWrite(this.id)">쓰기</button>
+																<button type="button" class="btn btn-default" 
+																id="modal_close_btn" data-dismiss="modal">닫기</button>
+														</div></div></div></div></div></div>
 									<div class="container" id="container-qna">
-										<div class="row">
-										<script type="text/javascript">
-										$('#replyDelete').on('click', function(){
-											<%if(session.getAttribute("user") == null){%>
-											loginCheck();
- 											<%}%>
-										})
-										$("#modal_close_btn").click(function(){
-											$("#modal").attr("style", "display:none");
-										})
-
-									
-										</script>
-										<br>
-										<div class="row" id="qna-row">
-										<div id="empty-qna-description"></div>
-										
-										
-										<c:forEach var="qnaList" items="${qnaList }" varStatus="state">
-										
-										
-										
-
-											
-											
-											
-											
-											
-											
-											
-											
-											
-											<table id="qna-table${state.index }" onclick="qnaPwdCheck${state.index }()" class="qna-table-class" style="margin-bottom: 10px; border-bottom: 1px solid grey;">
-												<c:choose>
-													<c:when test="${!empty qnaList }">
-														<tr>
-															<td id="img-qna">
-																<img alt="lock" style="width: 26px;" src="${path}/resources/img/product/details/lock.png">
-															</td>
-															<td style="width: 99px;">
-																<fmt:formatDate value="${qnaList.QNA_REGDATE }" 
-																	pattern="yyyy-MM-dd" /></td>
-															<td style="width: 605px;">${qnaList.QNA_TITLE }</td>
-															<td>${qnaList.QNA_CUSID }</td>
-															<c:choose>
-																<c:when test="${!empty qnaList.QNA_ANSWER }">
-																	<td>답변완료</td>												
-																</c:when>
-																<c:when test="${empty qnaList.QNA_ANSWER }">
-																	<td>답변대기</td>												
-																</c:when>
-															</c:choose>
-																<td style="width: 49px;">
-																	<form id="formToDelete${qnaList.QNA_NUM}" method="post">
-																		<input type="hidden" id="QNA_NUM" name="QNA_NUM" 
-																		value="${qnaList.QNA_NUM}" />
-																		<input type="button" onclick="clkBtnList${qnaList.QNA_NUM}(this.id)" 
-																		id="id-of-delete-qna${qnaList.QNA_NUM}" class="delete-qna" value="삭제">
-																	</form>
-																</td>
-																<td style="width: 58px;">
-																	<input type="button" id="modal_open_btn${qnaList.QNA_NUM}" class="btn-qna" value="수정" />
-																</td>
-															</tr>
-															<tr>
-																<td></td>
-																<td></td>
-																<td class="qna-content${qnaList.QNA_NUM}">
-																	${qnaList.QNA_CONTENT }
-																</td>
-															</tr>
-															<tr>
-																<td></td>
-																<td></td>
-																<c:choose>
-																	<c:when test="${!empty qnaList.QNA_ANSWER }">
-																		<td class="qna-content${qnaList.QNA_NUM}">${qnaList.QNA_ANSWER }</td>												
-																	</c:when>
-																	<c:otherwise>
-																		<td class="qna-content${qnaList.QNA_NUM}">ㄴ관리자가 답변을 준비중입니다. 다소 양해 부탁드립니다.</td>
-																	</c:otherwise>
-																</c:choose>
-															</tr>
-															<tr></tr>
-													</c:when>
-												</c:choose>
-											</table>
-											<br>
-											
-											
-											<script type="text/javascript">		
-											/*
-											function qnaPwdCheck${state.index }(){
-												*/
-													<%-- 
-													<%if(session.getAttribute("user") == null){%>
-													--%> 
-													/*
-		 											var result = confirm("로그인이 필요한 서비스입니다. 로그인하시겠습니까?");
-		 											if(result){
-		 												location.href="/login.do";
-		 												return false;
-		 											}
-		 											else {
-		 												return false;
-		 											}
-													*/
-													<%-- 
-		 										<%}%>	
-													--%>
-													/*
-		 											$("#qna-open-content${state.index }").attr("style", "display:block");
-												}
-													*/
-									
-												
-												$("#modal_open_btn${qnaList.QNA_NUM}").click(function(){
-													<%if(session.getAttribute("user") == null){%>
-		 											var result = confirm("로그인이 필요한 서비스입니다. 로그인하시겠습니까?");
-		 											if(result){
-		 												location.href="/login.do";
-		 												return false;
-		 											}
-		 											else {
-		 												return false;
-		 											}
-		 										<%}%>
-													$("#modal${state.index }").attr("style", "display:block");
-												})
-												
-												
-												$('.qna-content-password-check${qnaList.QNA_NUM}').on('click', function(){
-													var pwdCheck = $('#qna-content-password${qnaList.QNA_NUM}').val();
-													if(pwdCheck === '${qnaList.QNA_LOCK}'){
-														if($(this).attr('id') === 'replyWrite'){
-															$('#qna-content').css('display','inline-block');																			
-														}else if($(this).attr('id') === 'replyOpen'){
-															$('#qna-open-content${state.index }').css('display','none');
-															$('.qna-content${qnaList.QNA_NUM}').css('display','inline-block');
-														}
-													}else if(pwdCheck === ''){
-														alert('패스워드를 입력해주세요.');
-													}else {
-														alert('패스워드가 틀렸습니다. 관리자에게 문의하세요.');
-													}
-												});
-												/*
-												function clkBtnList${qnaList.QNA_NUM}(clickedId){
-													var CRUD = clickedId;
-													var remove = '${state.index }';
-													var pwdCheck = $('#qna-content-password${qnaList.QNA_NUM}').val();
-													if(pwdCheck === '${qnaList.QNA_LOCK}'){
-														var form = $('#formToDelete${qnaList.QNA_NUM}').serialize();
-														CRUD = 'delete';
-													}else if(pwdCheck === ''){
-														alert('패스워드를 입력해주세요.');
-														return false;
-													}else {
-														alert('패스워드가 틀렸습니다. 관리자에게 문의하세요.');
-														return false;
-													}
-													qnaAjax(form, CRUD, remove);
-												};
-												*/
-												/*
-												
-												*/
-											</script>
-										</c:forEach>
-										<script type="text/javascript">
-										
-										</script>
-										</div>
-					<!-- 
-						<c:choose>
-							<c:when test="${pageInfo.getPage()<=1}">
-								<li class="page-item disabled"><a class="page-link"
-									aria-disabled="true">이전</a></li>
-							</c:when>
-							<c:when test="${pageInfo.getStartPage()==1}">
-								<li class="page-item">
-									<a class="page-link" 
-									onclick="getQnaList(${pageInfo.getStartPage()})"
-									 tabindex="-1">이전</a>
-								</li>
-							</c:when>
-							<c:otherwise>
-								<li class="page-item">
-									<a class="page-link" 
-									onclick="getQnaList(${pageInfo.getStartPage()-1})"
-									 tabindex="-1">이전</a>
-								</li>
-							</c:otherwise>
-						</c:choose>
-						
-						 -->
-						 <!-- 
-						<c:forEach begin="${pageInfo.getStartPage()}"
-							end="${pageInfo.getEndPage()}" varStatus="state">
-							<c:choose>
-								<c:when test="${pageInfo.getPage()==state.index}">
-									<li class="page-item active" aria-current="page">
-										<a class="page-link">${state.index}</a>
-									</li>
-								</c:when>
-								<c:otherwise>
-									<li class="page-item">
-										<a class="page-link"
-										onclick="getQnaList(${state.index})">
-										${state.index}</a>
-									</li>
-								</c:otherwise>
-							</c:choose>
-						</c:forEach>
-						  -->
-						  <!-- 
-						<c:choose>
-							<c:when test="${pageInfo.getPage() >= pageInfo.getMaxPage()}">
-								<li class="page-item disabled">
-									<a class="page-link" aria-disabled="true">다음</a></li>
-							</c:when>
-							<c:when test="${pageInfo.getEndPage()==pageInfo.getMaxPage()}">
-								<li class="page-item">
-									<a class="page-link"
-									onclick="getQnaList(${pageInfo.getEndPage()})">
-									다음</a>
-								</li>
-							</c:when>
-							<c:otherwise>
-								<li class="page-item">
-									<a class="page-link"
-									onclick="getQnaList(${pageInfo.getEndPage()+1})">
-									다음</a>
-								</li>
-							</c:otherwise>
-						</c:choose>
-						   -->				
-									</div>
 									</div>
 									<!-- 페이징 구분 -->
 									<ul class="pagination">
 									</ul>
-									
+									<input type="hidden" id="hidden-page">
 								</div>
 							</div>
 						</div>
@@ -1331,11 +1196,13 @@ a.page-link {
 										$("#reviewTab").trigger("click");
 									});
 						});
-						function modalOpenBtn(ch){
+						function modalOpenBtn(){
 							<%if(session.getAttribute("user") == null){%>
 							loginCheck();
 							<%}%>
-							$("#modal").attr("style", "display:block");							
+							$("#QNA_TITLE").val("");
+							$("#QNA_LOCK").val("");
+							$("#btn-qna-hidden-id").click();							
 						}
 						function qnaWrite(clickedId){
 							var CRUD = clickedId;
@@ -1343,18 +1210,17 @@ a.page-link {
 							var page;
 							var CONTENT = $('#QNA_CONTENT').val();
 							var TITLE = $('#QNA_TITLE').val();
-							var LOCK = $('#QNA_LOCK').val();
+							var LOCK = $('input[name="QNA_LOCK"]:checked').val();
+				
 							if(CONTENT === null || CONTENT === ""){
 								alert("내용이 비었습니다.");
 								return false;
 							}else if(TITLE === null || TITLE === ""){
 								alert("문의 제목을 작성해주세요.");
 								return false;
-							}else if(LOCK === null || LOCK ===""){
-								alert("패스워드가 비었습니다.");
-								return false;
 							}
 							if(CRUD === 'qnaWrite-id'){
+								
 								var form = $('#formToInput').serialize();
 								CRUD = 'insert';
 								qnaCrud(form, CRUD, PRD_CODE, page);
@@ -1365,12 +1231,12 @@ a.page-link {
 							loginCheck();
 							return false;
 							<%}%>
-							$("#modal"+updateNumbering).attr("style", "display:block");
+							$("#btn-qna-hidden-id"+updateNumbering).click();
 						}
 						function continueQnaUpdate(updateNumbering, page){
 							var CONTENT = $('#QNA_CONTENT'+updateNumbering).val();
 							var TITLE = $('#QNA_TITLE'+updateNumbering).val();
-							var LOCK = $('#QNA_LOCK'+updateNumbering).val();
+							var LOCK = $('input[name="QNA_LOCK'+updateNumbering+'"]:checked').val();
 							if(CONTENT === null || CONTENT === ""){
 								alert("내용이 비었습니다.");
 								return false;
@@ -1386,7 +1252,7 @@ a.page-link {
 							var form = $('#formToInput'+updateNumbering).serialize();
 							qnaCrud(form, CRUD, CODE, page);
 						}
-						function qnaDelete(deleteNumbering, thisId){
+						function qnaDelete(deleteNumbering, thisId, page){
 							<%if(session.getAttribute("user") == null){%>
 							loginCheck();
 							return false;
@@ -1400,7 +1266,16 @@ a.page-link {
 								alert("게시물을 작성한 계정만 게시물을 삭제할 수 있습니다.");
 								return false;
 							}
-							$("#qna-open-content-delete"+deleteNumbering).attr("style", "display:block");
+							var result = confirm("정말로 삭제하시겠습니까?");
+							if(result){
+								var CRUD = 'delete';
+								var CODE = deleteNumbering;
+								var isForm = 'formToDelete'+deleteNumbering;
+								var form = $('#'+isForm).serialize();
+								qnaCrud(form, CRUD, CODE, page);								
+							}else{
+								return false;
+							}
 						}
 						
 						
@@ -1412,23 +1287,21 @@ a.page-link {
 								success: function (data) {
 									if(CRUD === 'insert'){
 										QnaList(1);
+										$('#modal_close_btn').click();
 									}else if(CRUD === 'delete'){
-										$('#qna-table'+CODE).remove();
-									}else if(CRUD === 'update'){
 										QnaList(page);
+									}else{
+										$('#modal_close_btn'+CODE).click();
+										setTimeout(function(){
+											QnaList(page);
+										}, 500);
 									}
 								},
 								error: function (e) {
 									console.log("ERROR : ", e);
-								},
-								complete: function(){
-									if(CRUD === 'insert'){
-										$("#modal").attr("style", "display:none");
-									}else{
-										$("#modal"+CODE).attr("style", "display:none");
-									}
 								}
 							})
+							
 						}
 						function loginCheck(){
 							var result = confirm("로그인이 필요한 서비스입니다. 로그인하시겠습니까?");
@@ -1440,7 +1313,7 @@ a.page-link {
 									return false;
 								}
 						}
-						function openContent(qnaNumbering,thisId){
+						function openContent(qnaNumbering,thisId,lock){
 							<%if(session.getAttribute("user") == null){%>
 							loginCheck();
 							return false;
@@ -1450,22 +1323,15 @@ a.page-link {
 								pageContext.setAttribute("CutId", new String[]{CutId});
 							}%>
 							var checkID= "${CutId[0]}";
-							if(thisId != checkID){
-								alert("게시물 작성자만 게시물을 볼 수 있습니다.");
-								return false;
+							if(lock === "0" || lock === 0){
+								if(thisId != checkID){
+									alert("비밀글은 작성자만 볼 수 있습니다.");
+									return false;
+								}
 							}
-							$("#qna-open-content"+qnaNumbering).attr("style", "display:block");
+							$(".qna-content"+qnaNumbering).attr("style", "display:block");								
 						}
-						function replyOpen(qnaNumbering) {
-							var correctPwd = $('#correct-pwd'+qnaNumbering).val();
-							var comparePwd = $("#qna-content-password"+qnaNumbering).val();
-							if(correctPwd != comparePwd || comparePwd === null){
-								alert("패스워드를 다시 확인해주세요.");
-							}else{
-								$('#qna-open-content'+qnaNumbering).css('display','none');
-								$('.qna-content'+qnaNumbering).css('display','block');
-							}
-						}
+						
 						function replyOpenDelete(qnaNumbering) {
 							var correctPwd = $('#correct-pwd-delete'+qnaNumbering).val();
 							var comparePwd = $("#qna-content-password-delete"+qnaNumbering).val();
@@ -1473,12 +1339,7 @@ a.page-link {
 								alert("패스워드를 다시 확인해주세요.");
 							}else{
 								$('#qna-open-content-delete'+qnaNumbering).css('display','none');
-								var CRUD = 'delete';
-								var CODE = qnaNumbering;
-								var isForm = 'formToDelete'+qnaNumbering;
-								var form = $('#'+isForm).serialize();
-								var page;
-								qnaCrud(form, CRUD, CODE, page);
+								
 							}
 						}
 						function replyCancle(qnaNumbering){
@@ -1488,6 +1349,7 @@ a.page-link {
 						function modalCloseBtn(qnaNumbering){
 							$("#modal"+qnaNumbering).attr("style", "display:none");
 						}
+
 						
 					
 						function QnaList(pageR){
@@ -1504,40 +1366,58 @@ a.page-link {
 								success:function(data){
 									arrays = data.qnaList;							
 									var pI = data.pageInfo;
+									$('#hidden-page').attr("onclick","QnaList("+pI.page+")");
 									$('#container-qna').empty();
 									if(arrays[0] === undefined){
-										$('#container-qna').append('<div id="empty-qna-description">작성된 문의가 없습니다.</div>');									
+										$('#container-qna').append('<div id="empty-qna-description" >작성된 문의가 없습니다.</div>');									
 									}else{
-										$('#container-qna').append('<div id="empty-qna-description"><h4>< 상품 Q&A ></h4></div>');
+										$('#container-qna').append('<div id="empty-qna-description" style="margin-bottom: 55px;"><h4>< 상품 Q&A ></h4></div>');
 									}
-									$('#container-qna').append('<div class="btn-qna-block"><input type="button" onclick="modalOpenBtn(1)" id="modal_open_btn" class="btn-qna" value="문의쓰기" /></div><br>');
+									$('#container-qna').append(
+											'<div style="margin-bottom:10px;" align="right">'
+											+'<button type="button" onclick="modalOpenBtn()" class="btn btn-primary btn-lg btn-qnaNew">문의쓰기</button>'
+											+'</div>'
+									);
 									for(var i=0; i<arrays.length;i++){
 										 var id;
 										$('#container-qna').append(
-										 '<div id="modal'+i+'" class="modal">'
-											+'<div class="modal_content">'
-												+'<form id="formToInput'+i+'" method="post">'
-													+'<p><h2 style="text-align:center;">상품Q&A 수정</h2><hr /></p>'
-													+'<input type="hidden" id="QNA_NUM" name="QNA_NUM" value="'+arrays[i].qna_NUM+'" />'
-													+'<input type="hidden" id="PRD_NUM" name="PRD_NUM" value="'+${prdInfo.PRD_NUM}+'" />'
-													+'<p><label> 패스워드* </label><br>'
-													+'<input type="password" id="QNA_LOCK'+i+'" name="QNA_LOCK" value=""/></p>'
-													+'<p><label> 글 제목* </label><br>'
-													+'<input type="text" id="QNA_TITLE'+i+'" name="QNA_TITLE" value="'+arrays[i].qna_TITLE+'" /></p>'
-													+'<p><label> 글 내용* </label><br>'
-													+'<textarea rows="13" cols="90" id="QNA_CONTENT'+i+'" name="QNA_CONTENT">'+arrays[i].qna_CONTENT+'</textarea><br></p>'
-													+'<input type="button" id="id-of-insert-qna" onclick="continueQnaUpdate('+i+', '+pI.page+')" value="확인" />'
-													+'<input type="button" onclick="modalCloseBtn('+i+')" id="modal_close_btn" value="닫기" / >'
-												+'</form>'
-											+'</div>'
-										+'</div>'
+										'<div class="container" ><div class="container-fluid">'
+										+'<button type="button" id="btn-qna-hidden-id'+i+'" class="btn btn-primary btn-lg btn-qna-hidden" '
+											+'data-toggle="modal" data-target="#myModal'+i+'"></button>'
+											+'<div class="modal fade" id="myModal'+i+'" tabindex="-1" role="dialog"' 
+											+'aria-labelledby="myModalLabel" aria-hidden="true">'	
+												+'<div class="modal-dialog">'
+												+'<div class="modal-content">'
+												+'<div class="modal-header">'
+												+'<h4 class="modal-title" id="myModalLabel">상품Q&A 수정</h4>'
+												+'<button type="button" class="close" data-dismiss="modal" aria-label="Close">'
+												+'<span aria-hidden="true">&times;</span></button></div>'
+												+'<div class="modal-body"><form id="formToInput'+i+'" method="post">'
+												+'<input type="hidden" id="QNA_NUM'+i+'" name="QNA_NUM" value="'+arrays[i].qna_NUM+'" />'
+												+'<input type="hidden" id="PRD_NUM'+i+'" name="PRD_NUM" value="'+${prdInfo.PRD_NUM}+'" />'
+										 +'<p><label> 제목* </label><br><input type="text" id="QNA_TITLE'+i+'" name="QNA_TITLE" ' 
+										  +'required="required" value="'+arrays[i].qna_TITLE+'"/></p>'	
+										  +'<p>'
+										  +'<input type="radio" style=" margin-right: 10px;" id="QNA_LOCK0" name="QNA_LOCK'+i+'" value="0" checked>'
+										  +'<label for="QNA_LOCK" style=" margin-right: 10px;" >비밀글</label>'												   
+										  +'<input type="radio" style=" margin-right: 10px;" id="QNA_LOCK1" name="QNA_LOCK'+i+'" value="1">'
+										  +'<label for="QNA_LOCK">공개글</label>'
+										   +'</p>'
+										  +'<p><label> 문의 내용 입력* </label><br><textarea rows="10" cols="60" id="QNA_CONTENT'+i+'" '
+										  +'name="QNA_CONTENT" required="required">'+arrays[i].qna_CONTENT+'</textarea><br></p>'	
+											+'</form></div>'
+													+'<div class="modal-footer">'
+													+'<button type="button" class="btn btn-primary" id="qnaWrite-id" '
+														+'onclick="continueQnaUpdate('+i+', '+pI.page+')">쓰기</button>'
+														+'<button type="button" class="btn btn-default close_btn" '
+														+'id="modal_close_btn'+i+'" data-dismiss="modal">닫기</button>'
+												+'</div></div></div></div></div></div>'
 										+'<div id="qna-open-content'+i+'"><div class="modal_content">'
 										+'<div id="replypw">문의글 비밀번호를 입력해주세요.</div>'
 										+'<hr/>'
 										+'<input type="hidden" id="correct-pwd'+i+'" value="'+arrays[i].qna_LOCK+'">'
 										+'<input type="password" placeholder="비밀번호 입력" size="30" id="qna-content-password'+i+'"><br>'
 										+'<div id="reply">'
-										+'<input type="button" id="replyOpen" onclick="replyOpen('+i+')" class="qna-content-password-check'+i+'" value="확인">'
 										+'<input type="button" id="replyCancle" onclick="replyCancle('+i+')" class="qna-content-password-check'+i+'" value="취소">'
 										+'</div></div></div>'
 										+'<div id="qna-open-content-delete'+i+'"><div class="modal_content">'
@@ -1550,14 +1430,14 @@ a.page-link {
 										+'<input type="button" id="replyCancle" onclick="replyCancle('+i+')" class="qna-content-password-check'+i+'" value="취소">'
 										+'</div></div></div>'
 										+'<table id="qna-table'+i+'" class="qna-table-class" style="margin-bottom: 10px; border-bottom: 1px solid grey;">'
-										+'<tr><td id="img-qna"><img alt="lock" style="width: 26px;" src="${path}/resources/img/product/details/lock.png"></td>'
+										+'<tr><td id="security-qna'+i+'">'+arrays[i].qna_LOCK+'</td>'
 										+'<td style="width: 99px;">'+new Date(arrays[i].qna_REGDATE).toLocaleDateString()+'</td>'
-										+'<td style="width: 605px;" id="'+arrays[i].qna_CUSID+'" onclick="openContent('+i+',this.id)">'+arrays[i].qna_TITLE+'</td>'
+										+'<td style="width: 605px;" id="'+arrays[i].qna_CUSID+'" onclick="openContent('+i+',this.id,'+arrays[i].qna_LOCK+')">'+arrays[i].qna_TITLE+'</td>'
 										+'<td style="width: 130px;">'+arrays[i].qna_CUSID+'</td>'
 										+'<td style="width: 91px;" id="aCheck'+i+'">답변대기</td><td style="width: 49px;">'
 										+'<form id="formToDelete'+i+'" method="post">'
 										+'<input type="hidden" id="QNA_NUM" name="QNA_NUM" value="'+arrays[i].qna_NUM+'" />'
-										+'<input type="button" onclick="qnaDelete('+i+',this.id)" id="'+arrays[i].qna_CUSID+'" class="delete-qna" value="삭제">'
+										+'<input type="button" onclick="qnaDelete('+i+',this.id, '+pI.page+')" id="'+arrays[i].qna_CUSID+'" class="delete-qna" value="삭제">'
 										+'</form>'
 										+'</td>'
 										+'<td style="width: 58px;">'
@@ -1567,7 +1447,7 @@ a.page-link {
 										+'<tr>'
 										+'<td></td>'
 										+'<td></td>'
-										+'<td class="qna-content'+i+'">'+arrays[i].qna_CONTENT+'</td>'
+										+'<td class="qna-content'+i+'" id="qna-content'+i+'" value="check" >'+arrays[i].qna_CONTENT+'</td>'
 										+'</tr><tr><td></td><td></td><td class="qna-content'+i+'"><textarea rows="10" cols="80" placeholder="A.관리자가 답변을 준비중입니다." value="'+arrays[i].qna_ANSWER+' readonly="readonly" disabled>'+arrays[i].qna_ANSWER+'</textarea></td></tr>'
 										+'</table>'
 										+'<style>'
@@ -1587,10 +1467,16 @@ a.page-link {
 										+'.qna-content'+i+'{display: none;} #qna-content-password'+i+'{display:block; margin: auto;}'
 										+'#qna-content-password-delete'+i+'{display:block; margin: auto;}</style>'
 										)
-										console.log("ddd :"+arrays[i].qna_ANSWER);
 										if(arrays[i].qna_ANSWER != ""){
 											 $('#aCheck'+i).text('답변완료');
 									 	}
+										var sq = $('#security-qna'+i).text();
+										console.log(sq+"? sq");
+										if(sq === '0'){
+											$('#security-qna'+i).html('[비밀글]&nbsp&nbsp&nbsp&nbsp');
+										}else{
+											$('#security-qna'+i).html('[공개글]&nbsp&nbsp&nbsp&nbsp');
+										}
 									}
 								
 									console.log(arrays[0]);

@@ -22,4 +22,7 @@
 	<select id="selOrdersById" resultType="kr.co.sinsa.biz.orders.OrdersVO">
 		select * from ORDERS where ORDER_NUM=#{ORDER_NUM} AND ORDER_CUSID=#{ORDER_CUSID}
 	</select>
+	<select id="sumPriceById" resultType="int">
+		select sum(ORDER_PRICE) from ORDERS where ORDER_NUM=#{ORDER_NUM};
+	</select>
 </mapper>

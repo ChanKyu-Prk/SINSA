@@ -47,6 +47,7 @@ public class ProductDAO {
 	public int countQNAList(Map<String, Object> map){
 		return SST.selectOne("ProductList.countQNAList",map);
 	}
+
 	
 	public List<CartVO> addCart(Map<String, Object> map){
 		return SST.selectList("ProductList.addCart",map);

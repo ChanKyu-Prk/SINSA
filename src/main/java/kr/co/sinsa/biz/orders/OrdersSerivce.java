@@ -11,4 +11,5 @@ public interface OrdersSerivce {
 	public int addOrders(OrdersVO ordersVO) throws Exception;
 	public int chkUsePoint(CustomerVO customerVO) throws Exception;
 	public List<OrdersVO> selOrdersById(OrdersVO ordersVO) throws Exception;
+	public int sumPriceById(String ORDER_NUM) throws Exception;
 }

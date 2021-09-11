@@ -52,6 +52,7 @@ public class ProductServiceImpl implements ProductService {
 		return DAO.countQNAList(map);
 	}
 
+
 	@Override
 	public List<ProductVO> listPageBestShoes(Map<String, Object> map) {	
 		return DAO.listPageBestShoes(map);

@@ -159,8 +159,14 @@ table {
 					</select>
 				</div>
 				<div class="form-group col-md-3">
+					<c:if test="${param.searchWord != '결제완료' && param.searchWord != '취소요청'}">
 					<input type="text" class="form-control" placeholder="Search"
 						name="searchWord" value="${param.searchWord}" />
+					</c:if>
+					<c:if test="${param.searchWord == '결제완료' || param.searchWord == '취소요청'}">
+					<input type="text" class="form-control" placeholder="Search"
+						name="searchWord" />
+					</c:if>
 				</div>
 				<div class="form-group col-md-1">
 					<input type="submit" class="btn btn-primary" value="검색" />
