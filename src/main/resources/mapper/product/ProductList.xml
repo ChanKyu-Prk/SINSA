@@ -70,6 +70,7 @@ select JJIM_PRDNUM from jjim where JJIM_CUSID =#{value};
 		GROUP BY ORDER_PRDNAME 
 		HAVING COUNT(ORDER_PRDNAME) > 0 
 		ORDER BY count DESC
+		limit #{page},12
 	]]>
 	</select>
 	
@@ -89,7 +90,7 @@ select JJIM_PRDNUM from jjim where JJIM_CUSID =#{value};
 		PRD_COLOR in (${color})
 		GROUP BY ORDER_PRDNAME 
 		HAVING COUNT(ORDER_PRDNAME) > 0 
-		ORDER BY count DESC;
+		ORDER BY count DESC
 	]]>
 	</select>
 
