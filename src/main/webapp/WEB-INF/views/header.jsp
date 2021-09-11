@@ -100,8 +100,8 @@ ul{
 
 					<li class="mobile_menu"><a href="/join.do"><i class="fas fa-user-plus mobile_icon"></i>&nbsp;회원가입</a></li>
 					<li class="mobile_menu"><a href="/myOrderList/1"><i class="fas fa-search mobile_icon"></i>&nbsp;&nbsp;주문조회</a></li>
-					<li class="mobile_menu"><a href="/myOrderList/1"><i class="fas fa-file mobile_icon"></i>&nbsp;&nbsp;&nbsp;마이페이지</a></li>
-					<li class="mobile_menu"><a href="#"><i class="fas fa-door-open mobile_icon"></i>&nbsp;고객센터</a></li>
+					<li class="mobile_menu"><a href="/myPage"><i class="fas fa-file mobile_icon"></i>&nbsp;&nbsp;&nbsp;마이페이지</a></li>
+					<li class="mobile_menu"><a href="/FAQ"><i class="fas fa-door-open mobile_icon"></i>&nbsp;고객센터</a></li>
 				</ul>
 
 			</div>
@@ -204,10 +204,10 @@ ul{
 								<a href="/myOrderList/1">주문조회</a>
 							</div>
 							<div class="header__top__right__auth">
-								<a href="/myOrderList/1">마이페이지</a>
+								<a href="/myPage">마이페이지</a>
 							</div>
 							<div class="header__top__right__auth">
-								<a href="#">고객센터</a>
+								<a href="/FAQ">고객센터</a>
 							</div>
 
 						</div>

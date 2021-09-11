@@ -105,8 +105,8 @@ public class MyPageServiceImpl implements MyPageService {
 	}
 
 	@Override
-	public int countJjimList(Map<String, Object> map) {
-		return dao.countJjimList(map);
+	public int countJjimList(String userID) {
+		return dao.countJjimList(userID);
 	}
 	
 	@Override
@@ -372,6 +372,60 @@ public class MyPageServiceImpl implements MyPageService {
 	@Override
 	public int countjjim(String id) {
 		return dao.countjjim(id);
+	}
+
+	@Override
+	public List<ProductVO> myPageRecView(Cookie[] cRecentlyVieweds, int listCount) {
+		List<ProductVO> list = new ArrayList<ProductVO>();
+		List<ProductVO> select = new ArrayList<ProductVO>();
+		List<ProductVO> allProduct = dao.allProductNum();
+		int PRD_NUM;
+		for (int i = cRecentlyVieweds.length - 1; i >= 0; i--) {
+			String str = cRecentlyVieweds[i].getName();
+			for (int j = 0; j < allProduct.size(); j++) {
+				String str2 = Integer.toString(allProduct.get(j).getPRD_NUM());
+				if (str.equals(str2)) {
+					PRD_NUM = Integer.parseInt(cRecentlyVieweds[i].getValue());
+					list.add(dao.recentView(PRD_NUM));
+				}
+			}
+		}
+		int end = 3;
+		if(listCount<3) {
+			end = listCount;
+		}
+		for (int i = 0; i < end; i++) {
+			select.add(list.get(i));
+		}
+		return select;
+	}
+
+	@Override
+	public List<ProductVO> myPageJjimList(String userID) {
+		return dao.myPageJjimList(userID);
+	}
+
+	@Override
+	public Map<String, Integer> countRecOrderState(String userID) {
+		Map<String, Integer> countState = new HashMap<String, Integer>();
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("ID", userID);
+		map.put("STATE", "결제완료");
+		int payEnd = dao.countRecOrderState(map);
+		map.replace("STATE", "배송중");
+		int delivery = dao.countRecOrderState(map);
+		map.replace("STATE", "구매확정");
+		int deliveryEnd = dao.countRecOrderState(map);
+		map.replace("STATE", "취소");
+		int cancelEnd = dao.countRecOrderState(map);
+		map.replace("STATE", "반품");
+		int refund = dao.countRecOrderState(map);
+		countState.put("payEnd", payEnd);
+		countState.put("delivery", delivery);
+		countState.put("deliveryEnd", deliveryEnd);
+		countState.put("cancel",  cancelEnd  );
+		countState.put("refund",  refund );
+		return countState;
 	}
 	
 

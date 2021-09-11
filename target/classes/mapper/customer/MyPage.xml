@@ -169,11 +169,11 @@
 		limit #{page},6;
 	</select>
 
-	<select id="countJjimList" parameterType="Map" resultType="int">
+	<select id="countJjimList" resultType="int">
 		select count(*) from product join JJIM on JJIM.JJIM_PRDNUM
 		=
 		product.PRD_NUM
-		where JJIM.JJIM_CUSID = #{ID};
+		where JJIM.JJIM_CUSID = #{value};
 	</select>
 
 
@@ -554,7 +554,22 @@ order by REV_NUM  desc
 		where JJIM_CUSID = #{ID} 
 	</select>
 	
+		<select id="myPageJjimList" 
+		resultType="kr.co.sinsa.biz.product.ProductVO">
+		select product.* from JJIM join product  on JJIM.JJIM_PRDNUM
+		= product.PRD_NUM
+		where JJIM.JJIM_CUSID = #{value} order by JJIM_REGDATE desc
+		limit 3;
+	</select>
 	
+		<select id="countRecOrderState" parameterType="Map" resultType="int">
+		select
+		count(*)
+		from ORDERS
+		where ORDER_CUSID = #{ID} and ORDER_STATE
+		like concat('%',#{STATE},'%')
+		and ORDER_REGDATE > DATE_SUB(now(),INTERVAL 1 Month);
+	</select>
 	
 	
 </mapper>
