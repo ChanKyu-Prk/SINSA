@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>SINSA : 회원가입</title>
+<title>SINSA관리자모드</title>
 <script
    src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://kit.fontawesome.com/848d8f1fa9.js"

@@ -49,7 +49,7 @@
 	}
 }
 </style>
-<title>SINSA : 비밀번호 변경</title>
+<title>SINSA 회원탈퇴</title>
 </head>
 <jsp:include page="../header.jsp"></jsp:include>
 

@@ -198,7 +198,7 @@ hr.mo {
 
 </style>
 
-<title>SINSA : 찜 목록</title>
+<title>SINSA 찜 목록</title>
 </head>
 <jsp:include page="../header.jsp"></jsp:include>
 

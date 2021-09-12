@@ -143,7 +143,7 @@ border-bottom: solid 1px #bebebe;
 }
 }
 </style>
-<title>SINSA : FAQ</title>
+<title>SINSA FAQ</title>
 </head>
 <jsp:include page="../header.jsp"></jsp:include>
 

@@ -182,7 +182,7 @@ padding : 0;
 }
 }
 </style>
-<title>SINSA : 후기 작성</title>
+<title>SINSA 후기 작성</title>
 </head>
 <jsp:include page="../header.jsp"></jsp:include>
 

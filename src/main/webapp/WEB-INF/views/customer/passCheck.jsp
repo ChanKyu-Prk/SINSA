@@ -106,7 +106,7 @@ vertical-align: middle;
 	}
 }
 </style>
-<title>SINSA : ${page }</title>
+<title>SINSA ${page }</title>
 </head>
 <jsp:include page="../header.jsp"></jsp:include>
 

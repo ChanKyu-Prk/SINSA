@@ -252,7 +252,7 @@ border-color: black !important;
 color: white !important;
 }
 </style>
-<title>SINSA : 나의 상품 후기</title>
+<title>SINSA 나의 상품 후기</title>
 </head>
 <jsp:include page="../header.jsp"></jsp:include>
 

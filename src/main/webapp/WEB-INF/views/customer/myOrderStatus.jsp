@@ -242,7 +242,7 @@ option {
 	padding-top: 5px;
 }
 </style>
-<title>SINSA : 주문 내역 상세</title>
+<title>SINSA 주문 내역 상세</title>
 <jsp:include page="../header.jsp"></jsp:include>
 </head>
 <body>
@@ -1205,7 +1205,7 @@ option {
 				if (reason == null) {
 					alert("반품 사유를 선택해 주세요");
 				} else {
-					alert("반품 처리 되었습니다.");
+					alert("반품 요청 되었습니다.");
 					location.href = '/refund?prdcode=' + prdcode + '&orderum='
 							+ orderum + '&prdsize=' + prdsize + "&reason="
 							+ reason;
@@ -1223,7 +1223,7 @@ option {
 				if (reason == null) {
 					alert("취소 사유를 선택해 주세요");
 				} else {
-					alert("취소 처리 되었습니다.");
+					alert("취소 요청 되었습니다.");
 					location.href = '/cancel?prdcode=' + prdcode + '&orderum='
 							+ orderum + '&prdsize=' + prdsize + "&reason="
 							+ reason;
@@ -1266,7 +1266,7 @@ option {
 				if (reason == null) {
 					alert("취소 사유를 선택해 주세요");
 				} else {
-					alert("취소 처리 되었습니다.");
+					alert("취소 요청 되었습니다.");
 					location.href = "/allCancel?orderum=" + ordernum
 							+ "&reason=" + reason;
 				}
@@ -1280,7 +1280,7 @@ option {
 				if (reason == null) {
 					alert("반품 사유를 선택해 주세요");
 				} else {
-					alert("반품 처리 되었습니다.");
+					alert("반품 요청 되었습니다.");
 					location.href = "/allRefund?orderum=" + ordernum
 							+ "&reason=" + reason;
 				}

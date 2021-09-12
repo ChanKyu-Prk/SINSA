@@ -109,7 +109,6 @@ public class AdminReviewController {
 
 			}
 			System.out.println(img);
-			System.out.println(img[0]);
 			model.addAttribute("titleList", title);
 			model.addAttribute("imgList", img);
 		
