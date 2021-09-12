@@ -943,16 +943,7 @@ padding-right: 3px;
 
 					</div>
 				</div>
-				<div class="container delivCon">
-					<div class="row delivTitleRow">
 
-						<div class="col-12 delivTitle">배송지 정보</div>
-					</div>
-					<hr />
-
-
-
-				</div>
 
 
 
