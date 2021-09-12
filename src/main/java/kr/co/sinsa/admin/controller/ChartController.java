@@ -37,7 +37,6 @@ public class ChartController {
 		
 		List<Integer> dailySalesList = ChartService.getDailySalesList();
 		model.addAttribute("dailySalesList", dailySalesList);
-		System.out.println("dailySalesList" + dailySalesList);
 		
 		int year = ChartService.getYear();
 		model.addAttribute("year", year);
@@ -70,20 +69,6 @@ public class ChartController {
 	}
 
 
-
-//	@RequestMapping(value = "incomeList", method = RequestMethod.GET, produces="text/plain;charset=UTF-8")
-//
-//	@ResponseBody
-//	public String incomeList(Locale locale, Model model) {
-//
-//		Gson gson = new Gson();
-//		
-//		List<ProductVO> list = ChartService.getProductList();
-//		
-//
-//		return gson.toJson(list);
-//
-//	}
 
 
 

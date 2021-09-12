@@ -7,7 +7,7 @@ import kr.co.sinsa.biz.product.ProductVO;
 
 public interface ChartService {
 
-	public List<ProductVO> getProductList();
+//	public List<ProductVO> getProductList();
 	
 	public List<Integer> getSalesList();
 	
