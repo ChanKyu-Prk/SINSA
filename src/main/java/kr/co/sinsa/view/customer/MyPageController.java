@@ -467,7 +467,7 @@ public class MyPageController {
 			map.put("ID", user.getCUS_ID());
 			map.put("PASSWORD", newPassword);
 			myPageSerive.passChange(map);
-			return "redirect:/myOrderList/1";
+			return "redirect:/myPage";
 		} else {
 			return "";
 		}
@@ -537,7 +537,7 @@ public class MyPageController {
 			String address = "(" + CUS_ADDR_1 + ")|" + CUS_ADDR_2 + "|" + CUS_ADDR_5 + "|" + CUS_ADDR_4;
 			vo.setCUS_ADDR(address);
 			myPageSerive.privateInfoChange(vo);
-			return "redirect:/myOrderList/1";
+			return "redirect:/myPage";
 		}
 
 	}
