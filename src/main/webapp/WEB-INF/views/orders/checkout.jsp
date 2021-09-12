@@ -225,7 +225,11 @@ input[type=number] {
 									<label for="defaultDeliv" class="radioLabel"> <input
 										type="radio" id="defaultDeliv" name="delivAddr"
 										value="default" checked> <span>주문자와 동일</span>
-									</label> <label for="newDeliv" class="radioLabel"> <input
+									</label>
+									<label for="recentlyDeliv" class="radioLabel"> <input
+										type="radio" id="recentlyDeliv" name="delivAddr" value="recently" /> <span>최근배송지</span>
+									</label>
+									<label for="newDeliv" class="radioLabel"> <input
 										type="radio" id="newDeliv" name="delivAddr" value="new" /> <span>신규입력</span>
 									</label>
 								</div>
@@ -247,6 +251,7 @@ input[type=number] {
 								</div>
 							</div>
 							<input type="hidden" id="isCart" value="${isCart}"/>
+							<!-- 기본주소 -->
 							<c:set var="getAddr" value="${fn:split(cusInfo.CUS_ADDR, '|')}" />
 							<c:set var="delivAddrExtra" value="${getAddr[fn:length(getAddr)-1]}" />
 							<c:set var="delivAddrJibun" value="${getAddr[fn:length(getAddr)-2]}" />
@@ -254,6 +259,14 @@ input[type=number] {
 							<c:set var="zip" value="${getAddr[fn:length(getAddr)-4]}" />
 							<c:set var="zip" value="${fn:replace(zip, '(', '')}" />
 							<c:set var="delivAddrZip" value="${fn:replace(zip, ')', '')}" />
+							<!-- 최근주소 -->
+							<c:set var="getAddr2" value="${fn:split(cusInfo.CUS_DELIV_ADDR, '|')}" />
+							<c:set var="delivAddrExtra2" value="${getAddr2[fn:length(getAddr2)-1]}" />
+							<c:set var="delivAddrJibun2" value="${getAddr2[fn:length(getAddr2)-2]}" />
+							<c:set var="delivAddrRoad2" value="${getAddr2[fn:length(getAddr2)-3]}" />
+							<c:set var="zip2" value="${getAddr2[fn:length(getAddr2)-4]}" />
+							<c:set var="zip2" value="${fn:replace(zip2, '(', '')}" />
+							<c:set var="delivAddrZip2" value="${fn:replace(zip2, ')', '')}" />
 							<div class="row">
 								<label for="delivAddrZip" class="col-lg-3">주소<span
 									class="inpReq">*</span></label>
@@ -525,6 +538,17 @@ input[type=number] {
 				$("#delivAddrRoad").val($("#delivAddrRoad").data("road"));
 				$("#delivAddrJibun").val($("#delivAddrJibun").data("jibun"));
 				$("#delivAddrExtra").val($("#delivAddrExtra").data("extra"));
+			} else if(chckdRadio == "recently"){
+				$('#ORDER_RECEIVER, #ORDER_TEL').prop('readonly', true);
+				$("#ORDER_RECEIVER").val($("#CUS_NAME").val());
+				$("#ORDER_TEL").val($("#CUS_TEL").val());
+				
+				
+ 				$("#delivAddrZip").val("${zip2}");
+				$("#delivAddrRoad").val("${delivAddrRoad2}");
+				$("#delivAddrJibun").val("${delivAddrJibun2}");
+				$("#delivAddrExtra").val("${delivAddrExtra2}");
+				
 			} else if(chckdRadio == "new"){
 				$('input.newDelivInput').val('');
 				$('#ORDER_RECEIVER, #ORDER_TEL').removeAttr('readonly');
