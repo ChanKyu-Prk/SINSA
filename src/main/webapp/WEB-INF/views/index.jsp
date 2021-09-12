@@ -12,7 +12,7 @@
 <meta name="keywords" content="Ogani, unica, creative, html">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
-<title>sinsa</title>
+<title>SINSA 메인페이지</title>
 
 
 
@@ -96,7 +96,7 @@
 }
 
 .review_prdnamebrand{
-/*    font-weight: bold; */
+   font-weight: bold; 
    margin: 10px 0px 9px 0px;
 }
 
@@ -539,7 +539,7 @@
 <c:if test="${list.REV_PRDCODE eq prdList.PRD_CODE}">
 <div class="review_prdnamebrand">
 <%-- <span>${prdList.PRD_BRAND}</span><br> --%>
-<span>${prdList.PRD_NAME}</span>
+<span>${prdList.PRD_NAME} / ${prdList.PRD_BRAND} </span>
 </div>
 
 </c:if>

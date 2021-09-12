@@ -73,11 +73,12 @@ ul{
 			<a href="#"><img src="${path}/resources/img/logo.png" alt=""></a>
 		</div>
 		<div class="humberger__menu__cart">
-			<ul>
-				<li><a href="../jjimList/1"><i class="fa fa-heart"></i> <span>1</span></a></li>
-				<li><a href="../cart.do"><i class="fa fa-shopping-bag"></i>
-						<span>3</span></a></li>
-			</ul>
+			<div class="col-lg-3">
+					<div class="header__cart">
+				
+					</div>
+					
+				</div>
 
 		</div>
 	
@@ -230,7 +231,7 @@ ul{
 							<li><a href="/product/List/all/newest/all/1">ALL</a></li>
 							<li><a href="/product/List/men/newest/all/1">men</a>
 								<ul class="header__menu__dropdown">
-									<li><a href="#" class="navbar_category1">운동화</a></li>
+									<li><span class="navbar_category1">운동화</span></li>
 									<li><a href="/product/List/men/newest/sneakers/1">스니커즈</a></li>
 									<li><a href="/product/List/men/newest/converse/1">캔버스화</a></li>
 									<li><a href="/product/List/men/newest/slipon/1">슬립온</a></li>
@@ -238,7 +239,7 @@ ul{
 									<li><div>
 											<br>
 										</div></li>
-									<li><a href="#" class="navbar_category1">스포츠</a></li>
+									<li><span class="navbar_category1">스포츠</span></li>
 									<li><a href="/product/List/men/newest/running/1">런닝화</a></li>
 									<li><a href="/product/List/men/newest/basketball/1">농구화</a></li>
 									<li><a href="/product/List/men/newest/golf/1">골프화</a></li>
@@ -247,7 +248,7 @@ ul{
 								</ul></li>
 							<li><a href="/product/List/women/newest/all/1/">women</a>
 								<ul class="header__menu__dropdown">
-									<li><a href="#" class="navbar_category1">운동화</a></li>
+									<li><span class="navbar_category1">운동화</span></li>
 									<li><a href="/product/List/women/newest/sneakers/1">스니커즈</a></li>
 									<li><a href="/product/List/women/newest/converse/1">캔버스화</a></li>
 									<li><a href="/product/List/women/newest/slipon/1">슬립온</a></li>
@@ -256,7 +257,7 @@ ul{
 									<li><div>
 											<br>
 										</div></li>
-									<li><a href="#" class="navbar_category1">스포츠</a></li>
+									<li><span class="navbar_category1">스포츠</span></li>
 									<li><a href="/product/List/women/newest/running/1">런닝화</a></li>
 									<li><a href="/product/List/women/newest/basketball/1">농구화</a></li>
 									<li><a href="/product/List/women/newest/golf/1">골프화</a></li>

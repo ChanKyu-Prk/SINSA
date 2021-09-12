@@ -197,7 +197,6 @@ public class LoginController {
 		System.out.println(CUS_NAME);
 		System.out.println(CUS_EMAIL);
 
-		String setFrom = "sjinjin6@naver.com";
 		String toMail = CUS_EMAIL;
 		String title = "[SINSA]요청하신 아이디 찾기 인증번호를 확인해 주세요";
 		String content = "홈페이지를 방문해주셔서 감사합니다." +"<br>" + "아이디 찾기 인증번호는" + checkNum + "입니다.";
@@ -206,7 +205,6 @@ public class LoginController {
 		try {
 			MimeMessage message = mailSender.createMimeMessage();
 			MimeMessageHelper helper = new MimeMessageHelper(message, true, "utf-8");
-			helper.setFrom(setFrom);
 			helper.setTo(toMail);
 			helper.setSubject(title);
 			helper.setText(content, true);
