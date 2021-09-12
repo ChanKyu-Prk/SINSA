@@ -12,8 +12,23 @@ public class QnaVO {
 	private String qna_content;
 	private String qna_answer;
 	private Date qna_regdate;
+	private String prd_code;
+	private String prd_name;
 	
 	
+	
+	public String getPrd_code() {
+		return prd_code;
+	}
+	public void setPrd_code(String prd_code) {
+		this.prd_code = prd_code;
+	}
+	public String getPrd_name() {
+		return prd_name;
+	}
+	public void setPrd_name(String prd_name) {
+		this.prd_name = prd_name;
+	}
 	public int getQna_num() {
 		return qna_num;
 	}

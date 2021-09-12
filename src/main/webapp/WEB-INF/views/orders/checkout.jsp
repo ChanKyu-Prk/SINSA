@@ -544,7 +544,7 @@ input[type=number] {
 				$("#ORDER_TEL").val($("#CUS_TEL").val());
 				
 				
- 				$("#delivAddrZip").val("${zip2}");
+ 				$("#delivAddrZip").val("${delivAddrZip2}");
 				$("#delivAddrRoad").val("${delivAddrRoad2}");
 				$("#delivAddrJibun").val("${delivAddrJibun2}");
 				$("#delivAddrExtra").val("${delivAddrExtra2}");
