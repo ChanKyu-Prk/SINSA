@@ -38,7 +38,7 @@
                <div class="footer__widget">
                   <h6>HELP US</h6>
                   <ul>
-                     <li><a href="FAQ">고객센터</a></li>
+                     <li><a href="/FAQ">고객센터</a></li>
                      <li><a href="notice/1">공지사항</a></li>
                   </ul>
                </div>
