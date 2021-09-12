@@ -743,7 +743,8 @@ color: white !important;
 	});
 
 	$('.prd_brand_span').on("click", function() {
-		location.href = "#";
+		var brand = $(this).text();
+		location.href = "/product/List/"+brand+"/newest/all/1";
 	});
 
 	$('.prd_name_span').on("click", function() {
