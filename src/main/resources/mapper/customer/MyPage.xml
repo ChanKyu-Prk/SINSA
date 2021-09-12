@@ -91,7 +91,8 @@
 		count(*)
 		from ORDERS
 		where ORDER_CUSID = #{ID} and ORDER_STATE
-		like concat('%',#{STATE},'%');
+		like
+		concat('%',#{STATE},'%');
 	</select>
 
 	<select id="countStateDate" parameterType="Map" resultType="int">
@@ -163,17 +164,20 @@
 
 	<select id="jjimList" parameterType="Map"
 		resultType="kr.co.sinsa.biz.product.ProductVO">
-		select product.* from JJIM join product  on JJIM.JJIM_PRDNUM
+		select product.* from JJIM join product on JJIM.JJIM_PRDNUM
 		= product.PRD_NUM
-		where JJIM.JJIM_CUSID = #{ID} order by JJIM_REGDATE desc
+		where JJIM.JJIM_CUSID = #{ID} order by JJIM_REGDATE
+		desc
 		limit #{page},6;
 	</select>
 
 	<select id="countJjimList" resultType="int">
-		select count(*) from product join JJIM on JJIM.JJIM_PRDNUM
+		select count(*) from
+		product join JJIM on JJIM.JJIM_PRDNUM
 		=
 		product.PRD_NUM
-		where JJIM.JJIM_CUSID = #{value};
+		where
+		JJIM.JJIM_CUSID = #{value};
 	</select>
 
 
@@ -489,87 +493,100 @@ order by REV_NUM  desc
 	<update id="decide" parameterType="Map">
 		update orders
 		set
-		ORDER_STATE = '구매확정'
+		ORDER_STATE =
+		'구매확정'
 		WHERE
 		ORDER_NUM = #{orderum} AND
 		ORDER_PRDCODE = #{prdcode} AND
 		ORDER_PRDSIZE = #{prdsize};
 	</update>
-	
+
 	<delete id="leave">
-	delete from customer
-	where CUS_ID = #{value};
+		delete from customer
+		where CUS_ID = #{value};
 	</delete>
-	
+
 	<select id="findCusnum" resultType="int">
-	select CUS_NUM from customer
-	where CUS_ID = #{value};
+		select CUS_NUM from customer
+		where CUS_ID = #{value};
 	</select>
-	
+
 	<delete id="leaveSNS">
-	delete from SNS_INFO
-	where cusnum = #{value};
+		delete from SNS_INFO
+		where cusnum = #{value};
 	</delete>
-	
-	<select id="canleave" resultType="kr.co.sinsa.biz.customer.MyOrderListVO">
-	select ORDER_STATE from ORDERS where 
-	ORDER_CUSID = #{value};
+
+	<select id="canleave"
+		resultType="kr.co.sinsa.biz.customer.MyOrderListVO">
+		select ORDER_STATE from ORDERS where
+		ORDER_CUSID = #{value};
 	</select>
-	
+
 	<select id="getStock"
-	resultType="kr.co.sinsa.biz.product.StockVO">
-	select * from stock
-	where
-	STOCK_PRDCODE = #{value};
+		resultType="kr.co.sinsa.biz.product.StockVO">
+		select * from stock
+		where
+		STOCK_PRDCODE = #{value};
 	</select>
-	
-	
-	<select id="getCusNum"
-	resultType="int">
-	select CUS_NUM from customer
-	where
-	CUS_ID = #{value};
+
+
+	<select id="getCusNum" resultType="int">
+		select CUS_NUM from customer
+		where
+		CUS_ID = #{value};
 	</select>
-	
-	<select id="checkSNS"
-	resultType="String">
-	select signUpWithSns from sns_info
-	where
-	cusnum = #{value};
+
+	<select id="checkSNS" resultType="String">
+		select signUpWithSns from sns_info
+		where
+		cusnum = #{value};
 	</select>
-	
-	
-	
-	
+
+
+
+
 	<select id="countCart" resultType="int">
 		select
 		count(*)
 		from cart
-		where CART_CUSID = #{ID} 
+		where
+		CART_CUSID = #{ID}
 	</select>
 	<select id="countjjim" resultType="int">
 		select
 		count(*)
 		from jjim
-		where JJIM_CUSID = #{ID} 
+		where
+		JJIM_CUSID = #{ID}
 	</select>
-	
-		<select id="myPageJjimList" 
+
+	<select id="myPageJjimList"
 		resultType="kr.co.sinsa.biz.product.ProductVO">
-		select product.* from JJIM join product  on JJIM.JJIM_PRDNUM
+		select product.* from JJIM join product on JJIM.JJIM_PRDNUM
 		= product.PRD_NUM
-		where JJIM.JJIM_CUSID = #{value} order by JJIM_REGDATE desc
+		where JJIM.JJIM_CUSID = #{value} order by
+		JJIM_REGDATE desc
 		limit 3;
 	</select>
-	
-		<select id="countRecOrderState" parameterType="Map" resultType="int">
+
+	<select id="countRecOrderState" parameterType="Map"
+		resultType="int">
 		select
 		count(*)
 		from ORDERS
-		where ORDER_CUSID = #{ID} and ORDER_STATE
+		where ORDER_CUSID = #{ID} and
+		ORDER_STATE
 		like concat('%',#{STATE},'%')
-		and ORDER_REGDATE > DATE_SUB(now(),INTERVAL 1 Month);
+		and ORDER_REGDATE >
+		DATE_SUB(now(),INTERVAL 1 Month);
 	</select>
 	
-	
+	<select id="naverLinkCheck" parameterType="int" resultType="int">
+		select
+		count(*)
+		from sns_info
+		where cusnum =#{value};
+	</select>
+
+
 </mapper>

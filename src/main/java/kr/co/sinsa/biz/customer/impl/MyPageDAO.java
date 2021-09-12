@@ -215,5 +215,8 @@ public class MyPageDAO {
 	public int countRecOrderState(Map<String, String> map) {
 		return SST.selectOne("myInfo.countRecOrderState", map);
 	}
+	public int naverLinkCheck(int cusnum) {
+		return SST.selectOne("myInfo.naverLinkCheck", cusnum);
+	}
 	
 }
