@@ -7,6 +7,18 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
+
+
+<style>
+.enter_adminLogin{
+	background: none !important;
+	border: none;
+	margin: 0px 0px 0px 300px !important;
+}
+.enter_adminLogin:hover{
+}
+</style>
 </head>
 <body>
 
@@ -66,9 +78,7 @@
                      <p>
                         <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                         Copyright &copy; Team SINSA 2021. All rights reserved
-                        SINSA (박찬규, 정인호, 권혁재, 이보배, 정혁희, 한다연)&nbsp;&nbsp;&nbsp;<button type="button" class="btn btn-outline-success" onclick="location.href='/adminLogin'">바로가기</button> 
-                        <!-- <button type="button" onclick="location.href='/adminLogin'">바로가기</button> -->
-                        <%-- <a type="button" href="${pageContext.request.contextPath}/adminLogin" title="주문관리페이지로 이동">바로가기</a> --%>
+                        SINSA (박찬규, 정인호, 권혁재, 이보배, 정혁희, 한다연)<button type="button" class="enter_adminLogin" onclick="location.href='/adminLogin'">바로가기&nbsp;&nbsp;<i class="fas fa-arrow-circle-right"></i></button> 
                      </p>
                   </div>
                   <div class="footer__copyright__payment"></div>
