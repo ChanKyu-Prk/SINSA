@@ -84,7 +84,15 @@
 
 .review_title_title {
 	color: grey;
-	font-size: 15px;
+	font-size: 13px;
+}
+.review_title_title2{
+	font-size: 13px;
+	font-weight:bold;
+}
+
+.review_content{
+	font-size: 14px;	
 }
 
 /* .index_banner_below{ */
@@ -396,7 +404,7 @@
 
 
 
-				<c:forEach var="list" items="${reviewList}" varStatus="status">
+				<c:forEach var="list" items="${reviewList}" varStatus="status" begin="0" end="2">
 
 					<div class="col-lg-4 col-md-4 col-sm-6">
 						<div class="blog__item">
@@ -497,15 +505,15 @@
 										<div class="row">
 											<div class="col-6">
 												<span class="review_title_title review_title_left">사이즈
-													:&nbsp;</span><span><c:out value='${Array[0]}' /><br></span>
+													:&nbsp;</span><span class="review_title_title2"><c:out value='${Array[0]}' /><br></span>
 												<span class="review_title_title review_title_left">착화감
-													:&nbsp;</span><span><c:out value='${Array[2]}' /></span>
+													:&nbsp;</span><span class="review_title_title2"><c:out value='${Array[2]}' /></span>
 											</div>
 											<div class="col-6">
 												<span class="review_title_title review_title_right">색상
-													:&nbsp;</span><span><c:out value='${Array[1]}' /><br></span>
+													:&nbsp;</span><span class="review_title_title2"><c:out value='${Array[1]}' /><br></span>
 												<span class="review_title_title review_title_right">배송
-													:&nbsp;</span><span><c:out value='${Array[3]}' /></span>
+													:&nbsp;</span><span class="review_title_title2"><c:out value='${Array[3]}' /></span>
 											</div>
 										</div>
 									</div>
@@ -519,8 +527,9 @@
 
 								</c:if>
 								<c:if test="${fn:length(REV_CONTENT) > 70}">
+								<span class="review_content">
 								${fn:substring(REV_CONTENT,0,70)}.....
-								
+								</span>
 								</c:if>
 
 

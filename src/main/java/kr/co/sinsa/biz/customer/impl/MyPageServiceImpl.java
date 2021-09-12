@@ -351,9 +351,10 @@ public class MyPageServiceImpl implements MyPageService {
 		boolean result = false;
 		int cusnum = dao.getCusNum(id);
 		String check = dao.checkSNS(cusnum);
+		if(check !=null) {
 		if (check.equals("O") || check == "O") {
 			result = true;
-		}
+		}}
 		return result;
 	}
 
