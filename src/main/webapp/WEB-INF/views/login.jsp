@@ -33,7 +33,7 @@
 <link rel="stylesheet"
    href="${path}/resources/login_resources/css/style.css">
 
-<title>Login #5</title>
+<title>SINSA 로그인</title>
 
 <style>
 .login {

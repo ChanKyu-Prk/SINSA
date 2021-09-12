@@ -32,7 +32,7 @@
 <meta name="keywords" content="Ogani, unica, creative, html">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
-<title>sinsa</title>
+<title>SINSA 장바구니</title>
 <script src="https://kit.fontawesome.com/848d8f1fa9.js"
 	crossorigin="anonymous"></script>
 
