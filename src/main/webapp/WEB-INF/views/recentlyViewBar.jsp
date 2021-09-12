@@ -180,7 +180,7 @@ display: none;
 														+ '사진" title="'
 														+ recPrdName[i]
 														+ '"src="${pageContext.request.contextPath}/resources/prdImg/'
-														+ recPrdImg[i]+'" />'
+														+ recPrdCode[i]+'.png" />'
 														+ '<span class="prdInfo"><div class="prdBrand">'
 														+ recPrdBrand[i]
 														+ '</div><div class="prdName">'
@@ -211,7 +211,7 @@ display: none;
 														+ '사진" title="'
 														+ recPrdName[i]
 														+ '"src="${pageContext.request.contextPath}/resources/prdImg/'
-														+ recPrdImg[i]+'" />'
+														+ recPrdCode[i]+'.png" />'
 														+ '<span class="prdInfo"><div class="prdBrand">'
 														+ recPrdBrand[i]
 														+ '</div><div class="prdName">'
@@ -244,7 +244,7 @@ display: none;
 														+ '사진" title="'
 														+ recPrdName[i]
 														+ '"src="${pageContext.request.contextPath}/resources/prdImg/'
-														+ recPrdImg[i]+'" />'
+														+ recPrdCode[i]+'.png" />'
 														+ '<span class="prdInfo"><div class="prdBrand">'
 														+ recPrdBrand[i]
 														+ '</div><div class="prdName">'
@@ -338,7 +338,7 @@ display: none;
 																		+ '사진" title="'
 																		+ recPrdName[i]
 																		+ '"src="${pageContext.request.contextPath}/resources/prdImg/'
-																		+ recPrdImg[i]+'" />'
+																		+ recPrdCode[i]+'.png" />'
 																		+ '<span class="prdInfo"><div class="prdBrand">'
 																		+ recPrdBrand[i]
 																		+ '</div><div class="prdName">'
@@ -370,7 +370,7 @@ display: none;
 																		+ '사진" title="'
 																		+ recPrdName[i]
 																		+ '"src="${pageContext.request.contextPath}/resources/prdImg/'
-																		+ recPrdImg[i]+'" />'
+																		+ recPrdCode[i]+'.png" />'
 																		+ '<span class="prdInfo"><div class="prdBrand">'
 																		+ recPrdBrand[i]
 																		+ '</div><div class="prdName">'
@@ -404,7 +404,7 @@ display: none;
 																		+ '사진" title="'
 																		+ recPrdName[i]
 																		+ '"src="${pageContext.request.contextPath}/resources/prdImg/'
-																		+ recPrdImg[i]+'" />'
+																		+ recPrdCode[i]+'.png" />'
 																		+ '<span class="prdInfo"><div class="prdBrand">'
 																		+ recPrdBrand[i]
 																		+ '</div><div class="prdName">'
@@ -502,7 +502,7 @@ display: none;
 																		+ '사진" title="'
 																		+ recPrdName[i]
 																		+ '"src="${pageContext.request.contextPath}/resources/prdImg/'
-																		+ recPrdImg[i]+'" />'
+																		+ recPrdCode[i]+'.png" />'
 																		+ '<span class="prdInfo"><div class="prdBrand">'
 																		+ recPrdBrand[i]
 																		+ '</div><div class="prdName">'
@@ -534,7 +534,7 @@ display: none;
 																		+ '사진" title="'
 																		+ recPrdName[i]
 																		+ '"src="${pageContext.request.contextPath}/resources/prdImg/'
-																		+ recPrdImg[i]+'" />'
+																		+ recPrdCode[i]+'.png" />'
 																		+ '<span class="prdInfo"><div class="prdBrand">'
 																		+ recPrdBrand[i]
 																		+ '</div><div class="prdName">'
@@ -568,7 +568,7 @@ display: none;
 																		+ '사진" title="'
 																		+ recPrdName[i]
 																		+ '"src="${pageContext.request.contextPath}/resources/prdImg/'
-																		+ recPrdImg[i]+'" />'
+																		+ recPrdCode[i]+'.png" />'
 																		+ '<span class="prdInfo"><div class="prdBrand">'
 																		+ recPrdBrand[i]
 																		+ '</div><div class="prdName">'

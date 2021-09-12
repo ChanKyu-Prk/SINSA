@@ -719,22 +719,31 @@ input::placeholder {
 															+ "&email_2="
 															+ email_2,
 													success : function(data) {
-														code = data;
+if(data == "-1"){
+															
+															alert("이미 가입된 이메일 입니다.");
+														}else{
+															alert("인증번호가 전송되었습니다.");
+															code = data;	
+
+															cehckBox
+																	.attr("disabled", false);
+															boxWrap
+																	.attr("id",
+																			"mail_check_input_box_true");
+															document.getElementById('send').innerHTML = "재전송";
+															$('.mail_check_button_c').css(
+																	"display", "table");
+															$('.mail_check_button_c2').css(
+																	"display", "none");
+															$('.mail_check_input').attr(
+																	"placeholder",
+																	"인증번호를 입력하세요");
+
+														}
 													}
 												});
-												cehckBox
-														.attr("disabled", false);
-												boxWrap
-														.attr("id",
-																"mail_check_input_box_true");
-												document.getElementById('send').innerHTML = "재전송";
-												$('.mail_check_button_c').css(
-														"display", "table");
-												$('.mail_check_button_c2').css(
-														"display", "none");
-												$('.mail_check_input').attr(
-														"placeholder",
-														"인증번호를 입력하세요");
+												
 											}
 										});
 						/* 인증번호 비교 */

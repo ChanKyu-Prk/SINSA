@@ -309,7 +309,7 @@ option {
 													<input type="hidden" value="${list.ORDER_PRDCODE }"
 														class="prdcode"> <img class="thumbPic"
 														alt="상품 대표 사진" title="상품 대표 사진"
-														src="/resources/prdImg/shoe.jpg" />
+														src="${pageContext.request.contextPath}/resources/prdImg/${list.ORDER_PRDCODE }.png " />
 
 												</div>
 											</td>
@@ -1248,7 +1248,8 @@ option {
 	});
 
 	$('.prd_brand_span').on("click", function() {
-		location.href = "#";
+		var brand = $(this).text();
+		location.href = "/product/List/"+brand+"/newest/all/1";
 	});
 
 	$('.prd_name_span').on("click", function() {
