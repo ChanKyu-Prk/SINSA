@@ -196,7 +196,6 @@ public class ProductController {
 			@PathVariable("category") String category, @PathVariable("orderby") String orderby,
 			@PathVariable("page") String pageR,
 			@RequestParam(value = "keyword", required = false, defaultValue = "") String keyword,
-			@RequestParam(value = "brand", required = false, defaultValue = "") String brand,
 			@RequestParam(value = "color", required = false, defaultValue = "") String color,
 			@RequestParam(value = "minPrice", required = false, defaultValue = "0") String minPriceR,
 			@RequestParam(value = "maxPrice", required = false, defaultValue = "150000") String maxPriceR,
@@ -206,6 +205,8 @@ public class ProductController {
 		info.put("orderby", orderby); 
 		info.put("category", category); 
 		info.put("keyWord", keyword);
+		String brand = "";
+		brand = condition;
 		info.put("brand", brand);
 		info.put("color", color);
 		info.put("minPrice", minPriceR);
@@ -301,7 +302,7 @@ public class ProductController {
 			ascdesc = "desc";
 		}
 
-
+		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("name", keyword);
 		map.put("category", prdCategory);
@@ -311,7 +312,7 @@ public class ProductController {
 		map.put("orderby", orderby); // "PRD_NUM"
 		map.put("ascdesc", ascdesc); // "desc"
 		map.put("color", colorQuerry);
-		map.put("brand", brand);
+		map.put("brand", "");
 		map.put("page", (page - 1) * limit);
 		listCount = service.countProductList(map);
 		
@@ -322,7 +323,6 @@ public class ProductController {
 			bCount = service.BestCount(map);
 			listCount = bCount.size();
 		}else if(!condition.equals("best") && !condition.equals("men") && !condition.equals("women") && !condition.equals("all")){
-			brand = condition;
 			map.put("brand", brand);
 			listCount = service.countProductList(map);
 			list = service.getList(map);

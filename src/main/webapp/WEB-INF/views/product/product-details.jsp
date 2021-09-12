@@ -25,7 +25,7 @@
 <meta name="keywords" content="Ogani, unica, creative, html">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
-<title>${prdInfo.PRD_CODE}&nbsp;${prdInfo.PRD_CODE}&nbsp;-&nbsp;SINSA</title>
+<title>SINSA&nbsp;-&nbsp;상세페이지&nbsp;${prdInfo.PRD_CODE}</title>
 <script src="${path}/resources/js/productlist.js" type="text/javascript"></script>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
@@ -427,7 +427,7 @@ a.page-link {
 				<div class="col-lg-6 col-md-6">
 					<div class="product__details__text">
 						<a
-							href="/product/List/all/newest/all/1?brand=${prdInfo.PRD_BRAND}"
+							href="/product/List/${prdInfo.PRD_BRAND}/newest/all/1"
 							class="brand_name"> ${prdInfo.PRD_BRAND} <span><i
 								class="fa fa-angle-right"></i></span>
 						</a>
@@ -1417,7 +1417,13 @@ a.page-link {
 					return false;
 				}
 			}
-			$(".qna-content" + qnaNumbering).attr("style", "display:block");
+			var check = $(".qna-content" + qnaNumbering).css("display");
+			if(check === "block"){
+				$(".qna-content" + qnaNumbering).attr("style", "display:none");	
+			}else{				
+				$(".qna-content" + qnaNumbering).attr("style", "display:block");
+			}
+			return false;
 		}
 
 		function replyOpenDelete(qnaNumbering) {
@@ -1572,7 +1578,7 @@ a.page-link {
 														+ pI.page
 														+ ')" id="'
 														+ arrays[i].qna_CUSID
-														+ '" class="delete-qna" value="삭제">'
+														+ '" class="delete-qna delete-qna'+i+'" value="삭제">'
 														+ '</form>'
 														+ '</td>'
 														+ '<td style="width: 58px;">'
@@ -1580,7 +1586,7 @@ a.page-link {
 														+ i
 														+ '" onclick="qnaUpdate('
 														+ i
-														+ ')" class="btn-qna" value="수정" />'
+														+ ')" class="btn-qna btn-qna'+i+'" value="수정" />'
 														+ '</td>'
 														+ '</tr>'
 														+ '<tr>'
@@ -1589,7 +1595,7 @@ a.page-link {
 														+ '<td class="qna-content'+i+'" id="qna-content'+i+'" value="check" >'
 														+ arrays[i].qna_CONTENT
 														+ '</td>'
-														+ '</tr><tr><td></td><td></td><td class="qna-content'+i+'"><textarea rows="10" cols="80" placeholder="A.관리자가 답변을 준비중입니다." value="'+arrays[i].qna_ANSWER+' readonly="readonly" disabled>'
+														+ '</tr><tr><td></td><td></td><td class="qna-content'+i+'"><textarea rows="10" style="resize:none" cols="80" placeholder="A.관리자가 답변을 준비중입니다." value="'+arrays[i].qna_ANSWER+' readonly="readonly" disabled>'
 														+ arrays[i].qna_ANSWER
 														+ '</textarea></td></tr>'
 														+ '</table>'
@@ -1639,6 +1645,23 @@ a.page-link {
 									$('#security-qna' + i).html(
 											'[공개글]&nbsp&nbsp&nbsp&nbsp');
 								}
+								var listWriter = arrays[i].qna_CUSID;
+								<%if (session.getAttribute("user") == null) {%>
+									$(".btn-qna"+i).remove();
+									$(".btn-qna"+i).css("cursor", "default");
+									$(".delete-qna"+i).remove();
+									$(".delete-qna"+i).css("cursor", "default");
+								<%}else{%>
+								<%
+									UserVO id = (UserVO) session.getAttribute("user");
+									String CutId = id.getCUS_ID();
+									pageContext.setAttribute("CutId", new String[]{CutId});
+								%>
+								if(listWriter != "${CutId[0]}"){
+									$(".btn-qna"+i).remove();
+									$(".delete-qna"+i).remove();									
+								}
+								<%}%>
 							}
 
 							console.log(arrays[0]);

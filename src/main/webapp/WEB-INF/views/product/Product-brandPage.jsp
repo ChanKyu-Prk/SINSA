@@ -11,7 +11,7 @@
 <meta name="keywords" content="Ogani, unica, creative, html">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
-<title>SinSa</title>
+<title>SINSA&nbsp;-&nbsp;브랜드 페이지</title>
 
 <script src="http://code.jquery.com/jquery-3.3.1.min.js">
 </script>
@@ -86,10 +86,7 @@
 </head>
 <body>
 
-	<!-- Page Preloder -->
-	<div id="preloder">
-		<div class="loader"></div>
-	</div>
+
 
 	<!-- Humberger Begin -->
 	<div class="humberger__menu__overlay"></div>
@@ -297,7 +294,9 @@
 		<hr />
 		<div class="brand-list">
 			<h2><a name="targetA">A</a></h2>
-			<div class="cursor">AKIII CLASSIC</div class="cursor"><div class="cursor">ADIDAS</div><div class="cursor">ASICS</div>
+			<div class="cursor">AKIII CLASSIC</div>
+			<div class="cursor">ADIDAS</div>
+			<div class="cursor">ASICS</div>
 		</div>
 		<hr />
 		<div class="brand-list">
@@ -461,7 +460,7 @@
 	<script type="text/javascript">
 		$('.brand-list').find('div').on('click', function(){
 			var brand = $(this).html();
-			location.href = "/product/List/all/newest/all/1?brand="+brand;
+			location.href = "/product/List/"+brand+"/newest/all/1";
 		})
 	</script>
 

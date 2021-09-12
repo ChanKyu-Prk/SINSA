@@ -13,7 +13,7 @@
 <meta name="keywords" content="Ogani, unica, creative, html">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
-<title>SinSa</title>
+<title>SINSA&nbsp;-&nbsp;상품 페이지</title>
 <link rel="stylesheet" href="${path}/resources/css/productList.css"
 	type="text/css">
 <link rel="stylesheet" type="text/css"
@@ -216,6 +216,34 @@ hr.mo {
 .filter__item {
 	padding-top: 20px !important;
 }
+
+.red label:after{
+	background-color: red !important;
+}
+.white label:after{
+	background-color: white !important;
+}
+.yellow label:after{
+	background-color: yellow !important;
+}
+.black label:after{
+	background-color: black !important;
+}
+.gray label:after{
+	background-color: gray !important;
+}
+.green label:after{
+	background-color: green !important;
+}
+.blue label:after{
+	background-color: blue !important;
+}
+.pink label:after{
+	background-color: pink !important;
+}
+.multi label:after{
+	background-image: linear-gradient(90deg, red, orange, yellow, green, blue, navy, purple) !important;
+}
 </style>
 <!-- Google Font -->
 <link
@@ -276,7 +304,7 @@ hr.mo {
 					<div class="breadcrumb__text">
 						<h2 style="color:white; text-shadow: -2px 0 gray, 0 2px gray, 2px 0 gray, 0 -2px gray;">Shoes Shop</h2>
 						<div class="breadcrumb__option">
-							<a href="./index.html" style="color:white; text-shadow: -2px 0 gray, 0 2px gray, 2px 0 gray, 0 -2px gray;"><span>SINSA</span></a> 
+							<a href="/" style="color:white; text-shadow: -2px 0 gray, 0 2px gray, 2px 0 gray, 0 -2px gray;"><span>SINSA</span></a> 
 						</div>
 					</div>
 				</div>
@@ -334,55 +362,55 @@ hr.mo {
 							<div id="color-box"
 								class="sidebar__item sidebar__item__color--option">
 								<h4>색상</h4>
-								<div class="sidebar__item__color sidebar__item__color--white">
+								<div class="sidebar__item__color sidebar__item__color--white white">
 									<label for="white" id="id01" onmouseout="mout1()"
 										onmouseover="mover1()"> WHITE <input type="checkbox"
 										id="white" name="color" value="white">
 									</label>
 								</div>
-								<div class="sidebar__item__color sidebar__item__color--white">
+								<div class="sidebar__item__color sidebar__item__color--green gray">
 									<label for="grey" id="id02" onmouseout="mout2()"
 										onmouseover="mover2()"> GREY <input type="checkbox"
 										id="grey" name="color" value="grey">
 									</label>
 								</div>
-								<div class="sidebar__item__color sidebar__item__color--white">
+								<div class="sidebar__item__color sidebar__item__color--green red">
 									<label for="red" id="id03" onmouseout="mout3()"
 										onmouseover="mover3()"> RED <input type="checkbox"
 										id="red" name="color" value="red">
 									</label>
 								</div>
-								<div class="sidebar__item__color sidebar__item__color--white">
+								<div class="sidebar__item__color sidebar__item__color--green black">
 									<label for="black" id="id04" onmouseout="mout4()"
 										onmouseover="mover4()"> BLACK <input type="checkbox"
 										id="black" name="color" value="black">
 									</label>
 								</div>
-								<div class="sidebar__item__color sidebar__item__color--white">
+								<div class="sidebar__item__color sidebar__item__color--green blue">
 									<label for="blue" id="id05" onmouseout="mout5()"
 										onmouseover="mover5()"> BLUE <input type="checkbox"
 										id="blue" name="color" value="blue">
 									</label>
 								</div>
-								<div class="sidebar__item__color sidebar__item__color--white">
+								<div class="sidebar__item__color sidebar__item__color--green pink">
 									<label for="PK" id="id06" onmouseout="mout6()"
 										onmouseover="mover6()"> PINK <input type="checkbox"
 										id="PK" name="color" value="PK">
 									</label>
 								</div>
-								<div class="sidebar__item__color sidebar__item__color--white">
+								<div class="sidebar__item__color sidebar__item__color--green multi">
 									<label for="MULTI" id="id07" onmouseout="mout7()"
 										onmouseover="mover7()"> MULTI <input type="checkbox"
 										id="MULTI" name="color" value="MULTI">
 									</label>
 								</div>
-								<div class="sidebar__item__color sidebar__item__color--white">
+								<div class="sidebar__item__color sidebar__item__color--green green">
 									<label for="BG" id="id08" onmouseout="mout8()"
 										onmouseover="mover8()"> GREEN <input type="checkbox"
 										id="BG" name="color" value="BG">
 									</label>
 								</div>
-								<div class="sidebar__item__color sidebar__item__color--white">
+								<div class="sidebar__item__color sidebar__item__color--green yellow">
 									<label for="YELLOW" id="id09" onmouseout="mout9()"
 										onmouseover="mover9()"> YELLOW <input type="checkbox"
 										id="YELLOW" name="color" value="YELLOW">
@@ -1053,8 +1081,8 @@ hr.mo {
 			function() {
 				var minPrice = $('#minPriceHidden').val();
 				var maxPrice = $('#maxPriceHidden').val();
-				var condition = $('#categoryHidden').val()
-				var category = $('#conditionHidden').val();
+				var condition = $('#conditionHidden').val();
+				var category = $('#categoryHidden').val();
 				var keyWord = $('#keyWordHidden').val();
 				var color = $('#colorHidden').val();
 				var orderby = $('.orderbySelect').val();
