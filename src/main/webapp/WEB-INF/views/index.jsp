@@ -95,6 +95,11 @@
 	font-size: 14px;	
 }
 
+.review_prdnamebrand{
+/* 	font-weight: bold; */
+	margin: 10px 0px 9px 0px;
+}
+
 /* .index_banner_below{ */
 /* 	height:300px !important; */
 /* 	width: 600px !important; */
@@ -109,6 +114,14 @@
 /* } */
 .review_image {
 	height: 300px !important;
+}
+
+.review_ul{
+	margin: 0px 0px 8px 0px !important;
+}
+
+.blog__item__text{
+	padding: 10px 0px 0px 0px !important;
 }
 </style>
 
@@ -413,14 +426,17 @@
 								<c:set var="img_array" value="${fn:split(list.REV_IMAGE,'/')}" />
 
 								<%-- 							<c:out var="image" value='${img_array[0]}' /> --%>
-								<img src="${path}/resources/img/review/${img_array[0]}" alt=""
-									class="review_image">
+								<a href="product/prdCode=${list.REV_PRDCODE}"><img src="${path}/resources/img/review/${img_array[0]}" alt=""
+									class="review_image"></a>
 							</div>
 							<div class="blog__item__text">
-								<ul>
+								<ul class="review_ul">
 									<li class="review_date"><i class="fa fa-calendar-o "></i>
 										<fmt:formatDate value="${list.REV_REGDATE}"
-											pattern="yyyy-MM-dd" /></li>
+											pattern="yyyy-MM-dd" />
+											
+											
+											</li>
 
 
 									<c:if test="${list.REV_STAR eq 0}">
@@ -496,6 +512,7 @@
 
 								</ul>
 
+
 								<h5>
 									<c:set var="Array" value="${fn:split(list.REV_TITLE,'/')}" />
 
@@ -518,7 +535,15 @@
 										</div>
 									</div>
 
+								<c:forEach var="prdList" items="${productList}" varStatus="status">
+<c:if test="${list.REV_PRDCODE eq prdList.PRD_CODE}">
+<div class="review_prdnamebrand">
+<%-- <span>${prdList.PRD_BRAND}</span><br> --%>
+<span>${prdList.PRD_NAME}</span>
+</div>
 
+</c:if>
+</c:forEach>
 
 								</h5>
 								<c:set var="REV_CONTENT" value="${list.REV_CONTENT}]" />
