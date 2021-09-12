@@ -82,5 +82,6 @@ public interface MyPageService {
 	public List<ProductVO> myPageRecView(Cookie[] cRecentlyVieweds, int listCount);
 	public List<ProductVO> myPageJjimList(String userID);
 	public Map<String, Integer> countRecOrderState(String userID);
+	public boolean naverLinkCheck(String userID);
 	
 }

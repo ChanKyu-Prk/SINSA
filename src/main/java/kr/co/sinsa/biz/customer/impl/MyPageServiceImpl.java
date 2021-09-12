@@ -60,7 +60,7 @@ public class MyPageServiceImpl implements MyPageService {
 		countState.put("payEnd", payEnd);
 		countState.put("delivery", delivery);
 		countState.put("deliveryEnd", deliveryEnd);
-		countState.put("cancel",  cancelEnd + refund );
+		countState.put("cancel", cancelEnd + refund);
 		return countState;
 	}
 
@@ -80,7 +80,7 @@ public class MyPageServiceImpl implements MyPageService {
 		countState.put("payEnd", payEnd);
 		countState.put("delivery", delivery);
 		countState.put("deliveryEnd", deliveryEnd);
-		countState.put("cancel",cancelEnd + refund );
+		countState.put("cancel", cancelEnd + refund);
 		return countState;
 	}
 
@@ -108,7 +108,7 @@ public class MyPageServiceImpl implements MyPageService {
 	public int countJjimList(String userID) {
 		return dao.countJjimList(userID);
 	}
-	
+
 	@Override
 	public List<Integer> getJjimList(String user) {
 		return dao.getJjimList(user);
@@ -283,13 +283,13 @@ public class MyPageServiceImpl implements MyPageService {
 	}
 
 	@Override
-	public void allRefund(Map<String,String> map) {
+	public void allRefund(Map<String, String> map) {
 		dao.allRefund(map);
 
 	}
 
 	@Override
-	public void allCancel(Map<String,String> map) {
+	public void allCancel(Map<String, String> map) {
 		dao.allCancel(map);
 
 	}
@@ -337,10 +337,10 @@ public class MyPageServiceImpl implements MyPageService {
 	@Override
 	public String canleave(String ORDER_CUSID) {
 		String result = "O";
-		List<MyOrderListVO> list= dao.canleave(ORDER_CUSID);
-		for(int i = 0 ; i < list.size() ; i ++) {
-			if(!list.get(i).getORDER_STATE().equals("구매확정") ) {
-			result = "X";	
+		List<MyOrderListVO> list = dao.canleave(ORDER_CUSID);
+		for (int i = 0; i < list.size(); i++) {
+			if (!list.get(i).getORDER_STATE().equals("구매확정")) {
+				result = "X";
 			}
 		}
 		return result;
@@ -348,17 +348,17 @@ public class MyPageServiceImpl implements MyPageService {
 
 	@Override
 	public boolean checkSNS(String id) {
-		boolean result = false ; 
+		boolean result = false;
 		int cusnum = dao.getCusNum(id);
 		String check = dao.checkSNS(cusnum);
-		if(check.equals("O") || check == "O") {
+		if (check.equals("O") || check == "O") {
 			result = true;
 		}
 		return result;
 	}
-	
+
 	@Override
-	public String checkSNS2(String id) {	
+	public String checkSNS2(String id) {
 		int cusnum = dao.getCusNum(id);
 		String check = dao.checkSNS(cusnum);
 		return check;
@@ -391,7 +391,7 @@ public class MyPageServiceImpl implements MyPageService {
 			}
 		}
 		int end = 3;
-		if(listCount<3) {
+		if (listCount < 3) {
 			end = listCount;
 		}
 		for (int i = 0; i < end; i++) {
@@ -423,13 +423,20 @@ public class MyPageServiceImpl implements MyPageService {
 		countState.put("payEnd", payEnd);
 		countState.put("delivery", delivery);
 		countState.put("deliveryEnd", deliveryEnd);
-		countState.put("cancel",  cancelEnd  );
-		countState.put("refund",  refund );
+		countState.put("cancel", cancelEnd);
+		countState.put("refund", refund);
 		return countState;
 	}
-	
 
-	
-	
-	
+	@Override
+	public boolean naverLinkCheck(String userID) {
+		boolean result = false;
+		int cusnum = dao.getCusNum(userID);
+		 
+		if (dao.naverLinkCheck(cusnum)>0) {
+			result = true;
+		}
+		return result;
+	}
+
 }

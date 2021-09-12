@@ -118,17 +118,17 @@ color: white !important;
 						</c:when>
 						<c:otherwise>
 							<div class="row noticerow">
-								<div class="col-1 numbercol">번호</div>
-								<div class="col-9">제목</div>
-								<div class="col-2 datecol">작성일</div>
+								<div class="col-2 col-md-1 numbercol">번호</div>
+								<div class="col-7 col-md-9">제목</div>
+								<div class="col-3 col-md-2 datecol">작성일</div>
 							</div>
 							<c:forEach var="list" items="${NoticeList}" varStatus="status">
 								<div class="row noticerow">
-									<div class="col-1 numbercol">${list.notice_num }</div>
-									<div class="col-9">
+									<div class="col-2 col-md-1 numbercol">${list.notice_num }</div>
+									<div class="col-7 col-md-9">
 										<span class="titleSpan">${list.notice_title }</span>
 									</div>
-									<div class="col-2 datecol">${list.notice_regdate }</div>
+									<div class="col-3 col-md-2 datecol">${list.notice_regdate }</div>
 								</div>
 							</c:forEach>
 						</c:otherwise>

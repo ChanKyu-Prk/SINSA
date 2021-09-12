@@ -55,6 +55,10 @@
 	border-right: 1px solid #c1bfc1;
 }
 
+.point_br {
+	display: none;
+}
+
 #pointSpan {
 	font-size: 25px;
 	font-weight: bold;
@@ -122,7 +126,6 @@
 	position: absolute;
 	top: 10px;
 	left: 285px;
-	position: absolute;
 }
 
 .orderMoreThan2 {
@@ -131,8 +134,6 @@
 	position: absolute;
 	top: 10px;
 	right: 265px;
-	position: absolute;
-	top: 10px;
 }
 
 .OrderRow2 {
@@ -174,7 +175,7 @@
 
 .no_jjim {
 	text-align: center;
-	padding: 120px;
+	padding: 138px;
 	vertical-align: middle;
 }
 
@@ -293,8 +294,49 @@ hr.mo {
 	display: none;
 }
 
+.privateTitle {
+	font-size: 25px;
+}
+
 .delivTitleRow {
 	font-size: 25px;
+}
+
+.privateRow2 {
+	font-size: 18px;
+	margin-bottom: 40px;
+	padding-bottom: 6px;
+	border-bottom: solid 1px #c1bfc1;
+}
+.privateCol1{
+padding-bottom: 6px;
+border-right: solid 1px #c1bfc1;
+}
+.privateCol2{
+padding-bottom: 6px;
+}
+@media screen and (max-width: 720px) {
+	.orderMoreThan1 {
+		left: 290px;
+	}
+	.orderMoreThan2 {
+		right: 295px;
+	}
+	.point_br {
+		display: block;
+	}
+	.blank_span {
+		display: none;
+	}
+}
+.naverMark{
+border: solid 1px #36d169;
+color: #36d169;
+border-radius: 11px;
+font-size: 12px;
+padding-left: 3px;
+margin-left: 10px;
+padding-right: 3px;
 }
 </style>
 <title>SINSA : 회원 정보</title>
@@ -306,7 +348,7 @@ hr.mo {
 	<div class="container con_top_margin">
 		<div class="row">
 			<jsp:include page="myPageSideBar.jsp"></jsp:include>
-			<div class="col-9">
+			<div class="col-sm-12 col-md-9">
 				<div class="subjecet">
 					<span>회원 정보</span>
 				</div>
@@ -315,26 +357,24 @@ hr.mo {
 				<div class="container mainCon">
 
 					<div class="row mainRow">
-						<!-- 					<div class="col-12 disTable"> -->
-						<!-- 					<div class="row disTableCell"> -->
+
 						<div class="col-4 pointCol">
-							<i class="fas fa-parking"></i>
-							포인트&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span id="pointSpan">${myInfo.CUS_POINT }</span>
+							<i class="fas fa-parking"></i> 포인트<span class="blank_span">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><br
+								class="point_br" /> <span id="pointSpan">${myInfo.CUS_POINT }</span>
 							p
 						</div>
 						<div class="col-4 cartCol">
-							<i class="fa fa-heart"></i> 찜한상품
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span id="jjimSpan">${countJjimList }</span>
+							<i class="fa fa-heart"></i> 찜한상품 <span class="blank_span">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><br
+								class="point_br" /> <span id="jjimSpan">${countJjimList }</span>
 							개
 						</div>
 						<div class="col-4 jjimCol">
-							<i class="fa fa-shopping-bag"></i> 장바구니
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span id="cartSpan">${countCartList }</span>
+							<i class="fa fa-shopping-bag"></i> 장바구니 <span class="blank_span">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><br
+								class="point_br" /> <span id="cartSpan">${countCartList }</span>
 							개
 						</div>
 
-						<!-- 						</div> -->
-						<!-- 					</div> -->
+
 					</div>
 				</div>
 
@@ -403,10 +443,11 @@ hr.mo {
 
 					<div class="row jjimTitleRow">
 						<input type="hidden" value="1" class="recOrJjim">
-						<div class="col-3 recTitleCol">최근 본 내역(${countRecViewList})</div>
-						<div class="col-3 jjimTitleCol">찜한상품(${countJjimList })</div>
-						<div class="col-4"></div>
-						<div class="col-2 seeMore">
+						<div class="col-5 col-md-3 recTitleCol">최근 본
+							내역(${countRecViewList})</div>
+						<div class="col-5 col-md-3 jjimTitleCol">찜한상품(${countJjimList })</div>
+
+						<div class="col-2 col-md-6 seeMore">
 							<div class="veticalBottom">
 								<span class="seeMoreSpan seeMoreROJ">더보기</span>
 							</div>
@@ -878,17 +919,42 @@ hr.mo {
 						</c:choose>
 					</div>
 				</div>
+				<div class="container privateCon">
+					<div class="row privateRow">
 
+						<div class="col-10 privateTitle">회원 기본 정보</div>
+						<div class="col-2 seeMore">
+							<div class="veticalBottom">
+								<span class="seeMoreSpan"
+									onclick="location.href='/privateInfoChange'">수정하기</span>
+							</div>
+						</div>
+					</div>
+					<hr />
+					<div class="row privateRow2">
+						<div class="col-3 privateCol1">아이디</div>
+						<div class="col-9 privateCol2">${myInfo.CUS_ID }</div>
+						<div class="col-3 privateCol1">이름</div>
+						<div class="col-9 privateCol2">${myInfo.CUS_NAME }</div>
+						<div class="col-3 privateCol1">전화번호</div>
+						<div class="col-9 privateCol2">${myInfo.CUS_TEL }</div>
+						<div class="col-3 privateCol1">이메일</div>
+						<div class="col-9 privateCol2">${myInfo.CUS_EMAIL }<c:if test="${naver}"><span class="naverMark">네이버 연동 완료</span></c:if></div>
+
+					</div>
+				</div>
 				<div class="container delivCon">
 					<div class="row delivTitleRow">
 
 						<div class="col-12 delivTitle">배송지 정보</div>
 					</div>
+					<hr />
+
 
 
 				</div>
 
-				<hr />
+
 
 
 
@@ -1042,4 +1108,4 @@ hr.mo {
 		}
 	});
 </script>
-</html>
+</ html>
