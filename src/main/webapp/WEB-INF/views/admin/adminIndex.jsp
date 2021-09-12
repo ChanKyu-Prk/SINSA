@@ -60,13 +60,6 @@
 
 
 
-
-
-
-
-
-
-
 	<!-- Content -->
 	<div class="content">
 		<!-- Animated -->
@@ -502,7 +495,7 @@
 
 
 
-	    //line chart
+// 	    line chart
 	    var ctx = document.getElementById( "lineChart" );
 	    ctx.height = 150;
 	    var myChart = new Chart( ctx, {

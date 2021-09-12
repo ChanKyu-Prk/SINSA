@@ -4,32 +4,27 @@
 <mapper namespace="IndexService">
    
       <select id="getProductList" resultType="kr.co.sinsa.biz.product.ProductVO"> 
-          select * from PRODUCT order by PRD_NUM desc limit 10
+          select PRD_IMAGE, PRD_BRAND, PRD_NAME, PRD_PRICE, PRD_CODE from PRODUCT order by PRD_NUM desc 
       </select> 
       
       <select id="getReviewList" resultType="kr.co.sinsa.biz.customer.ReviewVO"> 
-          select * from REVIEW order by REV_NUM desc
+          select * from REVIEW order by REV_NUM desc 
       </select> 
       
       <select id="getOrderList" resultType="kr.co.sinsa.biz.orders.OrdersVO"> 
-         select order_prdcode from orders group by order_prdcode order by count(order_prdcode) desc 
-<!--           select order_prdcode from orders group by order_prdcode order by count(order_prdcode) desc; -->
-      </select> 
-      
-<!--       <select id="getOrderListForSneakers" resultType="kr.co.sinsa.biz.orders.OrdersVO">  -->
-<!--          select order_prdcode from orders group by order_prdcode order by count(order_prdcode) desc -->
-<!--       </select> -->
+         select order_prdcode from orders group by order_prdcode order by count(order_prdcode)
+      </select>
       
       <select id="getTopProductList" parameterType="kr.co.sinsa.biz.product.ProductVO" resultType="kr.co.sinsa.biz.product.ProductVO"> 
-         select * from product where PRD_CODE = #{PRD_CODE}
+         select PRD_IMAGE, PRD_BRAND, PRD_NAME, PRD_PRICE, PRD_CODE from product where PRD_CODE = #{PRD_CODE}
       </select> 
       
       <select id="getTopSneakersProductList" parameterType="kr.co.sinsa.biz.product.ProductVO" resultType="kr.co.sinsa.biz.product.ProductVO"> 
-         select * from product where PRD_CODE = #{PRD_CODE} and PRD_CATEGORY IN ('스니커즈', '캔버스화', '슬립온', '뮬')
+         select PRD_IMAGE, PRD_BRAND, PRD_NAME, PRD_PRICE, PRD_CODE from product where PRD_CODE = #{PRD_CODE} and PRD_CATEGORY IN ('스니커즈', '캔버스화', '슬립온', '뮬') 
       </select> 
       
       <select id="getTopSportsProductList" parameterType="kr.co.sinsa.biz.product.ProductVO" resultType="kr.co.sinsa.biz.product.ProductVO"> 
-         select * from product where PRD_CODE = #{PRD_CODE} and PRD_CATEGORY IN ('런닝화', '농구화', '골프화', '등산화', '축구화')
+         select PRD_IMAGE, PRD_BRAND, PRD_NAME, PRD_PRICE, PRD_CODE from product where PRD_CODE = #{PRD_CODE} and PRD_CATEGORY IN ('런닝화', '농구화', '골프화', '등산화', '축구화') 
       </select> 
       
       

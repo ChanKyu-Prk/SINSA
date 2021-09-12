@@ -8,11 +8,11 @@
 
 
 
-	<select id="getProductList" resultType="kr.co.sinsa.biz.product.ProductVO">
+<!-- 	<select id="getProductList" resultType="kr.co.sinsa.biz.product.ProductVO"> -->
 
-		select * from product
+<!-- 		select * from product -->
 
-	</select>
+<!-- 	</select> -->
 	
 	
 	<select id="getSales1" resultType="Integer">
@@ -189,7 +189,7 @@
 	
 	
 	<select id="getOrderList" resultType="kr.co.sinsa.biz.orders.OrdersVO">
-		select * from orders
+		select ORDER_PRDCODE from orders
 	</select> 
 	
 	<select id="getTopBrandPrdList" parameterType="String" resultType="kr.co.sinsa.biz.product.ProductVO">

@@ -19,10 +19,10 @@ public class ChartServiceImpl implements ChartService {
 	private ChartDAO dao;
 
 	
-	@Override
-	public List<ProductVO> getProductList() {
-		return dao.getProductList();
-	}
+//	@Override
+//	public List<ProductVO> getProductList() {
+//		return dao.getProductList();
+//	}
 	
 	@Override
 	public List<Integer> getSalesList() {
