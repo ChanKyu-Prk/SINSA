@@ -26,7 +26,7 @@
 			from stock as s
 			left join product as p
 			on s.stock_prdcode = p.prd_code
-			where ${fieldName} like '%${searchWord}%' limit ${page}, 10;
+			where ${fieldName} like '%${searchWord}%' order by p.prd_num desc limit ${page}, 10;
 			
 	</select>
 			

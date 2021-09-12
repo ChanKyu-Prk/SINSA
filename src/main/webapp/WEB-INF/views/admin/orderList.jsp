@@ -100,7 +100,7 @@ table {
 				<button type="button" class="btn btn-outline-primary btn-lg"
 	onclick="location.href='orderList?fieldName=order_state&searchWord=결제완료'">출고요청 : ${ shippingreq }건</button>
 	<button type="button" class="btn btn-outline-primary btn-lg"
-	onclick="location.href='orderList?fieldName=order_state&searchWord=취소요청'">취소요청 : ${ cancelreq }건</button>
+	onclick="location.href='orderList?fieldName=order_state&searchWord=요청'">취소요청 : ${ cancelreq }건</button>
 				</div>
 				<div class="form-group col-md-1">
 					<input type="text" id="sdate" name="sdate" class="form-control">
@@ -159,11 +159,11 @@ table {
 					</select>
 				</div>
 				<div class="form-group col-md-3">
-					<c:if test="${param.searchWord != '결제완료' && param.searchWord != '취소요청'}">
+					<c:if test="${param.searchWord != '결제완료' && param.searchWord != '요청'}">
 					<input type="text" class="form-control" placeholder="Search"
 						name="searchWord" value="${param.searchWord}" />
 					</c:if>
-					<c:if test="${param.searchWord == '결제완료' || param.searchWord == '취소요청'}">
+					<c:if test="${param.searchWord == '결제완료' || param.searchWord == '요청'}">
 					<input type="text" class="form-control" placeholder="Search"
 						name="searchWord" />
 					</c:if>
@@ -275,11 +275,35 @@ table {
 											</td>
 							</form:form>
 										</c:when>
+										<c:when test="${ fn:contains(e.order_state, '반품요청')}">
+							<form:form method="post" action="orderCancel" modelAttribute="orderInfo">
+								<form:hidden path="order_num" value="${ e.order_num }" />
+								<form:hidden path="order_cusid" value="${ e.order_cusid }" />
+								<form:hidden path="order_prdcode" value="${ e.order_prdcode }" />
+								<form:hidden path="order_prdsize" value="${ e.order_prdsize }" />
+								<form:hidden path="order_price" value="${ e.order_price }" />
+								<form:hidden path="order_usepoint" value="${ e.order_usepoint }" />
+								<form:hidden path="order_state" value="${ e.order_state }" />
+											<td style="padding:6px 3px;" >${ e.order_delivcomp }</td>
+											<td style="padding:6px 3px;">${ e.order_delivnum }</td>
+											<td style="padding:6px 3px;">
+												<button type="submit" class="btn btn-danger btn-sm">반품처리</button>
+
+											</td>
+							</form:form>
+										</c:when>
 										<c:when test="${ fn:contains(e.order_state, '취소완료') }">
 											<td style="padding:6px 3px;">${ e.order_delivcomp }</td>
 											<td style="padding:6px 3px;">${ e.order_delivnum }</td>
 											<td style="padding:6px 3px;">
 												<input type="button" class="btn btn-danger btn-sm" aria-pressed="true" value="취소완료" disabled/>
+											</td>
+										</c:when>
+										<c:when test="${ fn:contains(e.order_state, '반품완료') }">
+											<td style="padding:6px 3px;">${ e.order_delivcomp }</td>
+											<td style="padding:6px 3px;">${ e.order_delivnum }</td>
+											<td style="padding:6px 3px;">
+												<input type="button" class="btn btn-danger btn-sm" aria-pressed="true" value="반품완료" disabled/>
 											</td>
 										</c:when>
 										<c:otherwise>

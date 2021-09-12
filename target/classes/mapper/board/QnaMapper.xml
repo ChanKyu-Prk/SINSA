@@ -4,7 +4,11 @@
 <mapper namespace="QnaDAO">
 
 	<select id="qna_list" parameterType="hashmap" resultType="kr.co.sinsa.admin.vo.QnaVO">
-		select * from qna where ${fieldName} like '%${searchWord}%' order by qna_num desc limit ${page}, 10
+		select q.qna_num, q.prd_num, p.prd_code, p.prd_name, q.qna_lock, q.qna_cusid, q.qna_title, q.qna_content, q.qna_answer, q.qna_regdate
+		 from qna as q
+		 left join product as p
+		 on q.prd_num = p.prd_num
+		 where ${fieldName} like '%${searchWord}%' order by qna_num desc limit ${page}, 10
 	</select>
 	
 	<select id="qna_list_count" parameterType="hashmap" resultType="int">
