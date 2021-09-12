@@ -26,7 +26,17 @@ public class IndexDAO {
 	}
 	
 	public List<ReviewVO> getReviewList() {
-		return SST.selectList("IndexService.getReviewList");
+		
+		List<ReviewVO> reviewList =  SST.selectList("IndexService.getReviewList");
+		
+		
+		for(int i=0; i<reviewList.size(); i++) {
+			if(reviewList.get(i).getREV_IMAGE() == null) {
+				reviewList.remove(i);
+			}
+		}
+
+		return reviewList;
 	}
 	
 	public List<ProductVO> getTopProductList() {
