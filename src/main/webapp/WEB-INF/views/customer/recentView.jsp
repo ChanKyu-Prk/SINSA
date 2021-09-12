@@ -190,7 +190,7 @@ padding-right: 0;
 }
 
 </style>
-<title>SINSA : 최근 본 상품</title>
+<title>SINSA 최근 본 상품</title>
 </head>
 <jsp:include page="../header.jsp"></jsp:include>
 

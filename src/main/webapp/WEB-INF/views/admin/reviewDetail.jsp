@@ -11,7 +11,7 @@ String getreferer = request.getHeader("Referer");
 <html>
 <head>
 <meta charset="UTF-8">
-<title>리뷰상세보기</title>
+<title>SINSA관리자모드</title>
 <style>
 body {
 	font-size:11pt;

@@ -9,7 +9,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>SINSA : 주문 내역 조회</title>
+<title>SINSA 주문 내역 조회</title>
 <jsp:include page="../header.jsp"></jsp:include>
 <style type="text/css">
 .table2 {

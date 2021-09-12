@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>SINSA : 회원가입</title>
+<title>SINSA 회원가입</title>
 </head>
 <script src="https://kit.fontawesome.com/848d8f1fa9.js"
 	crossorigin="anonymous"></script>

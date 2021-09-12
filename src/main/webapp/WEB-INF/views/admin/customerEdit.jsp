@@ -10,7 +10,7 @@ String getreferer = request.getHeader("Referer");
 <html>
 <head>
 <meta charset="UTF-8">
-<title>회원관리</title>
+<title>SINSA관리자모드</title>
 <style>
 body {
 	font-size: 11pt;

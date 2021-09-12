@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>customerInfo</title>
+<title>SINSA관리자모드</title>
 <Style>
 body
 {

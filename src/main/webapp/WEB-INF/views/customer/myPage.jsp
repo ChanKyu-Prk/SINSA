@@ -339,7 +339,7 @@ margin-left: 10px;
 padding-right: 3px;
 }
 </style>
-<title>SINSA : 회원 정보</title>
+<title>SINSA 회원 정보</title>
 </head>
 <jsp:include page="../header.jsp"></jsp:include>
 

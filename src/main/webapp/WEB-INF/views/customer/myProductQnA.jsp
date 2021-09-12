@@ -213,7 +213,7 @@ border-color: black !important;
 color: white !important;
 }
 </style>
-<title>SINSA : 상품 문의</title>
+<title>SINSA 상품 문의</title>
 </head>
 <jsp:include page="../header.jsp"></jsp:include>
 

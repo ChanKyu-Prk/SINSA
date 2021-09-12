@@ -61,7 +61,7 @@ text-align: center;
 	cursor: pointer;
 }
 </style>
-<title>SINSA : 공지사항</title>
+<title>SINSA 공지사항</title>
 </head>
 <jsp:include page="../header.jsp"></jsp:include>
 

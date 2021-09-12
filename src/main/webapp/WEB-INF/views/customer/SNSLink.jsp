@@ -8,7 +8,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
-<title>SINSA</title>
+<title>SINSA 네이버 연동</title>
 <style type="text/css">
 .product .section-title h2 {
 	width: 100%;

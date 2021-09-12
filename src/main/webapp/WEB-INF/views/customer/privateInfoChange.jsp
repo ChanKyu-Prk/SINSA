@@ -434,7 +434,7 @@ input::placeholder {
 	}
 }
 </style>
-<title>SINSA : 개인정보 수정</title>
+<title>SINSA 개인정보 수정</title>
 </head>
 <jsp:include page="../header.jsp"></jsp:include>
 
