@@ -657,14 +657,14 @@ hr.mo {
 								</c:when>
 								<c:when test="${pageInfo.getStartPage()==1}">
 									<li class="page-item"><a class="page-link"
-										href="/product/List/${info.condition }/${info.orderby }/${info.category } 
+										href="/product/List/${info.condition }/${info.orderby }/${info.category }
 									/${pageInfo.getStartPage()}?color=${info.color}&minPrice=${info.minPrice }
 									&maxPrice=${info.maxPrice }&keyWord=${info.keyWord }"
 										tabindex="-1">이전</a></li>
 								</c:when>
 								<c:otherwise>
 									<li class="page-item"><a class="page-link"
-										href="/product/List/${info.condition }/${info.orderby }/${info.category } 
+										href="/product/List/${info.condition }/${info.orderby }/${info.category }
 									/${pageInfo.getStartPage()-1}?color=${info.color}&minPrice=${info.minPrice }
 									&maxPrice=${info.maxPrice }&keyWord=${info.keyWord }"
 										tabindex="-1">이전</a></li>
@@ -679,7 +679,7 @@ hr.mo {
 									</c:when>
 									<c:otherwise>
 										<li class="page-item"><a class="page-link"
-											href="/product/List/${info.condition }/${info.orderby }/${info.category } 
+											href="/product/List/${info.condition }/${info.orderby }/${info.category }
 									/${state.index}?color=${info.color}&minPrice=${info.minPrice }
 									&maxPrice=${info.maxPrice }&keyWord=${info.keyWord }">${state.index}</a></li>
 									</c:otherwise>
@@ -692,13 +692,13 @@ hr.mo {
 								</c:when>
 								<c:when test="${pageInfo.getEndPage()==pageInfo.getMaxPage()}">
 									<li class="page-item"><a class="page-link"
-										href="/product/List/${info.condition }/${info.orderby }/${info.category } 
+										href="/product/List/${info.condition }/${info.orderby }/${info.category }
 									/${pageInfo.getEndPage()}?color=${info.color}&minPrice=${info.minPrice }
 									&maxPrice=${info.maxPrice }&keyWord=${info.keyWord }">다음</a></li>
 								</c:when>
 								<c:otherwise>
 									<li class="page-item"><a class="page-link"
-										href="/product/List/${info.condition }/${info.orderby }/${info.category } 
+										href="/product/List/${info.condition }/${info.orderby }/${info.category }
 									/${pageInfo.getEndPage()+1}?color=${info.color}&minPrice=${info.minPrice }
 									&maxPrice=${info.maxPrice }&keyWord=${info.keyWord }">다음</a></li>
 								</c:otherwise>
