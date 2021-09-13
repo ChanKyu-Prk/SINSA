@@ -399,6 +399,8 @@ a.page-link {
 	 -->
 	<jsp:include page="../header.jsp" />
 	<!-- Product Details Section Begin -->
+	<div>
+	<jsp:include page="../recentlyViewBar.jsp"></jsp:include>
 	<section class="product-details spad">
 		<div class="container">
 			<div class="row">
@@ -934,7 +936,7 @@ a.page-link {
 								<div class="product__details__tab__desc">
 									<ul>
 										<li>
-											<p>단순 상품비방, 상업적인 내용, 미풍양속 위반, 게시판의 성격에 맞지 않는 글은 통보 없이 삭제될
+											<p style="text-align: center;">단순 상품비방, 상업적인 내용, 미풍양속 위반, 게시판의 성격에 맞지 않는 글은 통보 없이 삭제될
 												수 있습니다.</p>
 										</li>
 									</ul>
@@ -982,14 +984,14 @@ a.page-link {
 																<p>
 																	<label> 문의 내용 입력* </label><br>
 																	<textarea rows="10" cols="60" id="QNA_CONTENT"
-																		name="QNA_CONTENT" required="required"></textarea>
+																		name="QNA_CONTENT" required="required" style="resize: none; width: 466px"></textarea>
 																	<br>
 																</p>
 															</form>
 														</div>
 														<div class="modal-footer">
 															<button type="button" class="btn btn-primary"
-																id="qnaWrite-id" onclick="qnaWrite(this.id)">쓰기</button>
+																id="qnaWrite-id" onclick="qnaWrite(this.id)" style="background-color: black;">쓰기</button>
 															<button type="button" class="btn btn-default"
 																id="modal_close_btn" data-dismiss="modal">닫기</button>
 														</div>
@@ -1011,6 +1013,7 @@ a.page-link {
 			</div>
 		</div>
 	</section>
+	
 	<!-- Product Details Section End -->
 	<c:if test="${recommList != null}">
 		<!-- Related Product Section Begin -->
@@ -1054,9 +1057,10 @@ a.page-link {
 				</div>
 			</div>
 		</section>
-		<jsp:include page="../footer.jsp" />
 		<!-- Related Product Section End -->
 	</c:if>
+		</div>
+		<jsp:include page="../footer.jsp" />
 	<script type="text/javascript">
 		$(document)
 				.ready(

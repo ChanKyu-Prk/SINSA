@@ -932,8 +932,9 @@ padding-right: 3px;
 					</div>
 					<hr />
 					<div class="row privateRow2">
+					<c:if test="${SNS !='O'}">
 						<div class="col-3 privateCol1">아이디</div>
-						<div class="col-9 privateCol2">${myInfo.CUS_ID }</div>
+						<div class="col-9 privateCol2">${myInfo.CUS_ID }</div></c:if>
 						<div class="col-3 privateCol1">이름</div>
 						<div class="col-9 privateCol2">${myInfo.CUS_NAME }</div>
 						<div class="col-3 privateCol1">전화번호</div>

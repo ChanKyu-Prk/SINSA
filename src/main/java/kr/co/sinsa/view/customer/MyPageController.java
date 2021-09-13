@@ -92,6 +92,9 @@ public class MyPageController {
 				}
 				jjimcheck.add(jjim);
 			}
+			if(myPageSerive.checkSNS(user.getCUS_ID())) {
+				model.addAttribute("SNS","O");		
+			}
 			model.addAttribute("naver",myPageSerive.naverLinkCheck(user.getCUS_ID()));
 			model.addAttribute("recStock", recStock);	
 			model.addAttribute("jjimStock", jjimStock);	
