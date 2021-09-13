@@ -98,6 +98,7 @@
 .review_prdnamebrand{
    font-weight: bold; 
    margin: 10px 0px 9px 0px;
+   
 }
 
 /* .index_banner_below{ */
@@ -122,6 +123,10 @@
 
 .blog__item__text{
    padding: 10px 0px 0px 0px !important;
+}
+
+.review_name{
+	font-size:15px !important;
 }
 </style>
 
@@ -539,7 +544,7 @@
 <c:if test="${list.REV_PRDCODE eq prdList.PRD_CODE}">
 <div class="review_prdnamebrand">
 <%-- <span>${prdList.PRD_BRAND}</span><br> --%>
-<span>${prdList.PRD_NAME} / ${prdList.PRD_BRAND} </span>
+<a class="review_name" href="product/prdCode=${list.REV_PRDCODE}">${prdList.PRD_NAME} / ${prdList.PRD_BRAND} </a>
 </div>
 
 </c:if>
