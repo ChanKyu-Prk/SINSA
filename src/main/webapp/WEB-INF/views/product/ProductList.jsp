@@ -244,12 +244,17 @@ hr.mo {
 .multi label:after{
 	background-image: linear-gradient(90deg, red, orange, yellow, green, blue, navy, purple) !important;
 }
+#color-box {
+    padding-top: 0px;
+}
 </style>
 <!-- Google Font -->
 <link
 	href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap"
 	rel="stylesheet">
 </head>
+
+	<jsp:include page="../header.jsp" />
 <body>
 	<%
 		UserVO user = (UserVO) session.getAttribute("user");
@@ -266,10 +271,11 @@ hr.mo {
 	<input type="hidden" value="${info.minPrice }" id="minPriceHidden">
 	<input type="hidden" value="${info.maxPrice }" id="maxPriceHidden">
 	<input type="hidden" value="${info.keyWord }" id="keyWordHidden">
-	<jsp:include page="../header.jsp" />
+
 	<section class="hero hero-normal">
 		<div class="container">
 			<div class="row">
+			
 				<div class="col-lg-12">
 					<div class="hero__search d-flex justify-content-center">
 						<div class="hero__search__form ">
@@ -314,11 +320,17 @@ hr.mo {
 	<!-- Breadcrumb Section End -->
 	<!-- Product Section Begin -->
 	<section class="product spad">
+	<jsp:include page="../recentlyViewBar.jsp"></jsp:include>
 		<div class="container">
 			<div class="row">
 				<div class="col-sm-12 col-md-3">
 					<div class="sidebar">
 						<div class="sidebar__item" id="sidebar__item__menu">
+						<div class="row">
+						<div class="col-6 col-md-12">
+						
+						
+						
 							<h4>운동화</h4>
 							<ul>
 								<li><a
@@ -331,6 +343,8 @@ hr.mo {
 									href="/product/List/${condition}/${info.orderby}/mule/1?keyword=${keyword }">Mule</a></li>
 							</ul>
 							<br><br>
+							</div>
+							<div class="col-6 col-md-12">
 							<h4>스포츠</h4>
 							<ul>
 								<li><a
@@ -344,9 +358,13 @@ hr.mo {
 								<li><a
 									href="/product/List/${condition}/${info.orderby}/outdoor/1?keyword=${keyword }">Outdoor</a></li>
 							</ul>
+							</div></div>
 						</div>
 						<br>
 						<div id="filter">
+						
+						<div class="row">
+						<div class="col-6 col-md-12">
 							<div class="sidebar__item">
 								<h4>가격</h4>
 								<div style="width: 248px">
@@ -356,9 +374,12 @@ hr.mo {
 										class="price_input" id="maxPrice" name="maxPrice" type="text"
 										value="${info.maxPrice }" placeholder="최대 금액 입력" maxlength="9">
 									<span>원</span>
+							<br><br><br>
 								</div>
+						</div>
 							</div>
-							<br>
+						<div class="col-6 col-md-12">
+							
 							<div id="color-box"
 								class="sidebar__item sidebar__item__color--option">
 								<h4>색상</h4>
@@ -416,6 +437,10 @@ hr.mo {
 										id="YELLOW" name="color" value="YELLOW">
 									</label>
 								</div>
+							</div>
+							
+							
+							</div>
 							</div>
 							<input id="search" type="button" value="조건 검색">
 						</div>
@@ -709,6 +734,7 @@ hr.mo {
 			</div>
 		</div>
 	</section>
+
 	<!-- Product Section End -->
 	<!-- Footer Section Begin -->
 	<!-- Footer Section End -->
