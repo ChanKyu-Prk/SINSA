@@ -984,7 +984,7 @@ a.page-link {
 																<p>
 																	<label> 문의 내용 입력* </label><br>
 																	<textarea rows="10" cols="60" id="QNA_CONTENT"
-																		name="QNA_CONTENT" required="required" style="resize: none; width: 466px"></textarea>
+																		name="QNA_CONTENT" required="required" style="resize: none; width: 100%"></textarea>
 																	<br>
 																</p>
 															</form>
