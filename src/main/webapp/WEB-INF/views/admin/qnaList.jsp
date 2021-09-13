@@ -9,7 +9,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <meta charset="UTF-8">
-<title>SINSA관리자모드</title>
+<title>qnaList</title>
 
 <style>
 body {
@@ -110,9 +110,11 @@ table {
 			<tr>
 			
 				<!-- <th>번호</th> -->
-				<th>고객아이디</th>
+				
 				<th>상품코드</th>
-				<th>제목</th>
+				<th>상품명</th>
+				<th>고객아이디</th>
+				<th width=50%>제목</th>
 				<th>답변</th>
 				<th>작성일자</th>
 			</tr>
@@ -128,8 +130,10 @@ table {
 			<c:forEach var="e" items="${ qnaList }">
 				<tr onclick="javascript:selectNum(this);">
 					<td class="hidden-col">${ e.qna_num }</td>
+					
+					<td>${ e.prd_code }</td>
+					<td>${ e.prd_name }</td>
 					<td>${ e.qna_cusid }</td>
-					<td>${ e.prd_num }</td>
 					<td>${ e.qna_title }</td>
 					<td>
 					<c:if test="${!empty fn:trim(e.qna_answer)}"><font color=whitegreen>답변완료</font></c:if>

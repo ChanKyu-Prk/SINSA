@@ -21,10 +21,10 @@ public class ChartDAO  {
 	private SqlSessionTemplate SST;
 
 
-	public List<ProductVO> getProductList() {
-		List<ProductVO> ProductList = SST.selectList("ChartService.getProductList");
-		return ProductList;
-	}
+//	public List<ProductVO> getProductList() {
+//		List<ProductVO> ProductList = SST.selectList("ChartService.getProductList");
+//		return ProductList;
+//	}
 
 	public List<Integer> getSalesList() {
 
@@ -121,7 +121,6 @@ public class ChartDAO  {
 	public List<TopBrandVO> getTopBrandList() {
 		List<OrdersVO> orderList= SST.selectList("ChartService.getOrderList");
 
-		System.out.println("orderList" + orderList);
 		List<ProductVO> topBrandPrdList = new ArrayList<ProductVO>();
 
 		List<String> brandList = new ArrayList<String>();
@@ -136,7 +135,6 @@ public class ChartDAO  {
 
 
 
-		System.out.println("topBrandPrdList" + topBrandPrdList);
 
 
 		for(int i=0; i<topBrandPrdList.size(); i++) {
@@ -145,7 +143,6 @@ public class ChartDAO  {
 		}
 
 
-		System.out.println("brandList" + brandList);
 
 		List<TopBrandVO> topBrandList = new ArrayList<TopBrandVO>();
 
@@ -166,7 +163,6 @@ public class ChartDAO  {
 			topBrandVO.setBRAND(brandList.get(i));
 			topBrandVO.setBRAND_ORDERCOUNT(count);
 
-			System.out.println("count" + count);
 
 
 			topBrandList.add(topBrandVO);
@@ -183,7 +179,6 @@ public class ChartDAO  {
 		});
 
 
-//		System.out.println("topBrandList111=" + topBrandList.get(0).getBRAND_ORDERCOUNT() + topBrandList.get(1).getBRAND_ORDERCOUNT() + topBrandList.get(2).getBRAND_ORDERCOUNT() + topBrandList.get(3).getBRAND_ORDERCOUNT());
 
 
 

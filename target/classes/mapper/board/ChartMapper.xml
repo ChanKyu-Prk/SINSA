@@ -8,11 +8,11 @@
 
 
 
-	<select id="getProductList" resultType="kr.co.sinsa.biz.product.ProductVO">
+<!-- 	<select id="getProductList" resultType="kr.co.sinsa.biz.product.ProductVO"> -->
 
-		select * from product
+<!-- 		select * from product -->
 
-	</select>
+<!-- 	</select> -->
 	
 	
 	<select id="getSales1" resultType="Integer">
@@ -113,11 +113,11 @@
 	</select>
 	
 	<select id="getTotalUsers" resultType="Integer">
-		<![CDATA[select count(cus_num) from customer where cus_regdate > date_format(now(), '2018-01-01 00:00:00') and cus_regdate < date_format(now(), '2100-12-31 00:00:00')]]>
+		select count(*) from customer
 	</select>
 	
 	<select id="getYear" resultType="Integer">
-		select date_format(order_regdate, '%Y') from orders order by order_regdate limit 1
+		select date_format(now(), '%Y')
 	</select>
 	
 	<select id="getTotalSales" resultType="Integer">
@@ -138,58 +138,58 @@
 	
 	
 	<select id="get10MaleUsersList" resultType="Integer">
-		select sum(if(date_format(now(), '%Y')-substring(cus_birth, 1, 4) between 0 and 19, 1, 0)) from customer where cus_gender='남성';
+		select sum(if(date_format(now(), '%Y')-substring(cus_birth, 1, 4) between 0 and 19, 1, 0)) from customer where cus_gender='남자';
 	</select> 
 	
 	<select id="get20MaleUsersList" resultType="Integer">
-		select sum(if(date_format(now(), '%Y')-substring(cus_birth, 1, 4) between 20 and 29, 1, 0)) from customer where cus_gender='남성';
+		select sum(if(date_format(now(), '%Y')-substring(cus_birth, 1, 4) between 20 and 29, 1, 0)) from customer where cus_gender='남자';
 	</select> 
 	
 	<select id="get30MaleUsersList" resultType="Integer">
-		select sum(if(date_format(now(), '%Y')-substring(cus_birth, 1, 4) between 30 and 39, 1, 0)) from customer where cus_gender='남성';
+		select sum(if(date_format(now(), '%Y')-substring(cus_birth, 1, 4) between 30 and 39, 1, 0)) from customer where cus_gender='남자';
 	</select> 
 	
 	<select id="get40MaleUsersList" resultType="Integer">
-		select sum(if(date_format(now(), '%Y')-substring(cus_birth, 1, 4) between 40 and 49, 1, 0)) from customer where cus_gender='남성';
+		select sum(if(date_format(now(), '%Y')-substring(cus_birth, 1, 4) between 40 and 49, 1, 0)) from customer where cus_gender='남자';
 	</select> 
 	
 	<select id="get50MaleUsersList" resultType="Integer">
-		select sum(if(date_format(now(), '%Y')-substring(cus_birth, 1, 4) between 50 and 59, 1, 0)) from customer where cus_gender='남성';
+		select sum(if(date_format(now(), '%Y')-substring(cus_birth, 1, 4) between 50 and 59, 1, 0)) from customer where cus_gender='남자';
 	</select> 
 	
 	<select id="get60MaleUsersList" resultType="Integer">
-		select sum(if(date_format(now(), '%Y')-substring(cus_birth, 1, 4) between 60 and 100, 1, 0)) from customer where cus_gender='남성';
+		select sum(if(date_format(now(), '%Y')-substring(cus_birth, 1, 4) between 60 and 100, 1, 0)) from customer where cus_gender='남자';
 	</select> 
 	
 	<select id="get10FemaleUsersList" resultType="Integer">
-		select sum(if(date_format(now(), '%Y')-substring(cus_birth, 1, 4) between 0 and 19, 1, 0)) from customer where cus_gender='여성';
+		select sum(if(date_format(now(), '%Y')-substring(cus_birth, 1, 4) between 0 and 19, 1, 0)) from customer where cus_gender='여자';
 	</select> 
 	
 	<select id="get20FemaleUsersList" resultType="Integer">
-		select sum(if(date_format(now(), '%Y')-substring(cus_birth, 1, 4) between 20 and 29, 1, 0)) from customer where cus_gender='여성';
+		select sum(if(date_format(now(), '%Y')-substring(cus_birth, 1, 4) between 20 and 29, 1, 0)) from customer where cus_gender='여자';
 	</select> 
 	
 	<select id="get30FemaleUsersList" resultType="Integer">
-		select sum(if(date_format(now(), '%Y')-substring(cus_birth, 1, 4) between 30 and 39, 1, 0)) from customer where cus_gender='여성';
+		select sum(if(date_format(now(), '%Y')-substring(cus_birth, 1, 4) between 30 and 39, 1, 0)) from customer where cus_gender='여자';
 	</select> 
 	
 	<select id="get40FemaleUsersList" resultType="Integer">
-		select sum(if(date_format(now(), '%Y')-substring(cus_birth, 1, 4) between 40 and 49, 1, 0)) from customer where cus_gender='여성';
+		select sum(if(date_format(now(), '%Y')-substring(cus_birth, 1, 4) between 40 and 49, 1, 0)) from customer where cus_gender='여자';
 	</select> 
 	
 	<select id="get50FemaleUsersList" resultType="Integer">
-		select sum(if(date_format(now(), '%Y')-substring(cus_birth, 1, 4) between 50 and 59, 1, 0)) from customer where cus_gender='여성';
+		select sum(if(date_format(now(), '%Y')-substring(cus_birth, 1, 4) between 50 and 59, 1, 0)) from customer where cus_gender='여자';
 	</select> 
 	
 	<select id="get60FemaleUsersList" resultType="Integer">
-		select sum(if(date_format(now(), '%Y')-substring(cus_birth, 1, 4) between 60 and 100, 1, 0)) from customer where cus_gender='여성';
+		select sum(if(date_format(now(), '%Y')-substring(cus_birth, 1, 4) between 60 and 100, 1, 0)) from customer where cus_gender='여자';
 	</select> 
 	
 	
 	
 	
 	<select id="getOrderList" resultType="kr.co.sinsa.biz.orders.OrdersVO">
-		select * from orders
+		select ORDER_PRDCODE from orders
 	</select> 
 	
 	<select id="getTopBrandPrdList" parameterType="String" resultType="kr.co.sinsa.biz.product.ProductVO">
