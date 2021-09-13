@@ -9,7 +9,7 @@ select * from product
 where 
 PRD_BRAND like concat ('%',#{brand},'%') and
 PRD_CATEGORY like concat('%',#{category},'%') and
-(PRD_GENDER like concat('%',#{gender},'%') or PRD_GENDER like concat('%','남여공용','%')) and
+PRD_GENDER like concat('%',#{gender},'%') and
 PRD_NAME in (SELECT PRD_NAME from product where PRD_NAME like concat('%',#{name},'%') or PRD_BRAND like concat('%',#{name},'%'))  and
 PRD_PRICE > #{minPrice} and 
 PRD_PRICE < #{maxPrice} and
@@ -32,8 +32,8 @@ select count(*) from product
 where 
 PRD_BRAND like concat ('%',#{brand},'%') and
 PRD_CATEGORY like concat('%',#{category},'%') and
-(PRD_GENDER like concat('%',#{gender},'%') or PRD_GENDER like concat('%','남여공용','%')) and
-PRD_NAME in (SELECT PRD_NAME from product where PRD_BRAND like concat('%',#{name},'%')  or PRD_BRAND like concat('%',#{name},'%'))  and
+PRD_GENDER like concat('%',#{gender},'%') and
+PRD_NAME in (SELECT PRD_NAME from product where PRD_NAME like concat('%',#{name},'%')  or PRD_BRAND like concat('%',#{name},'%'))  and
 PRD_PRICE > #{minPrice} and 
 PRD_PRICE < #{maxPrice} and
 PRD_COLOR in (${color})

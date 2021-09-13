@@ -207,7 +207,7 @@ public class ProductController {
 			@RequestParam(value = "keyword", required = false, defaultValue = "") String keyword,
 			@RequestParam(value = "color", required = false, defaultValue = "") String color,
 			@RequestParam(value = "minPrice", required = false, defaultValue = "0") String minPriceR,
-			@RequestParam(value = "maxPrice", required = false, defaultValue = "150000") String maxPriceR,
+			@RequestParam(value = "maxPrice", required = false, defaultValue = "300000") String maxPriceR,
 			HttpSession session) throws Exception {
 		Map<String, String> info = new HashMap<String, String>();
 		info.put("condition", condition); 
@@ -223,7 +223,6 @@ public class ProductController {
 		model.addAttribute("info", info);
 		
 		int page = Integer.parseInt(pageR); 
-		System.out.println(page); //1
 		int limit = 12;
 		int listCount;
 		int startPage;
@@ -324,7 +323,7 @@ public class ProductController {
 		map.put("brand", "");
 		map.put("page", (page - 1) * limit);
 		listCount = service.countProductList(map);
-		
+
 		List<ProductVO> list = null;
 		if(condition.equals("best")) {
 			list = service.listPageBestShoes(map);

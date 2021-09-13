@@ -4,6 +4,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <c:set var="path" value="${pageContext.request.contextPath}" />
 <!DOCTYPE html>
 <html lang="ko">
@@ -247,6 +248,21 @@ hr.mo {
 #color-box {
     padding-top: 0px;
 }
+.no_row {
+	min-height: 400px;
+	display: table;
+	padding-top: 125px;
+}
+.no_col {
+	text-align: center;
+	display: table-cell;
+	vertical-align: middle;
+}
+#exclamation {
+	width: 100px;
+	height: 100px;
+	fill: grey;
+}
 </style>
 <!-- Google Font -->
 <link
@@ -282,7 +298,7 @@ hr.mo {
 							<form action="/product/List/all/newest/all/1?keyword="
 								method="get">
 								<input type="text" name="keyword" placeholder="찾으시는 상품을 검색해주세요"
-									value="">
+									value="${info.keyWord }">
 								<button type="button" id="searchBtn" class="site-btn">검색</button>
 								<script>
 									document.getElementById("searchBtn").onclick = function() {
@@ -467,6 +483,7 @@ hr.mo {
 								</div>
 							</div>
 						</div>
+						
 						<div class="row">
 							<c:forEach var="list" items="${list }" varStatus="status">
 								<div class="col-lg-4 col-md-6 col-sm-6 prodBox">
@@ -674,6 +691,24 @@ hr.mo {
 								</div>
 							</c:forEach>
 						</div>
+						<c:if test="${fn:length(list) == 0}">
+													<div class="container">
+								<div class="row no_row">
+									<div class="col-12 no_col">
+										<svg xmlns="http://www.w3.org/2000/svg" id="exclamation"
+											class="bi bi-exclamation-circle" viewBox="0 0 16 16">
+  <path
+												d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+  <path
+												d="M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995z" />
+</svg>
+										<br>상품이 존재하지 않습니다.
+									</div>
+								</div>
+
+							</div>
+						</c:if>
+						<c:if test="${fn:length(list) != 0}">
 						<ul class="pagination">
 							<c:choose>
 								<c:when test="${pageInfo.getPage()<=1}">
@@ -684,14 +719,14 @@ hr.mo {
 									<li class="page-item"><a class="page-link"
 										href="/product/List/${info.condition }/${info.orderby }/${info.category }
 									/${pageInfo.getStartPage()}?color=${info.color}&minPrice=${info.minPrice }
-									&maxPrice=${info.maxPrice }&keyWord=${info.keyWord }"
+									&maxPrice=${info.maxPrice }&keyword=${info.keyWord }"
 										tabindex="-1">이전</a></li>
 								</c:when>
 								<c:otherwise>
 									<li class="page-item"><a class="page-link"
 										href="/product/List/${info.condition }/${info.orderby }/${info.category }
 									/${pageInfo.getStartPage()-1}?color=${info.color}&minPrice=${info.minPrice }
-									&maxPrice=${info.maxPrice }&keyWord=${info.keyWord }"
+									&maxPrice=${info.maxPrice }&keyword=${info.keyWord }"
 										tabindex="-1">이전</a></li>
 								</c:otherwise>
 							</c:choose>
@@ -706,7 +741,7 @@ hr.mo {
 										<li class="page-item"><a class="page-link"
 											href="/product/List/${info.condition }/${info.orderby }/${info.category }
 									/${state.index}?color=${info.color}&minPrice=${info.minPrice }
-									&maxPrice=${info.maxPrice }&keyWord=${info.keyWord }">${state.index}</a></li>
+									&maxPrice=${info.maxPrice }&keyword=${info.keyWord }">${state.index}</a></li>
 									</c:otherwise>
 								</c:choose>
 							</c:forEach>
@@ -719,16 +754,17 @@ hr.mo {
 									<li class="page-item"><a class="page-link"
 										href="/product/List/${info.condition }/${info.orderby }/${info.category }
 									/${pageInfo.getEndPage()}?color=${info.color}&minPrice=${info.minPrice }
-									&maxPrice=${info.maxPrice }&keyWord=${info.keyWord }">다음</a></li>
+									&maxPrice=${info.maxPrice }&keyword=${info.keyWord }">다음</a></li>
 								</c:when>
 								<c:otherwise>
 									<li class="page-item"><a class="page-link"
 										href="/product/List/${info.condition }/${info.orderby }/${info.category }
 									/${pageInfo.getEndPage()+1}?color=${info.color}&minPrice=${info.minPrice }
-									&maxPrice=${info.maxPrice }&keyWord=${info.keyWord }">다음</a></li>
+									&maxPrice=${info.maxPrice }&keyword=${info.keyWord }">다음</a></li>
 								</c:otherwise>
 							</c:choose>
 						</ul>
+						</c:if>
 					</div>
 				</div>
 			</div>
