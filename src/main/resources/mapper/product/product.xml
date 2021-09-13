@@ -23,6 +23,7 @@
 		GROUP BY ORDER_PRDNAME 
 		HAVING COUNT(ORDER_PRDNAME) > 1 
 		ORDER BY count DESC
+		LIMIT 4;
 	</select>
 	
 	<!-- 구분선 -->
