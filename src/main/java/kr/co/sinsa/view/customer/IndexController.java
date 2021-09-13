@@ -28,7 +28,7 @@ public class IndexController {
 		model.addAttribute("productList", productList);
 		
 		List<ReviewVO> reviewList = IndexService.getReviewList();
-		
+		 
 		model.addAttribute("reviewList", reviewList);
 		
 		List<ProductVO> topProductList = IndexService.getTopProductList();
