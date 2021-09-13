@@ -490,9 +490,9 @@ input::placeholder {
 											<select class="gender_input col-3" name="CUS_GENDER">
 												<option value="" disabled selected id="Ggrey">성별</option>
 												<option value="남성"
-													<c:if test="${myInfo.CUS_GENDER =='남성'}">selected</c:if>>남성</option>
+													<c:if test="${myInfo.CUS_GENDER =='남자'}">selected</c:if>>남자</option>
 												<option value="여성"
-													<c:if test="${myInfo.CUS_GENDER =='여성'}">selected</c:if>>여성</option>
+													<c:if test="${myInfo.CUS_GENDER =='여자'}">selected</c:if>>여자</option>
 											</select>
 										</div>
 
