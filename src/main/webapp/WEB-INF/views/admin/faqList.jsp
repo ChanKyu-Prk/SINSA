@@ -155,10 +155,10 @@ td.a {
 				<div class="form-group col-md-2">
 					<select name="fieldName" id="fieldName" class="form-control">
 						<option ${(param.fieldName == "all")? "selected" : ""} value="all">전체</option>
-						<option ${(param.fieldName == "notice_title")? "selected" : ""}
-							value="notice_title">제목</option>
-						<option ${(param.fieldName == "notice_content")? "selected" : ""}
-							value="notice_content">내용</option>
+						<option ${(param.fieldName == "faq_q")? "selected" : ""}
+							value="faq_q">제목</option>
+						<option ${(param.fieldName == "faq_a")? "selected" : ""}
+							value="faq_a">내용</option>
 					</select>
 				</div>
 				<div class="form-group col-md-5">
