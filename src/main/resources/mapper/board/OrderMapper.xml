@@ -76,22 +76,22 @@
 	</update>
 	
 	
-	<update id="order_cancel" parameterType="kr.co.sinsa.admin.vo.OrderVO">
-		update orders set 
-			order_state=replace(order_state, '요청', '완료'),
-			order_process=current_timestamp()
- 			where order_num=${order_num}
- 			and order_prdcode=#{order_prdcode}
- 			and order_prdsize=#{order_prdsize};
- 			
- 		<if test="order_state.contains('반품요청')">
- 			update customer set cus_point=cus_point-truncate(${order_price}*0.03, 0)
- 			where cus_id=#{order_cusid};
- 			
- 			update stock set stock_${order_prdsize}=stock_${order_prdsize}+${order_amount}
-			where stock_prdcode='${order_prdcode}';
-			
- 		</if>
+   <update id="order_cancel" parameterType="kr.co.sinsa.admin.vo.OrderVO">
+      update orders set 
+         order_state=replace(order_state, '요청', '완료'),
+         order_process=current_timestamp()
+          where order_num=${order_num}
+          and order_prdcode=#{order_prdcode}
+          and order_prdsize=#{order_prdsize};
+          
+       <if test="order_state.contains('반품요청')">
+          update customer set cus_point=cus_point-truncate(${order_price}*0.03, 0)
+          where cus_id=#{order_cusid};
+          
+          update stock set stock_${order_prdsize}=stock_${order_prdsize}+${order_amount}
+         where stock_prdcode='${order_prdcode}';
+         
+       </if>
 			
 	</update>
 	
@@ -99,9 +99,9 @@
 		update orders set 
 			order_state=replace(order_state, '요청', '완료'),
 			order_process=current_timestamp()
- 			where order_num=${order_num}
+ 			where order_num=${order_num};
+ 			
 
-			
 	</update>
 	
 	<select id="all_cancel_amount" parameterType="kr.co.sinsa.admin.vo.OrderVO" resultType="int">

@@ -200,7 +200,7 @@
          <div class="row">
             <div class="categories__slider owl-carousel">
 
-               <c:forEach var="list" items="${productList}" varStatus="status">
+               <c:forEach var="list" items="${productList}" varStatus="status" begin="0" end="7">
                   <div class="col-lg-3">
                      <a href="/product/prdCode=${list.PRD_CODE}">
                         <div class="featured__item">
