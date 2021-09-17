@@ -110,11 +110,11 @@ public class ProductController {
 		////////////////////////////////////////////////////////////////////////////////////////////////////
 		List<ReviewColorSizeVO> detailReviewList = DetailReviewService.getDetailReviewList(PRD_CODE);
 		
-		for(int i=0; i<detailReviewList.size(); i++) {
-			if(detailReviewList.get(i).getREV_IMAGE().equals("")) {
-				detailReviewList.get(i).setREV_IMAGE(null);
-			}
-		}
+//		for(int i=0; i<detailReviewList.size(); i++) {
+//			if(detailReviewList.get(i).getREV_IMAGE().equals("")) {
+//				detailReviewList.get(i).setREV_IMAGE(null);
+//			}
+//		}
 		
 		
 		

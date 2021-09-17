@@ -732,7 +732,7 @@ public class MyPageController {
 				String[] img = null;
 				if (myReviews.get(i).getREV_IMAGE() != null) {
 					String str = myReviews.get(i).getREV_IMAGE().substring(0,
-							myReviews.get(i).getREV_IMAGE().length() - 1);
+							myReviews.get(i).getREV_IMAGE().length());
 					img = str.split("/");
 				}
 				imgList.add(img);

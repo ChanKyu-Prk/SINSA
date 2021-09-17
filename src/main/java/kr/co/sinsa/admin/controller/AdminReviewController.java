@@ -104,7 +104,7 @@ public class AdminReviewController {
 
 			String[] img = null;
 			if(review.getRev_image()!=null) {
-			String str = review.getRev_image().substring(0, review.getRev_image().length()-1);
+			String str = review.getRev_image().substring(0, review.getRev_image().length());
 			img = str.split("/");
 
 			}
@@ -114,5 +114,4 @@ public class AdminReviewController {
 		
 		return "admin/reviewDetail";
 	}
-
 }
