@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	
 <style>
 .sidebar2 {
 	display: none;
@@ -20,7 +21,7 @@
 }
 </style>
 <meta charset="UTF-8">
-
+<meta content="width=device-width, initial-scale=1" name="viewport" />
 <div class="col-sm-12 col-md-3 ">
 	<div class="sidebar">
 		<div class="sidebar__item">

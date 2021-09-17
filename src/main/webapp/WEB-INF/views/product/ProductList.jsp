@@ -380,7 +380,7 @@ hr.mo {
 						<div id="filter">
 						
 						<div class="row">
-						<div class="col-6 col-md-12">
+						<div class="col-12">
 							<div class="sidebar__item">
 								<h4>가격</h4>
 								<div style="width: 248px">
@@ -394,7 +394,7 @@ hr.mo {
 								</div>
 						</div>
 							</div>
-						<div class="col-6 col-md-12">
+						<div class="col-12">
 							
 							<div id="color-box"
 								class="sidebar__item sidebar__item__color--option">

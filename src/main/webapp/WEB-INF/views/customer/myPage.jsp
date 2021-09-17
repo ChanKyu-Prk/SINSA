@@ -125,7 +125,7 @@
 	color: #c1bfc1;
 	position: absolute;
 	top: 10px;
-	left: 285px;
+	left: 30%;
 }
 
 .orderMoreThan2 {
@@ -133,7 +133,7 @@
 	color: #c1bfc1;
 	position: absolute;
 	top: 10px;
-	right: 265px;
+	right:  30%;
 }
 
 .OrderRow2 {
@@ -316,12 +316,7 @@ border-right: solid 1px #c1bfc1;
 padding-bottom: 6px;
 }
 @media screen and (max-width: 720px) {
-	.orderMoreThan1 {
-		left: 290px;
-	}
-	.orderMoreThan2 {
-		right: 295px;
-	}
+
 	.point_br {
 		display: block;
 	}
