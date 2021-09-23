@@ -103,8 +103,8 @@ select JJIM_PRDNUM from jjim where JJIM_CUSID =#{value};
 
 <select id="insertQNA" parameterType="Map">
 	<![CDATA[
-		insert into qna(PRD_NUM, QNA_LOCK, QNA_CUSID, QNA_TITLE, QNA_CONTENT, QNA_ANSWER, QNA_REGDATE)
-		values(#{PRD_NUM}, #{QNA_LOCK}, #{QNA_CUSID}, #{QNA_TITLE}, #{QNA_CONTENT}, '', now())
+		insert into qna(PRD_NUM, QNA_LOCK, QNA_CUSID, QNA_TITLE, QNA_CONTENT, QNA_REGDATE)
+		values(#{PRD_NUM}, #{QNA_LOCK}, #{QNA_CUSID}, #{QNA_TITLE}, #{QNA_CONTENT}, now())
 	]]>
 </select>
 <select id="updateQNA" parameterType="Map">
