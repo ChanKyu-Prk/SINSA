@@ -62,7 +62,7 @@
 				</table>
 				<p class="mb-5">자세한 구매내역 확인 및 환불, 취소 등의 서비스는 사이트 우측 상단의 <a href="/myOrderList/1">마이페이지>주문 내역 조회</a>에서 이용 가능합니다.</p>
 				<div class="btnCon">
-					<button class="primary-btn shopBtn" onclick="location.href='product/List/all/newest/all/1'">쇼핑 계속하기</button>
+					<button class="primary-btn shopBtn" onclick="location.href='/product/List/all/newest/all/1'">쇼핑 계속하기</button>
 					<button class="primary-btn" onclick="location.href='/myOrderList/1'">주문 내역 조회</button>
 				</div>
 			</div>

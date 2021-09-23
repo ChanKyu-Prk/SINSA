@@ -190,6 +190,11 @@ public class OrdersController {
 		if(isCart.equals("true")) {
 			myService.chckDeleteCart(CUS_ID);
 		}
+		try {
+	          Thread.sleep(3000);
+	       } catch (InterruptedException e) {
+	         e.printStackTrace();
+	       }
 		return "redirect:/checkout/complete/orderNo="+ORDER_NUM;
 	}
 	
