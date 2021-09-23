@@ -35,7 +35,6 @@ public class NaverLoginBO {
 				.build(NaverLoginApi.instance());
 		return oauthService.getAuthorizationUrl();
 	}
-
 	/* 네이버아이디로 Callback 처리 및 AccessToken 획득 Method */
 	public OAuth2AccessToken getAccessToken(HttpSession session, String code, String state) throws IOException {
 		/* Callback으로 전달받은 세선검증용 난수값과 세션에 저장되어있는 값이 일치하는지 확인 */
@@ -49,22 +48,18 @@ public class NaverLoginBO {
 		}
 		return null;
 	}
-
 	/* 세션 유효성 검증을 위한 난수 생성기 */
 	private String generateRandomString() {
 		return UUID.randomUUID().toString();
 	}
-
 	/* http session에 데이터 저장 */
 	private void setSession(HttpSession session, String state) {
 		session.setAttribute(SESSION_STATE, state);
 	}
-
 	/* http session에서 데이터 가져오기 */
 	private String getSession(HttpSession session) {
 		return (String) session.getAttribute(SESSION_STATE);
 	}
-
 	/* Access Token을 이용하여 네이버 사용자 프로필 API를 호출 */
 	public String getUserProfile(OAuth2AccessToken oauthToken) throws IOException {
 		OAuth20Service oauthService = new ServiceBuilder().apiKey(CLIENT_ID).apiSecret(CLIENT_SECRET)
