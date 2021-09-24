@@ -1637,8 +1637,11 @@ a.page-link {
 														+ '#qna-content-password-delete'
 														+ i
 														+ '{display:block; margin: auto;}</style>')
-								if (arrays[i].qna_ANSWER != "") {
+								if (arrays[i].qna_ANSWER != null) {
 									$('#aCheck' + i).text('답변완료');
+								}
+								if (arrays[i].qna_ANSWER == null) {
+									$('.qna-content' + i).find('textarea').val('');
 								}
 								var sq = $('#security-qna' + i).text();
 								console.log(sq + "? sq");
