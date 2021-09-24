@@ -18,14 +18,14 @@ public class RecViewProdServiceImpl implements RecViewProdService{
 
 	
 	@Autowired
-	private MyPageDAO cusdao;
+	private MyPageDAO dao;
 	
 	@Override
 	public List<ProductVO> recentView(Cookie[] cRecentlyVieweds, int page, int listCount) {
 		List<ProductVO> list = new ArrayList<ProductVO>();
 		List<ProductVO> select = new ArrayList<ProductVO>();
 
-		List<ProductVO> allProduct = cusdao.allProductNum();
+		List<ProductVO> allProduct = dao.allProductNum();
 		int PRD_NUM;
 		for (int i = cRecentlyVieweds.length - 1; i >= 0; i--) {
 			String str = cRecentlyVieweds[i].getName();
@@ -33,7 +33,7 @@ public class RecViewProdServiceImpl implements RecViewProdService{
 				String str2 = Integer.toString(allProduct.get(j).getPRD_NUM());
 				if (str.equals(str2)) {
 					PRD_NUM = Integer.parseInt(cRecentlyVieweds[i].getValue());
-					list.add(cusdao.recentView(PRD_NUM));
+					list.add(dao.recentView(PRD_NUM));
 				}
 			}
 		}
@@ -50,7 +50,7 @@ public class RecViewProdServiceImpl implements RecViewProdService{
 	@Override
 	public int countRecentView(Cookie[] cRecentlyVieweds) {
 		int listcount = 0;
-		List<ProductVO> allProduct = cusdao.allProductNum();
+		List<ProductVO> allProduct = dao.allProductNum();
 		for (int i = 0; i < cRecentlyVieweds.length; i++) {
 			String str = cRecentlyVieweds[i].getName();
 			for (int j = 0; j < allProduct.size(); j++) {

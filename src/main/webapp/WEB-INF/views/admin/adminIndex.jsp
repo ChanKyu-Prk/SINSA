@@ -18,9 +18,7 @@
 
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>Ela Admin - HTML5 Admin Template</title>
 <meta name="description" content="Ela Admin - HTML5 Admin Template">
-<meta name="viewport" content="width=device-width, initial-scale=1">
 
 
 
@@ -46,10 +44,6 @@
 <!--     <link href="https://cdn.jsdelivr.net/npm/jqvmap@1.5.1/dist/jqvmap.min.css" rel="stylesheet"> -->
 
 <meta charset="UTF-8">
-<title>Insert title here</title>
-
-
-
 <style>
 
 </style>
@@ -287,6 +281,7 @@
 	</div>
 	<!-- /.content -->
 	<div class="clearfix"></div>
+	<jsp:include page="footer.jsp"/>
 	<!-- Scripts -->
 	<script
 		src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
