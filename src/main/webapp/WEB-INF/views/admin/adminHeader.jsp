@@ -72,11 +72,9 @@ a:hover{
 		<c:if test="${!empty AdminVO}">
 			<ul class="nav navbar-nav navbar-right">
 				<li class="nav-item dropdown"><a
-					class="nav-link" href="${pageContext.request.contextPath}/admin/adminLogout" id="navbarDropdown"
+					class="nav-link adminlogout" href="${pageContext.request.contextPath}/admin/adminLogout" id="navbarDropdown"
 					role="button" data-toggle="dropdown" aria-haspopup="true"
-					aria-expanded="false" > 관리자  로그아웃 </a>
-	      			
-					
+					aria-expanded="false" onclick="location.href='/admin/adminLogout'" > 관리자  로그아웃 </a>
 				</li>
 			</ul>
 		</c:if>

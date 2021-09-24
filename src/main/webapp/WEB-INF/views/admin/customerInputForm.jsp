@@ -252,5 +252,5 @@
    <jsp:include page="../footer.jsp" />
 
 </body>
-<script src="${path}/resources/js/join.js"></script>
+<script src="${path}/resources/js/join.js"></script>	
 </html>

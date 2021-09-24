@@ -132,26 +132,24 @@ display: none;
 </div>
 <script src="${path}/resources/js/jquery-3.3.1.min.js"></script>
 <script type="text/javascript">
-   var recPage = 0;
-   $
-         .getJSON(
-               "/recentlyview/1",
-               function(data) {
-                  var recPrdImg = [];
-                  var recPrdName = [];
-                  var recPrdCode = [];
-                  var recPrdPrice = [];
-                  var recPrdBrand = [];
-                  var recListCount = 0;
-                  var recMaxPage = 0;
-                  var prev = 'prev';
-                  var next = 'next';
 
-                  $.each(data, function(inx, obj) {
-                     recPrdImg.push(obj.prdimg);
-                     var txt = obj.prdname;
-                     if (obj.prdname.length > 5) {
-                        txt = txt.substr(0, 5) + "...";
+   var recPage = 0;
+   $.getJSON("/recentlyview/1",function(data) {
+             var recPrdImg = [];
+             var recPrdName = [];
+             var recPrdCode = [];
+             var recPrdPrice = [];
+             var recPrdBrand = [];
+             var recListCount = 0;
+             var recMaxPage = 0;
+             var prev = 'prev';
+             var next = 'next';
+
+             $.each(data, function(inx, obj) {
+                   recPrdImg.push(obj.prdimg);
+                   var txt = obj.prdname;
+                   if (obj.prdname.length > 5) {
+                      txt = txt.substr(0, 5) + "...";
                      }
                      recPrdName.push(txt);
                      recPrdCode.push(obj.prdcode);
@@ -168,107 +166,45 @@ display: none;
                   if (recMaxPage == 1) {
                      next = 'firstAndMax';
                   }
-                  if (recPrdName.length == 3) {
-                     $
-                           .each(
-                                 data,
-                                 function(i) {
-                                    str += '<td class="recentlyViewBar_td"><div class="td-row"><input type="hidden" value="'
-                                          + recPrdCode[i]
-                                          + '" class="recentlyViewprdcode"><img class="recentlyViewthumbPic" alt="'
-                                          + recPrdName[i]
-                                          + '사진" title="'
-                                          + recPrdName[i]
-                                          + '"src="${pageContext.request.contextPath}/resources/prdImg/'
-                                          + recPrdCode[i]+'.png" />'
-                                          + '<span class="prdInfo"><div class="prdBrand">'
-                                          + recPrdBrand[i]
-                                          + '</div><div class="prdName">'
-                                          + recPrdName[i]
-                                          + '</div><div class="prdprice">'
-                                          + recPrdPrice[i]
-                                          + '원</div></div></span></td>'
-                                    str += '</TR>';
-                                 });
-                     str += '<tr>'
-                           + '<td class="recentlyViewBar_paging"><span id="'+prev+'">&lt;</span><span id ="recentPage">'
-                           + recPage
-                           + ' / '
-                           + recMaxPage
-                           + '</span><span id = "'+next+'">&gt;</span></td>'
-                           + '</tr>'
-                     $(".recentlyViewBar_table").append(str);
-
-                  } else if (recPrdName.length == 2) {
-                     $
-                           .each(
-                                 data,
-                                 function(i) {
-                                    str += '<td class="recentlyViewBar_td"><div class="td-row"><input type="hidden" value="'
-                                          + recPrdCode[i]
-                                          + '" class="recentlyViewprdcode"><img class="recentlyViewthumbPic" alt="'
-                                          + recPrdName[i]
-                                          + '사진" title="'
-                                          + recPrdName[i]
-                                          + '"src="${pageContext.request.contextPath}/resources/prdImg/'
-                                          + recPrdCode[i]+'.png" />'
-                                          + '<span class="prdInfo"><div class="prdBrand">'
-                                          + recPrdBrand[i]
-                                          + '</div><div class="prdName">'
-                                          + recPrdName[i]
-                                          + '</div><div class="prdprice">'
-                                          + recPrdPrice[i]
-                                          + '원</div></div></span></td>'
-                                    str += '</TR>';
-                                 });
-                     str += '<tr><td class="recentlyViewBar_td"><div class="td-row"></div></td></tr>'
-                           +
-
-                           '<tr>'
-                           + '<td class="recentlyViewBar_paging"><span id="'+prev+'">&lt;</span><span id ="recentPage">'
-                           + recPage
-                           + ' / '
-                           + recMaxPage
-                           + '</span><span id = "'+next+'">&gt;</span></td>'
-                           + '</tr>'
-                     $(".recentlyViewBar_table").append(str);
-                  } else if (recPrdName.length == 1) {
-                     $
-                           .each(
-                                 data,
-                                 function(i) {
-                                    str += '<td class="recentlyViewBar_td"><div class="td-row"><input type="hidden" value="'
-                                          + recPrdCode[i]
-                                          + '" class="recentlyViewprdcode"><img class="recentlyViewthumbPic" alt="'
-                                          + recPrdName[i]
-                                          + '사진" title="'
-                                          + recPrdName[i]
-                                          + '"src="${pageContext.request.contextPath}/resources/prdImg/'
-                                          + recPrdCode[i]+'.png" />'
-                                          + '<span class="prdInfo"><div class="prdBrand">'
-                                          + recPrdBrand[i]
-                                          + '</div><div class="prdName">'
-                                          + recPrdName[i]
-                                          + '</div><div class="prdprice">'
-                                          + recPrdPrice[i]
-                                          + '원</div></div></span></td>'
-                                    str += '</TR>';
-                                 });
-                     str += '<tr><td class="recentlyViewBar_td"><div class="td-row"></div></td></tr><tr><td class="recentlyViewBar_td"><div class="td-row"></div></td></tr>'
-                           +
-
-                           '<tr>'
-                           + '<td class="recentlyViewBar_paging"><span id="'+prev+'">&lt;</span><span id ="recentPage">'
-                           + recPage
-                           + ' / '
-                           + recMaxPage
-                           + '</span><span id = "'+next+'">&gt;</span></td>'
-                           + '</tr>'
-                     $(".recentlyViewBar_table").append(str);
-                  } else {
+                  if (recPrdName.length >0) {
+                	  $.each( data,function(i) {
+                          str += '<td class="recentlyViewBar_td"><div class="td-row"><input type="hidden" value="'
+                                + recPrdCode[i]
+                                + '" class="recentlyViewprdcode"><img class="recentlyViewthumbPic" alt="'
+                                + recPrdName[i]
+                                + '사진" title="'
+                                + recPrdName[i]
+                                + '"src="${pageContext.request.contextPath}/resources/prdImg/'
+                                + recPrdCode[i]+'.png" />'
+                                + '<span class="prdInfo"><div class="prdBrand">'
+                                + recPrdBrand[i]
+                                + '</div><div class="prdName">'
+                                + recPrdName[i]
+                                + '</div><div class="prdprice">'
+                                + recPrdPrice[i]
+                                + '원</div></div></span></td>'
+                          str += '</TR>';
+                       });
+                	  
+                      for(var i = 0 ; i < 3 - recPrdName.length ; i ++) {
+                    	  str += '<tr><td class="recentlyViewBar_td"><div class="td-row"></div></td></tr>'
+                    	  }
+           
+        	   str +=   '<tr>'
+                 + '<td class="recentlyViewBar_paging"><span id="'+prev+'">&lt;</span><span id ="recentPage">'
+                 + recPage
+                 + ' / '
+                 + recMaxPage
+                 + '</span><span id = "'+next+'">&gt;</span></td>'
+                 + '</tr>'
+                 
+           $(".recentlyViewBar_table").append(str);
+                  }  
+                  else {
 
                      str += '<td class="recentlyViewBar_td"><div class="td-row"></div></td></tr><tr><td class="recentlyViewBar_td">'
-                           + '<div class="td-row">최근 본 <br>상품이<br>없습니다.</div></td></tr><tr><td class="recentlyViewBar_td"><div class="td-row"></div></td></tr>'
+                           + '<div class="td-row">최근 본 <br>상품이<br>없습니다.</div></td></tr><tr>'
+                           + '<td class="recentlyViewBar_td"><div class="td-row"></div></td></tr>'
                            + '<tr>'
                            + '<td class="recentlyViewBar_paging"></td>'
                            + '</tr>'
@@ -276,9 +212,7 @@ display: none;
                   }
                   ;
                });
-   function createRecView(data) {
 
-   };
 
    $(document)
          .on(
@@ -326,107 +260,40 @@ display: none;
                               if (recMaxPage == recPage) {
                                  next = 'firstAndMax';
                               }
-                              if (recPrdName.length == 3) {
-                                 $
-                                       .each(
-                                             data,
-                                             function(i) {
-                                                str += '<td class="recentlyViewBar_td"><div class="td-row"><input type="hidden" value="'
-                                                      + recPrdCode[i]
-                                                      + '" class="recentlyViewprdcode"><img class="recentlyViewthumbPic" alt="'
-                                                      + recPrdName[i]
-                                                      + '사진" title="'
-                                                      + recPrdName[i]
-                                                      + '"src="${pageContext.request.contextPath}/resources/prdImg/'
-                                                      + recPrdCode[i]+'.png" />'
-                                                      + '<span class="prdInfo"><div class="prdBrand">'
-                                                      + recPrdBrand[i]
-                                                      + '</div><div class="prdName">'
-                                                      + recPrdName[i]
-                                                      + '</div><div class="prdprice">'
-                                                      + recPrdPrice[i]
-                                                      + '원</div></div></span></td>'
-                                                str += '</TR>';
-                                             });
-                                 str += '<tr>'
-                                       + '<td class="recentlyViewBar_paging"><span id="'+prev+'">&lt;</span><span id ="recentPage">'
-                                       + recPage
-                                       + ' / '
-                                       + recMaxPage
-                                       + '</span><span id = "'+next+'">&gt;</span></td>'
-                                       + '</tr>'
-                                 $(".recentlyViewBar_table").append(
-                                       str);
+                              if (recPrdName.length >0) {
+                            	  $.each( data,function(i) {
+                                      str += '<td class="recentlyViewBar_td"><div class="td-row"><input type="hidden" value="'
+                                            + recPrdCode[i]
+                                            + '" class="recentlyViewprdcode"><img class="recentlyViewthumbPic" alt="'
+                                            + recPrdName[i]
+                                            + '사진" title="'
+                                            + recPrdName[i]
+                                            + '"src="${pageContext.request.contextPath}/resources/prdImg/'
+                                            + recPrdCode[i]+'.png" />'
+                                            + '<span class="prdInfo"><div class="prdBrand">'
+                                            + recPrdBrand[i]
+                                            + '</div><div class="prdName">'
+                                            + recPrdName[i]
+                                            + '</div><div class="prdprice">'
+                                            + recPrdPrice[i]
+                                            + '원</div></div></span></td>'
+                                      str += '</TR>';
+                                   });
+                                  for(var i = 0 ; i < 3 - recPrdName.length ; i ++) {
+                                	  str += '<tr><td class="recentlyViewBar_td"><div class="td-row"></div></td></tr>'
+                                	  }
+                       
+                    	   str +=
 
-                              } else if (recPrdName.length == 2) {
-                                 $
-                                       .each(
-                                             data,
-                                             function(i) {
-                                                str += '<td class="recentlyViewBar_td"><div class="td-row"><input type="hidden" value="'
-                                                      + recPrdCode[i]
-                                                      + '" class="recentlyViewprdcode"><img class="recentlyViewthumbPic" alt="'
-                                                      + recPrdName[i]
-                                                      + '사진" title="'
-                                                      + recPrdName[i]
-                                                      + '"src="${pageContext.request.contextPath}/resources/prdImg/'
-                                                      + recPrdCode[i]+'.png" />'
-                                                      + '<span class="prdInfo"><div class="prdBrand">'
-                                                      + recPrdBrand[i]
-                                                      + '</div><div class="prdName">'
-                                                      + recPrdName[i]
-                                                      + '</div><div class="prdprice">'
-                                                      + recPrdPrice[i]
-                                                      + '원</div></div></span></td>'
-                                                str += '</TR>';
-                                             });
-                                 str += '<tr><td class="recentlyViewBar_td"><div class="td-row"></div></td></tr>'
-                                       +
-
-                                       '<tr>'
-                                       + '<td class="recentlyViewBar_paging"><span id="'+prev+'">&lt;</span><span id ="recentPage">'
-                                       + recPage
-                                       + ' / '
-                                       + recMaxPage
-                                       + '</span><span id = "'+next+'">&gt;</span></td>'
-                                       + '</tr>'
-                                 $(".recentlyViewBar_table").append(
-                                       str);
-                              } else if (recPrdName.length == 1) {
-                                 $
-                                       .each(
-                                             data,
-                                             function(i) {
-                                                str += '<td class="recentlyViewBar_td"><div class="td-row"><input type="hidden" value="'
-                                                      + recPrdCode[i]
-                                                      + '" class="recentlyViewprdcode"><img class="recentlyViewthumbPic" alt="'
-                                                      + recPrdName[i]
-                                                      + '사진" title="'
-                                                      + recPrdName[i]
-                                                      + '"src="${pageContext.request.contextPath}/resources/prdImg/'
-                                                      + recPrdCode[i]+'.png" />'
-                                                      + '<span class="prdInfo"><div class="prdBrand">'
-                                                      + recPrdBrand[i]
-                                                      + '</div><div class="prdName">'
-                                                      + recPrdName[i]
-                                                      + '</div><div class="prdprice">'
-                                                      + recPrdPrice[i]
-                                                      + '원</div></div></span></td>'
-                                                str += '</TR>';
-                                             });
-                                 str += '<tr><td class="recentlyViewBar_td"><div class="td-row"></div></td></tr><tr><td class="recentlyViewBar_td"><div class="td-row"></div></td></tr>'
-                                       +
-
-                                       '<tr>'
-                                       + '<td class="recentlyViewBar_paging"><span id="'+prev+'">&lt;</span><span id ="recentPage">'
-                                       + recPage
-                                       + ' / '
-                                       + recMaxPage
-                                       + '</span><span id = "'+next+'">&gt;</span></td>'
-                                       + '</tr>'
-                                 $(".recentlyViewBar_table").append(
-                                       str);
-                              } else {
+                             '<tr>'
+                             + '<td class="recentlyViewBar_paging"><span id="'+prev+'">&lt;</span><span id ="recentPage">'
+                             + recPage
+                             + ' / '
+                             + recMaxPage
+                             + '</span><span id = "'+next+'">&gt;</span></td>'
+                             + '</tr>'
+                       $(".recentlyViewBar_table").append(str);
+                              }  else {
 
                                  str += '<td class="recentlyViewBar_td"><div class="td-row"></div></td></tr><tr><td class="recentlyViewBar_td">'
                                        + '<div class="td-row">최근 본 <br>상품이<br>없습니다.</div></td></tr><tr><td class="recentlyViewBar_td"><div class="td-row"></div></td></tr>'
@@ -445,6 +312,7 @@ display: none;
                         });
                });
 
+   
    $(document)
          .on(
                "click",
@@ -490,107 +358,40 @@ display: none;
                               if (recMaxPage == recPage) {
                                  next = 'firstAndMax';
                               }
-                              if (recPrdName.length == 3) {
-                                 $
-                                       .each(
-                                             data,
-                                             function(i) {
-                                                str += '<td class="recentlyViewBar_td"><div class="td-row"><input type="hidden" value="'
-                                                      + recPrdCode[i]
-                                                      + '" class="recentlyViewprdcode"><img class="recentlyViewthumbPic" alt="'
-                                                      + recPrdName[i]
-                                                      + '사진" title="'
-                                                      + recPrdName[i]
-                                                      + '"src="${pageContext.request.contextPath}/resources/prdImg/'
-                                                      + recPrdCode[i]+'.png" />'
-                                                      + '<span class="prdInfo"><div class="prdBrand">'
-                                                      + recPrdBrand[i]
-                                                      + '</div><div class="prdName">'
-                                                      + recPrdName[i]
-                                                      + '</div><div class="prdprice">'
-                                                      + recPrdPrice[i]
-                                                      + '원</div></div></span></td>'
-                                                str += '</TR>';
-                                             });
-                                 str += '<tr>'
-                                       + '<td class="recentlyViewBar_paging"><span id="'+prev+'">&lt;</span><span id ="recentPage">'
-                                       + recPage
-                                       + ' / '
-                                       + recMaxPage
-                                       + '</span><span id = "'+next+'">&gt;</span></td>'
-                                       + '</tr>'
-                                 $(".recentlyViewBar_table").append(
-                                       str);
+                              if (recPrdName.length >0) {
+                            	  $.each( data,function(i) {
+                                      str += '<td class="recentlyViewBar_td"><div class="td-row"><input type="hidden" value="'
+                                            + recPrdCode[i]
+                                            + '" class="recentlyViewprdcode"><img class="recentlyViewthumbPic" alt="'
+                                            + recPrdName[i]
+                                            + '사진" title="'
+                                            + recPrdName[i]
+                                            + '"src="${pageContext.request.contextPath}/resources/prdImg/'
+                                            + recPrdCode[i]+'.png" />'
+                                            + '<span class="prdInfo"><div class="prdBrand">'
+                                            + recPrdBrand[i]
+                                            + '</div><div class="prdName">'
+                                            + recPrdName[i]
+                                            + '</div><div class="prdprice">'
+                                            + recPrdPrice[i]
+                                            + '원</div></div></span></td>'
+                                      str += '</TR>';
+                                   });
+                                  for(var i = 0 ; i < 3 - recPrdName.length ; i ++) {
+                                	  str += '<tr><td class="recentlyViewBar_td"><div class="td-row"></div></td></tr>'
+                                	  }
+                       
+                    	   str +=
 
-                              } else if (recPrdName.length == 2) {
-                                 $
-                                       .each(
-                                             data,
-                                             function(i) {
-                                                str += '<td class="recentlyViewBar_td"><div class="td-row"><input type="hidden" value="'
-                                                      + recPrdCode[i]
-                                                      + '" class="recentlyViewprdcode"><img class="recentlyViewthumbPic" alt="'
-                                                      + recPrdName[i]
-                                                      + '사진" title="'
-                                                      + recPrdName[i]
-                                                      + '"src="${pageContext.request.contextPath}/resources/prdImg/'
-                                                      + recPrdCode[i]+'.png" />'
-                                                      + '<span class="prdInfo"><div class="prdBrand">'
-                                                      + recPrdBrand[i]
-                                                      + '</div><div class="prdName">'
-                                                      + recPrdName[i]
-                                                      + '</div><div class="prdprice">'
-                                                      + recPrdPrice[i]
-                                                      + '원</div></div></span></td>'
-                                                str += '</TR>';
-                                             });
-                                 str += '<tr><td class="recentlyViewBar_td"><div class="td-row"></div></td></tr>'
-                                       +
-
-                                       '<tr>'
-                                       + '<td class="recentlyViewBar_paging"><span id="'+prev+'">&lt;</span><span id ="recentPage">'
-                                       + recPage
-                                       + ' / '
-                                       + recMaxPage
-                                       + '</span><span id = "'+next+'">&gt;</span></td>'
-                                       + '</tr>'
-                                 $(".recentlyViewBar_table").append(
-                                       str);
-                              } else if (recPrdName.length == 1) {
-                                 $
-                                       .each(
-                                             data,
-                                             function(i) {
-                                                str += '<td class="recentlyViewBar_td"><div class="td-row"><input type="hidden" value="'
-                                                      + recPrdCode[i]
-                                                      + '" class="recentlyViewprdcode"><img class="recentlyViewthumbPic" alt="'
-                                                      + recPrdName[i]
-                                                      + '사진" title="'
-                                                      + recPrdName[i]
-                                                      + '"src="${pageContext.request.contextPath}/resources/prdImg/'
-                                                      + recPrdCode[i]+'.png" />'
-                                                      + '<span class="prdInfo"><div class="prdBrand">'
-                                                      + recPrdBrand[i]
-                                                      + '</div><div class="prdName">'
-                                                      + recPrdName[i]
-                                                      + '</div><div class="prdprice">'
-                                                      + recPrdPrice[i]
-                                                      + '원</div></div></span></td>'
-                                                str += '</TR>';
-                                             });
-                                 str += '<tr><td class="recentlyViewBar_td"><div class="td-row"></div></td></tr><tr><td class="recentlyViewBar_td"><div class="td-row"></div></td></tr>'
-                                       +
-
-                                       '<tr>'
-                                       + '<td class="recentlyViewBar_paging"><span id="'+prev+'">&lt;</span><span id ="recentPage">'
-                                       + recPage
-                                       + ' / '
-                                       + recMaxPage
-                                       + '</span><span id = "'+next+'">&gt;</span></td>'
-                                       + '</tr>'
-                                 $(".recentlyViewBar_table").append(
-                                       str);
-                              } else {
+                             '<tr>'
+                             + '<td class="recentlyViewBar_paging"><span id="'+prev+'">&lt;</span><span id ="recentPage">'
+                             + recPage
+                             + ' / '
+                             + recMaxPage
+                             + '</span><span id = "'+next+'">&gt;</span></td>'
+                             + '</tr>'
+                       $(".recentlyViewBar_table").append(str);
+                              }  else {
 
                                  str += '<td class="recentlyViewBar_td"><div class="td-row"></div></td></tr><tr><td class="recentlyViewBar_td">'
                                        + '<div class="td-row">최근 본 <br>상품이<br>없습니다.</div></td></tr><tr><td class="recentlyViewBar_td"><div class="td-row"></div></td></tr>'
